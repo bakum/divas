@@ -15,7 +15,7 @@
                                         <af:panelAccordion id="pa2">
                                             <af:showDetailItem text="Детали" id="sdi2"
                                                                stretchChildren="first">
-                                                <af:panelBox text="PanelBox1" id="pb2" type="flow" background="dark">
+                                                <af:panelBox text="Протокол" id="pb2" type="flow" background="dark">
                                                     <f:facet name="toolbar"/>
                                                 </af:panelBox>
                                             </af:showDetailItem>
