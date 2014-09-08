@@ -6,8 +6,6 @@
     <variableIterator id="variables"/>
     <iterator Binds="CurrencyView1" RangeSize="25" DataControl="AppModuleDataControl" id="CurrencyView1Iterator"
               ChangeEventPolicy="ppr"/>
-    <iterator Binds="RegRatesView2" RangeSize="25" DataControl="AppModuleDataControl" id="RegRatesView2Iterator"
-              ChangeEventPolicy="ppr"/>
   </executables>
   <bindings>
     <tree IterBinding="CurrencyView1Iterator" id="CurrencyView1">
@@ -36,26 +34,5 @@
         <Item Value="Editable"/>
       </AttrNames>
     </attributeValues>
-    <attributeValues IterBinding="RegRatesView2Iterator" id="Period">
-      <AttrNames>
-        <Item Value="Period"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="RegRatesView2Iterator" StaticList="false" Uses="LOV_CurrId" id="CurrId" DTSupportsMRU="false"
-          SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="RegRatesView2Iterator" id="Kurs">
-      <AttrNames>
-        <Item Value="Kurs"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="RegRatesView2Iterator" id="Kratnost">
-      <AttrNames>
-        <Item Value="Kratnost"/>
-      </AttrNames>
-    </attributeValues>
-    <action IterBinding="RegRatesView2Iterator" id="First" RequiresUpdateModel="true" Action="first"/>
-    <action IterBinding="RegRatesView2Iterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
-    <action IterBinding="RegRatesView2Iterator" id="Next" RequiresUpdateModel="true" Action="next"/>
-    <action IterBinding="RegRatesView2Iterator" id="Last" RequiresUpdateModel="true" Action="last"/>
   </bindings>
 </pageDefinition>

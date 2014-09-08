@@ -37,8 +37,7 @@
                                               rowSelection="#{bindings.Editable.inputValue == 0 ? 'single' : 'none'}" fetchSize="#{bindings.CurrencyView1.rangeSize}"
                                               id="t1" scrollPolicy="page" editingMode="clickToEdit"
                                               partialTriggers="b3 ::b2" blockRowNavigationOnError="always"
-                                              binding="#{currency.mainTable}"
-                                              rowDisclosureListener="#{currency.rowDiscloseListener}">
+                                              binding="#{currency.mainTable}">
                                         <af:column id="c11" width="55"
                                                    inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
                                             <af:toolbar id="t2">
@@ -218,65 +217,6 @@
                                                                   pattern="#{bindings.CurrencyView1.hints.Editable.format}"/>
                                             </af:inputText>
                                         </af:column>
-                                        <f:facet name="detailStamp">
-                                            <af:panelFormLayout id="pfl1">
-                                                <af:inputDate value="#{bindings.Period.inputValue}" readOnly="true"
-                                                              label="#{bindings.Period.hints.label}"
-                                                              required="#{bindings.Period.hints.mandatory}"
-                                                              columns="#{bindings.Period.hints.displayWidth}"
-                                                              shortDesc="#{bindings.Period.hints.tooltip}" id="id2">
-                                                    <f:validator binding="#{bindings.Period.validator}"/>
-                                                    <af:convertDateTime pattern="#{bindings.Period.format}"/>
-                                                </af:inputDate>
-                                                <af:selectOneChoice value="#{bindings.CurrId.inputValue}"
-                                                                    label="#{bindings.CurrId.label}"
-                                                                    required="#{bindings.CurrId.hints.mandatory}"
-                                                                    shortDesc="#{bindings.CurrId.hints.tooltip}"
-                                                                    readOnly="true" id="soc1">
-                                                    <f:selectItems value="#{bindings.CurrId.items}" id="si1"/>
-                                                    <f:validator binding="#{bindings.CurrId.validator}"/>
-                                                </af:selectOneChoice>
-                                                <af:inputText value="#{bindings.Kurs.inputValue}"
-                                                              label="#{bindings.Kurs.hints.label}"
-                                                              required="#{bindings.Kurs.hints.mandatory}"
-                                                              readOnly="true"
-                                                              columns="#{bindings.Kurs.hints.displayWidth}"
-                                                              maximumLength="#{bindings.Kurs.hints.precision}"
-                                                              shortDesc="#{bindings.Kurs.hints.tooltip}" id="it11">
-                                                    <f:validator binding="#{bindings.Kurs.validator}"/>
-                                                    <af:convertNumber groupingUsed="false"
-                                                                      pattern="#{bindings.Kurs.format}"/>
-                                                </af:inputText>
-                                                <af:inputText value="#{bindings.Kratnost.inputValue}"
-                                                              label="#{bindings.Kratnost.hints.label}"
-                                                              required="#{bindings.Kratnost.hints.mandatory}"
-                                                              readOnly="true"
-                                                              columns="#{bindings.Kratnost.hints.displayWidth}"
-                                                              maximumLength="#{bindings.Kratnost.hints.precision}"
-                                                              shortDesc="#{bindings.Kratnost.hints.tooltip}" id="it12">
-                                                    <f:validator binding="#{bindings.Kratnost.validator}"/>
-                                                    <af:convertNumber groupingUsed="false"
-                                                                      pattern="#{bindings.Kratnost.format}"/>
-                                                </af:inputText>
-                                                <f:facet name="footer">
-                                                    <af:panelGroupLayout layout="horizontal" id="pgl2">
-                                                        <af:button actionListener="#{bindings.First.execute}"
-                                                                   text="First" disabled="#{!bindings.First.enabled}"
-                                                                   partialSubmit="true" id="b7"/>
-                                                        <af:button actionListener="#{bindings.Previous.execute}"
-                                                                   text="Previous"
-                                                                   disabled="#{!bindings.Previous.enabled}"
-                                                                   partialSubmit="true" id="b8"/>
-                                                        <af:button actionListener="#{bindings.Next.execute}" text="Next"
-                                                                   disabled="#{!bindings.Next.enabled}"
-                                                                   partialSubmit="true" id="b9"/>
-                                                        <af:button actionListener="#{bindings.Last.execute}" text="Last"
-                                                                   disabled="#{!bindings.Last.enabled}"
-                                                                   partialSubmit="true" id="b10"/>
-                                                    </af:panelGroupLayout>
-                                                </f:facet>
-                                            </af:panelFormLayout>
-                                        </f:facet>
                                     </af:table>
                                 </af:panelBox>
                             </af:showDetailItem>
