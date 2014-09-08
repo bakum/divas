@@ -32,6 +32,7 @@ public class CallLogImpl extends DivasEntityNoDelete {
         CompDetId,
         Memo,
         Version,
+        Dat,
         CallStatus1,
         CompaignsDetails,
         ContactDetails;
@@ -57,12 +58,14 @@ public class CallLogImpl extends DivasEntityNoDelete {
             return vals;
         }
     }
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int CALLSTATUS = AttributesEnum.CallStatus.index();
     public static final int CONTACTID = AttributesEnum.ContactId.index();
     public static final int COMPDETID = AttributesEnum.CompDetId.index();
     public static final int MEMO = AttributesEnum.Memo.index();
     public static final int VERSION = AttributesEnum.Version.index();
+    public static final int DAT = AttributesEnum.Dat.index();
     public static final int CALLSTATUS1 = AttributesEnum.CallStatus1.index();
     public static final int COMPAIGNSDETAILS = AttributesEnum.CompaignsDetails.index();
     public static final int CONTACTDETAILS = AttributesEnum.ContactDetails.index();
@@ -71,6 +74,13 @@ public class CallLogImpl extends DivasEntityNoDelete {
      * This is the default constructor (do not remove).
      */
     public CallLogImpl() {
+    }
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("ua.divas.model.CallLog");
     }
 
     /**
@@ -170,6 +180,22 @@ public class CallLogImpl extends DivasEntityNoDelete {
     }
 
     /**
+     * Gets the attribute value for Dat, using the alias name Dat.
+     * @return the value of Dat
+     */
+    public Timestamp getDat() {
+        return (Timestamp) getAttributeInternal(DAT);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for Dat.
+     * @param value value to set the Dat
+     */
+    public void setDat(Timestamp value) {
+        setAttributeInternal(DAT, value);
+    }
+
+    /**
      * @return the associated entity oracle.jbo.server.EntityImpl.
      */
     public EntityImpl getCallStatus1() {
@@ -220,11 +246,6 @@ public class CallLogImpl extends DivasEntityNoDelete {
         return new Key(new Object[] { id });
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("ua.divas.model.CallLog");
-    }
+
 }
 

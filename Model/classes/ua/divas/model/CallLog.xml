@@ -28,6 +28,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.CallLog.Id_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.CallLog.Id_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="CallStatus"
@@ -41,6 +49,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.CallLog.CallStatus_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.CallLog.CallStatus_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="ContactId"
@@ -54,6 +70,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.CallLog.ContactId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.CallLog.ContactId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="CompDetId"
@@ -66,6 +90,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.CallLog.CompDetId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.CallLog.CompDetId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Memo"
@@ -78,6 +110,18 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="2000"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.CallLog.Memo_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.CallLog.Memo_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="200"/>
+        <DISPLAYHEIGHT
+          Value="6"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Version"
@@ -85,7 +129,34 @@
     SQLType="TIMESTAMP"
     Type="java.sql.Timestamp"
     ColumnType="TIMESTAMP"
-    TableName="CALL_LOG"/>
+    TableName="CALL_LOG">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.CallLog.Version_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.CallLog.Version_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Dat"
+    IsNotNull="true"
+    ColumnName="DAT"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="CALL_LOG">
+    <TransientExpression><![CDATA[adf.currentDateTime]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.CallLog.Dat_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.CallLog.Dat_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="CallStatus1"
     Association="ua.divas.model.CallLogFk1Assoc"
@@ -150,4 +221,8 @@
       <Item Value="ua.divas.model.CallLog.CompDetId"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>

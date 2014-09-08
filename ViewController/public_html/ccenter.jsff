@@ -40,7 +40,8 @@
                                                             <af:button actionListener="#{bindings.Rollback.execute}"
                                                                        text="Отменить"
                                                                        disabled="#{!bindings.Rollback.enabled}"
-                                                                       immediate="true" id="b3">
+                                                                       immediate="true" id="b3"
+                                                                       action="#{filter.rollbackChange}">
                                                                 <af:resetActionListener/>
                                                             </af:button>
                                                             <af:button text="Обновить" id="b15"

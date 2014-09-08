@@ -1,5 +1,6 @@
 package ua.divas.view;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,6 +40,8 @@ import org.apache.myfaces.trinidad.event.RowDisclosureEvent;
 import org.apache.myfaces.trinidad.event.SelectionEvent;
 import org.apache.myfaces.trinidad.model.CollectionModel;
 import org.apache.myfaces.trinidad.model.RowKeySet;
+
+import org.apache.myfaces.trinidad.model.RowKeySetImpl;
 
 import ua.divas.classes.ADFUtil;
 
@@ -121,6 +124,7 @@ public class FilterBeans {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("Rollback");
         ob.execute();
+        callSelectionListener();
     }
 
     public void dialogListener(DialogEvent dialogEvent) {
@@ -133,6 +137,31 @@ public class FilterBeans {
             BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
             OperationBinding ob = binding.getOperationBinding("Rollback");
             ob.execute();
+            callSelectionListener();
+        }
+    }
+
+    private void callSelectionListener() {
+        DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = binding.findIteratorBinding("KontragentsView1Iterator");
+
+        Row currentRow = it.getCurrentRow();
+        //build the table rowKeySet
+        List rowKeyList = new ArrayList();
+        //check if there is child data at all
+        if (currentRow != null) {
+            //add primary key as jbo key
+            Key jboKey = new Key(new Object[] { currentRow.getAttribute("Id") });
+            rowKeyList.add(jboKey);
+            //add key to RowKeySet. For table multi row select usecases
+            //you would add multiple row keys like this
+            RowKeySet newRowKeySet = new RowKeySetImpl();
+            newRowKeySet.add(rowKeyList);
+            //create SelectioNEvent that pretends users has selected first row
+            //in table
+            SelectionEvent selectEvent = new SelectionEvent(mainTable.getSelectedRowKeys(), newRowKeySet, mainTable);
+            //queue event for execution
+            selectEvent.queue();
         }
     }
 
@@ -238,7 +267,7 @@ public class FilterBeans {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("Rollback");
         ob.execute();
-        refresh();
+        callSelectionListener();
         return null;
     }
 
@@ -249,14 +278,14 @@ public class FilterBeans {
     public RichPanelFormLayout getFormToRefresh() {
         return formToRefresh;
     }
-    
+
     public String refreshForm() {
         DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = binding.findIteratorBinding("ContactDetailsView2Iterator");
-        
+
         String currRowKey = it.getCurrentRowKeyString();
         Row currRow = it.findRowByKeyString(currRowKey);
-        
+
         if (currRow != null) {
             currRow.refresh(Row.REFRESH_UNDO_CHANGES);
             it.setCurrentRowWithKey(currRowKey);
