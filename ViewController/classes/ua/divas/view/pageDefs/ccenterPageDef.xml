@@ -54,7 +54,7 @@
       </ValueList>
     </button>
     <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <action id="Rollback" Action="rollbackTransaction" DataControl="AppModuleDataControl" RequiresUpdateModel="false"/>
     <tree IterBinding="KontragentsItemsLookupVO1Iterator" id="KontragentsItemsLookupVO1">
       <nodeDefinition DefName="ua.divas.view.ro.KontragentsItemsLookupVO" Name="KontragentsItemsLookupVO10">
         <AttrNames>
