@@ -104,16 +104,5 @@
         <Item Value="Email"/>
       </AttrNames>
     </attributeValues>
-    <action IterBinding="ContactDetailsView2Iterator" id="First" RequiresUpdateModel="true" Action="first"/>
-    <action IterBinding="ContactDetailsView2Iterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
-    <action IterBinding="ContactDetailsView2Iterator" id="Next" RequiresUpdateModel="true" Action="next"/>
-    <action IterBinding="ContactDetailsView2Iterator" id="Last" RequiresUpdateModel="true" Action="last"/>
-    <action IterBinding="ContactDetailsView2Iterator" id="CreateInsert1" RequiresUpdateModel="true"
-            Action="createInsertRow"/>
-    <attributeValues IterBinding="ContactDetailsView2Iterator" id="Editable1">
-      <AttrNames>
-        <Item Value="Editable"/>
-      </AttrNames>
-    </attributeValues>
   </bindings>
 </pageDefinition>
