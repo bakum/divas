@@ -2,6 +2,7 @@ package ua.divas.view;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -14,10 +15,14 @@ import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichTable;
+import oracle.adf.view.rich.component.rich.data.RichTree;
 import oracle.adf.view.rich.component.rich.layout.RichPanelFormLayout;
 import oracle.adf.view.rich.component.rich.layout.RichShowDetailItem;
 import oracle.adf.view.rich.context.AdfFacesContext;
+import oracle.adf.view.rich.datatransfer.DataFlavor;
+import oracle.adf.view.rich.dnd.DnDAction;
 import oracle.adf.view.rich.event.DialogEvent;
+import oracle.adf.view.rich.event.DropEvent;
 import oracle.adf.view.rich.event.PopupCanceledEvent;
 import oracle.adf.view.rich.event.PopupFetchEvent;
 import oracle.adf.view.rich.event.QueryEvent;
@@ -296,4 +301,40 @@ public class FilterBeans {
         return null;
     }
 
+    public DnDAction dropHandler(DropEvent dropEvent) {
+        RichTable table = (RichTable) dropEvent.getDragComponent();
+        RowKeySet droppedValue = null;
+        String KonId = null;
+        Iterator it = null;
+        RichTree tree = (RichTree) dropEvent.getDropComponent();
+        Object currentRowKey = tree.getRowKey();
+        List dropRowKey = (List) dropEvent.getDropSite();
+        if (dropRowKey == null) {
+            return DnDAction.NONE;
+        }
+        try {
+            DataFlavor<RowKeySet> df = DataFlavor.getDataFlavor(RowKeySet.class, "rowcopy");
+            droppedValue = dropEvent.getTransferable().getData(df);
+            if (droppedValue != null) {
+                it = droppedValue.iterator();
+                if (it.hasNext()) {
+                    List key = (List) it.next();
+                    table.setRowKey(key);
+                    JUCtrlHierNodeBinding rowBinding = (JUCtrlHierNodeBinding) table.getRowData();
+                    Row tableRow = (Row) rowBinding.getRow();
+                    KonId = (String) tableRow.getAttribute("Id");
+
+                    tree.setRowKey(dropRowKey);
+                    JUCtrlHierNodeBinding dropNode = (JUCtrlHierNodeBinding) tree.getRowData();
+                    Row treeRow = dropNode.getRow();
+                    String CompId = (String)treeRow.getAttribute("Id");
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return DnDAction.NONE;
+        }
+        return DnDAction.COPY;
+    }
 }

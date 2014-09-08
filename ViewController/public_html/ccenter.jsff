@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
-                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
     <c:set var="viewcontrollerBundle" value="#{adfBundle['viewcontroller.ccenterBundle']}"/>
     <af:panelGridLayout id="pgl1">
         <af:gridRow height="100%" id="gr1">
@@ -17,6 +18,25 @@
                                                                stretchChildren="first" icon="/img/detail.png">
                                                 <af:panelBox text="Протокол" id="pb2" type="flow" background="dark">
                                                     <f:facet name="toolbar"/>
+                                                </af:panelBox>
+                                            </af:showDetailItem>
+                                            <af:showDetailItem text="Кампании" id="sdi4" stretchChildren="first"
+                                                               icon="/img/Phone.png">
+                                                <af:panelBox text="PanelBox1" id="pb5">
+                                                    <f:facet name="toolbar"/>
+                                                    <af:tree value="#{bindings.CompaignsView1.treeModel}" var="node"
+                                                             selectionListener="#{bindings.CompaignsView1.treeModel.makeCurrent}"
+                                                             rowSelection="single" id="t3">
+                                                        <f:facet name="nodeStamp">
+                                                            <af:outputText value="#{node.Name}" id="ot1"
+                                                                           inlineStyle="font-size:large;"/>
+                                                        </f:facet>
+                                                        <af:dropTarget dropListener="#{filter.dropHandler}"
+                                                                       actions="COPY">
+                                                            <af:dataFlavor flavorClass="java.lang.Object"
+                                                                           discriminant="rowcopy"/>
+                                                        </af:dropTarget>
+                                                    </af:tree>
                                                 </af:panelBox>
                                             </af:showDetailItem>
                                         </af:panelAccordion>
@@ -238,6 +258,8 @@
                                                                 </af:button>
                                                             </af:panelGroupLayout>
                                                         </af:column>
+                                                        <af:dragSource actions="COPY" defaultAction="COPY"
+                                                                       discriminant="rowcopy"/>
                                                     </af:table>
                                                     <af:popup childCreation="deferred" id="pNewContact"
                                                               contentDelivery="lazyUncached"

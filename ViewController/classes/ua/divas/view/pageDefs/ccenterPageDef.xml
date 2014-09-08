@@ -12,6 +12,7 @@
               id="KontragentsItemsLookupVO1Iterator"/>
     <iterator Binds="ContactDetailsView2" RangeSize="25" DataControl="AppModuleDataControl"
               id="ContactDetailsView2Iterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="CompaignsView1" RangeSize="25" DataControl="AppModuleDataControl" id="CompaignsView1Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="KontragentsView1Iterator" id="KontragentsView1">
@@ -131,5 +132,24 @@
         <Item Value="Fullname"/>
       </AttrNames>
     </attributeValues>
+    <tree IterBinding="CompaignsView1Iterator" id="CompaignsView1">
+      <nodeDefinition DefName="ua.divas.view.CompaignsView" Name="CompaignsView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Name"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="CompaignsDetailsView"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="ua.divas.view.CompaignsDetailsView" Name="CompaignsView11">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="CompaignId"/>
+          <Item Value="ContactId"/>
+          <Item Value="KontragId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>
