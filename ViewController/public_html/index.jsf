@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" locale="ru">
+    <af:document title="Divas CRM" id="d1">
+        <af:form id="f1">
+            <af:panelGridLayout id="pgl1">
+                <af:gridRow height="100%" id="gr1">
+                    <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
+                        <!-- Content -->
+                        <af:decorativeBox id="db1" theme="dark" topHeight="18px">
+                            <f:facet name="center">
+                                <af:panelSpringboard id="ps1" displayMode="grid">
+                                    <af:showDetailItem text="Реестр заказов" id="sdi1" icon="/img/fork-1-icon.png"
+                                                       stretchChildren="first"/>
+                                    <af:showDetailItem text="Call Center" id="sdi2" stretchChildren="first"
+                                                       icon="/img/call.jpeg">
+                                        <af:region value="#{bindings.call_center1.regionModel}" id="r1">
+                                            <af:checkRegionUncommittedDataBehavior message="Есть изменённые данные. Оставить страницу?"/>
+                                        </af:region>
+                                    </af:showDetailItem>
+                                    <af:showDetailItem text="Управление замерами" id="sdi3" stretchChildren="first"
+                                                       icon="/img/st.png"/>
+                                    <af:showDetailItem text="Справочники" id="sdi4" stretchChildren="first"
+                                                       icon="/img/tSystCmp_picture_52.png">
+                                        <af:region value="#{bindings.direct1.regionModel}" id="r2"/>
+                                    </af:showDetailItem>
+                                    <af:showDetailItem text="Аналитика" id="sdi5" stretchChildren="first"
+                                                       icon="/img/analytics.png"/>
+                                    <af:showDetailItem text="Пользователи" id="sdi6" stretchChildren="first"
+                                                       icon="/img/people.png"/>
+                                    <af:showDetailItem text="Настройки" id="sdi7" stretchChildren="first"
+                                                       icon="/img/options.png"/>
+                                </af:panelSpringboard>
+                            </f:facet>
+                            <f:facet name="top">
+                                <af:panelGroupLayout id="pgl2" layout="horizontal">
+                                    <af:spacer width="50" height="10" id="s3"/>
+                                    <af:link text="Войти" id="l1" icon="/img/glbl_login_msg.gif"
+                                             rendered="#{!securityContext.authenticated}">
+                                        <af:showPopupBehavior popupId="pLogin" triggerType="action" align="endBefore"
+                                                              alignId="l1"/>
+                                    </af:link>
+                                    <af:spacer width="10" height="10" id="s1"/>
+                                    <af:link text="Выйти" id="l2" icon="/img/glbl_logout.gif"
+                                             rendered="#{securityContext.authenticated}" action="#{login.logout}"/>
+                                    <af:spacer width="50" height="10" id="s2"/>
+                                    <af:outputFormatted value="#{securityContext.userName}" id="of1"
+                                                        styleClass="Linkclass"/>
+                                    <af:spacer width="10" height="10" id="s4"/>
+                                    <af:outputFormatted value="#{login.roleUser}" id="of2" styleClass="Linkclass"/>
+                                    <af:popup childCreation="deferred" autoCancel="disabled" id="pLogin">
+                                        <af:dialog id="d2" title="Авторизация" dialogListener="#{login.OnLoginAction}">
+                                            <f:facet name="buttonBar"/>
+                                            <af:panelFormLayout id="pfl1">
+                                                <f:facet name="footer"/>
+                                                <af:inputText label="Пользователь" id="it1" value="#{login.username}"/>
+                                                <af:inputText label="Пароль" id="it2" secret="true"
+                                                              value="#{login.password}"/>
+                                            </af:panelFormLayout>
+                                        </af:dialog>
+                                        <af:resetListener type="popupCanceled"/>
+                                    </af:popup>
+                                </af:panelGroupLayout>
+                            </f:facet>
+                        </af:decorativeBox>
+                    </af:gridCell>
+                </af:gridRow>
+            </af:panelGridLayout>
+        </af:form>
+    </af:document>
+</f:view>
