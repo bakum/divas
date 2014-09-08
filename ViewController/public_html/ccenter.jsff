@@ -206,8 +206,17 @@
                                                                           pattern="#{bindings.KontragentsView1.hints.Editable.format}"/>
                                                     </af:inputText>
                                                 </af:column>
-                                                <af:column id="c3">
-                                                    <af:button id="b17" icon="/img/view1.png"/>
+                                                <af:column id="c3" width="80">
+                                                    <af:panelGroupLayout id="pgl4" layout="horizontal">
+                                                        <af:button id="b14" icon="/img/Symbol_Add.png">
+                                                            <af:showPopupBehavior popupId="::pNewContact"
+                                                                                  triggerType="action"/>
+                                                        </af:button>
+                                                        <af:button id="b17" icon="/img/view1.png">
+                                                            <af:showPopupBehavior popupId="::pView" triggerType="action"
+                                                                                  align="afterStart"/>
+                                                        </af:button>
+                                                    </af:panelGroupLayout>
                                                 </af:column>
                                             </af:table>
                                             <af:popup childCreation="deferred" id="pNewContact"
@@ -287,6 +296,140 @@
                                                     <af:outputFormatted value="Вы действительно хотите удалить запись?"
                                                                         id="of1"
                                                                         inlineStyle="font-size:medium; color:Red;"/>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="pView"
+                                                      contentDelivery="lazyUncached"
+                                                      popupCanceledListener="#{filter.cancelListener}">
+                                                <af:dialog id="d3" title="Контакты"
+                                                           dialogListener="#{filter.dialogListener}">
+                                                    <af:panelFormLayout id="pfl1">
+                                                        <af:inputText value="#{bindings.Id.inputValue}"
+                                                                      label="#{bindings.Id.hints.label}"
+                                                                      required="#{bindings.Id.hints.mandatory}"
+                                                                      columns="#{bindings.Id.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.Id.hints.precision}"
+                                                                      shortDesc="#{bindings.Id.hints.tooltip}" id="it9"
+                                                                      visible="false">
+                                                            <f:validator binding="#{bindings.Id.validator}"/>
+                                                        </af:inputText>
+                                                        <af:inputDate value="#{bindings.Version.inputValue}"
+                                                                      label="#{bindings.Version.hints.label}"
+                                                                      required="#{bindings.Version.hints.mandatory}"
+                                                                      columns="#{bindings.Version.hints.displayWidth}"
+                                                                      shortDesc="#{bindings.Version.hints.tooltip}"
+                                                                      id="id1" visible="false">
+                                                            <f:validator binding="#{bindings.Version.validator}"/>
+                                                            <af:convertDateTime pattern="#{bindings.Version.format}"/>
+                                                        </af:inputDate>
+                                                        <af:inputComboboxListOfValues id="kontragIdId"
+                                                                                      popupTitle="Search and Select: #{bindings.KontragId.hints.label}"
+                                                                                      value="#{bindings.KontragId.inputValue}"
+                                                                                      label="#{bindings.KontragId.hints.label}"
+                                                                                      model="#{bindings.KontragId.listOfValuesModel}"
+                                                                                      required="#{bindings.KontragId.hints.mandatory}"
+                                                                                      columns="#{bindings.KontragId.hints.displayWidth}"
+                                                                                      shortDesc="#{bindings.KontragId.hints.tooltip}"
+                                                                                      visible="false">
+                                                            <f:validator binding="#{bindings.KontragId.validator}"/>
+                                                        </af:inputComboboxListOfValues>
+                                                        <af:inputComboboxListOfValues id="kontragNameId"
+                                                                                      popupTitle="Search and Select: #{bindings.KontragName.hints.label}"
+                                                                                      value="#{bindings.KontragName.inputValue}"
+                                                                                      label="#{bindings.KontragName.hints.label}"
+                                                                                      model="#{bindings.KontragName.listOfValuesModel}"
+                                                                                      required="#{bindings.KontragName.hints.mandatory}"
+                                                                                      columns="#{bindings.KontragName.hints.displayWidth}"
+                                                                                      shortDesc="#{bindings.KontragName.hints.tooltip}"
+                                                                                      readOnly="true"
+                                                                                      inlineStyle="font-weight:bold;">
+                                                            <f:validator binding="#{bindings.KontragName.validator}"/>
+                                                        </af:inputComboboxListOfValues>
+                                                        <af:inputText value="#{bindings.Adress.inputValue}"
+                                                                      label="#{bindings.Adress.hints.label}"
+                                                                      required="#{bindings.Adress.hints.mandatory}"
+                                                                      columns="#{bindings.Adress.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.Adress.hints.precision}"
+                                                                      shortDesc="#{bindings.Adress.hints.tooltip}"
+                                                                      id="it10" rows="3"
+                                                                      readOnly="#{bindings.Editable1.inputValue == 0 ? true : false}">
+                                                            <f:validator binding="#{bindings.Adress.validator}"/>
+                                                        </af:inputText>
+                                                        <af:panelLabelAndMessage label="#{bindings.Phone.hints.label}" id="plam1">
+                                                            <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                                                <af:inputText value="#{bindings.Phone.inputValue}"
+                                                                              required="#{bindings.Phone.hints.mandatory}"
+                                                                              columns="#{bindings.Phone.hints.displayWidth}"
+                                                                              maximumLength="#{bindings.Phone.hints.precision}"
+                                                                              shortDesc="#{bindings.Phone.hints.tooltip}"
+                                                                              id="it11"
+                                                                              rendered="#{bindings.Editable1.inputValue == 1 ? true : false}">
+                                                                    <f:validator binding="#{bindings.Phone.validator}"/>
+                                                                </af:inputText>
+                                                                <af:button text="#{bindings.Phone.inputValue}" id="b13"
+                                                                           icon="/img/Phone.png"
+                                                                           rendered="#{bindings.Editable1.inputValue == 0 ? true : false}"/>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelLabelAndMessage>
+                                                        <af:inputText value="#{bindings.Email.inputValue}"
+                                                                      label="#{bindings.Email.hints.label}"
+                                                                      required="#{bindings.Email.hints.mandatory}"
+                                                                      columns="#{bindings.Email.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.Email.hints.precision}"
+                                                                      shortDesc="#{bindings.Email.hints.tooltip}"
+                                                                      id="it15"
+                                                                      readOnly="#{bindings.Editable1.inputValue == 0 ? true : false}">
+                                                            <f:validator binding="#{bindings.Email.validator}"/>
+                                                        </af:inputText>
+                                                        <af:inputText value="#{bindings.Editable1.inputValue}"
+                                                                      label="#{bindings.Editable1.hints.label}"
+                                                                      required="#{bindings.Editable1.hints.mandatory}"
+                                                                      columns="#{bindings.Editable1.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.Editable1.hints.precision}"
+                                                                      shortDesc="#{bindings.Editable1.hints.tooltip}"
+                                                                      id="it16" visible="false">
+                                                            <f:validator binding="#{bindings.Editable1.validator}"/>
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.Editable1.format}"/>
+                                                        </af:inputText>
+                                                        <f:facet name="footer">
+                                                            <af:panelGroupLayout layout="horizontal" id="pgl2">
+                                                                <af:button id="b11"
+                                                                           icon="/img/icon_save.png"
+                                                                           actionListener="#{bindings.Commit.execute}"
+                                                                           disabled="#{!bindings.Commit.enabled}">
+                                                                    <af:setPropertyListener from="#{0}"
+                                                                                            to="#{bindings.Editable1.inputValue}"
+                                                                                            type="action"/>
+                                                                </af:button>
+                                                                <af:button id="b12"
+                                                                           icon="/img/edit-16.gif"
+                                                                           disabled="#{bindings.Commit.enabled}">
+                                                                    <af:setPropertyListener from="#{1}"
+                                                                                            to="#{bindings.Editable1.inputValue}"
+                                                                                            type="action"/>
+                                                                </af:button>
+                                                                <af:spacer width="20" height="10" id="s1"/>
+                                                                <af:button actionListener="#{bindings.First.execute}"
+                                                                           text="First"
+                                                                           disabled="#{!bindings.First.enabled}"
+                                                                           partialSubmit="true" id="b4"/>
+                                                                <af:button actionListener="#{bindings.Previous.execute}"
+                                                                           text="Previous"
+                                                                           disabled="#{!bindings.Previous.enabled}"
+                                                                           partialSubmit="true" id="b8"/>
+                                                                <af:button actionListener="#{bindings.Next.execute}"
+                                                                           text="Next"
+                                                                           disabled="#{!bindings.Next.enabled}"
+                                                                           partialSubmit="true" id="b9"/>
+                                                                <af:button actionListener="#{bindings.Last.execute}"
+                                                                           text="Last"
+                                                                           disabled="#{!bindings.Last.enabled}"
+                                                                           partialSubmit="true" id="b10"/>
+                                                            </af:panelGroupLayout>
+                                                        </f:facet>
+                                                    </af:panelFormLayout>
+                                                    <f:facet name="buttonBar"/>
                                                 </af:dialog>
                                             </af:popup>
                                         </af:panelBox>

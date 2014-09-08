@@ -238,7 +238,7 @@ public class FilterBeans {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("Rollback");
         ob.execute();
-        refresh();
+        //refresh();
         return null;
     }
 
