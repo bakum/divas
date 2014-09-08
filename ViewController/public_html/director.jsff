@@ -217,6 +217,9 @@
                                                                   pattern="#{bindings.CurrencyView1.hints.Editable.format}"/>
                                             </af:inputText>
                                         </af:column>
+                                        <af:column id="c13" width="50">
+                                            <af:button id="b7" icon="/img/ico_currency.png"/>
+                                        </af:column>
                                     </af:table>
                                 </af:panelBox>
                             </af:showDetailItem>
