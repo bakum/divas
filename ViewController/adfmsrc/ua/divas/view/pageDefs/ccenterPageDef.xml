@@ -126,5 +126,10 @@
     <action IterBinding="ContactDetailsView2Iterator" id="CreateInsert1"
             InstanceName="AppModuleDataControl.ContactDetailsView2" DataControl="AppModuleDataControl"
             RequiresUpdateModel="true" Action="createInsertRow"/>
+    <attributeValues IterBinding="KontragentsView1Iterator" id="Fullname">
+      <AttrNames>
+        <Item Value="Fullname"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

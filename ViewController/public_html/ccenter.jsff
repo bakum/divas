@@ -14,7 +14,7 @@
                                     <f:facet name="first">
                                         <af:panelAccordion id="pa2">
                                             <af:showDetailItem text="Детали" id="sdi2"
-                                                               stretchChildren="first">
+                                                               stretchChildren="first" icon="/img/detail.png">
                                                 <af:panelBox text="Протокол" id="pb2" type="flow" background="dark">
                                                     <f:facet name="toolbar"/>
                                                 </af:panelBox>
@@ -41,9 +41,7 @@
                                                                        text="Отменить"
                                                                        disabled="#{!bindings.Rollback.enabled}"
                                                                        immediate="true" id="b3"
-                                                                       action="#{filter.rollbackChange}">
-                                                                <af:resetActionListener/>
-                                                            </af:button>
+                                                                       action="#{filter.rollbackChange}"/>
                                                             <af:button text="Обновить" id="b15"
                                                                        actionListener="#{filter.onRefresh}"
                                                                        disabled="#{bindings.Commit.enabled}"/>
@@ -245,11 +243,12 @@
                                                               contentDelivery="lazyUncached"
                                                               popupFetchListener="#{filter.fetchListener}"
                                                               popupCanceledListener="#{filter.cancelListener}">
-                                                        <af:dialog id="d2" title="Новый контакт"
+                                                        <af:dialog id="d2"
+                                                                   title="Новый контакт для #{bindings.Fullname.inputValue}"
                                                                    dialogListener="#{filter.dialogListener}">
                                                             <af:panelFormLayout id="pfl2">
                                                                 <af:panelLabelAndMessage label="#{bindings.KontragId.hints.label}"
-                                                                                         id="plam6">
+                                                                                         id="plam6" visible="false">
                                                                     <af:inputComboboxListOfValues id="iclov1"
                                                                                                   popupTitle="Search and Select: #{bindings.KontragId.hints.label}"
                                                                                                   value="#{bindings.KontragId.inputValue}"
@@ -263,7 +262,7 @@
                                                                     </af:inputComboboxListOfValues>
                                                                 </af:panelLabelAndMessage>
                                                                 <af:panelLabelAndMessage label="#{bindings.KontragName.hints.label}"
-                                                                                         id="plam7">
+                                                                                         id="plam7" visible="false">
                                                                     <af:inputComboboxListOfValues id="iclov2"
                                                                                                   popupTitle="Search and Select: #{bindings.KontragName.hints.label}"
                                                                                                   value="#{bindings.KontragName.inputValue}"
@@ -312,7 +311,8 @@
                                                     </af:popup>
                                                     <af:popup childCreation="deferred" autoCancel="disabled"
                                                               id="pDelete" contentDelivery="lazyUncached">
-                                                        <af:dialog id="d1" title="Подтверждение"
+                                                        <af:dialog id="d1"
+                                                                   title="Удаление #{bindings.KontragName.inputValue}!"
                                                                    dialogListener="#{AutoSuggestonKontragents.deleteDialogListener}">
                                                             <f:facet name="buttonBar"/>
                                                             <af:outputFormatted value="Вы действительно хотите удалить запись?"
