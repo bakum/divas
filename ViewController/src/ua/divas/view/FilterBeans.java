@@ -1,7 +1,6 @@
 package ua.divas.view;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -40,7 +39,6 @@ import oracle.jbo.uicli.binding.JUCtrlHierBinding;
 
 import oracle.jbo.uicli.binding.JUCtrlHierNodeBinding;
 
-import org.apache.myfaces.trinidad.event.ReturnEvent;
 import org.apache.myfaces.trinidad.event.RowDisclosureEvent;
 import org.apache.myfaces.trinidad.event.SelectionEvent;
 import org.apache.myfaces.trinidad.model.CollectionModel;
@@ -48,7 +46,6 @@ import org.apache.myfaces.trinidad.model.RowKeySet;
 
 import org.apache.myfaces.trinidad.model.RowKeySetImpl;
 
-import ua.divas.classes.ADFUtil;
 
 public class FilterBeans {
     private RichTable mainTable;
