@@ -33,11 +33,8 @@
                                                                            inlineStyle="font-size:large;"/>
                                                             <af:outputText value="#{node.KontragId}" id="ot2"/>
                                                         </f:facet>
-                                                        <af:dropTarget dropListener="#{filter.dropHandler}"
-                                                                       actions="COPY">
-                                                            <af:dataFlavor flavorClass="java.lang.Object"
-                                                                           discriminant="rowcopy"/>
-                                                        </af:dropTarget>
+                                                        <af:collectionDropTarget dropListener="#{filter.dropHandler}"
+                                                                                 actions="COPY" modelName="rowcopy"/>
                                                     </af:tree>
                                                 </af:panelBox>
                                             </af:showDetailItem>
