@@ -26,10 +26,12 @@
                                                     <f:facet name="toolbar"/>
                                                     <af:tree value="#{bindings.CompaignsView1.treeModel}" var="node"
                                                              selectionListener="#{bindings.CompaignsView1.treeModel.makeCurrent}"
-                                                             rowSelection="single" id="t3">
+                                                             rowSelection="single" id="t3" initiallyExpanded="true"
+                                                             displayRow="selected">
                                                         <f:facet name="nodeStamp">
                                                             <af:outputText value="#{node.Name}" id="ot1"
                                                                            inlineStyle="font-size:large;"/>
+                                                            <af:outputText value="#{node.KontragId}" id="ot2"/>
                                                         </f:facet>
                                                         <af:dropTarget dropListener="#{filter.dropHandler}"
                                                                        actions="COPY">
