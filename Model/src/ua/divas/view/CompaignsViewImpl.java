@@ -4,6 +4,7 @@ import oracle.adf.model.BindingContext;
 
 import oracle.jbo.server.ViewObjectImpl;
 
+import ua.divas.classes.DivasView;
 import ua.divas.module.AppModuleImpl;
 import ua.divas.view.common.CompaignsView;
 // ---------------------------------------------------------------------
@@ -12,7 +13,7 @@ import ua.divas.view.common.CompaignsView;
 // ---    Custom code may be added to this class.
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
-public class CompaignsViewImpl extends ViewObjectImpl implements CompaignsView {
+public class CompaignsViewImpl extends DivasView implements CompaignsView {
     /**
      * This is the default constructor (do not remove).
      */
@@ -21,6 +22,7 @@ public class CompaignsViewImpl extends ViewObjectImpl implements CompaignsView {
     
     public void addKonragentToCallList(String KonId, String CompId) {
         AppModuleImpl am = (AppModuleImpl)BindingContext.getCurrent().getDefaultDataControl().getApplicationModule();
+        callStoredProcedure("", new Object[] {});
         am.getTransaction().commit();
     }
 }
