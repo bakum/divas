@@ -11,7 +11,7 @@
                     <f:facet name="center">
                         <af:panelTabbed id="pt1">
                             <af:showDetailItem text="Клиенты" id="sdi1" stretchChildren="first">
-                                <af:panelSplitter id="ps3" orientation="horizontal" splitterPosition="300">
+                                <af:panelSplitter id="ps3" orientation="horizontal" splitterPosition="400">
                                     <f:facet name="first">
                                         <af:panelAccordion id="pa2">
                                             <af:showDetailItem text="Детали" id="sdi2" stretchChildren="first"
@@ -28,7 +28,7 @@
                                                              selectionListener="#{bindings.CompaignsView1.treeModel.makeCurrent}"
                                                              rowSelection="single" id="t3" displayRow="selected">
                                                         <f:facet name="nodeStamp">
-                                                            <af:image source="/img/format-bullet-list.png" id="i1"/>
+                                                            <af:image source="#{node.Name != null ? '/img/format-bullet-list.png' : '/img/Phone.png'}" id="i1"/>
                                                             <af:outputText value="#{node.Name}" id="ot1"
                                                                            inlineStyle="font-size:medium;"/>
                                                             <af:selectOneChoice value="#{node.KontragId}" id="soc14"
