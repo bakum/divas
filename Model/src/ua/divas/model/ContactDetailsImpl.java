@@ -58,6 +58,7 @@ public class ContactDetailsImpl extends DivasEntityNoDelete {
             return vals;
         }
     }
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int VERSION = AttributesEnum.Version.index();
     public static final int KONTRAGID = AttributesEnum.KontragId.index();
@@ -72,6 +73,13 @@ public class ContactDetailsImpl extends DivasEntityNoDelete {
      * This is the default constructor (do not remove).
      */
     public ContactDetailsImpl() {
+    }
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("ua.divas.model.ContactDetails");
     }
 
     /**
@@ -207,11 +215,6 @@ public class ContactDetailsImpl extends DivasEntityNoDelete {
         return new Key(new Object[] { id });
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("ua.divas.model.ContactDetails");
-    }
+
 }
 
