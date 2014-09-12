@@ -11,11 +11,11 @@
                     <f:facet name="center">
                         <af:panelTabbed id="pt1">
                             <af:showDetailItem text="Клиенты" id="sdi1" stretchChildren="first">
-                                <af:panelSplitter id="ps3" orientation="horizontal" splitterPosition="300">
+                                <af:panelSplitter id="ps3" orientation="horizontal" splitterPosition="400">
                                     <f:facet name="first">
                                         <af:panelAccordion id="pa2">
-                                            <af:showDetailItem text="Детали" id="sdi2"
-                                                               stretchChildren="first" icon="/img/detail.png">
+                                            <af:showDetailItem text="Детали" id="sdi2" stretchChildren="first"
+                                                               icon="/img/detail.png">
                                                 <af:panelBox text="Протокол" id="pb2" type="flow" background="dark">
                                                     <f:facet name="toolbar"/>
                                                 </af:panelBox>
@@ -26,16 +26,36 @@
                                                     <f:facet name="toolbar"/>
                                                     <af:tree value="#{bindings.CompaignsView1.treeModel}" var="node"
                                                              selectionListener="#{bindings.CompaignsView1.treeModel.makeCurrent}"
-                                                             rowSelection="single" id="t3">
+                                                             rowSelection="single" id="t3" displayRow="selected">
                                                         <f:facet name="nodeStamp">
+                                                            <af:image source="#{node.Name != null ? '/img/format-bullet-list.png' : '/img/Phone.png'}" id="i1"/>
                                                             <af:outputText value="#{node.Name}" id="ot1"
-                                                                           inlineStyle="font-size:large;"/>
+                                                                           inlineStyle="font-size:medium;"/>
+                                                            <af:selectOneChoice value="#{node.KontragId}" id="soc14"
+                                                                                readOnly="true"
+                                                                                inlineStyle="font-size:small;">
+                                                                <af:forEach var="listrow"
+                                                                            items="#{bindings.KontragentsView1.rangeSet}">
+                                                                    <f:selectItem id="si20"
+                                                                                  itemLabel="#{listrow.Fullname}"
+                                                                                  itemValue="#{listrow.Id}"/>
+                                                                </af:forEach>
+                                                            </af:selectOneChoice>
+                                                            <af:spacer width="10" height="10" id="s2"/>
+                                                            <af:selectOneChoice value="#{node.ContactId}" id="soc13"
+                                                                                readOnly="true">
+                                                                <af:forEach var="listrow"
+                                                                            items="#{bindings.ContactDetailsView1.rangeSet}">
+                                                                    <f:selectItem id="si19"
+                                                                                  itemLabel="#{listrow.Phone}"
+                                                                                  itemValue="#{listrow.Id}"/>
+                                                                </af:forEach>
+                                                            </af:selectOneChoice>
+                                                            <af:outputText value="#{node.KontragId}" id="ot2"
+                                                                           visible="false"/>
                                                         </f:facet>
-                                                        <af:dropTarget dropListener="#{filter.dropHandler}"
-                                                                       actions="COPY">
-                                                            <af:dataFlavor flavorClass="java.lang.Object"
-                                                                           discriminant="rowcopy"/>
-                                                        </af:dropTarget>
+                                                        <af:collectionDropTarget dropListener="#{filter.dropHandler}"
+                                                                                 actions="COPY" modelName="rowcopy"/>
                                                     </af:tree>
                                                 </af:panelBox>
                                             </af:showDetailItem>

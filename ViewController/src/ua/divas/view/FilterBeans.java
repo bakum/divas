@@ -1,7 +1,6 @@
 package ua.divas.view;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -40,7 +39,6 @@ import oracle.jbo.uicli.binding.JUCtrlHierBinding;
 
 import oracle.jbo.uicli.binding.JUCtrlHierNodeBinding;
 
-import org.apache.myfaces.trinidad.event.ReturnEvent;
 import org.apache.myfaces.trinidad.event.RowDisclosureEvent;
 import org.apache.myfaces.trinidad.event.SelectionEvent;
 import org.apache.myfaces.trinidad.model.CollectionModel;
@@ -48,7 +46,6 @@ import org.apache.myfaces.trinidad.model.RowKeySet;
 
 import org.apache.myfaces.trinidad.model.RowKeySetImpl;
 
-import ua.divas.classes.ADFUtil;
 
 public class FilterBeans {
     private RichTable mainTable;
@@ -326,8 +323,49 @@ public class FilterBeans {
 
                     tree.setRowKey(dropRowKey);
                     JUCtrlHierNodeBinding dropNode = (JUCtrlHierNodeBinding) tree.getRowData();
-                    Row treeRow = dropNode.getRow();
-                    String CompId = (String)treeRow.getAttribute("Id");
+                    //Row treeRow = dropNode.getRow();
+                    String dropNodeVO = dropNode.getHierTypeBinding().getStructureDefName();
+                    if (!dropNodeVO.equalsIgnoreCase("ua.divas.view.CompaignsView")) {
+                        return DnDAction.NONE;
+                    }
+
+                    tree.setRowKey(currentRowKey);
+                    CollectionModel treeModel = (CollectionModel) tree.getValue();
+                    JUCtrlHierBinding treeBinding = (JUCtrlHierBinding) treeModel.getWrappedData();
+
+                    JUCtrlHierNodeBinding treeDropNode = treeBinding.findNodeByKeyPath(dropRowKey);
+                    JUCtrlHierNodeBinding rootNode = treeBinding.getRootNodeBinding();
+                    JUCtrlHierNodeBinding dropNodeParent = treeDropNode.getParent();
+
+                    //walk up the tree to expand all parent nodes
+                    if (treeDropNode != null && treeDropNode != rootNode) {
+                        RowKeySetImpl rksImpl = new RowKeySetImpl();
+                        rksImpl.add(dropRowKey);
+                        String CompId = (String) treeDropNode.getRow().getAttribute("Id");
+                        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+                        OperationBinding oper =
+                            (OperationBinding) binding.getOperationBinding("addKonragentToCallList");
+                        oper.getParamsMap().put("KonId", KonId);
+                        oper.getParamsMap().put("CompId", CompId);
+                        oper.execute();
+                        //walk up the tree to expand all parent nodes
+                        while (dropNodeParent != null && dropNodeParent != rootNode) {
+                            rksImpl.add(dropNodeParent.getKeyPath());
+                            dropNodeParent = dropNodeParent.getParent();
+                        }
+                        //3. get all employee nodes in a tree to disclose them too
+                        ArrayList<JUCtrlHierNodeBinding> childList =
+                            (ArrayList<JUCtrlHierNodeBinding>) treeDropNode.getChildren();
+                        for (JUCtrlHierNodeBinding nb : childList) {
+                            rksImpl.add(nb.getKeyPath());
+                        }
+                        //ready to disclose
+                        tree.setDisclosedRowKeys(rksImpl);
+                        AdfFacesContext.getCurrentInstance().addPartialTarget(tree);
+
+                    } else {
+                        return DnDAction.NONE;
+                    }
                 }
             }
 

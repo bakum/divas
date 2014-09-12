@@ -5,6 +5,7 @@ import oracle.jbo.server.ApplicationModuleImpl;
 import oracle.jbo.server.ViewLinkImpl;
 import oracle.jbo.server.ViewObjectImpl;
 
+import ua.divas.view.CompaignsViewImpl;
 import ua.divas.view.ContactDetailsViewImpl;
 import ua.divas.view.CurrencyViewImpl;
 import ua.divas.view.KontragentsViewImpl;
@@ -58,8 +59,8 @@ public class AppModuleImpl extends ApplicationModuleImpl {
      * Container's getter for CompaignsView1.
      * @return CompaignsView1
      */
-    public ViewObjectImpl getCompaignsView1() {
-        return (ViewObjectImpl) findViewObject("CompaignsView1");
+    public CompaignsViewImpl getCompaignsView1() {
+        return (CompaignsViewImpl) findViewObject("CompaignsView1");
     }
 
     /**
@@ -2123,6 +2124,30 @@ public class AppModuleImpl extends ApplicationModuleImpl {
         // TODO Implement this method
         super.prepareSession(session);
         this.getDBTransaction().setClearCacheOnRollback(false);
+    }
+
+    /**
+     * Container's getter for KontragentsView3.
+     * @return KontragentsView3
+     */
+    public KontragentsViewImpl getKontragentsView3() {
+        return (KontragentsViewImpl) findViewObject("KontragentsView3");
+    }
+
+    /**
+     * Container's getter for ContactDetailsView3.
+     * @return ContactDetailsView3
+     */
+    public ContactDetailsViewImpl getContactDetailsView3() {
+        return (ContactDetailsViewImpl) findViewObject("ContactDetailsView3");
+    }
+
+    /**
+     * Container's getter for CompaignsDetailsKontragFnLink.
+     * @return CompaignsDetailsKontragFnLink
+     */
+    public ViewLinkImpl getCompaignsDetailsKontragFnLink() {
+        return (ViewLinkImpl) findViewLink("CompaignsDetailsKontragFnLink");
     }
 }
 

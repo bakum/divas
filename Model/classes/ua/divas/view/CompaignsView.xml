@@ -15,7 +15,13 @@
   FromList="COMPAIGNS Compaigns"
   BindingStyle="OracleName"
   CustomQuery="false"
-  PageIterMode="Full">
+  PageIterMode="Full"
+  ComponentClass="ua.divas.view.CompaignsViewImpl"
+  ComponentInterface="ua.divas.view.common.CompaignsView"
+  ClientProxyName="ua.divas.view.client.CompaignsViewClient">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
   <EntityUsage
     Name="Compaigns"
     Entity="ua.divas.model.Compaigns"/>
@@ -66,4 +72,20 @@
     ViewLink="ua.divas.view.CompaignsDetailsFk1Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="addKonragentToCallList"
+      MethodName="addKonragentToCallList">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="KonId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="CompId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
 </ViewObject>
