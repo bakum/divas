@@ -151,5 +151,11 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <methodAction id="addKonragentToCallList" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="addKonragentToCallList" IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.CompaignsView1">
+      <NamedData NDName="KonId" NDType="java.lang.String"/>
+      <NamedData NDName="CompId" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

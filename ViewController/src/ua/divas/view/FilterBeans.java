@@ -321,10 +321,32 @@ public class FilterBeans {
                     Row tableRow = (Row) rowBinding.getRow();
                     KonId = (String) tableRow.getAttribute("Id");
 
-                    tree.setRowKey(dropRowKey);
-                    JUCtrlHierNodeBinding dropNode = (JUCtrlHierNodeBinding) tree.getRowData();
-                    Row treeRow = dropNode.getRow();
-                    String CompId = (String)treeRow.getAttribute("Id");
+                    //tree.setRowKey(dropRowKey);
+                    tree.setRowKey(currentRowKey);
+                    /* JUCtrlHierNodeBinding dropNode = (JUCtrlHierNodeBinding) tree.getRowData();
+                    Row treeRow = dropNode.getRow(); */
+
+
+                    CollectionModel treeModel = (CollectionModel) tree.getValue();
+                    JUCtrlHierBinding treeBinding = (JUCtrlHierBinding) treeModel.getWrappedData();
+
+                    JUCtrlHierNodeBinding treeDropNode = treeBinding.findNodeByKeyPath(dropRowKey);
+                    JUCtrlHierNodeBinding rootNode = treeBinding.getRootNodeBinding();
+                    //JUCtrlHierNodeBinding dropNodeParent = treeDropNode.getParent();
+
+                    //walk up the tree to expand all parent nodes
+                    if (treeDropNode != null && treeDropNode != rootNode) {
+                        String CompId = (String) treeDropNode.getRow().getAttribute("Id");
+                        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+                        OperationBinding oper = (OperationBinding) binding.getOperationBinding("addKonragentToCallList");
+                        oper.getParamsMap().put("KonId", KonId);
+                        oper.getParamsMap().put("CompId", CompId);
+                        oper.execute();
+                        AdfFacesContext.getCurrentInstance().addPartialTarget(tree.getParent());
+
+                    } else {
+                        return DnDAction.NONE;
+                    }
                 }
             }
 

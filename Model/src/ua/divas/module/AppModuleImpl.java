@@ -5,6 +5,7 @@ import oracle.jbo.server.ApplicationModuleImpl;
 import oracle.jbo.server.ViewLinkImpl;
 import oracle.jbo.server.ViewObjectImpl;
 
+import ua.divas.view.CompaignsViewImpl;
 import ua.divas.view.ContactDetailsViewImpl;
 import ua.divas.view.CurrencyViewImpl;
 import ua.divas.view.KontragentsViewImpl;
@@ -58,8 +59,8 @@ public class AppModuleImpl extends ApplicationModuleImpl {
      * Container's getter for CompaignsView1.
      * @return CompaignsView1
      */
-    public ViewObjectImpl getCompaignsView1() {
-        return (ViewObjectImpl) findViewObject("CompaignsView1");
+    public CompaignsViewImpl getCompaignsView1() {
+        return (CompaignsViewImpl) findViewObject("CompaignsView1");
     }
 
     /**
