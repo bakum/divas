@@ -6,6 +6,8 @@
     <variableIterator id="variables"/>
     <iterator Binds="CurrencyView1" RangeSize="25" DataControl="AppModuleDataControl" id="CurrencyView1Iterator"
               ChangeEventPolicy="ppr"/>
+    <iterator Binds="RegRatesView2" RangeSize="10" DataControl="AppModuleDataControl" id="RegRatesView2Iterator"
+              ChangeEventPolicy="ppr"/>
   </executables>
   <bindings>
     <tree IterBinding="CurrencyView1Iterator" id="CurrencyView1">
@@ -32,6 +34,29 @@
     <attributeValues IterBinding="CurrencyView1Iterator" id="Editable">
       <AttrNames>
         <Item Value="Editable"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="RegRatesView2Iterator" id="RegRatesView2">
+      <nodeDefinition DefName="ua.divas.view.RegRatesView" Name="RegRatesView20">
+        <AttrNames>
+          <Item Value="Period"/>
+          <Item Value="CurrId"/>
+          <Item Value="Kurs"/>
+          <Item Value="Kratnost"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="CurrencyView1Iterator" id="Fullname">
+      <AttrNames>
+        <Item Value="Fullname"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="doCurrencyExchange" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="doCurrencyExchange" IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.CurrencyView1"/>
+    <attributeValues IterBinding="CurrencyView1Iterator" id="Namefull">
+      <AttrNames>
+        <Item Value="Namefull"/>
       </AttrNames>
     </attributeValues>
   </bindings>

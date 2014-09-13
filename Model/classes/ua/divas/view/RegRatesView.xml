@@ -15,7 +15,8 @@
   FromList="REG_RATES RegRates"
   BindingStyle="OracleName"
   CustomQuery="false"
-  PageIterMode="Full">
+  PageIterMode="Full"
+  OrderBy="RegRates.PERIOD DESC">
   <ViewAccessor
     Name="CurrencyView1"
     ViewObjectName="ua.divas.view.CurrencyView"

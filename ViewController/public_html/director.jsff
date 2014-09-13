@@ -26,6 +26,9 @@
                                             </af:button>
                                             <af:button text="Обновить" id="b6" actionListener="#{currency.onRefresh}"
                                                        disabled="#{bindings.Commit.enabled}"/>
+                                            <af:button text="Загрузить курсы" id="b8" icon="/img/download16x16.gif"
+                                                       disabled="#{bindings.Commit.enabled}"
+                                                       action="#{currency.doExRates}"/>
                                         </af:toolbar>
                                     </f:facet>
                                     <af:table value="#{bindings.CurrencyView1.collectionModel}" var="row"
@@ -218,9 +221,69 @@
                                             </af:inputText>
                                         </af:column>
                                         <af:column id="c13" width="50">
-                                            <af:button id="b7" icon="/img/ico_currency.png"/>
+                                            <af:button id="b7" icon="/img/ico_currency.png">
+                                                <af:showPopupBehavior popupId="::pRates" triggerType="action"
+                                                                      align="endAfter" alignId="b7"/>
+                                            </af:button>
                                         </af:column>
                                     </af:table>
+                                    <af:popup childCreation="deferred" autoCancel="disabled" id="pRates"
+                                              contentDelivery="lazyUncached">
+                                        <af:dialog id="d1" title="Курсы валют #{bindings.Fullname.inputValue}">
+                                            <f:facet name="buttonBar"/>
+                                            <af:panelBox text="#{bindings.Namefull.inputValue}" id="pb2" type="flow" background="dark">
+                                                <f:facet name="toolbar"/>
+                                                <af:table value="#{bindings.RegRatesView2.collectionModel}" var="row"
+                                                          rows="#{bindings.RegRatesView2.rangeSize}"
+                                                          emptyText="#{bindings.RegRatesView2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                          rowBandingInterval="0"
+                                                          selectedRowKeys="#{bindings.RegRatesView2.collectionModel.selectedRow}"
+                                                          selectionListener="#{bindings.RegRatesView2.collectionModel.makeCurrent}"
+                                                          rowSelection="single"
+                                                          fetchSize="#{bindings.RegRatesView2.rangeSize}" id="t4"
+                                                          scrollPolicy="page">
+                                                    <af:column headerText="#{bindings.RegRatesView2.hints.Period.label}"
+                                                               id="c14">
+                                                        <af:outputText value="#{row.Period}"
+                                                                       shortDesc="#{bindings.RegRatesView2.hints.Period.tooltip}"
+                                                                       id="ot1">
+                                                            <af:convertDateTime pattern="#{bindings.RegRatesView2.hints.Period.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.RegRatesView2.hints.CurrId.label}"
+                                                               id="c15">
+                                                        <af:selectOneChoice value="#{row.bindings.CurrId.inputValue}"
+                                                                            label="#{row.bindings.CurrId.label}"
+                                                                            required="#{bindings.RegRatesView2.hints.CurrId.mandatory}"
+                                                                            shortDesc="#{bindings.RegRatesView2.hints.CurrId.tooltip}"
+                                                                            readOnly="true" id="soc1">
+                                                            <f:selectItems value="#{row.bindings.CurrId.items}"
+                                                                           id="si1"/>
+                                                            <f:validator binding="#{row.bindings.CurrId.validator}"/>
+                                                        </af:selectOneChoice>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.RegRatesView2.hints.Kurs.label}"
+                                                               id="c16">
+                                                        <af:outputText value="#{row.Kurs}"
+                                                                       shortDesc="#{bindings.RegRatesView2.hints.Kurs.tooltip}"
+                                                                       id="ot2">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.RegRatesView2.hints.Kurs.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.RegRatesView2.hints.Kratnost.label}"
+                                                               id="c17">
+                                                        <af:outputText value="#{row.Kratnost}"
+                                                                       shortDesc="#{bindings.RegRatesView2.hints.Kratnost.tooltip}"
+                                                                       id="ot3">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.RegRatesView2.hints.Kratnost.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                </af:table>
+                                            </af:panelBox>
+                                        </af:dialog>
+                                    </af:popup>
                                 </af:panelBox>
                             </af:showDetailItem>
                         </af:panelTabbed>

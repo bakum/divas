@@ -2,6 +2,8 @@ package ua.divas.view;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import oracle.adf.model.BindingContext;
@@ -111,4 +113,27 @@ public class CurrencyBean {
         refresh();
         return null;
     }
+    
+    public BindingContainer getBindings() {
+            return BindingContext.getCurrent().getCurrentBindingsEntry();
+        }
+    
+    public String doExRates() {
+            FacesContext ctx = FacesContext.getCurrentInstance();
+            OperationBinding operationBinding = getBindings().getOperationBinding("doCurrencyExchange");
+            operationBinding.execute();
+            if (!operationBinding.getErrors().isEmpty()) {
+                FacesMessage msg =
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+                                     "Произошла ошибка при загрузке курсов!");
+                ctx.addMessage(null, msg);
+                return null;
+            }
+            
+            FacesMessage msg =
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Infirmation",
+                                 "Загрузка курсов завершена!");
+            ctx.addMessage(null, msg);
+            return null;
+        }
 }
