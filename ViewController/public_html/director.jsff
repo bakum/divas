@@ -9,7 +9,7 @@
                     <f:facet name="center">
                         <af:panelTabbed id="pt1">
                             <af:showDetailItem text="Валюты" id="sdi1" stretchChildren="first">
-                                <af:panelBox text="Классификатор валют" id="pb1" type="flow" background="dark"
+                                <af:panelBox text="Классификатор валют" id="pb1" type="flow"
                                              icon="/img/Currency Dollar.png">
                                     <f:facet name="toolbar">
                                         <af:toolbar id="t3">
