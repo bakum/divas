@@ -3,6 +3,8 @@ package ua.divas.module;
 import oracle.jbo.Session;
 import oracle.jbo.server.ApplicationModuleImpl;
 import oracle.jbo.server.ViewLinkImpl;
+
+
 import oracle.jbo.server.ViewObjectImpl;
 
 import ua.divas.view.CompaignsViewImpl;
@@ -2148,6 +2150,31 @@ public class AppModuleImpl extends ApplicationModuleImpl {
      */
     public ViewLinkImpl getCompaignsDetailsKontragFnLink() {
         return (ViewLinkImpl) findViewLink("CompaignsDetailsKontragFnLink");
+    }
+
+    /**
+     * Container's getter for VwCompDetails1.
+     * @return VwCompDetails1
+     */
+    public ViewObjectImpl getVwCompDetails1() {
+        return (ViewObjectImpl) findViewObject("VwCompDetails1");
+    }
+
+
+    /**
+     * Container's getter for VwCompDetails2.
+     * @return VwCompDetails2
+     */
+    public ViewObjectImpl getVwCompDetails2() {
+        return (ViewObjectImpl) findViewObject("VwCompDetails2");
+    }
+
+    /**
+     * Container's getter for VwCompDetailsFkLink1.
+     * @return VwCompDetailsFkLink1
+     */
+    public ViewLinkImpl getVwCompDetailsFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwCompDetailsFkLink1");
     }
 }
 

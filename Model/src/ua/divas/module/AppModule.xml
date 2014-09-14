@@ -517,6 +517,12 @@
   <ViewUsage
     Name="ContactDetailsView3"
     ViewObjectName="ua.divas.view.ContactDetailsView"/>
+  <ViewUsage
+    Name="VwCompDetails1"
+    ViewObjectName="ua.divas.view.ro.VwCompDetails"/>
+  <ViewUsage
+    Name="VwCompDetails2"
+    ViewObjectName="ua.divas.view.ro.VwCompDetails"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -1110,5 +1116,11 @@
     ViewLinkObjectName="ua.divas.view.CompaignsDetailsKontragFnLink"
     SrcViewUsageName="ua.divas.module.AppModule.KontragentsView3"
     DstViewUsageName="ua.divas.module.AppModule.ContactDetailsView3"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="VwCompDetailsFkLink1"
+    ViewLinkObjectName="ua.divas.view.ro.VwCompDetailsFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.CompaignsView1_1"
+    DstViewUsageName="ua.divas.module.AppModule.VwCompDetails2"
     Reversed="false"/>
 </AppModule>

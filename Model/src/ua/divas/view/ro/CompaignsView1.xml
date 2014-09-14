@@ -61,7 +61,7 @@ FROM COMPAIGNS Compaigns]]></SQLQuery>
     ColumnType="TIMESTAMP"
     AliasName="VERSION"
     Expression="VERSION"
-    SQLType="TIMESTAMP"/>
+    SQLType="DATE"/>
   <ViewAttribute
     Name="Enabled"
     IsUpdateable="false"
@@ -74,7 +74,7 @@ FROM COMPAIGNS Compaigns]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="ENABLED"
     Expression="ENABLED"
-    SQLType="NUMERIC"/>
+    SQLType="INTEGER"/>
   <ViewAttribute
     Name="Predefined"
     IsUpdateable="false"
@@ -87,7 +87,7 @@ FROM COMPAIGNS Compaigns]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="PREDEFINED"
     Expression="PREDEFINED"
-    SQLType="NUMERIC"/>
+    SQLType="INTEGER"/>
   <ViewAttribute
     Name="Deleted"
     IsUpdateable="false"
@@ -100,13 +100,18 @@ FROM COMPAIGNS Compaigns]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="DELETED"
     Expression="DELETED"
-    SQLType="NUMERIC"/>
+    SQLType="INTEGER"/>
   <AttrArray Name="KeyAttributes">
     <Item Value="Id"/>
   </AttrArray>
   <ViewLinkAccessor
     Name="CompaignsDetailsView1"
     ViewLink="ua.divas.view.ro.CompaignsDetailsFk1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="VwCompDetails"
+    ViewLink="ua.divas.view.ro.VwCompDetailsFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
 </ViewObject>
