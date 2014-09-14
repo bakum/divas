@@ -14,12 +14,6 @@
                                 <af:panelSplitter id="ps3" orientation="horizontal" splitterPosition="400">
                                     <f:facet name="first">
                                         <af:panelAccordion id="pa2">
-                                            <af:showDetailItem text="Детали" id="sdi2" stretchChildren="first"
-                                                               icon="/img/detail.png">
-                                                <af:panelBox text="Протокол" id="pb2" type="flow" background="dark">
-                                                    <f:facet name="toolbar"/>
-                                                </af:panelBox>
-                                            </af:showDetailItem>
                                             <af:showDetailItem text="Кампании" id="sdi4" stretchChildren="first"
                                                                icon="/img/Phone.png">
                                                 <af:panelBox text="Листы обзвона" id="pb5">
@@ -28,11 +22,11 @@
                                                              selectionListener="#{bindings.CompaignsView1_1.treeModel.makeCurrent}"
                                                              rowSelection="single" id="t3">
                                                         <f:facet name="nodeStamp">
-                                                            <af:image shortDesc="sas" id="i1"
-                                                                      source="#{node.Name == null ? '/img/Phone.png':'/img/format-bullet-list.png'}"/>
                                                             <af:outputText value="#{node.Name}" id="ot1"
                                                                            inlineStyle="font-size:large;"/>
                                                             <af:outputText value="#{node.Fullname}" id="ot2"/>
+                                                            <af:image shortDesc="sas" id="i1"
+                                                                      source="#{node.Name == null ? '/img/Phone.png':'/img/format-bullet-list.png'}"/>
                                                             <af:link id="ot3" text="#{node.Phone}"/>
                                                         </f:facet>
                                                         <af:collectionDropTarget dropListener="#{filter.dropHandler}"
@@ -40,6 +34,12 @@
                                                         <af:dragSource actions="MOVE" defaultAction="MOVE"
                                                                        discriminant="rowmove"/>
                                                     </af:tree>
+                                                </af:panelBox>
+                                            </af:showDetailItem>
+                                            <af:showDetailItem text="Детали" id="sdi2" stretchChildren="first"
+                                                               icon="/img/detail.png">
+                                                <af:panelBox text="Протокол" id="pb2" type="flow" background="dark">
+                                                    <f:facet name="toolbar"/>
                                                 </af:panelBox>
                                             </af:showDetailItem>
                                         </af:panelAccordion>
