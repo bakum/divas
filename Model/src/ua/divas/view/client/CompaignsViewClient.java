@@ -16,10 +16,24 @@ public class CompaignsViewClient extends ViewUsageImpl implements CompaignsView 
     public CompaignsViewClient() {
     }
 
+
+    public void removeKonragentFromCallList(String KonId, String CompId) {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "removeKonragentFromCallList", new String[] {
+                                                                         "java.lang.String", "java.lang.String"
+        }, new Object[] { KonId, CompId });
+        return;
+    }
+
     public void addKonragentToCallList(String KonId, String CompId) {
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "addKonragentToCallList", new String[] {
                                                                          "java.lang.String", "java.lang.String"
         }, new Object[] { KonId, CompId });
+        return;
+    }
+
+    public void removeKonragentFromCallList(String KonId) {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "removeKonragentFromCallList", new String[] {
+                                                                         "java.lang.String" }, new Object[] { KonId });
         return;
     }
 }

@@ -7,5 +7,7 @@ import oracle.jbo.ViewObject;
 // ---------------------------------------------------------------------
 public interface CompaignsView extends ViewObject {
     void addKonragentToCallList(String KonId, String CompId);
+
+    void removeKonragentFromCallList(String KonId);
 }
 

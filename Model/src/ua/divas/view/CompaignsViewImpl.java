@@ -25,5 +25,11 @@ public class CompaignsViewImpl extends DivasView implements CompaignsView {
         callStoredProcedure("UTILITY.add_kontragent_to_call_list(?,?)", new Object[] {KonId,CompId});
         //am.getTransaction().commit();
     }
+    
+    public void removeKonragentFromCallList(String KonId) {
+        //AppModuleImpl am = (AppModuleImpl)BindingContext.getCurrent().getDefaultDataControl().getApplicationModule();
+        callStoredProcedure("UTILITY.rem_kontragent_from_call_list(?)", new Object[] {KonId});
+        //am.getTransaction().commit();
+    }
 }
 

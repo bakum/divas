@@ -375,4 +375,65 @@ public class FilterBeans {
         }
         return DnDAction.COPY;
     }
+
+    public DnDAction dropTableHandler(DropEvent dropEvent) {
+        RichTree tree = (RichTree) dropEvent.getDragComponent();
+        DataFlavor<RowKeySet> df = DataFlavor.getDataFlavor(RowKeySet.class, "rowmove");
+        RowKeySet droppedValue = dropEvent.getTransferable().getData(df);
+
+        List dropRowKey = (List) dropEvent.getDropSite();
+        if (dropRowKey == null) {
+            return DnDAction.NONE;
+        }
+        
+        if (droppedValue != null) {
+            Iterator it = droppedValue.iterator();
+            if (it.hasNext()) {
+                List key = (List) it.next();
+                tree.setRowKey(key);
+                JUCtrlHierNodeBinding rowBinding = (JUCtrlHierNodeBinding) tree.getRowData();
+                Row treeRow = (Row) rowBinding.getRow();
+                
+                 CollectionModel treeModel = (CollectionModel) tree.getValue();
+
+                JUCtrlHierBinding treeBinding = (JUCtrlHierBinding) treeModel.getWrappedData();
+                JUCtrlHierNodeBinding treeDragNode = treeBinding.findNodeByKeyPath(key);
+                JUCtrlHierNodeBinding rootNode = treeBinding.getRootNodeBinding();
+                JUCtrlHierNodeBinding dragNodeParent = treeDragNode.getParent();
+                if (dragNodeParent.getParent() == null || treeDragNode == rootNode) {
+                    return DnDAction.NONE;
+                }
+                String KonId = (String) treeRow.getAttribute("Id");
+                BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+                OperationBinding oper = (OperationBinding) binding.getOperationBinding("removeKonragentFromCallList");
+                oper.getParamsMap().put("KonId", KonId);
+                oper.execute();
+                /*if (treeDragNode != null && treeDragNode != rootNode) {
+                    RowKeySetImpl rksImpl = new RowKeySetImpl();
+                    rksImpl.add(key);
+                    while (dragNodeParent != null && dragNodeParent != rootNode) {
+                        rksImpl.add(dragNodeParent.getKeyPath());
+                        dragNodeParent = dragNodeParent.getParent();
+                    }
+                    ArrayList<JUCtrlHierNodeBinding> childList =
+                        (ArrayList<JUCtrlHierNodeBinding>) treeDragNode.getChildren();
+                    if (childList != null) {
+                        for (JUCtrlHierNodeBinding nb : childList) {
+                            rksImpl.add(nb.getKeyPath());
+                        }
+                    }
+                    tree.setDisclosedRowKeys(rksImpl);
+                    AdfFacesContext.getCurrentInstance().addPartialTarget(tree);
+                } */
+                AdfFacesContext.getCurrentInstance().addPartialTarget(tree.getParent());
+            }
+        }
+
+        return DnDAction.MOVE;
+    }
+
+    public void DnDEndListener(DropEvent dropEvent) {
+        
+        
+    }
 }

@@ -87,5 +87,15 @@
         Name="CompId"
         Type="java.lang.String"/>
     </Method>
+    <Method
+      Name="removeKonragentFromCallList"
+      MethodName="removeKonragentFromCallList">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="KonId"
+        Type="java.lang.String"/>
+    </Method>
   </ClientInterface>
 </ViewObject>

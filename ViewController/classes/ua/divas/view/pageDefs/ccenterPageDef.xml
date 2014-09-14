@@ -154,8 +154,15 @@
         <AttrNames>
           <Item Value="Fullname"/>
           <Item Value="Phone"/>
+          <Item Value="Id"/>
+          <Item Value="CompaignId"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <methodAction id="removeKonragentFromCallList" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="removeKonragentFromCallList" IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.CompaignsView1">
+      <NamedData NDName="KonId" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

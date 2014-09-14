@@ -22,12 +22,14 @@
                                             </af:showDetailItem>
                                             <af:showDetailItem text="Кампании" id="sdi4" stretchChildren="first"
                                                                icon="/img/Phone.png">
-                                                <af:panelBox text="PanelBox1" id="pb5">
+                                                <af:panelBox text="Листы обзвона" id="pb5">
                                                     <f:facet name="toolbar"/>
                                                     <af:tree value="#{bindings.CompaignsView1_1.treeModel}" var="node"
                                                              selectionListener="#{bindings.CompaignsView1_1.treeModel.makeCurrent}"
                                                              rowSelection="single" id="t3">
                                                         <f:facet name="nodeStamp">
+                                                            <af:image shortDesc="sas" id="i1"
+                                                                      source="#{node.Name == null ? '/img/Phone.png':'/img/format-bullet-list.png'}"/>
                                                             <af:outputText value="#{node.Name}" id="ot1"
                                                                            inlineStyle="font-size:large;"/>
                                                             <af:outputText value="#{node.Fullname}" id="ot2"/>
@@ -35,6 +37,9 @@
                                                         </f:facet>
                                                         <af:collectionDropTarget dropListener="#{filter.dropHandler}"
                                                                                  actions="COPY" modelName="rowcopy"/>
+                                                        <af:dragSource actions="MOVE" defaultAction="MOVE"
+                                                                       discriminant="rowmove"
+                                                                       dragDropEndListener="#{filter.DnDEndListener}"/>
                                                     </af:tree>
                                                 </af:panelBox>
                                             </af:showDetailItem>
@@ -258,7 +263,9 @@
                                                             </af:panelGroupLayout>
                                                         </af:column>
                                                         <af:dragSource actions="COPY" defaultAction="COPY"
-                                                                       discriminant="rowcopy"/>
+                                                                       discriminant="rowcopy"/><af:collectionDropTarget dropListener="#{filter.dropTableHandler}"
+                                                                                                                        actions="MOVE"
+                                                                                                                        modelName="rowmove"/>
                                                     </af:table>
                                                     <af:popup childCreation="deferred" id="pNewContact"
                                                               contentDelivery="lazyUncached"
