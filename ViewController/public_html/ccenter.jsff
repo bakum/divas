@@ -38,8 +38,7 @@
                                                         <af:collectionDropTarget dropListener="#{filter.dropHandler}"
                                                                                  actions="COPY" modelName="rowcopy"/>
                                                         <af:dragSource actions="MOVE" defaultAction="MOVE"
-                                                                       discriminant="rowmove"
-                                                                       dragDropEndListener="#{filter.DnDEndListener}"/>
+                                                                       discriminant="rowmove"/>
                                                     </af:tree>
                                                 </af:panelBox>
                                             </af:showDetailItem>

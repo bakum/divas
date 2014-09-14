@@ -61,6 +61,7 @@ public class FilterBeans {
     }
 
     public FilterBeans() {
+        super();
     }
 
     public void setMainTable(RichTable mainTable) {
@@ -403,13 +404,14 @@ public class FilterBeans {
                 if (dragNodeParent.getParent() == null || treeDragNode == rootNode) {
                     return DnDAction.NONE;
                 }
-                String KonId = (String) treeRow.getAttribute("Id");
+                 String KonId = (String) treeRow.getAttribute("Id");
                 BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
                 OperationBinding oper = (OperationBinding) binding.getOperationBinding("removeKonragentFromCallList");
                 oper.getParamsMap().put("KonId", KonId);
-                oper.execute();
-                /*if (treeDragNode != null && treeDragNode != rootNode) {
-                    RowKeySetImpl rksImpl = new RowKeySetImpl();
+                oper.execute(); 
+                //treeRow.remove();
+                if (treeDragNode != null && treeDragNode != rootNode) {
+                     /*   RowKeySetImpl rksImpl = new RowKeySetImpl();
                     rksImpl.add(key);
                     while (dragNodeParent != null && dragNodeParent != rootNode) {
                         rksImpl.add(dragNodeParent.getKeyPath());
@@ -422,18 +424,15 @@ public class FilterBeans {
                             rksImpl.add(nb.getKeyPath());
                         }
                     }
-                    tree.setDisclosedRowKeys(rksImpl);
-                    AdfFacesContext.getCurrentInstance().addPartialTarget(tree);
-                } */
-                AdfFacesContext.getCurrentInstance().addPartialTarget(tree.getParent());
+                    tree.setDisclosedRowKeys(rksImpl);  */
+                    //this.setTree((RichTree) tree.getParent());
+                    //this.onRefreshTree();
+                    AdfFacesContext.getCurrentInstance().addPartialTarget(tree.getParent());
+                }
+                //AdfFacesContext.getCurrentInstance().addPartialTarget(tree.getParent());
             }
         }
 
         return DnDAction.MOVE;
-    }
-
-    public void DnDEndListener(DropEvent dropEvent) {
-        
-        
     }
 }
