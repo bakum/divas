@@ -17,17 +17,32 @@
                                             <af:showDetailItem text="Кампании" id="sdi4" stretchChildren="first"
                                                                icon="/img/Phone.png">
                                                 <af:panelBox text="Листы обзвона" id="pb5">
-                                                    <f:facet name="toolbar"/>
+                                                    <f:facet name="toolbar">
+                                                        <af:toolbar id="t5">
+                                                            <af:button actionListener="#{bindings.CreateInsert2.execute}"
+                                                                       text="Добавить"
+                                                                       disabled="#{!bindings.CreateInsert2.enabled}"
+                                                                       id="b16"/>
+                                                            <af:button actionListener="#{bindings.Delete1.execute}"
+                                                                       text="Удалить"
+                                                                       disabled="#{!bindings.Delete1.enabled}"
+                                                                       id="b18"/>
+                                                        </af:toolbar>
+                                                    </f:facet>
                                                     <af:tree value="#{bindings.CompaignsView1_1.treeModel}" var="node"
                                                              selectionListener="#{bindings.CompaignsView1_1.treeModel.makeCurrent}"
-                                                             rowSelection="single" id="t3">
+                                                             rowSelection="single" id="t3" displayRow="selected"
+                                                             contextMenuSelect="false">
                                                         <f:facet name="nodeStamp">
-                                                            <af:outputText value="#{node.Name}" id="ot1"
-                                                                           inlineStyle="font-size:large;"/>
-                                                            <af:outputText value="#{node.Fullname}" id="ot2"/>
                                                             <af:image shortDesc="sas" id="i1"
                                                                       source="#{node.Name == null ? '/img/Phone.png':'/img/format-bullet-list.png'}"/>
-                                                            <af:link id="ot3" text="#{node.Phone}"/>
+                                                            <af:outputText value="#{node.Name}" id="ot1"
+                                                                           inlineStyle="font-size:large;"/>
+                                                            <af:link text="[обзвон всех]" id="l1"
+                                                                     rendered="#{node.Name == null ? false : true}"/>
+                                                            <af:link id="ot3" text="#{node.Phone} #{node.Fullname}">
+                                                                <f:attribute name="phoneNum" value="#{node.Phone}"/>
+                                                            </af:link>
                                                         </f:facet>
                                                         <af:collectionDropTarget dropListener="#{filter.dropHandler}"
                                                                                  actions="COPY" modelName="rowcopy"/>

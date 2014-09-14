@@ -15,6 +15,7 @@ import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichTable;
 import oracle.adf.view.rich.component.rich.data.RichTree;
+import oracle.adf.view.rich.component.rich.data.RichTreeTable;
 import oracle.adf.view.rich.component.rich.layout.RichPanelFormLayout;
 import oracle.adf.view.rich.component.rich.layout.RichShowDetailItem;
 import oracle.adf.view.rich.context.AdfFacesContext;
@@ -45,6 +46,7 @@ import org.apache.myfaces.trinidad.model.CollectionModel;
 import org.apache.myfaces.trinidad.model.RowKeySet;
 
 import org.apache.myfaces.trinidad.model.RowKeySetImpl;
+import org.apache.myfaces.trinidad.model.RowKeySetTreeImpl;
 
 
 public class FilterBeans {
@@ -340,6 +342,11 @@ public class FilterBeans {
 
                     //walk up the tree to expand all parent nodes
                     if (treeDropNode != null && treeDropNode != rootNode) {
+                        RowKeySet drk = tree.getDisclosedRowKeys();
+                        if (drk != null) {
+                            drk.clear();
+                            AdfFacesContext.getCurrentInstance().addPartialTarget(tree);
+                        }
                         RowKeySetImpl rksImpl = new RowKeySetImpl();
                         rksImpl.add(dropRowKey);
                         String CompId = (String) treeDropNode.getRow().getAttribute("Id");
@@ -377,6 +384,27 @@ public class FilterBeans {
         return DnDAction.COPY;
     }
 
+    private void expandTree(RichTree soTreeTableBind) {
+        
+        RowKeySet disclosedTreeRowKeySet = new RowKeySetImpl();
+        CollectionModel model = (CollectionModel) soTreeTableBind.getValue();
+        JUCtrlHierBinding treeBinding = (JUCtrlHierBinding) model.getWrappedData();
+        JUCtrlHierNodeBinding rootNode = treeBinding.getRootNodeBinding();
+        disclosedTreeRowKeySet = soTreeTableBind.getDisclosedRowKeys();
+        if (disclosedTreeRowKeySet == null) {
+            disclosedTreeRowKeySet = new RowKeySetImpl();
+        }
+        List<JUCtrlHierNodeBinding> firstLevelChildren = rootNode.getChildren();
+        for (JUCtrlHierNodeBinding node : firstLevelChildren) {
+            ArrayList list = new ArrayList();
+            list.add(node.getRowKey());
+            disclosedTreeRowKeySet.add(list);
+            //expandTreeChildrenNode(soTreeTableBind, node, list);
+        }
+        soTreeTableBind.setDisclosedRowKeys(disclosedTreeRowKeySet);
+    }
+    
+
     public DnDAction dropTableHandler(DropEvent dropEvent) {
         RichTree tree = (RichTree) dropEvent.getDragComponent();
         DataFlavor<RowKeySet> df = DataFlavor.getDataFlavor(RowKeySet.class, "rowmove");
@@ -386,7 +414,7 @@ public class FilterBeans {
         if (dropRowKey == null) {
             return DnDAction.NONE;
         }
-        
+
         if (droppedValue != null) {
             Iterator it = droppedValue.iterator();
             if (it.hasNext()) {
@@ -394,8 +422,8 @@ public class FilterBeans {
                 tree.setRowKey(key);
                 JUCtrlHierNodeBinding rowBinding = (JUCtrlHierNodeBinding) tree.getRowData();
                 Row treeRow = (Row) rowBinding.getRow();
-                
-                 CollectionModel treeModel = (CollectionModel) tree.getValue();
+
+                CollectionModel treeModel = (CollectionModel) tree.getValue();
 
                 JUCtrlHierBinding treeBinding = (JUCtrlHierBinding) treeModel.getWrappedData();
                 JUCtrlHierNodeBinding treeDragNode = treeBinding.findNodeByKeyPath(key);
@@ -404,14 +432,14 @@ public class FilterBeans {
                 if (dragNodeParent.getParent() == null || treeDragNode == rootNode) {
                     return DnDAction.NONE;
                 }
-                 String KonId = (String) treeRow.getAttribute("Id");
+                String KonId = (String) treeRow.getAttribute("Id");
                 BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
                 OperationBinding oper = (OperationBinding) binding.getOperationBinding("removeKonragentFromCallList");
                 oper.getParamsMap().put("KonId", KonId);
-                oper.execute(); 
+                oper.execute();
                 //treeRow.remove();
                 if (treeDragNode != null && treeDragNode != rootNode) {
-                     /*   RowKeySetImpl rksImpl = new RowKeySetImpl();
+                    /*   RowKeySetImpl rksImpl = new RowKeySetImpl();
                     rksImpl.add(key);
                     while (dragNodeParent != null && dragNodeParent != rootNode) {
                         rksImpl.add(dragNodeParent.getKeyPath());
@@ -425,9 +453,13 @@ public class FilterBeans {
                         }
                     }
                     tree.setDisclosedRowKeys(rksImpl);  */
+
                     //this.setTree((RichTree) tree.getParent());
                     //this.onRefreshTree();
+                    tree.getDisclosedRowKeys().clear();
+                    //expandTree(tree);
                     AdfFacesContext.getCurrentInstance().addPartialTarget(tree.getParent());
+                    
                 }
                 //AdfFacesContext.getCurrentInstance().addPartialTarget(tree.getParent());
             }

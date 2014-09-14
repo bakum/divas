@@ -15,6 +15,7 @@
     <iterator Binds="ContactDetailsView1_1" RangeSize="10" DataControl="AppModuleDataControl"
               id="ContactDetailsView1_1Iterator"/>
     <iterator Binds="CompaignsView1_1" RangeSize="25" DataControl="AppModuleDataControl" id="CompaignsView1_1Iterator"/>
+    <iterator Binds="CompaignsView1" RangeSize="25" DataControl="AppModuleDataControl" id="CompaignsView1Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="KontragentsView1Iterator" id="KontragentsView1">
@@ -164,5 +165,8 @@
                   InstanceName="data.AppModuleDataControl.CompaignsView1">
       <NamedData NDName="KonId" NDType="java.lang.String"/>
     </methodAction>
+    <action IterBinding="CompaignsView1Iterator" id="CreateInsert2" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="CompaignsView1Iterator" id="Delete1" RequiresUpdateModel="false" Action="removeCurrentRow"/>
   </bindings>
 </pageDefinition>
