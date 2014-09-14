@@ -51,16 +51,8 @@ import org.apache.myfaces.trinidad.model.RowKeySetTreeImpl;
 
 public class FilterBeans {
     private RichTable mainTable;
-    private RichShowDetailItem pd_info;
     private RichPanelFormLayout formToRefresh;
 
-    public void setPd_info(RichShowDetailItem pd_info) {
-        this.pd_info = pd_info;
-    }
-
-    public RichShowDetailItem getPd_info() {
-        return pd_info;
-    }
 
     public FilterBeans() {
         super();
@@ -439,20 +431,24 @@ public class FilterBeans {
                 oper.execute();
                 //treeRow.remove();
                 if (treeDragNode != null && treeDragNode != rootNode) {
-                    /*   RowKeySetImpl rksImpl = new RowKeySetImpl();
-                    rksImpl.add(key);
+                    /* RowKeySet drk = tree.getDisclosedRowKeys();
+                    if (drk != null) {
+                        drk.clear();
+                        AdfFacesContext.getCurrentInstance().addPartialTarget(tree);
+                    }
+                       RowKeySetImpl rksImpl = new RowKeySetImpl();
+                    //rksImpl.add(key);
                     while (dragNodeParent != null && dragNodeParent != rootNode) {
                         rksImpl.add(dragNodeParent.getKeyPath());
                         dragNodeParent = dragNodeParent.getParent();
                     }
-                    ArrayList<JUCtrlHierNodeBinding> childList =
-                        (ArrayList<JUCtrlHierNodeBinding>) treeDragNode.getChildren();
+                    ArrayList<JUCtrlHierNodeBinding> childList = treeDragNode.getChildren();
                     if (childList != null) {
                         for (JUCtrlHierNodeBinding nb : childList) {
                             rksImpl.add(nb.getKeyPath());
                         }
                     }
-                    tree.setDisclosedRowKeys(rksImpl);  */
+                    tree.setDisclosedRowKeys(rksImpl);   */
 
                     //this.setTree((RichTree) tree.getParent());
                     //this.onRefreshTree();
