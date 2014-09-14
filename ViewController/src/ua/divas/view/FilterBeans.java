@@ -325,7 +325,7 @@ public class FilterBeans {
                     JUCtrlHierNodeBinding dropNode = (JUCtrlHierNodeBinding) tree.getRowData();
                     //Row treeRow = dropNode.getRow();
                     String dropNodeVO = dropNode.getHierTypeBinding().getStructureDefName();
-                    if (!dropNodeVO.equalsIgnoreCase("ua.divas.view.CompaignsView")) {
+                    if (!dropNodeVO.equalsIgnoreCase("ua.divas.view.ro.CompaignsView1")) {
                         return DnDAction.NONE;
                     }
 
