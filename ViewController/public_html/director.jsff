@@ -292,7 +292,11 @@
                                         <af:toolbar id="t7">
                                             <af:button text="Сохранить" id="b11"
                                                        actionListener="#{bindings.Commit.execute}"
-                                                       disabled="#{!bindings.Commit.enabled}"></af:button>
+                                                       disabled="#{!bindings.Commit.enabled}">
+                                                <af:setPropertyListener from="#{0}"
+                                                                        to="#{bindings.Editable1.inputValue}"
+                                                                        type="action"/>
+                                            </af:button>
                                             <af:button text="Отменить" id="b12"
                                                        actionListener="#{bindings.Rollback.execute}"
                                                        disabled="#{!bindings.Rollback.enabled}">
