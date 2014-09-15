@@ -31,13 +31,13 @@ FROM  FIRMS Firms]]></SQLQuery>
     Entity="ua.divas.model.Firms"/>
   <ViewAttribute
     Name="Id"
-    IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="Firms"
     AliasName="ID"/>
   <ViewAttribute
     Name="FName"
+    IsNotNull="true"
     PrecisionRule="true"
     AliasName="FULLNAME"
     EntityAttrName="Fullname"

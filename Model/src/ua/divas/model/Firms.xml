@@ -17,7 +17,6 @@
   </DesignTime>
   <Attribute
     Name="Id"
-    IsNotNull="true"
     Precision="50"
     ColumnName="ID"
     SQLType="VARCHAR"
@@ -28,6 +27,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Firms.Id_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Firms.Id_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Fullname"
@@ -41,6 +48,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="150"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Firms.Fullname_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Firms.Fullname_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Printname"
@@ -54,6 +69,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="200"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Firms.Printname_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Firms.Printname_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="UrFiz"
@@ -65,7 +88,16 @@
     Type="java.lang.Integer"
     ColumnType="NUMBER"
     TableName="FIRMS"
-    TypeValueMapPropertySet="oracle.jbo.valuemaps.Boolean10PropertySet"/>
+    TypeValueMapPropertySet="oracle.jbo.valuemaps.Boolean10PropertySet">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Firms.UrFiz_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Firms.UrFiz_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Inn"
     Precision="50"
@@ -77,6 +109,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Firms.Inn_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Firms.Inn_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Okpo"
@@ -89,15 +129,31 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Firms.Okpo_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Firms.Okpo_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Version"
-    IsNotNull="true"
     ColumnName="VERSION"
     SQLType="TIMESTAMP"
     Type="java.sql.Timestamp"
     ColumnType="TIMESTAMP"
-    TableName="FIRMS"/>
+    TableName="FIRMS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Firms.Version_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Firms.Version_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Deleted"
     IsNotNull="true"
@@ -108,10 +164,19 @@
     Type="java.lang.Integer"
     ColumnType="NUMBER"
     TableName="FIRMS"
-    TypeValueMapPropertySet="oracle.jbo.valuemaps.Boolean10PropertySet"/>
+    TypeValueMapPropertySet="oracle.jbo.valuemaps.Boolean10PropertySet"
+    DefaultValue="0">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Firms.Deleted_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Firms.Deleted_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Predefined"
-    IsNotNull="true"
     Precision="1"
     Scale="0"
     ColumnName="PREDEFINED"
@@ -119,7 +184,17 @@
     Type="java.lang.Integer"
     ColumnType="NUMBER"
     TableName="FIRMS"
-    TypeValueMapPropertySet="oracle.jbo.valuemaps.Boolean10PropertySet"/>
+    TypeValueMapPropertySet="oracle.jbo.valuemaps.Boolean10PropertySet"
+    DefaultValue="0">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Firms.Predefined_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Firms.Predefined_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="Kassa"
     Association="ua.divas.model.KassaFirmsFk1Assoc"
@@ -151,4 +226,8 @@
       <Item Value="ua.divas.model.Firms.Id"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>
