@@ -55,40 +55,11 @@
     <methodAction id="doCurrencyExchange" RequiresUpdateModel="true" Action="invokeMethod"
                   MethodName="doCurrencyExchange" IsViewObjectMethod="true" DataControl="AppModuleDataControl"
                   InstanceName="data.AppModuleDataControl.CurrencyView1"/>
-    <attributeValues IterBinding="CurrencyView1Iterator" id="Namefull">
+    <attributeValues IterBinding="FirmsView1Iterator" id="Namefull">
       <AttrNames>
-        <Item Value="Namefull"/>
+        <Item Value="Id"/>
       </AttrNames>
     </attributeValues>
-    <tree IterBinding="FirmsView1Iterator" id="FirmsView1">
-      <nodeDefinition DefName="ua.divas.view.FirmsView" Name="FirmsView10">
-        <AttrNames>
-          <Item Value="FName"/>
-          <Item Value="Printname"/>
-          <Item Value="UrFiz" Binds="UrFiz"/>
-          <Item Value="Inn"/>
-          <Item Value="Okpo"/>
-          <Item Value="FVersion"/>
-          <Item Value="FDeleted"/>
-          <Item Value="FPredefined"/>
-          <Item Value="FEditable"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <attributeValues IterBinding="FirmsView1Iterator" id="FEditable">
-      <AttrNames>
-        <Item Value="FEditable"/>
-      </AttrNames>
-    </attributeValues>
-    <button IterBinding="FirmsView1Iterator" id="UrFiz" DTSupportsMRU="false" StaticList="true">
-      <AttrNames>
-        <Item Value="UrFiz"/>
-      </AttrNames>
-      <ValueList>
-        <Item Value="1"/>
-        <Item Value="0"/>
-      </ValueList>
-    </button>
     <action IterBinding="FirmsView1Iterator" id="CreateInsert1" RequiresUpdateModel="true" Action="createInsertRow"/>
   </bindings>
 </pageDefinition>

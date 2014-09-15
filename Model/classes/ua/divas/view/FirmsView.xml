@@ -17,16 +17,17 @@
     <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
   <SQLQuery><![CDATA[SELECT Firms.ID, 
-       Firms.FULLNAME f_name, 
+       Firms.FULLNAME, 
        Firms.PRINTNAME, 
        Firms.UR_FIZ, 
        Firms.INN, 
        Firms.OKPO, 
-       Firms.VERSION f_version, 
-       Firms.DELETED f_deleted, 
-       Firms.PREDEFINED f_predefined,
-       (select 0 from dual) f_editable
-FROM  FIRMS Firms]]></SQLQuery>
+       Firms.VERSION, 
+       Firms.DELETED, 
+       Firms.PREDEFINED,
+       (select 0 from dual) editable
+FROM  FIRMS Firms
+where deleted = 0]]></SQLQuery>
   <EntityUsage
     Name="Firms"
     Entity="ua.divas.model.Firms"/>
@@ -37,7 +38,7 @@ FROM  FIRMS Firms]]></SQLQuery>
     EntityUsage="Firms"
     AliasName="ID"/>
   <ViewAttribute
-    Name="FName"
+    Name="Fullname"
     IsNotNull="true"
     PrecisionRule="true"
     AliasName="FULLNAME"
@@ -74,32 +75,32 @@ FROM  FIRMS Firms]]></SQLQuery>
     EntityUsage="Firms"
     AliasName="OKPO"/>
   <ViewAttribute
-    Name="FVersion"
+    Name="Version"
     IsUpdateable="false"
     PrecisionRule="true"
     AliasName="VERSION"
     EntityAttrName="Version"
     EntityUsage="Firms"/>
   <ViewAttribute
-    Name="FDeleted"
+    Name="Deleted"
     PrecisionRule="true"
     AliasName="DELETED"
     EntityAttrName="Deleted"
     EntityUsage="Firms"/>
   <ViewAttribute
-    Name="FPredefined"
+    Name="Predefined"
     PrecisionRule="true"
     AliasName="PREDEFINED"
     EntityAttrName="Predefined"
     EntityUsage="Firms"/>
   <ViewAttribute
-    Name="FEditable"
+    Name="Editable"
     IsPersistent="false"
     PrecisionRule="true"
     Type="java.math.BigDecimal"
     ColumnType="NUMBER"
-    AliasName="F_EDITABLE"
-    Expression="F_EDITABLE"
+    AliasName="EDITABLE"
+    Expression="EDITABLE"
     SQLType="NUMERIC"/>
   <ViewLinkAccessor
     Name="KassaView"

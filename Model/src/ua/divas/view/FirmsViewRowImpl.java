@@ -23,7 +23,7 @@ public class FirmsViewRowImpl extends ViewRowImpl {
 
     @Override
     public boolean isAttributeUpdateable(int i) {
-        BigDecimal editable = this.getFEditable();
+        BigDecimal editable = this.getEditable();
         if (editable.intValue()==0) {
             return false;
         } else { 
@@ -33,7 +33,7 @@ public class FirmsViewRowImpl extends ViewRowImpl {
 
     @Override
     protected void create(AttributeList attributeList) {
-        this.setFEditable(new BigDecimal(1));
+        this.setEditable(new BigDecimal(1));
         super.create(attributeList);
     }
 
@@ -42,15 +42,15 @@ public class FirmsViewRowImpl extends ViewRowImpl {
      */
     public enum AttributesEnum {
         Id,
-        FName,
+        Fullname,
         Printname,
         UrFiz,
         Inn,
         Okpo,
-        FVersion,
-        FDeleted,
-        FPredefined,
-        FEditable,
+        Version,
+        Deleted,
+        Predefined,
+        Editable,
         KassaView,
         OrdersView,
         UserSettingsView;
@@ -80,15 +80,15 @@ public class FirmsViewRowImpl extends ViewRowImpl {
 
 
     public static final int ID = AttributesEnum.Id.index();
-    public static final int FNAME = AttributesEnum.FName.index();
+    public static final int FULLNAME = AttributesEnum.Fullname.index();
     public static final int PRINTNAME = AttributesEnum.Printname.index();
     public static final int URFIZ = AttributesEnum.UrFiz.index();
     public static final int INN = AttributesEnum.Inn.index();
     public static final int OKPO = AttributesEnum.Okpo.index();
-    public static final int FVERSION = AttributesEnum.FVersion.index();
-    public static final int FDELETED = AttributesEnum.FDeleted.index();
-    public static final int FPREDEFINED = AttributesEnum.FPredefined.index();
-    public static final int FEDITABLE = AttributesEnum.FEditable.index();
+    public static final int VERSION = AttributesEnum.Version.index();
+    public static final int DELETED = AttributesEnum.Deleted.index();
+    public static final int PREDEFINED = AttributesEnum.Predefined.index();
+    public static final int EDITABLE = AttributesEnum.Editable.index();
     public static final int KASSAVIEW = AttributesEnum.KassaView.index();
     public static final int ORDERSVIEW = AttributesEnum.OrdersView.index();
     public static final int USERSETTINGSVIEW = AttributesEnum.UserSettingsView.index();
@@ -128,16 +128,16 @@ public class FirmsViewRowImpl extends ViewRowImpl {
      * Gets the attribute value for the calculated attribute FName.
      * @return the FName
      */
-    public String getFName() {
-        return (String) getAttributeInternal(FNAME);
+    public String getFullname() {
+        return (String) getAttributeInternal(FULLNAME);
     }
 
     /**
      * Sets <code>value</code> as the attribute value for the calculated attribute FName.
      * @param value value to set the  FName
      */
-    public void setFName(String value) {
-        setAttributeInternal(FNAME, value);
+    public void setFullname(String value) {
+        setAttributeInternal(FULLNAME, value);
     }
 
     /**
@@ -209,56 +209,57 @@ public class FirmsViewRowImpl extends ViewRowImpl {
      * Gets the attribute value for VERSION using the alias name FVersion.
      * @return the VERSION
      */
-    public Timestamp getFVersion() {
-        return (Timestamp) getAttributeInternal(FVERSION);
+    public Timestamp getVersion() {
+        return (Timestamp) getAttributeInternal(VERSION);
     }
 
     /**
      * Gets the attribute value for DELETED using the alias name FDeleted.
      * @return the DELETED
      */
-    public Integer getFDeleted() {
-        return (Integer) getAttributeInternal(FDELETED);
+    public Integer getDeleted() {
+        return (Integer) getAttributeInternal(DELETED);
     }
 
     /**
      * Sets <code>value</code> as attribute value for DELETED using the alias name FDeleted.
      * @param value value to set the DELETED
      */
-    public void setFDeleted(Integer value) {
-        setAttributeInternal(FDELETED, value);
+    public void setDeleted(Integer value) {
+        setAttributeInternal(DELETED, value);
     }
 
     /**
      * Gets the attribute value for PREDEFINED using the alias name FPredefined.
      * @return the PREDEFINED
      */
-    public Integer getFPredefined() {
-        return (Integer) getAttributeInternal(FPREDEFINED);
+    public Integer getPredefined() {
+        return (Integer) getAttributeInternal(PREDEFINED);
     }
 
     /**
      * Sets <code>value</code> as attribute value for PREDEFINED using the alias name FPredefined.
      * @param value value to set the PREDEFINED
      */
-    public void setFPredefined(Integer value) {
-        setAttributeInternal(FPREDEFINED, value);
+    public void setPredefined(Integer value) {
+        setAttributeInternal(PREDEFINED, value);
+    }
+
+
+    /**
+     * Gets the attribute value for the calculated attribute Editable.
+     * @return the Editable
+     */
+    public BigDecimal getEditable() {
+        return (BigDecimal) getAttributeInternal(EDITABLE);
     }
 
     /**
-     * Gets the attribute value for the calculated attribute FEditable.
-     * @return the FEditable
+     * Sets <code>value</code> as the attribute value for the calculated attribute Editable.
+     * @param value value to set the  Editable
      */
-    public BigDecimal getFEditable() {
-        return (BigDecimal) getAttributeInternal(FEDITABLE);
-    }
-
-    /**
-     * Sets <code>value</code> as the attribute value for the calculated attribute FEditable.
-     * @param value value to set the  FEditable
-     */
-    public void setFEditable(BigDecimal value) {
-        setAttributeInternal(FEDITABLE, value);
+    public void setEditable(BigDecimal value) {
+        setAttributeInternal(EDITABLE, value);
     }
 
     /**

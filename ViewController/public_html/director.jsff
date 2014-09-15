@@ -13,15 +13,14 @@
                                              icon="/img/Currency Dollar.png">
                                     <f:facet name="toolbar">
                                         <af:toolbar id="t3">
-                                            <af:button actionListener="#{bindings.CreateInsert.execute}"
-                                                       text="Добавить" disabled="#{bindings.Commit.enabled}"
-                                                       id="b2"/>
+                                            <af:button actionListener="#{bindings.CreateInsert.execute}" text="Добавить"
+                                                       disabled="#{bindings.Commit.enabled}" id="b2"/>
                                             <af:button actionListener="#{bindings.Commit.execute}" text="Сохранить"
                                                        disabled="#{!bindings.Commit.enabled}" id="b4"
                                                        action="#{currency.commitChange}"/>
                                             <af:button actionListener="#{bindings.Rollback.execute}" text="Отменить"
-                                                       disabled="#{!bindings.Rollback.enabled}" immediate="true"
-                                                       id="b5" action="#{currency.rollbackChange}">
+                                                       disabled="#{!bindings.Rollback.enabled}" immediate="true" id="b5"
+                                                       action="#{currency.rollbackChange}">
                                                 <af:resetActionListener/>
                                             </af:button>
                                             <af:button text="Обновить" id="b6" actionListener="#{currency.onRefresh}"
@@ -37,10 +36,10 @@
                                               rowBandingInterval="0"
                                               selectedRowKeys="#{bindings.CurrencyView1.collectionModel.selectedRow}"
                                               selectionListener="#{bindings.CurrencyView1.collectionModel.makeCurrent}"
-                                              rowSelection="#{bindings.Editable.inputValue == 0 ? 'single' : 'none'}" fetchSize="#{bindings.CurrencyView1.rangeSize}"
-                                              id="t1" scrollPolicy="page" editingMode="clickToEdit"
-                                              partialTriggers="b3 ::b2" blockRowNavigationOnError="always"
-                                              binding="#{currency.mainTable}">
+                                              rowSelection="#{bindings.Editable.inputValue == 0 ? 'single' : 'none'}"
+                                              fetchSize="#{bindings.CurrencyView1.rangeSize}" id="t1"
+                                              scrollPolicy="page" editingMode="clickToEdit" partialTriggers="b3 ::b2"
+                                              blockRowNavigationOnError="always" binding="#{currency.mainTable}">
                                         <af:column id="c11" width="55"
                                                    inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
                                             <af:toolbar id="t2">
@@ -176,8 +175,8 @@
                                         </af:column>
                                         <af:column sortProperty="#{bindings.CurrencyView1.hints.Predefined.name}"
                                                    sortable="true"
-                                                   headerText="#{bindings.CurrencyView1.hints.Predefined.label}"
-                                                   id="c9" visible="false"
+                                                   headerText="#{bindings.CurrencyView1.hints.Predefined.label}" id="c9"
+                                                   visible="false"
                                                    inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
                                             <af:inputText value="#{row.bindings.Predefined.inputValue}"
                                                           label="#{bindings.CurrencyView1.hints.Predefined.label}"
@@ -231,7 +230,8 @@
                                               contentDelivery="lazyUncached">
                                         <af:dialog id="d1" title="Курсы валют #{bindings.Fullname.inputValue}">
                                             <f:facet name="buttonBar"/>
-                                            <af:panelBox text="#{bindings.Namefull.inputValue}" id="pb2" type="flow" background="dark">
+                                            <af:panelBox text="#{bindings.Namefull.inputValue}" id="pb2" type="flow"
+                                                         background="dark">
                                                 <f:facet name="toolbar"/>
                                                 <af:table value="#{bindings.RegRatesView2.collectionModel}" var="row"
                                                           rows="#{bindings.RegRatesView2.rangeSize}"
@@ -291,15 +291,11 @@
                                     <f:facet name="toolbar">
                                         <af:toolbar id="t7">
                                             <af:button actionListener="#{bindings.CreateInsert1.execute}"
-                                                       text="Добавить"
-                                                       disabled="#{!bindings.CreateInsert1.enabled}" id="b13"/>
+                                                       text="Добавить" disabled="#{!bindings.CreateInsert1.enabled}"
+                                                       id="b13"/>
                                             <af:button text="Сохранить" id="b11"
                                                        actionListener="#{bindings.Commit.execute}"
-                                                       disabled="#{!bindings.Commit.enabled}">
-                                                <af:setPropertyListener from="#{0}"
-                                                                        to="#{bindings.FEditable.inputValue}"
-                                                                        type="action"/>
-                                            </af:button>
+                                                       disabled="#{!bindings.Commit.enabled}"></af:button>
                                             <af:button text="Отменить" id="b12"
                                                        actionListener="#{bindings.Rollback.execute}"
                                                        disabled="#{!bindings.Rollback.enabled}">
@@ -307,156 +303,6 @@
                                             </af:button>
                                         </af:toolbar>
                                     </f:facet>
-                                    <af:table value="#{bindings.FirmsView1.collectionModel}" var="row"
-                                              rows="#{bindings.FirmsView1.rangeSize}"
-                                              emptyText="#{bindings.FirmsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
-                                              rowBandingInterval="0"
-                                              selectedRowKeys="#{bindings.FirmsView1.collectionModel.selectedRow}"
-                                              selectionListener="#{bindings.FirmsView1.collectionModel.makeCurrent}"
-                                              rowSelection="#{bindings.FEditable.inputValue == 0 ? 'single' : 'none'}" fetchSize="#{bindings.FirmsView1.rangeSize}"
-                                              id="t5" scrollPolicy="page" editingMode="clickToEdit"
-                                              partialTriggers="::b13">
-                                        <af:column id="c20" width="80"
-                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
-                                            <af:toolbar id="t6">
-                                                <af:button id="b9" icon="/img/edit-16.gif">
-                                                    <af:setPropertyListener from="#{1}"
-                                                                            to="#{bindings.FEditable.inputValue}"
-                                                                            type="action"/>
-                                                </af:button>
-                                                <af:button id="b10" icon="/img/delete.png"/>
-                                            </af:toolbar>
-                                        </af:column>
-                                        <af:column sortProperty="#{bindings.FirmsView1.hints.FName.name}"
-                                                   sortable="true" headerText="Наименование"
-                                                   id="c18"
-                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
-                                            <af:inputText value="#{row.bindings.FName.inputValue}"
-                                                          label="#{bindings.FirmsView1.hints.FName.label}"
-                                                          required="#{bindings.FirmsView1.hints.FName.mandatory}"
-                                                          columns="#{bindings.FirmsView1.hints.FName.displayWidth}"
-                                                          maximumLength="#{bindings.FirmsView1.hints.FName.precision}"
-                                                          shortDesc="#{bindings.FirmsView1.hints.FName.tooltip}"
-                                                          id="it11">
-                                                <f:validator binding="#{row.bindings.FName.validator}"/>
-                                            </af:inputText>
-                                        </af:column>
-                                        <af:column sortProperty="#{bindings.FirmsView1.hints.Printname.name}"
-                                                   sortable="true"
-                                                   headerText="Полное наименование" id="c19"
-                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
-                                                   width="150">
-                                            <af:inputText value="#{row.bindings.Printname.inputValue}"
-                                                          label="#{bindings.FirmsView1.hints.Printname.label}"
-                                                          required="#{bindings.FirmsView1.hints.Printname.mandatory}"
-                                                          columns="#{bindings.FirmsView1.hints.Printname.displayWidth}"
-                                                          maximumLength="#{bindings.FirmsView1.hints.Printname.precision}"
-                                                          shortDesc="#{bindings.FirmsView1.hints.Printname.tooltip}"
-                                                          id="it12">
-                                                <f:validator binding="#{row.bindings.Printname.validator}"/>
-                                            </af:inputText>
-                                        </af:column>
-                                        <af:column headerText="Юр лицо" id="c27"
-                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
-                                                   width="50">
-                                            <af:selectBooleanCheckbox value="#{row.bindings.UrFiz.inputValue}"
-                                                                      label="#{row.bindings.UrFiz.label}"
-                                                                      shortDesc="#{bindings.FirmsView1.hints.UrFiz.tooltip}"
-                                                                      id="sbc1"/>
-                                        </af:column>
-                                        <af:column sortProperty="#{bindings.FirmsView1.hints.Inn.name}" sortable="true"
-                                                   headerText="ИНН" id="c21"
-                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
-                                            <af:inputText value="#{row.bindings.Inn.inputValue}"
-                                                          label="#{bindings.FirmsView1.hints.Inn.label}"
-                                                          required="#{bindings.FirmsView1.hints.Inn.mandatory}"
-                                                          columns="#{bindings.FirmsView1.hints.Inn.displayWidth}"
-                                                          maximumLength="#{bindings.FirmsView1.hints.Inn.precision}"
-                                                          shortDesc="#{bindings.FirmsView1.hints.Inn.tooltip}"
-                                                          id="it14">
-                                                <f:validator binding="#{row.bindings.Inn.validator}"/>
-                                            </af:inputText>
-                                        </af:column>
-                                        <af:column sortProperty="#{bindings.FirmsView1.hints.Okpo.name}" sortable="true"
-                                                   headerText="ОКПО" id="c22"
-                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
-                                            <af:inputText value="#{row.bindings.Okpo.inputValue}"
-                                                          label="#{bindings.FirmsView1.hints.Okpo.label}"
-                                                          required="#{bindings.FirmsView1.hints.Okpo.mandatory}"
-                                                          columns="#{bindings.FirmsView1.hints.Okpo.displayWidth}"
-                                                          maximumLength="#{bindings.FirmsView1.hints.Okpo.precision}"
-                                                          shortDesc="#{bindings.FirmsView1.hints.Okpo.tooltip}"
-                                                          id="it15">
-                                                <f:validator binding="#{row.bindings.Okpo.validator}"/>
-                                            </af:inputText>
-                                        </af:column>
-                                        <af:column sortProperty="#{bindings.FirmsView1.hints.FVersion.name}"
-                                                   sortable="true"
-                                                   headerText="#{bindings.FirmsView1.hints.FVersion.label}" id="c23"
-                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
-                                                   visible="false">
-                                            <af:inputDate value="#{row.bindings.FVersion.inputValue}"
-                                                          label="#{bindings.FirmsView1.hints.FVersion.label}"
-                                                          required="#{bindings.FirmsView1.hints.FVersion.mandatory}"
-                                                          columns="#{bindings.FirmsView1.hints.FVersion.displayWidth}"
-                                                          shortDesc="#{bindings.FirmsView1.hints.FVersion.tooltip}"
-                                                          id="id2">
-                                                <f:validator binding="#{row.bindings.FVersion.validator}"/>
-                                                <af:convertDateTime pattern="#{bindings.FirmsView1.hints.FVersion.format}"/>
-                                            </af:inputDate>
-                                        </af:column>
-                                        <af:column sortProperty="#{bindings.FirmsView1.hints.FDeleted.name}"
-                                                   sortable="true"
-                                                   headerText="#{bindings.FirmsView1.hints.FDeleted.label}" id="c24"
-                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
-                                                   visible="false">
-                                            <af:inputText value="#{row.bindings.FDeleted.inputValue}"
-                                                          label="#{bindings.FirmsView1.hints.FDeleted.label}"
-                                                          required="#{bindings.FirmsView1.hints.FDeleted.mandatory}"
-                                                          columns="#{bindings.FirmsView1.hints.FDeleted.displayWidth}"
-                                                          maximumLength="#{bindings.FirmsView1.hints.FDeleted.precision}"
-                                                          shortDesc="#{bindings.FirmsView1.hints.FDeleted.tooltip}"
-                                                          id="it16">
-                                                <f:validator binding="#{row.bindings.FDeleted.validator}"/>
-                                                <af:convertNumber groupingUsed="false"
-                                                                  pattern="#{bindings.FirmsView1.hints.FDeleted.format}"/>
-                                            </af:inputText>
-                                        </af:column>
-                                        <af:column sortProperty="#{bindings.FirmsView1.hints.FPredefined.name}"
-                                                   sortable="true"
-                                                   headerText="#{bindings.FirmsView1.hints.FPredefined.label}" id="c25"
-                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
-                                                   visible="false">
-                                            <af:inputText value="#{row.bindings.FPredefined.inputValue}"
-                                                          label="#{bindings.FirmsView1.hints.FPredefined.label}"
-                                                          required="#{bindings.FirmsView1.hints.FPredefined.mandatory}"
-                                                          columns="#{bindings.FirmsView1.hints.FPredefined.displayWidth}"
-                                                          maximumLength="#{bindings.FirmsView1.hints.FPredefined.precision}"
-                                                          shortDesc="#{bindings.FirmsView1.hints.FPredefined.tooltip}"
-                                                          id="it17">
-                                                <f:validator binding="#{row.bindings.FPredefined.validator}"/>
-                                                <af:convertNumber groupingUsed="false"
-                                                                  pattern="#{bindings.FirmsView1.hints.FPredefined.format}"/>
-                                            </af:inputText>
-                                        </af:column>
-                                        <af:column sortProperty="#{bindings.FirmsView1.hints.FEditable.name}"
-                                                   sortable="true"
-                                                   headerText="#{bindings.FirmsView1.hints.FEditable.label}" id="c26"
-                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
-                                                   visible="false">
-                                            <af:inputText value="#{row.bindings.FEditable.inputValue}"
-                                                          label="#{bindings.FirmsView1.hints.FEditable.label}"
-                                                          required="#{bindings.FirmsView1.hints.FEditable.mandatory}"
-                                                          columns="#{bindings.FirmsView1.hints.FEditable.displayWidth}"
-                                                          maximumLength="#{bindings.FirmsView1.hints.FEditable.precision}"
-                                                          shortDesc="#{bindings.FirmsView1.hints.FEditable.tooltip}"
-                                                          id="it18">
-                                                <f:validator binding="#{row.bindings.FEditable.validator}"/>
-                                                <af:convertNumber groupingUsed="false"
-                                                                  pattern="#{bindings.FirmsView1.hints.FEditable.format}"/>
-                                            </af:inputText>
-                                        </af:column>
-                                    </af:table>
                                 </af:panelBox>
                             </af:showDetailItem>
                         </af:panelTabbed>
