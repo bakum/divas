@@ -287,16 +287,12 @@
                                 </af:panelBox>
                             </af:showDetailItem>
                             <af:showDetailItem text="Организации" id="sdi2" stretchChildren="first">
-                                <af:panelBox text="Наши фирмы" id="pb3">
+                                <af:panelBox text="Наши фирмы" id="pb3" icon="/img/chart_organisation.png">
                                     <f:facet name="toolbar">
                                         <af:toolbar id="t7">
                                             <af:button actionListener="#{bindings.CreateInsert1.execute}"
                                                        text="Добавить"
-                                                       disabled="#{!bindings.CreateInsert1.enabled}" id="b13">
-                                                <af:setPropertyListener from="#{1}"
-                                                                        to="#{bindings.FEditable.inputValue}"
-                                                                        type="action"/>
-                                            </af:button>
+                                                       disabled="#{!bindings.CreateInsert1.enabled}" id="b13"/>
                                             <af:button text="Сохранить" id="b11"
                                                        actionListener="#{bindings.Commit.execute}"
                                                        disabled="#{!bindings.Commit.enabled}">
