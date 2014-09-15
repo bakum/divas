@@ -329,7 +329,8 @@
                                         <af:column sortProperty="#{bindings.FirmsView1.hints.Id.name}" sortable="true"
                                                    headerText="#{bindings.FirmsView1.hints.Id.label}" id="c18"
                                                    width="99"
-                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
+                                                   visible="false">
                                             <af:inputText value="#{row.bindings.Id.inputValue}"
                                                           label="#{bindings.FirmsView1.hints.Id.label}"
                                                           required="#{bindings.FirmsView1.hints.Id.mandatory}"
@@ -401,7 +402,8 @@
                                                    sortable="true"
                                                    headerText="#{bindings.FirmsView1.hints.Version.label}" id="c23"
                                                    width="100"
-                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
+                                                   visible="false">
                                             <af:inputDate value="#{row.bindings.Version.inputValue}"
                                                           label="#{bindings.FirmsView1.hints.Version.label}"
                                                           required="#{bindings.FirmsView1.hints.Version.mandatory}"
@@ -415,7 +417,8 @@
                                         <af:column sortProperty="#{bindings.FirmsView1.hints.Deleted.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.FirmsView1.hints.Deleted.label}" id="c24"
-                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
+                                                   visible="false">
                                             <af:inputText value="#{row.bindings.Deleted.inputValue}"
                                                           label="#{bindings.FirmsView1.hints.Deleted.label}"
                                                           required="#{bindings.FirmsView1.hints.Deleted.mandatory}"
@@ -431,7 +434,8 @@
                                         <af:column sortProperty="#{bindings.FirmsView1.hints.Predefined.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.FirmsView1.hints.Predefined.label}" id="c25"
-                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
+                                                   visible="false">
                                             <af:inputText value="#{row.bindings.Predefined.inputValue}"
                                                           label="#{bindings.FirmsView1.hints.Predefined.label}"
                                                           required="#{bindings.FirmsView1.hints.Predefined.mandatory}"
@@ -447,7 +451,8 @@
                                         <af:column sortProperty="#{bindings.FirmsView1.hints.Editable.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.FirmsView1.hints.Editable.label}" id="c26"
-                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
+                                                   visible="false">
                                             <af:inputText value="#{row.bindings.Editable.inputValue}"
                                                           label="#{bindings.FirmsView1.hints.Editable.label}"
                                                           required="#{bindings.FirmsView1.hints.Editable.mandatory}"
