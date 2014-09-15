@@ -47,7 +47,7 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <attributeValues IterBinding="CurrencyView1Iterator" id="Fullname">
+    <attributeValues IterBinding="FirmsView1Iterator" id="Fullname">
       <AttrNames>
         <Item Value="Fullname"/>
       </AttrNames>
@@ -55,9 +55,9 @@
     <methodAction id="doCurrencyExchange" RequiresUpdateModel="true" Action="invokeMethod"
                   MethodName="doCurrencyExchange" IsViewObjectMethod="true" DataControl="AppModuleDataControl"
                   InstanceName="data.AppModuleDataControl.CurrencyView1"/>
-    <attributeValues IterBinding="FirmsView1Iterator" id="Namefull">
+    <attributeValues IterBinding="CurrencyView1Iterator" id="Namefull">
       <AttrNames>
-        <Item Value="Id"/>
+        <Item Value="Namefull"/>
       </AttrNames>
     </attributeValues>
     <action IterBinding="FirmsView1Iterator" id="CreateInsert1" RequiresUpdateModel="true" Action="createInsertRow"/>
@@ -72,13 +72,23 @@
           <Item Value="Version"/>
           <Item Value="Deleted"/>
           <Item Value="Predefined"/>
-          <Item Value="Editable"/>
+          <Item Value="FEditable"/>
+          <Item Value="UrFiz" Binds="UrFiz"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <attributeValues IterBinding="FirmsView1Iterator" id="Editable1">
+    <button IterBinding="FirmsView1Iterator" id="UrFiz" DTSupportsMRU="false" StaticList="true">
       <AttrNames>
-        <Item Value="Editable"/>
+        <Item Value="UrFiz"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="1"/>
+        <Item Value="0"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="FirmsView1Iterator" id="FEditable">
+      <AttrNames>
+        <Item Value="FEditable"/>
       </AttrNames>
     </attributeValues>
   </bindings>

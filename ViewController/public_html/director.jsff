@@ -315,13 +315,13 @@
                                               rowBandingInterval="0"
                                               selectedRowKeys="#{bindings.FirmsView1.collectionModel.selectedRow}"
                                               selectionListener="#{bindings.FirmsView1.collectionModel.makeCurrent}"
-                                              rowSelection="#{bindings.Editable1.inputValue == 0 ? 'single' : 'none'}" fetchSize="#{bindings.FirmsView1.rangeSize}" id="t5" partialTriggers="::b9" editingMode="clickToEdit">
+                                              rowSelection="#{bindings.FEditable.inputValue == 0 ? 'single' : 'none'}" fetchSize="#{bindings.FirmsView1.rangeSize}" id="t5" partialTriggers="::b9" editingMode="clickToEdit">
                                         <af:column id="c27"
-                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
                                             <af:toolbar id="t6">
                                                 <af:button id="b10" icon="/img/edit-16.gif">
                                                     <af:setPropertyListener from="#{1}"
-                                                                            to="#{bindings.Editable1.inputValue}"
+                                                                            to="#{bindings.FEditable.inputValue}"
                                                                             type="action"/>
                                                 </af:button>
                                             </af:toolbar>
@@ -329,7 +329,7 @@
                                         <af:column sortProperty="#{bindings.FirmsView1.hints.Id.name}" sortable="true"
                                                    headerText="#{bindings.FirmsView1.hints.Id.label}" id="c18"
                                                    width="99"
-                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
+                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
                                                    visible="false">
                                             <af:inputText value="#{row.bindings.Id.inputValue}"
                                                           label="#{bindings.FirmsView1.hints.Id.label}"
@@ -340,11 +340,18 @@
                                                 <f:validator binding="#{row.bindings.Id.validator}"/>
                                             </af:inputText>
                                         </af:column>
+                                        <af:column headerText="#{bindings.FirmsView1.hints.UrFiz.label}" id="c28"
+                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                            <af:selectBooleanCheckbox value="#{row.bindings.UrFiz.inputValue}"
+                                                                      label="#{row.bindings.UrFiz.label}"
+                                                                      shortDesc="#{bindings.FirmsView1.hints.UrFiz.tooltip}"
+                                                                      id="sbc1"/>
+                                        </af:column>
                                         <af:column sortProperty="#{bindings.FirmsView1.hints.Fullname.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.FirmsView1.hints.Fullname.label}" id="c19"
                                                    width="101"
-                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
                                             <af:inputText value="#{row.bindings.Fullname.inputValue}"
                                                           label="#{bindings.FirmsView1.hints.Fullname.label}"
                                                           required="#{bindings.FirmsView1.hints.Fullname.mandatory}"
@@ -359,7 +366,7 @@
                                                    sortable="true"
                                                    headerText="#{bindings.FirmsView1.hints.Printname.label}" id="c20"
                                                    width="100"
-                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
                                             <af:inputText value="#{row.bindings.Printname.inputValue}"
                                                           label="#{bindings.FirmsView1.hints.Printname.label}"
                                                           required="#{bindings.FirmsView1.hints.Printname.mandatory}"
@@ -373,7 +380,7 @@
                                         <af:column sortProperty="#{bindings.FirmsView1.hints.Inn.name}" sortable="true"
                                                    headerText="#{bindings.FirmsView1.hints.Inn.label}" id="c21"
                                                    width="100"
-                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
                                             <af:inputText value="#{row.bindings.Inn.inputValue}"
                                                           label="#{bindings.FirmsView1.hints.Inn.label}"
                                                           required="#{bindings.FirmsView1.hints.Inn.mandatory}"
@@ -387,7 +394,7 @@
                                         <af:column sortProperty="#{bindings.FirmsView1.hints.Okpo.name}" sortable="true"
                                                    headerText="#{bindings.FirmsView1.hints.Okpo.label}" id="c22"
                                                    width="100"
-                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
                                             <af:inputText value="#{row.bindings.Okpo.inputValue}"
                                                           label="#{bindings.FirmsView1.hints.Okpo.label}"
                                                           required="#{bindings.FirmsView1.hints.Okpo.mandatory}"
@@ -402,7 +409,7 @@
                                                    sortable="true"
                                                    headerText="#{bindings.FirmsView1.hints.Version.label}" id="c23"
                                                    width="100"
-                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
+                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
                                                    visible="false">
                                             <af:inputDate value="#{row.bindings.Version.inputValue}"
                                                           label="#{bindings.FirmsView1.hints.Version.label}"
@@ -417,7 +424,7 @@
                                         <af:column sortProperty="#{bindings.FirmsView1.hints.Deleted.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.FirmsView1.hints.Deleted.label}" id="c24"
-                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
+                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
                                                    visible="false">
                                             <af:inputText value="#{row.bindings.Deleted.inputValue}"
                                                           label="#{bindings.FirmsView1.hints.Deleted.label}"
@@ -434,7 +441,7 @@
                                         <af:column sortProperty="#{bindings.FirmsView1.hints.Predefined.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.FirmsView1.hints.Predefined.label}" id="c25"
-                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
+                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
                                                    visible="false">
                                             <af:inputText value="#{row.bindings.Predefined.inputValue}"
                                                           label="#{bindings.FirmsView1.hints.Predefined.label}"
@@ -451,10 +458,9 @@
                                         <af:column sortProperty="#{bindings.FirmsView1.hints.Editable.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.FirmsView1.hints.Editable.label}" id="c26"
-                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
-                                                   visible="false">
-                                            <af:inputText value="#{row.bindings.Editable.inputValue}"
-                                                          label="#{bindings.FirmsView1.hints.Editable.label}"
+                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                            <af:inputText value="#{row.bindings.FEditable.inputValue}"
+                                                          label="#{bindings.FirmsView1.hints.FEditable.label}"
                                                           required="#{bindings.FirmsView1.hints.Editable.mandatory}"
                                                           columns="#{bindings.FirmsView1.hints.Editable.displayWidth}"
                                                           maximumLength="#{bindings.FirmsView1.hints.Editable.precision}"

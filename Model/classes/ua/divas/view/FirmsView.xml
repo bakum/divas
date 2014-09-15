@@ -25,7 +25,7 @@
        Firms.VERSION, 
        Firms.DELETED, 
        Firms.PREDEFINED,
-       (select 0 from dual) editable
+       (select 0 from dual) f_editable
 FROM  FIRMS Firms
 where deleted = 0]]></SQLQuery>
   <EntityUsage
@@ -95,13 +95,13 @@ where deleted = 0]]></SQLQuery>
     EntityAttrName="Predefined"
     EntityUsage="Firms"/>
   <ViewAttribute
-    Name="Editable"
+    Name="FEditable"
     IsPersistent="false"
     PrecisionRule="true"
     Type="java.math.BigDecimal"
     ColumnType="NUMBER"
-    AliasName="EDITABLE"
-    Expression="EDITABLE"
+    AliasName="F_EDITABLE"
+    Expression="F_EDITABLE"
     SQLType="NUMERIC"/>
   <ViewLinkAccessor
     Name="KassaView"

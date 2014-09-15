@@ -23,7 +23,7 @@ public class FirmsViewRowImpl extends ViewRowImpl {
 
     @Override
      public boolean isAttributeUpdateable(int i) {
-        BigDecimal editable = this.getEditable();
+        BigDecimal editable = this.getFEditable();
         if (editable.intValue()==0) {
             return false;
         } else {
@@ -33,7 +33,7 @@ public class FirmsViewRowImpl extends ViewRowImpl {
 
     @Override
     protected void create(AttributeList attributeList) {
-        this.setEditable(new BigDecimal(1));
+        this.setFEditable(new BigDecimal(1));
         super.create(attributeList);
     }
 
@@ -51,7 +51,7 @@ public class FirmsViewRowImpl extends ViewRowImpl {
         Version,
         Deleted,
         Predefined,
-        Editable,
+        FEditable,
         KassaView,
         OrdersView,
         UserSettingsView;
@@ -89,7 +89,7 @@ public class FirmsViewRowImpl extends ViewRowImpl {
     public static final int VERSION = AttributesEnum.Version.index();
     public static final int DELETED = AttributesEnum.Deleted.index();
     public static final int PREDEFINED = AttributesEnum.Predefined.index();
-    public static final int EDITABLE = AttributesEnum.Editable.index();
+    public static final int FEDITABLE = AttributesEnum.FEditable.index();
     public static final int KASSAVIEW = AttributesEnum.KassaView.index();
     public static final int ORDERSVIEW = AttributesEnum.OrdersView.index();
     public static final int USERSETTINGSVIEW = AttributesEnum.UserSettingsView.index();
@@ -248,19 +248,19 @@ public class FirmsViewRowImpl extends ViewRowImpl {
 
 
     /**
-     * Gets the attribute value for the calculated attribute Editable.
-     * @return the Editable
+     * Gets the attribute value for the calculated attribute FEditable.
+     * @return the FEditable
      */
-    public BigDecimal getEditable() {
-        return (BigDecimal) getAttributeInternal(EDITABLE);
+    public BigDecimal getFEditable() {
+        return (BigDecimal) getAttributeInternal(FEDITABLE);
     }
 
     /**
-     * Sets <code>value</code> as the attribute value for the calculated attribute Editable.
-     * @param value value to set the  Editable
+     * Sets <code>value</code> as the attribute value for the calculated attribute FEditable.
+     * @param value value to set the  FEditable
      */
-    public void setEditable(BigDecimal value) {
-        setAttributeInternal(EDITABLE, value);
+    public void setFEditable(BigDecimal value) {
+        setAttributeInternal(FEDITABLE, value);
     }
 
     /**
