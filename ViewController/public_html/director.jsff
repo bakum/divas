@@ -40,10 +40,11 @@
                                               fetchSize="#{bindings.CurrencyView1.rangeSize}" id="t1"
                                               scrollPolicy="page" editingMode="clickToEdit" partialTriggers="b3 ::b2"
                                               blockRowNavigationOnError="always" binding="#{currency.mainTable}">
-                                        <af:column id="c11" width="55"
+                                        <af:column id="c11" width="100"
                                                    inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
                                             <af:toolbar id="t2">
-                                                <af:button id="b1" icon="/img/edit-16.gif">
+                                                <af:button id="b1" icon="/img/edit-16.gif"
+                                                           disabled="#{bindings.Commit.enabled}">
                                                     <af:setPropertyListener from="#{1}"
                                                                             to="#{bindings.Editable.inputValue}"
                                                                             type="action"/>
@@ -287,18 +288,18 @@
                                 </af:panelBox>
                             </af:showDetailItem>
                             <af:showDetailItem text="Организации" id="sdi2" stretchChildren="first">
-                                <af:panelBox text="Наши фирмы" id="pb3" icon="/img/chart_organisation.png">
+                                <af:panelBox text="Наши фирмы" id="pb3" icon="/img/chart_organisation.png" type="flow">
                                     <f:facet name="toolbar">
                                         <af:toolbar id="t7">
                                             <af:button actionListener="#{bindings.CreateInsert1.execute}"
                                                        text="Добавить"
-                                                       disabled="#{!bindings.CreateInsert1.enabled}" id="b9"/>
+                                                       disabled="#{bindings.Commit.enabled}" id="b9"/>
                                             <af:button text="Сохранить" id="b11"
                                                        actionListener="#{bindings.Commit.execute}"
                                                        disabled="#{!bindings.Commit.enabled}"
                                                        action="#{firms.commitChange}">
                                                 <af:setPropertyListener from="#{0}"
-                                                                        to="#{bindings.Editable1.inputValue}"
+                                                                        to="#{bindings.FEditable.inputValue}"
                                                                         type="action"/>
                                             </af:button>
                                             <af:button text="Отменить" id="b12"
@@ -307,6 +308,8 @@
                                                        action="#{firms.rollbackChange}">
                                                 <af:resetActionListener/>
                                             </af:button>
+                                            <af:button text="Обновить" id="b14" actionListener="#{firms.onRefresh}"
+                                                       disabled="#{bindings.Commit.enabled}"/>
                                         </af:toolbar>
                                     </f:facet>
                                     <af:table value="#{bindings.FirmsView1.collectionModel}" var="row"
@@ -315,15 +318,18 @@
                                               rowBandingInterval="0"
                                               selectedRowKeys="#{bindings.FirmsView1.collectionModel.selectedRow}"
                                               selectionListener="#{bindings.FirmsView1.collectionModel.makeCurrent}"
-                                              rowSelection="#{bindings.FEditable.inputValue == 0 ? 'single' : 'none'}" fetchSize="#{bindings.FirmsView1.rangeSize}" id="t5" partialTriggers="::b9" editingMode="clickToEdit">
+                                              rowSelection="#{bindings.FEditable.inputValue == 0 ? 'single' : 'none'}" fetchSize="#{bindings.FirmsView1.rangeSize}" id="t5" partialTriggers="::b9" editingMode="clickToEdit"
+                                              scrollPolicy="page">
                                         <af:column id="c27"
                                                    inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
                                             <af:toolbar id="t6">
-                                                <af:button id="b10" icon="/img/edit-16.gif">
+                                                <af:button id="b10" icon="/img/edit-16.gif"
+                                                           disabled="#{bindings.Commit.enabled}">
                                                     <af:setPropertyListener from="#{1}"
                                                                             to="#{bindings.FEditable.inputValue}"
                                                                             type="action"/>
                                                 </af:button>
+                                                <af:button id="b13" icon="/img/delete.png"/>
                                             </af:toolbar>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.FirmsView1.hints.Id.name}" sortable="true"
@@ -458,7 +464,8 @@
                                         <af:column sortProperty="#{bindings.FirmsView1.hints.Editable.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.FirmsView1.hints.Editable.label}" id="c26"
-                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                   inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
+                                                   visible="false">
                                             <af:inputText value="#{row.bindings.FEditable.inputValue}"
                                                           label="#{bindings.FirmsView1.hints.FEditable.label}"
                                                           required="#{bindings.FirmsView1.hints.Editable.mandatory}"
@@ -472,6 +479,9 @@
                                             </af:inputText>
                                         </af:column>
                                     </af:table>
+                                </af:panelBox>
+                                <af:panelBox text="Кассы организаций" id="pb4" type="flow">
+                                    <f:facet name="toolbar"/>
                                 </af:panelBox>
                             </af:showDetailItem>
                         </af:panelTabbed>
