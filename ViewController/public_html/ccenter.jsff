@@ -38,7 +38,7 @@
                                                                       source="#{node.Name == null ? '/img/Phone.png':'/img/format-bullet-list.png'}"/>
                                                             <af:outputText value="#{node.Name}" id="ot1"
                                                                            inlineStyle="font-size:large;"/>
-                                                            <af:link text="[обзвон всех]" id="l1"
+                                                            <af:link text="[старт]" id="l1"
                                                                      rendered="#{node.Name == null ? false : true}"/>
                                                             <af:link id="ot3" text="#{node.Phone} #{node.Fullname}">
                                                                 <f:attribute name="phoneNum" value="#{node.Phone}"/>
