@@ -87,8 +87,7 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="FIRMS"
-    TypeValueMapPropertySet="oracle.jbo.valuemaps.Boolean10PropertySet">
+    TableName="FIRMS">
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -164,7 +163,6 @@
     Type="java.lang.Integer"
     ColumnType="NUMBER"
     TableName="FIRMS"
-    TypeValueMapPropertySet="oracle.jbo.valuemaps.Boolean10PropertySet"
     DefaultValue="0">
     <Properties>
       <SchemaBasedProperties>
@@ -184,7 +182,6 @@
     Type="java.lang.Integer"
     ColumnType="NUMBER"
     TableName="FIRMS"
-    TypeValueMapPropertySet="oracle.jbo.valuemaps.Boolean10PropertySet"
     DefaultValue="0">
     <Properties>
       <SchemaBasedProperties>

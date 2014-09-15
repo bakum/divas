@@ -22,11 +22,11 @@ public class FirmsViewRowImpl extends ViewRowImpl {
     public static final int ENTITY_FIRMS = 0;
 
     @Override
-    public boolean isAttributeUpdateable(int i) {
+     public boolean isAttributeUpdateable(int i) {
         BigDecimal editable = this.getEditable();
         if (editable.intValue()==0) {
             return false;
-        } else { 
+        } else {
         return super.isAttributeUpdateable(i);
             }
     }
@@ -36,6 +36,7 @@ public class FirmsViewRowImpl extends ViewRowImpl {
         this.setEditable(new BigDecimal(1));
         super.create(attributeList);
     }
+
 
     /**
      * AttributesEnum: generated enum for identifying attributes and accessors. DO NOT MODIFY.

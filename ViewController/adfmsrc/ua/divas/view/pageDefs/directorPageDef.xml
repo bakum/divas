@@ -8,7 +8,7 @@
               ChangeEventPolicy="ppr"/>
     <iterator Binds="RegRatesView2" RangeSize="10" DataControl="AppModuleDataControl" id="RegRatesView2Iterator"
               ChangeEventPolicy="ppr"/>
-    <iterator Binds="FirmsView1" RangeSize="5" DataControl="AppModuleDataControl" id="FirmsView1Iterator"/>
+    <iterator Binds="FirmsView1" RangeSize="25" DataControl="AppModuleDataControl" id="FirmsView1Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="CurrencyView1Iterator" id="CurrencyView1">
@@ -61,5 +61,25 @@
       </AttrNames>
     </attributeValues>
     <action IterBinding="FirmsView1Iterator" id="CreateInsert1" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <tree IterBinding="FirmsView1Iterator" id="FirmsView1">
+      <nodeDefinition DefName="ua.divas.view.FirmsView" Name="FirmsView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Fullname"/>
+          <Item Value="Printname"/>
+          <Item Value="Inn"/>
+          <Item Value="Okpo"/>
+          <Item Value="Version"/>
+          <Item Value="Deleted"/>
+          <Item Value="Predefined"/>
+          <Item Value="Editable"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FirmsView1Iterator" id="Editable1">
+      <AttrNames>
+        <Item Value="Editable"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

@@ -61,7 +61,8 @@ where deleted = 0]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="UrFiz"
     EntityUsage="Firms"
-    AliasName="UR_FIZ"/>
+    AliasName="UR_FIZ"
+    DefaultValue="0"/>
   <ViewAttribute
     Name="Inn"
     PrecisionRule="true"
