@@ -8,6 +8,7 @@
               ChangeEventPolicy="ppr"/>
     <iterator Binds="RegRatesView2" RangeSize="10" DataControl="AppModuleDataControl" id="RegRatesView2Iterator"
               ChangeEventPolicy="ppr"/>
+    <iterator Binds="FirmsView1" RangeSize="5" DataControl="AppModuleDataControl" id="FirmsView1Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="CurrencyView1Iterator" id="CurrencyView1">
@@ -59,5 +60,34 @@
         <Item Value="Namefull"/>
       </AttrNames>
     </attributeValues>
+    <tree IterBinding="FirmsView1Iterator" id="FirmsView1">
+      <nodeDefinition DefName="ua.divas.view.FirmsView" Name="FirmsView10">
+        <AttrNames>
+          <Item Value="FName"/>
+          <Item Value="Printname"/>
+          <Item Value="UrFiz" Binds="UrFiz"/>
+          <Item Value="Inn"/>
+          <Item Value="Okpo"/>
+          <Item Value="FVersion"/>
+          <Item Value="FDeleted"/>
+          <Item Value="FPredefined"/>
+          <Item Value="FEditable"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FirmsView1Iterator" id="FEditable">
+      <AttrNames>
+        <Item Value="FEditable"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="FirmsView1Iterator" id="UrFiz" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="UrFiz"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="1"/>
+        <Item Value="0"/>
+      </ValueList>
+    </button>
   </bindings>
 </pageDefinition>
