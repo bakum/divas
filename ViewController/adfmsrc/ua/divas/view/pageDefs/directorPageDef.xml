@@ -89,5 +89,6 @@
         <Item Value="0"/>
       </ValueList>
     </button>
+    <action IterBinding="FirmsView1Iterator" id="CreateInsert1" RequiresUpdateModel="true" Action="createInsertRow"/>
   </bindings>
 </pageDefinition>

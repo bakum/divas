@@ -290,6 +290,13 @@
                                 <af:panelBox text="Наши фирмы" id="pb3">
                                     <f:facet name="toolbar">
                                         <af:toolbar id="t7">
+                                            <af:button actionListener="#{bindings.CreateInsert1.execute}"
+                                                       text="Добавить"
+                                                       disabled="#{!bindings.CreateInsert1.enabled}" id="b13">
+                                                <af:setPropertyListener from="#{1}"
+                                                                        to="#{bindings.FEditable.inputValue}"
+                                                                        type="action"/>
+                                            </af:button>
                                             <af:button text="Сохранить" id="b11"
                                                        actionListener="#{bindings.Commit.execute}"
                                                        disabled="#{!bindings.Commit.enabled}">
@@ -311,7 +318,8 @@
                                               selectedRowKeys="#{bindings.FirmsView1.collectionModel.selectedRow}"
                                               selectionListener="#{bindings.FirmsView1.collectionModel.makeCurrent}"
                                               rowSelection="#{bindings.FEditable.inputValue == 0 ? 'single' : 'none'}" fetchSize="#{bindings.FirmsView1.rangeSize}"
-                                              id="t5" scrollPolicy="page" editingMode="clickToEdit">
+                                              id="t5" scrollPolicy="page" editingMode="clickToEdit"
+                                              partialTriggers="::b13">
                                         <af:column id="c20" width="80"
                                                    inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
                                             <af:toolbar id="t6">
@@ -324,7 +332,7 @@
                                             </af:toolbar>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.FirmsView1.hints.FName.name}"
-                                                   sortable="true" headerText="#{bindings.FirmsView1.hints.FName.label}"
+                                                   sortable="true" headerText="Наименование"
                                                    id="c18"
                                                    inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
                                             <af:inputText value="#{row.bindings.FName.inputValue}"
@@ -339,7 +347,7 @@
                                         </af:column>
                                         <af:column sortProperty="#{bindings.FirmsView1.hints.Printname.name}"
                                                    sortable="true"
-                                                   headerText="#{bindings.FirmsView1.hints.Printname.label}" id="c19"
+                                                   headerText="Полное наименование" id="c19"
                                                    inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
                                                    width="150">
                                             <af:inputText value="#{row.bindings.Printname.inputValue}"
@@ -352,7 +360,7 @@
                                                 <f:validator binding="#{row.bindings.Printname.validator}"/>
                                             </af:inputText>
                                         </af:column>
-                                        <af:column headerText="#{bindings.FirmsView1.hints.UrFiz.label}" id="c27"
+                                        <af:column headerText="Юр лицо" id="c27"
                                                    inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
                                                    width="50">
                                             <af:selectBooleanCheckbox value="#{row.bindings.UrFiz.inputValue}"
@@ -361,7 +369,7 @@
                                                                       id="sbc1"/>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.FirmsView1.hints.Inn.name}" sortable="true"
-                                                   headerText="#{bindings.FirmsView1.hints.Inn.label}" id="c21"
+                                                   headerText="ИНН" id="c21"
                                                    inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
                                             <af:inputText value="#{row.bindings.Inn.inputValue}"
                                                           label="#{bindings.FirmsView1.hints.Inn.label}"
@@ -374,7 +382,7 @@
                                             </af:inputText>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.FirmsView1.hints.Okpo.name}" sortable="true"
-                                                   headerText="#{bindings.FirmsView1.hints.Okpo.label}" id="c22"
+                                                   headerText="ОКПО" id="c22"
                                                    inlineStyle="#{row.bindings.FEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
                                             <af:inputText value="#{row.bindings.Okpo.inputValue}"
                                                           label="#{bindings.FirmsView1.hints.Okpo.label}"

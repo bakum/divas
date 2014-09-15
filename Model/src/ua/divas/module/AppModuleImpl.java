@@ -10,6 +10,7 @@ import oracle.jbo.server.ViewObjectImpl;
 import ua.divas.view.CompaignsViewImpl;
 import ua.divas.view.ContactDetailsViewImpl;
 import ua.divas.view.CurrencyViewImpl;
+import ua.divas.view.FirmsViewImpl;
 import ua.divas.view.KontragentsViewImpl;
 import ua.divas.view.ro.KontragentsItemsLookupVOImpl;
 // ---------------------------------------------------------------------
@@ -117,8 +118,8 @@ public class AppModuleImpl extends ApplicationModuleImpl {
      * Container's getter for FirmsView1.
      * @return FirmsView1
      */
-    public ViewObjectImpl getFirmsView1() {
-        return (ViewObjectImpl) findViewObject("FirmsView1");
+    public FirmsViewImpl getFirmsView1() {
+        return (FirmsViewImpl) findViewObject("FirmsView1");
     }
 
     /**
