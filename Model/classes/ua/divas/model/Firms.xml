@@ -9,7 +9,12 @@
   DBObjectType="table"
   DBObjectName="FIRMS"
   AliasName="Firms"
-  BindingStyle="OracleName">
+  BindingStyle="OracleName"
+  RowClass="ua.divas.model.FirmsImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Attribute
     Name="Id"
     IsNotNull="true"
@@ -59,7 +64,8 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="FIRMS"/>
+    TableName="FIRMS"
+    TypeValueMapPropertySet="oracle.jbo.valuemaps.Boolean10PropertySet"/>
   <Attribute
     Name="Inn"
     Precision="50"
@@ -101,7 +107,8 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="FIRMS"/>
+    TableName="FIRMS"
+    TypeValueMapPropertySet="oracle.jbo.valuemaps.Boolean10PropertySet"/>
   <Attribute
     Name="Predefined"
     IsNotNull="true"
@@ -111,7 +118,8 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="FIRMS"/>
+    TableName="FIRMS"
+    TypeValueMapPropertySet="oracle.jbo.valuemaps.Boolean10PropertySet"/>
   <AccessorAttribute
     Name="Kassa"
     Association="ua.divas.model.KassaFirmsFk1Assoc"

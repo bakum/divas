@@ -6,19 +6,23 @@
   Name="FirmsView"
   Version="12.1.2.66.68"
   InheritPersonalization="merge"
-  SelectList="Firms.ID, 
-       Firms.FULLNAME, 
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <SQLQuery><![CDATA[SELECT Firms.ID, 
+       Firms.FULLNAME f_name, 
        Firms.PRINTNAME, 
        Firms.UR_FIZ, 
        Firms.INN, 
        Firms.OKPO, 
-       Firms.VERSION, 
-       Firms.DELETED, 
-       Firms.PREDEFINED"
-  FromList="FIRMS Firms"
-  BindingStyle="OracleName"
-  CustomQuery="false"
-  PageIterMode="Full">
+       Firms.VERSION f_version, 
+       Firms.DELETED f_deleted, 
+       Firms.PREDEFINED f_predefined,
+       (select 0 from dual) f_editable
+FROM  FIRMS Firms]]></SQLQuery>
   <EntityUsage
     Name="Firms"
     Entity="ua.divas.model.Firms"/>
@@ -30,12 +34,15 @@
     EntityUsage="Firms"
     AliasName="ID"/>
   <ViewAttribute
-    Name="Fullname"
-    IsNotNull="true"
+    Name="FName"
     PrecisionRule="true"
+    AliasName="FULLNAME"
     EntityAttrName="Fullname"
-    EntityUsage="Firms"
-    AliasName="FULLNAME"/>
+    EntityUsage="Firms">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="150"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewAttribute
     Name="Printname"
     IsNotNull="true"
@@ -63,26 +70,33 @@
     EntityUsage="Firms"
     AliasName="OKPO"/>
   <ViewAttribute
-    Name="Version"
-    IsNotNull="true"
+    Name="FVersion"
+    IsUpdateable="false"
     PrecisionRule="true"
+    AliasName="VERSION"
     EntityAttrName="Version"
-    EntityUsage="Firms"
-    AliasName="VERSION"/>
+    EntityUsage="Firms"/>
   <ViewAttribute
-    Name="Deleted"
-    IsNotNull="true"
+    Name="FDeleted"
     PrecisionRule="true"
+    AliasName="DELETED"
     EntityAttrName="Deleted"
-    EntityUsage="Firms"
-    AliasName="DELETED"/>
+    EntityUsage="Firms"/>
   <ViewAttribute
-    Name="Predefined"
-    IsNotNull="true"
+    Name="FPredefined"
     PrecisionRule="true"
+    AliasName="PREDEFINED"
     EntityAttrName="Predefined"
-    EntityUsage="Firms"
-    AliasName="PREDEFINED"/>
+    EntityUsage="Firms"/>
+  <ViewAttribute
+    Name="FEditable"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="F_EDITABLE"
+    Expression="F_EDITABLE"
+    SQLType="NUMERIC"/>
   <ViewLinkAccessor
     Name="KassaView"
     ViewLink="ua.divas.view.KassaFirmsFk1Link"
