@@ -2177,5 +2177,30 @@ public class AppModuleImpl extends ApplicationModuleImpl {
     public ViewLinkImpl getVwCompDetailsFkLink1() {
         return (ViewLinkImpl) findViewLink("VwCompDetailsFkLink1");
     }
+
+
+    /**
+     * Container's getter for DivisionsRootView2.
+     * @return DivisionsRootView2
+     */
+    public ViewObjectImpl getDivisionsRootView2() {
+        return (ViewObjectImpl) findViewObject("DivisionsRootView2");
+    }
+
+    /**
+     * Container's getter for DivisionsView3.
+     * @return DivisionsView3
+     */
+    public ViewObjectImpl getDivisionsView3() {
+        return (ViewObjectImpl) findViewObject("DivisionsView3");
+    }
+
+    /**
+     * Container's getter for DivRootDivisionsFkLink.
+     * @return DivRootDivisionsFkLink
+     */
+    public ViewLinkImpl getDivRootDivisionsFkLink() {
+        return (ViewLinkImpl) findViewLink("DivRootDivisionsFkLink");
+    }
 }
 

@@ -9,6 +9,8 @@
     <iterator Binds="RegRatesView2" RangeSize="10" DataControl="AppModuleDataControl" id="RegRatesView2Iterator"
               ChangeEventPolicy="ppr"/>
     <iterator Binds="FirmsView1" RangeSize="5" DataControl="AppModuleDataControl" id="FirmsView1Iterator"/>
+    <iterator Binds="DivisionsRootView2" RangeSize="25" DataControl="AppModuleDataControl"
+              id="DivisionsRootView2Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="CurrencyView1Iterator" id="CurrencyView1">
@@ -91,5 +93,25 @@
         <Item Value="FEditable"/>
       </AttrNames>
     </attributeValues>
+    <tree IterBinding="DivisionsRootView2Iterator" id="DivisionsRootView2">
+      <nodeDefinition DefName="ua.divas.view.DivisionsRootView" Name="DivisionsRootView20">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Fullname"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="DivisionsView"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="ua.divas.view.DivisionsView" Name="DivisionsRootView21">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Deleted"/>
+          <Item Value="Fullname"/>
+          <Item Value="IsGroup"/>
+          <Item Value="ParentId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>
