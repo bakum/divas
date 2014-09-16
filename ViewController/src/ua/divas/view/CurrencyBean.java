@@ -31,6 +31,7 @@ import oracle.binding.OperationBinding;
 import oracle.jbo.Key;
 
 import oracle.jbo.Row;
+import oracle.jbo.RowIterator;
 import oracle.jbo.uicli.binding.JUCtrlHierBinding;
 
 import oracle.jbo.uicli.binding.JUCtrlHierNodeBinding;
@@ -222,7 +223,7 @@ public class CurrencyBean {
         if (dropRowKey == null) {
             return DnDAction.NONE;
         }
-        
+
         try {
             DataFlavor<RowKeySet> df = DataFlavor.getDataFlavor(RowKeySet.class, "rowmove");
             droppedValue = dropEvent.getTransferable().getData(df);
@@ -259,10 +260,10 @@ public class CurrencyBean {
                             AdfFacesContext.getCurrentInstance().addPartialTarget(tree);
                         } */
                         RowKeySetImpl rksImpl = new RowKeySetImpl();
-                        rksImpl.add(dropRowKey);
+                        rksImpl.add(currentRowKey);
                         String ParentId = (String) treeDropNode.getRow().getAttribute("Id");
                         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-                         OperationBinding oper =
+                        OperationBinding oper =
                             (OperationBinding) binding.getOperationBinding("changeParentInDivisions");
                         oper.getParamsMap().put("Id", Id);
                         oper.getParamsMap().put("ParentId", ParentId);
@@ -280,7 +281,7 @@ public class CurrencyBean {
                         }
                         //ready to disclose
                         tree.setDisclosedRowKeys(rksImpl);
-                        AdfFacesContext.getCurrentInstance().addPartialTarget(tree.getParent());
+                        //AdfFacesContext.getCurrentInstance().addPartialTarget(tree.getParent());
                         AdfFacesContext.getCurrentInstance().addPartialTarget(tree1);
 
                     } else {
@@ -294,5 +295,86 @@ public class CurrencyBean {
             return DnDAction.NONE;
         }
         return DnDAction.MOVE;
+    }
+
+    /**Method to get Iterator*/
+    public RowIterator getSelectedNodeIterator() {
+        if (getMainTree() != null && getMainTree().getSelectedRowKeys() != null) {
+            for (Object rKey : getMainTree().getSelectedRowKeys()) {
+                getMainTree().setRowKey(rKey);
+                return ((JUCtrlHierNodeBinding) getMainTree().getRowData()).getRowIterator();
+            }
+        }
+        return null;
+    }
+
+    /**Method to get Node Key*/
+    public Key getSelectedNodeKey() {
+        if (getMainTree() != null && getMainTree().getSelectedRowKeys() != null) {
+            for (Object rKey : getMainTree().getSelectedRowKeys()) {
+                getMainTree().setRowKey(rKey);
+                return ((JUCtrlHierNodeBinding) getMainTree().getRowData()).getRowKey();
+            }
+        }
+        return null;
+    }
+
+    public void delete(ActionEvent actionEvent) {
+        RowKeySet selection = this.getMainTree().getSelectedRowKeys();
+
+        if (selection != null && selection.getSize() > 0) {
+            for (Object facesTreeRowKey : selection) {
+                this.getMainTree().setRowKey(facesTreeRowKey);
+                JUCtrlHierNodeBinding root = (JUCtrlHierNodeBinding) this.getMainTree().getRowData();
+
+                JUCtrlHierNodeBinding node = this.getFirstChild(root);
+                while (node != null) {
+                    System.out.println(node.getRow().getAttribute(0));
+
+                    node.getRow().remove();
+
+                    if (node.getChildren() != null) {
+                        node = this.getFirstChild(node);
+                    } else {
+                        while (this.getNextSibling(node) == null && node != root)
+                            node = node.getParent();
+
+                        if (node != root) {
+                            node = this.getNextSibling(node);
+                        } else {
+                            node = null;
+                        }
+                    }
+                }
+                System.out.println(root.getRow().getAttribute(0));
+
+                root.getRow().remove();
+            }
+        }
+    }
+
+    private JUCtrlHierNodeBinding getFirstChild(JUCtrlHierNodeBinding node) {
+        if (node.getChildren() != null) {
+            return (JUCtrlHierNodeBinding) node.getChildren().get(0);
+        }
+
+        return null;
+    }
+
+    private JUCtrlHierNodeBinding getNextSibling(JUCtrlHierNodeBinding node) {
+        try {
+            JUCtrlHierNodeBinding parent = node.getParent();
+            int index = parent.getChildren().indexOf(node);
+
+            index = ++index;
+
+            if (index < parent.getChildren().size()) {
+                return (JUCtrlHierNodeBinding) parent.getChildren().get(index);
+            }
+        } catch (Exception e) {
+
+            return null;
+        }
+        return null;
     }
 }

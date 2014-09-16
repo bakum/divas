@@ -510,6 +510,9 @@
                                                                    returnListener="#{currency.returnListener}">
                                                             <af:showPopupBehavior popupId="pCreateEditDivision"/>
                                                         </af:button>
+                                                        <af:button text="Удалить" id="b15"
+                                                                   disabled="#{bindings.Commit.enabled}"
+                                                                   actionListener="#{currency.delete}"/>
                                                     </af:toolbar>
                                                 </f:facet>
                                                 <af:tree value="#{bindings.DivisionsRootView2.treeModel}" var="node"

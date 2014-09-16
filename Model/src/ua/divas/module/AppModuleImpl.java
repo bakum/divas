@@ -1,5 +1,8 @@
 package ua.divas.module;
 
+import oracle.jbo.Key;
+import oracle.jbo.Row;
+import oracle.jbo.RowIterator;
 import oracle.jbo.Session;
 import oracle.jbo.server.ApplicationModuleImpl;
 import oracle.jbo.server.ViewLinkImpl;
@@ -7,6 +10,7 @@ import oracle.jbo.server.ViewLinkImpl;
 
 import oracle.jbo.server.ViewObjectImpl;
 
+import ua.divas.module.common.AppModule;
 import ua.divas.view.CompaignsViewImpl;
 import ua.divas.view.ContactDetailsViewImpl;
 import ua.divas.view.CurrencyViewImpl;
@@ -20,7 +24,7 @@ import ua.divas.view.ro.KontragentsItemsLookupVOImpl;
 // ---    Custom code may be added to this class.
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
-public class AppModuleImpl extends ApplicationModuleImpl {
+public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     /**
      * This is the default constructor (do not remove).
      */
@@ -2203,5 +2207,28 @@ public class AppModuleImpl extends ApplicationModuleImpl {
     public ViewLinkImpl getDivRootDivisionsFkLink() {
         return (ViewLinkImpl) findViewLink("DivRootDivisionsFkLink");
     }
+    
+    public void deleteChildren(RowIterator ri, Key selectedNodeKey) {
+            if (ri != null && selectedNodeKey != null) {
+
+                Row last = ri.last();
+                Key lastRowKey = last.getKey();
+                // if the select row is not the last row in the row iterator...
+
+                Row[] rows = ri.findByKey(selectedNodeKey, 1);
+                if (rows != null) {
+
+                    for (Row row : rows) {
+                        row.remove();
+                        //this.getTransaction().commit();
+                    }
+
+                } else {
+                    System.out.println("Node not Found for " + selectedNodeKey);
+                }
+
+
+            }
+        }
 }
 

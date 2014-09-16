@@ -7,7 +7,9 @@
   Version="12.1.2.66.68"
   InheritPersonalization="merge"
   ClearCacheOnRollback="true"
-  ComponentClass="ua.divas.module.AppModuleImpl">
+  ComponentClass="ua.divas.module.AppModuleImpl"
+  ComponentInterface="ua.divas.module.common.AppModule"
+  ClientProxyName="ua.divas.module.client.AppModuleClient">
   <DesignTime>
     <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
@@ -1135,4 +1137,20 @@
     SrcViewUsageName="ua.divas.module.AppModule.DivisionsRootView2"
     DstViewUsageName="ua.divas.module.AppModule.DivisionsView3"
     Reversed="false"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="deleteChildren"
+      MethodName="deleteChildren">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="ri"
+        Type="oracle.jbo.RowIterator"/>
+      <Parameter
+        Name="selectedNodeKey"
+        Type="oracle.jbo.Key"/>
+    </Method>
+  </ClientInterface>
 </AppModule>
