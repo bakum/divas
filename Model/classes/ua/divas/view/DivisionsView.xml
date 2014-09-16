@@ -17,7 +17,9 @@
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
-  ComponentClass="ua.divas.view.DivisionsViewImpl">
+  ComponentClass="ua.divas.view.DivisionsViewImpl"
+  ComponentInterface="ua.divas.view.common.DivisionsView"
+  ClientProxyName="ua.divas.view.client.DivisionsViewClient">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
@@ -167,4 +169,20 @@
     ViewLink="ua.divas.view.UserSettingsDivisionsFk1Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="changeParentInDivisions"
+      MethodName="changeParentInDivisions">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="Id"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="ParentId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
 </ViewObject>

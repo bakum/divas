@@ -522,7 +522,9 @@
                                                                  rendered="#{node.ParentId == null ? false : true}"
                                                                  icon="/img/edit-16.gif"
                                                                  actionListener="#{currency.onPopup}"
-                                                                 disabled="#{bindings.Commit.enabled}"/>
+                                                                 disabled="#{bindings.Commit.enabled}"
+                                                                 returnListener="#{currency.returnListener}"
+                                                                 inlineStyle="font-size:smaller;"/>
                                                     </f:facet>
                                                     <af:dragSource actions="MOVE" discriminant="rowmove"/>
                                                     <af:collectionDropTarget dropListener="#{currency.dropHundler}"
