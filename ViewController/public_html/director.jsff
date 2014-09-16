@@ -308,8 +308,7 @@
                                                         </af:button>
                                                         <af:button text="Отменить" id="b12"
                                                                    actionListener="#{bindings.Rollback.execute}"
-                                                                   disabled="#{!bindings.Rollback.enabled}"
-                                                                   action="#{firms.rollbackChange}">
+                                                                   disabled="#{!bindings.Rollback.enabled}">
                                                             <af:resetActionListener/>
                                                         </af:button>
                                                         <af:button text="Обновить" id="b14"
@@ -505,7 +504,7 @@
                                                 <f:facet name="toolbar"/>
                                                 <af:tree value="#{bindings.DivisionsRootView2.treeModel}" var="node"
                                                          selectionListener="#{bindings.DivisionsRootView2.treeModel.makeCurrent}"
-                                                         rowSelection="single" id="t8" initiallyExpanded="true">
+                                                         rowSelection="single" id="t8">
                                                     <f:facet name="nodeStamp">
                                                         <af:outputText value="#{node.Fullname}" id="ot4"/>
                                                     </f:facet>
