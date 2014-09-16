@@ -99,6 +99,8 @@
         <AttrNames>
           <Item Value="Id"/>
           <Item Value="Fullname"/>
+          <Item Value="ParentId"/>
+          <Item Value="IsGroup"/>
         </AttrNames>
         <Accessors>
           <Item Value="DivisionsView"/>
@@ -113,6 +115,9 @@
           <Item Value="IsGroup"/>
           <Item Value="ParentId"/>
         </AttrNames>
+        <Accessors>
+          <Item Value="DivisionsView"/>
+        </Accessors>
       </nodeDefinition>
     </tree>
     <tree IterBinding="DivisionsView1Iterator" id="DivisionsView1">

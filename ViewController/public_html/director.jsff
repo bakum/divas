@@ -505,11 +505,9 @@
                                                     <af:toolbar id="t9">
                                                         <af:button actionListener="#{bindings.CreateInsert2.execute}"
                                                                    text="Добавить"
-                                                                   disabled="#{!bindings.CreateInsert2.enabled}"
-                                                                   id="b15" returnListener="#{currency.returnListener}">
-                                                            <af:showPopupBehavior popupId="pCreateEditDivision"/>
-                                                        </af:button>
-                                                        <af:button text="Редактировать" id="b16">
+                                                                   disabled="#{bindings.Commit.enabled}"
+                                                                   id="cbInsertDiv"
+                                                                   returnListener="#{currency.returnListener}">
                                                             <af:showPopupBehavior popupId="pCreateEditDivision"/>
                                                         </af:button>
                                                     </af:toolbar>
@@ -518,13 +516,26 @@
                                                          selectionListener="#{bindings.DivisionsRootView2.treeModel.makeCurrent}"
                                                          rowSelection="single" id="t8" binding="#{currency.mainTree}">
                                                     <f:facet name="nodeStamp">
-                                                        <af:outputText value="#{node.Fullname}" id="ot4"/>
+                                                        <af:outputText value="#{node.Fullname}" id="ot4"
+                                                                       inlineStyle="#{node.IsGroup == 1 ? 'font-weight:bold;' : ''}"/>
+                                                        <af:link text="[редактировать]" id="l1"
+                                                                 rendered="#{node.ParentId == null ? false : true}"
+                                                                 icon="/img/edit-16.gif"
+                                                                 actionListener="#{currency.onPopup}"
+                                                                 disabled="#{bindings.Commit.enabled}"/>
                                                     </f:facet>
+                                                    <af:dragSource actions="MOVE" discriminant="rowmove"/>
+                                                    <af:collectionDropTarget dropListener="#{currency.dropHundler}"
+                                                                             modelName="rowmove" actions="MOVE"/>
                                                 </af:tree>
                                             </af:panelBox>
                                             <af:popup childCreation="deferred" autoCancel="disabled"
-                                                      id="pCreateEditDivision" contentDelivery="lazyUncached">
-                                                <af:dialog id="d2" title="Подразделение">
+                                                      id="pCreateEditDivision" contentDelivery="lazyUncached"
+                                                      binding="#{currency.mainPopup}"
+                                                      popupFetchListener="#{currency.fetchListener}"
+                                                      popupCanceledListener="#{currency.cancelListener}">
+                                                <af:dialog id="d2" title="Подразделение"
+                                                           dialogListener="#{currency.dialogListener}">
                                                     <f:facet name="buttonBar"/>
                                                     <af:panelFormLayout id="pfl1">
                                                         <af:selectOneChoice value="#{bindings.ParentId1.inputValue}"
