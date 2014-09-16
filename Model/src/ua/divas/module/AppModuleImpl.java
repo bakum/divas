@@ -10,6 +10,7 @@ import oracle.jbo.server.ViewObjectImpl;
 import ua.divas.view.CompaignsViewImpl;
 import ua.divas.view.ContactDetailsViewImpl;
 import ua.divas.view.CurrencyViewImpl;
+import ua.divas.view.DivisionsViewImpl;
 import ua.divas.view.FirmsViewImpl;
 import ua.divas.view.KontragentsViewImpl;
 import ua.divas.view.ro.KontragentsItemsLookupVOImpl;
@@ -86,8 +87,8 @@ public class AppModuleImpl extends ApplicationModuleImpl {
      * Container's getter for DivisionsView1.
      * @return DivisionsView1
      */
-    public ViewObjectImpl getDivisionsView1() {
-        return (ViewObjectImpl) findViewObject("DivisionsView1");
+    public DivisionsViewImpl getDivisionsView1() {
+        return (DivisionsViewImpl) findViewObject("DivisionsView1");
     }
 
     /**
@@ -582,8 +583,8 @@ public class AppModuleImpl extends ApplicationModuleImpl {
      * Container's getter for DivisionsView2.
      * @return DivisionsView2
      */
-    public ViewObjectImpl getDivisionsView2() {
-        return (ViewObjectImpl) findViewObject("DivisionsView2");
+    public DivisionsViewImpl getDivisionsView2() {
+        return (DivisionsViewImpl) findViewObject("DivisionsView2");
     }
 
     /**
@@ -2191,8 +2192,8 @@ public class AppModuleImpl extends ApplicationModuleImpl {
      * Container's getter for DivisionsView3.
      * @return DivisionsView3
      */
-    public ViewObjectImpl getDivisionsView3() {
-        return (ViewObjectImpl) findViewObject("DivisionsView3");
+    public DivisionsViewImpl getDivisionsView3() {
+        return (DivisionsViewImpl) findViewObject("DivisionsView3");
     }
 
     /**

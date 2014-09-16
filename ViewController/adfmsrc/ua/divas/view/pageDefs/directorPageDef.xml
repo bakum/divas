@@ -8,9 +8,10 @@
               ChangeEventPolicy="ppr"/>
     <iterator Binds="RegRatesView2" RangeSize="10" DataControl="AppModuleDataControl" id="RegRatesView2Iterator"
               ChangeEventPolicy="ppr"/>
-    <iterator Binds="FirmsView1" RangeSize="5" DataControl="AppModuleDataControl" id="FirmsView1Iterator"/>
+    <iterator Binds="FirmsView1" RangeSize="3" DataControl="AppModuleDataControl" id="FirmsView1Iterator"/>
     <iterator Binds="DivisionsRootView2" RangeSize="25" DataControl="AppModuleDataControl"
               id="DivisionsRootView2Iterator"/>
+    <iterator Binds="DivisionsView1" RangeSize="10" DataControl="AppModuleDataControl" id="DivisionsView1Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="CurrencyView1Iterator" id="CurrencyView1">
@@ -103,7 +104,8 @@
           <Item Value="DivisionsView"/>
         </Accessors>
       </nodeDefinition>
-      <nodeDefinition DefName="ua.divas.view.DivisionsView" Name="DivisionsRootView21">
+      <nodeDefinition DefName="ua.divas.view.DivisionsView" Name="DivisionsRootView21"
+                      TargetIterator="${bindings.DivisionsView1Iterator}">
         <AttrNames>
           <Item Value="Id"/>
           <Item Value="Deleted"/>
@@ -113,5 +115,32 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <tree IterBinding="DivisionsView1Iterator" id="DivisionsView1">
+      <nodeDefinition DefName="ua.divas.view.DivisionsView" Name="DivisionsView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Deleted"/>
+          <Item Value="Fullname"/>
+          <Item Value="IsGroup"/>
+          <Item Value="ParentId"/>
+          <Item Value="Predefined"/>
+          <Item Value="Version"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="DivisionsView1Iterator" id="CreateInsert2" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <attributeValues IterBinding="DivisionsView1Iterator" id="ParentId">
+      <AttrNames>
+        <Item Value="ParentId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DivisionsView1Iterator" id="Fullname1">
+      <AttrNames>
+        <Item Value="Fullname"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="DivisionsView1Iterator" StaticList="false" Uses="LOV_ParentId" id="ParentId1"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
   </bindings>
 </pageDefinition>

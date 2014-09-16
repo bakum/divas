@@ -11,6 +11,10 @@ import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichTable;
 
+import oracle.adf.view.rich.component.rich.data.RichTree;
+
+import oracle.adf.view.rich.context.AdfFacesContext;
+
 import oracle.binding.BindingContainer;
 import oracle.binding.OperationBinding;
 
@@ -18,12 +22,14 @@ import oracle.jbo.Key;
 
 import oracle.jbo.uicli.binding.JUCtrlHierBinding;
 
+import org.apache.myfaces.trinidad.event.ReturnEvent;
 import org.apache.myfaces.trinidad.event.RowDisclosureEvent;
 import org.apache.myfaces.trinidad.model.CollectionModel;
 import org.apache.myfaces.trinidad.model.RowKeySet;
 
 public class CurrencyBean {
     private RichTable mainTable;
+    private RichTree mainTree;
 
     public CurrencyBean() {
     }
@@ -136,4 +142,16 @@ public class CurrencyBean {
             ctx.addMessage(null, msg);
             return null;
         }
+
+    public void setMainTree(RichTree mainTree) {
+        this.mainTree = mainTree;
+    }
+
+    public RichTree getMainTree() {
+        return mainTree;
+    }
+
+    public void returnListener(ReturnEvent returnEvent) {
+        AdfFacesContext.getCurrentInstance().addPartialTarget(mainTree.getParent());
+    }
 }

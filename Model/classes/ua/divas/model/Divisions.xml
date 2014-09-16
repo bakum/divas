@@ -9,10 +9,14 @@
   DBObjectType="table"
   DBObjectName="DIVISIONS"
   AliasName="Divisions"
-  BindingStyle="OracleName">
+  BindingStyle="OracleName"
+  RowClass="ua.divas.model.DivisionsImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Attribute
     Name="Id"
-    IsNotNull="true"
     Precision="50"
     ColumnName="ID"
     SQLType="VARCHAR"
@@ -23,6 +27,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Divisions.Id_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Divisions.Id_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Fullname"
@@ -36,6 +48,16 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="150"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Divisions.Fullname_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Divisions.Fullname_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Deleted"
@@ -46,7 +68,17 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="DIVISIONS"/>
+    TableName="DIVISIONS"
+    DefaultValue="0">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Divisions.Deleted_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Divisions.Deleted_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="IsGroup"
     IsNotNull="true"
@@ -56,7 +88,17 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="DIVISIONS"/>
+    TableName="DIVISIONS"
+    DefaultValue="0">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Divisions.IsGroup_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Divisions.IsGroup_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="ParentId"
     Precision="50"
@@ -68,15 +110,38 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Permission
+      target="ua.divas.model.Divisions.ParentId"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Divisions.ParentId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Divisions.ParentId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Version"
-    IsNotNull="true"
     ColumnName="VERSION"
     SQLType="TIMESTAMP"
     Type="java.sql.Timestamp"
     ColumnType="TIMESTAMP"
-    TableName="DIVISIONS"/>
+    TableName="DIVISIONS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Divisions.Version_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Divisions.Version_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Predefined"
     IsNotNull="true"
@@ -86,7 +151,17 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="DIVISIONS"/>
+    TableName="DIVISIONS"
+    DefaultValue="0">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Divisions.Predefined_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Divisions.Predefined_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="Divisions"
     Association="ua.divas.model.DivisionsDivisionsFk1Assoc"
@@ -143,4 +218,8 @@
       <Item Value="ua.divas.model.Divisions.ParentId"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>

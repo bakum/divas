@@ -129,6 +129,23 @@
               </permission>
             </permissions>
           </grant>
+          <grant>
+            <grantee>
+              <principals>
+                <principal>
+                  <class>oracle.security.jps.service.policystore.ApplicationRole</class>
+                  <name>administrator</name>
+                </principal>
+              </principals>
+            </grantee>
+            <permissions>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
+                <name>ua.divas.model.Divisions.ParentId</name>
+                <actions>update</actions>
+              </permission>
+            </permissions>
+          </grant>
         </jazn-policy>
       </application>
     </applications>

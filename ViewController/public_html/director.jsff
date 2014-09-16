@@ -501,15 +501,53 @@
                                         <af:gridCell marginStart="5px" width="45%" marginEnd="5px" id="gc3"
                                                      halign="stretch">
                                             <af:panelBox text="Подразделения" id="pb5">
-                                                <f:facet name="toolbar"/>
+                                                <f:facet name="toolbar">
+                                                    <af:toolbar id="t9">
+                                                        <af:button actionListener="#{bindings.CreateInsert2.execute}"
+                                                                   text="Добавить"
+                                                                   disabled="#{!bindings.CreateInsert2.enabled}"
+                                                                   id="b15" returnListener="#{currency.returnListener}">
+                                                            <af:showPopupBehavior popupId="pCreateEditDivision"/>
+                                                        </af:button>
+                                                        <af:button text="Редактировать" id="b16">
+                                                            <af:showPopupBehavior popupId="pCreateEditDivision"/>
+                                                        </af:button>
+                                                    </af:toolbar>
+                                                </f:facet>
                                                 <af:tree value="#{bindings.DivisionsRootView2.treeModel}" var="node"
                                                          selectionListener="#{bindings.DivisionsRootView2.treeModel.makeCurrent}"
-                                                         rowSelection="single" id="t8">
+                                                         rowSelection="single" id="t8" binding="#{currency.mainTree}">
                                                     <f:facet name="nodeStamp">
                                                         <af:outputText value="#{node.Fullname}" id="ot4"/>
                                                     </f:facet>
                                                 </af:tree>
                                             </af:panelBox>
+                                            <af:popup childCreation="deferred" autoCancel="disabled"
+                                                      id="pCreateEditDivision" contentDelivery="lazyUncached">
+                                                <af:dialog id="d2" title="Подразделение">
+                                                    <f:facet name="buttonBar"/>
+                                                    <af:panelFormLayout id="pfl1">
+                                                        <af:selectOneChoice value="#{bindings.ParentId1.inputValue}"
+                                                                            label="#{bindings.ParentId1.label}"
+                                                                            required="#{bindings.ParentId1.hints.mandatory}"
+                                                                            shortDesc="#{bindings.ParentId1.hints.tooltip}"
+                                                                            id="soc2">
+                                                            <f:selectItems value="#{bindings.ParentId1.items}"
+                                                                           id="si2"/>
+                                                            <f:validator binding="#{bindings.ParentId1.validator}"/>
+                                                        </af:selectOneChoice>
+                                                        <af:inputText value="#{bindings.Fullname1.inputValue}"
+                                                                      label="#{bindings.Fullname1.hints.label}"
+                                                                      required="#{bindings.Fullname1.hints.mandatory}"
+                                                                      columns="#{bindings.Fullname1.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.Fullname1.hints.precision}"
+                                                                      shortDesc="#{bindings.Fullname1.hints.tooltip}"
+                                                                      id="it20">
+                                                            <f:validator binding="#{bindings.Fullname1.validator}"/>
+                                                        </af:inputText>
+                                                    </af:panelFormLayout>
+                                                </af:dialog>
+                                            </af:popup>
                                         </af:gridCell>
                                     </af:gridRow>
                                 </af:panelGridLayout>
