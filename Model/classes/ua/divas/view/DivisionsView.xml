@@ -6,22 +6,15 @@
   Name="DivisionsView"
   Version="12.1.2.66.68"
   InheritPersonalization="merge"
-  SelectList="Divisions.ID, 
-       Divisions.FULLNAME, 
-       Divisions.DELETED, 
-       Divisions.IS_GROUP, 
-       Divisions.PARENT_ID, 
-       Divisions.VERSION, 
-       Divisions.PREDEFINED"
-  FromList="DIVISIONS Divisions"
   BindingStyle="OracleName"
-  CustomQuery="false"
+  CustomQuery="true"
   PageIterMode="Full"
   ComponentClass="ua.divas.view.DivisionsViewImpl"
   ComponentInterface="ua.divas.view.common.DivisionsView"
   ClientProxyName="ua.divas.view.client.DivisionsViewClient">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+    <Attr Name="_isExpertMode" Value="true"/>
   </DesignTime>
   <ViewAccessor
     Name="DivisionsView1"
@@ -46,6 +39,15 @@
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
+  <SQLQuery><![CDATA[SELECT Divisions.ID, 
+       Divisions.FULLNAME, 
+       Divisions.DELETED, 
+       Divisions.IS_GROUP, 
+       Divisions.PARENT_ID, 
+       Divisions.VERSION, 
+       Divisions.PREDEFINED
+FROM  DIVISIONS Divisions
+where deleted = 0]]></SQLQuery>
   <EntityUsage
     Name="Divisions"
     Entity="ua.divas.model.Divisions"/>

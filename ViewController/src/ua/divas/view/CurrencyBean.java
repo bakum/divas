@@ -16,9 +16,11 @@ import oracle.adf.view.rich.component.rich.data.RichTable;
 
 import oracle.adf.view.rich.component.rich.data.RichTree;
 
+import oracle.adf.view.rich.component.rich.data.RichTreeTable;
 import oracle.adf.view.rich.context.AdfFacesContext;
 
 import oracle.adf.view.rich.datatransfer.DataFlavor;
+import oracle.adf.view.rich.datatransfer.Transferable;
 import oracle.adf.view.rich.dnd.DnDAction;
 import oracle.adf.view.rich.event.DialogEvent;
 import oracle.adf.view.rich.event.DropEvent;
@@ -43,6 +45,8 @@ import org.apache.myfaces.trinidad.event.RowDisclosureEvent;
 import org.apache.myfaces.trinidad.model.CollectionModel;
 import org.apache.myfaces.trinidad.model.RowKeySet;
 import org.apache.myfaces.trinidad.model.RowKeySetImpl;
+
+import ua.divas.module.AppModuleImpl;
 
 public class CurrencyBean {
     private RichTable mainTable;
@@ -176,7 +180,7 @@ public class CurrencyBean {
 
 
     public void returnListener(ReturnEvent returnEvent) {
-        AdfFacesContext.getCurrentInstance().addPartialTarget(mainTree.getParent());
+        AdfFacesContext.getCurrentInstance().addPartialTarget(this.getMainTree());
     }
 
     public void onPopup(ActionEvent actionEvent) {
@@ -219,99 +223,92 @@ public class CurrencyBean {
     }
 
     public DnDAction dropHundler(DropEvent dropEvent) {
-        RichTree tree1 = (RichTree) dropEvent.getDragComponent();
-        RichTree tree = (RichTree) dropEvent.getDropComponent();
-        RowKeySet droppedValue = null;
-        String Id = null;
-        Iterator it = null;
-        Object currentRowKey = tree.getRowKey();
-        List dropRowKey = (List) dropEvent.getDropSite();
-        if (dropRowKey == null) {
-            return DnDAction.NONE;
-        }
-
+        //AppModuleImpl am = (AppModuleImpl) BindingContext.getCurrent().getDefaultDataControl().getApplicationModule();
         try {
-            DataFlavor<RowKeySet> df = DataFlavor.getDataFlavor(RowKeySet.class, "rowmove");
-            droppedValue = dropEvent.getTransferable().getData(df);
-            if (droppedValue != null) {
-                it = droppedValue.iterator();
-                //List<Key> rowKey;
-                if (it.hasNext()) {
-                    List key = (List) it.next();
-                    tree1.setRowKey(key);
-                    JUCtrlHierNodeBinding rowBinding = (JUCtrlHierNodeBinding) tree1.getRowData();
+            RichTree table = (RichTree) dropEvent.getDragComponent();
+            RichTree tree = (RichTree) dropEvent.getDropComponent();
+            Object currentRowKey = tree.getRowKey();
+            List dropRowKey = (List) dropEvent.getDropSite();
+            //if no dropsite then drop area was not a data area
+            if (dropRowKey == null) {
+                return DnDAction.NONE;
+            }
+            tree.setRowKey(dropRowKey);
+            JUCtrlHierNodeBinding dropNode = (JUCtrlHierNodeBinding) tree.getRowData();
+            String dropNodeVO = dropNode.getHierTypeBinding().getStructureDefName();
+            Row treeRow = dropNode.getRow();
+            if (dropNodeVO.equalsIgnoreCase("ua.divas.view.DivisionsView")) {
 
-                    /* FacesCtrlHierNodeBinding node = (FacesCtrlHierNodeBinding) tree.getRowData();
-                    rowKey = new ArrayList<Key>();
-                    rowKey.add(node.getRowKey());
-                    tree.getDisclosedRowKeys().add(rowKey);
-                    tree.setRowKey(rowKey);  */
+                Transferable t = dropEvent.getTransferable();
+                DataFlavor<RowKeySet> df = DataFlavor.getDataFlavor(RowKeySet.class, "rowmove");
+                RowKeySet rks = t.getData(df);
+                Iterator iter = rks.iterator();
+                Object[] keys = rks.toArray();
 
+                //for (int i = 0; i < keys.length; i++) {
+                while (iter.hasNext()) {
+                    //get next selected row key
+                    List key = (List) iter.next();
+                    //List key = (List)keys[i];
+                    table.setRowKey(key);
+                    //the table model represents its row by the ADF binding class,
+                    //which is JUCtrlHierNodeBinding
+                    JUCtrlHierNodeBinding rowBinding = (JUCtrlHierNodeBinding) table.getRowData();
+                    //DCDataRow is the generic row class representation in in ADF.
+                    //It is the super class of oracle.jbo.Row, which you use with
+                    //ADF BC services
                     Row tableRow = (Row) rowBinding.getRow();
-                    Id = (String) tableRow.getAttribute("Id");
+                    
+                    BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+                    OperationBinding oper = (OperationBinding) binding.getOperationBinding("changeParentInDivisions");
+                    oper.getParamsMap().put("Id", tableRow.getAttribute("Id"));
+                    oper.getParamsMap().put("ParentId", treeRow.getAttribute("Id"));
+                    oper.execute();
+                    
+                    //to relocate employees, just change the department ID
+                    //tableRow.setAttribute("ParentId", treeRow.getAttribute("Id"));
+                }
+                tree.setRowKey(currentRowKey);
+                CollectionModel treeModel = (CollectionModel) tree.getValue();
+                JUCtrlHierBinding treeBinding = (JUCtrlHierBinding) treeModel.getWrappedData();
+                //create a new row key set
+                RowKeySetImpl rksImpl = new RowKeySetImpl();
+                rksImpl.add(dropRowKey);
 
-                    tree.setRowKey(dropRowKey);
-                    JUCtrlHierNodeBinding dropNode = (JUCtrlHierNodeBinding) tree.getRowData();
-                    //Row treeRow = dropNode.getRow();
-                    String dropNodeVO = dropNode.getHierTypeBinding().getStructureDefName();
-                    if (!dropNodeVO.equalsIgnoreCase("ua.divas.view.DivisionsView")) {
-                        return DnDAction.NONE;
-                    }
+                JUCtrlHierNodeBinding treeDropNode = treeBinding.findNodeByKeyPath(dropRowKey);
+                JUCtrlHierNodeBinding rootNode = treeBinding.getRootNodeBinding();
+                JUCtrlHierNodeBinding dropNodeParent = treeDropNode.getParent();
+                //walk up the tree to expand all parent nodes
+                while (dropNodeParent != null && dropNodeParent != rootNode) {
+                    rksImpl.add(dropNodeParent.getKeyPath());
+                    dropNodeParent = dropNodeParent.getParent();
+                }
 
-                    tree.setRowKey(currentRowKey);
-                    CollectionModel treeModel = (CollectionModel) tree.getValue();
-                    JUCtrlHierBinding treeBinding = (JUCtrlHierBinding) treeModel.getWrappedData();
-
-                    JUCtrlHierNodeBinding treeDropNode = treeBinding.findNodeByKeyPath(dropRowKey);
-                    JUCtrlHierNodeBinding rootNode = treeBinding.getRootNodeBinding();
-                    JUCtrlHierNodeBinding dropNodeParent = treeDropNode.getParent();
-
-                    //walk up the tree to expand all parent nodes
-                    if (treeDropNode != null && treeDropNode != rootNode) {
-                        /*RowKeySet drk = tree.getDisclosedRowKeys();
-                         if (drk != null) {
-                            drk.clear();
-                            AdfFacesContext.getCurrentInstance().addPartialTarget(tree);
-                        } */
-                        RowKeySetImpl rksImpl = new RowKeySetImpl();
-                        rksImpl.add(currentRowKey);
-                        String ParentId = (String) treeDropNode.getRow().getAttribute("Id");
-                        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-                        OperationBinding oper =
-                            (OperationBinding) binding.getOperationBinding("changeParentInDivisions");
-                        oper.getParamsMap().put("Id", Id);
-                        oper.getParamsMap().put("ParentId", ParentId);
-                        oper.execute();
-                        //walk up the tree to expand all parent nodes
-                        while (dropNodeParent != null && dropNodeParent != rootNode) {
-                            rksImpl.add(dropNodeParent.getKeyPath());
-                            dropNodeParent = dropNodeParent.getParent();
-                        }
-                        //3. get all employee nodes in a tree to disclose them too
-                        ArrayList<JUCtrlHierNodeBinding> childList =
-                            (ArrayList<JUCtrlHierNodeBinding>) treeDropNode.getChildren();
-                        for (JUCtrlHierNodeBinding nb : childList) {
-                            rksImpl.add(nb.getKeyPath());
-                        }
-                        //ready to disclose
-
-                        tree.setDisclosedRowKeys(rksImpl);
-                        AdfFacesContext.getCurrentInstance().addPartialTarget(tree.getParent());
-                        AdfFacesContext.getCurrentInstance().addPartialTarget(tree1.getParent());
-                        //expandTreeChildrenNode(tree , node, rowKey);
-
-                    } else {
-                        return DnDAction.NONE;
+                ArrayList<JUCtrlHierNodeBinding> childList =
+                    (ArrayList<JUCtrlHierNodeBinding>) treeDropNode.getChildren();
+                if (childList != null) {
+                    for (JUCtrlHierNodeBinding nb : childList) {
+                        rksImpl.add(nb.getKeyPath());
                     }
                 }
-            }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+                tree.setDisclosedRowKeys(rksImpl);
+                AdfFacesContext.getCurrentInstance().addPartialTarget(tree.getParent());
+                AdfFacesContext.getCurrentInstance().addPartialTarget(table);
+                //am.getTransaction().commit();
+                return DnDAction.MOVE;
+            }
+            tree.setRowKey(currentRowKey);
+        } catch (Exception ex) {
+            System.out.println("drop failed with : " + ex.getMessage());
+            //am.getTransaction().rollback();
+            //tree.setRowKey(currentRowKey);
             return DnDAction.NONE;
         }
-        return DnDAction.MOVE;
+        return DnDAction.NONE;
+
     }
+
 
     /**Method to get Iterator*/
     public RowIterator getSelectedNodeIterator() {
