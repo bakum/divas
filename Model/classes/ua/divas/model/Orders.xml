@@ -9,10 +9,14 @@
   DBObjectType="table"
   DBObjectName="ORDERS"
   AliasName="Orders"
-  BindingStyle="OracleName">
+  BindingStyle="OracleName"
+  RowClass="ua.divas.model.OrdersImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Attribute
     Name="Id"
-    IsNotNull="true"
     Precision="50"
     ColumnName="ID"
     SQLType="VARCHAR"
@@ -23,6 +27,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.Id_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.Id_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Dat"
@@ -31,7 +43,16 @@
     SQLType="DATE"
     Type="java.sql.Timestamp"
     ColumnType="DATE"
-    TableName="ORDERS"/>
+    TableName="ORDERS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.Dat_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.Dat_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Num"
     IsNotNull="true"
@@ -44,6 +65,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.Num_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.Num_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="KontragId"
@@ -57,6 +86,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.KontragId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.KontragId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="CurrId"
@@ -70,6 +107,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.CurrId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.CurrId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="KassaId"
@@ -83,6 +128,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.KassaId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.KassaId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="DivisionId"
@@ -96,6 +149,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.DivisionId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.DivisionId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="UserId"
@@ -109,6 +170,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.UserId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.UserId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Kurs"
@@ -119,7 +188,17 @@
     SQLType="NUMERIC"
     Type="java.math.BigDecimal"
     ColumnType="NUMBER"
-    TableName="ORDERS"/>
+    TableName="ORDERS"
+    DefaultValue="1">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.Kurs_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.Kurs_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Kratnost"
     IsNotNull="true"
@@ -129,7 +208,17 @@
     SQLType="NUMERIC"
     Type="java.lang.Long"
     ColumnType="NUMBER"
-    TableName="ORDERS"/>
+    TableName="ORDERS"
+    DefaultValue="1">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.Kratnost_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.Kratnost_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Discription"
     Precision="2000"
@@ -141,6 +230,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="2000"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.Discription_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.Discription_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Deleted"
@@ -151,15 +248,33 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="ORDERS"/>
+    TableName="ORDERS"
+    DefaultValue="0">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.Deleted_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.Deleted_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Version"
-    IsNotNull="true"
     ColumnName="VERSION"
     SQLType="TIMESTAMP"
     Type="java.sql.Timestamp"
     ColumnType="TIMESTAMP"
-    TableName="ORDERS"/>
+    TableName="ORDERS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.Version_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.Version_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Posted"
     IsNotNull="true"
@@ -169,7 +284,17 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="ORDERS"/>
+    TableName="ORDERS"
+    DefaultValue="0">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.Posted_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.Posted_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="FirmId"
     IsNotNull="true"
@@ -182,6 +307,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.FirmId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.FirmId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="ActivitiesId"
@@ -195,6 +328,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.ActivitiesId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.ActivitiesId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="StatusId"
@@ -208,6 +349,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.StatusId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.StatusId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <AccessorAttribute
     Name="Currency"
@@ -381,4 +530,8 @@
       <Item Value="ua.divas.model.Orders.UserId"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>

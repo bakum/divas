@@ -100,6 +100,16 @@
                 <name>/WEB-INF/directories.xml#direct</name>
                 <actions>view</actions>
               </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/orders.xml#orders</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
+                <name>ua.divas.model.Divisions.ParentId</name>
+                <actions>update</actions>
+              </permission>
             </permissions>
           </grant>
           <grant>

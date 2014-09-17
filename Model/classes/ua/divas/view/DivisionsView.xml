@@ -6,17 +6,48 @@
   Name="DivisionsView"
   Version="12.1.2.66.68"
   InheritPersonalization="merge"
-  SelectList="Divisions.ID, 
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  ComponentClass="ua.divas.view.DivisionsViewImpl"
+  ComponentInterface="ua.divas.view.common.DivisionsView"
+  ClientProxyName="ua.divas.view.client.DivisionsViewClient">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="DivisionsView1"
+    ViewObjectName="ua.divas.view.DivisionsView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_ParentId"
+    ListVOName="DivisionsView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ParentId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[SELECT Divisions.ID, 
        Divisions.FULLNAME, 
        Divisions.DELETED, 
        Divisions.IS_GROUP, 
        Divisions.PARENT_ID, 
        Divisions.VERSION, 
-       Divisions.PREDEFINED"
-  FromList="DIVISIONS Divisions"
-  BindingStyle="OracleName"
-  CustomQuery="false"
-  PageIterMode="Full">
+       Divisions.PREDEFINED
+FROM  DIVISIONS Divisions
+where deleted = 0]]></SQLQuery>
   <EntityUsage
     Name="Divisions"
     Entity="ua.divas.model.Divisions"/>
@@ -53,7 +84,16 @@
     PrecisionRule="true"
     EntityAttrName="ParentId"
     EntityUsage="Divisions"
-    AliasName="PARENT_ID"/>
+    AliasName="PARENT_ID"
+    LOVName="LOV_ParentId">
+    <TransientExpression><![CDATA[viewObject.retrieveDivisionsFirstParentId()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Version"
     IsNotNull="true"
@@ -68,6 +108,49 @@
     EntityAttrName="Predefined"
     EntityUsage="Divisions"
     AliasName="PREDEFINED"/>
+  <ViewCriteria
+    Name="DivisionsViewGroup"
+    ViewObjectName="ua.divas.view.DivisionsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="DivisionsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="IsGroup"
+        ViewAttribute="IsGroup"
+        Operator="="
+        Conjunction="AND"
+        Value="1"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="ParentId"
+        ViewAttribute="ParentId"
+        Operator="ISNOTBLANK"
+        Conjunction="AND"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="DivisionsView"
     ViewLink="ua.divas.view.DivisionsDivisionsFk1Link"
@@ -88,4 +171,20 @@
     ViewLink="ua.divas.view.UserSettingsDivisionsFk1Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="changeParentInDivisions"
+      MethodName="changeParentInDivisions">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="Id"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="ParentId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
 </ViewObject>

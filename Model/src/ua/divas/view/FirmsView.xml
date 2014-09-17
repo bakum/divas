@@ -6,7 +6,17 @@
   Name="FirmsView"
   Version="12.1.2.66.68"
   InheritPersonalization="merge"
-  SelectList="Firms.ID, 
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  RowClass="ua.divas.view.FirmsViewRowImpl"
+  ComponentClass="ua.divas.view.FirmsViewImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <SQLQuery><![CDATA[SELECT Firms.ID, 
        Firms.FULLNAME, 
        Firms.PRINTNAME, 
        Firms.UR_FIZ, 
@@ -14,17 +24,15 @@
        Firms.OKPO, 
        Firms.VERSION, 
        Firms.DELETED, 
-       Firms.PREDEFINED"
-  FromList="FIRMS Firms"
-  BindingStyle="OracleName"
-  CustomQuery="false"
-  PageIterMode="Full">
+       Firms.PREDEFINED,
+       (select 0 from dual) f_editable
+FROM  FIRMS Firms
+where deleted = 0]]></SQLQuery>
   <EntityUsage
     Name="Firms"
     Entity="ua.divas.model.Firms"/>
   <ViewAttribute
     Name="Id"
-    IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="Firms"
@@ -33,9 +41,13 @@
     Name="Fullname"
     IsNotNull="true"
     PrecisionRule="true"
+    AliasName="FULLNAME"
     EntityAttrName="Fullname"
-    EntityUsage="Firms"
-    AliasName="FULLNAME"/>
+    EntityUsage="Firms">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="150"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewAttribute
     Name="Printname"
     IsNotNull="true"
@@ -49,7 +61,8 @@
     PrecisionRule="true"
     EntityAttrName="UrFiz"
     EntityUsage="Firms"
-    AliasName="UR_FIZ"/>
+    AliasName="UR_FIZ"
+    DefaultValue="0"/>
   <ViewAttribute
     Name="Inn"
     PrecisionRule="true"
@@ -64,25 +77,32 @@
     AliasName="OKPO"/>
   <ViewAttribute
     Name="Version"
-    IsNotNull="true"
+    IsUpdateable="false"
     PrecisionRule="true"
+    AliasName="VERSION"
     EntityAttrName="Version"
-    EntityUsage="Firms"
-    AliasName="VERSION"/>
+    EntityUsage="Firms"/>
   <ViewAttribute
     Name="Deleted"
-    IsNotNull="true"
     PrecisionRule="true"
+    AliasName="DELETED"
     EntityAttrName="Deleted"
-    EntityUsage="Firms"
-    AliasName="DELETED"/>
+    EntityUsage="Firms"/>
   <ViewAttribute
     Name="Predefined"
-    IsNotNull="true"
     PrecisionRule="true"
+    AliasName="PREDEFINED"
     EntityAttrName="Predefined"
-    EntityUsage="Firms"
-    AliasName="PREDEFINED"/>
+    EntityUsage="Firms"/>
+  <ViewAttribute
+    Name="FEditable"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="F_EDITABLE"
+    Expression="F_EDITABLE"
+    SQLType="NUMERIC"/>
   <ViewLinkAccessor
     Name="KassaView"
     ViewLink="ua.divas.view.KassaFirmsFk1Link"
