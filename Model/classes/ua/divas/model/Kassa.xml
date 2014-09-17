@@ -9,10 +9,14 @@
   DBObjectType="table"
   DBObjectName="KASSA"
   AliasName="Kassa"
-  BindingStyle="OracleName">
+  BindingStyle="OracleName"
+  RowClass="ua.divas.model.KassaImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Attribute
     Name="Id"
-    IsNotNull="true"
     Precision="50"
     ColumnName="ID"
     SQLType="VARCHAR"
@@ -23,6 +27,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Kassa.Id_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Kassa.Id_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Fullname"
@@ -36,6 +48,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="100"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Kassa.Fullname_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Kassa.Fullname_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="IsGroup"
@@ -46,7 +66,17 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="KASSA"/>
+    TableName="KASSA"
+    DefaultValue="0">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Kassa.IsGroup_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Kassa.IsGroup_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="ParentId"
     Precision="50"
@@ -58,6 +88,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Kassa.ParentId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Kassa.ParentId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="CurrId"
@@ -71,6 +109,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Kassa.CurrId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Kassa.CurrId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="DivisionId"
@@ -79,10 +125,19 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="KASSA">
+    TableName="KASSA"
+    IsNotNull="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Kassa.DivisionId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Kassa.DivisionId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="FirmaId"
@@ -95,6 +150,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Kassa.FirmaId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Kassa.FirmaId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Deleted"
@@ -105,15 +168,33 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="KASSA"/>
+    TableName="KASSA"
+    DefaultValue="0">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Kassa.Deleted_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Kassa.Deleted_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Version"
-    IsNotNull="true"
     ColumnName="VERSION"
     SQLType="TIMESTAMP"
     Type="java.sql.Timestamp"
     ColumnType="TIMESTAMP"
-    TableName="KASSA"/>
+    TableName="KASSA">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Kassa.Version_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Kassa.Version_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Predefined"
     IsNotNull="true"
@@ -123,7 +204,17 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="KASSA"/>
+    TableName="KASSA"
+    DefaultValue="0">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Kassa.Predefined_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Kassa.Predefined_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="Kassa"
     Association="ua.divas.model.KassaKassaFk1Assoc"
@@ -173,6 +264,18 @@
     AssociationOtherEnd="ua.divas.model.UserSettingsKassaFk1Assoc.Kassa"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <Key
+    Name="KassaDivisionIdCheck">
+    <DesignTime>
+      <Attr Name="_isNotNull" Value="true"/>
+      <Attr Name="_DBObjectName" Value="KASSA_DIVISION_ID_CHECK"/>
+      <Attr Name="_checkCondition" Value='"DIVISION_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="ua.divas.model.Kassa.DivisionId"/>
+    </AttrArray>
+  </Key>
   <Key
     Name="KassaPk"
     PrimaryKey="true">
@@ -227,4 +330,8 @@
       <Item Value="ua.divas.model.Kassa.ParentId"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>

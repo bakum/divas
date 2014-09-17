@@ -8,10 +8,58 @@
   InheritPersonalization="merge"
   BindingStyle="OracleName"
   CustomQuery="true"
-  PageIterMode="Full">
+  PageIterMode="Full"
+  RowClass="ua.divas.view.KassaViewRowImpl">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
+  <ViewAccessor
+    Name="CurrencyView1"
+    ViewObjectName="ua.divas.view.CurrencyView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="DivisionsView1"
+    ViewObjectName="ua.divas.view.DivisionsView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_CurrId"
+    ListVOName="CurrencyView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CurrId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_DivisionId"
+    ListVOName="DivisionsView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DivisionId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <SQLQuery><![CDATA[SELECT Kassa.ID, 
        Kassa.FULLNAME, 
        Kassa.IS_GROUP, 
@@ -21,7 +69,8 @@
        Kassa.FIRMA_ID, 
        Kassa.DELETED, 
        Kassa.VERSION, 
-       Kassa.PREDEFINED
+       Kassa.PREDEFINED,
+       (select 0 from dual) k_editable
 FROM  KASSA Kassa
 where deleted = 0]]></SQLQuery>
   <EntityUsage
@@ -29,7 +78,6 @@ where deleted = 0]]></SQLQuery>
     Entity="ua.divas.model.Kassa"/>
   <ViewAttribute
     Name="Id"
-    IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="Kassa"
@@ -60,13 +108,29 @@ where deleted = 0]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="CurrId"
     EntityUsage="Kassa"
-    AliasName="CURR_ID"/>
+    AliasName="CURR_ID"
+    LOVName="LOV_CurrId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
-    Name="DivisionId"
+    Name="DivisionId"    
     PrecisionRule="true"
     EntityAttrName="DivisionId"
     EntityUsage="Kassa"
-    AliasName="DIVISION_ID"/>
+    AliasName="DIVISION_ID"
+    LOVName="LOV_DivisionId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="FirmaId"
     PrecisionRule="true"
@@ -82,7 +146,6 @@ where deleted = 0]]></SQLQuery>
     AliasName="DELETED"/>
   <ViewAttribute
     Name="Version"
-    IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Version"
     EntityUsage="Kassa"
@@ -94,6 +157,15 @@ where deleted = 0]]></SQLQuery>
     EntityAttrName="Predefined"
     EntityUsage="Kassa"
     AliasName="PREDEFINED"/>
+  <ViewAttribute
+    Name="KEditable"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="K_EDITABLE"
+    Expression="K_EDITABLE"
+    SQLType="NUMERIC"/>
   <ViewLinkAccessor
     Name="KassaView"
     ViewLink="ua.divas.view.KassaKassaFk1Link"
