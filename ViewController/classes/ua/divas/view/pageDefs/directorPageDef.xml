@@ -12,6 +12,7 @@
     <iterator Binds="DivisionsRootView2" RangeSize="25" DataControl="AppModuleDataControl"
               id="DivisionsRootView2Iterator"/>
     <iterator Binds="DivisionsView1" RangeSize="10" DataControl="AppModuleDataControl" id="DivisionsView1Iterator"/>
+    <iterator Binds="KassaView4" RangeSize="25" DataControl="AppModuleDataControl" id="KassaView4Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="CurrencyView1Iterator" id="CurrencyView1">
@@ -153,5 +154,34 @@
       <NamedData NDName="Id" NDType="java.lang.String"/>
       <NamedData NDName="ParentId" NDType="java.lang.String"/>
     </methodAction>
+    <tree IterBinding="KassaView4Iterator" id="KassaView4">
+      <nodeDefinition DefName="ua.divas.view.KassaView" Name="KassaView40">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Fullname"/>
+          <Item Value="IsGroup"/>
+          <Item Value="ParentId"/>
+          <Item Value="CurrId"/>
+          <Item Value="DivisionId"/>
+          <Item Value="FirmaId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="KassaView4Iterator" id="KassaView41">
+      <nodeDefinition DefName="ua.divas.view.KassaView" Name="KassaView410">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Fullname"/>
+          <Item Value="IsGroup"/>
+          <Item Value="ParentId"/>
+          <Item Value="CurrId"/>
+          <Item Value="DivisionId"/>
+          <Item Value="FirmaId"/>
+          <Item Value="Deleted"/>
+          <Item Value="Version"/>
+          <Item Value="Predefined"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>

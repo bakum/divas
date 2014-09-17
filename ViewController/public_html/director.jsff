@@ -290,7 +290,159 @@
                             <af:showDetailItem text="Структура организации" id="sdi2" stretchChildren="first">
                                 <af:panelGridLayout id="pgl2">
                                     <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
-                                        <af:gridCell marginStart="5px" width="55%" id="gc2" halign="stretch">
+                                        <af:gridCell marginStart="5px" width="45%" id="gc2" halign="stretch">
+                                            <af:panelBox text="Подразделения" id="pb5" type="flow"
+                                                         icon="/img/chart_organisation.png">
+                                                <f:facet name="toolbar">
+                                                    <af:toolbar id="t9">
+                                                        <af:button actionListener="#{bindings.CreateInsert2.execute}"
+                                                                   text="Добавить" disabled="#{bindings.Commit.enabled}"
+                                                                   id="cbInsertDiv"
+                                                                   returnListener="#{currency.returnListener}">
+                                                            <af:showPopupBehavior popupId="pCreateEditDivision"/>
+                                                        </af:button>
+                                                        <af:button text="Удалить" id="b15"
+                                                                   disabled="#{bindings.Commit.enabled}"
+                                                                   actionListener="#{currency.delete}"/>
+                                                    </af:toolbar>
+                                                </f:facet>
+                                                <af:tree value="#{bindings.DivisionsRootView2.treeModel}" var="node"
+                                                         selectionListener="#{bindings.DivisionsRootView2.treeModel.makeCurrent}"
+                                                         rowSelection="single" id="t8" binding="#{currency.mainTree}"
+                                                         contextMenuSelect="false" displayRow="selected">
+                                                    <f:facet name="nodeStamp">
+                                                        <af:outputText value="#{node.Fullname}" id="ot4"
+                                                                       inlineStyle="#{node.IsGroup == 1 ? 'font-weight:bold;' : ''}"/>
+                                                        <af:link text="[редактировать]" id="l1"
+                                                                 rendered="#{node.ParentId == null ? false : true}"
+                                                                 icon="/img/edit-16.gif"
+                                                                 disabled="#{bindings.Commit.enabled}"
+                                                                 returnListener="#{currency.returnListener}"
+                                                                 inlineStyle="font-size:smaller;"
+                                                                 actionListener="#{currency.onPopup}"/>
+                                                    </f:facet>
+                                                    <af:dragSource actions="MOVE" discriminant="rowmove"/>
+                                                    <af:collectionDropTarget dropListener="#{currency.dropHundler}"
+                                                                             modelName="rowmove" actions="MOVE"/>
+                                                </af:tree>
+                                            </af:panelBox>
+                                            <af:popup childCreation="deferred" autoCancel="disabled"
+                                                      id="pCreateEditDivision" contentDelivery="lazyUncached"
+                                                      binding="#{currency.mainPopup}"
+                                                      popupFetchListener="#{currency.fetchListener}"
+                                                      popupCanceledListener="#{currency.cancelListener}">
+                                                <af:dialog id="d2" title="Подразделение"
+                                                           dialogListener="#{currency.dialogListener}">
+                                                    <f:facet name="buttonBar"/>
+                                                    <af:panelFormLayout id="pfl1">
+                                                        <af:selectOneChoice value="#{bindings.ParentId1.inputValue}"
+                                                                            label="#{bindings.ParentId1.label}"
+                                                                            required="#{bindings.ParentId1.hints.mandatory}"
+                                                                            shortDesc="#{bindings.ParentId1.hints.tooltip}"
+                                                                            id="soc2">
+                                                            <f:selectItems value="#{bindings.ParentId1.items}"
+                                                                           id="si2"/>
+                                                            <f:validator binding="#{bindings.ParentId1.validator}"/>
+                                                        </af:selectOneChoice>
+                                                        <af:inputText value="#{bindings.Fullname1.inputValue}"
+                                                                      label="#{bindings.Fullname1.hints.label}"
+                                                                      required="#{bindings.Fullname1.hints.mandatory}"
+                                                                      columns="#{bindings.Fullname1.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.Fullname1.hints.precision}"
+                                                                      shortDesc="#{bindings.Fullname1.hints.tooltip}"
+                                                                      id="it20">
+                                                            <f:validator binding="#{bindings.Fullname1.validator}"/>
+                                                        </af:inputText>
+                                                    </af:panelFormLayout>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:panelBox text="Кассы подразделений" id="pb4"
+                                                         icon="/img/coins.png">
+                                                <f:facet name="toolbar"/>
+                                                <af:table value="#{bindings.KassaView41.collectionModel}" var="row"
+                                                          rows="#{bindings.KassaView41.rangeSize}"
+                                                          emptyText="#{bindings.KassaView41.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                          rowBandingInterval="0"
+                                                          selectedRowKeys="#{bindings.KassaView41.collectionModel.selectedRow}"
+                                                          selectionListener="#{bindings.KassaView41.collectionModel.makeCurrent}"
+                                                          rowSelection="single"
+                                                          fetchSize="#{bindings.KassaView41.rangeSize}" id="t10">
+                                                    <af:column headerText="#{bindings.KassaView41.hints.Id.label}"
+                                                               id="c29">
+                                                        <af:outputText value="#{row.Id}"
+                                                                       shortDesc="#{bindings.KassaView41.hints.Id.tooltip}"
+                                                                       id="ot5"/>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.KassaView41.hints.Fullname.label}"
+                                                               id="c30">
+                                                        <af:outputText value="#{row.Fullname}"
+                                                                       shortDesc="#{bindings.KassaView41.hints.Fullname.tooltip}"
+                                                                       id="ot6"/>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.KassaView41.hints.IsGroup.label}"
+                                                               id="c31">
+                                                        <af:outputText value="#{row.IsGroup}"
+                                                                       shortDesc="#{bindings.KassaView41.hints.IsGroup.tooltip}"
+                                                                       id="ot7">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.KassaView41.hints.IsGroup.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.KassaView41.hints.ParentId.label}"
+                                                               id="c32">
+                                                        <af:outputText value="#{row.ParentId}"
+                                                                       shortDesc="#{bindings.KassaView41.hints.ParentId.tooltip}"
+                                                                       id="ot8"/>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.KassaView41.hints.CurrId.label}"
+                                                               id="c33">
+                                                        <af:outputText value="#{row.CurrId}"
+                                                                       shortDesc="#{bindings.KassaView41.hints.CurrId.tooltip}"
+                                                                       id="ot9"/>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.KassaView41.hints.DivisionId.label}"
+                                                               id="c34">
+                                                        <af:outputText value="#{row.DivisionId}"
+                                                                       shortDesc="#{bindings.KassaView41.hints.DivisionId.tooltip}"
+                                                                       id="ot10"/>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.KassaView41.hints.FirmaId.label}"
+                                                               id="c35">
+                                                        <af:outputText value="#{row.FirmaId}"
+                                                                       shortDesc="#{bindings.KassaView41.hints.FirmaId.tooltip}"
+                                                                       id="ot11"/>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.KassaView41.hints.Deleted.label}"
+                                                               id="c36">
+                                                        <af:outputText value="#{row.Deleted}"
+                                                                       shortDesc="#{bindings.KassaView41.hints.Deleted.tooltip}"
+                                                                       id="ot12">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.KassaView41.hints.Deleted.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.KassaView41.hints.Version.label}"
+                                                               id="c37">
+                                                        <af:outputText value="#{row.Version}"
+                                                                       shortDesc="#{bindings.KassaView41.hints.Version.tooltip}"
+                                                                       id="ot13">
+                                                            <af:convertDateTime pattern="#{bindings.KassaView41.hints.Version.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.KassaView41.hints.Predefined.label}"
+                                                               id="c38">
+                                                        <af:outputText value="#{row.Predefined}"
+                                                                       shortDesc="#{bindings.KassaView41.hints.Predefined.tooltip}"
+                                                                       id="ot14">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.KassaView41.hints.Predefined.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                </af:table>
+                                            </af:panelBox>
+                                        </af:gridCell>
+                                        <af:gridCell marginStart="5px" width="55%" marginEnd="5px" id="gc3"
+                                                     halign="stretch">
                                             <af:panelBox text="Наши фирмы" id="pb3" icon="/img/chart_organisation.png"
                                                          type="flow">
                                                 <f:facet name="toolbar">
@@ -494,77 +646,6 @@
                                                     </af:column>
                                                 </af:table>
                                             </af:panelBox>
-                                            <af:panelBox text="Кассы организаций" id="pb4">
-                                                <f:facet name="toolbar"/>
-                                            </af:panelBox>
-                                        </af:gridCell>
-                                        <af:gridCell marginStart="5px" width="45%" marginEnd="5px" id="gc3"
-                                                     halign="stretch">
-                                            <af:panelBox text="Подразделения" id="pb5" type="stretch">
-                                                <f:facet name="toolbar">
-                                                    <af:toolbar id="t9">
-                                                        <af:button actionListener="#{bindings.CreateInsert2.execute}"
-                                                                   text="Добавить"
-                                                                   disabled="#{bindings.Commit.enabled}"
-                                                                   id="cbInsertDiv"
-                                                                   returnListener="#{currency.returnListener}">
-                                                            <af:showPopupBehavior popupId="pCreateEditDivision"/>
-                                                        </af:button>
-                                                        <af:button text="Удалить" id="b15"
-                                                                   disabled="#{bindings.Commit.enabled}"
-                                                                   actionListener="#{currency.delete}"/>
-                                                    </af:toolbar>
-                                                </f:facet>
-                                                <af:tree value="#{bindings.DivisionsRootView2.treeModel}" var="node"
-                                                         selectionListener="#{bindings.DivisionsRootView2.treeModel.makeCurrent}"
-                                                         rowSelection="single" id="t8" binding="#{currency.mainTree}"
-                                                         contextMenuSelect="false" displayRow="selected">
-                                                    <f:facet name="nodeStamp">
-                                                        <af:outputText value="#{node.Fullname}" id="ot4"
-                                                                       inlineStyle="#{node.IsGroup == 1 ? 'font-weight:bold;' : ''}"/>
-                                                        <af:link text="[редактировать]" id="l1"
-                                                                 rendered="#{node.ParentId == null ? false : true}"
-                                                                 icon="/img/edit-16.gif"
-                                                                 disabled="#{bindings.Commit.enabled}"
-                                                                 returnListener="#{currency.returnListener}"
-                                                                 inlineStyle="font-size:smaller;"
-                                                                 actionListener="#{currency.onPopup}"/>
-                                                    </f:facet>
-                                                    <af:dragSource actions="MOVE" discriminant="rowmove"/>
-                                                    <af:collectionDropTarget dropListener="#{currency.dropHundler}"
-                                                                             modelName="rowmove" actions="MOVE"/>
-                                                </af:tree>
-                                            </af:panelBox>
-                                            <af:popup childCreation="deferred" autoCancel="disabled"
-                                                      id="pCreateEditDivision" contentDelivery="lazyUncached"
-                                                      binding="#{currency.mainPopup}"
-                                                      popupFetchListener="#{currency.fetchListener}"
-                                                      popupCanceledListener="#{currency.cancelListener}">
-                                                <af:dialog id="d2" title="Подразделение"
-                                                           dialogListener="#{currency.dialogListener}">
-                                                    <f:facet name="buttonBar"/>
-                                                    <af:panelFormLayout id="pfl1">
-                                                        <af:selectOneChoice value="#{bindings.ParentId1.inputValue}"
-                                                                            label="#{bindings.ParentId1.label}"
-                                                                            required="#{bindings.ParentId1.hints.mandatory}"
-                                                                            shortDesc="#{bindings.ParentId1.hints.tooltip}"
-                                                                            id="soc2">
-                                                            <f:selectItems value="#{bindings.ParentId1.items}"
-                                                                           id="si2"/>
-                                                            <f:validator binding="#{bindings.ParentId1.validator}"/>
-                                                        </af:selectOneChoice>
-                                                        <af:inputText value="#{bindings.Fullname1.inputValue}"
-                                                                      label="#{bindings.Fullname1.hints.label}"
-                                                                      required="#{bindings.Fullname1.hints.mandatory}"
-                                                                      columns="#{bindings.Fullname1.hints.displayWidth}"
-                                                                      maximumLength="#{bindings.Fullname1.hints.precision}"
-                                                                      shortDesc="#{bindings.Fullname1.hints.tooltip}"
-                                                                      id="it20">
-                                                            <f:validator binding="#{bindings.Fullname1.validator}"/>
-                                                        </af:inputText>
-                                                    </af:panelFormLayout>
-                                                </af:dialog>
-                                            </af:popup>
                                         </af:gridCell>
                                     </af:gridRow>
                                 </af:panelGridLayout>
