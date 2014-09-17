@@ -515,32 +515,25 @@
                                                                    actionListener="#{currency.delete}"/>
                                                     </af:toolbar>
                                                 </f:facet>
-                                                <af:panelCollection id="pc1" defaultToolbarItemDisplay="icon"
-                                                                    featuresOff="scrollToFirstMenuItem">
-                                                    <f:facet name="menus"/>
-                                                    <f:facet name="toolbar"/>
-                                                    <f:facet name="statusbar"/>
-                                                    <af:tree value="#{bindings.DivisionsRootView2.treeModel}" var="node"
-                                                             selectionListener="#{bindings.DivisionsRootView2.treeModel.makeCurrent}"
-                                                             rowSelection="single" id="t8"
-                                                             binding="#{currency.mainTree}" contextMenuSelect="false"
-                                                             displayRow="selected">
-                                                        <f:facet name="nodeStamp">
-                                                            <af:outputText value="#{node.Fullname}" id="ot4"
-                                                                           inlineStyle="#{node.IsGroup == 1 ? 'font-weight:bold;' : ''}"/>
-                                                            <af:link text="[редактировать]" id="l1"
-                                                                     rendered="#{node.ParentId == null ? false : true}"
-                                                                     icon="/img/edit-16.gif"
-                                                                     disabled="#{bindings.Commit.enabled}"
-                                                                     returnListener="#{currency.returnListener}"
-                                                                     inlineStyle="font-size:smaller;"
-                                                                     actionListener="#{currency.onPopup}"/>
-                                                        </f:facet>
-                                                        <af:dragSource actions="MOVE" discriminant="rowmove"/>
-                                                        <af:collectionDropTarget dropListener="#{currency.dropHundler}"
-                                                                                 modelName="rowmove" actions="MOVE"/>
-                                                    </af:tree>
-                                                </af:panelCollection>
+                                                <af:tree value="#{bindings.DivisionsRootView2.treeModel}" var="node"
+                                                         selectionListener="#{bindings.DivisionsRootView2.treeModel.makeCurrent}"
+                                                         rowSelection="single" id="t8" binding="#{currency.mainTree}"
+                                                         contextMenuSelect="false" displayRow="selected">
+                                                    <f:facet name="nodeStamp">
+                                                        <af:outputText value="#{node.Fullname}" id="ot4"
+                                                                       inlineStyle="#{node.IsGroup == 1 ? 'font-weight:bold;' : ''}"/>
+                                                        <af:link text="[редактировать]" id="l1"
+                                                                 rendered="#{node.ParentId == null ? false : true}"
+                                                                 icon="/img/edit-16.gif"
+                                                                 disabled="#{bindings.Commit.enabled}"
+                                                                 returnListener="#{currency.returnListener}"
+                                                                 inlineStyle="font-size:smaller;"
+                                                                 actionListener="#{currency.onPopup}"/>
+                                                    </f:facet>
+                                                    <af:dragSource actions="MOVE" discriminant="rowmove"/>
+                                                    <af:collectionDropTarget dropListener="#{currency.dropHundler}"
+                                                                             modelName="rowmove" actions="MOVE"/>
+                                                </af:tree>
                                             </af:panelBox>
                                             <af:popup childCreation="deferred" autoCancel="disabled"
                                                       id="pCreateEditDivision" contentDelivery="lazyUncached"
