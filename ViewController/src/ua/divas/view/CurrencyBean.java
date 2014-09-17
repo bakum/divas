@@ -25,6 +25,8 @@ import oracle.adf.view.rich.event.DropEvent;
 import oracle.adf.view.rich.event.PopupCanceledEvent;
 import oracle.adf.view.rich.event.PopupFetchEvent;
 
+import oracle.adfinternal.view.faces.model.binding.FacesCtrlHierNodeBinding;
+
 import oracle.binding.BindingContainer;
 import oracle.binding.OperationBinding;
 
@@ -178,8 +180,12 @@ public class CurrencyBean {
     }
 
     public void onPopup(ActionEvent actionEvent) {
-        RichPopup.PopupHints hints = new RichPopup.PopupHints();
-        getMainPopup().show(hints);
+        RowKeySet selection = this.getMainTree().getSelectedRowKeys();
+
+        if (selection != null && selection.getSize() > 0) {
+            RichPopup.PopupHints hints = new RichPopup.PopupHints();
+            getMainPopup().show(hints);
+        }
     }
 
 
@@ -229,10 +235,18 @@ public class CurrencyBean {
             droppedValue = dropEvent.getTransferable().getData(df);
             if (droppedValue != null) {
                 it = droppedValue.iterator();
+                //List<Key> rowKey;
                 if (it.hasNext()) {
                     List key = (List) it.next();
                     tree1.setRowKey(key);
                     JUCtrlHierNodeBinding rowBinding = (JUCtrlHierNodeBinding) tree1.getRowData();
+
+                    /* FacesCtrlHierNodeBinding node = (FacesCtrlHierNodeBinding) tree.getRowData();
+                    rowKey = new ArrayList<Key>();
+                    rowKey.add(node.getRowKey());
+                    tree.getDisclosedRowKeys().add(rowKey);
+                    tree.setRowKey(rowKey);  */
+
                     Row tableRow = (Row) rowBinding.getRow();
                     Id = (String) tableRow.getAttribute("Id");
 
@@ -280,9 +294,11 @@ public class CurrencyBean {
                             rksImpl.add(nb.getKeyPath());
                         }
                         //ready to disclose
+
                         tree.setDisclosedRowKeys(rksImpl);
-                        //AdfFacesContext.getCurrentInstance().addPartialTarget(tree.getParent());
-                        AdfFacesContext.getCurrentInstance().addPartialTarget(tree1);
+                        AdfFacesContext.getCurrentInstance().addPartialTarget(tree.getParent());
+                        AdfFacesContext.getCurrentInstance().addPartialTarget(tree1.getParent());
+                        //expandTreeChildrenNode(tree , node, rowKey);
 
                     } else {
                         return DnDAction.NONE;
@@ -376,5 +392,22 @@ public class CurrencyBean {
             return null;
         }
         return null;
+    }
+
+    private void expandTreeChildrenNode(RichTree rt, FacesCtrlHierNodeBinding node, List<Key> parentRowKey) {
+        ArrayList children = node.getChildren();
+        List<Key> rowKey;
+
+        if (children != null) {
+            for (int i = 0; i < children.size(); i++) {
+                rowKey = new ArrayList<Key>();
+                rowKey.addAll(parentRowKey);
+                rowKey.add(((FacesCtrlHierNodeBinding) children.get(i)).getRowKey());
+                rt.getDisclosedRowKeys().add(rowKey);
+                if (((FacesCtrlHierNodeBinding) (children.get(i))).getChildren() == null)
+                    continue;
+                expandTreeChildrenNode(rt, (FacesCtrlHierNodeBinding) (node.getChildren().get(i)), rowKey);
+            }
+        }
     }
 }
