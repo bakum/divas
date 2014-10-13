@@ -17,21 +17,27 @@
                                     <af:showDetailItem text="Call Center" id="sdi2" stretchChildren="first"
                                                        icon="/img/call.jpeg">
                                         <af:region value="#{bindings.call_center1.regionModel}" id="r1">
-                                            <af:checkRegionUncommittedDataBehavior message="Есть изменённые данные. Оставить страницу?"/>
+                                            <af:checkRegionUncommittedDataBehavior message="Есть изменённые данные. Оставить страницу?"
+                                                                                   regionIds="::r1"/>
                                         </af:region>
                                     </af:showDetailItem>
                                     <af:showDetailItem text="Управление замерами" id="sdi3" stretchChildren="first"
                                                        icon="/img/st.png"/>
                                     <af:showDetailItem text="Справочники" id="sdi4" stretchChildren="first"
                                                        icon="/img/tSystCmp_picture_52.png">
-                                        <af:region value="#{bindings.direct1.regionModel}" id="r2"/>
+                                        <af:region value="#{bindings.direct1.regionModel}" id="r2">
+                                            <af:checkRegionUncommittedDataBehavior regionIds="::r2"
+                                                                                   message="Есть изменённые данные. Оставить страницу?"/>
+                                        </af:region>
                                     </af:showDetailItem>
                                     <af:showDetailItem text="Аналитика" id="sdi5" stretchChildren="first"
                                                        icon="/img/analytics.png"/>
-                                    <af:showDetailItem text="Пользователи" id="sdi6" stretchChildren="first"
-                                                       icon="/img/people.png"/>
                                     <af:showDetailItem text="Настройки" id="sdi7" stretchChildren="first"
                                                        icon="/img/options.png"/>
+                                    <af:showDetailItem text="Пользователи" id="sdi6" stretchChildren="first"
+                                                       icon="/img/people.png">
+                                        <af:region value="#{bindings.users1.regionModel}" id="r4"/>
+                                    </af:showDetailItem>
                                 </af:panelSpringboard>
                             </f:facet>
                             <f:facet name="top">

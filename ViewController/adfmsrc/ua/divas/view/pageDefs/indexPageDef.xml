@@ -10,6 +10,8 @@
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
     <taskFlow id="orders1" taskFlowId="/WEB-INF/orders.xml#orders" activation="deferred"
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="users1" taskFlowId="/WEB-INF/users.xml#users" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
   </executables>
   <bindings/>
 </pageDefinition>

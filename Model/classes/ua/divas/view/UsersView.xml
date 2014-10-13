@@ -24,7 +24,6 @@
     Entity="ua.divas.model.Users"/>
   <ViewAttribute
     Name="Id"
-    IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="Users"
@@ -74,7 +73,6 @@
     AliasName="LOGIN"/>
   <ViewAttribute
     Name="Version"
-    IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Version"
     EntityUsage="Users"
