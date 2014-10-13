@@ -8,7 +8,7 @@
               ChangeEventPolicy="ppr"/>
     <iterator Binds="RegRatesView2" RangeSize="10" DataControl="AppModuleDataControl" id="RegRatesView2Iterator"
               ChangeEventPolicy="ppr"/>
-    <iterator Binds="FirmsView1" RangeSize="3" DataControl="AppModuleDataControl" id="FirmsView1Iterator"/>
+    <iterator Binds="FirmsView1" RangeSize="5" DataControl="AppModuleDataControl" id="FirmsView1Iterator"/>
     <iterator Binds="DivisionsRootView2" RangeSize="25" DataControl="AppModuleDataControl"
               id="DivisionsRootView2Iterator"/>
     <iterator Binds="DivisionsView1" RangeSize="10" DataControl="AppModuleDataControl" id="DivisionsView1Iterator"/>
@@ -172,16 +172,17 @@
         <AttrNames>
           <Item Value="Id"/>
           <Item Value="Fullname"/>
-          <Item Value="IsGroup"/>
-          <Item Value="ParentId"/>
           <Item Value="CurrId"/>
           <Item Value="DivisionId"/>
-          <Item Value="FirmaId"/>
-          <Item Value="Deleted"/>
-          <Item Value="Version"/>
-          <Item Value="Predefined"/>
+          <Item Value="KEditable"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <action IterBinding="KassaView4Iterator" id="CreateInsert3" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <attributeValues IterBinding="KassaView4Iterator" id="KEditable">
+      <AttrNames>
+        <Item Value="KEditable"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

@@ -309,7 +309,8 @@
                                                 <af:tree value="#{bindings.DivisionsRootView2.treeModel}" var="node"
                                                          selectionListener="#{bindings.DivisionsRootView2.treeModel.makeCurrent}"
                                                          rowSelection="single" id="t8" binding="#{currency.mainTree}"
-                                                         contextMenuSelect="false" displayRow="selected">
+                                                         contextMenuSelect="false" displayRow="selected"
+                                                         contentDelivery="immediate">
                                                     <f:facet name="nodeStamp">
                                                         <af:outputText value="#{node.Fullname}" id="ot4"
                                                                        inlineStyle="#{node.IsGroup == 1 ? 'font-weight:bold;' : ''}"/>
@@ -358,7 +359,14 @@
                                             </af:popup>
                                             <af:panelBox text="Кассы подразделений" id="pb4"
                                                          icon="/img/coins.png">
-                                                <f:facet name="toolbar"/>
+                                                <f:facet name="toolbar">
+                                                    <af:toolbar id="t11">
+                                                        <af:button actionListener="#{bindings.CreateInsert3.execute}"
+                                                                   text="Добавить"
+                                                                   disabled="#{bindings.Commit.enabled}"
+                                                                   id="bInsertkassa"/>
+                                                    </af:toolbar>
+                                                </f:facet>
                                                 <af:table value="#{bindings.KassaView41.collectionModel}" var="row"
                                                           rows="#{bindings.KassaView41.rangeSize}"
                                                           emptyText="#{bindings.KassaView41.viewable ? 'No data to display.' : 'Access Denied.'}"
@@ -366,77 +374,86 @@
                                                           selectedRowKeys="#{bindings.KassaView41.collectionModel.selectedRow}"
                                                           selectionListener="#{bindings.KassaView41.collectionModel.makeCurrent}"
                                                           rowSelection="single"
-                                                          fetchSize="#{bindings.KassaView41.rangeSize}" id="t10">
+                                                          fetchSize="#{bindings.KassaView41.rangeSize}" id="t10"
+                                                          editingMode="clickToEdit" partialTriggers="::bInsertkassa">
+                                                    <af:column id="c34"
+                                                               inlineStyle="#{row.bindings.KEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                        <af:toolbar id="t12">
+                                                            <af:button id="b16"
+                                                                       icon="/img/edit-16.gif">
+                                                                <af:setPropertyListener from="#{1}"
+                                                                                        to="#{bindings.KEditable.inputValue}"
+                                                                                        type="action"/>
+                                                            </af:button>
+                                                            <af:button id="b17" icon="/img/delete.png"/>
+                                                        </af:toolbar>
+                                                    </af:column>
                                                     <af:column headerText="#{bindings.KassaView41.hints.Id.label}"
-                                                               id="c29">
-                                                        <af:outputText value="#{row.Id}"
-                                                                       shortDesc="#{bindings.KassaView41.hints.Id.tooltip}"
-                                                                       id="ot5"/>
+                                                               id="c29" visible="false"
+                                                               inlineStyle="#{row.bindings.KEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                        <af:inputText value="#{row.bindings.Id.inputValue}"
+                                                                      label="#{bindings.KassaView41.hints.Id.label}"
+                                                                      required="#{bindings.KassaView41.hints.Id.mandatory}"
+                                                                      columns="#{bindings.KassaView41.hints.Id.displayWidth}"
+                                                                      maximumLength="#{bindings.KassaView41.hints.Id.precision}"
+                                                                      shortDesc="#{bindings.KassaView41.hints.Id.tooltip}"
+                                                                      id="it19">
+                                                            <f:validator binding="#{row.bindings.Id.validator}"/>
+                                                        </af:inputText>
                                                     </af:column>
                                                     <af:column headerText="#{bindings.KassaView41.hints.Fullname.label}"
-                                                               id="c30">
-                                                        <af:outputText value="#{row.Fullname}"
-                                                                       shortDesc="#{bindings.KassaView41.hints.Fullname.tooltip}"
-                                                                       id="ot6"/>
-                                                    </af:column>
-                                                    <af:column headerText="#{bindings.KassaView41.hints.IsGroup.label}"
-                                                               id="c31">
-                                                        <af:outputText value="#{row.IsGroup}"
-                                                                       shortDesc="#{bindings.KassaView41.hints.IsGroup.tooltip}"
-                                                                       id="ot7">
-                                                            <af:convertNumber groupingUsed="false"
-                                                                              pattern="#{bindings.KassaView41.hints.IsGroup.format}"/>
-                                                        </af:outputText>
-                                                    </af:column>
-                                                    <af:column headerText="#{bindings.KassaView41.hints.ParentId.label}"
-                                                               id="c32">
-                                                        <af:outputText value="#{row.ParentId}"
-                                                                       shortDesc="#{bindings.KassaView41.hints.ParentId.tooltip}"
-                                                                       id="ot8"/>
+                                                               id="c30"
+                                                               inlineStyle="#{row.bindings.KEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                        <af:inputText value="#{row.bindings.Fullname.inputValue}"
+                                                                      label="#{bindings.KassaView41.hints.Fullname.label}"
+                                                                      required="#{bindings.KassaView41.hints.Fullname.mandatory}"
+                                                                      columns="#{bindings.KassaView41.hints.Fullname.displayWidth}"
+                                                                      maximumLength="#{bindings.KassaView41.hints.Fullname.precision}"
+                                                                      shortDesc="#{bindings.KassaView41.hints.Fullname.tooltip}"
+                                                                      id="it21">
+                                                            <f:validator binding="#{row.bindings.Fullname.validator}"/>
+                                                        </af:inputText>
                                                     </af:column>
                                                     <af:column headerText="#{bindings.KassaView41.hints.CurrId.label}"
-                                                               id="c33">
-                                                        <af:outputText value="#{row.CurrId}"
-                                                                       shortDesc="#{bindings.KassaView41.hints.CurrId.tooltip}"
-                                                                       id="ot9"/>
+                                                               id="c31"
+                                                               inlineStyle="#{row.bindings.KEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                        <af:selectOneChoice value="#{row.bindings.CurrId.inputValue}"
+                                                                            label="#{row.bindings.CurrId.label}"
+                                                                            required="#{bindings.KassaView41.hints.CurrId.mandatory}"
+                                                                            shortDesc="#{bindings.KassaView41.hints.CurrId.tooltip}"
+                                                                            id="soc3">
+                                                            <f:selectItems value="#{row.bindings.CurrId.items}"
+                                                                           id="si3"/>
+                                                            <f:validator binding="#{row.bindings.CurrId.validator}"/>
+                                                        </af:selectOneChoice>
                                                     </af:column>
                                                     <af:column headerText="#{bindings.KassaView41.hints.DivisionId.label}"
-                                                               id="c34">
-                                                        <af:outputText value="#{row.DivisionId}"
-                                                                       shortDesc="#{bindings.KassaView41.hints.DivisionId.tooltip}"
-                                                                       id="ot10"/>
+                                                               id="c32"
+                                                               inlineStyle="#{row.bindings.KEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                        <af:selectOneChoice value="#{row.bindings.DivisionId.inputValue}"
+                                                                            label="#{row.bindings.DivisionId.label}"
+                                                                            required="#{bindings.KassaView41.hints.DivisionId.mandatory}"
+                                                                            shortDesc="#{bindings.KassaView41.hints.DivisionId.tooltip}"
+                                                                            id="soc4">
+                                                            <f:selectItems value="#{row.bindings.DivisionId.items}"
+                                                                           id="si4"/>
+                                                            <f:validator binding="#{row.bindings.DivisionId.validator}"/>
+                                                        </af:selectOneChoice>
                                                     </af:column>
-                                                    <af:column headerText="#{bindings.KassaView41.hints.FirmaId.label}"
-                                                               id="c35">
-                                                        <af:outputText value="#{row.FirmaId}"
-                                                                       shortDesc="#{bindings.KassaView41.hints.FirmaId.tooltip}"
-                                                                       id="ot11"/>
-                                                    </af:column>
-                                                    <af:column headerText="#{bindings.KassaView41.hints.Deleted.label}"
-                                                               id="c36">
-                                                        <af:outputText value="#{row.Deleted}"
-                                                                       shortDesc="#{bindings.KassaView41.hints.Deleted.tooltip}"
-                                                                       id="ot12">
+                                                    <af:column headerText="#{bindings.KassaView41.hints.KEditable.label}"
+                                                               id="c33"
+                                                               inlineStyle="#{row.bindings.KEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                        <af:inputText value="#{row.bindings.KEditable.inputValue}"
+                                                                      label="#{bindings.KassaView41.hints.KEditable.label}"
+                                                                      required="#{bindings.KassaView41.hints.KEditable.mandatory}"
+                                                                      columns="#{bindings.KassaView41.hints.KEditable.displayWidth}"
+                                                                      maximumLength="#{bindings.KassaView41.hints.KEditable.precision}"
+                                                                      shortDesc="#{bindings.KassaView41.hints.KEditable.tooltip}"
+                                                                      id="it22">
+                                                            <f:validator binding="#{row.bindings.KEditable.validator}"/>
                                                             <af:convertNumber groupingUsed="false"
-                                                                              pattern="#{bindings.KassaView41.hints.Deleted.format}"/>
-                                                        </af:outputText>
-                                                    </af:column>
-                                                    <af:column headerText="#{bindings.KassaView41.hints.Version.label}"
-                                                               id="c37">
-                                                        <af:outputText value="#{row.Version}"
-                                                                       shortDesc="#{bindings.KassaView41.hints.Version.tooltip}"
-                                                                       id="ot13">
-                                                            <af:convertDateTime pattern="#{bindings.KassaView41.hints.Version.format}"/>
-                                                        </af:outputText>
-                                                    </af:column>
-                                                    <af:column headerText="#{bindings.KassaView41.hints.Predefined.label}"
-                                                               id="c38">
-                                                        <af:outputText value="#{row.Predefined}"
-                                                                       shortDesc="#{bindings.KassaView41.hints.Predefined.tooltip}"
-                                                                       id="ot14">
-                                                            <af:convertNumber groupingUsed="false"
-                                                                              pattern="#{bindings.KassaView41.hints.Predefined.format}"/>
-                                                        </af:outputText>
+                                                                              pattern="#{bindings.KassaView41.hints.KEditable.format}"/>
+                                                        </af:inputText>
                                                     </af:column>
                                                 </af:table>
                                             </af:panelBox>
@@ -457,11 +474,19 @@
                                                             <af:setPropertyListener from="#{0}"
                                                                                     to="#{bindings.FEditable.inputValue}"
                                                                                     type="action"/>
+                                                            <af:setPropertyListener from="#{0}"
+                                                                                    to="#{bindings.KEditable.inputValue}"
+                                                                                    type="action"/>
                                                         </af:button>
                                                         <af:button text="Отменить" id="b12"
                                                                    actionListener="#{bindings.Rollback.execute}"
                                                                    disabled="#{!bindings.Rollback.enabled}">
-                                                            <af:resetActionListener/>
+                                                            <af:setPropertyListener from="#{0}"
+                                                                                    to="#{bindings.FEditable.inputValue}"
+                                                                                    type="action"/>
+                                                            <af:setPropertyListener from="#{0}"
+                                                                                    to="#{bindings.KEditable.inputValue}"
+                                                                                    type="action"/>
                                                         </af:button>
                                                         <af:button text="Обновить" id="b14"
                                                                    actionListener="#{firms.onRefresh}"

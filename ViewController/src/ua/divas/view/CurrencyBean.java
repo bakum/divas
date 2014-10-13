@@ -27,6 +27,8 @@ import oracle.adf.view.rich.event.DropEvent;
 import oracle.adf.view.rich.event.PopupCanceledEvent;
 import oracle.adf.view.rich.event.PopupFetchEvent;
 
+import oracle.adf.view.rich.model.TreeModel;
+
 import oracle.adfinternal.view.faces.model.binding.FacesCtrlHierNodeBinding;
 
 import oracle.binding.BindingContainer;
@@ -406,5 +408,37 @@ public class CurrencyBean {
                 expandTreeChildrenNode(rt, (FacesCtrlHierNodeBinding) (node.getChildren().get(i)), rowKey);
             }
         }
+    }
+    
+    public void discloseTreeNodeChildren(RowDisclosureEvent event) {
+       RowKeySet addedKeys = event.getAddedSet();
+       Iterator addedIt = addedKeys.iterator();
+       if(addedIt.hasNext()) {
+           Object addedKey = addedIt.next();
+           TreeModel treeModel = (TreeModel) this.mainTree.getValue();
+           JUCtrlHierNodeBinding nodeBinding = (JUCtrlHierNodeBinding)
+                  treeModel.getRowData(addedKey);
+           String isLeaf = (String) nodeBinding.getAttribute("isLeaf");       
+             // you have to have a condition to break the series of disclosure events!!
+           if(!(new Boolean(isLeaf))) {
+               this.expandAllNodes(nodeBinding, this.mainTree.getDisclosedRowKeys());
+               AdfFacesContext.getCurrentInstance().addPartialTarget(this.mainTree);
+           }
+       }
+    }
+    
+    private void expandAllNodes(JUCtrlHierNodeBinding nodeBinding, RowKeySet
+             disclosedKeys) {   
+       List<JUCtrlHierNodeBinding> childNodes = (List<JUCtrlHierNodeBinding>)
+           nodeBinding.getChildren();     
+       ArrayList newKeys = new ArrayList();
+       if(childNodes != null) {
+           for(JUCtrlHierNodeBinding node : childNodes) {           
+               newKeys.add(node.getKeyPath());
+               // recursive call to the method expandAllNodes()         
+               expandAllNodes(node, disclosedKeys);
+           }
+       }
+       disclosedKeys.addAll(newKeys);     
     }
 }

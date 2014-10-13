@@ -1,5 +1,7 @@
 package ua.divas.view;
 
+
+
 import javax.faces.event.ActionEvent;
 
 import oracle.adf.model.BindingContext;
@@ -53,4 +55,6 @@ public class FirmsBean {
         refresh();
         return null;
     }
+    
+    
 }
