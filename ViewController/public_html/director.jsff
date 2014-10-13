@@ -442,7 +442,8 @@
                                                     </af:column>
                                                     <af:column headerText="#{bindings.KassaView41.hints.KEditable.label}"
                                                                id="c33"
-                                                               inlineStyle="#{row.bindings.KEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                               inlineStyle="#{row.bindings.KEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
+                                                               visible="false">
                                                         <af:inputText value="#{row.bindings.KEditable.inputValue}"
                                                                       label="#{bindings.KassaView41.hints.KEditable.label}"
                                                                       required="#{bindings.KassaView41.hints.KEditable.mandatory}"
