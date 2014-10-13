@@ -25,9 +25,11 @@
                                                        icon="/img/st.png"/>
                                     <af:showDetailItem text="Справочники" id="sdi4" stretchChildren="first"
                                                        icon="/img/tSystCmp_picture_52.png">
-                                        <af:region value="#{bindings.direct1.regionModel}" id="r2">
+                                        <af:region value="#{bindings.direct1.regionModel}" id="r2"
+                                                   uncommittedDataWarning="on">
                                             <af:checkRegionUncommittedDataBehavior regionIds="::r2"
-                                                                                   message="Есть изменённые данные. Оставить страницу?"/>
+                                                                                   message="Есть изменённые данные. Оставить страницу?"
+                                                                                   triggerType="click"/>
                                         </af:region>
                                     </af:showDetailItem>
                                     <af:showDetailItem text="Аналитика" id="sdi5" stretchChildren="first"

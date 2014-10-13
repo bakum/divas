@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.2.66.68" id="userPageDef"
+                Package="ua.divas.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="UsersView1" RangeSize="25" DataControl="AppModuleDataControl" id="UsersView1Iterator"/>
+    <searchRegion Binds="UsersView1Iterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="UsersView1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="UsersView1Iterator" id="UsersView1">
+      <nodeDefinition DefName="ua.divas.view.UsersView" Name="UsersView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="FirstName"/>
+          <Item Value="LastName"/>
+          <Item Value="Email"/>
+          <Item Value="PassWd"/>
+          <Item Value="Login"/>
+          <Item Value="Version"/>
+          <Item Value="Predefined"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -12,11 +12,13 @@
     <page path="/index.jsf" usageId="ua_divas_view_indexPageDef"/>
     <page path="/ccenter.jsff" usageId="ua_divas_view_ccenterPageDef"/>
     <page path="/director.jsff" usageId="ua_divas_view_directorPageDef"/>
+    <page path="/user.jsff" usageId="ua_divas_view_userPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="ua_divas_view_indexPageDef" path="ua.divas.view.pageDefs.indexPageDef"/>
     <page id="ua_divas_view_ccenterPageDef" path="ua.divas.view.pageDefs.ccenterPageDef"/>
     <page id="ua_divas_view_directorPageDef" path="ua.divas.view.pageDefs.directorPageDef"/>
+    <page id="ua_divas_view_userPageDef" path="ua.divas.view.pageDefs.userPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AppModuleDataControl" Package="ua.divas.module"
