@@ -2230,5 +2230,77 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
 
             }
         }
+
+    /**
+     * Container's getter for GroupsView2.
+     * @return GroupsView2
+     */
+    public ViewObjectImpl getGroupsView2() {
+        return (ViewObjectImpl) findViewObject("GroupsView2");
+    }
+
+    /**
+     * Container's getter for GroupmembersView1.
+     * @return GroupmembersView1
+     */
+    public ViewObjectImpl getGroupmembersView1() {
+        return (ViewObjectImpl) findViewObject("GroupmembersView1");
+    }
+
+    /**
+     * Container's getter for GroupmembersView2.
+     * @return GroupmembersView2
+     */
+    public ViewObjectImpl getGroupmembersView2() {
+        return (ViewObjectImpl) findViewObject("GroupmembersView2");
+    }
+
+    /**
+     * Container's getter for GroupmembersFk2Link.
+     * @return GroupmembersFk2Link
+     */
+    public ViewLinkImpl getGroupmembersFk2Link() {
+        return (ViewLinkImpl) findViewLink("GroupmembersFk2Link");
+    }
+
+    /**
+     * Container's getter for GroupmembersView3.
+     * @return GroupmembersView3
+     */
+    public ViewObjectImpl getGroupmembersView3() {
+        return (ViewObjectImpl) findViewObject("GroupmembersView3");
+    }
+
+    /**
+     * Container's getter for GroupmembersFk2Link1.
+     * @return GroupmembersFk2Link1
+     */
+    public ViewLinkImpl getGroupmembersFk2Link1() {
+        return (ViewLinkImpl) findViewLink("GroupmembersFk2Link1");
+    }
+
+    /**
+     * Container's getter for UsersView2.
+     * @return UsersView2
+     */
+    public ViewObjectImpl getUsersView2() {
+        return (ViewObjectImpl) findViewObject("UsersView2");
+    }
+
+    /**
+     * Container's getter for GroupmembersView4.
+     * @return GroupmembersView4
+     */
+    public ViewObjectImpl getGroupmembersView4() {
+        return (ViewObjectImpl) findViewObject("GroupmembersView4");
+    }
+
+    /**
+     * Container's getter for GroupmembersFkUsersLink.
+     * @return GroupmembersFkUsersLink
+     */
+    public ViewLinkImpl getGroupmembersFkUsersLink() {
+        return (ViewLinkImpl) findViewLink("GroupmembersFkUsersLink");
+    }
 }
 

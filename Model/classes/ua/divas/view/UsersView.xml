@@ -6,7 +6,13 @@
   Name="UsersView"
   Version="12.1.2.66.68"
   InheritPersonalization="merge"
-  SelectList="Users.ID, 
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <SQLQuery><![CDATA[SELECT Users.ID, 
        Users.FIRST_NAME, 
        Users.LAST_NAME, 
        Users.EMAIL, 
@@ -14,11 +20,10 @@
        Users.PASS_WD, 
        Users.LOGIN, 
        Users.VERSION, 
-       Users.PREDEFINED"
-  FromList="USERS Users"
-  BindingStyle="OracleName"
-  CustomQuery="false"
-  PageIterMode="Full">
+       Users.PREDEFINED,
+       (select 0 from dual) U_Editable,
+       Users.U_Description
+FROM  USERS Users]]></SQLQuery>
   <EntityUsage
     Name="Users"
     Entity="ua.divas.model.Users"/>
@@ -30,21 +35,18 @@
     AliasName="ID"/>
   <ViewAttribute
     Name="FirstName"
-    IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="FirstName"
     EntityUsage="Users"
     AliasName="FIRST_NAME"/>
   <ViewAttribute
     Name="LastName"
-    IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="LastName"
     EntityUsage="Users"
     AliasName="LAST_NAME"/>
   <ViewAttribute
     Name="Email"
-    IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Email"
     EntityUsage="Users"
@@ -84,6 +86,21 @@
     EntityAttrName="Predefined"
     EntityUsage="Users"
     AliasName="PREDEFINED"/>
+  <ViewAttribute
+    Name="UEditable"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="U_EDITABLE"
+    Expression="U_EDITABLE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="UDescription"
+    PrecisionRule="true"
+    EntityAttrName="UDescription"
+    EntityUsage="Users"
+    AliasName="U_DESCRIPTION"/>
   <ViewLinkAccessor
     Name="OrdersView"
     ViewLink="ua.divas.view.OrdersUsersFk1Link"
@@ -98,5 +115,10 @@
     Name="UserSettingsView"
     ViewLink="ua.divas.view.UserSettingsUsersFk1Link"
     Type="oracle.jbo.Row"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="GroupmembersView"
+    ViewLink="ua.divas.view.GroupmembersFkUsersLink"
+    Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
 </ViewObject>

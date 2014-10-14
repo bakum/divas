@@ -39,15 +39,15 @@
     </DesignTime>
   </Attribute>
   <Attribute
-    Name="Description"
-    Precision="300"
-    ColumnName="DESCRIPTION"
+    Name="GDescription"
+    Precision="1000"
+    ColumnName="G_DESCRIPTION"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
     TableName="GROUPS">
     <DesignTime>
-      <Attr Name="_DisplaySize" Value="300"/>
+      <Attr Name="_DisplaySize" Value="1000"/>
     </DesignTime>
   </Attribute>
   <AccessorAttribute
@@ -55,6 +55,13 @@
     Association="ua.divas.model.UsersGroupsFk1Assoc"
     AssociationEnd="ua.divas.model.UsersGroupsFk1Assoc.UsersGroups"
     AssociationOtherEnd="ua.divas.model.UsersGroupsFk1Assoc.Groups"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="Groupmembers"
+    Association="ua.divas.model.GroupmembersFk2Assoc"
+    AssociationEnd="ua.divas.model.GroupmembersFk2Assoc.Groupmembers"
+    AssociationOtherEnd="ua.divas.model.GroupmembersFk2Assoc.Groups"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <Key

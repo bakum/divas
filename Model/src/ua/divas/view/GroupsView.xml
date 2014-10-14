@@ -6,13 +6,16 @@
   Name="GroupsView"
   Version="12.1.2.66.68"
   InheritPersonalization="merge"
-  SelectList="Groups.ID, 
-       Groups.FULLNAME, 
-       Groups.DESCRIPTION"
-  FromList="GROUPS Groups"
   BindingStyle="OracleName"
-  CustomQuery="false"
+  CustomQuery="true"
   PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <SQLQuery><![CDATA[SELECT Groups.ID, 
+       Groups.FULLNAME, 
+       Groups.G_DESCRIPTION
+FROM  GROUPS Groups]]></SQLQuery>
   <EntityUsage
     Name="Groups"
     Entity="ua.divas.model.Groups"/>
@@ -30,16 +33,43 @@
     PrecisionRule="true"
     EntityAttrName="Fullname"
     EntityUsage="Groups"
-    AliasName="FULLNAME"/>
+    AliasName="FULLNAME">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.GroupsView.Fullname_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.GroupsView.Fullname_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
-    Name="Description"
+    Name="GDescription"
     PrecisionRule="true"
-    EntityAttrName="Description"
+    EntityAttrName="GDescription"
     EntityUsage="Groups"
-    AliasName="DESCRIPTION"/>
+    AliasName="G_DESCRIPTION">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.GroupsView.GDescription_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.GroupsView.GDescription_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewLinkAccessor
     Name="UsersGroupsView"
     ViewLink="ua.divas.view.UsersGroupsFk1Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="GroupmembersView"
+    ViewLink="ua.divas.view.GroupmembersFk2Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>

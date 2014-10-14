@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import oracle.jbo.Key;
 import oracle.jbo.RowIterator;
+import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.EntityDefImpl;
 import oracle.jbo.server.EntityImpl;
 
@@ -35,9 +36,11 @@ public class UsersImpl extends DivasEntityNoDelete {
         Login,
         Version,
         Predefined,
+        UDescription,
         Orders,
         UsersGroups,
-        UserSettings;
+        UserSettings,
+        Groupmembers;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -60,6 +63,8 @@ public class UsersImpl extends DivasEntityNoDelete {
             return vals;
         }
     }
+
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int FIRSTNAME = AttributesEnum.FirstName.index();
     public static final int LASTNAME = AttributesEnum.LastName.index();
@@ -69,15 +74,25 @@ public class UsersImpl extends DivasEntityNoDelete {
     public static final int LOGIN = AttributesEnum.Login.index();
     public static final int VERSION = AttributesEnum.Version.index();
     public static final int PREDEFINED = AttributesEnum.Predefined.index();
+    public static final int UDESCRIPTION = AttributesEnum.UDescription.index();
     public static final int ORDERS = AttributesEnum.Orders.index();
     public static final int USERSGROUPS = AttributesEnum.UsersGroups.index();
     public static final int USERSETTINGS = AttributesEnum.UserSettings.index();
+    public static final int GROUPMEMBERS = AttributesEnum.Groupmembers.index();
 
     /**
      * This is the default constructor (do not remove).
      */
     public UsersImpl() {
     }
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("ua.divas.model.Users");
+    }
+
 
     /**
      * Gets the attribute value for Id, using the alias name Id.
@@ -224,6 +239,22 @@ public class UsersImpl extends DivasEntityNoDelete {
     }
 
     /**
+     * Gets the attribute value for UDescription, using the alias name UDescription.
+     * @return the value of UDescription
+     */
+    public String getUDescription() {
+        return (String) getAttributeInternal(UDESCRIPTION);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for UDescription.
+     * @param value value to set the UDescription
+     */
+    public void setUDescription(String value) {
+        setAttributeInternal(UDESCRIPTION, value);
+    }
+
+    /**
      * @return the associated entity oracle.jbo.RowIterator.
      */
     public RowIterator getOrders() {
@@ -252,6 +283,13 @@ public class UsersImpl extends DivasEntityNoDelete {
     }
 
     /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getGroupmembers() {
+        return (RowIterator) getAttributeInternal(GROUPMEMBERS);
+    }
+
+    /**
      * @param id key constituent
 
      * @return a Key object based on given key constituents.
@@ -260,11 +298,6 @@ public class UsersImpl extends DivasEntityNoDelete {
         return new Key(new Object[] { id });
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("ua.divas.model.Users");
-    }
+
 }
 

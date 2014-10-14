@@ -38,7 +38,6 @@
   </Attribute>
   <Attribute
     Name="FirstName"
-    IsNotNull="true"
     Precision="50"
     ColumnName="FIRST_NAME"
     SQLType="VARCHAR"
@@ -54,12 +53,13 @@
           ResId="ua.divas.model.Users.FirstName_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.model.Users.FirstName_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="30"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
   <Attribute
     Name="LastName"
-    IsNotNull="true"
     Precision="50"
     ColumnName="LAST_NAME"
     SQLType="VARCHAR"
@@ -75,12 +75,13 @@
           ResId="ua.divas.model.Users.LastName_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.model.Users.LastName_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="30"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
   <Attribute
     Name="Email"
-    IsNotNull="true"
     Precision="100"
     ColumnName="EMAIL"
     SQLType="VARCHAR"
@@ -96,6 +97,8 @@
           ResId="ua.divas.model.Users.Email_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.model.Users.Email_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="30"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -138,6 +141,8 @@
           ResId="ua.divas.model.Users.PassWd_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.model.Users.PassWd_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="30"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -200,6 +205,30 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="UDescription"
+    Precision="1000"
+    ColumnName="U_DESCRIPTION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1000"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Users.UDescription_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Users.UDescription_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="40"/>
+        <DISPLAYHEIGHT
+          Value="2"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="Orders"
     Association="ua.divas.model.OrdersUsersFk1Assoc"
@@ -221,6 +250,13 @@
     AssociationOtherEnd="ua.divas.model.UserSettingsUsersFk1Assoc.Users"
     Type="oracle.jbo.server.EntityImpl"
     IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="Groupmembers"
+    Association="ua.divas.model.GroupmembersFkUserAssoc"
+    AssociationEnd="ua.divas.model.GroupmembersFkUserAssoc.Groupmembers"
+    AssociationOtherEnd="ua.divas.model.GroupmembersFkUserAssoc.Users"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="UsersPk"
     PrimaryKey="true">

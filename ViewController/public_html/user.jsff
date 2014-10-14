@@ -20,79 +20,178 @@
                                               rowSelection="single" fetchSize="#{bindings.UsersView1.rangeSize}"
                                               filterModel="#{bindings.UsersView1Query.queryDescriptor}"
                                               queryListener="#{bindings.UsersView1Query.processQuery}"
-                                              filterVisible="true" varStatus="vs" id="t1">
+                                              filterVisible="true" varStatus="vs" id="t1" scrollPolicy="page"
+                                              editingMode="clickToEdit">
+                                        <af:column id="c7">
+                                            <af:toolbar id="t2">
+                                                <af:button id="b1" icon="/img/edit-16.gif">
+                                                    <af:showPopupBehavior popupId="::pCreateInsert"/>
+                                                </af:button>
+                                            </af:toolbar>
+                                        </af:column>
                                         <af:column sortProperty="#{bindings.UsersView1.hints.Id.name}" filterable="true"
                                                    sortable="true" headerText="#{bindings.UsersView1.hints.Id.label}"
-                                                   id="c1">
-                                            <af:outputText value="#{row.Id}"
-                                                           shortDesc="#{bindings.UsersView1.hints.Id.tooltip}"
-                                                           id="ot1"/>
+                                                   id="c1" visible="false">
+                                            <af:inputText value="#{row.bindings.Id.inputValue}"
+                                                          label="#{bindings.UsersView1.hints.Id.label}"
+                                                          required="#{bindings.UsersView1.hints.Id.mandatory}"
+                                                          columns="#{bindings.UsersView1.hints.Id.displayWidth}"
+                                                          maximumLength="#{bindings.UsersView1.hints.Id.precision}"
+                                                          shortDesc="#{bindings.UsersView1.hints.Id.tooltip}" id="it5">
+                                                <f:validator binding="#{row.bindings.Id.validator}"/>
+                                            </af:inputText>
                                         </af:column>
-                                        <af:column sortProperty="#{bindings.UsersView1.hints.FirstName.name}"
+                                        <af:column sortProperty="#{bindings.UsersView1.hints.Login.name}"
                                                    filterable="true" sortable="true"
-                                                   headerText="#{bindings.UsersView1.hints.FirstName.label}" id="c2">
-                                            <af:outputText value="#{row.FirstName}"
-                                                           shortDesc="#{bindings.UsersView1.hints.FirstName.tooltip}"
-                                                           id="ot2"/>
+                                                   headerText="#{bindings.UsersView1.hints.Login.label}" id="c2">
+                                            <af:inputText value="#{row.bindings.Login.inputValue}"
+                                                          label="#{bindings.UsersView1.hints.Login.label}"
+                                                          required="#{bindings.UsersView1.hints.Login.mandatory}"
+                                                          columns="#{bindings.UsersView1.hints.Login.displayWidth}"
+                                                          maximumLength="#{bindings.UsersView1.hints.Login.precision}"
+                                                          shortDesc="#{bindings.UsersView1.hints.Login.tooltip}"
+                                                          id="it6">
+                                                <f:validator binding="#{row.bindings.Login.validator}"/>
+                                            </af:inputText>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.UsersView1.hints.LastName.name}"
                                                    filterable="true" sortable="true"
                                                    headerText="#{bindings.UsersView1.hints.LastName.label}" id="c3">
-                                            <af:outputText value="#{row.LastName}"
-                                                           shortDesc="#{bindings.UsersView1.hints.LastName.tooltip}"
-                                                           id="ot3"/>
+                                            <af:inputText value="#{row.bindings.LastName.inputValue}"
+                                                          label="#{bindings.UsersView1.hints.LastName.label}"
+                                                          required="#{bindings.UsersView1.hints.LastName.mandatory}"
+                                                          columns="#{bindings.UsersView1.hints.LastName.displayWidth}"
+                                                          maximumLength="#{bindings.UsersView1.hints.LastName.precision}"
+                                                          shortDesc="#{bindings.UsersView1.hints.LastName.tooltip}"
+                                                          id="it7">
+                                                <f:validator binding="#{row.bindings.LastName.validator}"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.UsersView1.hints.FirstName.name}"
+                                                   filterable="true" sortable="true"
+                                                   headerText="#{bindings.UsersView1.hints.FirstName.label}" id="c4">
+                                            <af:inputText value="#{row.bindings.FirstName.inputValue}"
+                                                          label="#{bindings.UsersView1.hints.FirstName.label}"
+                                                          required="#{bindings.UsersView1.hints.FirstName.mandatory}"
+                                                          columns="#{bindings.UsersView1.hints.FirstName.displayWidth}"
+                                                          maximumLength="#{bindings.UsersView1.hints.FirstName.precision}"
+                                                          shortDesc="#{bindings.UsersView1.hints.FirstName.tooltip}"
+                                                          id="it8">
+                                                <f:validator binding="#{row.bindings.FirstName.validator}"/>
+                                            </af:inputText>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.UsersView1.hints.Email.name}"
                                                    filterable="true" sortable="true"
-                                                   headerText="#{bindings.UsersView1.hints.Email.label}" id="c4">
-                                            <af:outputText value="#{row.Email}"
-                                                           shortDesc="#{bindings.UsersView1.hints.Email.tooltip}"
-                                                           id="ot4"/>
+                                                   headerText="#{bindings.UsersView1.hints.Email.label}" id="c5">
+                                            <af:inputText value="#{row.bindings.Email.inputValue}"
+                                                          label="#{bindings.UsersView1.hints.Email.label}"
+                                                          required="#{bindings.UsersView1.hints.Email.mandatory}"
+                                                          columns="#{bindings.UsersView1.hints.Email.displayWidth}"
+                                                          maximumLength="#{bindings.UsersView1.hints.Email.precision}"
+                                                          shortDesc="#{bindings.UsersView1.hints.Email.tooltip}"
+                                                          id="it9">
+                                                <f:validator binding="#{row.bindings.Email.validator}"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UsersView1.hints.IsAdmin.label}" id="c8">
+                                            <af:selectBooleanCheckbox value="#{row.bindings.IsAdmin.inputValue}"
+                                                                      label="#{row.bindings.IsAdmin.label}"
+                                                                      shortDesc="#{bindings.UsersView1.hints.IsAdmin.tooltip}"
+                                                                      id="sbc2"/>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.UsersView1.hints.PassWd.name}"
                                                    filterable="true" sortable="true"
-                                                   headerText="#{bindings.UsersView1.hints.PassWd.label}" id="c5">
-                                            <af:outputText value="#{row.PassWd}"
-                                                           shortDesc="#{bindings.UsersView1.hints.PassWd.tooltip}"
-                                                           id="ot5"/>
+                                                   headerText="#{bindings.UsersView1.hints.PassWd.label}" id="c6"
+                                                   visible="false">
+                                            <af:inputText value="#{row.bindings.PassWd.inputValue}"
+                                                          label="#{bindings.UsersView1.hints.PassWd.label}"
+                                                          required="#{bindings.UsersView1.hints.PassWd.mandatory}"
+                                                          columns="#{bindings.UsersView1.hints.PassWd.displayWidth}"
+                                                          maximumLength="#{bindings.UsersView1.hints.PassWd.precision}"
+                                                          shortDesc="#{bindings.UsersView1.hints.PassWd.tooltip}"
+                                                          id="it10">
+                                                <f:validator binding="#{row.bindings.PassWd.validator}"/>
+                                            </af:inputText>
                                         </af:column>
-                                        <af:column sortProperty="#{bindings.UsersView1.hints.Login.name}"
-                                                   filterable="true" sortable="true"
-                                                   headerText="#{bindings.UsersView1.hints.Login.label}" id="c6">
-                                            <af:outputText value="#{row.Login}"
-                                                           shortDesc="#{bindings.UsersView1.hints.Login.tooltip}"
-                                                           id="ot6"/>
-                                        </af:column>
-                                        <af:column sortProperty="#{bindings.UsersView1.hints.Version.name}"
-                                                   filterable="true" sortable="true"
-                                                   headerText="#{bindings.UsersView1.hints.Version.label}" id="c7">
-                                            <f:facet name="filter">
-                                                <af:inputDate value="#{bindings.UsersView1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.Version.value}"
-                                                              id="id1">
-                                                    <af:convertDateTime pattern="#{bindings.UsersView1.hints.Version.format}"/>
-                                                </af:inputDate>
-                                            </f:facet>
-                                            <af:outputText value="#{row.Version}"
-                                                           shortDesc="#{bindings.UsersView1.hints.Version.tooltip}"
-                                                           id="ot7">
-                                                <af:convertDateTime pattern="#{bindings.UsersView1.hints.Version.format}"/>
-                                            </af:outputText>
-                                        </af:column>
-                                        <af:column sortProperty="#{bindings.UsersView1.hints.Predefined.name}"
-                                                   filterable="true" sortable="true"
-                                                   headerText="#{bindings.UsersView1.hints.Predefined.label}" id="c8">
-                                            <af:outputText value="#{row.Predefined}"
-                                                           shortDesc="#{bindings.UsersView1.hints.Predefined.tooltip}"
-                                                           id="ot8">
+                                        <af:column headerText="#{bindings.UsersView1.hints.UEditable.label}" id="c9">
+                                            <af:inputText value="#{row.bindings.UEditable.inputValue}"
+                                                          label="#{bindings.UsersView1.hints.UEditable.label}"
+                                                          required="#{bindings.UsersView1.hints.UEditable.mandatory}"
+                                                          columns="#{bindings.UsersView1.hints.UEditable.displayWidth}"
+                                                          maximumLength="#{bindings.UsersView1.hints.UEditable.precision}"
+                                                          shortDesc="#{bindings.UsersView1.hints.UEditable.tooltip}"
+                                                          id="it11">
+                                                <f:validator binding="#{row.bindings.UEditable.validator}"/>
                                                 <af:convertNumber groupingUsed="false"
-                                                                  pattern="#{bindings.UsersView1.hints.Predefined.format}"/>
-                                            </af:outputText>
+                                                                  pattern="#{bindings.UsersView1.hints.UEditable.format}"/>
+                                            </af:inputText>
                                         </af:column>
                                     </af:table>
                                 </af:panelBox>
+                                <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateInsert"
+                                          contentDelivery="lazyUncached">
+                                    <af:dialog id="d1" title="Редактирование пользователя">
+                                        <f:facet name="buttonBar"/>
+                                        <af:panelTabbed id="pt2">
+                                            <af:showDetailItem text="Главная" id="sdi4"
+                                                               stretchChildren="first">
+                                                <af:panelFormLayout id="pfl1">
+                                                    <af:inputText value="#{bindings.Login.inputValue}"
+                                                                  label="#{bindings.Login.hints.label}"
+                                                                  required="#{bindings.Login.hints.mandatory}"
+                                                                  columns="#{bindings.Login.hints.displayWidth}"
+                                                                  maximumLength="#{bindings.Login.hints.precision}"
+                                                                  shortDesc="#{bindings.Login.hints.tooltip}" id="it1">
+                                                        <f:validator binding="#{bindings.Login.validator}"/>
+                                                    </af:inputText>
+                                                    <af:inputText value="#{bindings.FirstName.inputValue}"
+                                                                  label="#{bindings.FirstName.hints.label}"
+                                                                  required="#{bindings.FirstName.hints.mandatory}"
+                                                                  columns="#{bindings.FirstName.hints.displayWidth}"
+                                                                  maximumLength="#{bindings.FirstName.hints.precision}"
+                                                                  shortDesc="#{bindings.FirstName.hints.tooltip}"
+                                                                  id="it2">
+                                                        <f:validator binding="#{bindings.FirstName.validator}"/>
+                                                    </af:inputText>
+                                                    <af:inputText value="#{bindings.LastName.inputValue}"
+                                                                  label="#{bindings.LastName.hints.label}"
+                                                                  required="#{bindings.LastName.hints.mandatory}"
+                                                                  columns="#{bindings.LastName.hints.displayWidth}"
+                                                                  maximumLength="#{bindings.LastName.hints.precision}"
+                                                                  shortDesc="#{bindings.LastName.hints.tooltip}"
+                                                                  id="it3">
+                                                        <f:validator binding="#{bindings.LastName.validator}"/>
+                                                    </af:inputText>
+                                                    <af:inputText value="#{bindings.Email.inputValue}"
+                                                                  label="#{bindings.Email.hints.label}"
+                                                                  required="#{bindings.Email.hints.mandatory}"
+                                                                  columns="#{bindings.Email.hints.displayWidth}"
+                                                                  maximumLength="#{bindings.Email.hints.precision}"
+                                                                  shortDesc="#{bindings.Email.hints.tooltip}" id="it4">
+                                                        <f:validator binding="#{bindings.Email.validator}"/>
+                                                    </af:inputText>
+                                                    <af:selectBooleanCheckbox value="#{bindings.IsAdmin.inputValue}"
+                                                                              label="#{bindings.IsAdmin.label}"
+                                                                              shortDesc="#{bindings.IsAdmin.hints.tooltip}"
+                                                                              id="sbc1"/>
+                                                    <af:inputText value="#{bindings.UDescription.inputValue}"
+                                                                  label="#{bindings.UDescription.hints.label}"
+                                                                  required="#{bindings.UDescription.hints.mandatory}"
+                                                                  columns="#{bindings.UDescription.hints.displayWidth}"
+                                                                  maximumLength="#{bindings.UDescription.hints.precision}"
+                                                                  shortDesc="#{bindings.UDescription.hints.tooltip}"
+                                                                  id="it12" rows="2">
+                                                        <f:validator binding="#{bindings.UDescription.validator}"/>
+                                                    </af:inputText>
+                                                </af:panelFormLayout>
+                                            </af:showDetailItem>
+                                            <af:showDetailItem text="Группы" id="sdi5" stretchChildren="first"/>
+                                            <af:showDetailItem text="Подразделения" id="sdi6" stretchChildren="first"/>
+                                            <af:showDetailItem text="Настройки" id="sdi7" stretchChildren="first"/>
+                                        </af:panelTabbed>
+                                    </af:dialog>
+                                </af:popup>
                             </af:showDetailItem>
-                            <af:showDetailItem text="Группы" id="sdi2" stretchChildren="first"/>
-                            <af:showDetailItem text="Подразделения" id="sdi3" stretchChildren="first"/>
                         </af:panelTabbed>
                     </f:facet>
                     <f:facet name="top"/>

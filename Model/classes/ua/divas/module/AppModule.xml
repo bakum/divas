@@ -531,6 +531,18 @@
   <ViewUsage
     Name="DivisionsView3"
     ViewObjectName="ua.divas.view.DivisionsView"/>
+  <ViewUsage
+    Name="GroupsView2"
+    ViewObjectName="ua.divas.view.GroupsView"/>
+  <ViewUsage
+    Name="GroupmembersView1"
+    ViewObjectName="ua.divas.view.GroupmembersView"/>
+  <ViewUsage
+    Name="GroupmembersView2"
+    ViewObjectName="ua.divas.view.GroupmembersView"/>
+  <ViewUsage
+    Name="GroupmembersView3"
+    ViewObjectName="ua.divas.view.GroupmembersView"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -1137,8 +1149,33 @@
     SrcViewUsageName="ua.divas.module.AppModule.DivisionsRootView2"
     DstViewUsageName="ua.divas.module.AppModule.DivisionsView3"
     Reversed="false"/>
+  <ViewLinkUsage
+    Name="GroupmembersFk2Link"
+    ViewLinkObjectName="ua.divas.view.GroupmembersFk2Link"
+    SrcViewUsageName="ua.divas.module.AppModule.GroupsView2"
+    DstViewUsageName="ua.divas.module.AppModule.GroupmembersView1"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="GroupmembersFk2Link1"
+    ViewLinkObjectName="ua.divas.view.GroupmembersFk2Link"
+    SrcViewUsageName="ua.divas.module.AppModule.GroupsView1"
+    DstViewUsageName="ua.divas.module.AppModule.GroupmembersView3"
+    Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">
+    <Method
+      Name="deleteChildren"
+      MethodName="deleteChildren">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="ri"
+        Type="oracle.jbo.RowIterator"/>
+      <Parameter
+        Name="selectedNodeKey"
+        Type="oracle.jbo.Key"/>
+    </Method>
     <Method
       Name="deleteChildren"
       MethodName="deleteChildren">
