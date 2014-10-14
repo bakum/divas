@@ -2302,5 +2302,21 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getGroupmembersFkUsersLink() {
         return (ViewLinkImpl) findViewLink("GroupmembersFkUsersLink");
     }
+
+    /**
+     * Container's getter for GroupmembersView5.
+     * @return GroupmembersView5
+     */
+    public ViewObjectImpl getGroupmembersView5() {
+        return (ViewObjectImpl) findViewObject("GroupmembersView5");
+    }
+
+    /**
+     * Container's getter for GroupmembersFkUsersLink1.
+     * @return GroupmembersFkUsersLink1
+     */
+    public ViewLinkImpl getGroupmembersFkUsersLink1() {
+        return (ViewLinkImpl) findViewLink("GroupmembersFkUsersLink1");
+    }
 }
 
