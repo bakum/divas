@@ -16,6 +16,7 @@ import ua.divas.view.ContactDetailsViewImpl;
 import ua.divas.view.CurrencyViewImpl;
 import ua.divas.view.DivisionsViewImpl;
 import ua.divas.view.FirmsViewImpl;
+import ua.divas.view.GroupmembersViewImpl;
 import ua.divas.view.KontragentsViewImpl;
 import ua.divas.view.ro.KontragentsItemsLookupVOImpl;
 // ---------------------------------------------------------------------
@@ -2231,44 +2232,22 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
             }
         }
 
-    /**
-     * Container's getter for GroupsView2.
-     * @return GroupsView2
-     */
-    public ViewObjectImpl getGroupsView2() {
-        return (ViewObjectImpl) findViewObject("GroupsView2");
-    }
-
-    /**
-     * Container's getter for GroupmembersView1.
-     * @return GroupmembersView1
-     */
-    public ViewObjectImpl getGroupmembersView1() {
-        return (ViewObjectImpl) findViewObject("GroupmembersView1");
-    }
 
     /**
      * Container's getter for GroupmembersView2.
      * @return GroupmembersView2
      */
-    public ViewObjectImpl getGroupmembersView2() {
-        return (ViewObjectImpl) findViewObject("GroupmembersView2");
+    public GroupmembersViewImpl getGroupmembersView2() {
+        return (GroupmembersViewImpl) findViewObject("GroupmembersView2");
     }
 
-    /**
-     * Container's getter for GroupmembersFk2Link.
-     * @return GroupmembersFk2Link
-     */
-    public ViewLinkImpl getGroupmembersFk2Link() {
-        return (ViewLinkImpl) findViewLink("GroupmembersFk2Link");
-    }
 
     /**
      * Container's getter for GroupmembersView3.
      * @return GroupmembersView3
      */
-    public ViewObjectImpl getGroupmembersView3() {
-        return (ViewObjectImpl) findViewObject("GroupmembersView3");
+    public GroupmembersViewImpl getGroupmembersView3() {
+        return (GroupmembersViewImpl) findViewObject("GroupmembersView3");
     }
 
     /**
@@ -2279,36 +2258,13 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         return (ViewLinkImpl) findViewLink("GroupmembersFk2Link1");
     }
 
-    /**
-     * Container's getter for UsersView2.
-     * @return UsersView2
-     */
-    public ViewObjectImpl getUsersView2() {
-        return (ViewObjectImpl) findViewObject("UsersView2");
-    }
-
-    /**
-     * Container's getter for GroupmembersView4.
-     * @return GroupmembersView4
-     */
-    public ViewObjectImpl getGroupmembersView4() {
-        return (ViewObjectImpl) findViewObject("GroupmembersView4");
-    }
-
-    /**
-     * Container's getter for GroupmembersFkUsersLink.
-     * @return GroupmembersFkUsersLink
-     */
-    public ViewLinkImpl getGroupmembersFkUsersLink() {
-        return (ViewLinkImpl) findViewLink("GroupmembersFkUsersLink");
-    }
 
     /**
      * Container's getter for GroupmembersView5.
      * @return GroupmembersView5
      */
-    public ViewObjectImpl getGroupmembersView5() {
-        return (ViewObjectImpl) findViewObject("GroupmembersView5");
+    public GroupmembersViewImpl getGroupmembersView5() {
+        return (GroupmembersViewImpl) findViewObject("GroupmembersView5");
     }
 
     /**
@@ -2317,6 +2273,48 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getGroupmembersFkUsersLink1() {
         return (ViewLinkImpl) findViewLink("GroupmembersFkUsersLink1");
+    }
+
+
+    /**
+     * Container's getter for DivisionSotrView3.
+     * @return DivisionSotrView3
+     */
+    public ViewObjectImpl getDivisionSotrView3() {
+        return (ViewObjectImpl) findViewObject("DivisionSotrView3");
+    }
+
+
+    /**
+     * Container's getter for DivisionSotrView1.
+     * @return DivisionSotrView1
+     */
+    public ViewObjectImpl getDivisionSotrView1() {
+        return (ViewObjectImpl) findViewObject("DivisionSotrView1");
+    }
+
+    /**
+     * Container's getter for DivisionSotrFk2Link1.
+     * @return DivisionSotrFk2Link1
+     */
+    public ViewLinkImpl getDivisionSotrFk2Link1() {
+        return (ViewLinkImpl) findViewLink("DivisionSotrFk2Link1");
+    }
+
+    /**
+     * Container's getter for DivisionSotrView2.
+     * @return DivisionSotrView2
+     */
+    public ViewObjectImpl getDivisionSotrView2() {
+        return (ViewObjectImpl) findViewObject("DivisionSotrView2");
+    }
+
+    /**
+     * Container's getter for DivisionSotrFk1Link1.
+     * @return DivisionSotrFk1Link1
+     */
+    public ViewLinkImpl getDivisionSotrFk1Link1() {
+        return (ViewLinkImpl) findViewLink("DivisionSotrFk1Link1");
     }
 }
 

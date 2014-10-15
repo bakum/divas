@@ -2,6 +2,16 @@
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
   <task-flow-definition id="users">
     <default-activity>user</default-activity>
+    <managed-bean id="__1">
+      <managed-bean-name>shuttle_group</managed-bean-name>
+      <managed-bean-class>ua.divas.view.ShuttleGroup</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__2">
+      <managed-bean-name>shuttle_departament</managed-bean-name>
+      <managed-bean-class>ua.divas.view.ShuttleDepartaments</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
     <view id="user">
       <page>/user.jsff</page>
     </view>

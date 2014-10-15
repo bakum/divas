@@ -10,7 +10,17 @@
                         <af:panelTabbed id="pt1">
                             <af:showDetailItem text="Пользователи" id="sdi1" stretchChildren="first">
                                 <af:panelBox text="PanelBox1" id="pb1" type="flow">
-                                    <f:facet name="toolbar"/>
+                                    <f:facet name="toolbar">
+                                        <af:toolbar id="t7">
+                                            <af:button actionListener="#{bindings.Commit.execute}" text="Commit"
+                                                       disabled="#{!bindings.Commit.enabled}" id="b6"/>
+                                            <af:button actionListener="#{bindings.Rollback.execute}" text="Rollback"
+                                                       disabled="#{!bindings.Rollback.enabled}" immediate="true"
+                                                       id="b7">
+                                                <af:resetActionListener/>
+                                            </af:button>
+                                        </af:toolbar>
+                                    </f:facet>
                                     <af:table value="#{bindings.UsersView1.collectionModel}" var="row"
                                               rows="#{bindings.UsersView1.rangeSize}"
                                               emptyText="#{bindings.UsersView1.viewable ? 'No data to display.' : 'Access Denied.'}"
@@ -129,12 +139,13 @@
                                     </af:table>
                                 </af:panelBox>
                                 <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateInsert"
-                                          contentDelivery="lazyUncached">
-                                    <af:dialog id="d1" title="Редактирование пользователя">
+                                          contentDelivery="lazyUncached" resetEditableValues="whenCanceled">
+                                    <af:dialog id="d1" title="Редактирование пользователя" resize="on"
+                                               contentWidth="530" contentHeight="320"
+                                               dialogListener="#{shuttle_group.dialogListener}">
                                         <f:facet name="buttonBar"/>
-                                        <af:panelTabbed id="pt2">
-                                            <af:showDetailItem text="Главная" id="sdi4"
-                                                               stretchChildren="first">
+                                        <af:panelAccordion id="pt2">
+                                            <af:showDetailItem text="Главная" id="sdi4" stretchChildren="none">
                                                 <af:panelFormLayout id="pfl1">
                                                     <af:inputText value="#{bindings.Login.inputValue}"
                                                                   label="#{bindings.Login.hints.label}"
@@ -183,12 +194,41 @@
                                                                   id="it12" rows="2">
                                                         <f:validator binding="#{bindings.UDescription.validator}"/>
                                                     </af:inputText>
+                                                    <f:facet name="footer">
+                                                        <af:button text="Редактировать" id="b2" icon="/img/edit-16.gif">
+                                                            <af:setPropertyListener from="#{1}"
+                                                                                    to="#{bindings.UEditable.inputValue}"
+                                                                                    type="action"/>
+                                                        </af:button>
+                                                    </f:facet>
                                                 </af:panelFormLayout>
                                             </af:showDetailItem>
-                                            <af:showDetailItem text="Группы" id="sdi5" stretchChildren="first"/>
-                                            <af:showDetailItem text="Подразделения" id="sdi6" stretchChildren="first"/>
-                                            <af:showDetailItem text="Настройки" id="sdi7" stretchChildren="first"/>
-                                        </af:panelTabbed>
+                                            <af:showDetailItem text="Группы" id="sdi5" stretchChildren="none">
+                                                <af:panelBox id="pb2">
+                                                    <f:facet name="toolbar"/>
+                                                    <af:selectManyShuttle value="#{shuttle_group.selectedValues}"
+                                                                          id="sms1"
+                                                                          valueChangeListener="#{shuttle_group.onGroupChange}"
+                                                                          trailingHeader="Учавствует в группах"
+                                                                          leadingHeader="Все группы">
+                                                        <f:selectItems value="#{shuttle_group.allValues}" id="si1"/>
+                                                    </af:selectManyShuttle>
+                                                </af:panelBox>
+                                            </af:showDetailItem>
+                                            <af:showDetailItem text="Подразделения" id="sdi2">
+                                                <af:panelBox id="pb3">
+                                                    <f:facet name="toolbar"/>
+                                                    <af:selectManyShuttle id="sms2"
+                                                                          value="#{shuttle_departament.selectedValues}"
+                                                                          leadingHeader="Подразделения"
+                                                                          trailingHeader="В подразделении">
+                                                        <f:selectItems value="#{shuttle_departament.allValues}"
+                                                                       id="si2"/>
+                                                    </af:selectManyShuttle>
+                                                </af:panelBox>
+                                            </af:showDetailItem>
+                                            <af:showDetailItem text="Настройки" id="sdi3"/>
+                                        </af:panelAccordion>
                                     </af:dialog>
                                 </af:popup>
                             </af:showDetailItem>

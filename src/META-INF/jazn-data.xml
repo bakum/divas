@@ -4,6 +4,12 @@
   <jazn-realm default="jazn.com">
     <realm>
       <name>jazn.com</name>
+      <users>
+        <user>
+          <name>test-all</name>
+          <credentials>{903}rU6KB2izP6Ehpk9QRUnxeL+lGJllqxiZlCM2qARUjqE=</credentials>
+        </user>
+      </users>
       <roles>
         <role>
           <name>administrator</name>
@@ -70,6 +76,21 @@
               <member>
                 <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
                 <name>cc_director</name>
+              </member>
+            </members>
+          </app-role>
+          <app-role>
+            <class>oracle.security.jps.service.policystore.ApplicationRole</class>
+            <name>test-all</name>
+            <display-name>test-all</display-name>
+            <members>
+              <member>
+                <class>oracle.security.jps.internal.core.principals.JpsAnonymousRoleImpl</class>
+                <name>anonymous-role</name>
+              </member>
+              <member>
+                <class>oracle.security.jps.internal.core.principals.JpsXmlUserImpl</class>
+                <name>test-all</name>
               </member>
             </members>
           </app-role>

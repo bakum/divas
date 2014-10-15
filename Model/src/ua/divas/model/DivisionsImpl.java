@@ -43,7 +43,8 @@ public class DivisionsImpl extends DivasEntity {
         ParentIdDivisions,
         Kassa,
         Orders,
-        UserSettings;
+        UserSettings,
+        DivisionSotr;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -66,6 +67,8 @@ public class DivisionsImpl extends DivasEntity {
             return vals;
         }
     }
+
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int FULLNAME = AttributesEnum.Fullname.index();
     public static final int DELETED = AttributesEnum.Deleted.index();
@@ -78,12 +81,21 @@ public class DivisionsImpl extends DivasEntity {
     public static final int KASSA = AttributesEnum.Kassa.index();
     public static final int ORDERS = AttributesEnum.Orders.index();
     public static final int USERSETTINGS = AttributesEnum.UserSettings.index();
+    public static final int DIVISIONSOTR = AttributesEnum.DivisionSotr.index();
 
     /**
      * This is the default constructor (do not remove).
      */
     public DivisionsImpl() {
     }
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("ua.divas.model.Divisions");
+    }
+
 
     /**
      * Gets the attribute value for Id, using the alias name Id.
@@ -240,6 +252,13 @@ public class DivisionsImpl extends DivasEntity {
     }
 
     /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getDivisionSotr() {
+        return (RowIterator) getAttributeInternal(DIVISIONSOTR);
+    }
+
+    /**
      * @param id key constituent
 
      * @return a Key object based on given key constituents.
@@ -248,11 +267,6 @@ public class DivisionsImpl extends DivasEntity {
         return new Key(new Object[] { id });
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("ua.divas.model.Divisions");
-    }
+
 }
 
