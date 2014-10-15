@@ -9,22 +9,20 @@
                     <f:facet name="center">
                         <af:panelTabbed id="pt1">
                             <af:showDetailItem text="Пользователи" id="sdi1" stretchChildren="first">
-                                <af:panelBox text="PanelBox1" id="pb1" type="flow">
+                                <af:panelBox id="pb1" type="flow">
                                     <f:facet name="toolbar">
                                         <af:toolbar id="t7">
-                                            <af:button actionListener="#{bindings.Commit.execute}" text="Commit"
+                                            <af:button actionListener="#{bindings.CreateInsert.execute}"
+                                                       text="Добавить" disabled="#{bindings.Commit.enabled}"
+                                                       id="b3"/>
+                                            <af:button actionListener="#{bindings.Commit.execute}" text="Сохранить"
                                                        disabled="#{!bindings.Commit.enabled}" id="b6"
                                                        action="#{shuttle_group.commitChange}"/>
-                                            <af:button actionListener="#{bindings.Rollback.execute}" text="Rollback"
+                                            <af:button actionListener="#{bindings.Rollback.execute}" text="Отменить"
                                                        disabled="#{!bindings.Rollback.enabled}" immediate="true"
                                                        id="b7">
                                                 <af:resetActionListener/>
                                             </af:button>
-                                            <af:button actionListener="#{bindings.CreateInsert.execute}"
-                                                       text="CreateInsert" disabled="#{bindings.Commit.enabled}"
-                                                       id="b3"/>
-                                            <af:link text="Weblogic console" id="l1" destination="/console"
-                                                     targetFrame="_blank" styleClass="Linkclass"/>
                                         </af:toolbar>
                                     </f:facet>
                                     <af:table value="#{bindings.UsersView1.collectionModel}" var="row"
@@ -99,7 +97,8 @@
                                         </af:column>
                                         <af:column sortProperty="#{bindings.UsersView1.hints.Email.name}"
                                                    filterable="true" sortable="true"
-                                                   headerText="#{bindings.UsersView1.hints.Email.label}" id="c5">
+                                                   headerText="#{bindings.UsersView1.hints.Email.label}" id="c5"
+                                                   width="200">
                                             <af:inputText value="#{row.bindings.Email.inputValue}"
                                                           label="#{bindings.UsersView1.hints.Email.label}"
                                                           required="#{bindings.UsersView1.hints.Email.mandatory}"
@@ -130,7 +129,8 @@
                                                 <f:validator binding="#{row.bindings.PassWd.validator}"/>
                                             </af:inputText>
                                         </af:column>
-                                        <af:column headerText="#{bindings.UsersView1.hints.UEditable.label}" id="c9">
+                                        <af:column headerText="#{bindings.UsersView1.hints.UEditable.label}" id="c9"
+                                                   visible="false">
                                             <af:inputText value="#{row.bindings.UEditable.inputValue}"
                                                           label="#{bindings.UsersView1.hints.UEditable.label}"
                                                           required="#{bindings.UsersView1.hints.UEditable.mandatory}"
@@ -148,7 +148,7 @@
                                 <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateInsert"
                                           contentDelivery="lazyUncached" resetEditableValues="whenCanceled">
                                     <af:dialog id="d1" title="Редактирование пользователя #{bindings.Login.inputValue}" resize="on"
-                                               contentWidth="530" contentHeight="320"
+                                               contentWidth="530" contentHeight="350"
                                                dialogListener="#{shuttle_group.dialogListener}">
                                         <f:facet name="buttonBar"/>
                                         <af:panelAccordion id="pt2">
@@ -223,8 +223,8 @@
                                                     <af:selectManyShuttle value="#{shuttle_group.selectedValues}"
                                                                           id="sms1"
                                                                           valueChangeListener="#{shuttle_group.onGroupChange}"
-                                                                          trailingHeader="Учавствует в группах"
-                                                                          leadingHeader="Все группы">
+                                                                          trailingHeader="Участвует в группах:"
+                                                                          leadingHeader="Все группы:">
                                                         <f:selectItems value="#{shuttle_group.allValues}" id="si1"/>
                                                     </af:selectManyShuttle>
                                                 </af:panelBox>
@@ -234,8 +234,9 @@
                                                     <f:facet name="toolbar"/>
                                                     <af:selectManyShuttle id="sms2"
                                                                           value="#{shuttle_departament.selectedValues}"
-                                                                          leadingHeader="Подразделения"
-                                                                          trailingHeader="В подразделении">
+                                                                          leadingHeader="Подразделения:"
+                                                                          trailingHeader="В подразделении:"
+                                                                          valueChangeListener="#{shuttle_departament.onDepartamentChange}">
                                                         <f:selectItems value="#{shuttle_departament.allValues}"
                                                                        id="si2"/>
                                                     </af:selectManyShuttle>
