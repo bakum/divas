@@ -14,6 +14,8 @@ import oracle.adf.model.binding.DCIteratorBinding;
 
 import oracle.adf.view.rich.event.DialogEvent;
 
+import oracle.adfinternal.view.faces.taglib.listener.ResetActionListener;
+
 import oracle.binding.BindingContainer;
 
 import oracle.binding.OperationBinding;
@@ -135,15 +137,40 @@ public class ShuttleGroup {
 
     }
     
+    public void refresh() {
+        DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = binding.findIteratorBinding("UsersView1Iterator");
+        if (it != null) {
+            String rks = it.getCurrentRow().getKey().toStringFormat(true);
+            it.executeQuery();
+            if (rks != null) {
+                it.setCurrentRowWithKey(rks);
+            }
+        }
+    }
+    
+    public String commitChange() {
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("Commit");
+        ob.execute();
+        refresh();
+        return null;
+    }
+    
+    public String rollbackChange() {
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("Rollback");
+        ob.execute();
+        refresh();
+        return null;
+    }
+
+    
     public void dialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
-            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-            OperationBinding ob = binding.getOperationBinding("Commit");
-            ob.execute();
+            commitChange();
         } else if (dialogEvent.getOutcome().name().equals("cancel")) {
-            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-            OperationBinding ob = binding.getOperationBinding("Rollback");
-            ob.execute();
+            rollbackChange();
         }
     }
 }

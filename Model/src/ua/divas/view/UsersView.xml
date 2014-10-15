@@ -63,7 +63,6 @@ FROM  USERS Users]]></SQLQuery>
     AliasName="IS_ADMIN"/>
   <ViewAttribute
     Name="PassWd"
-    IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="PassWd"
     EntityUsage="Users"

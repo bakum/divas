@@ -13,12 +13,18 @@
                                     <f:facet name="toolbar">
                                         <af:toolbar id="t7">
                                             <af:button actionListener="#{bindings.Commit.execute}" text="Commit"
-                                                       disabled="#{!bindings.Commit.enabled}" id="b6"/>
+                                                       disabled="#{!bindings.Commit.enabled}" id="b6"
+                                                       action="#{shuttle_group.commitChange}"/>
                                             <af:button actionListener="#{bindings.Rollback.execute}" text="Rollback"
                                                        disabled="#{!bindings.Rollback.enabled}" immediate="true"
                                                        id="b7">
                                                 <af:resetActionListener/>
                                             </af:button>
+                                            <af:button actionListener="#{bindings.CreateInsert.execute}"
+                                                       text="CreateInsert" disabled="#{bindings.Commit.enabled}"
+                                                       id="b3"/>
+                                            <af:link text="Weblogic console" id="l1" destination="/console"
+                                                     targetFrame="_blank" styleClass="Linkclass"/>
                                         </af:toolbar>
                                     </f:facet>
                                     <af:table value="#{bindings.UsersView1.collectionModel}" var="row"
@@ -31,10 +37,11 @@
                                               filterModel="#{bindings.UsersView1Query.queryDescriptor}"
                                               queryListener="#{bindings.UsersView1Query.processQuery}"
                                               filterVisible="true" varStatus="vs" id="t1" scrollPolicy="page"
-                                              editingMode="clickToEdit">
+                                              editingMode="clickToEdit" partialTriggers="::b3">
                                         <af:column id="c7">
                                             <af:toolbar id="t2">
-                                                <af:button id="b1" icon="/img/edit-16.gif">
+                                                <af:button id="b1" icon="/img/edit-16.gif"
+                                                           disabled="#{bindings.Commit.enabled}">
                                                     <af:showPopupBehavior popupId="::pCreateInsert"/>
                                                 </af:button>
                                             </af:toolbar>
@@ -140,7 +147,7 @@
                                 </af:panelBox>
                                 <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateInsert"
                                           contentDelivery="lazyUncached" resetEditableValues="whenCanceled">
-                                    <af:dialog id="d1" title="Редактирование пользователя" resize="on"
+                                    <af:dialog id="d1" title="Редактирование пользователя #{bindings.Login.inputValue}" resize="on"
                                                contentWidth="530" contentHeight="320"
                                                dialogListener="#{shuttle_group.dialogListener}">
                                         <f:facet name="buttonBar"/>
@@ -152,7 +159,8 @@
                                                                   required="#{bindings.Login.hints.mandatory}"
                                                                   columns="#{bindings.Login.hints.displayWidth}"
                                                                   maximumLength="#{bindings.Login.hints.precision}"
-                                                                  shortDesc="#{bindings.Login.hints.tooltip}" id="it1">
+                                                                  shortDesc="#{bindings.Login.hints.tooltip}" id="it1"
+                                                                  readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
                                                         <f:validator binding="#{bindings.Login.validator}"/>
                                                     </af:inputText>
                                                     <af:inputText value="#{bindings.FirstName.inputValue}"
@@ -161,7 +169,8 @@
                                                                   columns="#{bindings.FirstName.hints.displayWidth}"
                                                                   maximumLength="#{bindings.FirstName.hints.precision}"
                                                                   shortDesc="#{bindings.FirstName.hints.tooltip}"
-                                                                  id="it2">
+                                                                  id="it2"
+                                                                  readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
                                                         <f:validator binding="#{bindings.FirstName.validator}"/>
                                                     </af:inputText>
                                                     <af:inputText value="#{bindings.LastName.inputValue}"
@@ -170,7 +179,8 @@
                                                                   columns="#{bindings.LastName.hints.displayWidth}"
                                                                   maximumLength="#{bindings.LastName.hints.precision}"
                                                                   shortDesc="#{bindings.LastName.hints.tooltip}"
-                                                                  id="it3">
+                                                                  id="it3"
+                                                                  readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
                                                         <f:validator binding="#{bindings.LastName.validator}"/>
                                                     </af:inputText>
                                                     <af:inputText value="#{bindings.Email.inputValue}"
@@ -178,30 +188,34 @@
                                                                   required="#{bindings.Email.hints.mandatory}"
                                                                   columns="#{bindings.Email.hints.displayWidth}"
                                                                   maximumLength="#{bindings.Email.hints.precision}"
-                                                                  shortDesc="#{bindings.Email.hints.tooltip}" id="it4">
+                                                                  shortDesc="#{bindings.Email.hints.tooltip}" id="it4"
+                                                                  readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
                                                         <f:validator binding="#{bindings.Email.validator}"/>
                                                     </af:inputText>
                                                     <af:selectBooleanCheckbox value="#{bindings.IsAdmin.inputValue}"
                                                                               label="#{bindings.IsAdmin.label}"
                                                                               shortDesc="#{bindings.IsAdmin.hints.tooltip}"
-                                                                              id="sbc1"/>
+                                                                              id="sbc1"
+                                                                              readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}"/>
                                                     <af:inputText value="#{bindings.UDescription.inputValue}"
                                                                   label="#{bindings.UDescription.hints.label}"
                                                                   required="#{bindings.UDescription.hints.mandatory}"
                                                                   columns="#{bindings.UDescription.hints.displayWidth}"
                                                                   maximumLength="#{bindings.UDescription.hints.precision}"
                                                                   shortDesc="#{bindings.UDescription.hints.tooltip}"
-                                                                  id="it12" rows="2">
+                                                                  id="it12" rows="2"
+                                                                  readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
                                                         <f:validator binding="#{bindings.UDescription.validator}"/>
                                                     </af:inputText>
-                                                    <f:facet name="footer">
-                                                        <af:button text="Редактировать" id="b2" icon="/img/edit-16.gif">
-                                                            <af:setPropertyListener from="#{1}"
-                                                                                    to="#{bindings.UEditable.inputValue}"
-                                                                                    type="action"/>
-                                                        </af:button>
-                                                    </f:facet>
+                                                    <f:facet name="footer"/>
                                                 </af:panelFormLayout>
+                                                <f:facet name="toolbar">
+                                                    <af:button text="Редактировать" id="b2" icon="/img/edit-16.gif">
+                                                        <af:setPropertyListener from="#{1}"
+                                                                                to="#{bindings.UEditable.inputValue}"
+                                                                                type="action"/>
+                                                    </af:button>
+                                                </f:facet>
                                             </af:showDetailItem>
                                             <af:showDetailItem text="Группы" id="sdi5" stretchChildren="none">
                                                 <af:panelBox id="pb2">

@@ -125,7 +125,6 @@
   </Attribute>
   <Attribute
     Name="PassWd"
-    IsNotNull="true"
     Precision="100"
     ColumnName="PASS_WD"
     SQLType="VARCHAR"
