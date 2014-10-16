@@ -18,172 +18,12 @@
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full">
-  <ViewAccessor
-    Name="UsersView1"
-    ViewObjectName="ua.divas.view.UsersView"
-    RowLevelBinds="true"/>
-  <ViewAccessor
-    Name="DivisionsView1"
-    ViewObjectName="ua.divas.view.DivisionsView"
-    RowLevelBinds="true"/>
-  <ViewAccessor
-    Name="FirmsView1"
-    ViewObjectName="ua.divas.view.FirmsView"
-    RowLevelBinds="true"/>
-  <ViewAccessor
-    Name="CurrencyView1"
-    ViewObjectName="ua.divas.view.CurrencyView"
-    RowLevelBinds="true"/>
-  <ViewAccessor
-    Name="KassaView1"
-    ViewObjectName="ua.divas.view.KassaView"
-    RowLevelBinds="true"/>
-  <ViewAccessor
-    Name="TypeOfActivitiesView1"
-    ViewObjectName="ua.divas.view.TypeOfActivitiesView"
-    RowLevelBinds="true"/>
-  <ViewAccessor
-    Name="NomenklaturaView1"
-    ViewObjectName="ua.divas.view.NomenklaturaView"
-    RowLevelBinds="true"/>
-  <ListBinding
-    Name="LOV_UserId"
-    ListVOName="UsersView1"
-    ListRangeSize="-1"
-    NullValueFlag="start"
-    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
-    MRUCount="0">
-    <AttrArray Name="AttrNames">
-      <Item Value="UserId"/>
-    </AttrArray>
-    <AttrArray Name="AttrExpressions"/>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="Login"/>
-    </AttrArray>
-    <DisplayCriteria/>
-  </ListBinding>
-  <ListBinding
-    Name="LOV_DivisionId"
-    ListVOName="DivisionsView1"
-    ListRangeSize="-1"
-    NullValueFlag="start"
-    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
-    MRUCount="0">
-    <AttrArray Name="AttrNames">
-      <Item Value="DivisionId"/>
-    </AttrArray>
-    <AttrArray Name="AttrExpressions"/>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="Fullname"/>
-    </AttrArray>
-    <DisplayCriteria/>
-  </ListBinding>
-  <ListBinding
-    Name="LOV_FirmaId"
-    ListVOName="FirmsView1"
-    ListRangeSize="-1"
-    NullValueFlag="none"
-    MRUCount="0">
-    <AttrArray Name="AttrNames">
-      <Item Value="FirmaId"/>
-    </AttrArray>
-    <AttrArray Name="AttrExpressions"/>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="Fullname"/>
-    </AttrArray>
-    <DisplayCriteria/>
-  </ListBinding>
-  <ListBinding
-    Name="LOV_CurrencyId"
-    ListVOName="CurrencyView1"
-    ListRangeSize="-1"
-    NullValueFlag="none"
-    MRUCount="0">
-    <AttrArray Name="AttrNames">
-      <Item Value="CurrencyId"/>
-    </AttrArray>
-    <AttrArray Name="AttrExpressions"/>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="Fullname"/>
-    </AttrArray>
-    <DisplayCriteria/>
-  </ListBinding>
-  <ListBinding
-    Name="LOV_KassaId"
-    ListVOName="KassaView1"
-    ListRangeSize="-1"
-    NullValueFlag="start"
-    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
-    MRUCount="0">
-    <AttrArray Name="AttrNames">
-      <Item Value="KassaId"/>
-    </AttrArray>
-    <AttrArray Name="AttrExpressions"/>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="Fullname"/>
-    </AttrArray>
-    <DisplayCriteria/>
-  </ListBinding>
-  <ListBinding
-    Name="LOV_MainUsluga"
-    ListVOName="NomenklaturaView1"
-    ListRangeSize="-1"
-    NullValueFlag="none"
-    MRUCount="0"
-    ComboRowCountHint="10">
-    <AttrArray Name="AttrNames">
-      <Item Value="MainUsluga"/>
-    </AttrArray>
-    <AttrArray Name="AttrExpressions"/>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="Fullname"/>
-    </AttrArray>
-    <DisplayCriteria
-      Hint="showAndExecute"/>
-  </ListBinding>
-  <ListBinding
-    Name="LOV_ActivitiesId"
-    ListVOName="TypeOfActivitiesView1"
-    ListRangeSize="-1"
-    NullValueFlag="none"
-    MRUCount="0"
-    ComboRowCountHint="10">
-    <AttrArray Name="AttrNames">
-      <Item Value="ActivitiesId"/>
-    </AttrArray>
-    <AttrArray Name="AttrExpressions"/>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="Fullname"/>
-    </AttrArray>
-    <DisplayCriteria
-      Hint="showAndExecute"/>
-  </ListBinding>
   <EntityUsage
     Name="UserSettings"
     Entity="ua.divas.model.UserSettings"/>
   <ViewAttribute
     Name="Id"
+    IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="UserSettings"
@@ -195,103 +35,47 @@
     PrecisionRule="true"
     EntityAttrName="UserId"
     EntityUsage="UserSettings"
-    AliasName="USER_ID"
-    LOVName="LOV_UserId">
-    <Properties>
-      <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="choice"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
+    AliasName="USER_ID"/>
   <ViewAttribute
     Name="DivisionId"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="DivisionId"
     EntityUsage="UserSettings"
-    AliasName="DIVISION_ID"
-    LOVName="LOV_DivisionId">
-    <Properties>
-      <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="choice"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
+    AliasName="DIVISION_ID"/>
   <ViewAttribute
     Name="FirmaId"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="FirmaId"
     EntityUsage="UserSettings"
-    AliasName="FIRMA_ID"
-    LOVName="LOV_FirmaId">
-    <Properties>
-      <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="choice"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
+    AliasName="FIRMA_ID"/>
   <ViewAttribute
     Name="CurrencyId"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="CurrencyId"
     EntityUsage="UserSettings"
-    AliasName="CURRENCY_ID"
-    LOVName="LOV_CurrencyId">
-    <Properties>
-      <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="choice"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
+    AliasName="CURRENCY_ID"/>
   <ViewAttribute
     Name="KassaId"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="KassaId"
     EntityUsage="UserSettings"
-    AliasName="KASSA_ID"
-    LOVName="LOV_KassaId">
-    <Properties>
-      <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="choice"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
+    AliasName="KASSA_ID"/>
   <ViewAttribute
     Name="MainUsluga"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="MainUsluga"
     EntityUsage="UserSettings"
-    AliasName="MAIN_USLUGA"
-    LOVName="LOV_MainUsluga">
-    <Properties>
-      <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="input_text_lov"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
+    AliasName="MAIN_USLUGA"/>
   <ViewAttribute
     Name="ActivitiesId"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="ActivitiesId"
     EntityUsage="UserSettings"
-    AliasName="ACTIVITIES_ID"
-    LOVName="LOV_ActivitiesId">
-    <Properties>
-      <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="input_text_lov"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
+    AliasName="ACTIVITIES_ID"/>
 </ViewObject>

@@ -19,8 +19,6 @@
               RangeSize="25"/>
     <iterator id="GroupmembersView2Iterator" Binds="GroupmembersView2" DataControl="AppModuleDataControl"
               RangeSize="25"/>
-    <iterator Binds="UserSettingsView8" RangeSize="25" DataControl="AppModuleDataControl"
-              id="UserSettingsView8Iterator"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="UsersView1Iterator" id="Login">
@@ -85,24 +83,5 @@
       </AttrNames>
     </attributeValues>
     <action IterBinding="UsersView1Iterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
-    <attributeValues IterBinding="UserSettingsView8Iterator" id="Id">
-      <AttrNames>
-        <Item Value="Id"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="UserSettingsView8Iterator" StaticList="false" Uses="LOV_UserId" id="UserId"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
-    <list IterBinding="UserSettingsView8Iterator" StaticList="false" Uses="LOV_DivisionId" id="DivisionId"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
-    <list IterBinding="UserSettingsView8Iterator" StaticList="false" Uses="LOV_FirmaId" id="FirmaId"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
-    <list IterBinding="UserSettingsView8Iterator" StaticList="false" Uses="LOV_CurrencyId" id="CurrencyId"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
-    <list IterBinding="UserSettingsView8Iterator" StaticList="false" Uses="LOV_KassaId" id="KassaId"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
-    <listOfValues IterBinding="UserSettingsView8Iterator" StaticList="false" Uses="LOV_MainUsluga" id="MainUsluga"/>
-    <listOfValues IterBinding="UserSettingsView8Iterator" StaticList="false" Uses="LOV_ActivitiesId" id="ActivitiesId"/>
-    <action IterBinding="UserSettingsView8Iterator" id="CreateInsert1" RequiresUpdateModel="true"
-            Action="createInsertRow"/>
   </bindings>
 </pageDefinition>
