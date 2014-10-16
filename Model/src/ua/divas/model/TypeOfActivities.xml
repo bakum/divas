@@ -71,7 +71,7 @@
         <TOOLTIP
           ResId="ua.divas.model.TypeOfActivities.Fullname_TOOLTIP"/>
         <DISPLAYWIDTH
-          Value="50"/>
+          Value="30"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>

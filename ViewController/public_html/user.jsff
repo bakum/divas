@@ -212,7 +212,8 @@
                                                     <f:facet name="footer"/>
                                                 </af:panelFormLayout>
                                                 <f:facet name="toolbar">
-                                                    <af:button text="Редактировать" id="b2" icon="/img/edit-16.gif">
+                                                    <af:button text="Редактировать" id="b2" icon="/img/edit-16.gif"
+                                                               disabled="#{bindings.UEditable.inputValue == 1 ? true : false}">
                                                         <af:setPropertyListener from="#{1}"
                                                                                 to="#{bindings.UEditable.inputValue}"
                                                                                 type="action"/>
@@ -269,7 +270,6 @@
                                                                         required="#{bindings.DivisionId.hints.mandatory}"
                                                                         shortDesc="#{bindings.DivisionId.hints.tooltip}"
                                                                         id="divId"
-                                                                        readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}"
                                                                         valueChangeListener="#{shuttle_group.onDepChange}"
                                                                         autoSubmit="true"
                                                                         binding="#{shuttle_group.division}">
@@ -280,8 +280,7 @@
                                                                         label="#{bindings.FirmaId.label}"
                                                                         required="#{bindings.FirmaId.hints.mandatory}"
                                                                         shortDesc="#{bindings.FirmaId.hints.tooltip}"
-                                                                        id="soc3"
-                                                                        readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
+                                                                        id="soc3">
                                                         <f:selectItems value="#{bindings.FirmaId.items}" id="si5"/>
                                                         <f:validator binding="#{bindings.FirmaId.validator}"/>
                                                     </af:selectOneChoice>
@@ -290,7 +289,6 @@
                                                                         required="#{bindings.CurrencyId.hints.mandatory}"
                                                                         shortDesc="#{bindings.CurrencyId.hints.tooltip}"
                                                                         id="curId"
-                                                                        readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}"
                                                                         valueChangeListener="#{shuttle_group.onDepChange}"
                                                                         autoSubmit="true"
                                                                         binding="#{shuttle_group.currency}">
@@ -302,7 +300,6 @@
                                                                         required="#{bindings.KassaId.hints.mandatory}"
                                                                         shortDesc="#{bindings.KassaId.hints.tooltip}"
                                                                         id="soc5"
-                                                                        readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}"
                                                                         partialTriggers="divId curId">
                                                         <f:selectItems value="#{bindings.KassaId.items}" id="si7"/>
                                                         <f:validator binding="#{bindings.KassaId.validator}"/>
@@ -315,7 +312,6 @@
                                                                           required="#{bindings.MainUsluga.hints.mandatory}"
                                                                           columns="#{bindings.MainUsluga.hints.displayWidth}"
                                                                           shortDesc="#{bindings.MainUsluga.hints.tooltip}"
-                                                                          readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}"
                                                                           partialTriggers="musluganameId"
                                                                           visible="false">
                                                         <f:validator binding="#{bindings.MainUsluga.validator}"/>
@@ -329,9 +325,9 @@
                                                                           columns="#{bindings.Musluganame.hints.displayWidth}"
                                                                           shortDesc="#{bindings.Musluganame.hints.tooltip}"
                                                                           partialTriggers="mainUslugaId"
-                                                                          readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}"
                                                                           createPopupId="pCreateNom">
                                                         <f:validator binding="#{bindings.Musluganame.validator}"/>
+                                                        <af:autoSuggestBehavior suggestedItems="#{bindings.Musluganame.suggestedItems}"/>
                                                     </af:inputListOfValues>
                                                     <af:inputListOfValues id="activitiesIdId"
                                                                           popupTitle="Search and Select: #{bindings.ActivitiesId.hints.label}"
@@ -341,7 +337,6 @@
                                                                           required="#{bindings.ActivitiesId.hints.mandatory}"
                                                                           columns="#{bindings.ActivitiesId.hints.displayWidth}"
                                                                           shortDesc="#{bindings.ActivitiesId.hints.tooltip}"
-                                                                          readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}"
                                                                           partialTriggers="activitiesNameId"
                                                                           visible="false">
                                                         <f:validator binding="#{bindings.ActivitiesId.validator}"/>
@@ -355,19 +350,20 @@
                                                                           columns="#{bindings.ActivitiesName.hints.displayWidth}"
                                                                           shortDesc="#{bindings.ActivitiesName.hints.tooltip}"
                                                                           partialTriggers="activitiesIdId"
-                                                                          readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}"
                                                                           createPopupId="pCreateActiv">
                                                         <f:validator binding="#{bindings.ActivitiesName.validator}"/>
+                                                        <af:autoSuggestBehavior suggestedItems="#{bindings.ActivitiesName.suggestedItems}"/>
                                                     </af:inputListOfValues>
                                                 </af:panelFormLayout>
                                                 <f:facet name="toolbar">
                                                     <af:toolbar id="t3">
                                                         <af:button actionListener="#{bindings.CreateInsert1.execute}"
                                                                    text="Добавить"
+                                                                   id="b4"
                                                                    disabled="#{!bindings.CreateInsert1.enabled}"
-                                                                   id="b4"/>
+                                                                   rendered="#{bindings.UserId.inputValue == null ? true : false}"/>
                                                         <af:button text="Редактировать" id="b5"
-                                                                   icon="/img/edit-16.gif">
+                                                                   icon="/img/edit-16.gif" rendered="false">
                                                             <af:setPropertyListener from="#{1}"
                                                                                     to="#{bindings.UEditable.inputValue}"
                                                                                     type="action"/>
@@ -379,8 +375,53 @@
                                     </af:dialog>
                                 </af:popup>
                                 <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateNom"
-                                          contentDelivery="lazyUncached">
-                                    <af:dialog id="d2" title="Создать номенклатуру">
+                                          contentDelivery="lazyUncached"
+                                          popupFetchListener="#{shuttle_group.onPopupNomenklatura}">
+                                    <af:dialog id="d2" title="Создать номенклатуру"
+                                               dialogListener="#{shuttle_group.onNomenklaturaDialogListener}">
+                                        <af:panelFormLayout id="pfl4">
+                                            <af:inputText value="#{bindings.Id2.inputValue}"
+                                                          label="#{bindings.Id2.hints.label}"
+                                                          required="#{bindings.Id2.hints.mandatory}"
+                                                          columns="#{bindings.Id2.hints.displayWidth}"
+                                                          maximumLength="#{bindings.Id2.hints.precision}"
+                                                          shortDesc="#{bindings.Id2.hints.tooltip}" id="it16"
+                                                          rendered="false">
+                                                <f:validator binding="#{bindings.Id2.validator}"/>
+                                            </af:inputText>
+                                            <af:selectOneChoice value="#{bindings.ParentId.inputValue}"
+                                                                label="#{bindings.ParentId.label}"
+                                                                required="#{bindings.ParentId.hints.mandatory}"
+                                                                shortDesc="#{bindings.ParentId.hints.tooltip}"
+                                                                id="soc2" partialTriggers="parentnameId"
+                                                                visible="false">
+                                                <f:selectItems value="#{bindings.ParentId.items}" id="si8"/>
+                                                <f:validator binding="#{bindings.ParentId.validator}"/>
+                                            </af:selectOneChoice>
+                                            <af:inputComboboxListOfValues id="parentnameId"
+                                                                          popupTitle="Search and Select: #{bindings.Parentname.hints.label}"
+                                                                          value="#{bindings.Parentname.inputValue}"
+                                                                          label="#{bindings.Parentname.hints.label}"
+                                                                          model="#{bindings.Parentname.listOfValuesModel}"
+                                                                          required="#{bindings.Parentname.hints.mandatory}"
+                                                                          columns="#{bindings.Parentname.hints.displayWidth}"
+                                                                          shortDesc="#{bindings.Parentname.hints.tooltip}"
+                                                                          partialTriggers="soc2">
+                                                <f:validator binding="#{bindings.Parentname.validator}"/>
+                                            </af:inputComboboxListOfValues>
+                                            <af:inputText value="#{bindings.Fullname1.inputValue}"
+                                                          label="#{bindings.Fullname1.hints.label}"
+                                                          required="#{bindings.Fullname1.hints.mandatory}"
+                                                          columns="#{bindings.Fullname1.hints.displayWidth}"
+                                                          maximumLength="#{bindings.Fullname1.hints.precision}"
+                                                          shortDesc="#{bindings.Fullname1.hints.tooltip}" id="it17">
+                                                <f:validator binding="#{bindings.Fullname1.validator}"/>
+                                            </af:inputText>
+                                            <af:selectBooleanCheckbox value="#{bindings.Usluga.inputValue}"
+                                                                      label="#{bindings.Usluga.label}"
+                                                                      shortDesc="#{bindings.Usluga.hints.tooltip}"
+                                                                      id="sbc3"/>
+                                        </af:panelFormLayout>
                                         <f:facet name="buttonBar"/>
                                     </af:dialog>
                                 </af:popup>
@@ -396,7 +437,7 @@
                                                           columns="#{bindings.Id1.hints.displayWidth}"
                                                           maximumLength="#{bindings.Id1.hints.precision}"
                                                           shortDesc="#{bindings.Id1.hints.tooltip}" id="it14"
-                                                          readOnly="true">
+                                                          readOnly="true" rendered="false">
                                                 <f:validator binding="#{bindings.Id1.validator}"/>
                                             </af:inputText>
                                             <af:inputText value="#{bindings.Fullname.inputValue}"

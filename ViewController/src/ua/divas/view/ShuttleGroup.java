@@ -238,8 +238,24 @@ public class ShuttleGroup {
 
     public void onActivitiesDialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding ob = binding.getOperationBinding("Commit");
+            ob.execute();
             DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
             DCIteratorBinding it = bd.findIteratorBinding("TypeOfActivitiesView1Iterator");
+            if (it != null) {
+                it.executeQuery();
+            }
+        }
+    }
+    
+    public void onNomenklaturaDialogListener(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding ob = binding.getOperationBinding("Commit");
+            ob.execute();
+            DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("NomenklaturaView1Iterator");
             if (it != null) {
                 it.executeQuery();
             }
@@ -257,5 +273,17 @@ public class ShuttleGroup {
         OperationBinding ob = binding.getOperationBinding("CreateInsert2");
         ob.execute();
         
+    }
+
+    public void onPopupNomenklatura(PopupFetchEvent popupFetchEvent) {
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("CreateInsert3");
+        ob.execute();
+    }
+
+    public void onCancelActivities(PopupCanceledEvent popupCanceledEvent) {
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("Rollback");
+        ob.execute();
     }
 }

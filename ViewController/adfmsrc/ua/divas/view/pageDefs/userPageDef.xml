@@ -23,7 +23,17 @@
               id="UserSettingsView8Iterator"/>
     <iterator Binds="KassaVO1" RangeSize="-1" DataControl="AppModuleDataControl" id="KassaVO1Iterator"/>
     <iterator Binds="TypeOfActivitiesView1" RangeSize="25" DataControl="AppModuleDataControl"
-              id="TypeOfActivitiesView1Iterator"/>
+              id="TypeOfActivitiesView1Iterator">
+      <sortCriteria>
+        <sort attribute="Fullname" ascending="false"/>
+      </sortCriteria>
+    </iterator>
+    <iterator Binds="NomenklaturaView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="NomenklaturaView1Iterator">
+      <sortCriteria>
+        <sort attribute="Fullname" ascending="false"/>
+      </sortCriteria>
+    </iterator>
   </executables>
   <bindings>
     <attributeValues IterBinding="UsersView1Iterator" id="Login">
@@ -88,7 +98,7 @@
       </AttrNames>
     </attributeValues>
     <action IterBinding="UsersView1Iterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
-    <attributeValues IterBinding="UserSettingsView8Iterator" id="Id">
+    <attributeValues IterBinding="UsersView1Iterator" id="Id">
       <AttrNames>
         <Item Value="Id"/>
       </AttrNames>
@@ -138,5 +148,30 @@
     <action IterBinding="TypeOfActivitiesView1Iterator" id="CreateInsert2"
             InstanceName="AppModuleDataControl.TypeOfActivitiesView1" DataControl="AppModuleDataControl"
             RequiresUpdateModel="true" Action="createInsertRow"/>
+    <attributeValues IterBinding="NomenklaturaView1Iterator" id="Id2">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="NomenklaturaView1Iterator" StaticList="false" Uses="LOV_ParentId" id="ParentId"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="NomenklaturaView1Iterator" id="Fullname1">
+      <AttrNames>
+        <Item Value="Fullname"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="NomenklaturaView1Iterator" id="Usluga" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Usluga"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="1"/>
+        <Item Value="0"/>
+      </ValueList>
+    </button>
+    <action IterBinding="NomenklaturaView1Iterator" id="CreateInsert3"
+            InstanceName="AppModuleDataControl.NomenklaturaView1" DataControl="AppModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <listOfValues IterBinding="NomenklaturaView1Iterator" StaticList="false" Uses="LOV_Parentname" id="Parentname"/>
   </bindings>
 </pageDefinition>

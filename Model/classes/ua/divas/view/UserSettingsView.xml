@@ -203,9 +203,11 @@
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="Fullname"/>
+      <Item Value="Usluga"/>
     </AttrArray>
     <DisplayCriteria
-      Hint="showAndExecute"/>
+      Hint="showAndExecute"
+      Name="NomenklaturaViewUslugaItem"/>
   </ListBinding>
   <ListBinding
     Name="LOV_ActivitiesName"
@@ -359,14 +361,14 @@ FROM  USER_SETTINGS UserSettings]]></SQLQuery>
     </DesignTime>
     <Properties>
       <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="input_text_lov"/>
         <LABEL
           ResId="ua.divas.view.UserSettingsView.Musluganame_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.view.UserSettingsView.Musluganame_TOOLTIP"/>
         <DISPLAYWIDTH
-          Value="50"/>
+          Value="20"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -392,7 +394,7 @@ FROM  USER_SETTINGS UserSettings]]></SQLQuery>
         <TOOLTIP
           ResId="ua.divas.view.UserSettingsView.ActivitiesName_TOOLTIP"/>
         <DISPLAYWIDTH
-          Value="50"/>
+          Value="20"/>
         <CONTROLTYPE
           Value="input_text_lov"/>
       </SchemaBasedProperties>

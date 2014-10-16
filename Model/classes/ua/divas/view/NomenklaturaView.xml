@@ -6,18 +6,83 @@
   Name="NomenklaturaView"
   Version="12.1.2.66.68"
   InheritPersonalization="merge"
-  SelectList="Nomenklatura.ID, 
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="NomenklaturaView1"
+    ViewObjectName="ua.divas.view.NomenklaturaView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_ParentId"
+    ListVOName="NomenklaturaView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ParentId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Parentname"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="NomenklaturaViewGroup"
+      Hint="showAndExecute"/>
+    <ViewCriteriaUsage
+      Name="NomenklaturaViewGroup"
+      FullName="ua.divas.view.NomenklaturaView.NomenklaturaViewGroup"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Parentname"
+    ListVOName="NomenklaturaView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Parentname"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ParentId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Fullname"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="NomenklaturaViewGroup"
+      Hint="showAndExecute"/>
+    <ViewCriteriaUsage
+      Name="NomenklaturaViewGroup"
+      FullName="ua.divas.view.NomenklaturaView.NomenklaturaViewGroup"/>
+  </ListBinding>
+  <SQLQuery><![CDATA[SELECT Nomenklatura.ID, 
        Nomenklatura.FULLNAME, 
        Nomenklatura.DELETED, 
        Nomenklatura.IS_GROUP, 
-       Nomenklatura.PARENT_ID, 
+       Nomenklatura.PARENT_ID,
+       (select fullname from NOMENKLATURA where id = Nomenklatura.PARENT_ID) ParentName,
        Nomenklatura.USLUGA, 
        Nomenklatura.PREDEFINED, 
-       Nomenklatura.VERSION"
-  FromList="NOMENKLATURA Nomenklatura"
-  BindingStyle="OracleName"
-  CustomQuery="false"
-  PageIterMode="Full">
+       Nomenklatura.VERSION
+FROM  NOMENKLATURA Nomenklatura
+where deleted = 0]]></SQLQuery>
   <EntityUsage
     Name="Nomenklatura"
     Entity="ua.divas.model.Nomenklatura"/>
@@ -54,7 +119,42 @@
     PrecisionRule="true"
     EntityAttrName="ParentId"
     EntityUsage="Nomenklatura"
-    AliasName="PARENT_ID"/>
+    AliasName="PARENT_ID"
+    LOVName="LOV_ParentId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Parentname"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="150"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARENTNAME"
+    Expression="PARENTNAME"
+    SQLType="VARCHAR"
+    LOVName="LOV_Parentname">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="150"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.NomenklaturaView.Parentname_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.NomenklaturaView.Parentname_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Usluga"
     IsNotNull="true"
@@ -76,6 +176,122 @@
     EntityAttrName="Version"
     EntityUsage="Nomenklatura"
     AliasName="VERSION"/>
+  <ViewCriteria
+    Name="NomenklaturaViewGroup"
+    ViewObjectName="ua.divas.view.NomenklaturaView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="NomenklaturaViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="IsGroup"
+        ViewAttribute="IsGroup"
+        Operator="="
+        Conjunction="AND"
+        Value="1"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="NomenklaturaViewItems"
+    ViewObjectName="ua.divas.view.NomenklaturaView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="NomenklaturaViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="IsGroup"
+        ViewAttribute="IsGroup"
+        Operator="="
+        Conjunction="AND"
+        Value="0"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="NomenklaturaViewUslugaItem"
+    ViewObjectName="ua.divas.view.NomenklaturaView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="NomenklaturaViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="IsGroup"
+        ViewAttribute="IsGroup"
+        Operator="="
+        Conjunction="AND"
+        Value="0"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Usluga"
+        ViewAttribute="Usluga"
+        Operator="="
+        Conjunction="AND"
+        Value="1"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="NomenklaturaView"
     ViewLink="ua.divas.view.NomenklaturaNomenklaturaFk1Link"
@@ -86,4 +302,8 @@
     ViewLink="ua.divas.view.UserSettingsNomenklaturFk1Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>

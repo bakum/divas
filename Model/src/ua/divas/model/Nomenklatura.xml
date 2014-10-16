@@ -9,10 +9,14 @@
   DBObjectType="table"
   DBObjectName="NOMENKLATURA"
   AliasName="Nomenklatura"
-  BindingStyle="OracleName">
+  BindingStyle="OracleName"
+  RowClass="ua.divas.model.NomenklaturaImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Attribute
     Name="Id"
-    IsNotNull="true"
     Precision="50"
     ColumnName="ID"
     SQLType="VARCHAR"
@@ -23,6 +27,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Nomenklatura.Id_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Nomenklatura.Id_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Fullname"
@@ -36,6 +48,16 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="150"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Nomenklatura.Fullname_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Nomenklatura.Fullname_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Deleted"
@@ -46,7 +68,17 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="NOMENKLATURA"/>
+    TableName="NOMENKLATURA">
+    <TransientExpression><![CDATA[0]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Nomenklatura.Deleted_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Nomenklatura.Deleted_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="IsGroup"
     IsNotNull="true"
@@ -56,7 +88,19 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="NOMENKLATURA"/>
+    TableName="NOMENKLATURA">
+    <TransientExpression><![CDATA[0]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Nomenklatura.IsGroup_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Nomenklatura.IsGroup_TOOLTIP"/>
+        <CONTROLTYPE
+          Value="check_box"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="ParentId"
     Precision="50"
@@ -68,6 +112,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Nomenklatura.ParentId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Nomenklatura.ParentId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Usluga"
@@ -78,7 +130,19 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="NOMENKLATURA"/>
+    TableName="NOMENKLATURA">
+    <TransientExpression><![CDATA[0]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Nomenklatura.Usluga_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Nomenklatura.Usluga_TOOLTIP"/>
+        <CONTROLTYPE
+          Value="check_box"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Predefined"
     IsNotNull="true"
@@ -88,15 +152,33 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="NOMENKLATURA"/>
+    TableName="NOMENKLATURA">
+    <TransientExpression><![CDATA[0]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Nomenklatura.Predefined_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Nomenklatura.Predefined_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Version"
-    IsNotNull="true"
     ColumnName="VERSION"
     SQLType="TIMESTAMP"
     Type="java.sql.Timestamp"
     ColumnType="TIMESTAMP"
-    TableName="NOMENKLATURA"/>
+    TableName="NOMENKLATURA">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Nomenklatura.Version_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Nomenklatura.Version_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="Nomenklatura"
     Association="ua.divas.model.NomenklaturaNomenklaturaFk1Assoc"
@@ -139,4 +221,8 @@
       <Item Value="ua.divas.model.Nomenklatura.ParentId"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>
