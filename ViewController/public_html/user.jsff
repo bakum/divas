@@ -163,16 +163,6 @@
                                                                   readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
                                                         <f:validator binding="#{bindings.Login.validator}"/>
                                                     </af:inputText>
-                                                    <af:inputText value="#{bindings.FirstName.inputValue}"
-                                                                  label="#{bindings.FirstName.hints.label}"
-                                                                  required="#{bindings.FirstName.hints.mandatory}"
-                                                                  columns="#{bindings.FirstName.hints.displayWidth}"
-                                                                  maximumLength="#{bindings.FirstName.hints.precision}"
-                                                                  shortDesc="#{bindings.FirstName.hints.tooltip}"
-                                                                  id="it2"
-                                                                  readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
-                                                        <f:validator binding="#{bindings.FirstName.validator}"/>
-                                                    </af:inputText>
                                                     <af:inputText value="#{bindings.LastName.inputValue}"
                                                                   label="#{bindings.LastName.hints.label}"
                                                                   required="#{bindings.LastName.hints.mandatory}"
@@ -182,6 +172,16 @@
                                                                   id="it3"
                                                                   readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
                                                         <f:validator binding="#{bindings.LastName.validator}"/>
+                                                    </af:inputText>
+                                                    <af:inputText value="#{bindings.FirstName.inputValue}"
+                                                                  label="#{bindings.FirstName.hints.label}"
+                                                                  required="#{bindings.FirstName.hints.mandatory}"
+                                                                  columns="#{bindings.FirstName.hints.displayWidth}"
+                                                                  maximumLength="#{bindings.FirstName.hints.precision}"
+                                                                  shortDesc="#{bindings.FirstName.hints.tooltip}"
+                                                                  id="it2"
+                                                                  readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
+                                                        <f:validator binding="#{bindings.FirstName.validator}"/>
                                                     </af:inputText>
                                                     <af:inputText value="#{bindings.Email.inputValue}"
                                                                   label="#{bindings.Email.hints.label}"
@@ -242,7 +242,99 @@
                                                     </af:selectManyShuttle>
                                                 </af:panelBox>
                                             </af:showDetailItem>
-                                            <af:showDetailItem text="Настройки" id="sdi3"/>
+                                            <af:showDetailItem text="Настройки" id="sdi3">
+                                                <af:panelFormLayout id="pfl2">
+                                                    <af:inputText value="#{bindings.Id.inputValue}"
+                                                                  label="#{bindings.Id.hints.label}"
+                                                                  required="#{bindings.Id.hints.mandatory}"
+                                                                  columns="#{bindings.Id.hints.displayWidth}"
+                                                                  maximumLength="#{bindings.Id.hints.precision}"
+                                                                  shortDesc="#{bindings.Id.hints.tooltip}" id="it13"
+                                                                  readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
+                                                        <f:validator binding="#{bindings.Id.validator}"/>
+                                                    </af:inputText>
+                                                    <af:selectOneChoice value="#{bindings.UserId.inputValue}"
+                                                                        label="#{bindings.UserId.label}"
+                                                                        required="#{bindings.UserId.hints.mandatory}"
+                                                                        shortDesc="#{bindings.UserId.hints.tooltip}"
+                                                                        id="soc1"
+                                                                        readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
+                                                        <f:selectItems value="#{bindings.UserId.items}" id="si3"/>
+                                                        <f:validator binding="#{bindings.UserId.validator}"/>
+                                                    </af:selectOneChoice>
+                                                    <af:selectOneChoice value="#{bindings.DivisionId.inputValue}"
+                                                                        label="#{bindings.DivisionId.label}"
+                                                                        required="#{bindings.DivisionId.hints.mandatory}"
+                                                                        shortDesc="#{bindings.DivisionId.hints.tooltip}"
+                                                                        id="soc2"
+                                                                        readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
+                                                        <f:selectItems value="#{bindings.DivisionId.items}" id="si4"/>
+                                                        <f:validator binding="#{bindings.DivisionId.validator}"/>
+                                                    </af:selectOneChoice>
+                                                    <af:selectOneChoice value="#{bindings.FirmaId.inputValue}"
+                                                                        label="#{bindings.FirmaId.label}"
+                                                                        required="#{bindings.FirmaId.hints.mandatory}"
+                                                                        shortDesc="#{bindings.FirmaId.hints.tooltip}"
+                                                                        id="soc3"
+                                                                        readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
+                                                        <f:selectItems value="#{bindings.FirmaId.items}" id="si5"/>
+                                                        <f:validator binding="#{bindings.FirmaId.validator}"/>
+                                                    </af:selectOneChoice>
+                                                    <af:selectOneChoice value="#{bindings.CurrencyId.inputValue}"
+                                                                        label="#{bindings.CurrencyId.label}"
+                                                                        required="#{bindings.CurrencyId.hints.mandatory}"
+                                                                        shortDesc="#{bindings.CurrencyId.hints.tooltip}"
+                                                                        id="soc4"
+                                                                        readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
+                                                        <f:selectItems value="#{bindings.CurrencyId.items}" id="si6"/>
+                                                        <f:validator binding="#{bindings.CurrencyId.validator}"/>
+                                                    </af:selectOneChoice>
+                                                    <af:selectOneChoice value="#{bindings.KassaId.inputValue}"
+                                                                        label="#{bindings.KassaId.label}"
+                                                                        required="#{bindings.KassaId.hints.mandatory}"
+                                                                        shortDesc="#{bindings.KassaId.hints.tooltip}"
+                                                                        id="soc5"
+                                                                        readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
+                                                        <f:selectItems value="#{bindings.KassaId.items}" id="si7"/>
+                                                        <f:validator binding="#{bindings.KassaId.validator}"/>
+                                                    </af:selectOneChoice>
+                                                    <af:inputListOfValues id="mainUslugaId"
+                                                                          popupTitle="Search and Select: #{bindings.MainUsluga.hints.label}"
+                                                                          value="#{bindings.MainUsluga.inputValue}"
+                                                                          label="#{bindings.MainUsluga.hints.label}"
+                                                                          model="#{bindings.MainUsluga.listOfValuesModel}"
+                                                                          required="#{bindings.MainUsluga.hints.mandatory}"
+                                                                          columns="#{bindings.MainUsluga.hints.displayWidth}"
+                                                                          shortDesc="#{bindings.MainUsluga.hints.tooltip}"
+                                                                          readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
+                                                        <f:validator binding="#{bindings.MainUsluga.validator}"/>
+                                                    </af:inputListOfValues>
+                                                    <af:inputListOfValues id="activitiesIdId"
+                                                                          popupTitle="Search and Select: #{bindings.ActivitiesId.hints.label}"
+                                                                          value="#{bindings.ActivitiesId.inputValue}"
+                                                                          label="#{bindings.ActivitiesId.hints.label}"
+                                                                          model="#{bindings.ActivitiesId.listOfValuesModel}"
+                                                                          required="#{bindings.ActivitiesId.hints.mandatory}"
+                                                                          columns="#{bindings.ActivitiesId.hints.displayWidth}"
+                                                                          shortDesc="#{bindings.ActivitiesId.hints.tooltip}"
+                                                                          readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
+                                                        <f:validator binding="#{bindings.ActivitiesId.validator}"/>
+                                                    </af:inputListOfValues>
+                                                </af:panelFormLayout>
+                                                <f:facet name="toolbar">
+                                                    <af:toolbar id="t3">
+                                                        <af:button actionListener="#{bindings.CreateInsert1.execute}"
+                                                                   text="CreateInsert1"
+                                                                   disabled="#{!bindings.CreateInsert1.enabled}"
+                                                                   id="b5"/>
+                                                        <af:button text="Редактировать" id="b4" icon="/img/edit-16.gif">
+                                                            <af:setPropertyListener from="#{1}"
+                                                                                    to="#{bindings.UEditable.inputValue}"
+                                                                                    type="action"/>
+                                                        </af:button>
+                                                    </af:toolbar>
+                                                </f:facet>
+                                            </af:showDetailItem>
                                         </af:panelAccordion>
                                     </af:dialog>
                                 </af:popup>
