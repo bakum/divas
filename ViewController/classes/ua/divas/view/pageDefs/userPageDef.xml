@@ -4,7 +4,7 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="UsersView1" RangeSize="25" DataControl="AppModuleDataControl" id="UsersView1Iterator">
+    <iterator Binds="UsersView1" RangeSize="10" DataControl="AppModuleDataControl" id="UsersView1Iterator">
       <sortCriteria>
         <sort attribute="Login" ascending="true"/>
       </sortCriteria>
@@ -19,6 +19,11 @@
               RangeSize="25"/>
     <iterator id="GroupmembersView2Iterator" Binds="GroupmembersView2" DataControl="AppModuleDataControl"
               RangeSize="25"/>
+    <iterator Binds="UserSettingsView8" RangeSize="25" DataControl="AppModuleDataControl"
+              id="UserSettingsView8Iterator"/>
+    <iterator Binds="KassaVO1" RangeSize="-1" DataControl="AppModuleDataControl" id="KassaVO1Iterator"/>
+    <iterator Binds="TypeOfActivitiesView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="TypeOfActivitiesView1Iterator"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="UsersView1Iterator" id="Login">
@@ -83,5 +88,55 @@
       </AttrNames>
     </attributeValues>
     <action IterBinding="UsersView1Iterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <attributeValues IterBinding="UserSettingsView8Iterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="UserSettingsView8Iterator" StaticList="false" Uses="LOV_UserId" id="UserId"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="UserSettingsView8Iterator" StaticList="false" Uses="LOV_DivisionId" id="DivisionId"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="UserSettingsView8Iterator" StaticList="false" Uses="LOV_FirmaId" id="FirmaId"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="UserSettingsView8Iterator" StaticList="false" Uses="LOV_CurrencyId" id="CurrencyId"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="UserSettingsView8Iterator" StaticList="false" id="KassaId"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject" ListIter="KassaVO1Iterator">
+      <AttrNames>
+        <Item Value="KassaId"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="Id"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Fullname"/>
+      </ListDisplayAttrNames>
+    </list>
+    <listOfValues IterBinding="UserSettingsView8Iterator" StaticList="false" Uses="LOV_MainUsluga" id="MainUsluga"/>
+    <listOfValues IterBinding="UserSettingsView8Iterator" StaticList="false" Uses="LOV_ActivitiesId" id="ActivitiesId"/>
+    <action IterBinding="UserSettingsView8Iterator" id="CreateInsert1" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="KassaVO1Iterator" id="ExecuteWithParams" InstanceName="AppModuleDataControl.KassaVO1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="currency" NDValue="#{bindings.CurrencyId.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="division" NDValue="#{bindings.DivisionId.inputValue}" NDType="java.lang.String"/>
+    </action>
+    <listOfValues IterBinding="UserSettingsView8Iterator" StaticList="false" Uses="LOV_Musluganame" id="Musluganame"/>
+    <listOfValues IterBinding="UserSettingsView8Iterator" StaticList="false" Uses="LOV_ActivitiesName"
+                  id="ActivitiesName"/>
+    <attributeValues IterBinding="TypeOfActivitiesView1Iterator" id="Id1">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="TypeOfActivitiesView1Iterator" id="Fullname">
+      <AttrNames>
+        <Item Value="Fullname"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="TypeOfActivitiesView1Iterator" id="CreateInsert2"
+            InstanceName="AppModuleDataControl.TypeOfActivitiesView1" DataControl="AppModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
   </bindings>
 </pageDefinition>

@@ -9,10 +9,14 @@
   DBObjectType="table"
   DBObjectName="USER_SETTINGS"
   AliasName="UserSettings"
-  BindingStyle="OracleName">
+  BindingStyle="OracleName"
+  RowClass="ua.divas.model.UserSettingsImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Attribute
     Name="Id"
-    IsNotNull="true"
     Precision="50"
     ColumnName="ID"
     SQLType="VARCHAR"
@@ -23,6 +27,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.UserSettings.Id_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.UserSettings.Id_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="UserId"
@@ -37,6 +49,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.UserSettings.UserId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.UserSettings.UserId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="DivisionId"
@@ -50,6 +70,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.UserSettings.DivisionId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.UserSettings.DivisionId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="FirmaId"
@@ -63,6 +91,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.UserSettings.FirmaId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.UserSettings.FirmaId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="CurrencyId"
@@ -76,6 +112,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.UserSettings.CurrencyId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.UserSettings.CurrencyId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="KassaId"
@@ -89,6 +133,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.UserSettings.KassaId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.UserSettings.KassaId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="MainUsluga"
@@ -102,6 +154,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.UserSettings.MainUsluga_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.UserSettings.MainUsluga_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="ActivitiesId"
@@ -115,6 +175,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.UserSettings.ActivitiesId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.UserSettings.ActivitiesId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <AccessorAttribute
     Name="Currency"
@@ -262,4 +330,8 @@
       <Item Value="ua.divas.model.UserSettings.UserId"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>

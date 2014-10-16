@@ -18,14 +18,12 @@
     Entity="ua.divas.model.TypeOfActivities"/>
   <ViewAttribute
     Name="Id"
-    IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="TypeOfActivities"
     AliasName="ID"/>
   <ViewAttribute
     Name="Version"
-    IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Version"
     EntityUsage="TypeOfActivities"

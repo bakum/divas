@@ -549,6 +549,9 @@
   <ViewUsage
     Name="DivisionSotrView2"
     ViewObjectName="ua.divas.view.DivisionSotrView"/>
+  <ViewUsage
+    Name="KassaVO1"
+    ViewObjectName="ua.divas.view.KassaVO"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"

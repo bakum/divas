@@ -5,6 +5,7 @@ import java.util.List;
 
 import java.util.UUID;
 
+import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
@@ -12,7 +13,11 @@ import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
 
+import oracle.adf.view.rich.component.rich.input.RichSelectOneChoice;
 import oracle.adf.view.rich.event.DialogEvent;
+
+import oracle.adf.view.rich.event.PopupCanceledEvent;
+import oracle.adf.view.rich.event.PopupFetchEvent;
 
 import oracle.adfinternal.view.faces.taglib.listener.ResetActionListener;
 
@@ -26,6 +31,8 @@ import oracle.jbo.Row;
 public class ShuttleGroup {
     List selectedValues = new ArrayList();
     List allValues = new ArrayList();
+    private RichSelectOneChoice division;
+    private RichSelectOneChoice currency;
 
     public ShuttleGroup() {
     }
@@ -118,8 +125,7 @@ public class ShuttleGroup {
                 r.setAttribute("Id", UUID.randomUUID().toString());
                 r.setAttribute("GName", index); */
                 BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-                OperationBinding oper =
-                    (OperationBinding) binding.getOperationBinding("addUserToGroup");
+                OperationBinding oper = (OperationBinding) binding.getOperationBinding("addUserToGroup");
                 oper.getParamsMap().put("userName", userLogin);
                 oper.getParamsMap().put("groupName", index);
                 oper.execute();
@@ -136,7 +142,7 @@ public class ShuttleGroup {
         }
 
     }
-    
+
     public void refresh() {
         DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = binding.findIteratorBinding("UsersView1Iterator");
@@ -148,7 +154,7 @@ public class ShuttleGroup {
             }
         }
     }
-    
+
     public String commitChange() {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("Commit");
@@ -156,7 +162,7 @@ public class ShuttleGroup {
         refresh();
         return null;
     }
-    
+
     public String rollbackChange() {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("Rollback");
@@ -165,12 +171,91 @@ public class ShuttleGroup {
         return null;
     }
 
-    
+
     public void dialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             commitChange();
         } else if (dialogEvent.getOutcome().name().equals("cancel")) {
             rollbackChange();
         }
+    }
+
+    public void onDepChange(ValueChangeEvent valueChangeEvent) {
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("ExecuteWithParams");
+        if (ob != null) {
+            System.out.println((String) this.getCurrency().getValue());
+            System.out.println((String) this.getDivision().getValue());
+            ob.getParamsMap().put("currency", (String) this.getCurrency().getValue());
+            ob.getParamsMap().put("division", (String) this.getDivision().getValue());
+            ob.execute();
+
+            DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("KassaVO1Iterator");
+            if (it != null) {
+                it.executeQuery();
+            }
+        }
+    }
+
+    public void setDivision(RichSelectOneChoice division) {
+        this.division = division;
+    }
+
+    public RichSelectOneChoice getDivision() {
+        return division;
+    }
+
+    public void setCurrency(RichSelectOneChoice currency) {
+        this.currency = currency;
+    }
+
+    public RichSelectOneChoice getCurrency() {
+        return currency;
+    }
+
+    public void onPopupFetch(PopupFetchEvent popupFetchEvent) {
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("ExecuteWithParams");
+        if (ob != null) {
+            /* System.out.println((String) this.getCurrency().getValue());
+            System.out.println((String) this.getDivision().getValue());
+            ob.getParamsMap().put("currency", (String) this.getCurrency().getValue());
+            ob.getParamsMap().put("division", (String) this.getDivision().getValue()); */
+            ob.execute();
+
+            DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("KassaVO1Iterator");
+            if (it != null) {
+                it.executeQuery();
+            }
+        }
+    }
+
+    public void onCancelPopup(PopupCanceledEvent popupCanceledEvent) {
+        rollbackChange();
+    }
+
+    public void onActivitiesDialogListener(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("TypeOfActivitiesView1Iterator");
+            if (it != null) {
+                it.executeQuery();
+            }
+        }
+    }
+
+    public void onCreateActivities(ActionEvent actionEvent) {
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("CreateInsert2");
+        ob.execute();
+    }
+
+    public void onPopupActivities(PopupFetchEvent popupFetchEvent) {
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("CreateInsert2");
+        ob.execute();
+        
     }
 }

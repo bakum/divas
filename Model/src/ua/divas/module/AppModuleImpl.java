@@ -17,6 +17,7 @@ import ua.divas.view.CurrencyViewImpl;
 import ua.divas.view.DivisionsViewImpl;
 import ua.divas.view.FirmsViewImpl;
 import ua.divas.view.GroupmembersViewImpl;
+import ua.divas.view.KassaVOImpl;
 import ua.divas.view.KontragentsViewImpl;
 import ua.divas.view.ro.KontragentsItemsLookupVOImpl;
 // ---------------------------------------------------------------------
@@ -2315,6 +2316,14 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getDivisionSotrFk1Link1() {
         return (ViewLinkImpl) findViewLink("DivisionSotrFk1Link1");
+    }
+
+    /**
+     * Container's getter for KassaVO1.
+     * @return KassaVO1
+     */
+    public KassaVOImpl getKassaVO1() {
+        return (KassaVOImpl) findViewObject("KassaVO1");
     }
 }
 

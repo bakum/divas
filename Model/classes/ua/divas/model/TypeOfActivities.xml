@@ -9,10 +9,14 @@
   DBObjectType="table"
   DBObjectName="TYPE_OF_ACTIVITIES"
   AliasName="TypeOfActivities"
-  BindingStyle="OracleName">
+  BindingStyle="OracleName"
+  RowClass="ua.divas.model.TypeOfActivitiesImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Attribute
     Name="Id"
-    IsNotNull="true"
     Precision="50"
     ColumnName="ID"
     SQLType="VARCHAR"
@@ -23,15 +27,31 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.TypeOfActivities.Id_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.TypeOfActivities.Id_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Version"
-    IsNotNull="true"
     ColumnName="VERSION"
     SQLType="TIMESTAMP"
     Type="java.sql.Timestamp"
     ColumnType="TIMESTAMP"
-    TableName="TYPE_OF_ACTIVITIES"/>
+    TableName="TYPE_OF_ACTIVITIES">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.TypeOfActivities.Version_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.TypeOfActivities.Version_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Fullname"
     IsNotNull="true"
@@ -44,6 +64,16 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="150"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.TypeOfActivities.Fullname_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.TypeOfActivities.Fullname_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <AccessorAttribute
     Name="Moves"
@@ -76,4 +106,8 @@
       <Item Value="ua.divas.model.TypeOfActivities.Id"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>
