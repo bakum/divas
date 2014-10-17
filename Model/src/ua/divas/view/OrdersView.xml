@@ -190,7 +190,8 @@
        Orders.FIRM_ID, 
        Orders.ACTIVITIES_ID, 
        Orders.STATUS_ID
-FROM  ORDERS Orders]]></SQLQuery>
+FROM  ORDERS Orders
+where deleted = 0]]></SQLQuery>
   <EntityUsage
     Name="Orders"
     Entity="ua.divas.model.Orders"/>
