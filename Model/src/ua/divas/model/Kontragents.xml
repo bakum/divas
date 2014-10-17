@@ -300,6 +300,13 @@
     AssociationOtherEnd="ua.divas.model.OrdersKontragentsFk1Assoc.Kontragents"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="OrdersTpUslugi"
+    Association="ua.divas.model.OrdersTpUslugiFk3Assoc"
+    AssociationEnd="ua.divas.model.OrdersTpUslugiFk3Assoc.OrdersTpUslugi"
+    AssociationOtherEnd="ua.divas.model.OrdersTpUslugiFk3Assoc.Kontragents"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="KontragentsIdCheck">
     <DesignTime>

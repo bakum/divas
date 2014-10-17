@@ -40,26 +40,10 @@
     Name="OrderStatusView1"
     ViewObjectName="ua.divas.view.OrderStatusView"
     RowLevelBinds="true"/>
-  <ListBinding
-    Name="LOV_KontragId"
-    ListVOName="KontragentsView1"
-    ListRangeSize="-1"
-    NullValueFlag="none"
-    MRUCount="0"
-    ComboRowCountHint="10">
-    <AttrArray Name="AttrNames">
-      <Item Value="KontragId"/>
-    </AttrArray>
-    <AttrArray Name="AttrExpressions"/>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="Fullname"/>
-    </AttrArray>
-    <DisplayCriteria
-      Hint="showAndExecute"/>
-  </ListBinding>
+  <ViewAccessor
+    Name="FirmsView1"
+    ViewObjectName="ua.divas.view.FirmsView"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_CurrId"
     ListVOName="CurrencyView1"
@@ -173,10 +157,80 @@
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
+  <ListBinding
+    Name="LOV_KontragId"
+    ListVOName="KontragentsView1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="KontragId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Kontragname"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="KontragentsItems"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Kontragname"
+    ListVOName="KontragentsView1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Kontragname"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="KontragId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Fullname"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="KontragentsItems"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FirmId"
+    ListVOName="FirmsView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FirmId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <SQLQuery><![CDATA[SELECT Orders.ID, 
        Orders.DAT, 
        Orders.NUM, 
-       Orders.KONTRAG_ID, 
+       Orders.KONTRAG_ID,
+       (select fullname from kontragents where id = KONTRAG_ID) KontragName,
        Orders.CURR_ID, 
        Orders.KASSA_ID, 
        Orders.DIVISION_ID, 
@@ -207,10 +261,11 @@ where deleted = 0]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Dat"
     EntityUsage="Orders"
-    AliasName="DAT"/>
+    AliasName="DAT">
+    <TransientExpression><![CDATA[adf.currentDateTime]]></TransientExpression>
+  </ViewAttribute>
   <ViewAttribute
     Name="Num"
-    IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Num"
     EntityUsage="Orders"
@@ -227,6 +282,33 @@ where deleted = 0]]></SQLQuery>
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Kontragname"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="150"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="KONTRAGNAME"
+    Expression="KONTRAGNAME"
+    SQLType="VARCHAR"
+    LOVName="LOV_Kontragname">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="150"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+        <LABEL
+          ResId="ua.divas.view.OrdersView.Kontragname_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.OrdersView.Kontragname_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -336,7 +418,15 @@ where deleted = 0]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="FirmId"
     EntityUsage="Orders"
-    AliasName="FIRM_ID"/>
+    AliasName="FIRM_ID"
+    LOVName="LOV_FirmId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="ActivitiesId"
     IsNotNull="true"
@@ -367,4 +457,55 @@ where deleted = 0]]></SQLQuery>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="TotalSumUslugi"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[OrdersTpUslugiView.sum("Summ != null ? Summ : 0")]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.OrdersView.TotalSumUslugi_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.OrdersView.TotalSumUslugi_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountUslug"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[OrdersTpUslugiView.count("Id != null ? Id : 0")]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.OrdersView.CountUslug_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.OrdersView.CountUslug_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewLinkAccessor
+    Name="OrdersTpUslugiView"
+    ViewLink="ua.divas.view.OrdersTpUslugiFk1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>

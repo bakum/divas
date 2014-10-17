@@ -302,6 +302,11 @@ where deleted = 0]]></SQLQuery>
     ViewLink="ua.divas.view.UserSettingsNomenklaturFk1Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="OrdersTpUslugiView"
+    ViewLink="ua.divas.view.OrdersTpUslugiFk2Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

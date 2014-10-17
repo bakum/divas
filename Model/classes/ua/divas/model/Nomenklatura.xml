@@ -200,6 +200,13 @@
     AssociationOtherEnd="ua.divas.model.UserSettingsNomenklaturFk1Assoc.Nomenklatura"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="OrdersTpUslugi"
+    Association="ua.divas.model.OrdersTpUslugiFk2Assoc"
+    AssociationEnd="ua.divas.model.OrdersTpUslugiFk2Assoc.OrdersTpUslugi"
+    AssociationOtherEnd="ua.divas.model.OrdersTpUslugiFk2Assoc.Nomenklatura"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="NomenklaturaPk"
     PrimaryKey="true">

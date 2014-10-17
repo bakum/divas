@@ -2334,5 +2334,61 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public UsersItemsLookupVOImpl getUsersItemsLookupVO1() {
         return (UsersItemsLookupVOImpl) findViewObject("UsersItemsLookupVO1");
     }
+
+    /**
+     * Container's getter for OrdersTpUslugiView1.
+     * @return OrdersTpUslugiView1
+     */
+    public ViewObjectImpl getOrdersTpUslugiView1() {
+        return (ViewObjectImpl) findViewObject("OrdersTpUslugiView1");
+    }
+
+    /**
+     * Container's getter for OrdersTpUslugiView2.
+     * @return OrdersTpUslugiView2
+     */
+    public ViewObjectImpl getOrdersTpUslugiView2() {
+        return (ViewObjectImpl) findViewObject("OrdersTpUslugiView2");
+    }
+
+    /**
+     * Container's getter for OrdersTpUslugiFk1Link1.
+     * @return OrdersTpUslugiFk1Link1
+     */
+    public ViewLinkImpl getOrdersTpUslugiFk1Link1() {
+        return (ViewLinkImpl) findViewLink("OrdersTpUslugiFk1Link1");
+    }
+
+    /**
+     * Container's getter for OrdersTpUslugiView3.
+     * @return OrdersTpUslugiView3
+     */
+    public ViewObjectImpl getOrdersTpUslugiView3() {
+        return (ViewObjectImpl) findViewObject("OrdersTpUslugiView3");
+    }
+
+    /**
+     * Container's getter for OrdersTpUslugiFk3Link1.
+     * @return OrdersTpUslugiFk3Link1
+     */
+    public ViewLinkImpl getOrdersTpUslugiFk3Link1() {
+        return (ViewLinkImpl) findViewLink("OrdersTpUslugiFk3Link1");
+    }
+
+    /**
+     * Container's getter for OrdersTpUslugiView4.
+     * @return OrdersTpUslugiView4
+     */
+    public ViewObjectImpl getOrdersTpUslugiView4() {
+        return (ViewObjectImpl) findViewObject("OrdersTpUslugiView4");
+    }
+
+    /**
+     * Container's getter for OrdersTpUslugiFk2Link1.
+     * @return OrdersTpUslugiFk2Link1
+     */
+    public ViewLinkImpl getOrdersTpUslugiFk2Link1() {
+        return (ViewLinkImpl) findViewLink("OrdersTpUslugiFk2Link1");
+    }
 }
 

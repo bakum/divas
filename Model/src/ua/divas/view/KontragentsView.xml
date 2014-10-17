@@ -338,8 +338,35 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     ViewLink="ua.divas.view.CompaignsDetailsKontragFnLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="OrdersTpUslugiView"
+    ViewLink="ua.divas.view.OrdersTpUslugiFk3Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ClientInterface
     Name="__clientInterface">
+    <Method
+      Name="getRowStatus"
+      MethodName="getRowStatus">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="row"
+        Type="oracle.jbo.Row"/>
+    </Method>
+    <Method
+      Name="getCharacterIndexList"
+      MethodName="getCharacterIndexList">
+      <Return
+        Name="_return_type_"
+        Type="java.util.List"
+        IsGeneric="true">
+        <Element
+          Name="IndexCharacterObject"
+          Type="ua.divas.classes.IndexCharacterObject"/>
+      </Return>
+    </Method>
     <Method
       Name="getRowStatus"
       MethodName="getRowStatus">

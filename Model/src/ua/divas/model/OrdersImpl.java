@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 import oracle.jbo.Key;
+import oracle.jbo.RowIterator;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.EntityDefImpl;
 import oracle.jbo.server.EntityImpl;
@@ -57,7 +58,8 @@ public class OrdersImpl extends DivasEntity {
         Kontragents,
         OrderStatus,
         TypeOfActivities,
-        Users;
+        Users,
+        OrdersTpUslugi;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -80,6 +82,8 @@ public class OrdersImpl extends DivasEntity {
             return vals;
         }
     }
+
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int DAT = AttributesEnum.Dat.index();
     public static final int NUM = AttributesEnum.Num.index();
@@ -105,12 +109,21 @@ public class OrdersImpl extends DivasEntity {
     public static final int ORDERSTATUS = AttributesEnum.OrderStatus.index();
     public static final int TYPEOFACTIVITIES = AttributesEnum.TypeOfActivities.index();
     public static final int USERS = AttributesEnum.Users.index();
+    public static final int ORDERSTPUSLUGI = AttributesEnum.OrdersTpUslugi.index();
 
     /**
      * This is the default constructor (do not remove).
      */
     public OrdersImpl() {
     }
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("ua.divas.model.Orders");
+    }
+
 
     /**
      * Gets the attribute value for Id, using the alias name Id.
@@ -401,42 +414,42 @@ public class OrdersImpl extends DivasEntity {
     /**
      * @return the associated entity oracle.jbo.server.EntityImpl.
      */
-    public EntityImpl getDivisions() {
-        return (EntityImpl) getAttributeInternal(DIVISIONS);
+    public DivisionsImpl getDivisions() {
+        return (DivisionsImpl) getAttributeInternal(DIVISIONS);
     }
 
     /**
      * Sets <code>value</code> as the associated entity oracle.jbo.server.EntityImpl.
      */
-    public void setDivisions(EntityImpl value) {
+    public void setDivisions(DivisionsImpl value) {
         setAttributeInternal(DIVISIONS, value);
     }
 
     /**
      * @return the associated entity oracle.jbo.server.EntityImpl.
      */
-    public EntityImpl getFirms() {
-        return (EntityImpl) getAttributeInternal(FIRMS);
+    public FirmsImpl getFirms() {
+        return (FirmsImpl) getAttributeInternal(FIRMS);
     }
 
     /**
      * Sets <code>value</code> as the associated entity oracle.jbo.server.EntityImpl.
      */
-    public void setFirms(EntityImpl value) {
+    public void setFirms(FirmsImpl value) {
         setAttributeInternal(FIRMS, value);
     }
 
     /**
      * @return the associated entity oracle.jbo.server.EntityImpl.
      */
-    public EntityImpl getKassa() {
-        return (EntityImpl) getAttributeInternal(KASSA);
+    public KassaImpl getKassa() {
+        return (KassaImpl) getAttributeInternal(KASSA);
     }
 
     /**
      * Sets <code>value</code> as the associated entity oracle.jbo.server.EntityImpl.
      */
-    public void setKassa(EntityImpl value) {
+    public void setKassa(KassaImpl value) {
         setAttributeInternal(KASSA, value);
     }
 
@@ -471,29 +484,36 @@ public class OrdersImpl extends DivasEntity {
     /**
      * @return the associated entity oracle.jbo.server.EntityImpl.
      */
-    public EntityImpl getTypeOfActivities() {
-        return (EntityImpl) getAttributeInternal(TYPEOFACTIVITIES);
+    public TypeOfActivitiesImpl getTypeOfActivities() {
+        return (TypeOfActivitiesImpl) getAttributeInternal(TYPEOFACTIVITIES);
     }
 
     /**
      * Sets <code>value</code> as the associated entity oracle.jbo.server.EntityImpl.
      */
-    public void setTypeOfActivities(EntityImpl value) {
+    public void setTypeOfActivities(TypeOfActivitiesImpl value) {
         setAttributeInternal(TYPEOFACTIVITIES, value);
     }
 
     /**
      * @return the associated entity oracle.jbo.server.EntityImpl.
      */
-    public EntityImpl getUsers() {
-        return (EntityImpl) getAttributeInternal(USERS);
+    public UsersImpl getUsers() {
+        return (UsersImpl) getAttributeInternal(USERS);
     }
 
     /**
      * Sets <code>value</code> as the associated entity oracle.jbo.server.EntityImpl.
      */
-    public void setUsers(EntityImpl value) {
+    public void setUsers(UsersImpl value) {
         setAttributeInternal(USERS, value);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getOrdersTpUslugi() {
+        return (RowIterator) getAttributeInternal(ORDERSTPUSLUGI);
     }
 
     /**
@@ -505,11 +525,6 @@ public class OrdersImpl extends DivasEntity {
         return new Key(new Object[] { id });
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("ua.divas.model.Orders");
-    }
+
 }
 

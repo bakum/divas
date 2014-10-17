@@ -414,6 +414,13 @@
     AssociationOtherEnd="ua.divas.model.OrdersUsersFk1Assoc.Orders"
     Type="oracle.jbo.server.EntityImpl"
     IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="OrdersTpUslugi"
+    Association="ua.divas.model.OrdersTpUslugiFk1Assoc"
+    AssociationEnd="ua.divas.model.OrdersTpUslugiFk1Assoc.OrdersTpUslugi"
+    AssociationOtherEnd="ua.divas.model.OrdersTpUslugiFk1Assoc.Orders"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="OrdersChk1">
     <DesignTime>

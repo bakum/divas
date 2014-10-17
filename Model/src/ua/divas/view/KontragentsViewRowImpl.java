@@ -61,6 +61,7 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         ContactDetailsView,
         OrdersView,
         ContactDetailsView1,
+        OrdersTpUslugiView,
         KontragentsView1;
         static AttributesEnum[] vals = null;
         ;
@@ -105,6 +106,7 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
     public static final int CONTACTDETAILSVIEW = AttributesEnum.ContactDetailsView.index();
     public static final int ORDERSVIEW = AttributesEnum.OrdersView.index();
     public static final int CONTACTDETAILSVIEW1 = AttributesEnum.ContactDetailsView1.index();
+    public static final int ORDERSTPUSLUGIVIEW = AttributesEnum.OrdersTpUslugiView.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
 
     /**
@@ -364,6 +366,13 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getContactDetailsView1() {
         return (RowIterator) getAttributeInternal(CONTACTDETAILSVIEW1);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link OrdersTpUslugiView.
+     */
+    public RowIterator getOrdersTpUslugiView() {
+        return (RowIterator) getAttributeInternal(ORDERSTPUSLUGIVIEW);
     }
 
     /**

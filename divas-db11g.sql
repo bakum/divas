@@ -311,6 +311,20 @@
 	"STATUS_ID" VARCHAR2(50 CHAR)
    ) ;
 --------------------------------------------------------
+--  DDL for Table ORDERS_TP_USLUGI
+--------------------------------------------------------
+
+  CREATE TABLE "DBA_DIVAS"."ORDERS_TP_USLUGI" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"ORDER_ID" VARCHAR2(50 CHAR), 
+	"NOM_ID" VARCHAR2(50 CHAR), 
+	"PRICE" NUMBER(10,3), 
+	"SUMM" NUMBER(10,2), 
+	"DAT_COMPLETE" DATE DEFAULT sysdate, 
+	"SOTR_ID" VARCHAR2(50 CHAR), 
+	"DAT_TO_PAY" DATE
+   ) ;
+--------------------------------------------------------
 --  DDL for Table ORDER_STATUS
 --------------------------------------------------------
 
@@ -618,6 +632,9 @@ REM INSERTING into DBA_DIVAS.NUMERATOR
 SET DEFINE OFF;
 Insert into DBA_DIVAS.NUMERATOR (ID,TYPEDEF_ID,PREFIX,VERSION) values ('72abc2a7-4b01-4ba9-aa5f-31d5ac21606e','5dc3ad18-8201-4463-8c25-aded8b3e8fdb','OR-',to_timestamp('27-MAY-14 09.41.28.512077000 PM','DD-MON-RR HH.MI.SSXFF AM'));
 REM INSERTING into DBA_DIVAS.ORDERS
+SET DEFINE OFF;
+Insert into DBA_DIVAS.ORDERS (ID,DAT,NUM,KONTRAG_ID,CURR_ID,KASSA_ID,DIVISION_ID,USER_ID,KURS,KRATNOST,DISCRIPTION,DELETED,VERSION,POSTED,FIRM_ID,ACTIVITIES_ID,STATUS_ID) values ('8ec210a0-9ef9-4ee3-a086-256b48fd31bc',to_timestamp('17-OCT-14','DD-MON-RR HH.MI.SSXFF AM'),'1','6ec66d9a-66de-40cd-a30d-ccbc69439d0c','ae6d0171-45cb-4b99-8d1a-1b039df274ca','5ca0edeb-890a-4e07-a1db-fb36cad6024f','dbcf65ca-a015-49a7-a928-af09fc2d0d2e','6b78e738-a620-420f-90e2-c3613ba91a19',1,1,null,0,to_timestamp('17-OCT-14 04.03.59.198062000 PM','DD-MON-RR HH.MI.SSXFF AM'),0,'4853ba5a-226d-49eb-9654-b01ab5861381','b9958408-ecea-4de6-9c75-0433a4baeb45','ca43635d-c39f-4f1c-aa2a-99f21489cbfc');
+REM INSERTING into DBA_DIVAS.ORDERS_TP_USLUGI
 SET DEFINE OFF;
 REM INSERTING into DBA_DIVAS.ORDER_STATUS
 SET DEFINE OFF;
@@ -1339,6 +1356,12 @@ SET DEFINE OFF;
   CREATE UNIQUE INDEX "DBA_DIVAS"."ORDERS_PK" ON "DBA_DIVAS"."ORDERS" ("ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index ORDERS_TP_USLUGI_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DBA_DIVAS"."ORDERS_TP_USLUGI_PK" ON "DBA_DIVAS"."ORDERS_TP_USLUGI" ("ID") 
+  ;
+--------------------------------------------------------
 --  DDL for Index ORDER_STATUS_PK
 --------------------------------------------------------
 
@@ -1832,6 +1855,25 @@ SET DEFINE OFF;
  
   ALTER TABLE "DBA_DIVAS"."ORDERS" MODIFY ("STATUS_ID" NOT NULL ENABLE);
 --------------------------------------------------------
+--  Constraints for Table ORDERS_TP_USLUGI
+--------------------------------------------------------
+
+  ALTER TABLE "DBA_DIVAS"."ORDERS_TP_USLUGI" ADD CONSTRAINT "ORDERS_TP_USLUGI_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "DBA_DIVAS"."ORDERS_TP_USLUGI" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DBA_DIVAS"."ORDERS_TP_USLUGI" MODIFY ("ORDER_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DBA_DIVAS"."ORDERS_TP_USLUGI" MODIFY ("NOM_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DBA_DIVAS"."ORDERS_TP_USLUGI" MODIFY ("PRICE" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DBA_DIVAS"."ORDERS_TP_USLUGI" MODIFY ("SUMM" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DBA_DIVAS"."ORDERS_TP_USLUGI" MODIFY ("DAT_COMPLETE" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DBA_DIVAS"."ORDERS_TP_USLUGI" MODIFY ("SOTR_ID" NOT NULL ENABLE);
+--------------------------------------------------------
 --  Constraints for Table ORDER_STATUS
 --------------------------------------------------------
 
@@ -2187,6 +2229,18 @@ SET DEFINE OFF;
  
   ALTER TABLE "DBA_DIVAS"."ORDERS" ADD CONSTRAINT "ORDERS_USERS_FK1" FOREIGN KEY ("USER_ID")
 	  REFERENCES "DBA_DIVAS"."USERS" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table ORDERS_TP_USLUGI
+--------------------------------------------------------
+
+  ALTER TABLE "DBA_DIVAS"."ORDERS_TP_USLUGI" ADD CONSTRAINT "ORDERS_TP_USLUGI_FK1" FOREIGN KEY ("ORDER_ID")
+	  REFERENCES "DBA_DIVAS"."ORDERS" ("ID") ON DELETE CASCADE ENABLE;
+ 
+  ALTER TABLE "DBA_DIVAS"."ORDERS_TP_USLUGI" ADD CONSTRAINT "ORDERS_TP_USLUGI_FK2" FOREIGN KEY ("NOM_ID")
+	  REFERENCES "DBA_DIVAS"."NOMENKLATURA" ("ID") ON DELETE SET NULL ENABLE;
+ 
+  ALTER TABLE "DBA_DIVAS"."ORDERS_TP_USLUGI" ADD CONSTRAINT "ORDERS_TP_USLUGI_FK3" FOREIGN KEY ("SOTR_ID")
+	  REFERENCES "DBA_DIVAS"."KONTRAGENTS" ("ID") ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table PLAN_ACC
 --------------------------------------------------------
@@ -2659,6 +2713,24 @@ ALTER TRIGGER "DBA_DIVAS"."NOMENKLATURA_TRG" ENABLE;
 end;
 /
 ALTER TRIGGER "DBA_DIVAS"."NUMERATOR_TGR" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger ORDERS_TP_USLUGI_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "DBA_DIVAS"."ORDERS_TP_USLUGI_TRG" 
+  BEFORE INSERT OR UPDATE ON "ORDERS_TP_USLUGI"
+  REFERENCING FOR EACH ROW
+begin  
+   if inserting then
+      
+      
+      if :NEW."ID" is null then 
+         select utility.uuid() into :NEW."ID" from dual;
+      end if;
+      end if;
+end;
+/
+ALTER TRIGGER "DBA_DIVAS"."ORDERS_TP_USLUGI_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger ORDERS_TRG
 --------------------------------------------------------
