@@ -8,9 +8,13 @@
   InheritPersonalization="merge"
   BindingStyle="OracleName"
   CustomQuery="true"
-  PageIterMode="Full">
+  PageIterMode="Full"
+  RowClass="ua.divas.view.OrdersViewRowImpl"
+  ComponentClass="ua.divas.view.OrdersViewImpl">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
   <ViewAccessor
     Name="KontragentsView1"
@@ -44,6 +48,10 @@
     Name="FirmsView1"
     ViewObjectName="ua.divas.view.FirmsView"
     RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="KassaVO1"
+    ViewObjectName="ua.divas.view.KassaVO"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_CurrId"
     ListVOName="CurrencyView1"
@@ -67,8 +75,9 @@
     Name="LOV_KassaId"
     ListVOName="KassaView1"
     ListRangeSize="-1"
-    NullValueFlag="none"
-    MRUCount="0">
+    NullValueFlag="start"
+    MRUCount="0"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}">
     <AttrArray Name="AttrNames">
       <Item Value="KassaId"/>
     </AttrArray>
@@ -114,8 +123,7 @@
       <Item Value="Id"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="LastName"/>
-      <Item Value="FirstName"/>
+      <Item Value="Login"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -243,7 +251,8 @@
        Orders.POSTED, 
        Orders.FIRM_ID, 
        Orders.ACTIVITIES_ID, 
-       Orders.STATUS_ID
+       Orders.STATUS_ID,
+       (select 0 from dual) o_editable
 FROM  ORDERS Orders
 where deleted = 0]]></SQLQuery>
   <EntityUsage
@@ -295,7 +304,8 @@ where deleted = 0]]></SQLQuery>
     AliasName="KONTRAGNAME"
     Expression="KONTRAGNAME"
     SQLType="VARCHAR"
-    LOVName="LOV_Kontragname">
+    LOVName="LOV_Kontragname"
+    IsNotNull="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="150"/>
     </DesignTime>
@@ -320,6 +330,7 @@ where deleted = 0]]></SQLQuery>
     EntityUsage="Orders"
     AliasName="CURR_ID"
     LOVName="LOV_CurrId">
+    <TransientExpression><![CDATA[viewObject.retrieveCurrencyId()]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
@@ -365,6 +376,7 @@ where deleted = 0]]></SQLQuery>
     EntityUsage="Orders"
     AliasName="USER_ID"
     LOVName="LOV_UserId">
+    <TransientExpression><![CDATA[viewObject.getSessionUserId()]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
@@ -457,6 +469,15 @@ where deleted = 0]]></SQLQuery>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="OEditable"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="O_EDITABLE"
+    Expression="O_EDITABLE"
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="TotalSumUslugi"
     IsUpdateable="false"

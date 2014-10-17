@@ -55,6 +55,8 @@
           ResId="ua.divas.model.Kontragents.IsGroup_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.model.Kontragents.IsGroup_TOOLTIP"/>
+        <CONTROLTYPE
+          Value="check_box"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -125,6 +127,8 @@
           ResId="ua.divas.model.Kontragents.Deleted_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.model.Kontragents.Deleted_TOOLTIP"/>
+        <CONTROLTYPE
+          Value="check_box"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>

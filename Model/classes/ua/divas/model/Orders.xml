@@ -236,6 +236,10 @@
           ResId="ua.divas.model.Orders.Discription_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.model.Orders.Discription_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="80"/>
+        <DISPLAYHEIGHT
+          Value="3"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -256,6 +260,8 @@
           ResId="ua.divas.model.Orders.Deleted_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.model.Orders.Deleted_TOOLTIP"/>
+        <CONTROLTYPE
+          Value="check_box"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>

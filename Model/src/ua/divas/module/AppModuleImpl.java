@@ -19,6 +19,8 @@ import ua.divas.view.FirmsViewImpl;
 import ua.divas.view.GroupmembersViewImpl;
 import ua.divas.view.KassaVOImpl;
 import ua.divas.view.KontragentsViewImpl;
+import ua.divas.view.OrdersViewImpl;
+import ua.divas.view.UserSettingsViewImpl;
 import ua.divas.view.ro.KontragentsItemsLookupVOImpl;
 import ua.divas.view.ro.UsersItemsLookupVOImpl;
 // ---------------------------------------------------------------------
@@ -198,8 +200,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrdersView1.
      * @return OrdersView1
      */
-    public ViewObjectImpl getOrdersView1() {
-        return (ViewObjectImpl) findViewObject("OrdersView1");
+    public OrdersViewImpl getOrdersView1() {
+        return (OrdersViewImpl) findViewObject("OrdersView1");
     }
 
     /**
@@ -254,8 +256,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for UserSettingsView1.
      * @return UserSettingsView1
      */
-    public ViewObjectImpl getUserSettingsView1() {
-        return (ViewObjectImpl) findViewObject("UserSettingsView1");
+    public UserSettingsViewImpl getUserSettingsView1() {
+        return (UserSettingsViewImpl) findViewObject("UserSettingsView1");
     }
 
     /**
@@ -686,48 +688,48 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrdersView2.
      * @return OrdersView2
      */
-    public ViewObjectImpl getOrdersView2() {
-        return (ViewObjectImpl) findViewObject("OrdersView2");
+    public OrdersViewImpl getOrdersView2() {
+        return (OrdersViewImpl) findViewObject("OrdersView2");
     }
 
     /**
      * Container's getter for OrdersView3.
      * @return OrdersView3
      */
-    public ViewObjectImpl getOrdersView3() {
-        return (ViewObjectImpl) findViewObject("OrdersView3");
+    public OrdersViewImpl getOrdersView3() {
+        return (OrdersViewImpl) findViewObject("OrdersView3");
     }
 
     /**
      * Container's getter for OrdersView4.
      * @return OrdersView4
      */
-    public ViewObjectImpl getOrdersView4() {
-        return (ViewObjectImpl) findViewObject("OrdersView4");
+    public OrdersViewImpl getOrdersView4() {
+        return (OrdersViewImpl) findViewObject("OrdersView4");
     }
 
     /**
      * Container's getter for OrdersView5.
      * @return OrdersView5
      */
-    public ViewObjectImpl getOrdersView5() {
-        return (ViewObjectImpl) findViewObject("OrdersView5");
+    public OrdersViewImpl getOrdersView5() {
+        return (OrdersViewImpl) findViewObject("OrdersView5");
     }
 
     /**
      * Container's getter for OrdersView6.
      * @return OrdersView6
      */
-    public ViewObjectImpl getOrdersView6() {
-        return (ViewObjectImpl) findViewObject("OrdersView6");
+    public OrdersViewImpl getOrdersView6() {
+        return (OrdersViewImpl) findViewObject("OrdersView6");
     }
 
     /**
      * Container's getter for OrdersView7.
      * @return OrdersView7
      */
-    public ViewObjectImpl getOrdersView7() {
-        return (ViewObjectImpl) findViewObject("OrdersView7");
+    public OrdersViewImpl getOrdersView7() {
+        return (OrdersViewImpl) findViewObject("OrdersView7");
     }
 
     /**
@@ -846,16 +848,16 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrdersView8.
      * @return OrdersView8
      */
-    public ViewObjectImpl getOrdersView8() {
-        return (ViewObjectImpl) findViewObject("OrdersView8");
+    public OrdersViewImpl getOrdersView8() {
+        return (OrdersViewImpl) findViewObject("OrdersView8");
     }
 
     /**
      * Container's getter for OrdersView9.
      * @return OrdersView9
      */
-    public ViewObjectImpl getOrdersView9() {
-        return (ViewObjectImpl) findViewObject("OrdersView9");
+    public OrdersViewImpl getOrdersView9() {
+        return (OrdersViewImpl) findViewObject("OrdersView9");
     }
 
     /**
@@ -878,56 +880,56 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for UserSettingsView2.
      * @return UserSettingsView2
      */
-    public ViewObjectImpl getUserSettingsView2() {
-        return (ViewObjectImpl) findViewObject("UserSettingsView2");
+    public UserSettingsViewImpl getUserSettingsView2() {
+        return (UserSettingsViewImpl) findViewObject("UserSettingsView2");
     }
 
     /**
      * Container's getter for UserSettingsView3.
      * @return UserSettingsView3
      */
-    public ViewObjectImpl getUserSettingsView3() {
-        return (ViewObjectImpl) findViewObject("UserSettingsView3");
+    public UserSettingsViewImpl getUserSettingsView3() {
+        return (UserSettingsViewImpl) findViewObject("UserSettingsView3");
     }
 
     /**
      * Container's getter for UserSettingsView4.
      * @return UserSettingsView4
      */
-    public ViewObjectImpl getUserSettingsView4() {
-        return (ViewObjectImpl) findViewObject("UserSettingsView4");
+    public UserSettingsViewImpl getUserSettingsView4() {
+        return (UserSettingsViewImpl) findViewObject("UserSettingsView4");
     }
 
     /**
      * Container's getter for UserSettingsView5.
      * @return UserSettingsView5
      */
-    public ViewObjectImpl getUserSettingsView5() {
-        return (ViewObjectImpl) findViewObject("UserSettingsView5");
+    public UserSettingsViewImpl getUserSettingsView5() {
+        return (UserSettingsViewImpl) findViewObject("UserSettingsView5");
     }
 
     /**
      * Container's getter for UserSettingsView6.
      * @return UserSettingsView6
      */
-    public ViewObjectImpl getUserSettingsView6() {
-        return (ViewObjectImpl) findViewObject("UserSettingsView6");
+    public UserSettingsViewImpl getUserSettingsView6() {
+        return (UserSettingsViewImpl) findViewObject("UserSettingsView6");
     }
 
     /**
      * Container's getter for UserSettingsView7.
      * @return UserSettingsView7
      */
-    public ViewObjectImpl getUserSettingsView7() {
-        return (ViewObjectImpl) findViewObject("UserSettingsView7");
+    public UserSettingsViewImpl getUserSettingsView7() {
+        return (UserSettingsViewImpl) findViewObject("UserSettingsView7");
     }
 
     /**
      * Container's getter for UserSettingsView8.
      * @return UserSettingsView8
      */
-    public ViewObjectImpl getUserSettingsView8() {
-        return (ViewObjectImpl) findViewObject("UserSettingsView8");
+    public UserSettingsViewImpl getUserSettingsView8() {
+        return (UserSettingsViewImpl) findViewObject("UserSettingsView8");
     }
 
     /**

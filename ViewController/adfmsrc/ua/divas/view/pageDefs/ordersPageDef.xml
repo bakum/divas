@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.2.66.68" id="ordersPageDef"
+                Package="ua.divas.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="OrdersView1" RangeSize="15" DataControl="AppModuleDataControl" id="OrdersView1Iterator">
+      <sortCriteria>
+        <sort attribute="Dat" ascending="false"/>
+        <sort attribute="Kontragname" ascending="true"/>
+      </sortCriteria>
+    </iterator>
+    <searchRegion Binds="OrdersView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="OrdersView1Query"/>
+    <iterator Binds="KassaVO1" RangeSize="-1" DataControl="AppModuleDataControl" id="KassaVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="OrdersView1Iterator" id="OrdersView1">
+      <nodeDefinition DefName="ua.divas.view.OrdersView" Name="OrdersView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Dat"/>
+          <Item Value="Num"/>
+          <Item Value="KontragId"/>
+          <Item Value="Kontragname"/>
+          <Item Value="CurrId"/>
+          <Item Value="KassaId"/>
+          <Item Value="DivisionId"/>
+          <Item Value="UserId"/>
+          <Item Value="Kurs"/>
+          <Item Value="Kratnost"/>
+          <Item Value="Deleted"/>
+          <Item Value="Version"/>
+          <Item Value="Posted"/>
+          <Item Value="FirmId"/>
+          <Item Value="ActivitiesId"/>
+          <Item Value="StatusId"/>
+          <Item Value="TotalSumUslugi"/>
+          <Item Value="CountUslug"/>
+          <Item Value="Discription"/>
+          <Item Value="OEditable"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="OrdersView1Iterator" id="OEditable">
+      <AttrNames>
+        <Item Value="OEditable"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="OrdersView1Iterator" StaticList="false" Uses="LOV_KontragId" id="KontragId"/>
+    <listOfValues IterBinding="OrdersView1Iterator" StaticList="false" Uses="LOV_Kontragname" id="Kontragname"/>
+    <attributeValues IterBinding="OrdersView1Iterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OrdersView1Iterator" id="Dat">
+      <AttrNames>
+        <Item Value="Dat"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OrdersView1Iterator" id="Num">
+      <AttrNames>
+        <Item Value="Num"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="OrdersView1Iterator" StaticList="false" Uses="LOV_CurrId" id="CurrId" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="OrdersView1Iterator" StaticList="false" id="KassaId" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject" ListIter="KassaVO1Iterator">
+      <AttrNames>
+        <Item Value="KassaId"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="Id"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Fullname"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list IterBinding="OrdersView1Iterator" StaticList="false" Uses="LOV_DivisionId" id="DivisionId"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="OrdersView1Iterator" StaticList="false" Uses="LOV_UserId" id="UserId" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="OrdersView1Iterator" id="Kurs">
+      <AttrNames>
+        <Item Value="Kurs"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OrdersView1Iterator" id="Kratnost">
+      <AttrNames>
+        <Item Value="Kratnost"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OrdersView1Iterator" id="Discription">
+      <AttrNames>
+        <Item Value="Discription"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="OrdersView1Iterator" StaticList="false" Uses="LOV_FirmId" id="FirmId" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="OrdersView1Iterator" StaticList="false" Uses="LOV_ActivitiesId" id="ActivitiesId"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="OrdersView1Iterator" StaticList="false" Uses="LOV_StatusId" id="StatusId" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <tree IterBinding="KassaVO1Iterator" id="KassaVO1">
+      <nodeDefinition DefName="ua.divas.view.KassaVO" Name="KassaVO10">
+        <AttrNames>
+          <Item Value="CurrId"/>
+          <Item Value="Deleted"/>
+          <Item Value="DivisionId"/>
+          <Item Value="Fullname"/>
+          <Item Value="Id"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="KassaVO1Iterator" id="ExecuteWithParams" InstanceName="AppModuleDataControl.KassaVO1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="currency" NDValue="#{bindings.CurrId.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="division" NDValue="#{bindings.DivisionId.inputValue}" NDType="java.lang.String"/>
+    </action>
+    <action IterBinding="OrdersView1Iterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>
