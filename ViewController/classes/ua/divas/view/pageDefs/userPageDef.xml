@@ -34,6 +34,8 @@
         <sort attribute="Fullname" ascending="false"/>
       </sortCriteria>
     </iterator>
+    <iterator Binds="UsersItemsLookupVO1" RangeSize="-1" DataControl="AppModuleDataControl"
+              id="UsersItemsLookupVO1Iterator"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="UsersView1Iterator" id="Login">
@@ -173,5 +175,17 @@
             InstanceName="AppModuleDataControl.NomenklaturaView1" DataControl="AppModuleDataControl"
             RequiresUpdateModel="true" Action="createInsertRow"/>
     <listOfValues IterBinding="NomenklaturaView1Iterator" StaticList="false" Uses="LOV_Parentname" id="Parentname"/>
+    <methodAction id="setStartCriteria" RequiresUpdateModel="true" Action="invokeMethod" MethodName="setStartCriteria"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.UsersItemsLookupVO1">
+      <NamedData NDName="value" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="UsersItemsLookupVO1Iterator" id="UsersItemsLookupVO1">
+      <nodeDefinition DefName="ua.divas.view.ro.UsersItemsLookupVO" Name="UsersItemsLookupVO10">
+        <AttrNames>
+          <Item Value="Login"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>

@@ -35,14 +35,20 @@
                                               filterModel="#{bindings.UsersView1Query.queryDescriptor}"
                                               queryListener="#{bindings.UsersView1Query.processQuery}"
                                               filterVisible="true" varStatus="vs" id="t1" scrollPolicy="page"
-                                              editingMode="clickToEdit" partialTriggers="::b3">
-                                        <af:column id="c7">
+                                              editingMode="clickToEdit" partialTriggers="::b3"
+                                              binding="#{users.userTable}">
+                                        <af:column id="c7" filterable="true">
                                             <af:toolbar id="t2">
                                                 <af:button id="b1" icon="/img/edit-16.gif"
                                                            disabled="#{bindings.Commit.enabled}">
                                                     <af:showPopupBehavior popupId="::pCreateInsert"/>
                                                 </af:button>
                                             </af:toolbar>
+                                            <f:facet name="filter">
+                                                <af:button id="b8"
+                                                           icon="/img/filter_(delete)_16x16.gif"
+                                                           actionListener="#{users.resetTableFilter}"/>
+                                            </f:facet>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.UsersView1.hints.Id.name}" filterable="true"
                                                    sortable="true" headerText="#{bindings.UsersView1.hints.Id.label}"
@@ -68,6 +74,12 @@
                                                           id="it6">
                                                 <f:validator binding="#{row.bindings.Login.validator}"/>
                                             </af:inputText>
+                                            <f:facet name="filter">
+                                                <af:inputText id="it18"
+                                                              value="#{vs.filterCriteria.Login}" autoSubmit="true">
+                                                    <af:autoSuggestBehavior suggestedItems="#{users.onSuggest}"/>
+                                                </af:inputText>
+                                            </f:facet>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.UsersView1.hints.LastName.name}"
                                                    filterable="true" sortable="true"

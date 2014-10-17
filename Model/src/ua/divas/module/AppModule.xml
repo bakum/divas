@@ -552,6 +552,13 @@
   <ViewUsage
     Name="KassaVO1"
     ViewObjectName="ua.divas.view.KassaVO"/>
+  <ViewUsage
+    Name="UsersItemsLookupVO1"
+    ViewObjectName="ua.divas.view.ro.UsersItemsLookupVO">
+    <ViewCriteriaUsage
+      Name="FilterUsersByCriteria"
+      FullName="ua.divas.view.ro.UsersItemsLookupVO.FilterUsersByCriteria"/>
+  </ViewUsage>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"

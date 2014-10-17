@@ -36,6 +36,25 @@ public class ShuttleGroup {
 
     public ShuttleGroup() {
     }
+    
+    private List union(List set1, List set2) {
+        set1.addAll(set2);
+        return set1;
+
+    }
+
+    private List intersect(List set1, List set2) {
+        set1.retainAll(set2);
+        return set1;
+
+    }
+
+    private List diff(List set1, List set2) {
+        List diff = new ArrayList(set1);
+        diff.removeAll(set2);
+        return diff;
+
+    }
 
     public void setSelectedValues(List selectedValues) {
         this.selectedValues = selectedValues;
@@ -69,25 +88,6 @@ public class ShuttleGroup {
             allValues.add(new SelectItem(indx));
         }
         return allValues;
-    }
-
-    private List union(List set1, List set2) {
-        set1.addAll(set2);
-        return set1;
-
-    }
-
-    private List intersect(List set1, List set2) {
-        set1.retainAll(set2);
-        return set1;
-
-    }
-
-    private List diff(List set1, List set2) {
-        List diff = new ArrayList(set1);
-        diff.removeAll(set2);
-        return diff;
-
     }
 
     public void onGroupChange(ValueChangeEvent valueChangeEvent) {
