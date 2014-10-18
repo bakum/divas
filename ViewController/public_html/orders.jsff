@@ -121,13 +121,17 @@
                                                    headerText="#{bindings.OrdersView1.hints.Kontragname.label}" id="c5"
                                                    width="200">
                                             <af:inputListOfValues id="kontragnameId"
-                                                                  popupTitle="Search and Select: #{bindings.OrdersView1.hints.Kontragname.label}"
+                                                                  popupTitle="Найти и выбрать: #{bindings.OrdersView1.hints.Kontragname.label}"
                                                                   value="#{row.bindings.Kontragname.inputValue}"
                                                                   model="#{row.bindings.Kontragname.listOfValuesModel}"
                                                                   required="#{bindings.OrdersView1.hints.Kontragname.mandatory}"
                                                                   columns="#{bindings.OrdersView1.hints.Kontragname.displayWidth}"
-                                                                  shortDesc="#{bindings.OrdersView1.hints.Kontragname.tooltip}">
+                                                                  shortDesc="#{bindings.OrdersView1.hints.Kontragname.tooltip}"
+                                                                  createPopupId="::pCreateKontrag"
+                                                                  launchPopupListener="#{orders.onLaunchLov}"
+                                                                  autoSubmit="true">
                                                 <f:validator binding="#{row.bindings.Kontragname.validator}"/>
+                                                <af:autoSuggestBehavior suggestedItems="#{bindings.Kontragname.suggestedItems}"/>
                                             </af:inputListOfValues>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.OrdersView1.hints.CurrId.name}"
@@ -423,11 +427,11 @@
                                                                                   partialTriggers="ilov2"
                                                                                   readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
                                                                                   binding="#{orders.kontrag}"
-                                                                                  autoSubmit="true">
+                                                                                  autoSubmit="true" visible="false">
                                                                 <f:validator binding="#{bindings.KontragId.validator}"/>
                                                             </af:inputListOfValues>
                                                             <af:inputListOfValues id="ilov2"
-                                                                                  popupTitle="Search and Select: #{bindings.Kontragname.hints.label}"
+                                                                                  popupTitle="Найти и выбрать: #{bindings.Kontragname.hints.label}"
                                                                                   value="#{bindings.Kontragname.inputValue}"
                                                                                   label="#{bindings.Kontragname.hints.label}"
                                                                                   model="#{bindings.Kontragname.listOfValuesModel}"
@@ -437,7 +441,9 @@
                                                                                   partialTriggers="ilov1"
                                                                                   readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
                                                                                   valueChangeListener="#{orders.onKonChange}"
-                                                                                  autoSubmit="true">
+                                                                                  autoSubmit="true"
+                                                                                  launchPopupListener="#{orders.onLaunchLov}"
+                                                                                  createPopupId="pCreateKontrag">
                                                                 <f:validator binding="#{bindings.Kontragname.validator}"/>
                                                             </af:inputListOfValues>
                                                         </af:panelGroupLayout>
@@ -656,6 +662,12 @@
                                             <af:showDetailItem text="Услуги" id="sdi3"
                                                                stretchChildren="first"/>
                                         </af:panelAccordion>
+                                    </af:dialog>
+                                </af:popup>
+                                <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateKontrag"
+                                          contentDelivery="lazyUncached">
+                                    <af:dialog id="d2" title="Cоздать контрагента">
+                                        <f:facet name="buttonBar"/>
                                     </af:dialog>
                                 </af:popup>
                             </af:showDetailItem>

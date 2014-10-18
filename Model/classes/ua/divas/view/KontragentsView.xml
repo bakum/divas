@@ -166,7 +166,14 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Namefull"
     EntityUsage="Kontragents"
-    AliasName="NAMEFULL"/>
+    AliasName="NAMEFULL">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="UrFiz"
     IsNotNull="true"
@@ -439,6 +446,13 @@ order by Kontragents.FULLNAME]]></SQLQuery>
       <Parameter
         Name="Id"
         Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="removeAllViewCriteria"
+      MethodName="removeAllViewCriteria">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
     </Method>
   </ClientInterface>
   <ResourceBundle>

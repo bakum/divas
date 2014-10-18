@@ -37,5 +37,10 @@ public class KontragentsViewClient extends ViewUsageImpl implements KontragentsV
                                                                          "oracle.jbo.Row" }, new Object[] { row });
         return (String) _ret;
     }
+
+    public void removeAllViewCriteria() {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "removeAllViewCriteria", null, null);
+        return;
+    }
 }
 

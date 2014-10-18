@@ -16,5 +16,7 @@ public interface KontragentsView extends ViewObject {
     List<IndexCharacterObject> getCharacterIndexList();
 
     void findKontragentById(String Id);
+
+    void removeAllViewCriteria();
 }
 

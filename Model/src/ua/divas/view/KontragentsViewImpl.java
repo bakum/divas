@@ -183,5 +183,17 @@ public class KontragentsViewImpl extends DivasView implements KontragentsView {
         this.applyViewCriteria(vc);
         this.executeQuery();
     }
+    
+    public void removeAllViewCriteria () {
+        String [] applyViewCriteriaNames = this.getApplyViewCriteriaNames();
+        if (applyViewCriteriaNames != null) {
+            for (String cname : applyViewCriteriaNames) {
+                this.removeApplyViewCriteriaName(cname);
+            }
+        }
+        ViewCriteria vc = this.getViewCriteria("KontragentsItems");
+        this.applyViewCriteria(vc);
+        this.executeQuery();
+    }
 }
 

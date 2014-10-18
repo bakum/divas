@@ -21,13 +21,15 @@
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="TypeOfActivities"
-    AliasName="ID"/>
+    AliasName="ID"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Version"
     PrecisionRule="true"
     EntityAttrName="Version"
     EntityUsage="TypeOfActivities"
-    AliasName="VERSION"/>
+    AliasName="VERSION"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Fullname"
     IsNotNull="true"

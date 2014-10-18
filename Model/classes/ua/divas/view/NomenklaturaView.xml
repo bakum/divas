@@ -268,7 +268,7 @@ where deleted = 0]]></SQLQuery>
           Value="true"/>
         <Property
           Name="mode"
-          Value="Basic"/>
+          Value="Advanced"/>
       </CustomProperties>
     </Properties>
     <ViewCriteriaRow

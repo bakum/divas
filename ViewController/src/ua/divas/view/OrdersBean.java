@@ -8,23 +8,42 @@ import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.input.RichInputListOfValues;
 import oracle.adf.view.rich.component.rich.input.RichSelectOneChoice;
 import oracle.adf.view.rich.event.DialogEvent;
+import oracle.adf.view.rich.event.LaunchPopupEvent;
 import oracle.adf.view.rich.event.PopupCanceledEvent;
 
 import oracle.adf.view.rich.event.PopupFetchEvent;
+
+import oracle.adfinternal.view.faces.model.binding.FacesCtrlLOVBinding;
 
 import oracle.binding.BindingContainer;
 import oracle.binding.OperationBinding;
 
 public class OrdersBean {
-    
+
 
     public OrdersBean() {
     }
-    
+
     private RichSelectOneChoice division;
     private RichSelectOneChoice currency;
     private RichInputListOfValues kontrag;
-    
+
+    private String upperCase(String s) {
+        StringBuffer buf = new StringBuffer(s.toUpperCase());
+        char ch;
+        for (int k = 0, n = buf.length(); k < n; k++) {
+            ch = buf.charAt(k);
+            buf.setCharAt(k, ch >= 'а' && ch <= 'я' ? (char) (ch - 'а' + 'А') : (ch == 'ё' ? 'Ё' : ch));
+        }
+        return buf.toString();
+    }
+
+    private String firstUpperCase(String word) {
+        if (word == null || word.isEmpty())
+            return ""; //или return word;
+        return word.substring(0, 1).toUpperCase() + word.substring(1);
+    }
+
     public void setDivision(RichSelectOneChoice division) {
         this.division = division;
     }
@@ -40,7 +59,7 @@ public class OrdersBean {
     public RichSelectOneChoice getCurrency() {
         return currency;
     }
-    
+
     public void setKontrag(RichInputListOfValues kontrag) {
         this.kontrag = kontrag;
     }
@@ -48,7 +67,7 @@ public class OrdersBean {
     public RichInputListOfValues getKontrag() {
         return kontrag;
     }
-    
+
     public void refresh() {
         DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = binding.findIteratorBinding("OrdersView1Iterator");
@@ -60,7 +79,7 @@ public class OrdersBean {
             }
         }
     }
-    
+
     public String commitChange() {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("Commit");
@@ -68,7 +87,7 @@ public class OrdersBean {
         refresh();
         return null;
     }
-    
+
     public String rollbackChange() {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("Rollback");
@@ -79,16 +98,26 @@ public class OrdersBean {
 
     public void onOrderCancel(PopupCanceledEvent popupCanceledEvent) {
         rollbackChange();
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("removeAllViewCriteria");
+        if (ob != null) {
+            ob.execute();
+        }
     }
-    
+
     public void dialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             commitChange();
         } else if (dialogEvent.getOutcome().name().equals("cancel")) {
             rollbackChange();
         }
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("removeAllViewCriteria");
+        if (ob != null) {
+            ob.execute();
+        }
     }
-    
+
     public void onPopupFetch(PopupFetchEvent popupFetchEvent) {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("ExecuteWithParams");
@@ -108,7 +137,7 @@ public class OrdersBean {
         ob = binding.getOperationBinding("findKontragentById");
         ob.execute();
     }
-    
+
     public void onDepChange(ValueChangeEvent valueChangeEvent) {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("ExecuteWithParams");
@@ -133,6 +162,22 @@ public class OrdersBean {
         if (ob != null) {
             ob.getParamsMap().put("Id", (String) this.getKontrag().getValue());
             ob.execute();
+        }
+    }
+
+    public void onLaunchLov(LaunchPopupEvent launchPopupEvent) {
+        String submittedValue = (String) launchPopupEvent.getSubmittedValue();
+        //only perform query if value is submitted
+        if (submittedValue != null && submittedValue.length() > 0) {
+            RichInputListOfValues lovComp = (RichInputListOfValues) launchPopupEvent.getComponent();
+            FacesCtrlLOVBinding.ListOfValuesModelImpl lovModel = null;
+            lovModel = (FacesCtrlLOVBinding.ListOfValuesModelImpl) lovComp.getModel();
+            submittedValue = this.firstUpperCase(submittedValue);
+            if (submittedValue != null) {
+                lovModel.getCriteria().getCurrentRow().setAttribute("Fullname", submittedValue + "%");
+                lovModel.applyCriteria();
+                lovModel.performQuery(lovModel.getQueryDescriptor());
+            }
         }
     }
 }

@@ -2139,29 +2139,6 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         this.getDBTransaction().setClearCacheOnRollback(false);
     }
 
-    /**
-     * Container's getter for KontragentsView3.
-     * @return KontragentsView3
-     */
-    public KontragentsViewImpl getKontragentsView3() {
-        return (KontragentsViewImpl) findViewObject("KontragentsView3");
-    }
-
-    /**
-     * Container's getter for ContactDetailsView3.
-     * @return ContactDetailsView3
-     */
-    public ContactDetailsViewImpl getContactDetailsView3() {
-        return (ContactDetailsViewImpl) findViewObject("ContactDetailsView3");
-    }
-
-    /**
-     * Container's getter for CompaignsDetailsKontragFnLink.
-     * @return CompaignsDetailsKontragFnLink
-     */
-    public ViewLinkImpl getCompaignsDetailsKontragFnLink() {
-        return (ViewLinkImpl) findViewLink("CompaignsDetailsKontragFnLink");
-    }
 
     /**
      * Container's getter for VwCompDetails1.

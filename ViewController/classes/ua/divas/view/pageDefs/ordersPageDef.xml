@@ -183,5 +183,8 @@
         <Item Value="Editable"/>
       </AttrNames>
     </attributeValues>
+    <methodAction id="removeAllViewCriteria" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="removeAllViewCriteria" IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.KontragentsView1"/>
   </bindings>
 </pageDefinition>
