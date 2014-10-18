@@ -185,4 +185,10 @@ public class OrdersBean {
             }
         }
     }
+
+    public void onPopupCreateKontrag(PopupFetchEvent popupFetchEvent) {
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("CreateInsert1");
+        ob.execute();
+    }
 }

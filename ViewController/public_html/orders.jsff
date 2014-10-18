@@ -667,9 +667,77 @@
                                     </af:dialog>
                                 </af:popup>
                                 <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateKontrag"
-                                          contentDelivery="lazyUncached">
+                                          contentDelivery="lazyUncached"
+                                          popupFetchListener="#{orders.onPopupCreateKontrag}">
                                     <af:dialog id="d2" title="Cоздать контрагента">
-                                        <f:facet name="buttonBar"/>
+                                        <af:panelFormLayout id="pfl4">
+                                            <af:inputText value="#{bindings.Id1.inputValue}"
+                                                          label="#{bindings.Id1.hints.label}"
+                                                          required="#{bindings.Id1.hints.mandatory}"
+                                                          columns="#{bindings.Id1.hints.displayWidth}"
+                                                          maximumLength="#{bindings.Id1.hints.precision}"
+                                                          shortDesc="#{bindings.Id1.hints.tooltip}" id="it23">
+                                                <f:validator binding="#{bindings.Id1.validator}"/>
+                                            </af:inputText>
+                                            <af:inputComboboxListOfValues id="iclov1"
+                                                                          popupTitle="Search and Select: #{bindings.ParentId.hints.label}"
+                                                                          value="#{bindings.ParentId.inputValue}"
+                                                                          label="#{bindings.ParentId.hints.label}"
+                                                                          model="#{bindings.ParentId.listOfValuesModel}"
+                                                                          required="#{bindings.ParentId.hints.mandatory}"
+                                                                          columns="#{bindings.ParentId.hints.displayWidth}"
+                                                                          shortDesc="#{bindings.ParentId.hints.tooltip}">
+                                                <f:validator binding="#{bindings.ParentId.validator}"/>
+                                            </af:inputComboboxListOfValues>
+                                            <af:inputText value="#{bindings.Fullname.inputValue}"
+                                                          label="#{bindings.Fullname.hints.label}"
+                                                          required="#{bindings.Fullname.hints.mandatory}"
+                                                          columns="#{bindings.Fullname.hints.displayWidth}"
+                                                          maximumLength="#{bindings.Fullname.hints.precision}"
+                                                          shortDesc="#{bindings.Fullname.hints.tooltip}" id="it24">
+                                                <f:validator binding="#{bindings.Fullname.validator}"/>
+                                            </af:inputText>
+                                        </af:panelFormLayout>
+                                        <f:facet name="buttonBar">
+                                            <af:panelFormLayout id="pfl5">
+                                                <af:inputText value="#{bindings.KonId.inputValue}"
+                                                              label="Контрагент"
+                                                              required="#{bindings.KonId.hints.mandatory}"
+                                                              columns="#{bindings.KonId.hints.displayWidth}"
+                                                              maximumLength="#{bindings.KonId.hints.precision}"
+                                                              shortDesc="#{bindings.KonId.hints.tooltip}" id="it25">
+                                                    <f:validator binding="#{bindings.KonId.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.Tel.inputValue}"
+                                                              label="Телефон"
+                                                              columns="#{bindings.Tel.hints.displayWidth}"
+                                                              maximumLength="#{bindings.Tel.hints.precision}"
+                                                              shortDesc="#{bindings.Tel.hints.tooltip}" id="it26"
+                                                              required="true">
+                                                    <f:validator binding="#{bindings.Tel.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.email.inputValue}"
+                                                              label="E-Mail"
+                                                              required="#{bindings.email.hints.mandatory}"
+                                                              columns="#{bindings.email.hints.displayWidth}"
+                                                              maximumLength="#{bindings.email.hints.precision}"
+                                                              shortDesc="#{bindings.email.hints.tooltip}" id="it27">
+                                                    <f:validator binding="#{bindings.email.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.Adress1.inputValue}"
+                                                              label="Адрес"
+                                                              required="#{bindings.Adress1.hints.mandatory}"
+                                                              columns="#{bindings.Adress1.hints.displayWidth}"
+                                                              maximumLength="#{bindings.Adress1.hints.precision}"
+                                                              shortDesc="#{bindings.Adress1.hints.tooltip}" id="it28"
+                                                              rows="3">
+                                                    <f:validator binding="#{bindings.Adress1.validator}"/>
+                                                </af:inputText>
+                                                <af:button actionListener="#{bindings.createContactDetail.execute}"
+                                                           text="createContactDetail"
+                                                           disabled="#{!bindings.createContactDetail.enabled}" id="b6"/>
+                                            </af:panelFormLayout>
+                                        </f:facet>
                                     </af:dialog>
                                 </af:popup>
                             </af:showDetailItem>
