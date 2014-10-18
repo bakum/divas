@@ -174,9 +174,14 @@ public class OrdersBean {
             lovModel = (FacesCtrlLOVBinding.ListOfValuesModelImpl) lovComp.getModel();
             submittedValue = this.firstUpperCase(submittedValue);
             if (submittedValue != null) {
-                lovModel.getCriteria().getCurrentRow().setAttribute("Fullname", submittedValue + "%");
-                lovModel.applyCriteria();
-                lovModel.performQuery(lovModel.getQueryDescriptor());
+                try {
+                    lovModel.getCriteria().getCurrentRow().setAttribute("Fullname", submittedValue + "%");
+                    lovModel.applyCriteria();
+                    lovModel.performQuery(lovModel.getQueryDescriptor());
+                } catch (Exception e) {
+                    // TODO: Add catch code
+                    e.printStackTrace();
+                }
             }
         }
     }

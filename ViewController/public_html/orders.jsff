@@ -131,7 +131,9 @@
                                                                   launchPopupListener="#{orders.onLaunchLov}"
                                                                   autoSubmit="true">
                                                 <f:validator binding="#{row.bindings.Kontragname.validator}"/>
-                                                <af:autoSuggestBehavior suggestedItems="#{bindings.Kontragname.suggestedItems}"/>
+                                                <af:autoSuggestBehavior suggestedItems="#{bindings.Kontragname.suggestedItems}"
+                                                                        smartList="#{bindings.Kontragname.smartList}"
+                                                                        maxSuggestedItems="5"/>
                                             </af:inputListOfValues>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.OrdersView1.hints.CurrId.name}"
