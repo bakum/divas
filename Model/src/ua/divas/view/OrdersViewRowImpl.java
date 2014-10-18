@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import oracle.jbo.AttributeList;
 import oracle.jbo.RowIterator;
 import oracle.jbo.RowSet;
+import oracle.jbo.domain.NClobDomain;
 import oracle.jbo.domain.Number;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.ViewRowImpl;
@@ -19,6 +20,7 @@ import ua.divas.model.OrdersImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class OrdersViewRowImpl extends ViewRowImpl {
+
 
     public static final int ENTITY_ORDERS = 0;
 
@@ -461,8 +463,8 @@ public class OrdersViewRowImpl extends ViewRowImpl {
      * Gets the attribute value for the calculated attribute CountUslug.
      * @return the CountUslug
      */
-    public Number getCountUslug() {
-        return (Number) getAttributeInternal(COUNTUSLUG);
+    public Long getCountUslug() {
+        return (Long) getAttributeInternal(COUNTUSLUG);
     }
 
     /**

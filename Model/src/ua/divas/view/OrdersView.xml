@@ -346,6 +346,7 @@ where deleted = 0]]></SQLQuery>
     EntityUsage="Orders"
     AliasName="KASSA_ID"
     LOVName="LOV_KassaId">
+    <TransientExpression><![CDATA[viewObject.retrieveKassaId()]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
@@ -361,6 +362,7 @@ where deleted = 0]]></SQLQuery>
     EntityUsage="Orders"
     AliasName="DIVISION_ID"
     LOVName="LOV_DivisionId">
+    <TransientExpression><![CDATA[viewObject.retrieveDivisionId()]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
@@ -432,6 +434,7 @@ where deleted = 0]]></SQLQuery>
     EntityUsage="Orders"
     AliasName="FIRM_ID"
     LOVName="LOV_FirmId">
+    <TransientExpression><![CDATA[viewObject.retrieveFirmaId()]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
@@ -447,6 +450,7 @@ where deleted = 0]]></SQLQuery>
     EntityUsage="Orders"
     AliasName="ACTIVITIES_ID"
     LOVName="LOV_ActivitiesId">
+    <TransientExpression><![CDATA[viewObject.retrieveActivitiesId()]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
@@ -462,6 +466,7 @@ where deleted = 0]]></SQLQuery>
     EntityUsage="Orders"
     AliasName="STATUS_ID"
     LOVName="LOV_StatusId">
+    <TransientExpression><![CDATA[viewObject.retrieveStatusId()]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
@@ -505,7 +510,7 @@ where deleted = 0]]></SQLQuery>
     IsSelected="false"
     IsPersistent="false"
     PrecisionRule="true"
-    Type="oracle.jbo.domain.Number"
+    Type="java.lang.Long"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
     SQLType="NUMERIC">

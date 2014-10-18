@@ -13,11 +13,12 @@
                                     <f:facet name="toolbar">
                                         <af:toolbar id="t4">
                                             <af:button actionListener="#{bindings.CreateInsert.execute}"
-                                                       text="CreateInsert" disabled="#{bindings.Commit.enabled}"
+                                                       text="Добавить" disabled="#{bindings.Commit.enabled}"
                                                        id="b5"/>
-                                            <af:button actionListener="#{bindings.Commit.execute}" text="Commit"
-                                                       disabled="#{!bindings.Commit.enabled}" id="b3"/>
-                                            <af:button actionListener="#{bindings.Rollback.execute}" text="Rollback"
+                                            <af:button actionListener="#{bindings.Commit.execute}" text="Сохранить"
+                                                       disabled="#{!bindings.Commit.enabled}" id="b3"
+                                                       action="#{orders.commitChange}"/>
+                                            <af:button actionListener="#{bindings.Rollback.execute}" text="Отменить"
                                                        disabled="#{!bindings.Rollback.enabled}" immediate="true"
                                                        id="b4">
                                                 <af:resetActionListener/>
@@ -46,7 +47,7 @@
                                         <af:column sortProperty="#{bindings.OrdersView1.hints.Id.name}"
                                                    filterable="true" sortable="true"
                                                    headerText="#{bindings.OrdersView1.hints.Id.label}" id="c1"
-                                                   visible="false">
+                                                   visible="false" inlineStyle="font-weight:bold;">
                                             <af:inputText value="#{row.bindings.Id.inputValue}"
                                                           label="#{bindings.OrdersView1.hints.Id.label}"
                                                           required="#{bindings.OrdersView1.hints.Id.mandatory}"
@@ -58,7 +59,8 @@
                                         </af:column>
                                         <af:column sortProperty="#{bindings.OrdersView1.hints.StatusId.name}"
                                                    filterable="true" sortable="true"
-                                                   headerText="#{bindings.OrdersView1.hints.StatusId.label}" id="c17">
+                                                   headerText="#{bindings.OrdersView1.hints.StatusId.label}" id="c17"
+                                                   inlineStyle="#{row.bindings.CountUslug.inputValue == 1 ? '' : 'font-weight:bold;'}">
                                             <af:selectOneChoice value="#{row.bindings.StatusId.inputValue}"
                                                                 label="#{row.bindings.StatusId.label}"
                                                                 required="#{bindings.OrdersView1.hints.StatusId.mandatory}"
@@ -321,18 +323,16 @@
                                         </af:column>
                                         <f:facet name="detailStamp">
                                             <af:panelLabelAndMessage label="#{bindings.OrdersView1.hints.Discription.label}" id="plam1">
-                                                <af:inputText value="#{row.bindings.Discription.inputValue}"
-                                                              label="#{bindings.OrdersView1.hints.Discription.label}"
-                                                              required="#{bindings.OrdersView1.hints.Discription.mandatory}"
-                                                              columns="#{bindings.OrdersView1.hints.Discription.displayWidth}"
-                                                              maximumLength="#{bindings.OrdersView1.hints.Discription.precision}"
-                                                              shortDesc="#{bindings.OrdersView1.hints.Discription.tooltip}"
-                                                              id="it9" rows="3">
-                                                    <f:validator binding="#{row.bindings.Discription.validator}"/>
-                                                </af:inputText>
+                                                <af:richTextEditor value="#{row.bindings.Discription.inputValue}"
+                                                                   label="#{bindings.OrdersView1.hints.Discription.label}"
+                                                                   required="#{bindings.OrdersView1.hints.Discription.mandatory}"
+                                                                   columns="#{bindings.OrdersView1.hints.Discription.displayWidth}"
+                                                                   shortDesc="#{bindings.OrdersView1.hints.Discription.tooltip}"
+                                                                   id="it9" rows="3"/>
                                             </af:panelLabelAndMessage>
                                         </f:facet>
-                                        <af:column headerText="#{bindings.OrdersView1.hints.OEditable.label}" id="c20">
+                                        <af:column headerText="#{bindings.OrdersView1.hints.OEditable.label}" id="c20"
+                                                   visible="false">
                                             <af:inputText value="#{row.bindings.OEditable.inputValue}"
                                                           label="#{bindings.OrdersView1.hints.OEditable.label}"
                                                           required="#{bindings.OrdersView1.hints.OEditable.mandatory}"
@@ -422,7 +422,8 @@
                                                                                   shortDesc="#{bindings.KontragId.hints.tooltip}"
                                                                                   partialTriggers="ilov2"
                                                                                   readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
-                                                                                  visible="false">
+                                                                                  binding="#{orders.kontrag}"
+                                                                                  autoSubmit="true">
                                                                 <f:validator binding="#{bindings.KontragId.validator}"/>
                                                             </af:inputListOfValues>
                                                             <af:inputListOfValues id="ilov2"
@@ -434,7 +435,9 @@
                                                                                   columns="#{bindings.Kontragname.hints.displayWidth}"
                                                                                   shortDesc="#{bindings.Kontragname.hints.tooltip}"
                                                                                   partialTriggers="ilov1"
-                                                                                  readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
+                                                                                  readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
+                                                                                  valueChangeListener="#{orders.onKonChange}"
+                                                                                  autoSubmit="true">
                                                                 <f:validator binding="#{bindings.Kontragname.validator}"/>
                                                             </af:inputListOfValues>
                                                         </af:panelGroupLayout>
@@ -550,6 +553,108 @@
                                                     </af:toolbar>
                                                 </f:facet>
                                             </af:showDetailItem>
+                                            <af:showDetailItem text="Данные о покупателе" id="sdi4"
+                                                               stretchChildren="first">
+                                                <af:panelFormLayout id="pfl2">
+                                                    <af:inputText value="#{bindings.Id1.inputValue}"
+                                                                  label="#{bindings.Id1.hints.label}"
+                                                                  required="#{bindings.Id1.hints.mandatory}"
+                                                                  columns="#{bindings.Id1.hints.displayWidth}"
+                                                                  maximumLength="#{bindings.Id1.hints.precision}"
+                                                                  shortDesc="#{bindings.Id1.hints.tooltip}" id="it16"
+                                                                  visible="false">
+                                                        <f:validator binding="#{bindings.Id1.validator}"/>
+                                                    </af:inputText>
+                                                    <af:selectBooleanCheckbox value="#{bindings.IsGroup.inputValue}"
+                                                                              label="#{bindings.IsGroup.label}"
+                                                                              shortDesc="#{bindings.IsGroup.hints.tooltip}"
+                                                                              id="sbc1" visible="false"/>
+                                                    <af:inputComboboxListOfValues id="parentIdId"
+                                                                                  popupTitle="Search and Select: #{bindings.ParentId.hints.label}"
+                                                                                  value="#{bindings.ParentId.inputValue}"
+                                                                                  label="#{bindings.ParentId.hints.label}"
+                                                                                  model="#{bindings.ParentId.listOfValuesModel}"
+                                                                                  required="#{bindings.ParentId.hints.mandatory}"
+                                                                                  columns="#{bindings.ParentId.hints.displayWidth}"
+                                                                                  shortDesc="#{bindings.ParentId.hints.tooltip}"
+                                                                                  visible="false">
+                                                        <f:validator binding="#{bindings.ParentId.validator}"/>
+                                                    </af:inputComboboxListOfValues>
+                                                    <af:panelLabelAndMessage label="Общие данные" id="plam6">
+                                                        <af:inputText value="#{bindings.Fullname.inputValue}"
+                                                                      label="#{bindings.Fullname.hints.label}"
+                                                                      required="#{bindings.Fullname.hints.mandatory}"
+                                                                      columns="#{bindings.Fullname.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.Fullname.hints.precision}"
+                                                                      shortDesc="#{bindings.Fullname.hints.tooltip}"
+                                                                      id="it17">
+                                                            <f:validator binding="#{bindings.Fullname.validator}"/>
+                                                        </af:inputText>
+                                                        <af:inputText value="#{bindings.Namefull.inputValue}"
+                                                                      label="#{bindings.Namefull.hints.label}"
+                                                                      required="#{bindings.Namefull.hints.mandatory}"
+                                                                      columns="#{bindings.Namefull.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.Namefull.hints.precision}"
+                                                                      shortDesc="#{bindings.Namefull.hints.tooltip}"
+                                                                      id="it18">
+                                                            <f:validator binding="#{bindings.Namefull.validator}"/>
+                                                        </af:inputText>
+                                                        <af:selectBooleanCheckbox value="#{bindings.UrFiz.inputValue}"
+                                                                                  label="#{bindings.UrFiz.label}"
+                                                                                  shortDesc="#{bindings.UrFiz.hints.tooltip}"
+                                                                                  id="sbc2"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <f:facet name="footer">
+                                                        <af:panelFormLayout id="pfl3">
+                                                            <af:panelLabelAndMessage label="Контакты" id="plam7">
+                                                                <af:panelGroupLayout id="pgl6" layout="horizontal">
+                                                                    <af:inputText value="#{bindings.Phone.inputValue}"
+                                                                                  label="#{bindings.Phone.hints.label}"
+                                                                                  required="#{bindings.Phone.hints.mandatory}"
+                                                                                  columns="#{bindings.Phone.hints.displayWidth}"
+                                                                                  maximumLength="#{bindings.Phone.hints.precision}"
+                                                                                  shortDesc="#{bindings.Phone.hints.tooltip}"
+                                                                                  id="it20">
+                                                                        <f:validator binding="#{bindings.Phone.validator}"/>
+                                                                    </af:inputText>
+                                                                    <af:inputText value="#{bindings.Email.inputValue}"
+                                                                                  label="#{bindings.Email.hints.label}"
+                                                                                  required="#{bindings.Email.hints.mandatory}"
+                                                                                  columns="#{bindings.Email.hints.displayWidth}"
+                                                                                  maximumLength="#{bindings.Email.hints.precision}"
+                                                                                  shortDesc="#{bindings.Email.hints.tooltip}"
+                                                                                  id="it21">
+                                                                        <f:validator binding="#{bindings.Email.validator}"/>
+                                                                    </af:inputText>
+                                                                </af:panelGroupLayout>
+                                                                <af:inputText value="#{bindings.Adress.inputValue}"
+                                                                              label="#{bindings.Adress.hints.label}"
+                                                                              required="#{bindings.Adress.hints.mandatory}"
+                                                                              columns="#{bindings.Adress.hints.displayWidth}"
+                                                                              maximumLength="#{bindings.Adress.hints.precision}"
+                                                                              shortDesc="#{bindings.Adress.hints.tooltip}"
+                                                                              id="it19" rows="3">
+                                                                    <f:validator binding="#{bindings.Adress.validator}"/>
+                                                                </af:inputText>
+                                                                <af:inputText value="#{bindings.Editable.inputValue}"
+                                                                              label="#{bindings.Editable.hints.label}"
+                                                                              required="#{bindings.Editable.hints.mandatory}"
+                                                                              columns="#{bindings.Editable.hints.displayWidth}"
+                                                                              maximumLength="#{bindings.Editable.hints.precision}"
+                                                                              shortDesc="#{bindings.Editable.hints.tooltip}"
+                                                                              id="it22" visible="false">
+                                                                    <f:validator binding="#{bindings.Editable.validator}"/>
+                                                                    <af:convertNumber groupingUsed="false"
+                                                                                      pattern="#{bindings.Editable.format}"/>
+                                                                </af:inputText>
+                                                            </af:panelLabelAndMessage>
+                                                        </af:panelFormLayout>
+                                                    </f:facet>
+                                                    <af:separator id="s5"/>
+                                                </af:panelFormLayout>
+                                            </af:showDetailItem>
+                                            <af:showDetailItem text="Услуги" id="sdi3"
+                                                               stretchChildren="first"/>
                                         </af:panelAccordion>
                                     </af:dialog>
                                 </af:popup>

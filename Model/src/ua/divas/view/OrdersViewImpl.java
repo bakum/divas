@@ -19,21 +19,76 @@ public class OrdersViewImpl extends DivasView {
      */
     public OrdersViewImpl() {
     }
-
-    public String retrieveCurrencyId() {
+    
+    private ViewRowSetImpl getSettingsRowSet() {
         VariableImpl z = new VariableImpl();
         z.setName("UserKey");
         ViewObjectImpl vo = (ViewObjectImpl) this.getRootApplicationModule().findViewObject("UserSettingsView1");
-        /* ViewRowSetImpl rs =
-            (ViewRowSetImpl) vo.findByViewCriteria(vo.getViewCriteria("FilterSettingsByUser"), -1,
-                                                   vo.QUERY_MODE_SCAN_DATABASE_TABLES); */
         ViewRowSetImpl rs =
             (ViewRowSetImpl) vo.findByViewCriteriaWithBindVars(vo.getViewCriteria("FilterSettingsByUser"), -1,
-                                                               vo.QUERY_MODE_SCAN_DATABASE_TABLES, new Variable[] { z }, 
-                                                               new Object[] { this.getSessionUserId() });
+                                                               vo.QUERY_MODE_SCAN_DATABASE_TABLES, new Variable[] { z }, new Object[] {
+                                                               this.getSessionUserId() });
+        return rs;
+    }
+
+    public String retrieveCurrencyId() {
+        ViewRowSetImpl rs = this.getSettingsRowSet();
         Row row = rs.first();
         if (row != null) {
             String rv = (String) row.getAttribute("CurrencyId");
+            return rv;
+        }
+        return null;
+    }
+    
+    public String retrieveDivisionId() {
+        ViewRowSetImpl rs = this.getSettingsRowSet();
+        Row row = rs.first();
+        if (row != null) {
+            String rv = (String) row.getAttribute("DivisionId");
+            return rv;
+        }
+        return null;
+    }
+    
+    public String retrieveKassaId() {
+        ViewRowSetImpl rs = this.getSettingsRowSet();
+        Row row = rs.first();
+        if (row != null) {
+            String rv = (String) row.getAttribute("KassaId");
+            return rv;
+        }
+        return null;
+    }
+    
+    public String retrieveFirmaId() {
+        ViewRowSetImpl rs = this.getSettingsRowSet();
+        Row row = rs.first();
+        if (row != null) {
+            String rv = (String) row.getAttribute("FirmaId");
+            return rv;
+        }
+        return null;
+    }
+    
+    public String retrieveActivitiesId() {
+        ViewRowSetImpl rs = this.getSettingsRowSet();
+        Row row = rs.first();
+        if (row != null) {
+            String rv = (String) row.getAttribute("ActivitiesId");
+            return rv;
+        }
+        return null;
+    }
+    
+    public String retrieveStatusId() {
+        ViewObjectImpl vo = (ViewObjectImpl) this.getRootApplicationModule().findViewObject("OrderStatusView1");
+        ViewRowSetImpl rs =
+            (ViewRowSetImpl) vo.findByViewCriteria(vo.getViewCriteria("FilterOrderStatusByNew"), -1,
+                                                               vo.QUERY_MODE_SCAN_DATABASE_TABLES);
+        Row row = rs.first();
+        if (row != null) {
+            String rv = (String) row.getAttribute("Id");
             return rv;
         }
         return null;

@@ -5,6 +5,7 @@ import javax.faces.event.ValueChangeEvent;
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
+import oracle.adf.view.rich.component.rich.input.RichInputListOfValues;
 import oracle.adf.view.rich.component.rich.input.RichSelectOneChoice;
 import oracle.adf.view.rich.event.DialogEvent;
 import oracle.adf.view.rich.event.PopupCanceledEvent;
@@ -15,11 +16,14 @@ import oracle.binding.BindingContainer;
 import oracle.binding.OperationBinding;
 
 public class OrdersBean {
+    
+
     public OrdersBean() {
     }
     
     private RichSelectOneChoice division;
     private RichSelectOneChoice currency;
+    private RichInputListOfValues kontrag;
     
     public void setDivision(RichSelectOneChoice division) {
         this.division = division;
@@ -35,6 +39,14 @@ public class OrdersBean {
 
     public RichSelectOneChoice getCurrency() {
         return currency;
+    }
+    
+    public void setKontrag(RichInputListOfValues kontrag) {
+        this.kontrag = kontrag;
+    }
+
+    public RichInputListOfValues getKontrag() {
+        return kontrag;
     }
     
     public void refresh() {
@@ -93,6 +105,8 @@ public class OrdersBean {
                 it.executeQuery();
             }
         }
+        ob = binding.getOperationBinding("findKontragentById");
+        ob.execute();
     }
     
     public void onDepChange(ValueChangeEvent valueChangeEvent) {
@@ -110,6 +124,15 @@ public class OrdersBean {
             if (it != null) {
                 it.executeQuery();
             }
+        }
+    }
+
+    public void onKonChange(ValueChangeEvent valueChangeEvent) {
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("findKontragentById");
+        if (ob != null) {
+            ob.getParamsMap().put("Id", (String) this.getKontrag().getValue());
+            ob.execute();
         }
     }
 }

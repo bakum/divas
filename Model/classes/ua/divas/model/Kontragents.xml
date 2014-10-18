@@ -231,6 +231,8 @@
           ResId="ua.divas.model.Kontragents.UrFiz_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.model.Kontragents.UrFiz_TOOLTIP"/>
+        <CONTROLTYPE
+          Value="check_box"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>

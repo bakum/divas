@@ -14,5 +14,7 @@ public interface KontragentsView extends ViewObject {
     String getRowStatus(Row row);
 
     List<IndexCharacterObject> getCharacterIndexList();
+
+    void findKontragentById(String Id);
 }
 

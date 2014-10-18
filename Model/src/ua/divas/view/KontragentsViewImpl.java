@@ -7,6 +7,7 @@ import java.util.List;
 import oracle.jbo.Key;
 import oracle.jbo.Row;
 import oracle.jbo.RowSet;
+import oracle.jbo.ViewCriteria;
 import oracle.jbo.ViewObject;
 import oracle.jbo.server.Entity;
 import oracle.jbo.server.ViewObjectImpl;
@@ -153,5 +154,34 @@ public class KontragentsViewImpl extends DivasView implements KontragentsView {
         }
     }
 
+    /**
+     * Returns the variable value for KonId.
+     * @return variable value for KonId
+     */
+    public String getKonId() {
+        return (String) ensureVariableManager().getVariableValue("KonId");
+    }
+
+    /**
+     * Sets <code>value</code> for variable KonId.
+     * @param value value to bind as KonId
+     */
+    public void setKonId(String value) {
+        ensureVariableManager().setVariableValue("KonId", value);
+    }
+    
+    public void findKontragentById (String Id) {
+        String [] applyViewCriteriaNames = this.getApplyViewCriteriaNames();
+        if (applyViewCriteriaNames != null) {
+            for (String cname : applyViewCriteriaNames) {
+                this.removeApplyViewCriteriaName(cname);
+            }
+        }
+        
+        ViewCriteria vc = this.getViewCriteria("KontragentByIdFilter");
+        this.setKonId(Id);
+        this.applyViewCriteria(vc);
+        this.executeQuery();
+    }
 }
 
