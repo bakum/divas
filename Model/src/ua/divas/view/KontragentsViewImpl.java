@@ -195,5 +195,21 @@ public class KontragentsViewImpl extends DivasView implements KontragentsView {
         this.applyViewCriteria(vc);
         this.executeQuery();
     }
+
+    /**
+     * Returns the variable value for KonName.
+     * @return variable value for KonName
+     */
+    public String getKonName() {
+        return (String) ensureVariableManager().getVariableValue("KonName");
+    }
+
+    /**
+     * Sets <code>value</code> for variable KonName.
+     * @param value value to bind as KonName
+     */
+    public void setKonName(String value) {
+        ensureVariableManager().setVariableValue("KonName", value);
+    }
 }
 

@@ -211,7 +211,8 @@
       <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria
-      Hint="showAndExecute"/>
+      Hint="showAndExecute"
+      Name="KontragentsFilterItemsByName"/>
   </ListBinding>
   <ListBinding
     Name="LOV_FirmId"
