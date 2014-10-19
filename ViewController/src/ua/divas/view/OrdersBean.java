@@ -179,7 +179,6 @@ public class OrdersBean {
                     lovModel.applyCriteria();
                     lovModel.performQuery(lovModel.getQueryDescriptor());
                 } catch (Exception e) {
-                    // TODO: Add catch code
                     e.printStackTrace();
                 }
             }
