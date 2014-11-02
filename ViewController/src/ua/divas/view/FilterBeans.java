@@ -247,7 +247,16 @@ public class FilterBeans {
         }
     }
 
+    private void setIsBuyer() {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+        Row currRow = it.getCurrentRow();
+
+        currRow.setAttribute("IsBuyer", new Integer(1));
+    }
+
     public String commitChange() {
+        this.setIsBuyer();
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("Commit");
         ob.execute();
@@ -377,7 +386,7 @@ public class FilterBeans {
     }
 
     private void expandTree(RichTree soTreeTableBind) {
-        
+
         RowKeySet disclosedTreeRowKeySet = new RowKeySetImpl();
         CollectionModel model = (CollectionModel) soTreeTableBind.getValue();
         JUCtrlHierBinding treeBinding = (JUCtrlHierBinding) model.getWrappedData();
@@ -395,7 +404,7 @@ public class FilterBeans {
         }
         soTreeTableBind.setDisclosedRowKeys(disclosedTreeRowKeySet);
     }
-    
+
 
     public DnDAction dropTableHandler(DropEvent dropEvent) {
         RichTree tree = (RichTree) dropEvent.getDragComponent();
@@ -450,12 +459,14 @@ public class FilterBeans {
                     }
                     tree.setDisclosedRowKeys(rksImpl);   */
 
+
+
                     //this.setTree((RichTree) tree.getParent());
                     //this.onRefreshTree();
                     tree.getDisclosedRowKeys().clear();
                     //expandTree(tree);
                     AdfFacesContext.getCurrentInstance().addPartialTarget(tree.getParent());
-                    
+
                 }
                 //AdfFacesContext.getCurrentInstance().addPartialTarget(tree.getParent());
             }

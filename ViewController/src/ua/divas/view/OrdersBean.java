@@ -3,6 +3,7 @@ package ua.divas.view;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
+import oracle.adf.model.AttributeBinding;
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
@@ -18,6 +19,8 @@ import oracle.adfinternal.view.faces.model.binding.FacesCtrlLOVBinding;
 
 import oracle.binding.BindingContainer;
 import oracle.binding.OperationBinding;
+
+import oracle.jbo.Row;
 
 public class OrdersBean {
 
@@ -195,9 +198,20 @@ public class OrdersBean {
         OperationBinding ob = binding.getOperationBinding("CreateInsert1");
         ob.execute();
     }
-    
+
+    private void setIsBuyer() {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+        Row currRow = it.getCurrentRow();
+
+        currRow.setAttribute("IsBuyer", new Integer(1));
+
+
+    }
+
     public void onNewKontragentDialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
+            this.setIsBuyer();
             BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
             OperationBinding ob = binding.getOperationBinding("Commit");
             ob.execute();

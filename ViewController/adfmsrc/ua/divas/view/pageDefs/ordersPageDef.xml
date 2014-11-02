@@ -197,5 +197,10 @@
     </attributeValues>
     <listOfValues IterBinding="OrdersView1Iterator" StaticList="false" Uses="LOV_Zamername" id="Zamername"/>
     <listOfValues IterBinding="OrdersView1Iterator" StaticList="false" Uses="LOV_ZamerId" id="ZamerId"/>
+    <attributeValues IterBinding="KontragentsView1Iterator" id="IsBuyer">
+      <AttrNames>
+        <Item Value="IsBuyer"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

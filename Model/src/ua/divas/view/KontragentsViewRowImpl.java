@@ -60,6 +60,7 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         IsSupplier,
         IsBuyer,
         IsMeasurer,
+        UserId,
         KontragentsView,
         CompaignsDetailsView,
         ContactDetailsView,
@@ -67,7 +68,8 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         ContactDetailsView1,
         OrdersTpUslugiView,
         OrdersView1,
-        KontragentsView1;
+        KontragentsView1,
+        UsersView1;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -110,6 +112,7 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
     public static final int ISSUPPLIER = AttributesEnum.IsSupplier.index();
     public static final int ISBUYER = AttributesEnum.IsBuyer.index();
     public static final int ISMEASURER = AttributesEnum.IsMeasurer.index();
+    public static final int USERID = AttributesEnum.UserId.index();
     public static final int KONTRAGENTSVIEW = AttributesEnum.KontragentsView.index();
     public static final int COMPAIGNSDETAILSVIEW = AttributesEnum.CompaignsDetailsView.index();
     public static final int CONTACTDETAILSVIEW = AttributesEnum.ContactDetailsView.index();
@@ -118,6 +121,7 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
     public static final int ORDERSTPUSLUGIVIEW = AttributesEnum.OrdersTpUslugiView.index();
     public static final int ORDERSVIEW1 = AttributesEnum.OrdersView1.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
+    public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -384,6 +388,22 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
     }
 
     /**
+     * Gets the attribute value for USER_ID using the alias name UserId.
+     * @return the USER_ID
+     */
+    public String getUserId() {
+        return (String) getAttributeInternal(USERID);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for USER_ID using the alias name UserId.
+     * @param value value to set the USER_ID
+     */
+    public void setUserId(String value) {
+        setAttributeInternal(USERID, value);
+    }
+
+    /**
      * Gets the attribute value for IS_SUPPLIER using the alias name IsSupplier.
      * @return the IS_SUPPLIER
      */
@@ -453,6 +473,13 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
      */
     public RowSet getKontragentsView1() {
         return (RowSet) getAttributeInternal(KONTRAGENTSVIEW1);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> UsersView1.
+     */
+    public RowSet getUsersView1() {
+        return (RowSet) getAttributeInternal(USERSVIEW1);
     }
 }
 

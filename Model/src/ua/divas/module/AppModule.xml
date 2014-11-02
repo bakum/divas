@@ -568,6 +568,9 @@
   <ViewUsage
     Name="OrdersViewZamer"
     ViewObjectName="ua.divas.view.OrdersView"/>
+  <ViewUsage
+    Name="KontragentsView3"
+    ViewObjectName="ua.divas.view.KontragentsView"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -1215,6 +1218,12 @@
     ViewLinkObjectName="ua.divas.view.OrdersZamerFkLink"
     SrcViewUsageName="ua.divas.module.AppModule.KontragentsView1"
     DstViewUsageName="ua.divas.module.AppModule.OrdersViewZamer"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="KontragentUserFkLink1"
+    ViewLinkObjectName="ua.divas.view.KontragentUserFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.UsersView1"
+    DstViewUsageName="ua.divas.module.AppModule.KontragentsView3"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">

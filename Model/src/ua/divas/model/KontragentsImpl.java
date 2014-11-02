@@ -47,13 +47,15 @@ public class KontragentsImpl extends DivasEntity {
         IsBuyer,
         IsMeasurer,
         IsSupplier,
+        UserId,
         Kontragents,
         ParentIdKontragents,
         CompaignsDetails,
         ContactDetails,
         Orders,
         OrdersTpUslugi,
-        Orders1;
+        Orders1,
+        Users;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -93,6 +95,7 @@ public class KontragentsImpl extends DivasEntity {
     public static final int ISBUYER = AttributesEnum.IsBuyer.index();
     public static final int ISMEASURER = AttributesEnum.IsMeasurer.index();
     public static final int ISSUPPLIER = AttributesEnum.IsSupplier.index();
+    public static final int USERID = AttributesEnum.UserId.index();
     public static final int KONTRAGENTS = AttributesEnum.Kontragents.index();
     public static final int PARENTIDKONTRAGENTS = AttributesEnum.ParentIdKontragents.index();
     public static final int COMPAIGNSDETAILS = AttributesEnum.CompaignsDetails.index();
@@ -100,6 +103,7 @@ public class KontragentsImpl extends DivasEntity {
     public static final int ORDERS = AttributesEnum.Orders.index();
     public static final int ORDERSTPUSLUGI = AttributesEnum.OrdersTpUslugi.index();
     public static final int ORDERS1 = AttributesEnum.Orders1.index();
+    public static final int USERS = AttributesEnum.Users.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -357,6 +361,22 @@ public class KontragentsImpl extends DivasEntity {
     }
 
     /**
+     * Gets the attribute value for UserId, using the alias name UserId.
+     * @return the value of UserId
+     */
+    public String getUserId() {
+        return (String) getAttributeInternal(USERID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for UserId.
+     * @param value value to set the UserId
+     */
+    public void setUserId(String value) {
+        setAttributeInternal(USERID, value);
+    }
+
+    /**
      * @return the associated entity oracle.jbo.RowIterator.
      */
     public RowIterator getKontragents() {
@@ -410,6 +430,20 @@ public class KontragentsImpl extends DivasEntity {
      */
     public RowIterator getOrders1() {
         return (RowIterator) getAttributeInternal(ORDERS1);
+    }
+
+    /**
+     * @return the associated entity UsersImpl.
+     */
+    public UsersImpl getUsers() {
+        return (UsersImpl) getAttributeInternal(USERS);
+    }
+
+    /**
+     * Sets <code>value</code> as the associated entity UsersImpl.
+     */
+    public void setUsers(UsersImpl value) {
+        setAttributeInternal(USERS, value);
     }
 
     /**

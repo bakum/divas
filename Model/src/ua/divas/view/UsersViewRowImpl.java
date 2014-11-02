@@ -18,8 +18,9 @@ import ua.divas.model.UsersImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class UsersViewRowImpl extends ViewRowImpl {
+
     public static final int ENTITY_USERS = 0;
-    
+
     @Override
     public boolean isAttributeUpdateable(int i) {
         BigDecimal editable = this.getUEditable();
@@ -55,8 +56,10 @@ public class UsersViewRowImpl extends ViewRowImpl {
         UsersGroupsView,
         UserSettingsView,
         GroupmembersView,
-        DivisionSotrView;
-        private static AttributesEnum[] vals = null;
+        DivisionSotrView,
+        KontragentsView;
+        static AttributesEnum[] vals = null;
+        ;
         private static final int firstIndex = 0;
 
         public int index() {
@@ -78,6 +81,7 @@ public class UsersViewRowImpl extends ViewRowImpl {
             return vals;
         }
     }
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int FIRSTNAME = AttributesEnum.FirstName.index();
     public static final int LASTNAME = AttributesEnum.LastName.index();
@@ -94,6 +98,7 @@ public class UsersViewRowImpl extends ViewRowImpl {
     public static final int USERSETTINGSVIEW = AttributesEnum.UserSettingsView.index();
     public static final int GROUPMEMBERSVIEW = AttributesEnum.GroupmembersView.index();
     public static final int DIVISIONSOTRVIEW = AttributesEnum.DivisionSotrView.index();
+    public static final int KONTRAGENTSVIEW = AttributesEnum.KontragentsView.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -325,6 +330,13 @@ public class UsersViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getDivisionSotrView() {
         return (RowIterator) getAttributeInternal(DIVISIONSOTRVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link KontragentsView.
+     */
+    public RowIterator getKontragentsView() {
+        return (RowIterator) getAttributeInternal(KONTRAGENTSVIEW);
     }
 }
 

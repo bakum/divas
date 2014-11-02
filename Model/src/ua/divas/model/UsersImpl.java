@@ -41,7 +41,8 @@ public class UsersImpl extends DivasEntityNoDelete {
         UsersGroups,
         UserSettings,
         Groupmembers,
-        DivisionSotr;
+        DivisionSotr,
+        Kontragents;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -81,6 +82,7 @@ public class UsersImpl extends DivasEntityNoDelete {
     public static final int USERSETTINGS = AttributesEnum.UserSettings.index();
     public static final int GROUPMEMBERS = AttributesEnum.Groupmembers.index();
     public static final int DIVISIONSOTR = AttributesEnum.DivisionSotr.index();
+    public static final int KONTRAGENTS = AttributesEnum.Kontragents.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -273,14 +275,14 @@ public class UsersImpl extends DivasEntityNoDelete {
     /**
      * @return the associated entity oracle.jbo.server.EntityImpl.
      */
-    public EntityImpl getUserSettings() {
-        return (EntityImpl) getAttributeInternal(USERSETTINGS);
+    public UserSettingsImpl getUserSettings() {
+        return (UserSettingsImpl) getAttributeInternal(USERSETTINGS);
     }
 
     /**
      * Sets <code>value</code> as the associated entity oracle.jbo.server.EntityImpl.
      */
-    public void setUserSettings(EntityImpl value) {
+    public void setUserSettings(UserSettingsImpl value) {
         setAttributeInternal(USERSETTINGS, value);
     }
 
@@ -296,6 +298,13 @@ public class UsersImpl extends DivasEntityNoDelete {
      */
     public RowIterator getDivisionSotr() {
         return (RowIterator) getAttributeInternal(DIVISIONSOTR);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getKontragents() {
+        return (RowIterator) getAttributeInternal(KONTRAGENTS);
     }
 
     /**

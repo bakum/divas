@@ -564,7 +564,8 @@
                                                                                               columns="#{bindings.ZamerId.hints.displayWidth}"
                                                                                               shortDesc="#{bindings.ZamerId.hints.tooltip}"
                                                                                               autoSubmit="true"
-                                                                                              partialTriggers="zamernameId">
+                                                                                              partialTriggers="zamernameId"
+                                                                                              visible="false">
                                                                     <f:validator binding="#{bindings.ZamerId.validator}"/>
                                                                 </af:inputComboboxListOfValues>
                                                                 <af:inputComboboxListOfValues id="zamernameId"

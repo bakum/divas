@@ -2385,5 +2385,21 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getOrdersZamerFkLink1() {
         return (ViewLinkImpl) findViewLink("OrdersZamerFkLink1");
     }
+
+    /**
+     * Container's getter for KontragentsView3.
+     * @return KontragentsView3
+     */
+    public KontragentsViewImpl getKontragentsView3() {
+        return (KontragentsViewImpl) findViewObject("KontragentsView3");
+    }
+
+    /**
+     * Container's getter for KontragentUserFkLink1.
+     * @return KontragentUserFkLink1
+     */
+    public ViewLinkImpl getKontragentUserFkLink1() {
+        return (ViewLinkImpl) findViewLink("KontragentUserFkLink1");
+    }
 }
 

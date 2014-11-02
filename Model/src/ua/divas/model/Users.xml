@@ -263,6 +263,13 @@
     AssociationOtherEnd="ua.divas.model.DivisionSotrFk2Assoc.Users"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="Kontragents"
+    Association="ua.divas.model.KontragentUserFkAssoc"
+    AssociationEnd="ua.divas.model.KontragentUserFkAssoc.Kontragents"
+    AssociationOtherEnd="ua.divas.model.KontragentUserFkAssoc.Users"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="UsersPk"
     PrimaryKey="true">
