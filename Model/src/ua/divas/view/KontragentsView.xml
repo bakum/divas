@@ -293,6 +293,7 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     EntityUsage="Kontragents"
     AliasName="USER_ID"
     LOVName="LOV_UserId">
+    <TransientExpression><![CDATA[viewObject.getSessionUserId()]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
