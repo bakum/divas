@@ -698,46 +698,7 @@
                                                 <f:validator binding="#{bindings.Fullname.validator}"/>
                                             </af:inputText>
                                         </af:panelFormLayout>
-                                        <f:facet name="buttonBar">
-                                            <af:panelFormLayout id="pfl5">
-                                                <af:inputText value="#{bindings.KonId.inputValue}"
-                                                              label="Контрагент"
-                                                              required="#{bindings.KonId.hints.mandatory}"
-                                                              columns="#{bindings.KonId.hints.displayWidth}"
-                                                              maximumLength="#{bindings.KonId.hints.precision}"
-                                                              shortDesc="#{bindings.KonId.hints.tooltip}" id="it25">
-                                                    <f:validator binding="#{bindings.KonId.validator}"/>
-                                                </af:inputText>
-                                                <af:inputText value="#{bindings.Tel.inputValue}"
-                                                              label="Телефон"
-                                                              columns="#{bindings.Tel.hints.displayWidth}"
-                                                              maximumLength="#{bindings.Tel.hints.precision}"
-                                                              shortDesc="#{bindings.Tel.hints.tooltip}" id="it26"
-                                                              required="true">
-                                                    <f:validator binding="#{bindings.Tel.validator}"/>
-                                                </af:inputText>
-                                                <af:inputText value="#{bindings.email.inputValue}"
-                                                              label="E-Mail"
-                                                              required="#{bindings.email.hints.mandatory}"
-                                                              columns="#{bindings.email.hints.displayWidth}"
-                                                              maximumLength="#{bindings.email.hints.precision}"
-                                                              shortDesc="#{bindings.email.hints.tooltip}" id="it27">
-                                                    <f:validator binding="#{bindings.email.validator}"/>
-                                                </af:inputText>
-                                                <af:inputText value="#{bindings.Adress1.inputValue}"
-                                                              label="Адрес"
-                                                              required="#{bindings.Adress1.hints.mandatory}"
-                                                              columns="#{bindings.Adress1.hints.displayWidth}"
-                                                              maximumLength="#{bindings.Adress1.hints.precision}"
-                                                              shortDesc="#{bindings.Adress1.hints.tooltip}" id="it28"
-                                                              rows="3">
-                                                    <f:validator binding="#{bindings.Adress1.validator}"/>
-                                                </af:inputText>
-                                                <af:button actionListener="#{bindings.createContactDetail.execute}"
-                                                           text="createContactDetail"
-                                                           disabled="#{!bindings.createContactDetail.enabled}" id="b6"/>
-                                            </af:panelFormLayout>
-                                        </f:facet>
+                                        <f:facet name="buttonBar"/>
                                     </af:dialog>
                                 </af:popup>
                             </af:showDetailItem>

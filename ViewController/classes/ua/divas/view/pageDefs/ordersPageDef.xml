@@ -3,13 +3,6 @@
                 Package="ua.divas.view.pageDefs">
   <parameters/>
   <executables>
-    <variableIterator id="variables">
-      <variable Type="java.lang.String" Name="createContactDetail_KonId" IsQueriable="false"
-                DefaultValue="#{bindings.KontragId.inputValue}"/>
-      <variable Type="java.lang.String" Name="createContactDetail_Tel" IsQueriable="false"/>
-      <variable Type="java.lang.String" Name="createContactDetail_email" IsQueriable="false"/>
-      <variable Type="java.lang.String" Name="createContactDetail_Adress" IsQueriable="false"/>
-    </variableIterator>
     <iterator Binds="OrdersView1" RangeSize="25" DataControl="AppModuleDataControl" id="OrdersView1Iterator">
       <sortCriteria>
         <sort attribute="Dat" ascending="false"/>
@@ -192,34 +185,6 @@
     <methodAction id="removeAllViewCriteria" RequiresUpdateModel="true" Action="invokeMethod"
                   MethodName="removeAllViewCriteria" IsViewObjectMethod="true" DataControl="AppModuleDataControl"
                   InstanceName="data.AppModuleDataControl.KontragentsView1"/>
-    <methodAction id="createContactDetail" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="createContactDetail" IsViewObjectMethod="true" DataControl="AppModuleDataControl"
-                  InstanceName="data.AppModuleDataControl.OrdersView1">
-      <NamedData NDName="KonId" NDType="java.lang.String" NDValue="${bindings.createContactDetail_KonId}"/>
-      <NamedData NDName="Tel" NDType="java.lang.String" NDValue="${bindings.createContactDetail_Tel}"/>
-      <NamedData NDName="email" NDType="java.lang.String" NDValue="${bindings.createContactDetail_email}"/>
-      <NamedData NDName="Adress" NDType="java.lang.String" NDValue="${bindings.createContactDetail_Adress}"/>
-    </methodAction>
-    <attributeValues IterBinding="variables" id="KonId">
-      <AttrNames>
-        <Item Value="createContactDetail_KonId"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="variables" id="Tel">
-      <AttrNames>
-        <Item Value="createContactDetail_Tel"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="variables" id="email">
-      <AttrNames>
-        <Item Value="createContactDetail_email"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="variables" id="Adress1">
-      <AttrNames>
-        <Item Value="createContactDetail_Adress"/>
-      </AttrNames>
-    </attributeValues>
     <action IterBinding="KontragentsView1Iterator" id="CreateInsert1"
             InstanceName="AppModuleDataControl.KontragentsView1" DataControl="AppModuleDataControl"
             RequiresUpdateModel="true" Action="createInsertRow"/>
