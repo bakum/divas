@@ -226,4 +226,5 @@ public class OrdersBean {
     public void onRefreshOrders(ActionEvent actionEvent) {
         this.refresh();
     }
+
 }

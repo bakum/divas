@@ -128,4 +128,9 @@ FROM  USERS Users]]></SQLQuery>
     ViewLink="ua.divas.view.DivisionSotrFk2Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="KontragentsView"
+    ViewLink="ua.divas.view.KontragentUserFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
 </ViewObject>

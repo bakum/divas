@@ -360,8 +360,8 @@
                                           contentDelivery="lazyUncached" resetEditableValues="whenCanceled"
                                           popupCanceledListener="#{orders.onOrderCancel}"
                                           popupFetchListener="#{orders.onPopupFetch}">
-                                    <af:dialog id="d1" title="Редактировать заказ:" resize="on" contentWidth="650"
-                                               contentHeight="450" dialogListener="#{orders.dialogListener}">
+                                    <af:dialog id="d1" title="Редактировать заказ:" resize="on" contentWidth="670"
+                                               contentHeight="470" dialogListener="#{orders.dialogListener}">
                                         <f:facet name="buttonBar"/>
                                         <af:panelAccordion id="pa1">
                                             <af:showDetailItem text="Главная" id="sdi2" stretchChildren="first">
@@ -374,7 +374,8 @@
                                                                           columns="#{bindings.Num.hints.displayWidth}"
                                                                           maximumLength="#{bindings.Num.hints.precision}"
                                                                           shortDesc="#{bindings.Num.hints.tooltip}"
-                                                                          id="it12" readOnly="true">
+                                                                          id="it12" readOnly="true"
+                                                                          labelStyle="font-weight: bold;">
                                                                 <f:validator binding="#{bindings.Num.validator}"/>
                                                             </af:inputText>
                                                             <af:inputDate value="#{bindings.Dat.inputValue}"
@@ -383,7 +384,8 @@
                                                                           columns="#{bindings.Dat.hints.displayWidth}"
                                                                           shortDesc="#{bindings.Dat.hints.tooltip}"
                                                                           id="id5"
-                                                                          readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
+                                                                          readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
+                                                                          labelStyle="font-weight: bold;">
                                                                 <f:validator binding="#{bindings.Dat.validator}"/>
                                                                 <af:convertDateTime pattern="#{bindings.Dat.format}"/>
                                                             </af:inputDate>
@@ -392,7 +394,8 @@
                                                                                 required="#{bindings.StatusId.hints.mandatory}"
                                                                                 shortDesc="#{bindings.StatusId.hints.tooltip}"
                                                                                 id="soc14"
-                                                                                readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
+                                                                                readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
+                                                                                labelStyle="font-weight: bold;">
                                                                 <f:selectItems value="#{bindings.StatusId.items}"
                                                                                id="si14"/>
                                                                 <f:validator binding="#{bindings.StatusId.validator}"/>
@@ -416,7 +419,8 @@
                                                                                 required="#{bindings.FirmId.hints.mandatory}"
                                                                                 shortDesc="#{bindings.FirmId.hints.tooltip}"
                                                                                 id="soc12"
-                                                                                readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
+                                                                                readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
+                                                                                labelStyle="font-weight: bold;">
                                                                 <f:selectItems value="#{bindings.FirmId.items}"
                                                                                id="si12"/>
                                                                 <f:validator binding="#{bindings.FirmId.validator}"/>
@@ -448,7 +452,8 @@
                                                                                   valueChangeListener="#{orders.onKonChange}"
                                                                                   autoSubmit="true"
                                                                                   launchPopupListener="#{orders.onLaunchLov}"
-                                                                                  createPopupId="pCreateKontrag">
+                                                                                  createPopupId="pCreateKontrag"
+                                                                                  labelStyle="font-weight: bold;">
                                                                 <f:validator binding="#{bindings.Kontragname.validator}"/>
                                                             </af:inputListOfValues>
                                                         </af:panelGroupLayout>
@@ -464,7 +469,8 @@
                                                                                 readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
                                                                                 valueChangeListener="#{orders.onDepChange}"
                                                                                 autoSubmit="true"
-                                                                                binding="#{orders.currency}">
+                                                                                binding="#{orders.currency}"
+                                                                                labelStyle="font-weight: bold;">
                                                                 <f:selectItems value="#{bindings.CurrId.items}"
                                                                                id="si8"/>
                                                                 <f:validator binding="#{bindings.CurrId.validator}"/>
@@ -475,7 +481,8 @@
                                                                                 shortDesc="#{bindings.KassaId.hints.tooltip}"
                                                                                 id="soc9"
                                                                                 readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
-                                                                                partialTriggers="soc8 soc10">
+                                                                                partialTriggers="soc8 soc10"
+                                                                                labelStyle="font-weight: bold;">
                                                                 <f:selectItems value="#{bindings.KassaId.items}"
                                                                                id="si9"/>
                                                                 <f:validator binding="#{bindings.KassaId.validator}"/>
@@ -488,7 +495,8 @@
                                                                           columns="#{bindings.Kurs.hints.displayWidth}"
                                                                           maximumLength="#{bindings.Kurs.hints.precision}"
                                                                           shortDesc="#{bindings.Kurs.hints.tooltip}"
-                                                                          id="it13" readOnly="true">
+                                                                          id="it13" readOnly="true"
+                                                                          labelStyle="font-weight: bold;">
                                                                 <f:validator binding="#{bindings.Kurs.validator}"/>
                                                                 <af:convertNumber groupingUsed="false"
                                                                                   pattern="#{bindings.Kurs.format}"/>
@@ -499,7 +507,8 @@
                                                                           columns="#{bindings.Kratnost.hints.displayWidth}"
                                                                           maximumLength="#{bindings.Kratnost.hints.precision}"
                                                                           shortDesc="#{bindings.Kratnost.hints.tooltip}"
-                                                                          id="it14" readOnly="true">
+                                                                          id="it14" readOnly="true"
+                                                                          labelStyle="font-weight: bold;">
                                                                 <f:validator binding="#{bindings.Kratnost.validator}"/>
                                                                 <af:convertNumber groupingUsed="false"
                                                                                   pattern="#{bindings.Kratnost.format}"/>
@@ -517,7 +526,8 @@
                                                                                 readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
                                                                                 valueChangeListener="#{orders.onDepChange}"
                                                                                 autoSubmit="true"
-                                                                                binding="#{orders.division}">
+                                                                                binding="#{orders.division}"
+                                                                                labelStyle="font-weight: bold;">
                                                                 <f:selectItems value="#{bindings.DivisionId.items}"
                                                                                id="si10"/>
                                                                 <f:validator binding="#{bindings.DivisionId.validator}"/>
@@ -526,7 +536,8 @@
                                                                                 label="#{bindings.UserId.label}"
                                                                                 required="#{bindings.UserId.hints.mandatory}"
                                                                                 shortDesc="#{bindings.UserId.hints.tooltip}"
-                                                                                id="soc11" readOnly="true">
+                                                                                id="soc11" readOnly="true"
+                                                                                labelStyle="font-weight: bold;">
                                                                 <f:selectItems value="#{bindings.UserId.items}"
                                                                                id="si11"/>
                                                                 <f:validator binding="#{bindings.UserId.validator}"/>
@@ -541,15 +552,16 @@
                                                                        shortDesc="#{bindings.Discription.hints.tooltip}"
                                                                        id="it15"
                                                                        readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
-                                                                       rows="3"/>
-                                                    <af:panelLabelAndMessage label="Label 2" id="plam8">
+                                                                       rows="3" labelStyle="font-weight: bold;"/>
+                                                    <af:panelLabelAndMessage id="plam8">
                                                         <af:panelGroupLayout id="pgl8" layout="horizontal">
                                                             <af:selectOneChoice value="#{bindings.ActivitiesId.inputValue}"
                                                                                 label="#{bindings.ActivitiesId.label}"
                                                                                 required="#{bindings.ActivitiesId.hints.mandatory}"
                                                                                 shortDesc="#{bindings.ActivitiesId.hints.tooltip}"
                                                                                 id="soc13"
-                                                                                readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
+                                                                                readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
+                                                                                labelStyle="font-weight: bold;">
                                                                 <f:selectItems value="#{bindings.ActivitiesId.items}"
                                                                                id="si13"/>
                                                                 <f:validator binding="#{bindings.ActivitiesId.validator}"/>
@@ -569,7 +581,7 @@
                                                                     <f:validator binding="#{bindings.ZamerId.validator}"/>
                                                                 </af:inputComboboxListOfValues>
                                                                 <af:inputComboboxListOfValues id="zamernameId"
-                                                                                              popupTitle="Search and Select: #{bindings.Zamername.hints.label}"
+                                                                                              popupTitle="Найти и выбрать: #{bindings.Zamername.hints.label}"
                                                                                               value="#{bindings.Zamername.inputValue}"
                                                                                               label="#{bindings.Zamername.hints.label}"
                                                                                               model="#{bindings.Zamername.listOfValuesModel}"
@@ -578,12 +590,15 @@
                                                                                               shortDesc="#{bindings.Zamername.hints.tooltip}"
                                                                                               readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
                                                                                               autoSubmit="true"
-                                                                                              partialTriggers="zamerIdId">
+                                                                                              partialTriggers="zamerIdId"
+                                                                                              createPopupId="pCreateZamer"
+                                                                                              labelStyle="font-weight: bold;">
                                                                     <f:validator binding="#{bindings.Zamername.validator}"/>
                                                                 </af:inputComboboxListOfValues>
                                                             </af:panelGroupLayout>
                                                         </af:panelGroupLayout>
                                                     </af:panelLabelAndMessage>
+                                                    <af:spacer width="10" height="10" id="s8"/>
                                                 </af:panelFormLayout>
                                                 <f:facet name="toolbar">
                                                     <af:toolbar id="t3">
@@ -757,6 +772,40 @@
                                             </af:inputText>
                                         </af:panelFormLayout>
                                         <f:facet name="buttonBar"/>
+                                    </af:dialog>
+                                </af:popup>
+                                <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateZamer"
+                                          popupFetchListener="#{orders.onPopupCreateKontrag}">
+                                    <af:dialog id="d3" title="Создать замерщика">
+                                        <f:facet name="buttonBar"/>
+                                        <af:panelFormLayout id="pfl5">
+                                            <af:inputComboboxListOfValues id="iclov2"
+                                                                          popupTitle="Search and Select: #{bindings.ParentId.hints.label}"
+                                                                          value="#{bindings.ParentId.inputValue}"
+                                                                          label="#{bindings.ParentId.hints.label}"
+                                                                          model="#{bindings.ParentId.listOfValuesModel}"
+                                                                          required="#{bindings.ParentId.hints.mandatory}"
+                                                                          columns="#{bindings.ParentId.hints.displayWidth}"
+                                                                          shortDesc="#{bindings.ParentId.hints.tooltip}">
+                                                <f:validator binding="#{bindings.ParentId.validator}"/>
+                                            </af:inputComboboxListOfValues>
+                                            <af:inputText value="#{bindings.Parentname.inputValue}"
+                                                          label="#{bindings.Parentname.hints.label}"
+                                                          required="#{bindings.Parentname.hints.mandatory}"
+                                                          columns="#{bindings.Parentname.hints.displayWidth}"
+                                                          maximumLength="#{bindings.Parentname.hints.precision}"
+                                                          shortDesc="#{bindings.Parentname.hints.tooltip}" id="it25">
+                                                <f:validator binding="#{bindings.Parentname.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.Fullname.inputValue}"
+                                                          label="#{bindings.Fullname.hints.label}"
+                                                          required="#{bindings.Fullname.hints.mandatory}"
+                                                          columns="#{bindings.Fullname.hints.displayWidth}"
+                                                          maximumLength="#{bindings.Fullname.hints.precision}"
+                                                          shortDesc="#{bindings.Fullname.hints.tooltip}" id="it26">
+                                                <f:validator binding="#{bindings.Fullname.validator}"/>
+                                            </af:inputText>
+                                        </af:panelFormLayout>
                                     </af:dialog>
                                 </af:popup>
                             </af:showDetailItem>

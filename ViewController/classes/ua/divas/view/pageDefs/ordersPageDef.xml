@@ -202,5 +202,10 @@
         <Item Value="IsBuyer"/>
       </AttrNames>
     </attributeValues>
+    <attributeValues IterBinding="KontragentsView1Iterator" id="Parentname">
+      <AttrNames>
+        <Item Value="Parentname"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>
