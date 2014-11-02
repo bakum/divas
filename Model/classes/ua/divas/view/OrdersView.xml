@@ -235,6 +235,64 @@
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
+  <ListBinding
+    Name="LOV_ZamerId"
+    ListVOName="KontragentsView1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ZamerId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Zamername"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="KontragentsZamerCriteria"
+      Hint="showAndExecute"/>
+    <ViewCriteriaUsage
+      Name="KontragentsZamerCriteria"
+      FullName="ua.divas.view.KontragentsView.KontragentsZamerCriteria"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Zamername"
+    ListVOName="KontragentsView1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Zamername"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ZamerId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Fullname"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="KontragentsZamerCriteria"
+      Hint="showAndExecute"/>
+    <ViewCriteriaUsage
+      Name="KontragentsZamerCriteria"
+      FullName="ua.divas.view.KontragentsView.KontragentsZamerCriteria"/>
+  </ListBinding>
   <SQLQuery><![CDATA[SELECT Orders.ID, 
        Orders.DAT, 
        Orders.NUM, 
@@ -253,7 +311,9 @@
        Orders.FIRM_ID, 
        Orders.ACTIVITIES_ID, 
        Orders.STATUS_ID,
-       (select 0 from dual) o_editable
+       (select 0 from dual) o_editable,
+       Orders.ZAMER_ID,
+       (select fullname from kontragents where id = ZAMER_ID) ZamerName
 FROM  ORDERS Orders
 where deleted = 0]]></SQLQuery>
   <EntityUsage
@@ -484,6 +544,49 @@ where deleted = 0]]></SQLQuery>
     AliasName="O_EDITABLE"
     Expression="O_EDITABLE"
     SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ZamerId"
+    PrecisionRule="true"
+    EntityAttrName="ZamerId"
+    EntityUsage="Orders"
+    AliasName="ZAMER_ID"
+    LOVName="LOV_ZamerId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Zamername"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="150"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ZAMERNAME"
+    Expression="ZAMERNAME"
+    SQLType="VARCHAR"
+    LOVName="LOV_Zamername">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="150"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.OrdersView.Zamername_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.OrdersView.Zamername_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="TotalSumUslugi"
     IsUpdateable="false"

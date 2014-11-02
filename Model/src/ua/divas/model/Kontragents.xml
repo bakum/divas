@@ -271,6 +271,72 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="IsBuyer"
+    IsNotNull="true"
+    Precision="1"
+    Scale="0"
+    ColumnName="IS_BUYER"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="KONTRAGENTS">
+    <TransientExpression><![CDATA[0]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Kontragents.IsBuyer_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Kontragents.IsBuyer_TOOLTIP"/>
+        <CONTROLTYPE
+          Value="check_box"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="IsMeasurer"
+    IsNotNull="true"
+    Precision="1"
+    Scale="0"
+    ColumnName="IS_MEASURER"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="KONTRAGENTS">
+    <TransientExpression><![CDATA[0]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Kontragents.IsMeasurer_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Kontragents.IsMeasurer_TOOLTIP"/>
+        <CONTROLTYPE
+          Value="check_box"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="IsSupplier"
+    IsNotNull="true"
+    Precision="1"
+    Scale="0"
+    ColumnName="IS_SUPPLIER"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="KONTRAGENTS">
+    <TransientExpression><![CDATA[0]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Kontragents.IsSupplier_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Kontragents.IsSupplier_TOOLTIP"/>
+        <CONTROLTYPE
+          Value="check_box"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="Kontragents"
     Association="ua.divas.model.KontragentsKontragentsFk1Assoc"
@@ -311,6 +377,13 @@
     Association="ua.divas.model.OrdersTpUslugiFk3Assoc"
     AssociationEnd="ua.divas.model.OrdersTpUslugiFk3Assoc.OrdersTpUslugi"
     AssociationOtherEnd="ua.divas.model.OrdersTpUslugiFk3Assoc.Kontragents"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="Orders1"
+    Association="ua.divas.model.OrdersZamerFkAssoc"
+    AssociationEnd="ua.divas.model.OrdersZamerFkAssoc.Orders1"
+    AssociationOtherEnd="ua.divas.model.OrdersZamerFkAssoc.Kontragents1"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <Key

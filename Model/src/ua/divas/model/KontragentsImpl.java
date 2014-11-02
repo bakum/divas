@@ -44,12 +44,16 @@ public class KontragentsImpl extends DivasEntity {
         UrFiz,
         Version,
         Predefined,
+        IsBuyer,
+        IsMeasurer,
+        IsSupplier,
         Kontragents,
         ParentIdKontragents,
         CompaignsDetails,
         ContactDetails,
         Orders,
-        OrdersTpUslugi;
+        OrdersTpUslugi,
+        Orders1;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -86,12 +90,16 @@ public class KontragentsImpl extends DivasEntity {
     public static final int URFIZ = AttributesEnum.UrFiz.index();
     public static final int VERSION = AttributesEnum.Version.index();
     public static final int PREDEFINED = AttributesEnum.Predefined.index();
+    public static final int ISBUYER = AttributesEnum.IsBuyer.index();
+    public static final int ISMEASURER = AttributesEnum.IsMeasurer.index();
+    public static final int ISSUPPLIER = AttributesEnum.IsSupplier.index();
     public static final int KONTRAGENTS = AttributesEnum.Kontragents.index();
     public static final int PARENTIDKONTRAGENTS = AttributesEnum.ParentIdKontragents.index();
     public static final int COMPAIGNSDETAILS = AttributesEnum.CompaignsDetails.index();
     public static final int CONTACTDETAILS = AttributesEnum.ContactDetails.index();
     public static final int ORDERS = AttributesEnum.Orders.index();
     public static final int ORDERSTPUSLUGI = AttributesEnum.OrdersTpUslugi.index();
+    public static final int ORDERS1 = AttributesEnum.Orders1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -301,6 +309,54 @@ public class KontragentsImpl extends DivasEntity {
 
 
     /**
+     * Gets the attribute value for IsBuyer, using the alias name IsBuyer.
+     * @return the value of IsBuyer
+     */
+    public Integer getIsBuyer() {
+        return (Integer) getAttributeInternal(ISBUYER);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for IsBuyer.
+     * @param value value to set the IsBuyer
+     */
+    public void setIsBuyer(Integer value) {
+        setAttributeInternal(ISBUYER, value);
+    }
+
+    /**
+     * Gets the attribute value for IsMeasurer, using the alias name IsMeasurer.
+     * @return the value of IsMeasurer
+     */
+    public Integer getIsMeasurer() {
+        return (Integer) getAttributeInternal(ISMEASURER);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for IsMeasurer.
+     * @param value value to set the IsMeasurer
+     */
+    public void setIsMeasurer(Integer value) {
+        setAttributeInternal(ISMEASURER, value);
+    }
+
+    /**
+     * Gets the attribute value for IsSupplier, using the alias name IsSupplier.
+     * @return the value of IsSupplier
+     */
+    public Integer getIsSupplier() {
+        return (Integer) getAttributeInternal(ISSUPPLIER);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for IsSupplier.
+     * @param value value to set the IsSupplier
+     */
+    public void setIsSupplier(Integer value) {
+        setAttributeInternal(ISSUPPLIER, value);
+    }
+
+    /**
      * @return the associated entity oracle.jbo.RowIterator.
      */
     public RowIterator getKontragents() {
@@ -347,6 +403,13 @@ public class KontragentsImpl extends DivasEntity {
      */
     public RowIterator getOrdersTpUslugi() {
         return (RowIterator) getAttributeInternal(ORDERSTPUSLUGI);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getOrders1() {
+        return (RowIterator) getAttributeInternal(ORDERS1);
     }
 
     /**

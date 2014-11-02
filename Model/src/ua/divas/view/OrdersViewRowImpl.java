@@ -64,6 +64,8 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         ActivitiesId,
         StatusId,
         OEditable,
+        ZamerId,
+        Zamername,
         TotalSumUslugi,
         CountUslug,
         OrdersTpUslugiView,
@@ -120,6 +122,8 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     public static final int ACTIVITIESID = AttributesEnum.ActivitiesId.index();
     public static final int STATUSID = AttributesEnum.StatusId.index();
     public static final int OEDITABLE = AttributesEnum.OEditable.index();
+    public static final int ZAMERID = AttributesEnum.ZamerId.index();
+    public static final int ZAMERNAME = AttributesEnum.Zamername.index();
     public static final int TOTALSUMUSLUGI = AttributesEnum.TotalSumUslugi.index();
     public static final int COUNTUSLUG = AttributesEnum.CountUslug.index();
     public static final int ORDERSTPUSLUGIVIEW = AttributesEnum.OrdersTpUslugiView.index();
@@ -465,6 +469,38 @@ public class OrdersViewRowImpl extends ViewRowImpl {
      */
     public Long getCountUslug() {
         return (Long) getAttributeInternal(COUNTUSLUG);
+    }
+
+    /**
+     * Gets the attribute value for ZAMER_ID using the alias name ZamerId.
+     * @return the ZAMER_ID
+     */
+    public String getZamerId() {
+        return (String) getAttributeInternal(ZAMERID);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for ZAMER_ID using the alias name ZamerId.
+     * @param value value to set the ZAMER_ID
+     */
+    public void setZamerId(String value) {
+        setAttributeInternal(ZAMERID, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute Zamername.
+     * @return the Zamername
+     */
+    public String getZamername() {
+        return (String) getAttributeInternal(ZAMERNAME);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for the calculated attribute Zamername.
+     * @param value value to set the  Zamername
+     */
+    public void setZamername(String value) {
+        setAttributeInternal(ZAMERNAME, value);
     }
 
     /**

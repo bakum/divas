@@ -46,6 +46,7 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         Id,
         IsGroup,
         ParentId,
+        Parentname,
         Fullname,
         Deleted,
         Inn,
@@ -56,12 +57,16 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         Version,
         Predefined,
         Editable,
+        IsSupplier,
+        IsBuyer,
+        IsMeasurer,
         KontragentsView,
         CompaignsDetailsView,
         ContactDetailsView,
         OrdersView,
         ContactDetailsView1,
         OrdersTpUslugiView,
+        OrdersView1,
         KontragentsView1;
         static AttributesEnum[] vals = null;
         ;
@@ -91,6 +96,7 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
     public static final int ID = AttributesEnum.Id.index();
     public static final int ISGROUP = AttributesEnum.IsGroup.index();
     public static final int PARENTID = AttributesEnum.ParentId.index();
+    public static final int PARENTNAME = AttributesEnum.Parentname.index();
     public static final int FULLNAME = AttributesEnum.Fullname.index();
     public static final int DELETED = AttributesEnum.Deleted.index();
     public static final int INN = AttributesEnum.Inn.index();
@@ -101,12 +107,16 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
     public static final int VERSION = AttributesEnum.Version.index();
     public static final int PREDEFINED = AttributesEnum.Predefined.index();
     public static final int EDITABLE = AttributesEnum.Editable.index();
+    public static final int ISSUPPLIER = AttributesEnum.IsSupplier.index();
+    public static final int ISBUYER = AttributesEnum.IsBuyer.index();
+    public static final int ISMEASURER = AttributesEnum.IsMeasurer.index();
     public static final int KONTRAGENTSVIEW = AttributesEnum.KontragentsView.index();
     public static final int COMPAIGNSDETAILSVIEW = AttributesEnum.CompaignsDetailsView.index();
     public static final int CONTACTDETAILSVIEW = AttributesEnum.ContactDetailsView.index();
     public static final int ORDERSVIEW = AttributesEnum.OrdersView.index();
     public static final int CONTACTDETAILSVIEW1 = AttributesEnum.ContactDetailsView1.index();
     public static final int ORDERSTPUSLUGIVIEW = AttributesEnum.OrdersTpUslugiView.index();
+    public static final int ORDERSVIEW1 = AttributesEnum.OrdersView1.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
 
     /**
@@ -171,6 +181,14 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         setAttributeInternal(PARENTID, value);
     }
 
+
+    /**
+     * Gets the attribute value for the calculated attribute Parentname.
+     * @return the Parentname
+     */
+    public String getParentname() {
+        return (String) getAttributeInternal(PARENTNAME);
+    }
 
     /**
      * Gets the attribute value for FULLNAME using the alias name Fullname.
@@ -334,6 +352,54 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
 
 
     /**
+     * Gets the attribute value for IS_BUYER using the alias name IsBuyer.
+     * @return the IS_BUYER
+     */
+    public Integer getIsBuyer() {
+        return (Integer) getAttributeInternal(ISBUYER);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for IS_BUYER using the alias name IsBuyer.
+     * @param value value to set the IS_BUYER
+     */
+    public void setIsBuyer(Integer value) {
+        setAttributeInternal(ISBUYER, value);
+    }
+
+    /**
+     * Gets the attribute value for IS_MEASURER using the alias name IsMeasurer.
+     * @return the IS_MEASURER
+     */
+    public Integer getIsMeasurer() {
+        return (Integer) getAttributeInternal(ISMEASURER);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for IS_MEASURER using the alias name IsMeasurer.
+     * @param value value to set the IS_MEASURER
+     */
+    public void setIsMeasurer(Integer value) {
+        setAttributeInternal(ISMEASURER, value);
+    }
+
+    /**
+     * Gets the attribute value for IS_SUPPLIER using the alias name IsSupplier.
+     * @return the IS_SUPPLIER
+     */
+    public Integer getIsSupplier() {
+        return (Integer) getAttributeInternal(ISSUPPLIER);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for IS_SUPPLIER using the alias name IsSupplier.
+     * @param value value to set the IS_SUPPLIER
+     */
+    public void setIsSupplier(Integer value) {
+        setAttributeInternal(ISSUPPLIER, value);
+    }
+
+    /**
      * Gets the associated <code>RowIterator</code> using master-detail link KontragentsView.
      */
     public RowIterator getKontragentsView() {
@@ -373,6 +439,13 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getOrdersTpUslugiView() {
         return (RowIterator) getAttributeInternal(ORDERSTPUSLUGIVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link OrdersView1.
+     */
+    public RowIterator getOrdersView1() {
+        return (RowIterator) getAttributeInternal(ORDERSVIEW1);
     }
 
     /**

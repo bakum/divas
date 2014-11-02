@@ -27,6 +27,10 @@
     Name="KonName"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <Variable
+    Name="ZamerName"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="KontragentsView1"
     ViewObjectName="ua.divas.view.KontragentsView"
@@ -59,6 +63,7 @@
   <SQLQuery><![CDATA[SELECT Kontragents.ID, 
        Kontragents.IS_GROUP, 
        Kontragents.PARENT_ID,
+       (select fullname from kontragents where id = parent_id) ParentName,
        Kontragents.FULLNAME, 
        Kontragents.DELETED, 
        Kontragents.INN, 
@@ -68,7 +73,10 @@
        Kontragents.UR_FIZ, 
        Kontragents.VERSION, 
        Kontragents.PREDEFINED,
-       (select 0 from dual) editable
+       (select 0 from dual) editable,
+        Kontragents.IS_SUPPLIER,
+        Kontragents.IS_BUYER,
+        Kontragents.IS_MEASURER
 FROM  KONTRAGENTS Kontragents
 where deleted = 0
 order by Kontragents.FULLNAME]]></SQLQuery>
@@ -102,6 +110,29 @@ order by Kontragents.FULLNAME]]></SQLQuery>
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Parentname"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="150"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARENTNAME"
+    Expression="PARENTNAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="150"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.KontragentsView.Parentname_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.KontragentsView.Parentname_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -210,6 +241,27 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     Expression="EDITABLE"
     SQLType="NUMERIC"
     IsNotNull="true"/>
+  <ViewAttribute
+    Name="IsSupplier"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="IsSupplier"
+    EntityUsage="Kontragents"
+    AliasName="IS_SUPPLIER"/>
+  <ViewAttribute
+    Name="IsBuyer"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="IsBuyer"
+    EntityUsage="Kontragents"
+    AliasName="IS_BUYER"/>
+  <ViewAttribute
+    Name="IsMeasurer"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="IsMeasurer"
+    EntityUsage="Kontragents"
+    AliasName="IS_MEASURER"/>
   <ViewCriteria
     Name="KontragentsGroup"
     ViewObjectName="ua.divas.view.KontragentsView"
@@ -297,6 +349,14 @@ order by Kontragents.FULLNAME]]></SQLQuery>
           Value=":KonName"
           GenerateIsNullClauseForBindVars="false"
           IsBindVarValue="true"
+          Required="Optional"/>
+        <ViewCriteriaItem
+          Name="IsBuyer"
+          ViewAttribute="IsBuyer"
+          Operator="="
+          Conjunction="AND"
+          Value="1"
+          GenerateIsNullClauseForBindVars="false"
           Required="Optional"/>
       </ViewCriteriaRow>
     </ViewCriteria>
@@ -417,6 +477,67 @@ order by Kontragents.FULLNAME]]></SQLQuery>
         GenerateIsNullClauseForBindVars="false"
         IsBindVarValue="true"
         Required="Optional"/>
+      <ViewCriteriaItem
+        Name="IsBuyer"
+        ViewAttribute="IsBuyer"
+        Operator="="
+        Conjunction="AND"
+        Value="1"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="KontragentsZamerCriteria"
+    ViewObjectName="ua.divas.view.KontragentsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="KontragentsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="IsGroup"
+        ViewAttribute="IsGroup"
+        Operator="="
+        Conjunction="AND"
+        Value="0"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Fullname"
+        ViewAttribute="Fullname"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Value=":ZamerName"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="IsMeasurer"
+        ViewAttribute="IsMeasurer"
+        Operator="="
+        Conjunction="AND"
+        Value="1"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
   <ViewLinkAccessor
@@ -447,6 +568,11 @@ order by Kontragents.FULLNAME]]></SQLQuery>
   <ViewLinkAccessor
     Name="OrdersTpUslugiView"
     ViewLink="ua.divas.view.OrdersTpUslugiFk3Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="OrdersView1"
+    ViewLink="ua.divas.view.OrdersZamerFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <ClientInterface

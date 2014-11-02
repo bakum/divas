@@ -195,5 +195,7 @@
         <Item Value="Editable"/>
       </AttrNames>
     </attributeValues>
+    <listOfValues IterBinding="OrdersView1Iterator" StaticList="false" Uses="LOV_Zamername" id="Zamername"/>
+    <listOfValues IterBinding="OrdersView1Iterator" StaticList="false" Uses="LOV_ZamerId" id="ZamerId"/>
   </bindings>
 </pageDefinition>

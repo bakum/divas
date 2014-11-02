@@ -720,8 +720,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrdersView6.
      * @return OrdersView6
      */
-    public OrdersViewImpl getOrdersView6() {
-        return (OrdersViewImpl) findViewObject("OrdersView6");
+    public OrdersViewImpl getOrdersViewKontragent() {
+        return (OrdersViewImpl) findViewObject("OrdersViewKontragent");
     }
 
     /**
@@ -2368,6 +2368,22 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getOrdersTpUslugiFk2Link1() {
         return (ViewLinkImpl) findViewLink("OrdersTpUslugiFk2Link1");
+    }
+
+    /**
+     * Container's getter for OrdersView10.
+     * @return OrdersView10
+     */
+    public OrdersViewImpl getOrdersViewZamer() {
+        return (OrdersViewImpl) findViewObject("OrdersViewZamer");
+    }
+
+    /**
+     * Container's getter for OrdersZamerFkLink1.
+     * @return OrdersZamerFkLink1
+     */
+    public ViewLinkImpl getOrdersZamerFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrdersZamerFkLink1");
     }
 }
 

@@ -51,6 +51,7 @@ public class OrdersImpl extends DivasEntity {
         FirmId,
         ActivitiesId,
         StatusId,
+        ZamerId,
         Currency,
         Divisions,
         Firms,
@@ -59,7 +60,8 @@ public class OrdersImpl extends DivasEntity {
         OrderStatus,
         TypeOfActivities,
         Users,
-        OrdersTpUslugi;
+        OrdersTpUslugi,
+        Kontragents1;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -101,6 +103,7 @@ public class OrdersImpl extends DivasEntity {
     public static final int FIRMID = AttributesEnum.FirmId.index();
     public static final int ACTIVITIESID = AttributesEnum.ActivitiesId.index();
     public static final int STATUSID = AttributesEnum.StatusId.index();
+    public static final int ZAMERID = AttributesEnum.ZamerId.index();
     public static final int CURRENCY = AttributesEnum.Currency.index();
     public static final int DIVISIONS = AttributesEnum.Divisions.index();
     public static final int FIRMS = AttributesEnum.Firms.index();
@@ -110,6 +113,7 @@ public class OrdersImpl extends DivasEntity {
     public static final int TYPEOFACTIVITIES = AttributesEnum.TypeOfActivities.index();
     public static final int USERS = AttributesEnum.Users.index();
     public static final int ORDERSTPUSLUGI = AttributesEnum.OrdersTpUslugi.index();
+    public static final int KONTRAGENTS1 = AttributesEnum.Kontragents1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -398,6 +402,22 @@ public class OrdersImpl extends DivasEntity {
     }
 
     /**
+     * Gets the attribute value for ZamerId, using the alias name ZamerId.
+     * @return the value of ZamerId
+     */
+    public String getZamerId() {
+        return (String) getAttributeInternal(ZAMERID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for ZamerId.
+     * @param value value to set the ZamerId
+     */
+    public void setZamerId(String value) {
+        setAttributeInternal(ZAMERID, value);
+    }
+
+    /**
      * @return the associated entity CurrencyImpl.
      */
     public CurrencyImpl getCurrency() {
@@ -514,6 +534,20 @@ public class OrdersImpl extends DivasEntity {
      */
     public RowIterator getOrdersTpUslugi() {
         return (RowIterator) getAttributeInternal(ORDERSTPUSLUGI);
+    }
+
+    /**
+     * @return the associated entity KontragentsImpl.
+     */
+    public KontragentsImpl getKontragents1() {
+        return (KontragentsImpl) getAttributeInternal(KONTRAGENTS1);
+    }
+
+    /**
+     * Sets <code>value</code> as the associated entity KontragentsImpl.
+     */
+    public void setKontragents1(KontragentsImpl value) {
+        setAttributeInternal(KONTRAGENTS1, value);
     }
 
     /**

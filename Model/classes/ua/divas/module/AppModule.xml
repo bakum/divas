@@ -273,7 +273,7 @@
     Name="OrdersView5"
     ViewObjectName="ua.divas.view.OrdersView"/>
   <ViewUsage
-    Name="OrdersView6"
+    Name="OrdersViewKontragent"
     ViewObjectName="ua.divas.view.OrdersView"/>
   <ViewUsage
     Name="OrdersView7"
@@ -565,6 +565,9 @@
   <ViewUsage
     Name="OrdersTpUslugiView4"
     ViewObjectName="ua.divas.view.OrdersTpUslugiView"/>
+  <ViewUsage
+    Name="OrdersViewZamer"
+    ViewObjectName="ua.divas.view.OrdersView"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -695,7 +698,7 @@
     Name="OrdersKontragentsFk1Link1"
     ViewLinkObjectName="ua.divas.view.OrdersKontragentsFk1Link"
     SrcViewUsageName="ua.divas.module.AppModule.KontragentsView1"
-    DstViewUsageName="ua.divas.module.AppModule.OrdersView6"
+    DstViewUsageName="ua.divas.module.AppModule.OrdersViewKontragent"
     Reversed="false"/>
   <ViewLinkUsage
     Name="OrdersStatusFkLink1"
@@ -1206,6 +1209,12 @@
     ViewLinkObjectName="ua.divas.view.OrdersTpUslugiFk2Link"
     SrcViewUsageName="ua.divas.module.AppModule.NomenklaturaView1"
     DstViewUsageName="ua.divas.module.AppModule.OrdersTpUslugiView4"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="OrdersZamerFkLink1"
+    ViewLinkObjectName="ua.divas.view.OrdersZamerFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.KontragentsView1"
+    DstViewUsageName="ua.divas.module.AppModule.OrdersViewZamer"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">

@@ -363,6 +363,26 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="ZamerId"
+    Precision="50"
+    ColumnName="ZAMER_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="ORDERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.ZamerId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.ZamerId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="Currency"
     Association="ua.divas.model.OrdersCurrencyFk1Assoc"
@@ -426,6 +446,13 @@
     AssociationOtherEnd="ua.divas.model.OrdersTpUslugiFk1Assoc.Orders"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="Kontragents1"
+    Association="ua.divas.model.OrdersZamerFkAssoc"
+    AssociationEnd="ua.divas.model.OrdersZamerFkAssoc.Kontragents1"
+    AssociationOtherEnd="ua.divas.model.OrdersZamerFkAssoc.Orders1"
+    Type="ua.divas.model.KontragentsImpl"
+    IsUpdateable="true"/>
   <Key
     Name="OrdersChk1">
     <DesignTime>
@@ -540,6 +567,17 @@
     </DesignTime>
     <AttrArray Name="Attributes">
       <Item Value="ua.divas.model.Orders.UserId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_Orders">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="KONTRAGENTS_ID_CHECK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_ORDERS"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="ua.divas.model.Orders.ZamerId"/>
     </AttrArray>
   </Key>
   <ResourceBundle>

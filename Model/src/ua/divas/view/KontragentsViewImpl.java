@@ -211,5 +211,21 @@ public class KontragentsViewImpl extends DivasView implements KontragentsView {
     public void setKonName(String value) {
         ensureVariableManager().setVariableValue("KonName", value);
     }
+
+    /**
+     * Returns the variable value for ZamerName.
+     * @return variable value for ZamerName
+     */
+    public String getZamerName() {
+        return (String) ensureVariableManager().getVariableValue("ZamerName");
+    }
+
+    /**
+     * Sets <code>value</code> for variable ZamerName.
+     * @param value value to bind as ZamerName
+     */
+    public void setZamerName(String value) {
+        ensureVariableManager().setVariableValue("ZamerName", value);
+    }
 }
 

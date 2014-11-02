@@ -360,7 +360,7 @@
                                           contentDelivery="lazyUncached" resetEditableValues="whenCanceled"
                                           popupCanceledListener="#{orders.onOrderCancel}"
                                           popupFetchListener="#{orders.onPopupFetch}">
-                                    <af:dialog id="d1" title="Редактировать заказ:" resize="on" contentWidth="600"
+                                    <af:dialog id="d1" title="Редактировать заказ:" resize="on" contentWidth="650"
                                                contentHeight="450" dialogListener="#{orders.dialogListener}">
                                         <f:facet name="buttonBar"/>
                                         <af:panelAccordion id="pa1">
@@ -542,16 +542,47 @@
                                                                        id="it15"
                                                                        readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
                                                                        rows="3"/>
-                                                    <af:selectOneChoice value="#{bindings.ActivitiesId.inputValue}"
-                                                                        label="#{bindings.ActivitiesId.label}"
-                                                                        required="#{bindings.ActivitiesId.hints.mandatory}"
-                                                                        shortDesc="#{bindings.ActivitiesId.hints.tooltip}"
-                                                                        id="soc13"
-                                                                        readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
-                                                        <f:selectItems value="#{bindings.ActivitiesId.items}"
-                                                                       id="si13"/>
-                                                        <f:validator binding="#{bindings.ActivitiesId.validator}"/>
-                                                    </af:selectOneChoice>
+                                                    <af:panelLabelAndMessage label="Label 2" id="plam8">
+                                                        <af:panelGroupLayout id="pgl8" layout="horizontal">
+                                                            <af:selectOneChoice value="#{bindings.ActivitiesId.inputValue}"
+                                                                                label="#{bindings.ActivitiesId.label}"
+                                                                                required="#{bindings.ActivitiesId.hints.mandatory}"
+                                                                                shortDesc="#{bindings.ActivitiesId.hints.tooltip}"
+                                                                                id="soc13"
+                                                                                readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
+                                                                <f:selectItems value="#{bindings.ActivitiesId.items}"
+                                                                               id="si13"/>
+                                                                <f:validator binding="#{bindings.ActivitiesId.validator}"/>
+                                                            </af:selectOneChoice>
+                                                            <af:panelGroupLayout id="pgl9">
+                                                                <af:inputComboboxListOfValues id="zamerIdId"
+                                                                                              popupTitle="Search and Select: #{bindings.ZamerId.hints.label}"
+                                                                                              value="#{bindings.ZamerId.inputValue}"
+                                                                                              label="#{bindings.ZamerId.hints.label}"
+                                                                                              model="#{bindings.ZamerId.listOfValuesModel}"
+                                                                                              required="#{bindings.ZamerId.hints.mandatory}"
+                                                                                              columns="#{bindings.ZamerId.hints.displayWidth}"
+                                                                                              shortDesc="#{bindings.ZamerId.hints.tooltip}"
+                                                                                              autoSubmit="true"
+                                                                                              partialTriggers="zamernameId">
+                                                                    <f:validator binding="#{bindings.ZamerId.validator}"/>
+                                                                </af:inputComboboxListOfValues>
+                                                                <af:inputComboboxListOfValues id="zamernameId"
+                                                                                              popupTitle="Search and Select: #{bindings.Zamername.hints.label}"
+                                                                                              value="#{bindings.Zamername.inputValue}"
+                                                                                              label="#{bindings.Zamername.hints.label}"
+                                                                                              model="#{bindings.Zamername.listOfValuesModel}"
+                                                                                              required="#{bindings.Zamername.hints.mandatory}"
+                                                                                              columns="#{bindings.Zamername.hints.displayWidth}"
+                                                                                              shortDesc="#{bindings.Zamername.hints.tooltip}"
+                                                                                              readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
+                                                                                              autoSubmit="true"
+                                                                                              partialTriggers="zamerIdId">
+                                                                    <f:validator binding="#{bindings.Zamername.validator}"/>
+                                                                </af:inputComboboxListOfValues>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelLabelAndMessage>
                                                 </af:panelFormLayout>
                                                 <f:facet name="toolbar">
                                                     <af:toolbar id="t3">
@@ -663,10 +694,13 @@
                                                                 </af:inputText>
                                                             </af:panelLabelAndMessage>
                                                             <f:facet name="footer">
-                                                                <af:button actionListener="#{bindings.CreateInsert2.execute}"
-                                                                           text="Добавить контакт"
-                                                                           disabled="#{!bindings.CreateInsert2.enabled}"
-                                                                           id="b8"/>
+                                                                <af:spacer width="10" height="10" id="s7"/>
+                                                                <af:panelGroupLayout id="pgl7" layout="horizontal">
+                                                                    <af:button actionListener="#{bindings.CreateInsert2.execute}"
+                                                                               text="Добавить контакт"
+                                                                               disabled="#{!bindings.CreateInsert2.enabled}"
+                                                                               id="b8"/>
+                                                                </af:panelGroupLayout>
                                                                 <af:spacer width="10" height="10" id="s6"/>
                                                             </f:facet>
                                                         </af:panelFormLayout>
@@ -674,11 +708,13 @@
                                                     <af:separator id="s5"/>
                                                 </af:panelFormLayout>
                                                 <f:facet name="toolbar">
-                                                    <af:button text="Редактировать" id="b7" icon="/img/edit-16.gif">
-                                                        <af:setPropertyListener from="#{1}"
-                                                                                to="#{bindings.Editable1.inputValue}"
-                                                                                type="action"/>
-                                                    </af:button>
+                                                    <af:toolbar id="t5">
+                                                        <af:button text="Редактировать" id="b7" icon="/img/edit-16.gif">
+                                                            <af:setPropertyListener from="#{1}"
+                                                                                    to="#{bindings.Editable1.inputValue}"
+                                                                                    type="action"/>
+                                                        </af:button>
+                                                    </af:toolbar>
                                                 </f:facet>
                                             </af:showDetailItem>
                                             <af:showDetailItem text="Услуги" id="sdi3"
