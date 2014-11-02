@@ -23,6 +23,9 @@
                                                        id="b4">
                                                 <af:resetActionListener/>
                                             </af:button>
+                                            <af:button text="Обновить" id="b6"
+                                                       actionListener="#{orders.onRefreshOrders}"
+                                                       disabled="#{bindings.Commit.enabled}"/>
                                         </af:toolbar>
                                     </f:facet>
                                     <af:table value="#{bindings.OrdersView1.collectionModel}" var="row"
@@ -595,7 +598,8 @@
                                                                       columns="#{bindings.Fullname.hints.displayWidth}"
                                                                       maximumLength="#{bindings.Fullname.hints.precision}"
                                                                       shortDesc="#{bindings.Fullname.hints.tooltip}"
-                                                                      id="it17">
+                                                                      id="it17"
+                                                                      readOnly="#{bindings.Editable1.inputValue == 1 ? false : true}">
                                                             <f:validator binding="#{bindings.Fullname.validator}"/>
                                                         </af:inputText>
                                                         <af:inputText value="#{bindings.Namefull.inputValue}"
@@ -604,13 +608,15 @@
                                                                       columns="#{bindings.Namefull.hints.displayWidth}"
                                                                       maximumLength="#{bindings.Namefull.hints.precision}"
                                                                       shortDesc="#{bindings.Namefull.hints.tooltip}"
-                                                                      id="it18">
+                                                                      id="it18"
+                                                                      readOnly="#{bindings.Editable1.inputValue == 1 ? false : true}">
                                                             <f:validator binding="#{bindings.Namefull.validator}"/>
                                                         </af:inputText>
                                                         <af:selectBooleanCheckbox value="#{bindings.UrFiz.inputValue}"
                                                                                   label="#{bindings.UrFiz.label}"
                                                                                   shortDesc="#{bindings.UrFiz.hints.tooltip}"
-                                                                                  id="sbc2"/>
+                                                                                  id="sbc2"
+                                                                                  readOnly="#{bindings.Editable1.inputValue == 1 ? false : true}"/>
                                                     </af:panelLabelAndMessage>
                                                     <f:facet name="footer">
                                                         <af:panelFormLayout id="pfl3">
@@ -656,10 +662,24 @@
                                                                                       pattern="#{bindings.Editable.format}"/>
                                                                 </af:inputText>
                                                             </af:panelLabelAndMessage>
+                                                            <f:facet name="footer">
+                                                                <af:button actionListener="#{bindings.CreateInsert2.execute}"
+                                                                           text="Добавить контакт"
+                                                                           disabled="#{!bindings.CreateInsert2.enabled}"
+                                                                           id="b8"/>
+                                                                <af:spacer width="10" height="10" id="s6"/>
+                                                            </f:facet>
                                                         </af:panelFormLayout>
                                                     </f:facet>
                                                     <af:separator id="s5"/>
                                                 </af:panelFormLayout>
+                                                <f:facet name="toolbar">
+                                                    <af:button text="Редактировать" id="b7" icon="/img/edit-16.gif">
+                                                        <af:setPropertyListener from="#{1}"
+                                                                                to="#{bindings.Editable1.inputValue}"
+                                                                                type="action"/>
+                                                    </af:button>
+                                                </f:facet>
                                             </af:showDetailItem>
                                             <af:showDetailItem text="Услуги" id="sdi3"
                                                                stretchChildren="first"/>
@@ -669,7 +689,8 @@
                                 <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateKontrag"
                                           contentDelivery="lazyUncached"
                                           popupFetchListener="#{orders.onPopupCreateKontrag}">
-                                    <af:dialog id="d2" title="Cоздать контрагента">
+                                    <af:dialog id="d2" title="Cоздать контрагента"
+                                               dialogListener="#{orders.onNewKontragentDialogListener}">
                                         <af:panelFormLayout id="pfl4">
                                             <af:inputText value="#{bindings.Id1.inputValue}"
                                                           label="#{bindings.Id1.hints.label}"

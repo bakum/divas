@@ -188,5 +188,12 @@
     <action IterBinding="KontragentsView1Iterator" id="CreateInsert1"
             InstanceName="AppModuleDataControl.KontragentsView1" DataControl="AppModuleDataControl"
             RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="ContactDetailsView2Iterator" id="CreateInsert2" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <attributeValues IterBinding="KontragentsView1Iterator" id="Editable1">
+      <AttrNames>
+        <Item Value="Editable"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

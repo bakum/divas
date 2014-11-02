@@ -1,5 +1,6 @@
 package ua.divas.view;
 
+import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
 import oracle.adf.model.BindingContext;
@@ -75,7 +76,11 @@ public class OrdersBean {
             String rks = it.getCurrentRow().getKey().toStringFormat(true);
             it.executeQuery();
             if (rks != null) {
-                it.setCurrentRowWithKey(rks);
+                try {
+                    it.setCurrentRowWithKey(rks);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -175,7 +180,7 @@ public class OrdersBean {
             submittedValue = this.firstUpperCase(submittedValue);
             if (submittedValue != null) {
                 try {
-                    lovModel.getCriteria().getCurrentRow().setAttribute("Fullname", submittedValue + "%");
+                    lovModel.getCriteria().getCurrentRow().setAttribute("Fullname", submittedValue);
                     lovModel.applyCriteria();
                     lovModel.performQuery(lovModel.getQueryDescriptor());
                 } catch (Exception e) {
@@ -189,5 +194,22 @@ public class OrdersBean {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("CreateInsert1");
         ob.execute();
+    }
+    
+    public void onNewKontragentDialogListener(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding ob = binding.getOperationBinding("Commit");
+            ob.execute();
+            DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+            if (it != null) {
+                it.executeQuery();
+            }
+        }
+    }
+
+    public void onRefreshOrders(ActionEvent actionEvent) {
+        this.refresh();
     }
 }
