@@ -741,7 +741,7 @@
                                 <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateKontrag"
                                           contentDelivery="lazyUncached"
                                           popupFetchListener="#{orders.onPopupCreateKontrag}">
-                                    <af:dialog id="d2" title="Cоздать контрагента"
+                                    <af:dialog id="d2" title="Новый контрагент"
                                                dialogListener="#{orders.onNewKontragentDialogListener}">
                                         <af:panelFormLayout id="pfl4">
                                             <af:inputText value="#{bindings.Id1.inputValue}"
@@ -778,7 +778,7 @@
                                 </af:popup>
                                 <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateZamer"
                                           popupFetchListener="#{orders.onPopupCreateKontrag}">
-                                    <af:dialog id="d3" title="Создать замерщика"
+                                    <af:dialog id="d3" title="Новый замерщик"
                                                dialogListener="#{orders.onNewZamerDialogListener}">
                                         <f:facet name="buttonBar"/>
                                         <af:panelFormLayout id="pfl5">
