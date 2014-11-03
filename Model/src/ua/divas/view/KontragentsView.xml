@@ -128,8 +128,6 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     EntityUsage="Kontragents"
     AliasName="PARENT_ID"
     LOVName="LOV_ParentId">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[viewObject.retrieveCustomersFirstParentId()]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
@@ -676,6 +674,20 @@ order by Kontragents.FULLNAME]]></SQLQuery>
       <Return
         Name="_return_type_"
         Type="void"/>
+    </Method>
+    <Method
+      Name="retrieveCustomersFirstParentId"
+      MethodName="retrieveCustomersFirstParentId">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="retrieveZamerFirstParentId"
+      MethodName="retrieveZamerFirstParentId">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
     </Method>
   </ClientInterface>
   <ResourceBundle>

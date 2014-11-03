@@ -749,7 +749,8 @@
                                                           required="#{bindings.Id1.hints.mandatory}"
                                                           columns="#{bindings.Id1.hints.displayWidth}"
                                                           maximumLength="#{bindings.Id1.hints.precision}"
-                                                          shortDesc="#{bindings.Id1.hints.tooltip}" id="it23">
+                                                          shortDesc="#{bindings.Id1.hints.tooltip}" id="it23"
+                                                          visible="false">
                                                 <f:validator binding="#{bindings.Id1.validator}"/>
                                             </af:inputText>
                                             <af:inputComboboxListOfValues id="iclov1"
@@ -759,7 +760,8 @@
                                                                           model="#{bindings.ParentId.listOfValuesModel}"
                                                                           required="#{bindings.ParentId.hints.mandatory}"
                                                                           columns="#{bindings.ParentId.hints.displayWidth}"
-                                                                          shortDesc="#{bindings.ParentId.hints.tooltip}">
+                                                                          shortDesc="#{bindings.ParentId.hints.tooltip}"
+                                                                          visible="false">
                                                 <f:validator binding="#{bindings.ParentId.validator}"/>
                                             </af:inputComboboxListOfValues>
                                             <af:inputText value="#{bindings.Fullname.inputValue}"
@@ -776,7 +778,8 @@
                                 </af:popup>
                                 <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateZamer"
                                           popupFetchListener="#{orders.onPopupCreateKontrag}">
-                                    <af:dialog id="d3" title="Создать замерщика">
+                                    <af:dialog id="d3" title="Создать замерщика"
+                                               dialogListener="#{orders.onNewZamerDialogListener}">
                                         <f:facet name="buttonBar"/>
                                         <af:panelFormLayout id="pfl5">
                                             <af:inputComboboxListOfValues id="iclov2"
@@ -786,7 +789,8 @@
                                                                           model="#{bindings.ParentId.listOfValuesModel}"
                                                                           required="#{bindings.ParentId.hints.mandatory}"
                                                                           columns="#{bindings.ParentId.hints.displayWidth}"
-                                                                          shortDesc="#{bindings.ParentId.hints.tooltip}">
+                                                                          shortDesc="#{bindings.ParentId.hints.tooltip}"
+                                                                          visible="false">
                                                 <f:validator binding="#{bindings.ParentId.validator}"/>
                                             </af:inputComboboxListOfValues>
                                             <af:inputText value="#{bindings.Parentname.inputValue}"
@@ -794,7 +798,8 @@
                                                           required="#{bindings.Parentname.hints.mandatory}"
                                                           columns="#{bindings.Parentname.hints.displayWidth}"
                                                           maximumLength="#{bindings.Parentname.hints.precision}"
-                                                          shortDesc="#{bindings.Parentname.hints.tooltip}" id="it25">
+                                                          shortDesc="#{bindings.Parentname.hints.tooltip}" id="it25"
+                                                          visible="false">
                                                 <f:validator binding="#{bindings.Parentname.validator}"/>
                                             </af:inputText>
                                             <af:inputText value="#{bindings.Fullname.inputValue}"

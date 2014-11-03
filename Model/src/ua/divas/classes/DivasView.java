@@ -50,6 +50,10 @@ public class DivasView extends ViewObjectImpl {
         return (String)callStoredFunction(VARCHAR2,"UTILITY.RETRIEVE_CUSTOMER_PARENTID", new Object[] {});
     }
     
+    public String getZamerParentId() {
+        return (String)callStoredFunction(VARCHAR2,"UTILITY.RETRIEVE_ZAMER_PARENTID", new Object[] {});
+    }
+    
     public String getCustomerParentName() {
         return (String)callStoredFunction(VARCHAR2,"UTILITY.RETRIEVE_CUSTOMER_PARENTNAME", new Object[] {});
     }

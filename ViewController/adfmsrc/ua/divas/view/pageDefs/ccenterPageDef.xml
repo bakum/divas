@@ -168,5 +168,9 @@
     <action IterBinding="CompaignsView1Iterator" id="CreateInsert2" RequiresUpdateModel="true"
             Action="createInsertRow"/>
     <action IterBinding="CompaignsView1Iterator" id="Delete1" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <methodAction id="retrieveCustomersFirstParentId" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="retrieveCustomersFirstParentId" IsViewObjectMethod="true"
+                  DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.KontragentsView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.retrieveCustomersFirstParentId_AppModuleDataControl_KontragentsView1_retrieveCustomersFirstParentId_result"/>
   </bindings>
 </pageDefinition>

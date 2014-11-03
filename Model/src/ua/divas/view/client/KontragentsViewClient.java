@@ -42,5 +42,17 @@ public class KontragentsViewClient extends ViewUsageImpl implements KontragentsV
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "removeAllViewCriteria", null, null);
         return;
     }
+
+    public String retrieveCustomersFirstParentId() {
+        Object _ret =
+            getApplicationModuleProxy().riInvokeExportedMethod(this, "retrieveCustomersFirstParentId", null, null);
+        return (String) _ret;
+    }
+
+    public String retrieveZamerFirstParentId() {
+        Object _ret =
+            getApplicationModuleProxy().riInvokeExportedMethod(this, "retrieveZamerFirstParentId", null, null);
+        return (String) _ret;
+    }
 }
 

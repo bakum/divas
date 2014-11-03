@@ -207,5 +207,13 @@
         <Item Value="Parentname"/>
       </AttrNames>
     </attributeValues>
+    <methodAction id="retrieveCustomersFirstParentId" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="retrieveCustomersFirstParentId" IsViewObjectMethod="true"
+                  DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.KontragentsView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.retrieveCustomersFirstParentId_AppModuleDataControl_KontragentsView1_retrieveCustomersFirstParentId_result"/>
+    <methodAction id="retrieveZamerFirstParentId" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="retrieveZamerFirstParentId" IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.KontragentsView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.retrieveZamerFirstParentId_AppModuleDataControl_KontragentsView1_retrieveZamerFirstParentId_result"/>
   </bindings>
 </pageDefinition>

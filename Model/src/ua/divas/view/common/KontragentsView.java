@@ -18,5 +18,9 @@ public interface KontragentsView extends ViewObject {
     void findKontragentById(String Id);
 
     void removeAllViewCriteria();
+
+    String retrieveCustomersFirstParentId();
+
+    String retrieveZamerFirstParentId();
 }
 

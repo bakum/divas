@@ -208,10 +208,46 @@ public class OrdersBean {
 
 
     }
+    
+    private void setIsMeasurer() {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+        Row currRow = it.getCurrentRow();
+
+        currRow.setAttribute("IsMeasurer", new Integer(1));
+
+
+    }
+    private void setParentId() {
+        
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+        Row currRow = it.getCurrentRow();
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding oper =
+            (OperationBinding) binding.getOperationBinding("retrieveCustomersFirstParentId");
+        String res = (String)oper.execute();
+        currRow.setAttribute("ParentId", res);
+        
+    }
+    
+    private void setZamerParentId() {
+        
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+        Row currRow = it.getCurrentRow();
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding oper =
+            (OperationBinding) binding.getOperationBinding("retrieveZamerFirstParentId");
+        String res = (String)oper.execute();
+        currRow.setAttribute("ParentId", res);
+        
+    }
 
     public void onNewKontragentDialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             this.setIsBuyer();
+            this.setParentId();
             BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
             OperationBinding ob = binding.getOperationBinding("Commit");
             ob.execute();
@@ -227,4 +263,18 @@ public class OrdersBean {
         this.refresh();
     }
 
+    public void onNewZamerDialogListener(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            this.setIsMeasurer();
+            this.setZamerParentId();
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding ob = binding.getOperationBinding("Commit");
+            ob.execute();
+            DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+            if (it != null) {
+                it.executeQuery();
+            }
+        }
+    }
 }

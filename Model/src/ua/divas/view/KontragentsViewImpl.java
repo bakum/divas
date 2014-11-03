@@ -47,6 +47,14 @@ public class KontragentsViewImpl extends DivasView implements KontragentsView {
         return null; 
     }
     
+    public String retrieveZamerFirstParentId() {
+        String rv = getZamerParentId();
+        if (rv != null) {
+            return rv;
+        };
+        return null; 
+    }
+    
     public String retrieveCustomersFirstParentName() {
         String rv = getCustomerParentName();
         if (rv != null) {
