@@ -22,7 +22,9 @@
                                         </af:region>
                                     </af:showDetailItem>
                                     <af:showDetailItem text="Управление замерами" id="sdi3" stretchChildren="first"
-                                                       icon="/img/st.png"/>
+                                                       icon="/img/st.png">
+                                        <af:region value="#{bindings.zamerconfig1.regionModel}" id="r5"/>
+                                    </af:showDetailItem>
                                     <af:showDetailItem text="Справочники" id="sdi4" stretchChildren="first"
                                                        icon="/img/tSystCmp_picture_52.png">
                                         <af:region value="#{bindings.direct1.regionModel}" id="r2"
