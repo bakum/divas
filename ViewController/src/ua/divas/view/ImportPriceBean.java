@@ -11,6 +11,10 @@ import java.util.StringTokenizer;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import javax.faces.event.ActionEvent;
+
+import oracle.adf.model.BindingContext;
+import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichTable;
 
@@ -95,5 +99,25 @@ public class ImportPriceBean extends ImportFromCSV{
            "Data Error in Uploaded file", e.getMessage()));
           
         }
+    }
+    
+    public void refresh() {
+        DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = binding.findIteratorBinding("ImportedPriceView1Iterator");
+        if (it != null) {
+            //String rks = it.getCurrentRow().getKey().toStringFormat(true);
+            it.executeQuery();
+            /* if (rks != null) {
+                try {
+                    it.setCurrentRowWithKey(rks);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } */
+        }
+    }
+
+    public void onRefresh(ActionEvent actionEvent) {
+        this.refresh();
     }
 }

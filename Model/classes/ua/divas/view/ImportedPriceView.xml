@@ -29,7 +29,6 @@
     AliasName="ID"/>
   <ViewAttribute
     Name="Dat"
-    IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Dat"
     EntityUsage="ImportedPrice"
@@ -69,7 +68,6 @@
     AliasName="PRICE_USL"/>
   <ViewAttribute
     Name="PriceGoods"
-    IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="PriceGoods"
     EntityUsage="ImportedPrice"

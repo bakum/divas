@@ -38,8 +38,9 @@ public abstract class ImportFromCSV {
       // Add event code here...    
       UploadedFile file = (UploadedFile)valueChangeEvent.getNewValue();
       try {
-        AdfFacesContext.getCurrentInstance().addPartialTarget(staffTable);
+        
         parseFile(file.getInputStream());
+        AdfFacesContext.getCurrentInstance().addPartialTarget(staffTable);  
         
       } catch (IOException e) {
         System.out.println(e.getMessage().toString());

@@ -5,7 +5,11 @@
   <executables>
     <variableIterator id="variables"/>
     <iterator Binds="ImportedPriceView1" RangeSize="25" DataControl="AppModuleDataControl"
-              id="ImportedPriceView1Iterator"/>
+              id="ImportedPriceView1Iterator">
+      <sortCriteria>
+        <sort attribute="Artikul" ascending="true"/>
+      </sortCriteria>
+    </iterator>
     <searchRegion Binds="ImportedPriceView1Iterator" Criteria=""
                   Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ImportedPriceView1Query"/>
   </executables>

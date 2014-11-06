@@ -21,6 +21,9 @@
                                                        id="b2">
                                                 <af:resetActionListener/>
                                             </af:button>
+                                            <af:button text="Обновить" id="b3"
+                                                       actionListener="#{import_price.onRefresh}"
+                                                       disabled="#{bindings.Commit.enabled}"/>
                                         </af:toolbar>
                                     </f:facet>
                                     <f:facet name="statusbar"/>
@@ -69,7 +72,7 @@
                                         <af:column sortProperty="#{bindings.ImportedPriceView1.hints.Groups.name}"
                                                    filterable="true" sortable="true"
                                                    headerText="#{bindings.ImportedPriceView1.hints.Groups.label}"
-                                                   id="c4">
+                                                   id="c4" width="200">
                                             <af:outputText value="#{row.Groups}"
                                                            shortDesc="#{bindings.ImportedPriceView1.hints.Groups.tooltip}"
                                                            id="ot4"/>
@@ -77,7 +80,7 @@
                                         <af:column sortProperty="#{bindings.ImportedPriceView1.hints.NomName.name}"
                                                    filterable="true" sortable="true"
                                                    headerText="#{bindings.ImportedPriceView1.hints.NomName.label}"
-                                                   id="c5">
+                                                   id="c5" width="350">
                                             <af:outputText value="#{row.NomName}"
                                                            shortDesc="#{bindings.ImportedPriceView1.hints.NomName.tooltip}"
                                                            id="ot5"/>
@@ -119,7 +122,7 @@
                             <f:facet name="end"/>
                             <f:facet name="top">
                                 <af:inputFile label="Выберите csv файл" id="if1"
-                                              valueChangeListener="#{requestScope.import_price.fileUploaded}"
+                                              valueChangeListener="#{import_price.fileUploaded}"
                                               autoSubmit="true"/>
                             </f:facet>
                         </af:panelStretchLayout>

@@ -38,13 +38,11 @@
   </Attribute>
   <Attribute
     Name="Dat"
-    IsNotNull="true"
     ColumnName="DAT"
     SQLType="DATE"
     Type="java.sql.Timestamp"
     ColumnType="DATE"
     TableName="IMPORTED_PRICE">
-    <TransientExpression><![CDATA[adf.CurrentData]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -157,7 +155,6 @@
   </Attribute>
   <Attribute
     Name="PriceGoods"
-    IsNotNull="true"
     Precision="10"
     Scale="2"
     ColumnName="PRICE_GOODS"
