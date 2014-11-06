@@ -68,6 +68,8 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         ContactDetailsView1,
         OrdersTpUslugiView,
         OrdersView1,
+        OrderZamerView,
+        OrderZamerView1,
         KontragentsView1,
         UsersView1;
         static AttributesEnum[] vals = null;
@@ -120,6 +122,8 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
     public static final int CONTACTDETAILSVIEW1 = AttributesEnum.ContactDetailsView1.index();
     public static final int ORDERSTPUSLUGIVIEW = AttributesEnum.OrdersTpUslugiView.index();
     public static final int ORDERSVIEW1 = AttributesEnum.OrdersView1.index();
+    public static final int ORDERZAMERVIEW = AttributesEnum.OrderZamerView.index();
+    public static final int ORDERZAMERVIEW1 = AttributesEnum.OrderZamerView1.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
 
@@ -466,6 +470,20 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getOrdersView1() {
         return (RowIterator) getAttributeInternal(ORDERSVIEW1);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link OrderZamerView.
+     */
+    public RowIterator getOrderZamerView() {
+        return (RowIterator) getAttributeInternal(ORDERZAMERVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link OrderZamerView1.
+     */
+    public RowIterator getOrderZamerView1() {
+        return (RowIterator) getAttributeInternal(ORDERZAMERVIEW1);
     }
 
     /**

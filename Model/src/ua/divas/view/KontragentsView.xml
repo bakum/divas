@@ -612,6 +612,16 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     ViewLink="ua.divas.view.OrdersZamerFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="OrderZamerView"
+    ViewLink="ua.divas.view.OrderZamerKontragentsFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="OrderZamerView1"
+    ViewLink="ua.divas.view.OrderZamerZamerFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ClientInterface
     Name="__clientInterface">
     <Method

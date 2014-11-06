@@ -71,6 +71,7 @@ public class KassaImpl extends DivasEntity {
             return vals;
         }
     }
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int FULLNAME = AttributesEnum.Fullname.index();
     public static final int ISGROUP = AttributesEnum.IsGroup.index();
@@ -93,6 +94,13 @@ public class KassaImpl extends DivasEntity {
      * This is the default constructor (do not remove).
      */
     public KassaImpl() {
+    }
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("ua.divas.model.Kassa");
     }
 
     /**
@@ -341,11 +349,6 @@ public class KassaImpl extends DivasEntity {
         return new Key(new Object[] { id });
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("ua.divas.model.Kassa");
-    }
+
 }
 

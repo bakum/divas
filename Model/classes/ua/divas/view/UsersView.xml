@@ -133,4 +133,9 @@ FROM  USERS Users]]></SQLQuery>
     ViewLink="ua.divas.view.KontragentUserFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="OrderZamerView"
+    ViewLink="ua.divas.view.OrderZamerUserFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
 </ViewObject>

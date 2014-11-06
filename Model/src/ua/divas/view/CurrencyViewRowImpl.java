@@ -18,8 +18,9 @@ import ua.divas.model.CurrencyImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class CurrencyViewRowImpl extends ViewRowImpl {
+
     public static final int ENTITY_CURRENCY = 0;
-    
+
     @Override
     public boolean isAttributeUpdateable(int i) {
         BigDecimal editable = this.getEditable();
@@ -57,8 +58,10 @@ public class CurrencyViewRowImpl extends ViewRowImpl {
         MovesView1,
         OrdersView,
         RegRatesView,
-        UserSettingsView;
-        private static AttributesEnum[] vals = null;
+        UserSettingsView,
+        OrderZamerView;
+        static AttributesEnum[] vals = null;
+        ;
         private static final int firstIndex = 0;
 
         public int index() {
@@ -80,6 +83,7 @@ public class CurrencyViewRowImpl extends ViewRowImpl {
             return vals;
         }
     }
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int ISGROUP = AttributesEnum.IsGroup.index();
     public static final int PARENTID = AttributesEnum.ParentId.index();
@@ -98,6 +102,7 @@ public class CurrencyViewRowImpl extends ViewRowImpl {
     public static final int ORDERSVIEW = AttributesEnum.OrdersView.index();
     public static final int REGRATESVIEW = AttributesEnum.RegRatesView.index();
     public static final int USERSETTINGSVIEW = AttributesEnum.UserSettingsView.index();
+    public static final int ORDERZAMERVIEW = AttributesEnum.OrderZamerView.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -343,6 +348,13 @@ public class CurrencyViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getUserSettingsView() {
         return (RowIterator) getAttributeInternal(USERSETTINGSVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link OrderZamerView.
+     */
+    public RowIterator getOrderZamerView() {
+        return (RowIterator) getAttributeInternal(ORDERZAMERVIEW);
     }
 }
 

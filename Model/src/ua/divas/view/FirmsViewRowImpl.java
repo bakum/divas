@@ -54,7 +54,8 @@ public class FirmsViewRowImpl extends ViewRowImpl {
         FEditable,
         KassaView,
         OrdersView,
-        UserSettingsView;
+        UserSettingsView,
+        OrderZamerView;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -93,6 +94,7 @@ public class FirmsViewRowImpl extends ViewRowImpl {
     public static final int KASSAVIEW = AttributesEnum.KassaView.index();
     public static final int ORDERSVIEW = AttributesEnum.OrdersView.index();
     public static final int USERSETTINGSVIEW = AttributesEnum.UserSettingsView.index();
+    public static final int ORDERZAMERVIEW = AttributesEnum.OrderZamerView.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -282,6 +284,13 @@ public class FirmsViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getUserSettingsView() {
         return (RowIterator) getAttributeInternal(USERSETTINGSVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link OrderZamerView.
+     */
+    public RowIterator getOrderZamerView() {
+        return (RowIterator) getAttributeInternal(ORDERZAMERVIEW);
     }
 }
 

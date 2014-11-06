@@ -2401,5 +2401,165 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getKontragentUserFkLink1() {
         return (ViewLinkImpl) findViewLink("KontragentUserFkLink1");
     }
+
+    /**
+     * Container's getter for OrderZamerView1.
+     * @return OrderZamerView1
+     */
+    public ViewObjectImpl getOrderZamerView1() {
+        return (ViewObjectImpl) findViewObject("OrderZamerView1");
+    }
+
+    /**
+     * Container's getter for OrderZamerView2.
+     * @return OrderZamerView2
+     */
+    public ViewObjectImpl getOrderZamerView2() {
+        return (ViewObjectImpl) findViewObject("OrderZamerView2");
+    }
+
+    /**
+     * Container's getter for OrderZamerCurrFkLink1.
+     * @return OrderZamerCurrFkLink1
+     */
+    public ViewLinkImpl getOrderZamerCurrFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrderZamerCurrFkLink1");
+    }
+
+    /**
+     * Container's getter for OrderZamerView3.
+     * @return OrderZamerView3
+     */
+    public ViewObjectImpl getOrderZamerView3() {
+        return (ViewObjectImpl) findViewObject("OrderZamerView3");
+    }
+
+    /**
+     * Container's getter for OrderZamerDivisionFkLink1.
+     * @return OrderZamerDivisionFkLink1
+     */
+    public ViewLinkImpl getOrderZamerDivisionFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrderZamerDivisionFkLink1");
+    }
+
+    /**
+     * Container's getter for OrderZamerView4.
+     * @return OrderZamerView4
+     */
+    public ViewObjectImpl getOrderZamerView4() {
+        return (ViewObjectImpl) findViewObject("OrderZamerView4");
+    }
+
+    /**
+     * Container's getter for OrderZamerFirmFkLink1.
+     * @return OrderZamerFirmFkLink1
+     */
+    public ViewLinkImpl getOrderZamerFirmFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrderZamerFirmFkLink1");
+    }
+
+    /**
+     * Container's getter for OrderZamerView5.
+     * @return OrderZamerView5
+     */
+    public ViewObjectImpl getOrderZamerView5() {
+        return (ViewObjectImpl) findViewObject("OrderZamerView5");
+    }
+
+    /**
+     * Container's getter for OrderZamerKassaFkLink1.
+     * @return OrderZamerKassaFkLink1
+     */
+    public ViewLinkImpl getOrderZamerKassaFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrderZamerKassaFkLink1");
+    }
+
+    /**
+     * Container's getter for OrderZamerView6.
+     * @return OrderZamerView6
+     */
+    public ViewObjectImpl getOrderZamerViewKontrag() {
+        return (ViewObjectImpl) findViewObject("OrderZamerViewKontrag");
+    }
+
+    /**
+     * Container's getter for OrderZamerKontragentsFkLink1.
+     * @return OrderZamerKontragentsFkLink1
+     */
+    public ViewLinkImpl getOrderZamerKontragentsFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrderZamerKontragentsFkLink1");
+    }
+
+    /**
+     * Container's getter for OrderZamerView7.
+     * @return OrderZamerView7
+     */
+    public ViewObjectImpl getOrderZamerViewZamer() {
+        return (ViewObjectImpl) findViewObject("OrderZamerViewZamer");
+    }
+
+    /**
+     * Container's getter for OrderZamerZamerFkLink1.
+     * @return OrderZamerZamerFkLink1
+     */
+    public ViewLinkImpl getOrderZamerZamerFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrderZamerZamerFkLink1");
+    }
+
+    /**
+     * Container's getter for OrderZamerView6.
+     * @return OrderZamerView6
+     */
+    public ViewObjectImpl getOrderZamerView6() {
+        return (ViewObjectImpl) findViewObject("OrderZamerView6");
+    }
+
+    /**
+     * Container's getter for OrderZamerStatusFkLink1.
+     * @return OrderZamerStatusFkLink1
+     */
+    public ViewLinkImpl getOrderZamerStatusFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrderZamerStatusFkLink1");
+    }
+
+    /**
+     * Container's getter for OrderZamerView7.
+     * @return OrderZamerView7
+     */
+    public ViewObjectImpl getOrderZamerView7() {
+        return (ViewObjectImpl) findViewObject("OrderZamerView7");
+    }
+
+    /**
+     * Container's getter for OrderZamerActivitiesFkLink1.
+     * @return OrderZamerActivitiesFkLink1
+     */
+    public ViewLinkImpl getOrderZamerActivitiesFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrderZamerActivitiesFkLink1");
+    }
+
+    /**
+     * Container's getter for OrderZamerView8.
+     * @return OrderZamerView8
+     */
+    public ViewObjectImpl getOrderZamerView8() {
+        return (ViewObjectImpl) findViewObject("OrderZamerView8");
+    }
+
+    /**
+     * Container's getter for OrderZamerUserFkLink1.
+     * @return OrderZamerUserFkLink1
+     */
+    public ViewLinkImpl getOrderZamerUserFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrderZamerUserFkLink1");
+    }
+
+    /**
+     * Container's getter for ImportedPriceView1.
+     * @return ImportedPriceView1
+     */
+    public ViewObjectImpl getImportedPriceView1() {
+        return (ViewObjectImpl) findViewObject("ImportedPriceView1");
+    }
 }
 

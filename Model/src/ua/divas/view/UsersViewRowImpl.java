@@ -19,6 +19,7 @@ import ua.divas.model.UsersImpl;
 // ---------------------------------------------------------------------
 public class UsersViewRowImpl extends ViewRowImpl {
 
+
     public static final int ENTITY_USERS = 0;
 
     @Override
@@ -57,7 +58,8 @@ public class UsersViewRowImpl extends ViewRowImpl {
         UserSettingsView,
         GroupmembersView,
         DivisionSotrView,
-        KontragentsView;
+        KontragentsView,
+        OrderZamerView;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -82,6 +84,7 @@ public class UsersViewRowImpl extends ViewRowImpl {
         }
     }
 
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int FIRSTNAME = AttributesEnum.FirstName.index();
     public static final int LASTNAME = AttributesEnum.LastName.index();
@@ -99,6 +102,7 @@ public class UsersViewRowImpl extends ViewRowImpl {
     public static final int GROUPMEMBERSVIEW = AttributesEnum.GroupmembersView.index();
     public static final int DIVISIONSOTRVIEW = AttributesEnum.DivisionSotrView.index();
     public static final int KONTRAGENTSVIEW = AttributesEnum.KontragentsView.index();
+    public static final int ORDERZAMERVIEW = AttributesEnum.OrderZamerView.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -337,6 +341,13 @@ public class UsersViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getKontragentsView() {
         return (RowIterator) getAttributeInternal(KONTRAGENTSVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link OrderZamerView.
+     */
+    public RowIterator getOrderZamerView() {
+        return (RowIterator) getAttributeInternal(ORDERZAMERVIEW);
     }
 }
 

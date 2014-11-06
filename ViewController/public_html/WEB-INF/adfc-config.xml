@@ -35,4 +35,14 @@
     <managed-bean-class>ua.divas.view.LoginBean</managed-bean-class>
     <managed-bean-scope>request</managed-bean-scope>
   </managed-bean>
+  <managed-bean id="__8">
+    <managed-bean-name>orders</managed-bean-name>
+    <managed-bean-class>ua.divas.view.OrdersBean</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__9">
+    <managed-bean-name>import_price</managed-bean-name>
+    <managed-bean-class>ua.divas.view.ImportPriceBean</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
 </adfc-config>

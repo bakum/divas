@@ -68,6 +68,7 @@ public class FirmsImpl extends DivasEntity {
         }
     }
 
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int FULLNAME = AttributesEnum.Fullname.index();
     public static final int PRINTNAME = AttributesEnum.Printname.index();
@@ -93,6 +94,7 @@ public class FirmsImpl extends DivasEntity {
     public static synchronized EntityDefImpl getDefinitionObject() {
         return EntityDefImpl.findDefObject("ua.divas.model.Firms");
     }
+
 
     /**
      * Gets the attribute value for Id, using the alias name Id.

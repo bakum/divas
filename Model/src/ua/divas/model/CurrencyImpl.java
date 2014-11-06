@@ -71,6 +71,7 @@ public class CurrencyImpl extends DivasEntity {
             return vals;
         }
     }
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int ISGROUP = AttributesEnum.IsGroup.index();
     public static final int PARENTID = AttributesEnum.ParentId.index();
@@ -93,6 +94,13 @@ public class CurrencyImpl extends DivasEntity {
      * This is the default constructor (do not remove).
      */
     public CurrencyImpl() {
+    }
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("ua.divas.model.Currency");
     }
 
     /**
@@ -320,11 +328,6 @@ public class CurrencyImpl extends DivasEntity {
         return new Key(new Object[] { id });
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("ua.divas.model.Currency");
-    }
+
 }
 

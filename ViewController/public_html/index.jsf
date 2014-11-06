@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" locale="ru">
     <af:document title="Divas CRM" id="d1">
-        <af:form id="f1">
+        <af:form id="f1" usesUpload="true">
             <af:panelGridLayout id="pgl1">
                 <af:gridRow height="100%" id="gr1">
                     <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
@@ -37,7 +37,14 @@
                                     <af:showDetailItem text="Аналитика" id="sdi5" stretchChildren="first"
                                                        icon="/img/analytics.png"/>
                                     <af:showDetailItem text="Настройки" id="sdi7" stretchChildren="first"
-                                                       icon="/img/options.png"/>
+                                                       icon="/img/options.png">
+                                        <af:panelTabbed id="pt1">
+                                            <af:showDetailItem text="Импорт прайс-листа" id="sdi8"
+                                                               stretchChildren="first">
+                                                <af:region value="#{bindings.importpriceconfig1.regionModel}" id="r6"/>
+                                            </af:showDetailItem>
+                                        </af:panelTabbed>
+                                    </af:showDetailItem>
                                     <af:showDetailItem text="Пользователи" id="sdi6" stretchChildren="first"
                                                        icon="/img/people.png">
                                         <af:region value="#{bindings.users1.regionModel}" id="r4"/>

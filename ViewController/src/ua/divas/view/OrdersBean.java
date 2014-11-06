@@ -7,6 +7,7 @@ import oracle.adf.model.AttributeBinding;
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
+import oracle.adf.share.ADFContext;
 import oracle.adf.view.rich.component.rich.input.RichInputListOfValues;
 import oracle.adf.view.rich.component.rich.input.RichSelectOneChoice;
 import oracle.adf.view.rich.event.DialogEvent;
@@ -31,6 +32,15 @@ public class OrdersBean {
     private RichSelectOneChoice division;
     private RichSelectOneChoice currency;
     private RichInputListOfValues kontrag;
+    public Boolean refreshNeeded;
+
+    public void setRefreshNeeded(Boolean refreshNeeded) {
+        this.refreshNeeded = refreshNeeded;
+    }
+
+    public Boolean getRefreshNeeded() {
+        return refreshNeeded;
+    }
 
     private String upperCase(String s) {
         StringBuffer buf = new StringBuffer(s.toUpperCase());
@@ -93,6 +103,7 @@ public class OrdersBean {
         OperationBinding ob = binding.getOperationBinding("Commit");
         ob.execute();
         refresh();
+        ADFContext.getCurrent().getRequestScope().put("refreshNeeded", Boolean.TRUE); 
         return null;
     }
 

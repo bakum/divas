@@ -14,6 +14,8 @@
     <page path="/director.jsff" usageId="ua_divas_view_directorPageDef"/>
     <page path="/user.jsff" usageId="ua_divas_view_userPageDef"/>
     <page path="/orders.jsff" usageId="ua_divas_view_ordersPageDef"/>
+    <page path="/zamer.jsff" usageId="ua_divas_view_zamerPageDef"/>
+    <page path="/import_price.jsff" usageId="ua_divas_view_import_pricePageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="ua_divas_view_indexPageDef" path="ua.divas.view.pageDefs.indexPageDef"/>
@@ -21,6 +23,8 @@
     <page id="ua_divas_view_directorPageDef" path="ua.divas.view.pageDefs.directorPageDef"/>
     <page id="ua_divas_view_userPageDef" path="ua.divas.view.pageDefs.userPageDef"/>
     <page id="ua_divas_view_ordersPageDef" path="ua.divas.view.pageDefs.ordersPageDef"/>
+    <page id="ua_divas_view_zamerPageDef" path="ua.divas.view.pageDefs.zamerPageDef"/>
+    <page id="ua_divas_view_import_pricePageDef" path="ua.divas.view.pageDefs.import_pricePageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AppModuleDataControl" Package="ua.divas.module"

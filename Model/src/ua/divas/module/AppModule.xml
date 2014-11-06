@@ -571,6 +571,39 @@
   <ViewUsage
     Name="KontragentsView3"
     ViewObjectName="ua.divas.view.KontragentsView"/>
+  <ViewUsage
+    Name="OrderZamerView1"
+    ViewObjectName="ua.divas.view.OrderZamerView"/>
+  <ViewUsage
+    Name="OrderZamerView2"
+    ViewObjectName="ua.divas.view.OrderZamerView"/>
+  <ViewUsage
+    Name="OrderZamerView3"
+    ViewObjectName="ua.divas.view.OrderZamerView"/>
+  <ViewUsage
+    Name="OrderZamerView4"
+    ViewObjectName="ua.divas.view.OrderZamerView"/>
+  <ViewUsage
+    Name="OrderZamerView5"
+    ViewObjectName="ua.divas.view.OrderZamerView"/>
+  <ViewUsage
+    Name="OrderZamerViewKontrag"
+    ViewObjectName="ua.divas.view.OrderZamerView"/>
+  <ViewUsage
+    Name="OrderZamerViewZamer"
+    ViewObjectName="ua.divas.view.OrderZamerView"/>
+  <ViewUsage
+    Name="OrderZamerView6"
+    ViewObjectName="ua.divas.view.OrderZamerView"/>
+  <ViewUsage
+    Name="OrderZamerView7"
+    ViewObjectName="ua.divas.view.OrderZamerView"/>
+  <ViewUsage
+    Name="OrderZamerView8"
+    ViewObjectName="ua.divas.view.OrderZamerView"/>
+  <ViewUsage
+    Name="ImportedPriceView1"
+    ViewObjectName="ua.divas.view.ImportedPriceView"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -1224,6 +1257,60 @@
     ViewLinkObjectName="ua.divas.view.KontragentUserFkLink"
     SrcViewUsageName="ua.divas.module.AppModule.UsersView1"
     DstViewUsageName="ua.divas.module.AppModule.KontragentsView3"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="OrderZamerCurrFkLink1"
+    ViewLinkObjectName="ua.divas.view.OrderZamerCurrFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.CurrencyView1"
+    DstViewUsageName="ua.divas.module.AppModule.OrderZamerView2"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="OrderZamerDivisionFkLink1"
+    ViewLinkObjectName="ua.divas.view.OrderZamerDivisionFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.DivisionsView1"
+    DstViewUsageName="ua.divas.module.AppModule.OrderZamerView3"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="OrderZamerFirmFkLink1"
+    ViewLinkObjectName="ua.divas.view.OrderZamerFirmFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.FirmsView1"
+    DstViewUsageName="ua.divas.module.AppModule.OrderZamerView4"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="OrderZamerKassaFkLink1"
+    ViewLinkObjectName="ua.divas.view.OrderZamerKassaFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.KassaView1"
+    DstViewUsageName="ua.divas.module.AppModule.OrderZamerView5"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="OrderZamerKontragentsFkLink1"
+    ViewLinkObjectName="ua.divas.view.OrderZamerKontragentsFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.KontragentsView1"
+    DstViewUsageName="ua.divas.module.AppModule.OrderZamerViewKontrag"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="OrderZamerZamerFkLink1"
+    ViewLinkObjectName="ua.divas.view.OrderZamerZamerFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.KontragentsView1"
+    DstViewUsageName="ua.divas.module.AppModule.OrderZamerViewZamer"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="OrderZamerStatusFkLink1"
+    ViewLinkObjectName="ua.divas.view.OrderZamerStatusFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.OrderStatusView1"
+    DstViewUsageName="ua.divas.module.AppModule.OrderZamerView6"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="OrderZamerActivitiesFkLink1"
+    ViewLinkObjectName="ua.divas.view.OrderZamerActivitiesFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.TypeOfActivitiesView1"
+    DstViewUsageName="ua.divas.module.AppModule.OrderZamerView7"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="OrderZamerUserFkLink1"
+    ViewLinkObjectName="ua.divas.view.OrderZamerUserFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.UsersView1"
+    DstViewUsageName="ua.divas.module.AppModule.OrderZamerView8"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">

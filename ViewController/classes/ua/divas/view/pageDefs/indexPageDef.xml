@@ -12,6 +12,10 @@
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
     <taskFlow id="users1" taskFlowId="/WEB-INF/users.xml#users" activation="deferred"
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="zamerconfig1" taskFlowId="/WEB-INF/zamer-config.xml#zamer-config" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="importpriceconfig1" taskFlowId="/WEB-INF/import-price-config.xml#import-price-config"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
   </executables>
   <bindings/>
 </pageDefinition>

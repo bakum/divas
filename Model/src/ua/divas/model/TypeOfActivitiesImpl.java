@@ -55,6 +55,7 @@ public class TypeOfActivitiesImpl extends DivasEntityNoDelete {
             return vals;
         }
     }
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int VERSION = AttributesEnum.Version.index();
     public static final int FULLNAME = AttributesEnum.Fullname.index();
@@ -66,6 +67,13 @@ public class TypeOfActivitiesImpl extends DivasEntityNoDelete {
      * This is the default constructor (do not remove).
      */
     public TypeOfActivitiesImpl() {
+    }
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("ua.divas.model.TypeOfActivities");
     }
 
     /**
@@ -146,11 +154,6 @@ public class TypeOfActivitiesImpl extends DivasEntityNoDelete {
         return new Key(new Object[] { id });
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("ua.divas.model.TypeOfActivities");
-    }
+
 }
 

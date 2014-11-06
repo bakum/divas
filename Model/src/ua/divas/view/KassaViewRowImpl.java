@@ -18,8 +18,9 @@ import ua.divas.model.KassaImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class KassaViewRowImpl extends ViewRowImpl {
+
     public static final int ENTITY_KASSA = 0;
-    
+
     @Override
      public boolean isAttributeUpdateable(int i) {
         BigDecimal editable = this.getKEditable();
@@ -54,9 +55,11 @@ public class KassaViewRowImpl extends ViewRowImpl {
         KassaView,
         OrdersView,
         UserSettingsView,
+        OrderZamerView,
         CurrencyView1,
         DivisionsView1;
-        private static AttributesEnum[] vals = null;
+        static AttributesEnum[] vals = null;
+        ;
         private static final int firstIndex = 0;
 
         public int index() {
@@ -78,6 +81,7 @@ public class KassaViewRowImpl extends ViewRowImpl {
             return vals;
         }
     }
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int FULLNAME = AttributesEnum.Fullname.index();
     public static final int ISGROUP = AttributesEnum.IsGroup.index();
@@ -92,6 +96,7 @@ public class KassaViewRowImpl extends ViewRowImpl {
     public static final int KASSAVIEW = AttributesEnum.KassaView.index();
     public static final int ORDERSVIEW = AttributesEnum.OrdersView.index();
     public static final int USERSETTINGSVIEW = AttributesEnum.UserSettingsView.index();
+    public static final int ORDERZAMERVIEW = AttributesEnum.OrderZamerView.index();
     public static final int CURRENCYVIEW1 = AttributesEnum.CurrencyView1.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
 
@@ -304,6 +309,13 @@ public class KassaViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getUserSettingsView() {
         return (RowIterator) getAttributeInternal(USERSETTINGSVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link OrderZamerView.
+     */
+    public RowIterator getOrderZamerView() {
+        return (RowIterator) getAttributeInternal(ORDERZAMERVIEW);
     }
 
     /**
