@@ -433,7 +433,9 @@
                                                                         </af:inputText>
                                                                         <af:button text="#{bindings.Phone.inputValue}"
                                                                                    id="b13" icon="/img/Phone.png"
-                                                                                   rendered="#{bindings.Editable1.inputValue == 0 ? true : false}"/>
+                                                                                   rendered="#{bindings.Editable1.inputValue == 0 ? true : false}">
+                                                                            <af:showPopupBehavior popupId="pViewCall"/>
+                                                                        </af:button>
                                                                     </af:panelGroupLayout>
                                                                 </af:panelLabelAndMessage>
                                                                 <af:inputText value="#{bindings.Email.inputValue}"
@@ -501,6 +503,15 @@
                                                                 </f:facet>
                                                             </af:panelFormLayout>
                                                             <f:facet name="buttonBar"/>
+                                                        </af:dialog>
+                                                    </af:popup>
+                                                    <af:popup childCreation="deferred" autoCancel="disabled"
+                                                              id="pViewCall" contentDelivery="lazyUncached">
+                                                        <af:dialog id="d4">
+                                                            <f:facet name="buttonBar"/>
+                                                            <af:activeOutputText id="aot1"
+                                                                                 inlineStyle="color:brown;font-size:18px;font-weight:bold;text-align:center;"
+                                                                                 value="0"/>
                                                         </af:dialog>
                                                     </af:popup>
                                                 </af:panelBox>

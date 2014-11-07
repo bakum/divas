@@ -1,7 +1,14 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <SDM>
    <OverallProperties
-      id="OverallProperties1"/>
+      id="OverallProperties1">
+      <property
+         name="linkStyle">Direct</property>
+      <property
+         name="y">250.46875</property>
+      <property
+         name="x">93.90918</property>
+   </OverallProperties>
    <View
       id="View2">
       <property
@@ -13,9 +20,9 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">102.09375</property>
+         name="y">83.5</property>
       <property
-         name="x">127.0</property>
+         name="x">93.90918</property>
    </View>
    <View
       id="View3">
@@ -28,9 +35,9 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">101.15625</property>
+         name="y">83.5</property>
       <property
-         name="x">314.0</property>
+         name="x">258.31836</property>
    </View>
    <ControlFlowCase
       islink="true"
@@ -40,7 +47,7 @@
       <property
          name="fromOutcome">home</property>
       <property
-         name="sdm:polyPoints">R46,168.0,98.609375,272.96875,97.671875,L46</property>
+         name="sdm:polyPoints">R46,134.90918,80.015625,217.31836,80.015625,L46</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -50,6 +57,6 @@
       <property
          name="fromOutcome">index</property>
       <property
-         name="sdm:polyPoints">L54,273.0,104.671875,168.03125,105.609375,R54</property>
+         name="sdm:polyPoints">L54,217.31836,87.015625,134.90918,87.015625,R54</property>
    </ControlFlowCase>
 </SDM>

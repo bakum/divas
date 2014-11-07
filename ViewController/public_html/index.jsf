@@ -2,6 +2,10 @@
 <!DOCTYPE html>
 <f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" locale="ru">
     <af:document title="Divas CRM" id="d1">
+        <af:resource type="javascript">activeDataCallback = function (event) {
+            var value = event.getSource().getValue();
+            alert("Value "+value+" was pushed into client.")
+        }</af:resource>
         <af:form id="f1" usesUpload="true">
             <af:panelGridLayout id="pgl1">
                 <af:gridRow height="100%" id="gr1">

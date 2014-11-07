@@ -171,6 +171,27 @@
       <value n="j2eeWebAppName" v="div_app-ViewController-webapp"/>
       <value n="j2eeWebContextRoot" v="div_app-ViewController-context-root"/>
    </hash>
+   <hash n="oracle.jdeveloper.model.PathsConfiguration">
+      <hash n="javaContentSet">
+         <list n="constituent-sets">
+            <hash>
+               <url n="content-folder-url" path="adfmsrc/ua/divas/view/"/>
+               <list n="pattern-filters">
+                  <string v="+ua/divas/view/ActiveBean.java"/>
+               </list>
+               <list n="url-path">
+                  <url path="adfmsrc/"/>
+               </list>
+            </hash>
+         </list>
+         <list n="pattern-filters">
+            <string v="+**"/>
+         </list>
+         <list n="url-path">
+            <url path="src/"/>
+         </list>
+      </hash>
+   </hash>
    <hash n="oracle.jdevimpl.config.JProjectLibraries">
       <list n="exportedReferences">
          <hash>
