@@ -222,6 +222,7 @@
                                                         <f:validator binding="#{bindings.UDescription.validator}"/>
                                                     </af:inputText>
                                                     <f:facet name="footer"/>
+                                                    <af:spacer width="10" height="10" id="s1"/>
                                                 </af:panelFormLayout>
                                                 <f:facet name="toolbar">
                                                     <af:button text="Редактировать" id="b2" icon="/img/edit-16.gif"
@@ -366,6 +367,7 @@
                                                         <f:validator binding="#{bindings.ActivitiesName.validator}"/>
                                                         <af:autoSuggestBehavior suggestedItems="#{bindings.ActivitiesName.suggestedItems}"/>
                                                     </af:inputListOfValues>
+                                                    <af:spacer width="10" height="10" id="s2"/>
                                                 </af:panelFormLayout>
                                                 <f:facet name="toolbar">
                                                     <af:toolbar id="t3">

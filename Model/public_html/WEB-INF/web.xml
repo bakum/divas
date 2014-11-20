@@ -30,4 +30,10 @@
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>INCLUDE</dispatcher>
   </filter-mapping>
+  <listener>
+    <listener-class>oracle.adf.mbean.share.connection.ADFConnectionLifeCycleCallBack</listener-class>
+  </listener>
+  <listener>
+    <listener-class>oracle.adf.mbean.share.config.ADFConfigLifeCycleCallBack</listener-class>
+  </listener>
 </web-app>
