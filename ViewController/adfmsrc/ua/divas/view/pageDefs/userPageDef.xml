@@ -3,7 +3,6 @@
                 Package="ua.divas.view.pageDefs">
   <parameters/>
   <executables>
-    <variableIterator id="variables"/>
     <iterator Binds="UsersView1" RangeSize="10" DataControl="AppModuleDataControl" id="UsersView1Iterator">
       <sortCriteria>
         <sort attribute="Login" ascending="true"/>
@@ -36,6 +35,14 @@
     </iterator>
     <iterator Binds="UsersItemsLookupVO1" RangeSize="-1" DataControl="AppModuleDataControl"
               id="UsersItemsLookupVO1Iterator"/>
+    <variableIterator id="variables">
+      <variable Type="java.lang.String" Name="resetUserPwdToWls_username" IsQueriable="false"
+                DefaultValue="#{bindings.Login.inputValue}" IsNotNull="true"/>
+      <variable Type="java.lang.String" Name="resetUserPwdToWls_newPassword" IsQueriable="false" IsNotNull="true"/>
+      <variable Type="java.lang.String" Name="addUserToWls_username" IsQueriable="false" IsNotNull="true"/>
+      <variable Type="java.lang.String" Name="addUserToWls_psw" IsQueriable="false" IsNotNull="true"/>
+      <variable Type="java.lang.String" Name="addUserToWls_desc" IsQueriable="false"/>
+    </variableIterator>
   </executables>
   <bindings>
     <attributeValues IterBinding="UsersView1Iterator" id="Login">
@@ -187,5 +194,43 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <methodAction id="resetUserPwdToWls" RequiresUpdateModel="true" Action="invokeMethod" MethodName="resetUserPwdToWls"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.UsersView1">
+      <NamedData NDName="username" NDType="java.lang.String" NDValue="${bindings.resetUserPwdToWls_username}"/>
+      <NamedData NDName="newPassword" NDType="java.lang.String" NDValue="${bindings.resetUserPwdToWls_newPassword}"/>
+    </methodAction>
+    <attributeValues IterBinding="variables" id="username">
+      <AttrNames>
+        <Item Value="resetUserPwdToWls_username"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="newPassword">
+      <AttrNames>
+        <Item Value="resetUserPwdToWls_newPassword"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="addUserToWls" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addUserToWls"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.UsersView1">
+      <NamedData NDName="username" NDType="java.lang.String" NDValue="${bindings.addUserToWls_username}"/>
+      <NamedData NDName="psw" NDType="java.lang.String" NDValue="${bindings.addUserToWls_psw}"/>
+      <NamedData NDName="desc" NDType="java.lang.String" NDValue="${bindings.addUserToWls_desc}"/>
+    </methodAction>
+    <attributeValues IterBinding="variables" id="username1">
+      <AttrNames>
+        <Item Value="addUserToWls_username"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="psw">
+      <AttrNames>
+        <Item Value="addUserToWls_psw"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="desc">
+      <AttrNames>
+        <Item Value="addUserToWls_desc"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

@@ -286,4 +286,25 @@ public class ShuttleGroup {
         OperationBinding ob = binding.getOperationBinding("Rollback");
         ob.execute();
     }
+
+    public void onSetPwdDlgListener(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding oper = (OperationBinding) binding.getOperationBinding("resetUserPwdToWls");
+            oper.execute();
+        } else if (dialogEvent.getOutcome().name().equals("cancel")) {
+           
+        }
+    }
+
+    public void onNewUserDialogListener(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding oper = (OperationBinding) binding.getOperationBinding("addUserToWls");
+            oper.execute();
+            this.refresh();
+        } else if (dialogEvent.getOutcome().name().equals("cancel")) {
+           
+        }
+    }
 }

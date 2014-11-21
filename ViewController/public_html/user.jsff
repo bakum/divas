@@ -14,7 +14,9 @@
                                         <af:toolbar id="t7">
                                             <af:button actionListener="#{bindings.CreateInsert.execute}"
                                                        text="Добавить" disabled="#{bindings.Commit.enabled}"
-                                                       id="b3"/>
+                                                       id="b3">
+                                                <af:showPopupBehavior popupId="pCreateUser"/>
+                                            </af:button>
                                             <af:button actionListener="#{bindings.Commit.execute}" text="Сохранить"
                                                        disabled="#{!bindings.Commit.enabled}" id="b6"
                                                        action="#{shuttle_group.commitChange}"/>
@@ -22,6 +24,10 @@
                                                        disabled="#{!bindings.Rollback.enabled}" immediate="true"
                                                        id="b7">
                                                 <af:resetActionListener/>
+                                            </af:button>
+                                            <af:button text="Установить пароль" id="b10"
+                                                       disabled="#{bindings.Commit.enabled}">
+                                                <af:showPopupBehavior popupId="pResetPwd"/>
                                             </af:button>
                                         </af:toolbar>
                                     </f:facet>
@@ -464,6 +470,74 @@
                                             </af:inputText>
                                         </af:panelFormLayout>
                                         <f:facet name="buttonBar"/>
+                                    </af:dialog>
+                                </af:popup>
+                                <af:popup childCreation="deferred" autoCancel="disabled" id="pResetPwd"
+                                          contentDelivery="lazyUncached">
+                                    <af:dialog id="d4" title="Установить пароль"
+                                               dialogListener="#{shuttle_group.onSetPwdDlgListener}">
+                                        <f:facet name="buttonBar"/>
+                                        <af:panelFormLayout id="pfl5">
+                                            <af:inputText value="#{bindings.username.inputValue}"
+                                                          label="Логин"
+                                                          required="#{bindings.username.hints.mandatory}"
+                                                          columns="#{bindings.username.hints.displayWidth}"
+                                                          maximumLength="#{bindings.username.hints.precision}"
+                                                          shortDesc="#{bindings.username.hints.tooltip}" id="it19">
+                                                <f:validator binding="#{bindings.username.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.newPassword.inputValue}"
+                                                          label="Пароль"
+                                                          required="#{bindings.newPassword.hints.mandatory}"
+                                                          columns="#{bindings.newPassword.hints.displayWidth}"
+                                                          maximumLength="#{bindings.newPassword.hints.precision}"
+                                                          shortDesc="#{bindings.newPassword.hints.tooltip}" id="it20"
+                                                          secret="true">
+                                                <f:validator binding="#{bindings.newPassword.validator}"/>
+                                            </af:inputText>
+                                            <af:button actionListener="#{bindings.resetUserPwdToWls.execute}"
+                                                       text="resetUserPwdToWls"
+                                                       disabled="#{!bindings.resetUserPwdToWls.enabled}" id="b9"
+                                                       rendered="false"/>
+                                        </af:panelFormLayout>
+                                    </af:dialog>
+                                </af:popup>
+                                <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateUser"
+                                          contentDelivery="lazyUncached">
+                                    <af:dialog id="d5" title="Добавить пользователя"
+                                               dialogListener="#{shuttle_group.onNewUserDialogListener}">
+                                        <f:facet name="buttonBar"/>
+                                        <af:panelFormLayout id="pfl6">
+                                            <af:inputText value="#{bindings.username1.inputValue}"
+                                                          label="Логин"
+                                                          required="#{bindings.username1.hints.mandatory}"
+                                                          columns="#{bindings.username1.hints.displayWidth}"
+                                                          maximumLength="#{bindings.username1.hints.precision}"
+                                                          shortDesc="#{bindings.username1.hints.tooltip}" id="it21"
+                                                          showRequired="true">
+                                                <f:validator binding="#{bindings.username1.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.psw.inputValue}"
+                                                          label="Пароль"
+                                                          required="#{bindings.psw.hints.mandatory}"
+                                                          columns="#{bindings.psw.hints.displayWidth}"
+                                                          maximumLength="#{bindings.psw.hints.precision}"
+                                                          shortDesc="#{bindings.psw.hints.tooltip}" id="it22"
+                                                          secret="true" showRequired="true">
+                                                <f:validator binding="#{bindings.psw.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.desc.inputValue}"
+                                                          label="Примечание"
+                                                          required="#{bindings.desc.hints.mandatory}"
+                                                          columns="#{bindings.desc.hints.displayWidth}"
+                                                          maximumLength="#{bindings.desc.hints.precision}"
+                                                          shortDesc="#{bindings.desc.hints.tooltip}" id="it23" rows="2">
+                                                <f:validator binding="#{bindings.desc.validator}"/>
+                                            </af:inputText>
+                                            <af:button actionListener="#{bindings.addUserToWls.execute}"
+                                                       text="addUserToWls" disabled="#{!bindings.addUserToWls.enabled}"
+                                                       id="b11" rendered="false"/>
+                                        </af:panelFormLayout>
                                     </af:dialog>
                                 </af:popup>
                             </af:showDetailItem>

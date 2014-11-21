@@ -21,6 +21,7 @@ import ua.divas.view.KassaVOImpl;
 import ua.divas.view.KontragentsViewImpl;
 import ua.divas.view.OrdersViewImpl;
 import ua.divas.view.UserSettingsViewImpl;
+import ua.divas.view.UsersViewImpl;
 import ua.divas.view.ro.KontragentsItemsLookupVOImpl;
 import ua.divas.view.ro.UsersItemsLookupVOImpl;
 // ---------------------------------------------------------------------
@@ -272,8 +273,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for UsersView1.
      * @return UsersView1
      */
-    public ViewObjectImpl getUsersView1() {
-        return (ViewObjectImpl) findViewObject("UsersView1");
+    public UsersViewImpl getUsersView1() {
+        return (UsersViewImpl) findViewObject("UsersView1");
     }
 
     /**
