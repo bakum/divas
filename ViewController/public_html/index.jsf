@@ -14,8 +14,8 @@
                                                        stretchChildren="first">
                                         <af:region value="#{bindings.orders1.regionModel}" id="r3"/>
                                     </af:showDetailItem>
-                                    <af:showDetailItem text="Call Center" id="sdi2" stretchChildren="first"
-                                                       icon="/img/call.jpeg">
+                                    <af:showDetailItem text="Клиенты" id="sdi2" stretchChildren="first"
+                                                       icon="/img/call.jpeg" flex="0">
                                         <af:region value="#{bindings.call_center1.regionModel}" id="r1">
                                             <af:checkRegionUncommittedDataBehavior message="Есть изменённые данные. Оставить страницу?"
                                                                                    regionIds="::r1"/>

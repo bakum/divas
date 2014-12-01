@@ -40,7 +40,7 @@ public class WLS_Utility implements Serializable {
         static {
             try {
                 String host = "127.0.0.1";
-                String port = "8001";
+                String port = "7101";
                 String username = "weblogic";
                 String password = "!stigmata70";
                 Hashtable h = new Hashtable();

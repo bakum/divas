@@ -14,8 +14,6 @@
               id="ContactDetailsView2Iterator" ChangeEventPolicy="ppr"/>
     <iterator Binds="ContactDetailsView1_1" RangeSize="10" DataControl="AppModuleDataControl"
               id="ContactDetailsView1_1Iterator"/>
-    <iterator Binds="CompaignsView1_1" RangeSize="25" DataControl="AppModuleDataControl" id="CompaignsView1_1Iterator"/>
-    <iterator Binds="CompaignsView1" RangeSize="25" DataControl="AppModuleDataControl" id="CompaignsView1Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="KontragentsView1Iterator" id="KontragentsView1">
@@ -141,33 +139,11 @@
       <NamedData NDName="KonId" NDType="java.lang.String"/>
       <NamedData NDName="CompId" NDType="java.lang.String"/>
     </methodAction>
-    <tree IterBinding="CompaignsView1_1Iterator" id="CompaignsView1_1">
-      <nodeDefinition DefName="ua.divas.view.ro.CompaignsView1" Name="CompaignsView1_10">
-        <AttrNames>
-          <Item Value="Id"/>
-          <Item Value="Name"/>
-        </AttrNames>
-        <Accessors>
-          <Item Value="VwCompDetails"/>
-        </Accessors>
-      </nodeDefinition>
-      <nodeDefinition DefName="ua.divas.view.ro.VwCompDetails" Name="CompaignsView1_11">
-        <AttrNames>
-          <Item Value="Fullname"/>
-          <Item Value="Phone"/>
-          <Item Value="Id"/>
-          <Item Value="CompaignId"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
     <methodAction id="removeKonragentFromCallList" RequiresUpdateModel="true" Action="invokeMethod"
                   MethodName="removeKonragentFromCallList" IsViewObjectMethod="true" DataControl="AppModuleDataControl"
                   InstanceName="data.AppModuleDataControl.CompaignsView1">
       <NamedData NDName="KonId" NDType="java.lang.String"/>
     </methodAction>
-    <action IterBinding="CompaignsView1Iterator" id="CreateInsert2" RequiresUpdateModel="true"
-            Action="createInsertRow"/>
-    <action IterBinding="CompaignsView1Iterator" id="Delete1" RequiresUpdateModel="false" Action="removeCurrentRow"/>
     <methodAction id="retrieveCustomersFirstParentId" RequiresUpdateModel="true" Action="invokeMethod"
                   MethodName="retrieveCustomersFirstParentId" IsViewObjectMethod="true"
                   DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.KontragentsView1"

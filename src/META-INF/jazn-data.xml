@@ -34,6 +34,12 @@
         <role>
           <name>manager</name>
         </role>
+        <role>
+          <name>z_manager</name>
+        </role>
+        <role>
+          <name>z_dispatcher</name>
+        </role>
       </roles>
     </realm>
   </jazn-realm>
@@ -104,6 +110,26 @@
               <member>
                 <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
                 <name>manager</name>
+              </member>
+            </members>
+          </app-role>
+          <app-role>
+            <name>z_manager</name>
+            <class>oracle.security.jps.service.policystore.ApplicationRole</class>
+            <members>
+              <member>
+                <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
+                <name>z_manager</name>
+              </member>
+            </members>
+          </app-role>
+          <app-role>
+            <name>z_dispatcher</name>
+            <class>oracle.security.jps.service.policystore.ApplicationRole</class>
+            <members>
+              <member>
+                <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
+                <name>z_dispatcher</name>
               </member>
             </members>
           </app-role>
