@@ -8,6 +8,7 @@ import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.share.ADFContext;
+import oracle.adf.view.rich.component.rich.input.RichInputComboboxListOfValues;
 import oracle.adf.view.rich.component.rich.input.RichInputListOfValues;
 import oracle.adf.view.rich.component.rich.input.RichSelectOneChoice;
 import oracle.adf.view.rich.event.DialogEvent;
@@ -25,6 +26,8 @@ import oracle.jbo.Row;
 
 public class OrdersBean {
 
+
+    private RichInputComboboxListOfValues group;
 
     public OrdersBean() {
     }
@@ -283,6 +286,30 @@ public class OrdersBean {
             ob.execute();
             DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
             DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+            if (it != null) {
+                it.executeQuery();
+            }
+        }
+    }
+
+    public void setGroup(RichInputComboboxListOfValues group) {
+        this.group = group;
+    }
+
+    public RichInputComboboxListOfValues getGroup() {
+        return group;
+    }
+
+    public void onGroupChange(ValueChangeEvent valueChangeEvent) {
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("ExecuteWithParams1");
+        if (ob != null) {
+            System.out.println("Groups"+(String) this.getGroup().getValue());
+            ob.getParamsMap().put("prntid", (String) this.getGroup().getValue());
+            ob.execute();
+
+            DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("NomenklaturaVO1Iterator");
             if (it != null) {
                 it.executeQuery();
             }

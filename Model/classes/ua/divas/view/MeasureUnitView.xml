@@ -53,4 +53,9 @@
     EntityAttrName="Version"
     EntityUsage="MeasureUnit"
     AliasName="VERSION"/>
+  <ViewLinkAccessor
+    Name="OrdersTpUslugiView"
+    ViewLink="ua.divas.view.OrdersTpUslugiMeasureFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
 </ViewObject>

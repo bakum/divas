@@ -453,6 +453,13 @@
     AssociationOtherEnd="ua.divas.model.OrdersZamerFkAssoc.Orders1"
     Type="ua.divas.model.KontragentsImpl"
     IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="OrdersTpOplaty"
+    Association="ua.divas.model.OrdersTpOplatyFk1Assoc"
+    AssociationEnd="ua.divas.model.OrdersTpOplatyFk1Assoc.OrdersTpOplaty"
+    AssociationOtherEnd="ua.divas.model.OrdersTpOplatyFk1Assoc.Orders"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="OrdersChk1">
     <DesignTime>

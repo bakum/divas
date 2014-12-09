@@ -270,6 +270,13 @@
     AssociationOtherEnd="ua.divas.model.KontragentUserFkAssoc.Users"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="OrdersTpOplaty"
+    Association="ua.divas.model.OrdersTpOplatyFk2Assoc"
+    AssociationEnd="ua.divas.model.OrdersTpOplatyFk2Assoc.OrdersTpOplaty"
+    AssociationOtherEnd="ua.divas.model.OrdersTpOplatyFk2Assoc.Users"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="UsersPk"
     PrimaryKey="true">

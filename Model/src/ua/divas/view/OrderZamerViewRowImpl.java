@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 import oracle.jbo.AttributeList;
+import oracle.jbo.RowIterator;
 import oracle.jbo.RowSet;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.ViewRowImpl;
@@ -17,8 +18,9 @@ import ua.divas.model.OrdersImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class OrderZamerViewRowImpl extends ViewRowImpl {
+
     public static final int ENTITY_ORDERS = 0;
-    
+
     @Override
     public boolean isAttributeUpdateable(int i) {
         BigDecimal editable = this.getOEditable();
@@ -62,6 +64,7 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
         ZamerId,
         Zamername,
         Adress,
+        OrdersTpOplatyView,
         TypeOfActivitiesView1,
         CurrencyView1,
         DivisionsView1,
@@ -70,7 +73,8 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
         KontragentsView1,
         OrderStatusView1,
         UsersView1;
-        private static AttributesEnum[] vals = null;
+        static AttributesEnum[] vals = null;
+        ;
         private static final int firstIndex = 0;
 
         public int index() {
@@ -92,6 +96,7 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
             return vals;
         }
     }
+
     public static final int ACTIVITIESID = AttributesEnum.ActivitiesId.index();
     public static final int CURRID = AttributesEnum.CurrId.index();
     public static final int DAT = AttributesEnum.Dat.index();
@@ -114,6 +119,7 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
     public static final int ZAMERID = AttributesEnum.ZamerId.index();
     public static final int ZAMERNAME = AttributesEnum.Zamername.index();
     public static final int ADRESS = AttributesEnum.Adress.index();
+    public static final int ORDERSTPOPLATYVIEW = AttributesEnum.OrdersTpOplatyView.index();
     public static final int TYPEOFACTIVITIESVIEW1 = AttributesEnum.TypeOfActivitiesView1.index();
     public static final int CURRENCYVIEW1 = AttributesEnum.CurrencyView1.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
@@ -479,6 +485,13 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
      */
     public String getAdress() {
         return (String) getAttributeInternal(ADRESS);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link OrdersTpOplatyView.
+     */
+    public RowIterator getOrdersTpOplatyView() {
+        return (RowIterator) getAttributeInternal(ORDERSTPOPLATYVIEW);
     }
 
     /**

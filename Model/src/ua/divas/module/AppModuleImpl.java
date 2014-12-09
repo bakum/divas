@@ -2562,5 +2562,45 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewObjectImpl getImportedPriceView1() {
         return (ViewObjectImpl) findViewObject("ImportedPriceView1");
     }
+
+    /**
+     * Container's getter for OrdersTpUslugiView5.
+     * @return OrdersTpUslugiView5
+     */
+    public ViewObjectImpl getOrdersTpUslugiGroup() {
+        return (ViewObjectImpl) findViewObject("OrdersTpUslugiGroup");
+    }
+
+    /**
+     * Container's getter for OrdersTpUslugiGroupFkLink1.
+     * @return OrdersTpUslugiGroupFkLink1
+     */
+    public ViewLinkImpl getOrdersTpUslugiGroupFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrdersTpUslugiGroupFkLink1");
+    }
+
+    /**
+     * Container's getter for OrdersTpUslugiView5.
+     * @return OrdersTpUslugiView5
+     */
+    public ViewObjectImpl getOrdersTpUslugiMeasure() {
+        return (ViewObjectImpl) findViewObject("OrdersTpUslugiMeasure");
+    }
+
+    /**
+     * Container's getter for OrdersTpUslugiMeasureFkLink1.
+     * @return OrdersTpUslugiMeasureFkLink1
+     */
+    public ViewLinkImpl getOrdersTpUslugiMeasureFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrdersTpUslugiMeasureFkLink1");
+    }
+
+    /**
+     * Container's getter for NomenklaturaVO1.
+     * @return NomenklaturaVO1
+     */
+    public ViewObjectImpl getNomenklaturaVO1() {
+        return (ViewObjectImpl) findViewObject("NomenklaturaVO1");
+    }
 }
 

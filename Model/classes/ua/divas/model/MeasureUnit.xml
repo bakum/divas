@@ -68,6 +68,13 @@
     Type="java.sql.Timestamp"
     ColumnType="TIMESTAMP"
     TableName="MEASURE_UNIT"/>
+  <AccessorAttribute
+    Name="OrdersTpUslugi"
+    Association="ua.divas.model.OrdersTpUslugiMeasureFkAssoc"
+    AssociationEnd="ua.divas.model.OrdersTpUslugiMeasureFkAssoc.OrdersTpUslugi"
+    AssociationOtherEnd="ua.divas.model.OrdersTpUslugiMeasureFkAssoc.MeasureUnit"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="MeasureUnitChk1">
     <DesignTime>

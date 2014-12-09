@@ -413,6 +413,13 @@
     AssociationOtherEnd="ua.divas.model.KontragentUserFkAssoc.Kontragents"
     Type="ua.divas.model.UsersImpl"
     IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="OrdersTpUslugi1"
+    Association="ua.divas.model.OrdersTpUslugiGroupFkAssoc"
+    AssociationEnd="ua.divas.model.OrdersTpUslugiGroupFkAssoc.OrdersTpUslugi1"
+    AssociationOtherEnd="ua.divas.model.OrdersTpUslugiGroupFkAssoc.Kontragents1"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="KontragentsIdCheck">
     <DesignTime>
