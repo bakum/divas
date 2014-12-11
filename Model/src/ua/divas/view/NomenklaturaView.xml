@@ -8,10 +8,22 @@
   InheritPersonalization="merge"
   BindingStyle="OracleName"
   CustomQuery="true"
-  PageIterMode="Full">
+  PageIterMode="Full"
+  ComponentClass="ua.divas.view.NomenklaturaViewImpl"
+  ComponentInterface="ua.divas.view.common.NomenklaturaView"
+  ClientProxyName="ua.divas.view.client.NomenklaturaViewClient">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
+  <Variable
+    Name="prnt"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="fname"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="NomenklaturaView1"
     ViewObjectName="ua.divas.view.NomenklaturaView"
@@ -292,6 +304,104 @@ where deleted = 0]]></SQLQuery>
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ViewCriteria
+    Name="FilterNomByCascade"
+    ViewObjectName="ua.divas.view.NomenklaturaView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="NomenklaturaViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="NomenklaturaViewCriteria_NomenklaturaViewCriteria_row_0_Deleted"
+        ViewAttribute="Deleted"
+        Operator="="
+        Conjunction="AND"
+        Value="0"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="IsGroup"
+        ViewAttribute="IsGroup"
+        Operator="="
+        Conjunction="AND"
+        Value="0"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="ParentId"
+        ViewAttribute="ParentId"
+        Operator="="
+        Conjunction="AND"
+        Value=":prnt"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Usluga"
+        ViewAttribute="Usluga"
+        Operator="="
+        Conjunction="AND"
+        Value="1"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="FilterNomByName"
+    ViewObjectName="ua.divas.view.NomenklaturaView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="NomenklaturaViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Fullname"
+        ViewAttribute="Fullname"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Value=":fname"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="NomenklaturaView"
     ViewLink="ua.divas.view.NomenklaturaNomenklaturaFk1Link"
@@ -307,6 +417,19 @@ where deleted = 0]]></SQLQuery>
     ViewLink="ua.divas.view.OrdersTpUslugiFk2Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="findNomByParent"
+      MethodName="findNomByParent">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="parent"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

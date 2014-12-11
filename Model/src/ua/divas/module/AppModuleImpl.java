@@ -19,6 +19,7 @@ import ua.divas.view.FirmsViewImpl;
 import ua.divas.view.GroupmembersViewImpl;
 import ua.divas.view.KassaVOImpl;
 import ua.divas.view.KontragentsViewImpl;
+import ua.divas.view.NomenklaturaViewImpl;
 import ua.divas.view.OrdersViewImpl;
 import ua.divas.view.UserSettingsViewImpl;
 import ua.divas.view.UsersViewImpl;
@@ -177,8 +178,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for NomenklaturaView1.
      * @return NomenklaturaView1
      */
-    public ViewObjectImpl getNomenklaturaView1() {
-        return (ViewObjectImpl) findViewObject("NomenklaturaView1");
+    public NomenklaturaViewImpl getNomenklaturaView1() {
+        return (NomenklaturaViewImpl) findViewObject("NomenklaturaView1");
     }
 
     /**
@@ -681,8 +682,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for NomenklaturaView2.
      * @return NomenklaturaView2
      */
-    public ViewObjectImpl getNomenklaturaView2() {
-        return (ViewObjectImpl) findViewObject("NomenklaturaView2");
+    public NomenklaturaViewImpl getNomenklaturaView2() {
+        return (NomenklaturaViewImpl) findViewObject("NomenklaturaView2");
     }
 
     /**

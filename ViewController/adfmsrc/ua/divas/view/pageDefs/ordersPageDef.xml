@@ -223,9 +223,7 @@
         <AttrNames>
           <Item Value="Id"/>
           <Item Value="OrderId"/>
-          <Item Value="Groupname"/>
-          <Item Value="NomId" Binds="NomId"/>
-          <Item Value="Nomname"/>
+          <Item Value="NomId"/>
           <Item Value="Quantity"/>
           <Item Value="MeasureId"/>
           <Item Value="Price"/>
@@ -248,36 +246,5 @@
         <Item Value="OtpuEditable"/>
       </AttrNames>
     </attributeValues>
-    <list IterBinding="OrdersTpUslugiView2Iterator" StaticList="false" id="NomId"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject" ListIter="NomenklaturaVO1Iterator">
-      <AttrNames>
-        <Item Value="NomId"/>
-      </AttrNames>
-      <ListAttrNames>
-        <Item Value="Id"/>
-      </ListAttrNames>
-      <ListDisplayAttrNames>
-        <Item Value="Fullname"/>
-      </ListDisplayAttrNames>
-    </list>
-    <action IterBinding="NomenklaturaVO1Iterator" id="ExecuteWithParams1"
-            InstanceName="AppModuleDataControl.NomenklaturaVO1" DataControl="AppModuleDataControl"
-            RequiresUpdateModel="true" Action="executeWithParams">
-      <NamedData NDName="prntid" NDType="java.lang.String"/>
-    </action>
-    <tree IterBinding="NomenklaturaVO1Iterator" id="NomenklaturaVO1">
-      <nodeDefinition DefName="ua.divas.view.NomenklaturaVO" Name="NomenklaturaVO10">
-        <AttrNames>
-          <Item Value="Id"/>
-          <Item Value="Deleted"/>
-          <Item Value="Fullname"/>
-          <Item Value="IsGroup"/>
-          <Item Value="ParentId"/>
-          <Item Value="Predefined"/>
-          <Item Value="Usluga"/>
-          <Item Value="Version"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
   </bindings>
 </pageDefinition>

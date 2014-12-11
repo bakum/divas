@@ -199,7 +199,8 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="ORDERS_TP_USLUGI">
+    TableName="ORDERS_TP_USLUGI"
+    IsNotNull="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
@@ -305,6 +306,18 @@
     AssociationOtherEnd="ua.divas.model.OrdersTpUslugiMeasureFkAssoc.OrdersTpUslugi"
     Type="oracle.jbo.server.EntityImpl"
     IsUpdateable="true"/>
+  <Key
+    Name="OrdersTpUslugiGroupIdCheck">
+    <DesignTime>
+      <Attr Name="_isNotNull" Value="true"/>
+      <Attr Name="_DBObjectName" Value="ORDERS_TP_USLUGI_GROUP_ID_CHEC"/>
+      <Attr Name="_checkCondition" Value='"GROUP_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="ua.divas.model.OrdersTpUslugi.GroupId"/>
+    </AttrArray>
+  </Key>
   <Key
     Name="OrdersTpUslugiPk"
     PrimaryKey="true">

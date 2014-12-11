@@ -45,7 +45,6 @@ public class OrdersTpUslugiViewRowImpl extends ViewRowImpl {
         Id,
         OrderId,
         NomId,
-        Nomname,
         Price,
         Summ,
         DatComplete,
@@ -54,7 +53,6 @@ public class OrdersTpUslugiViewRowImpl extends ViewRowImpl {
         DatToPay,
         AddWork,
         GroupId,
-        Groupname,
         MeasureId,
         PriceAdd,
         Quantity,
@@ -62,7 +60,8 @@ public class OrdersTpUslugiViewRowImpl extends ViewRowImpl {
         OrdersView1,
         NomenklaturaView1,
         KontragentsView1,
-        MeasureUnitView1;
+        MeasureUnitView1,
+        NomenklaturaUslGroup1;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -91,7 +90,6 @@ public class OrdersTpUslugiViewRowImpl extends ViewRowImpl {
     public static final int ID = AttributesEnum.Id.index();
     public static final int ORDERID = AttributesEnum.OrderId.index();
     public static final int NOMID = AttributesEnum.NomId.index();
-    public static final int NOMNAME = AttributesEnum.Nomname.index();
     public static final int PRICE = AttributesEnum.Price.index();
     public static final int SUMM = AttributesEnum.Summ.index();
     public static final int DATCOMPLETE = AttributesEnum.DatComplete.index();
@@ -100,7 +98,6 @@ public class OrdersTpUslugiViewRowImpl extends ViewRowImpl {
     public static final int DATTOPAY = AttributesEnum.DatToPay.index();
     public static final int ADDWORK = AttributesEnum.AddWork.index();
     public static final int GROUPID = AttributesEnum.GroupId.index();
-    public static final int GROUPNAME = AttributesEnum.Groupname.index();
     public static final int MEASUREID = AttributesEnum.MeasureId.index();
     public static final int PRICEADD = AttributesEnum.PriceAdd.index();
     public static final int QUANTITY = AttributesEnum.Quantity.index();
@@ -109,6 +106,7 @@ public class OrdersTpUslugiViewRowImpl extends ViewRowImpl {
     public static final int NOMENKLATURAVIEW1 = AttributesEnum.NomenklaturaView1.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
     public static final int MEASUREUNITVIEW1 = AttributesEnum.MeasureUnitView1.index();
+    public static final int NOMENKLATURAUSLGROUP1 = AttributesEnum.NomenklaturaUslGroup1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -172,21 +170,6 @@ public class OrdersTpUslugiViewRowImpl extends ViewRowImpl {
         setAttributeInternal(NOMID, value);
     }
 
-    /**
-     * Gets the attribute value for the calculated attribute Nomname.
-     * @return the Nomname
-     */
-    public String getNomname() {
-        return (String) getAttributeInternal(NOMNAME);
-    }
-
-    /**
-     * Sets <code>value</code> as the attribute value for the calculated attribute Nomname.
-     * @param value value to set the  Nomname
-     */
-    public void setNomname(String value) {
-        setAttributeInternal(NOMNAME, value);
-    }
 
     /**
      * Gets the attribute value for PRICE using the alias name Price.
@@ -316,21 +299,6 @@ public class OrdersTpUslugiViewRowImpl extends ViewRowImpl {
         setAttributeInternal(GROUPID, value);
     }
 
-    /**
-     * Gets the attribute value for the calculated attribute Groupname.
-     * @return the Groupname
-     */
-    public String getGroupname() {
-        return (String) getAttributeInternal(GROUPNAME);
-    }
-
-    /**
-     * Sets <code>value</code> as the attribute value for the calculated attribute Groupname.
-     * @param value value to set the  Groupname
-     */
-    public void setGroupname(String value) {
-        setAttributeInternal(GROUPNAME, value);
-    }
 
     /**
      * Gets the attribute value for MEASURE_ID using the alias name MeasureId.
@@ -422,6 +390,13 @@ public class OrdersTpUslugiViewRowImpl extends ViewRowImpl {
      */
     public RowSet getMeasureUnitView1() {
         return (RowSet) getAttributeInternal(MEASUREUNITVIEW1);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> NomenklaturaUslGroup1.
+     */
+    public RowSet getNomenklaturaUslGroup1() {
+        return (RowSet) getAttributeInternal(NOMENKLATURAUSLGROUP1);
     }
 }
 

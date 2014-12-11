@@ -22,7 +22,16 @@
   <ViewAccessor
     Name="NomenklaturaView1"
     ViewObjectName="ua.divas.view.NomenklaturaView"
-    RowLevelBinds="true"/>
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="FilterNomByCascade"
+      FullName="ua.divas.view.NomenklaturaView.FilterNomByCascade"/>
+    <ParameterMap>
+      <PIMap Variable="prnt">
+        <TransientExpression><![CDATA[GroupId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
   <ViewAccessor
     Name="KontragentsView1"
     ViewObjectName="ua.divas.view.KontragentsView"
@@ -30,6 +39,10 @@
   <ViewAccessor
     Name="MeasureUnitView1"
     ViewObjectName="ua.divas.view.MeasureUnitView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="NomenklaturaUslGroup1"
+    ViewObjectName="ua.divas.view.NomenklaturaUslGroup"
     RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_OrderId"
@@ -50,62 +63,6 @@
       <Item Value="Dat"/>
     </AttrArray>
     <DisplayCriteria/>
-  </ListBinding>
-  <ListBinding
-    Name="LOV_NomId"
-    ListVOName="NomenklaturaView1"
-    ListRangeSize="-1"
-    NullValueFlag="start"
-    MRUCount="0"
-    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}">
-    <AttrArray Name="AttrNames">
-      <Item Value="NomId"/>
-    </AttrArray>
-    <AttrArray Name="AttrExpressions"/>
-    <AttrArray Name="DerivedAttrNames">
-      <Item Value="Nomname"/>
-    </AttrArray>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
-      <Item Value="Fullname"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="Fullname"/>
-    </AttrArray>
-    <DisplayCriteria
-      Name="NomenklaturaViewUslugaItem"
-      Hint="showAndExecute"/>
-    <ViewCriteriaUsage
-      Name="NomenklaturaViewUslugaItem"
-      FullName="ua.divas.view.NomenklaturaView.NomenklaturaViewUslugaItem"/>
-  </ListBinding>
-  <ListBinding
-    Name="LOV_Nomname"
-    ListVOName="NomenklaturaView1"
-    ListRangeSize="-1"
-    NullValueFlag="start"
-    MRUCount="0"
-    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}">
-    <AttrArray Name="AttrNames">
-      <Item Value="Nomname"/>
-    </AttrArray>
-    <AttrArray Name="AttrExpressions"/>
-    <AttrArray Name="DerivedAttrNames">
-      <Item Value="NomId"/>
-    </AttrArray>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="Fullname"/>
-      <Item Value="Id"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="Fullname"/>
-    </AttrArray>
-    <DisplayCriteria
-      Name="NomenklaturaViewUslugaItem"
-      Hint="showAndExecute"/>
-    <ViewCriteriaUsage
-      Name="NomenklaturaViewUslugaItem"
-      FullName="ua.divas.view.NomenklaturaView.NomenklaturaViewUslugaItem"/>
   </ListBinding>
   <ListBinding
     Name="LOV_SotrId"
@@ -167,7 +124,7 @@
   </ListBinding>
   <ListBinding
     Name="LOV_GroupId"
-    ListVOName="NomenklaturaView1"
+    ListVOName="NomenklaturaUslGroup1"
     ListRangeSize="-1"
     NullValueFlag="start"
     NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
@@ -176,50 +133,13 @@
       <Item Value="GroupId"/>
     </AttrArray>
     <AttrArray Name="AttrExpressions"/>
-    <AttrArray Name="DerivedAttrNames">
-      <Item Value="Groupname"/>
-    </AttrArray>
     <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
-      <Item Value="Fullname"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="Fullname"/>
-    </AttrArray>
-    <DisplayCriteria
-      Name="NomenklaturaViewGroup"
-      Hint="showAndExecute"/>
-    <ViewCriteriaUsage
-      Name="NomenklaturaViewGroup"
-      FullName="ua.divas.view.NomenklaturaView.NomenklaturaViewGroup"/>
-  </ListBinding>
-  <ListBinding
-    Name="LOV_Groupname"
-    ListVOName="NomenklaturaView1"
-    ListRangeSize="-1"
-    NullValueFlag="start"
-    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
-    MRUCount="0">
-    <AttrArray Name="AttrNames">
-      <Item Value="Groupname"/>
-    </AttrArray>
-    <AttrArray Name="AttrExpressions"/>
-    <AttrArray Name="DerivedAttrNames">
-      <Item Value="GroupId"/>
-    </AttrArray>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="Fullname"/>
       <Item Value="Id"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="Fullname"/>
     </AttrArray>
-    <DisplayCriteria
-      Name="NomenklaturaViewGroup"
-      Hint="showAndExecute"/>
-    <ViewCriteriaUsage
-      Name="NomenklaturaViewGroup"
-      FullName="ua.divas.view.NomenklaturaView.NomenklaturaViewGroup"/>
+    <DisplayCriteria/>
   </ListBinding>
   <ListBinding
     Name="LOV_MeasureId"
@@ -240,10 +160,28 @@
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
+  <ListBinding
+    Name="LOV_NomId"
+    ListVOName="NomenklaturaView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="NomId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <SQLQuery><![CDATA[SELECT OrdersTpUslugi.ID, 
        OrdersTpUslugi.ORDER_ID, 
        OrdersTpUslugi.NOM_ID,
-       (select fullname from nomenklatura where id = NOM_ID) NomName,
        OrdersTpUslugi.PRICE, 
        OrdersTpUslugi.SUMM, 
        OrdersTpUslugi.DAT_COMPLETE, 
@@ -252,7 +190,6 @@
        OrdersTpUslugi.DAT_TO_PAY, 
        OrdersTpUslugi.ADD_WORK, 
        OrdersTpUslugi.GROUP_ID,
-       (select fullname from nomenklatura where id = GROUP_ID) GroupName,
        OrdersTpUslugi.MEASURE_ID, 
        OrdersTpUslugi.PRICE_ADD, 
        OrdersTpUslugi.QUANTITY,
@@ -290,35 +227,14 @@ FROM  ORDERS_TP_USLUGI OrdersTpUslugi]]></SQLQuery>
     EntityUsage="OrdersTpUslugi"
     AliasName="NOM_ID"
     LOVName="LOV_NomId">
+    <Dependencies>
+      <Item
+        Value="GroupId"/>
+    </Dependencies>
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
-          Value="combo_lov"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="Nomname"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Precision="150"
-    Type="java.lang.String"
-    ColumnType="VARCHAR2"
-    AliasName="NOMNAME"
-    Expression="NOMNAME"
-    SQLType="VARCHAR"
-    LOVName="LOV_Nomname">
-    <DesignTime>
-      <Attr Name="_DisplaySize" Value="150"/>
-    </DesignTime>
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.OrdersTpUslugiView.Nomname_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.OrdersTpUslugiView.Nomname_TOOLTIP"/>
-        <CONTROLTYPE
-          Value="combo_lov"/>
+          Value="choice"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -409,32 +325,9 @@ FROM  ORDERS_TP_USLUGI OrdersTpUslugi]]></SQLQuery>
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
-          Value="combo_lov"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="Groupname"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Precision="150"
-    Type="java.lang.String"
-    ColumnType="VARCHAR2"
-    AliasName="GROUPNAME"
-    Expression="GROUPNAME"
-    SQLType="VARCHAR"
-    LOVName="LOV_Groupname">
-    <DesignTime>
-      <Attr Name="_DisplaySize" Value="150"/>
-    </DesignTime>
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.OrdersTpUslugiView.Groupname_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.OrdersTpUslugiView.Groupname_TOOLTIP"/>
-        <CONTROLTYPE
-          Value="combo_lov"/>
+          Value="choice"/>
+        <AUTOSUBMIT
+          Value="true"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

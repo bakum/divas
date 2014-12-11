@@ -27,7 +27,7 @@ import oracle.jbo.Row;
 public class OrdersBean {
 
 
-    private RichInputComboboxListOfValues group;
+    
 
     public OrdersBean() {
     }
@@ -292,27 +292,17 @@ public class OrdersBean {
         }
     }
 
-    public void setGroup(RichInputComboboxListOfValues group) {
-        this.group = group;
-    }
-
-    public RichInputComboboxListOfValues getGroup() {
-        return group;
-    }
-
-    public void onGroupChange(ValueChangeEvent valueChangeEvent) {
+    public void onGroupChange(ValueChangeEvent vce) {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-        OperationBinding ob = binding.getOperationBinding("ExecuteWithParams1");
+        OperationBinding ob = binding.getOperationBinding("findNomByParent");
         if (ob != null) {
-            System.out.println("Groups"+(String) this.getGroup().getValue());
-            ob.getParamsMap().put("prntid", (String) this.getGroup().getValue());
-            ob.execute();
-
             DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
-            DCIteratorBinding it = bd.findIteratorBinding("NomenklaturaVO1Iterator");
-            if (it != null) {
-                it.executeQuery();
-            }
+            DCIteratorBinding it = bd.findIteratorBinding("OrdersTpUslugiView2Iterator");
+            Row currRow = it.getCurrentRow();
+            System.out.println(vce.getNewValue());
+            System.out.println(currRow.getAttribute("GroupId"));
+            //ob.getParamsMap().put("parent", (String) this.getGroup().getValue());
+            //ob.execute();
         }
     }
 }

@@ -70,6 +70,8 @@ public class OrdersTpUslugiImpl extends DivasEntityNoDelete {
             return vals;
         }
     }
+
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int ORDERID = AttributesEnum.OrderId.index();
     public static final int NOMID = AttributesEnum.NomId.index();
@@ -94,6 +96,14 @@ public class OrdersTpUslugiImpl extends DivasEntityNoDelete {
      */
     public OrdersTpUslugiImpl() {
     }
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("ua.divas.model.OrdersTpUslugi");
+    }
+
 
     /**
      * Gets the attribute value for Id, using the alias name Id.
@@ -382,11 +392,6 @@ public class OrdersTpUslugiImpl extends DivasEntityNoDelete {
         return new Key(new Object[] { id });
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("ua.divas.model.OrdersTpUslugi");
-    }
+
 }
 

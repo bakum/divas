@@ -792,51 +792,29 @@
                                                                 <f:validator binding="#{row.bindings.OrderId.validator}"/>
                                                             </af:selectOneChoice>
                                                         </af:column>
-                                                        <af:column sortProperty="#{bindings.OrdersTpUslugiView2.hints.Groupname.name}"
-                                                                   sortable="true"
-                                                                   headerText="#{bindings.OrdersTpUslugiView2.hints.Groupname.label}"
-                                                                   id="c34">
-                                                            <af:inputComboboxListOfValues id="groupnameId"
-                                                                                          popupTitle="Search and Select: #{bindings.OrdersTpUslugiView2.hints.Groupname.label}"
-                                                                                          value="#{row.bindings.Groupname.inputValue}"
-                                                                                          model="#{row.bindings.Groupname.listOfValuesModel}"
-                                                                                          required="#{bindings.OrdersTpUslugiView2.hints.Groupname.mandatory}"
-                                                                                          columns="#{bindings.OrdersTpUslugiView2.hints.Groupname.displayWidth}"
-                                                                                          shortDesc="#{bindings.OrdersTpUslugiView2.hints.Groupname.tooltip}"
-                                                                                          autoSubmit="true"
-                                                                                          partialTriggers="groupIdId"
-                                                                                          valueChangeListener="#{orders.onGroupChange}"
-                                                                                          binding="#{orders.group}">
-                                                                <f:validator binding="#{row.bindings.Groupname.validator}"/>
-                                                            </af:inputComboboxListOfValues>
+                                                        <af:column headerText="#{bindings.OrdersTpUslugiView2.hints.GroupId.label}"
+                                                                   id="c32">
+                                                            <af:selectOneChoice value="#{row.bindings.GroupId.inputValue}"
+                                                                                label="#{row.bindings.GroupId.label}"
+                                                                                required="#{bindings.OrdersTpUslugiView2.hints.GroupId.mandatory}"
+                                                                                shortDesc="#{bindings.OrdersTpUslugiView2.hints.GroupId.tooltip}"
+                                                                                id="soc17" autoSubmit="true">
+                                                                <f:selectItems value="#{row.bindings.GroupId.items}"
+                                                                               id="si17"/>
+                                                                <f:validator binding="#{row.bindings.GroupId.validator}"/>
+                                                            </af:selectOneChoice>
                                                         </af:column>
                                                         <af:column headerText="#{bindings.OrdersTpUslugiView2.hints.NomId.label}"
-                                                                   id="c24" visible="false">
-                                                            <af:inputComboboxListOfValues id="nomIdId"
-                                                                                          popupTitle="Search and Select: #{bindings.OrdersTpUslugiView2.hints.NomId.label}"
-                                                                                          value="#{row.bindings.NomId.inputValue}"
-                                                                                          model="#{row.bindings.NomId.listOfValuesModel}"
-                                                                                          required="#{bindings.OrdersTpUslugiView2.hints.NomId.mandatory}"
-                                                                                          columns="#{bindings.OrdersTpUslugiView2.hints.NomId.displayWidth}"
-                                                                                          shortDesc="#{bindings.OrdersTpUslugiView2.hints.NomId.tooltip}"
-                                                                                          autoSubmit="true"
-                                                                                          partialTriggers="nomnameId">
+                                                                   id="c24">
+                                                            <af:selectOneChoice value="#{row.bindings.NomId.inputValue}"
+                                                                                label="#{row.bindings.NomId.label}"
+                                                                                required="#{bindings.OrdersTpUslugiView2.hints.NomId.mandatory}"
+                                                                                shortDesc="#{bindings.OrdersTpUslugiView2.hints.NomId.tooltip}"
+                                                                                id="soc18">
+                                                                <f:selectItems value="#{row.bindings.NomId.items}"
+                                                                               id="si18"/>
                                                                 <f:validator binding="#{row.bindings.NomId.validator}"/>
-                                                            </af:inputComboboxListOfValues>
-                                                        </af:column>
-                                                        <af:column headerText="#{bindings.OrdersTpUslugiView2.hints.Nomname.label}"
-                                                                   id="c25">
-                                                            <af:inputComboboxListOfValues id="nomnameId"
-                                                                                          popupTitle="Search and Select: #{bindings.OrdersTpUslugiView2.hints.Nomname.label}"
-                                                                                          value="#{row.bindings.Nomname.inputValue}"
-                                                                                          model="#{row.bindings.Nomname.listOfValuesModel}"
-                                                                                          required="#{bindings.OrdersTpUslugiView2.hints.Nomname.mandatory}"
-                                                                                          columns="#{bindings.OrdersTpUslugiView2.hints.Nomname.displayWidth}"
-                                                                                          shortDesc="#{bindings.OrdersTpUslugiView2.hints.Nomname.tooltip}"
-                                                                                          autoSubmit="true"
-                                                                                          partialTriggers="nomIdId">
-                                                                <f:validator binding="#{row.bindings.Nomname.validator}"/>
-                                                            </af:inputComboboxListOfValues>
+                                                            </af:selectOneChoice>
                                                         </af:column>
                                                         <af:column sortProperty="#{bindings.OrdersTpUslugiView2.hints.Quantity.name}"
                                                                    sortable="true"
@@ -957,22 +935,6 @@
                                                                 <f:validator binding="#{row.bindings.DatToPay.validator}"/>
                                                                 <af:convertDateTime pattern="#{bindings.OrdersTpUslugiView2.hints.DatToPay.format}"/>
                                                             </af:inputDate>
-                                                        </af:column>
-                                                        <af:column sortProperty="#{bindings.OrdersTpUslugiView2.hints.GroupId.name}"
-                                                                   sortable="true"
-                                                                   headerText="#{bindings.OrdersTpUslugiView2.hints.GroupId.label}"
-                                                                   id="c33" visible="false">
-                                                            <af:inputComboboxListOfValues id="groupIdId"
-                                                                                          popupTitle="Search and Select: #{bindings.OrdersTpUslugiView2.hints.GroupId.label}"
-                                                                                          value="#{row.bindings.GroupId.inputValue}"
-                                                                                          model="#{row.bindings.GroupId.listOfValuesModel}"
-                                                                                          required="#{bindings.OrdersTpUslugiView2.hints.GroupId.mandatory}"
-                                                                                          columns="#{bindings.OrdersTpUslugiView2.hints.GroupId.displayWidth}"
-                                                                                          shortDesc="#{bindings.OrdersTpUslugiView2.hints.GroupId.tooltip}"
-                                                                                          autoSubmit="true"
-                                                                                          partialTriggers="groupnameId">
-                                                                <f:validator binding="#{row.bindings.GroupId.validator}"/>
-                                                            </af:inputComboboxListOfValues>
                                                         </af:column>
                                                         <af:column headerText="#{bindings.OrdersTpUslugiView2.hints.OtpuEditable.label}"
                                                                    id="c38"
