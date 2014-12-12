@@ -810,7 +810,8 @@
                                                                                 label="#{row.bindings.NomId.label}"
                                                                                 required="#{bindings.OrdersTpUslugiView2.hints.NomId.mandatory}"
                                                                                 shortDesc="#{bindings.OrdersTpUslugiView2.hints.NomId.tooltip}"
-                                                                                id="soc18">
+                                                                                id="soc18" autoSubmit="true"
+                                                                                valueChangeListener="#{orders.onNomChanged}">
                                                                 <f:selectItems value="#{row.bindings.NomId.items}"
                                                                                id="si18"/>
                                                                 <f:validator binding="#{row.bindings.NomId.validator}"/>
@@ -826,7 +827,9 @@
                                                                           columns="#{bindings.OrdersTpUslugiView2.hints.Quantity.displayWidth}"
                                                                           maximumLength="#{bindings.OrdersTpUslugiView2.hints.Quantity.precision}"
                                                                           shortDesc="#{bindings.OrdersTpUslugiView2.hints.Quantity.tooltip}"
-                                                                          id="it32">
+                                                                          id="it32" autoSubmit="true"
+                                                                          binding="#{orders.qtt}"
+                                                                          valueChangeListener="#{orders.onPriceChange}">
                                                                 <f:validator binding="#{row.bindings.Quantity.validator}"/>
                                                                 <af:convertNumber groupingUsed="false"
                                                                                   pattern="#{bindings.OrdersTpUslugiView2.hints.Quantity.format}"/>
@@ -840,7 +843,9 @@
                                                                           columns="#{bindings.OrdersTpUslugiView2.hints.Price.displayWidth}"
                                                                           maximumLength="#{bindings.OrdersTpUslugiView2.hints.Price.precision}"
                                                                           shortDesc="#{bindings.OrdersTpUslugiView2.hints.Price.tooltip}"
-                                                                          id="it28">
+                                                                          id="it28"
+                                                                          autoSubmit="true" binding="#{orders.price}"
+                                                                          valueChangeListener="#{orders.onPriceChange}">
                                                                 <f:validator binding="#{row.bindings.Price.validator}"/>
                                                                 <af:convertNumber groupingUsed="false"
                                                                                   pattern="#{bindings.OrdersTpUslugiView2.hints.Price.format}"/>
@@ -854,7 +859,7 @@
                                                                                 label="#{row.bindings.MeasureId.label}"
                                                                                 required="#{bindings.OrdersTpUslugiView2.hints.MeasureId.mandatory}"
                                                                                 shortDesc="#{bindings.OrdersTpUslugiView2.hints.MeasureId.tooltip}"
-                                                                                id="soc16">
+                                                                                id="soc16" autoSubmit="true">
                                                                 <f:selectItems value="#{row.bindings.MeasureId.items}"
                                                                                id="si16"/>
                                                                 <f:validator binding="#{row.bindings.MeasureId.validator}"/>
@@ -870,7 +875,7 @@
                                                                           columns="#{bindings.OrdersTpUslugiView2.hints.Summ.displayWidth}"
                                                                           maximumLength="#{bindings.OrdersTpUslugiView2.hints.Summ.precision}"
                                                                           shortDesc="#{bindings.OrdersTpUslugiView2.hints.Summ.tooltip}"
-                                                                          id="it29">
+                                                                          id="it29" readOnly="true">
                                                                 <f:validator binding="#{row.bindings.Summ.validator}"/>
                                                                 <af:convertNumber groupingUsed="false"
                                                                                   pattern="#{bindings.OrdersTpUslugiView2.hints.Summ.format}"/>

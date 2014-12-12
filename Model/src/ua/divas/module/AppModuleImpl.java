@@ -19,7 +19,9 @@ import ua.divas.view.FirmsViewImpl;
 import ua.divas.view.GroupmembersViewImpl;
 import ua.divas.view.KassaVOImpl;
 import ua.divas.view.KontragentsViewImpl;
+import ua.divas.view.LastPriceVOImpl;
 import ua.divas.view.NomenklaturaViewImpl;
+import ua.divas.view.OrdersTpUslugiViewImpl;
 import ua.divas.view.OrdersViewImpl;
 import ua.divas.view.UserSettingsViewImpl;
 import ua.divas.view.UsersViewImpl;
@@ -2320,16 +2322,16 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrdersTpUslugiView1.
      * @return OrdersTpUslugiView1
      */
-    public ViewObjectImpl getOrdersTpUslugiView1() {
-        return (ViewObjectImpl) findViewObject("OrdersTpUslugiView1");
+    public OrdersTpUslugiViewImpl getOrdersTpUslugiView1() {
+        return (OrdersTpUslugiViewImpl) findViewObject("OrdersTpUslugiView1");
     }
 
     /**
      * Container's getter for OrdersTpUslugiView2.
      * @return OrdersTpUslugiView2
      */
-    public ViewObjectImpl getOrdersTpUslugiView2() {
-        return (ViewObjectImpl) findViewObject("OrdersTpUslugiView2");
+    public OrdersTpUslugiViewImpl getOrdersTpUslugiView2() {
+        return (OrdersTpUslugiViewImpl) findViewObject("OrdersTpUslugiView2");
     }
 
     /**
@@ -2344,8 +2346,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrdersTpUslugiView3.
      * @return OrdersTpUslugiView3
      */
-    public ViewObjectImpl getOrdersTpUslugiView3() {
-        return (ViewObjectImpl) findViewObject("OrdersTpUslugiView3");
+    public OrdersTpUslugiViewImpl getOrdersTpUslugiView3() {
+        return (OrdersTpUslugiViewImpl) findViewObject("OrdersTpUslugiView3");
     }
 
     /**
@@ -2360,8 +2362,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrdersTpUslugiView4.
      * @return OrdersTpUslugiView4
      */
-    public ViewObjectImpl getOrdersTpUslugiView4() {
-        return (ViewObjectImpl) findViewObject("OrdersTpUslugiView4");
+    public OrdersTpUslugiViewImpl getOrdersTpUslugiView4() {
+        return (OrdersTpUslugiViewImpl) findViewObject("OrdersTpUslugiView4");
     }
 
     /**
@@ -2568,8 +2570,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrdersTpUslugiView5.
      * @return OrdersTpUslugiView5
      */
-    public ViewObjectImpl getOrdersTpUslugiGroup() {
-        return (ViewObjectImpl) findViewObject("OrdersTpUslugiGroup");
+    public OrdersTpUslugiViewImpl getOrdersTpUslugiGroup() {
+        return (OrdersTpUslugiViewImpl) findViewObject("OrdersTpUslugiGroup");
     }
 
     /**
@@ -2584,8 +2586,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrdersTpUslugiView5.
      * @return OrdersTpUslugiView5
      */
-    public ViewObjectImpl getOrdersTpUslugiMeasure() {
-        return (ViewObjectImpl) findViewObject("OrdersTpUslugiMeasure");
+    public OrdersTpUslugiViewImpl getOrdersTpUslugiMeasure() {
+        return (OrdersTpUslugiViewImpl) findViewObject("OrdersTpUslugiMeasure");
     }
 
     /**
@@ -2602,6 +2604,14 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewObjectImpl getNomenklaturaVO1() {
         return (ViewObjectImpl) findViewObject("NomenklaturaVO1");
+    }
+
+    /**
+     * Container's getter for LastPriceVO1.
+     * @return LastPriceVO1
+     */
+    public LastPriceVOImpl getLastPriceVO1() {
+        return (LastPriceVOImpl) findViewObject("LastPriceVO1");
     }
 }
 

@@ -1,5 +1,15 @@
 package ua.divas.view;
 
+
+import java.math.BigDecimal;
+
+import javax.el.ELContext;
+
+import javax.el.ExpressionFactory;
+import javax.el.ValueExpression;
+
+import javax.faces.application.Application;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
@@ -10,6 +20,7 @@ import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.share.ADFContext;
 import oracle.adf.view.rich.component.rich.input.RichInputComboboxListOfValues;
 import oracle.adf.view.rich.component.rich.input.RichInputListOfValues;
+import oracle.adf.view.rich.component.rich.input.RichInputText;
 import oracle.adf.view.rich.component.rich.input.RichSelectOneChoice;
 import oracle.adf.view.rich.event.DialogEvent;
 import oracle.adf.view.rich.event.LaunchPopupEvent;
@@ -27,7 +38,7 @@ import oracle.jbo.Row;
 public class OrdersBean {
 
 
-    
+   
 
     public OrdersBean() {
     }
@@ -35,6 +46,8 @@ public class OrdersBean {
     private RichSelectOneChoice division;
     private RichSelectOneChoice currency;
     private RichInputListOfValues kontrag;
+    private RichInputText price;
+    private RichInputText qtt;
     public Boolean refreshNeeded;
 
     public void setRefreshNeeded(Boolean refreshNeeded) {
@@ -43,6 +56,22 @@ public class OrdersBean {
 
     public Boolean getRefreshNeeded() {
         return refreshNeeded;
+    }
+    
+    public void setPrice(RichInputText price) {
+        this.price = price;
+    }
+
+    public RichInputText getPrice() {
+        return price;
+    }
+
+    public void setQtt(RichInputText qtt) {
+        this.qtt = qtt;
+    }
+
+    public RichInputText getQtt() {
+        return qtt;
     }
 
     private String upperCase(String s) {
@@ -291,18 +320,68 @@ public class OrdersBean {
             }
         }
     }
+    
+    public String getValueFrmExpression(String data) {
+            FacesContext fc = FacesContext.getCurrentInstance();
+            Application app = fc.getApplication();
+            ExpressionFactory elFactory = app.getExpressionFactory();
+            ELContext elContext = fc.getELContext();
+            ValueExpression valueExp = elFactory.createValueExpression(elContext, data, Object.class);
+            String Message = null;
+            Object obj = valueExp.getValue(elContext);
+            if (obj != null) {
+                Message = obj.toString();
+            }
+            return Message;
+        }
 
-    public void onGroupChange(ValueChangeEvent vce) {
+    public void onNomChanged(ValueChangeEvent vce) {
+        vce.getComponent().processUpdates(FacesContext.getCurrentInstance());
+        //System.out.println(vce.getNewValue());
+        String NomId = getValueFrmExpression("#{row.bindings.NomId.attributeValue}");
+        System.out.println(NomId);
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("OrdersTpUslugiView2Iterator");
+        Row currRow = it.getCurrentRow();
+        currRow.setAttribute("MeasureId", null);
+        currRow.setAttribute("Price", 0);
+        currRow.setAttribute("Summ", 0);
+        currRow.setAttribute("Quantity", 0);
+        
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-        OperationBinding ob = binding.getOperationBinding("findNomByParent");
+        OperationBinding ob = binding.getOperationBinding("retrieveMeasure");
         if (ob != null) {
-            DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
-            DCIteratorBinding it = bd.findIteratorBinding("OrdersTpUslugiView2Iterator");
-            Row currRow = it.getCurrentRow();
-            System.out.println(vce.getNewValue());
-            System.out.println(currRow.getAttribute("GroupId"));
-            //ob.getParamsMap().put("parent", (String) this.getGroup().getValue());
-            //ob.execute();
+            ob.getParamsMap().put("NomId", NomId);
+            String measure = (String)ob.execute();
+            System.out.println(measure);
+            currRow.setAttribute("MeasureId", measure);
+        }
+        
+        ob = binding.getOperationBinding("retrievePrice");
+        if (ob != null) {
+            ob.getParamsMap().put("NomId", NomId);
+            BigDecimal price = (BigDecimal)ob.execute();
+            System.out.println(price);
+            currRow.setAttribute("Price", price);
+        }
+    }
+
+    public void onPriceChange(ValueChangeEvent vce) {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("OrdersTpUslugiView2Iterator");
+        Row currRow = it.getCurrentRow();
+        BigDecimal p = (BigDecimal) getPrice().getValue();
+        BigDecimal q = (BigDecimal) getQtt().getValue();
+        System.out.println(p);
+        System.out.println(q);
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("retrieveSumm");
+        if (ob != null) {
+            ob.getParamsMap().put("p", p);
+            ob.getParamsMap().put("q", q);
+            BigDecimal s = (BigDecimal)ob.execute();
+            System.out.println(s);
+            currRow.setAttribute("Summ", s);
         }
     }
 }

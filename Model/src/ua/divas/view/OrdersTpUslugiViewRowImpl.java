@@ -2,6 +2,8 @@ package ua.divas.view;
 
 import java.math.BigDecimal;
 
+import java.math.RoundingMode;
+
 import java.sql.Timestamp;
 
 import oracle.jbo.AttributeList;
@@ -192,6 +194,7 @@ public class OrdersTpUslugiViewRowImpl extends ViewRowImpl {
      * @return the SUMM
      */
     public BigDecimal getSumm() {
+        //return getPrice().multiply(getQuantity()).setScale(2, RoundingMode.HALF_UP);
         return (BigDecimal) getAttributeInternal(SUMM);
     }
 
@@ -364,6 +367,7 @@ public class OrdersTpUslugiViewRowImpl extends ViewRowImpl {
         setAttributeInternal(OTPUEDITABLE, value);
     }
 
+
     /**
      * Gets the view accessor <code>RowSet</code> OrdersView1.
      */
@@ -398,5 +402,6 @@ public class OrdersTpUslugiViewRowImpl extends ViewRowImpl {
     public RowSet getNomenklaturaUslGroup1() {
         return (RowSet) getAttributeInternal(NOMENKLATURAUSLGROUP1);
     }
+
 }
 

@@ -246,5 +246,24 @@
         <Item Value="OtpuEditable"/>
       </AttrNames>
     </attributeValues>
+    <methodAction id="retrieveMeasure" RequiresUpdateModel="true" Action="invokeMethod" MethodName="retrieveMeasure"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.OrdersTpUslugiView2"
+                  ReturnName="data.AppModuleDataControl.methodResults.retrieveMeasure_AppModuleDataControl_OrdersTpUslugiView2_retrieveMeasure_result">
+      <NamedData NDName="NomId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="retrievePrice" RequiresUpdateModel="true" Action="invokeMethod" MethodName="retrievePrice"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.OrdersTpUslugiView2"
+                  ReturnName="data.AppModuleDataControl.methodResults.retrievePrice_AppModuleDataControl_OrdersTpUslugiView2_retrievePrice_result">
+      <NamedData NDName="NomId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="retrieveSumm" RequiresUpdateModel="true" Action="invokeMethod" MethodName="retrieveSumm"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.OrdersTpUslugiView2"
+                  ReturnName="data.AppModuleDataControl.methodResults.retrieveSumm_AppModuleDataControl_OrdersTpUslugiView2_retrieveSumm_result">
+      <NamedData NDName="p" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="q" NDType="java.math.BigDecimal"/>
+    </methodAction>
   </bindings>
 </pageDefinition>
