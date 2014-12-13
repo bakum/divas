@@ -3,7 +3,7 @@
                 Package="ua.divas.view.pageDefs">
   <parameters/>
   <executables>
-    <iterator Binds="OrdersView1" RangeSize="25" DataControl="AppModuleDataControl" id="OrdersView1Iterator">
+    <iterator Binds="OrdersView1" RangeSize="10" DataControl="AppModuleDataControl" id="OrdersView1Iterator">
       <sortCriteria>
         <sort attribute="Dat" ascending="false"/>
       </sortCriteria>

@@ -616,6 +616,9 @@
   <ViewUsage
     Name="LastPriceVO1"
     ViewObjectName="ua.divas.view.LastPriceVO"/>
+  <ViewUsage
+    Name="OrdersTpOplatyView1"
+    ViewObjectName="ua.divas.view.OrdersTpOplatyView"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -1335,6 +1338,12 @@
     ViewLinkObjectName="ua.divas.view.OrdersTpUslugiMeasureFkLink"
     SrcViewUsageName="ua.divas.module.AppModule.MeasureUnitView1"
     DstViewUsageName="ua.divas.module.AppModule.OrdersTpUslugiMeasure"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="OrdersTpOplatyFkLink1"
+    ViewLinkObjectName="ua.divas.view.OrdersTpOplatyFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.OrdersView1"
+    DstViewUsageName="ua.divas.module.AppModule.OrdersTpOplatyView1"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">

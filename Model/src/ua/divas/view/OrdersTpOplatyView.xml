@@ -6,120 +6,134 @@
   Name="OrdersTpOplatyView"
   Version="12.1.2.66.68"
   InheritPersonalization="merge"
-  SelectList="OrdersTpOplaty.ID, 
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+    <DesignTime>
+        <Attr Name="_isExpertMode" Value="true"/>
+    </DesignTime>
+    <ViewAccessor
+      Name="OrdersView1"
+      ViewObjectName="ua.divas.view.OrdersView"
+      RowLevelBinds="true"/>
+    <ViewAccessor
+      Name="UsersView1"
+      ViewObjectName="ua.divas.view.UsersView"
+      RowLevelBinds="true"/>
+    <ListBinding
+      Name="LOV_OrderId"
+      ListVOName="OrdersView1"
+      ListRangeSize="-1"
+      NullValueFlag="start"
+      NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+      MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="OrderId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Num"/>
+            <Item Value="Dat"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+      Name="LOV_UserId"
+      ListVOName="UsersView1"
+      ListRangeSize="-1"
+      NullValueFlag="start"
+      NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+      MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="UserId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Login"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <SQLQuery><![CDATA[SELECT OrdersTpOplaty.ID, 
        OrdersTpOplaty.ORDER_ID, 
        OrdersTpOplaty.DAT, 
        OrdersTpOplaty.SUM, 
        OrdersTpOplaty.USER_ID, 
-       OrdersTpOplaty.COMMENTS"
-  FromList="ORDERS_TP_OPLATY OrdersTpOplaty"
-  BindingStyle="OracleName"
-  CustomQuery="false"
-  PageIterMode="Full">
-  <ViewAccessor
-    Name="OrdersView1"
-    ViewObjectName="ua.divas.view.OrdersView"
-    RowLevelBinds="true"/>
-  <ViewAccessor
-    Name="UsersView1"
-    ViewObjectName="ua.divas.view.UsersView"
-    RowLevelBinds="true"/>
-  <ListBinding
-    Name="LOV_OrderId"
-    ListVOName="OrdersView1"
-    ListRangeSize="-1"
-    NullValueFlag="start"
-    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
-    MRUCount="0">
-    <AttrArray Name="AttrNames">
-      <Item Value="OrderId"/>
-    </AttrArray>
-    <AttrArray Name="AttrExpressions"/>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="Num"/>
-      <Item Value="Dat"/>
-    </AttrArray>
-    <DisplayCriteria/>
-  </ListBinding>
-  <ListBinding
-    Name="LOV_UserId"
-    ListVOName="UsersView1"
-    ListRangeSize="-1"
-    NullValueFlag="start"
-    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
-    MRUCount="0">
-    <AttrArray Name="AttrNames">
-      <Item Value="UserId"/>
-    </AttrArray>
-    <AttrArray Name="AttrExpressions"/>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="Login"/>
-    </AttrArray>
-    <DisplayCriteria/>
-  </ListBinding>
-  <EntityUsage
-    Name="OrdersTpOplaty"
-    Entity="ua.divas.model.OrdersTpOplaty"/>
-  <ViewAttribute
-    Name="Id"
-    PrecisionRule="true"
-    EntityAttrName="Id"
-    EntityUsage="OrdersTpOplaty"
-    AliasName="ID"/>
-  <ViewAttribute
-    Name="OrderId"
-    IsNotNull="true"
-    PrecisionRule="true"
-    EntityAttrName="OrderId"
-    EntityUsage="OrdersTpOplaty"
-    AliasName="ORDER_ID"
-    LOVName="LOV_OrderId">
-    <Properties>
-      <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="choice"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="Dat"
-    IsNotNull="true"
-    PrecisionRule="true"
-    EntityAttrName="Dat"
-    EntityUsage="OrdersTpOplaty"
-    AliasName="DAT"/>
-  <ViewAttribute
-    Name="Sum1"
-    IsNotNull="true"
-    PrecisionRule="true"
-    EntityAttrName="Sum1"
-    EntityUsage="OrdersTpOplaty"
-    AliasName="SUM"/>
-  <ViewAttribute
-    Name="UserId"
-    IsNotNull="true"
-    PrecisionRule="true"
-    EntityAttrName="UserId"
-    EntityUsage="OrdersTpOplaty"
-    AliasName="USER_ID"
-    LOVName="LOV_UserId">
-    <Properties>
-      <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="choice"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="Comments"
-    PrecisionRule="true"
-    EntityAttrName="Comments"
-    EntityUsage="OrdersTpOplaty"
-    AliasName="COMMENTS"/>
+       OrdersTpOplaty.COMMENTS,
+       (select 0 from dual) otpo_editable
+FROM  ORDERS_TP_OPLATY OrdersTpOplaty]]></SQLQuery>
+    <EntityUsage
+      Name="OrdersTpOplaty"
+      Entity="ua.divas.model.OrdersTpOplaty"/>
+    <ViewAttribute
+      Name="Id"
+      PrecisionRule="true"
+      EntityAttrName="Id"
+      EntityUsage="OrdersTpOplaty"
+      AliasName="ID"/>
+    <ViewAttribute
+      Name="OrderId"
+      IsNotNull="true"
+      PrecisionRule="true"
+      EntityAttrName="OrderId"
+      EntityUsage="OrdersTpOplaty"
+      AliasName="ORDER_ID"
+      LOVName="LOV_OrderId">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                  Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="Dat"
+      IsNotNull="true"
+      PrecisionRule="true"
+      EntityAttrName="Dat"
+      EntityUsage="OrdersTpOplaty"
+      AliasName="DAT"/>
+    <ViewAttribute
+      Name="Sum1"
+      PrecisionRule="true"
+      IsNotNull="true"
+      EntityAttrName="Sum1"
+      EntityUsage="OrdersTpOplaty"
+      AliasName="SUM"/>
+    <ViewAttribute
+      Name="UserId"
+      IsNotNull="true"
+      PrecisionRule="true"
+      EntityAttrName="UserId"
+      EntityUsage="OrdersTpOplaty"
+      AliasName="USER_ID"
+      LOVName="LOV_UserId">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                  Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="Comments"
+      PrecisionRule="true"
+      EntityAttrName="Comments"
+      EntityUsage="OrdersTpOplaty"
+      AliasName="COMMENTS"/>
+    <ViewAttribute
+      Name="OtpoEditable"
+      IsUpdateable="false"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Type="java.math.BigDecimal"
+      ColumnType="NUMBER"
+      AliasName="OTPO_EDITABLE"
+      Expression="OTPO_EDITABLE"
+      SQLType="NUMERIC"/>
 </ViewObject>

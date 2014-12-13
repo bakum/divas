@@ -2613,5 +2613,21 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public LastPriceVOImpl getLastPriceVO1() {
         return (LastPriceVOImpl) findViewObject("LastPriceVO1");
     }
+
+    /**
+     * Container's getter for OrdersTpOplatyView1.
+     * @return OrdersTpOplatyView1
+     */
+    public ViewObjectImpl getOrdersTpOplatyView1() {
+        return (ViewObjectImpl) findViewObject("OrdersTpOplatyView1");
+    }
+
+    /**
+     * Container's getter for OrdersTpOplatyFkLink1.
+     * @return OrdersTpOplatyFkLink1
+     */
+    public ViewLinkImpl getOrdersTpOplatyFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrdersTpOplatyFkLink1");
+    }
 }
 
