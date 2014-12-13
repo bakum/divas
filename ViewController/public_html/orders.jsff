@@ -151,6 +151,20 @@
                                                 <f:validator binding="#{row.bindings.CurrId.validator}"/>
                                             </af:selectOneChoice>
                                         </af:column>
+                                        <af:column headerText="#{bindings.OrdersView1.hints.TotalSumOplaty.label}"
+                                                   id="c25">
+                                            <af:inputText value="#{row.bindings.TotalSumOplaty.inputValue}"
+                                                          label="#{bindings.OrdersView1.hints.TotalSumOplaty.label}"
+                                                          required="#{bindings.OrdersView1.hints.TotalSumOplaty.mandatory}"
+                                                          columns="#{bindings.OrdersView1.hints.TotalSumOplaty.displayWidth}"
+                                                          maximumLength="#{bindings.OrdersView1.hints.TotalSumOplaty.precision}"
+                                                          shortDesc="#{bindings.OrdersView1.hints.TotalSumOplaty.tooltip}"
+                                                          id="it30">
+                                                <f:validator binding="#{row.bindings.TotalSumOplaty.validator}"/>
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.OrdersView1.hints.TotalSumOplaty.format}"/>
+                                            </af:inputText>
+                                        </af:column>
                                         <af:column sortProperty="#{bindings.OrdersView1.hints.TotalSumUslugi.name}"
                                                    filterable="true" sortable="true"
                                                    headerText="#{bindings.OrdersView1.hints.TotalSumUslugi.label}"

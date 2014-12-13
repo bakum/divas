@@ -43,6 +43,7 @@
           <Item Value="CountUslug"/>
           <Item Value="Discription"/>
           <Item Value="OEditable"/>
+          <Item Value="TotalSumOplaty"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

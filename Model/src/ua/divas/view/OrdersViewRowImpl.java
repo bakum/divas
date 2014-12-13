@@ -68,7 +68,9 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         Zamername,
         TotalSumUslugi,
         CountUslug,
+        TotalSumOplaty,
         OrdersTpUslugiView,
+        OrdersTpOplatyView,
         KontragentsView1,
         CurrencyView1,
         KassaView1,
@@ -126,7 +128,9 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     public static final int ZAMERNAME = AttributesEnum.Zamername.index();
     public static final int TOTALSUMUSLUGI = AttributesEnum.TotalSumUslugi.index();
     public static final int COUNTUSLUG = AttributesEnum.CountUslug.index();
+    public static final int TOTALSUMOPLATY = AttributesEnum.TotalSumOplaty.index();
     public static final int ORDERSTPUSLUGIVIEW = AttributesEnum.OrdersTpUslugiView.index();
+    public static final int ORDERSTPOPLATYVIEW = AttributesEnum.OrdersTpOplatyView.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
     public static final int CURRENCYVIEW1 = AttributesEnum.CurrencyView1.index();
     public static final int KASSAVIEW1 = AttributesEnum.KassaView1.index();
@@ -472,6 +476,14 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     }
 
     /**
+     * Gets the attribute value for the calculated attribute TotalSumOplaty.
+     * @return the TotalSumOplaty
+     */
+    public Number getTotalSumOplaty() {
+        return (Number) getAttributeInternal(TOTALSUMOPLATY);
+    }
+
+    /**
      * Gets the attribute value for ZAMER_ID using the alias name ZamerId.
      * @return the ZAMER_ID
      */
@@ -508,6 +520,13 @@ public class OrdersViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getOrdersTpUslugiView() {
         return (RowIterator) getAttributeInternal(ORDERSTPUSLUGIVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link OrdersTpOplatyView.
+     */
+    public RowIterator getOrdersTpOplatyView() {
+        return (RowIterator) getAttributeInternal(ORDERSTPOPLATYVIEW);
     }
 
     /**

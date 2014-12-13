@@ -629,9 +629,35 @@ where deleted = 0]]></SQLQuery>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="TotalSumOplaty"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[OrdersTpOplatyView.sum("Sum1 != null ? Sum1 : 0")]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.OrdersView.TotalSumOplaty_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.OrdersView.TotalSumOplaty_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewLinkAccessor
     Name="OrdersTpUslugiView"
     ViewLink="ua.divas.view.OrdersTpUslugiFk1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="OrdersTpOplatyView"
+    ViewLink="ua.divas.view.OrdersTpOplatyFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <ClientInterface

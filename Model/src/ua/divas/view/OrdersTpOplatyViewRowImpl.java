@@ -34,7 +34,6 @@ public class OrdersTpOplatyViewRowImpl extends ViewRowImpl {
     @Override
     protected void create(AttributeList attributeList) {
         this.setOtpoEditable(new BigDecimal(1));
-        //this.setForValidation(new Integer(2));
         super.create(attributeList);
     }
 
@@ -45,10 +44,10 @@ public class OrdersTpOplatyViewRowImpl extends ViewRowImpl {
         Id,
         OrderId,
         Dat,
+        Sum1,
         UserId,
-        OtpoEditable,
         Comments,
-        Summ,
+        OtpoEditable,
         OrdersView1,
         UsersView1;
         static AttributesEnum[] vals = null;
@@ -79,10 +78,10 @@ public class OrdersTpOplatyViewRowImpl extends ViewRowImpl {
     public static final int ID = AttributesEnum.Id.index();
     public static final int ORDERID = AttributesEnum.OrderId.index();
     public static final int DAT = AttributesEnum.Dat.index();
+    public static final int SUM1 = AttributesEnum.Sum1.index();
     public static final int USERID = AttributesEnum.UserId.index();
-    public static final int OTPOEDITABLE = AttributesEnum.OtpoEditable.index();
     public static final int COMMENTS = AttributesEnum.Comments.index();
-    public static final int SUMM = AttributesEnum.Summ.index();
+    public static final int OTPOEDITABLE = AttributesEnum.OtpoEditable.index();
     public static final int ORDERSVIEW1 = AttributesEnum.OrdersView1.index();
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
 
@@ -150,6 +149,22 @@ public class OrdersTpOplatyViewRowImpl extends ViewRowImpl {
 
 
     /**
+     * Gets the attribute value for SUM using the alias name Sum1.
+     * @return the SUM
+     */
+    public BigDecimal getSum1() {
+        return (BigDecimal) getAttributeInternal(SUM1);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for SUM using the alias name Sum1.
+     * @param value value to set the SUM
+     */
+    public void setSum1(BigDecimal value) {
+        setAttributeInternal(SUM1, value);
+    }
+
+    /**
      * Gets the attribute value for USER_ID using the alias name UserId.
      * @return the USER_ID
      */
@@ -172,6 +187,7 @@ public class OrdersTpOplatyViewRowImpl extends ViewRowImpl {
     public BigDecimal getOtpoEditable() {
         return (BigDecimal) getAttributeInternal(OTPOEDITABLE);
     }
+
 
     /**
      * Sets <code>value</code> as the attribute value for the calculated attribute OtpoEditable.
@@ -197,22 +213,6 @@ public class OrdersTpOplatyViewRowImpl extends ViewRowImpl {
         setAttributeInternal(COMMENTS, value);
     }
 
-
-    /**
-     * Gets the attribute value for SUM using the alias name Summ.
-     * @return the SUM
-     */
-    public BigDecimal getSumm() {
-        return (BigDecimal) getAttributeInternal(SUMM);
-    }
-
-    /**
-     * Sets <code>value</code> as attribute value for SUM using the alias name Summ.
-     * @param value value to set the SUM
-     */
-    public void setSumm(BigDecimal value) {
-        setAttributeInternal(SUMM, value);
-    }
 
     /**
      * Gets the view accessor <code>RowSet</code> OrdersView1.
