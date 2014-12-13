@@ -17,6 +17,8 @@
     <iterator Binds="OrdersTpUslugiView2" RangeSize="10" DataControl="AppModuleDataControl"
               id="OrdersTpUslugiView2Iterator"/>
     <iterator Binds="NomenklaturaVO1" RangeSize="-1" DataControl="AppModuleDataControl" id="NomenklaturaVO1Iterator"/>
+    <iterator Binds="OrdersTpOplatyView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="OrdersTpOplatyView1Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="OrdersView1Iterator" id="OrdersView1">
@@ -266,5 +268,25 @@
       <NamedData NDName="p" NDType="java.math.BigDecimal"/>
       <NamedData NDName="q" NDType="java.math.BigDecimal"/>
     </methodAction>
+    <tree IterBinding="OrdersTpOplatyView1Iterator" id="OrdersTpOplatyView1">
+      <nodeDefinition DefName="ua.divas.view.OrdersTpOplatyView" Name="OrdersTpOplatyView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="OrderId"/>
+          <Item Value="Dat"/>
+          <Item Value="Sum1"/>
+          <Item Value="UserId"/>
+          <Item Value="Comments"/>
+          <Item Value="OtpoEditable"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="OrdersTpOplatyView1Iterator" id="CreateInsert4" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <attributeValues IterBinding="OrdersTpOplatyView1Iterator" id="OtpoEditable">
+      <AttrNames>
+        <Item Value="OtpoEditable"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

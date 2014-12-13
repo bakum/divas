@@ -1001,6 +1001,140 @@
                                                     </af:table>
                                                 </af:panelBox>
                                             </af:showDetailItem>
+                                            <af:showDetailItem text="Оплаты" id="sdi5" stretchChildren="first">
+                                                <af:panelBox text="Перечень оплат" id="pb3" type="flow">
+                                                    <f:facet name="toolbar">
+                                                        <af:toolbar id="t11">
+                                                            <af:button actionListener="#{bindings.CreateInsert4.execute}"
+                                                                       text="Добавить"
+                                                                       disabled="#{!bindings.CreateInsert4.enabled}"
+                                                                       id="b12"/>
+                                                        </af:toolbar>
+                                                    </f:facet>
+                                                    <af:table value="#{bindings.OrdersTpOplatyView1.collectionModel}"
+                                                              var="row" rows="#{bindings.OrdersTpOplatyView1.rangeSize}"
+                                                              emptyText="#{bindings.OrdersTpOplatyView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                              rowBandingInterval="0"
+                                                              selectedRowKeys="#{bindings.OrdersTpOplatyView1.collectionModel.selectedRow}"
+                                                              selectionListener="#{bindings.OrdersTpOplatyView1.collectionModel.makeCurrent}"
+                                                              rowSelection="single"
+                                                              fetchSize="#{bindings.OrdersTpOplatyView1.rangeSize}"
+                                                              id="t9" partialTriggers="::b12" editingMode="clickToEdit"
+                                                              scrollPolicy="page" blockRowNavigationOnError="always">
+                                                        <af:column id="c44" width="60">
+                                                            <af:toolbar id="t10">
+                                                                <af:button id="b11" icon="/img/edit-16.gif">
+                                                                    <af:setPropertyListener from="#{1}"
+                                                                                            to="#{bindings.OtpoEditable.inputValue}"
+                                                                                            type="action"/>
+                                                                </af:button>
+                                                            </af:toolbar>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.OrdersTpOplatyView1.hints.Id.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.OrdersTpOplatyView1.hints.Id.label}"
+                                                                   id="c33">
+                                                            <af:inputText value="#{row.bindings.Id.inputValue}"
+                                                                          label="#{bindings.OrdersTpOplatyView1.hints.Id.label}"
+                                                                          required="#{bindings.OrdersTpOplatyView1.hints.Id.mandatory}"
+                                                                          columns="#{bindings.OrdersTpOplatyView1.hints.Id.displayWidth}"
+                                                                          maximumLength="#{bindings.OrdersTpOplatyView1.hints.Id.precision}"
+                                                                          shortDesc="#{bindings.OrdersTpOplatyView1.hints.Id.tooltip}"
+                                                                          id="it31">
+                                                                <f:validator binding="#{row.bindings.Id.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.OrdersTpOplatyView1.hints.OrderId.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.OrdersTpOplatyView1.hints.OrderId.label}"
+                                                                   id="c34">
+                                                            <af:selectOneChoice value="#{row.bindings.OrderId.inputValue}"
+                                                                                label="#{row.bindings.OrderId.label}"
+                                                                                required="#{bindings.OrdersTpOplatyView1.hints.OrderId.mandatory}"
+                                                                                shortDesc="#{bindings.OrdersTpOplatyView1.hints.OrderId.tooltip}"
+                                                                                id="soc19">
+                                                                <f:selectItems value="#{row.bindings.OrderId.items}"
+                                                                               id="si19"/>
+                                                                <f:validator binding="#{row.bindings.OrderId.validator}"/>
+                                                            </af:selectOneChoice>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.OrdersTpOplatyView1.hints.Dat.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.OrdersTpOplatyView1.hints.Dat.label}"
+                                                                   id="c36">
+                                                            <af:inputDate value="#{row.bindings.Dat.inputValue}"
+                                                                          label="#{bindings.OrdersTpOplatyView1.hints.Dat.label}"
+                                                                          required="#{bindings.OrdersTpOplatyView1.hints.Dat.mandatory}"
+                                                                          columns="#{bindings.OrdersTpOplatyView1.hints.Dat.displayWidth}"
+                                                                          shortDesc="#{bindings.OrdersTpOplatyView1.hints.Dat.tooltip}"
+                                                                          id="id8">
+                                                                <f:validator binding="#{row.bindings.Dat.validator}"/>
+                                                                <af:convertDateTime pattern="#{bindings.OrdersTpOplatyView1.hints.Dat.format}"/>
+                                                            </af:inputDate>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.OrdersTpOplatyView1.hints.Sum1.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.OrdersTpOplatyView1.hints.Sum1.label}"
+                                                                   id="c40">
+                                                            <af:inputText value="#{row.bindings.Sum1.inputValue}"
+                                                                          label="#{bindings.OrdersTpOplatyView1.hints.Sum1.label}"
+                                                                          required="#{bindings.OrdersTpOplatyView1.hints.Sum1.mandatory}"
+                                                                          columns="#{bindings.OrdersTpOplatyView1.hints.Sum1.displayWidth}"
+                                                                          maximumLength="#{bindings.OrdersTpOplatyView1.hints.Sum1.precision}"
+                                                                          shortDesc="#{bindings.OrdersTpOplatyView1.hints.Sum1.tooltip}"
+                                                                          id="it36">
+                                                                <f:validator binding="#{row.bindings.Sum1.validator}"/>
+                                                                <af:convertNumber groupingUsed="false"
+                                                                                  pattern="#{bindings.OrdersTpOplatyView1.hints.Sum1.format}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.OrdersTpOplatyView1.hints.UserId.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.OrdersTpOplatyView1.hints.UserId.label}"
+                                                                   id="c41">
+                                                            <af:selectOneChoice value="#{row.bindings.UserId.inputValue}"
+                                                                                label="#{row.bindings.UserId.label}"
+                                                                                required="#{bindings.OrdersTpOplatyView1.hints.UserId.mandatory}"
+                                                                                shortDesc="#{bindings.OrdersTpOplatyView1.hints.UserId.tooltip}"
+                                                                                id="soc20">
+                                                                <f:selectItems value="#{row.bindings.UserId.items}"
+                                                                               id="si20"/>
+                                                                <f:validator binding="#{row.bindings.UserId.validator}"/>
+                                                            </af:selectOneChoice>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.OrdersTpOplatyView1.hints.Comments.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.OrdersTpOplatyView1.hints.Comments.label}"
+                                                                   id="c42">
+                                                            <af:inputText value="#{row.bindings.Comments.inputValue}"
+                                                                          label="#{bindings.OrdersTpOplatyView1.hints.Comments.label}"
+                                                                          required="#{bindings.OrdersTpOplatyView1.hints.Comments.mandatory}"
+                                                                          columns="#{bindings.OrdersTpOplatyView1.hints.Comments.displayWidth}"
+                                                                          maximumLength="#{bindings.OrdersTpOplatyView1.hints.Comments.precision}"
+                                                                          shortDesc="#{bindings.OrdersTpOplatyView1.hints.Comments.tooltip}"
+                                                                          id="it37">
+                                                                <f:validator binding="#{row.bindings.Comments.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.OrdersTpOplatyView1.hints.OtpoEditable.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.OrdersTpOplatyView1.hints.OtpoEditable.label}"
+                                                                   id="c43">
+                                                            <af:inputText value="#{row.bindings.OtpoEditable.inputValue}"
+                                                                          label="#{bindings.OrdersTpOplatyView1.hints.OtpoEditable.label}"
+                                                                          required="#{bindings.OrdersTpOplatyView1.hints.OtpoEditable.mandatory}"
+                                                                          columns="#{bindings.OrdersTpOplatyView1.hints.OtpoEditable.displayWidth}"
+                                                                          maximumLength="#{bindings.OrdersTpOplatyView1.hints.OtpoEditable.precision}"
+                                                                          shortDesc="#{bindings.OrdersTpOplatyView1.hints.OtpoEditable.tooltip}"
+                                                                          id="it38">
+                                                                <f:validator binding="#{row.bindings.OtpoEditable.validator}"/>
+                                                                <af:convertNumber groupingUsed="false"
+                                                                                  pattern="#{bindings.OrdersTpOplatyView1.hints.OtpoEditable.format}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                    </af:table>
+                                                </af:panelBox>
+                                            </af:showDetailItem>
                                         </af:panelAccordion>
                                     </af:dialog>
                                 </af:popup>
