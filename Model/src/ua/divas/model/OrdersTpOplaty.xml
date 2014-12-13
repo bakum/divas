@@ -131,6 +131,8 @@
           ResId="ua.divas.model.OrdersTpOplaty.Comments_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.model.OrdersTpOplaty.Comments_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="80"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>

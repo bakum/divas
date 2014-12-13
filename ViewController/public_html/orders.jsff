@@ -1033,7 +1033,7 @@
                                                         <af:column sortProperty="#{bindings.OrdersTpOplatyView1.hints.Id.name}"
                                                                    sortable="true"
                                                                    headerText="#{bindings.OrdersTpOplatyView1.hints.Id.label}"
-                                                                   id="c33">
+                                                                   id="c33" visible="false">
                                                             <af:inputText value="#{row.bindings.Id.inputValue}"
                                                                           label="#{bindings.OrdersTpOplatyView1.hints.Id.label}"
                                                                           required="#{bindings.OrdersTpOplatyView1.hints.Id.mandatory}"
@@ -1047,7 +1047,7 @@
                                                         <af:column sortProperty="#{bindings.OrdersTpOplatyView1.hints.OrderId.name}"
                                                                    sortable="true"
                                                                    headerText="#{bindings.OrdersTpOplatyView1.hints.OrderId.label}"
-                                                                   id="c34">
+                                                                   id="c34" visible="false">
                                                             <af:selectOneChoice value="#{row.bindings.OrderId.inputValue}"
                                                                                 label="#{row.bindings.OrderId.label}"
                                                                                 required="#{bindings.OrdersTpOplatyView1.hints.OrderId.mandatory}"
@@ -1102,24 +1102,10 @@
                                                                 <f:validator binding="#{row.bindings.UserId.validator}"/>
                                                             </af:selectOneChoice>
                                                         </af:column>
-                                                        <af:column sortProperty="#{bindings.OrdersTpOplatyView1.hints.Comments.name}"
-                                                                   sortable="true"
-                                                                   headerText="#{bindings.OrdersTpOplatyView1.hints.Comments.label}"
-                                                                   id="c42">
-                                                            <af:inputText value="#{row.bindings.Comments.inputValue}"
-                                                                          label="#{bindings.OrdersTpOplatyView1.hints.Comments.label}"
-                                                                          required="#{bindings.OrdersTpOplatyView1.hints.Comments.mandatory}"
-                                                                          columns="#{bindings.OrdersTpOplatyView1.hints.Comments.displayWidth}"
-                                                                          maximumLength="#{bindings.OrdersTpOplatyView1.hints.Comments.precision}"
-                                                                          shortDesc="#{bindings.OrdersTpOplatyView1.hints.Comments.tooltip}"
-                                                                          id="it37">
-                                                                <f:validator binding="#{row.bindings.Comments.validator}"/>
-                                                            </af:inputText>
-                                                        </af:column>
                                                         <af:column sortProperty="#{bindings.OrdersTpOplatyView1.hints.OtpoEditable.name}"
                                                                    sortable="true"
                                                                    headerText="#{bindings.OrdersTpOplatyView1.hints.OtpoEditable.label}"
-                                                                   id="c43">
+                                                                   id="c43" visible="false">
                                                             <af:inputText value="#{row.bindings.OtpoEditable.inputValue}"
                                                                           label="#{bindings.OrdersTpOplatyView1.hints.OtpoEditable.label}"
                                                                           required="#{bindings.OrdersTpOplatyView1.hints.OtpoEditable.mandatory}"
@@ -1132,6 +1118,19 @@
                                                                                   pattern="#{bindings.OrdersTpOplatyView1.hints.OtpoEditable.format}"/>
                                                             </af:inputText>
                                                         </af:column>
+                                                        <f:facet name="detailStamp">
+                                                            <af:panelLabelAndMessage label="Комментарий" id="plam10">
+                                                                <af:inputText value="#{row.bindings.Comments.inputValue}"
+                                                                              simple="true"
+                                                                              required="#{bindings.OrdersTpOplatyView1.hints.Comments.mandatory}"
+                                                                              columns="#{bindings.OrdersTpOplatyView1.hints.Comments.displayWidth}"
+                                                                              maximumLength="#{bindings.OrdersTpOplatyView1.hints.Comments.precision}"
+                                                                              shortDesc="#{bindings.OrdersTpOplatyView1.hints.Comments.tooltip}"
+                                                                              id="it37" rows="3">
+                                                                    <f:validator binding="#{row.bindings.Comments.validator}"/>
+                                                                </af:inputText>
+                                                            </af:panelLabelAndMessage>
+                                                        </f:facet>
                                                     </af:table>
                                                 </af:panelBox>
                                             </af:showDetailItem>
