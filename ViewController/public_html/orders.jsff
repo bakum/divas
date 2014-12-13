@@ -754,7 +754,7 @@
                                                               rowSelection="single"
                                                               fetchSize="#{bindings.OrdersTpUslugiView2.rangeSize}"
                                                               id="t6" scrollPolicy="page" editingMode="clickToEdit"
-                                                              partialTriggers="::b9">
+                                                              partialTriggers="::b9" allDetailsEnabled="true">
                                                         <af:column id="c39" sortable="true" width="60">
                                                             <af:toolbar id="t8">
                                                                 <af:button id="b10" icon="/img/edit-16.gif">
@@ -805,7 +805,7 @@
                                                             </af:selectOneChoice>
                                                         </af:column>
                                                         <af:column headerText="#{bindings.OrdersTpUslugiView2.hints.NomId.label}"
-                                                                   id="c24">
+                                                                   id="c24" width="250">
                                                             <af:selectOneChoice value="#{row.bindings.NomId.inputValue}"
                                                                                 label="#{row.bindings.NomId.label}"
                                                                                 required="#{bindings.OrdersTpUslugiView2.hints.NomId.mandatory}"
@@ -820,7 +820,7 @@
                                                         <af:column sortProperty="#{bindings.OrdersTpUslugiView2.hints.Quantity.name}"
                                                                    sortable="true"
                                                                    headerText="#{bindings.OrdersTpUslugiView2.hints.Quantity.label}"
-                                                                   id="c37">
+                                                                   id="c37" width="60">
                                                             <af:inputText value="#{row.bindings.Quantity.inputValue}"
                                                                           label="#{bindings.OrdersTpUslugiView2.hints.Quantity.label}"
                                                                           required="#{bindings.OrdersTpUslugiView2.hints.Quantity.mandatory}"
@@ -836,7 +836,7 @@
                                                             </af:inputText>
                                                         </af:column>
                                                         <af:column headerText="#{bindings.OrdersTpUslugiView2.hints.Price.label}"
-                                                                   id="c26">
+                                                                   id="c26" width="60">
                                                             <af:inputText value="#{row.bindings.Price.inputValue}"
                                                                           label="#{bindings.OrdersTpUslugiView2.hints.Price.label}"
                                                                           required="#{bindings.OrdersTpUslugiView2.hints.Price.mandatory}"
@@ -854,7 +854,7 @@
                                                         <af:column sortProperty="#{bindings.OrdersTpUslugiView2.hints.MeasureId.name}"
                                                                    sortable="true"
                                                                    headerText="#{bindings.OrdersTpUslugiView2.hints.MeasureId.label}"
-                                                                   id="c35">
+                                                                   id="c35" width="60">
                                                             <af:selectOneChoice value="#{row.bindings.MeasureId.inputValue}"
                                                                                 label="#{row.bindings.MeasureId.label}"
                                                                                 required="#{bindings.OrdersTpUslugiView2.hints.MeasureId.mandatory}"
@@ -868,7 +868,7 @@
                                                         <af:column sortProperty="#{bindings.OrdersTpUslugiView2.hints.Summ.name}"
                                                                    sortable="true"
                                                                    headerText="#{bindings.OrdersTpUslugiView2.hints.Summ.label}"
-                                                                   id="c27">
+                                                                   id="c27" width="60">
                                                             <af:inputText value="#{row.bindings.Summ.inputValue}"
                                                                           label="#{bindings.OrdersTpUslugiView2.hints.Summ.label}"
                                                                           required="#{bindings.OrdersTpUslugiView2.hints.Summ.mandatory}"
@@ -958,28 +958,31 @@
                                                             </af:inputText>
                                                         </af:column>
                                                         <f:facet name="detailStamp">
-                                                            <af:panelGroupLayout id="pgl10" layout="vertical">
-                                                                <af:inputText value="#{row.bindings.AddWork.inputValue}"
-                                                                              label="Доп. работы"
-                                                                              required="#{bindings.OrdersTpUslugiView2.hints.AddWork.mandatory}"
-                                                                              columns="#{bindings.OrdersTpUslugiView2.hints.AddWork.displayWidth}"
-                                                                              maximumLength="#{bindings.OrdersTpUslugiView2.hints.AddWork.precision}"
-                                                                              shortDesc="#{bindings.OrdersTpUslugiView2.hints.AddWork.tooltip}"
-                                                                              id="it34">
-                                                                    <f:validator binding="#{row.bindings.AddWork.validator}"/>
-                                                                </af:inputText>
-                                                                <af:spacer width="10" height="10" id="s9"/>
-                                                                <af:inputText value="#{row.bindings.PriceAdd.inputValue}"
-                                                                              required="#{bindings.OrdersTpUslugiView2.hints.PriceAdd.mandatory}"
-                                                                              columns="#{bindings.OrdersTpUslugiView2.hints.PriceAdd.displayWidth}"
-                                                                              maximumLength="#{bindings.OrdersTpUslugiView2.hints.PriceAdd.precision}"
-                                                                              shortDesc="#{bindings.OrdersTpUslugiView2.hints.PriceAdd.tooltip}"
-                                                                              id="it35" label="Доп сумма:">
-                                                                    <f:validator binding="#{row.bindings.PriceAdd.validator}"/>
-                                                                    <af:convertNumber groupingUsed="false"
-                                                                                      pattern="#{bindings.OrdersTpUslugiView2.hints.PriceAdd.format}"/>
-                                                                </af:inputText>
-                                                            </af:panelGroupLayout>
+                                                            <af:panelLabelAndMessage label="Доп. работы" id="plam9">
+                                                                <af:panelGroupLayout id="pgl10" layout="vertical">
+                                                                    <af:inputText value="#{row.bindings.AddWork.inputValue}"
+                                                                                  label="Доп. работы"
+                                                                                  required="#{bindings.OrdersTpUslugiView2.hints.AddWork.mandatory}"
+                                                                                  columns="#{bindings.OrdersTpUslugiView2.hints.AddWork.displayWidth}"
+                                                                                  maximumLength="#{bindings.OrdersTpUslugiView2.hints.AddWork.precision}"
+                                                                                  shortDesc="#{bindings.OrdersTpUslugiView2.hints.AddWork.tooltip}"
+                                                                                  id="it34" placeholder="Доп. работы">
+                                                                        <f:validator binding="#{row.bindings.AddWork.validator}"/>
+                                                                    </af:inputText>
+                                                                    <af:spacer width="10" height="10" id="s9"/>
+                                                                    <af:inputText value="#{row.bindings.PriceAdd.inputValue}"
+                                                                                  required="#{bindings.OrdersTpUslugiView2.hints.PriceAdd.mandatory}"
+                                                                                  columns="#{bindings.OrdersTpUslugiView2.hints.PriceAdd.displayWidth}"
+                                                                                  maximumLength="#{bindings.OrdersTpUslugiView2.hints.PriceAdd.precision}"
+                                                                                  shortDesc="#{bindings.OrdersTpUslugiView2.hints.PriceAdd.tooltip}"
+                                                                                  id="it35" label="Доп сумма:"
+                                                                                  placeholder="Доп сумма">
+                                                                        <f:validator binding="#{row.bindings.PriceAdd.validator}"/>
+                                                                        <af:convertNumber groupingUsed="false"
+                                                                                          pattern="#{bindings.OrdersTpUslugiView2.hints.PriceAdd.format}"/>
+                                                                    </af:inputText>
+                                                                </af:panelGroupLayout>
+                                                            </af:panelLabelAndMessage>
                                                         </f:facet>
                                                     </af:table>
                                                 </af:panelBox>

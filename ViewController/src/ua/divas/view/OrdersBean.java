@@ -344,9 +344,9 @@ public class OrdersBean {
         DCIteratorBinding it = bd.findIteratorBinding("OrdersTpUslugiView2Iterator");
         Row currRow = it.getCurrentRow();
         currRow.setAttribute("MeasureId", null);
-        currRow.setAttribute("Price", 0);
-        currRow.setAttribute("Summ", 0);
-        currRow.setAttribute("Quantity", 0);
+        currRow.setAttribute("Price", null);
+        currRow.setAttribute("Summ", null);
+        currRow.setAttribute("Quantity", null);
         
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("retrieveMeasure");
