@@ -21,6 +21,7 @@ import ua.divas.view.KassaVOImpl;
 import ua.divas.view.KontragentsViewImpl;
 import ua.divas.view.LastPriceVOImpl;
 import ua.divas.view.NomenklaturaViewImpl;
+import ua.divas.view.OrdersTpOplatyViewImpl;
 import ua.divas.view.OrdersTpUslugiViewImpl;
 import ua.divas.view.OrdersViewImpl;
 import ua.divas.view.UserSettingsViewImpl;
@@ -2618,8 +2619,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrdersTpOplatyView1.
      * @return OrdersTpOplatyView1
      */
-    public ViewObjectImpl getOrdersTpOplatyView1() {
-        return (ViewObjectImpl) findViewObject("OrdersTpOplatyView1");
+    public OrdersTpOplatyViewImpl getOrdersTpOplatyView1() {
+        return (OrdersTpOplatyViewImpl) findViewObject("OrdersTpOplatyView1");
     }
 
     /**

@@ -15,9 +15,7 @@ import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichTable;
 import oracle.adf.view.rich.component.rich.data.RichTree;
-import oracle.adf.view.rich.component.rich.data.RichTreeTable;
 import oracle.adf.view.rich.component.rich.layout.RichPanelFormLayout;
-import oracle.adf.view.rich.component.rich.layout.RichShowDetailItem;
 import oracle.adf.view.rich.context.AdfFacesContext;
 import oracle.adf.view.rich.datatransfer.DataFlavor;
 import oracle.adf.view.rich.dnd.DnDAction;
@@ -46,7 +44,6 @@ import org.apache.myfaces.trinidad.model.CollectionModel;
 import org.apache.myfaces.trinidad.model.RowKeySet;
 
 import org.apache.myfaces.trinidad.model.RowKeySetImpl;
-import org.apache.myfaces.trinidad.model.RowKeySetTreeImpl;
 
 
 public class FilterBeans {
@@ -254,18 +251,17 @@ public class FilterBeans {
 
         currRow.setAttribute("IsBuyer", new Integer(1));
     }
-    
+
     private void setParentId() {
-        
+
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
         Row currRow = it.getCurrentRow();
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-        OperationBinding oper =
-            (OperationBinding) binding.getOperationBinding("retrieveCustomersFirstParentId");
-        String res = (String)oper.execute();
+        OperationBinding oper = (OperationBinding) binding.getOperationBinding("retrieveCustomersFirstParentId");
+        String res = (String) oper.execute();
         currRow.setAttribute("ParentId", res);
-        
+
     }
 
     public String commitChange() {

@@ -11,6 +11,9 @@ import oracle.adf.model.BindingContext;
 import oracle.adf.view.rich.component.rich.data.RichTable;
 
 import oracle.adf.view.rich.event.QueryEvent;
+import oracle.adf.view.rich.model.AttributeCriterion;
+import oracle.adf.view.rich.model.ConjunctionCriterion;
+import oracle.adf.view.rich.model.Criterion;
 import oracle.adf.view.rich.model.FilterableQueryDescriptor;
 
 import oracle.binding.BindingContainer;
@@ -36,8 +39,15 @@ public class UsersBean {
     
     public void resetTableFilter(ActionEvent actionEvent) {
         FilterableQueryDescriptor queryDescriptor = (FilterableQueryDescriptor) getUserTable().getFilterModel();
-        if (queryDescriptor != null && queryDescriptor.getFilterCriteria() != null) {
-            queryDescriptor.getFilterCriteria().clear();
+        if (queryDescriptor != null && queryDescriptor.getFilterConjunctionCriterion() != null) {
+            ConjunctionCriterion cc = queryDescriptor.getFilterConjunctionCriterion();
+            List<Criterion> lc = cc.getCriterionList();
+            for (Criterion c : lc) {
+                if (c instanceof AttributeCriterion) {
+                    AttributeCriterion ac = (AttributeCriterion) c;
+                    ac.setValue(null);
+                }
+            }
             getUserTable().queueEvent(new QueryEvent(getUserTable(), queryDescriptor));
         }
     }

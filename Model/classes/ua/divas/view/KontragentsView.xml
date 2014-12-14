@@ -86,7 +86,6 @@
   <SQLQuery><![CDATA[SELECT Kontragents.ID, 
        Kontragents.IS_GROUP, 
        Kontragents.PARENT_ID,
-       (select fullname from kontragents where id = parent_id) ParentName,
        Kontragents.FULLNAME, 
        Kontragents.DELETED, 
        Kontragents.INN, 
@@ -132,29 +131,6 @@ order by Kontragents.FULLNAME]]></SQLQuery>
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="combo_lov"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="Parentname"
-    IsUpdateable="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Precision="150"
-    Type="java.lang.String"
-    ColumnType="VARCHAR2"
-    AliasName="PARENTNAME"
-    Expression="PARENTNAME"
-    SQLType="VARCHAR">
-    <DesignTime>
-      <Attr Name="_DisplaySize" Value="150"/>
-    </DesignTime>
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.KontragentsView.Parentname_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.KontragentsView.Parentname_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

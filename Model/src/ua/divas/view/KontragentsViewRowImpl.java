@@ -46,7 +46,6 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         Id,
         IsGroup,
         ParentId,
-        Parentname,
         Fullname,
         Deleted,
         Inn,
@@ -101,7 +100,6 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
     public static final int ID = AttributesEnum.Id.index();
     public static final int ISGROUP = AttributesEnum.IsGroup.index();
     public static final int PARENTID = AttributesEnum.ParentId.index();
-    public static final int PARENTNAME = AttributesEnum.Parentname.index();
     public static final int FULLNAME = AttributesEnum.Fullname.index();
     public static final int DELETED = AttributesEnum.Deleted.index();
     public static final int INN = AttributesEnum.Inn.index();
@@ -191,14 +189,6 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         setAttributeInternal(PARENTID, value);
     }
 
-
-    /**
-     * Gets the attribute value for the calculated attribute Parentname.
-     * @return the Parentname
-     */
-    public String getParentname() {
-        return (String) getAttributeInternal(PARENTNAME);
-    }
 
     /**
      * Gets the attribute value for FULLNAME using the alias name Fullname.

@@ -3,6 +3,8 @@ package ua.divas.view;
 
 import java.math.BigDecimal;
 
+import java.util.List;
+
 import javax.el.ELContext;
 
 import javax.el.ExpressionFactory;
@@ -18,6 +20,7 @@ import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.share.ADFContext;
+import oracle.adf.view.rich.component.rich.data.RichTable;
 import oracle.adf.view.rich.component.rich.input.RichInputComboboxListOfValues;
 import oracle.adf.view.rich.component.rich.input.RichInputListOfValues;
 import oracle.adf.view.rich.component.rich.input.RichInputText;
@@ -27,6 +30,12 @@ import oracle.adf.view.rich.event.LaunchPopupEvent;
 import oracle.adf.view.rich.event.PopupCanceledEvent;
 
 import oracle.adf.view.rich.event.PopupFetchEvent;
+
+import oracle.adf.view.rich.event.QueryEvent;
+import oracle.adf.view.rich.model.AttributeCriterion;
+import oracle.adf.view.rich.model.ConjunctionCriterion;
+import oracle.adf.view.rich.model.Criterion;
+import oracle.adf.view.rich.model.FilterableQueryDescriptor;
 
 import oracle.adfinternal.view.faces.model.binding.FacesCtrlLOVBinding;
 
@@ -38,8 +47,6 @@ import oracle.jbo.Row;
 public class OrdersBean {
 
 
-   
-
     public OrdersBean() {
     }
 
@@ -48,6 +55,7 @@ public class OrdersBean {
     private RichInputListOfValues kontrag;
     private RichInputText price;
     private RichInputText qtt;
+    private RichTable mainTable;
     public Boolean refreshNeeded;
 
     public void setRefreshNeeded(Boolean refreshNeeded) {
@@ -57,7 +65,7 @@ public class OrdersBean {
     public Boolean getRefreshNeeded() {
         return refreshNeeded;
     }
-    
+
     public void setPrice(RichInputText price) {
         this.price = price;
     }
@@ -72,6 +80,14 @@ public class OrdersBean {
 
     public RichInputText getQtt() {
         return qtt;
+    }
+
+    public void setMainTable(RichTable mainTable) {
+        this.mainTable = mainTable;
+    }
+
+    public RichTable getMainTable() {
+        return mainTable;
     }
 
     private String upperCase(String s) {
@@ -135,7 +151,7 @@ public class OrdersBean {
         OperationBinding ob = binding.getOperationBinding("Commit");
         ob.execute();
         refresh();
-        ADFContext.getCurrent().getRequestScope().put("refreshNeeded", Boolean.TRUE); 
+        ADFContext.getCurrent().getRequestScope().put("refreshNeeded", Boolean.TRUE);
         return null;
     }
 
@@ -251,7 +267,7 @@ public class OrdersBean {
 
 
     }
-    
+
     private void setIsMeasurer() {
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
@@ -261,30 +277,29 @@ public class OrdersBean {
 
 
     }
+
     private void setParentId() {
-        
+
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
         Row currRow = it.getCurrentRow();
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-        OperationBinding oper =
-            (OperationBinding) binding.getOperationBinding("retrieveCustomersFirstParentId");
-        String res = (String)oper.execute();
+        OperationBinding oper = (OperationBinding) binding.getOperationBinding("retrieveCustomersFirstParentId");
+        String res = (String) oper.execute();
         currRow.setAttribute("ParentId", res);
-        
+
     }
-    
+
     private void setZamerParentId() {
-        
+
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
         Row currRow = it.getCurrentRow();
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-        OperationBinding oper =
-            (OperationBinding) binding.getOperationBinding("retrieveZamerFirstParentId");
-        String res = (String)oper.execute();
+        OperationBinding oper = (OperationBinding) binding.getOperationBinding("retrieveZamerFirstParentId");
+        String res = (String) oper.execute();
         currRow.setAttribute("ParentId", res);
-        
+
     }
 
     public void onNewKontragentDialogListener(DialogEvent dialogEvent) {
@@ -320,20 +335,20 @@ public class OrdersBean {
             }
         }
     }
-    
+
     public String getValueFrmExpression(String data) {
-            FacesContext fc = FacesContext.getCurrentInstance();
-            Application app = fc.getApplication();
-            ExpressionFactory elFactory = app.getExpressionFactory();
-            ELContext elContext = fc.getELContext();
-            ValueExpression valueExp = elFactory.createValueExpression(elContext, data, Object.class);
-            String Message = null;
-            Object obj = valueExp.getValue(elContext);
-            if (obj != null) {
-                Message = obj.toString();
-            }
-            return Message;
+        FacesContext fc = FacesContext.getCurrentInstance();
+        Application app = fc.getApplication();
+        ExpressionFactory elFactory = app.getExpressionFactory();
+        ELContext elContext = fc.getELContext();
+        ValueExpression valueExp = elFactory.createValueExpression(elContext, data, Object.class);
+        String Message = null;
+        Object obj = valueExp.getValue(elContext);
+        if (obj != null) {
+            Message = obj.toString();
         }
+        return Message;
+    }
 
     public void onNomChanged(ValueChangeEvent vce) {
         vce.getComponent().processUpdates(FacesContext.getCurrentInstance());
@@ -347,20 +362,20 @@ public class OrdersBean {
         currRow.setAttribute("Price", null);
         currRow.setAttribute("Summ", null);
         currRow.setAttribute("Quantity", null);
-        
+
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("retrieveMeasure");
         if (ob != null) {
             ob.getParamsMap().put("NomId", NomId);
-            String measure = (String)ob.execute();
+            String measure = (String) ob.execute();
             System.out.println(measure);
             currRow.setAttribute("MeasureId", measure);
         }
-        
+
         ob = binding.getOperationBinding("retrievePrice");
         if (ob != null) {
             ob.getParamsMap().put("NomId", NomId);
-            BigDecimal price = (BigDecimal)ob.execute();
+            BigDecimal price = (BigDecimal) ob.execute();
             System.out.println(price);
             currRow.setAttribute("Price", price);
         }
@@ -379,9 +394,24 @@ public class OrdersBean {
         if (ob != null) {
             ob.getParamsMap().put("p", p);
             ob.getParamsMap().put("q", q);
-            BigDecimal s = (BigDecimal)ob.execute();
+            BigDecimal s = (BigDecimal) ob.execute();
             System.out.println(s);
             currRow.setAttribute("Summ", s);
+        }
+    }
+
+    public void onFilterClear(ActionEvent actionEvent) {
+        FilterableQueryDescriptor queryDescriptor = (FilterableQueryDescriptor) getMainTable().getFilterModel();
+        if (queryDescriptor != null && queryDescriptor.getFilterConjunctionCriterion() != null) {
+            ConjunctionCriterion cc = queryDescriptor.getFilterConjunctionCriterion();
+            List<Criterion> lc = cc.getCriterionList();
+            for (Criterion c : lc) {
+                if (c instanceof AttributeCriterion) {
+                    AttributeCriterion ac = (AttributeCriterion) c;
+                    ac.setValue(null);
+                }
+            }
+            getMainTable().queueEvent(new QueryEvent(getMainTable(), queryDescriptor));
         }
     }
 }

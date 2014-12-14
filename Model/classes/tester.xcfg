@@ -1,0 +1,11 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
+   <AppModuleConfigBag ApplicationName="ua.divas.module.AppModule">
+      <AppModuleConfig name="14A48FCA8D1" DBconnection="java:comp/env/jdbc/divasDS" ApplicationName="ua.divas.module.AppModule" DeployPlatform="LOCAL" IsLazyLoadingTrue="true" java.naming.factory.initial="oracle.jbo.common.JboInitialContextFactory" JDBCName="divas" BC4JConfigName="AppModuleLocal" jbo.project="ua.divas.model.Model">
+         <Database jbo.TypeMapEntries="OracleApps" jbo.SQLBuilder="Oracle"/>
+         <Security AppModuleJndiName="ua.divas.module.AppModule"/>
+         <Tester FullProxyInterfaceName="ua.divas.module.common.AppModule"/>
+         <Custom ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" ns0:_testers_credentials_needed="false" ns0:JDBCDataSource="java:comp/env/jdbc/divasDS" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>
