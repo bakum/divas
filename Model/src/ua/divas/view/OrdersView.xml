@@ -18,6 +18,22 @@
     <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
+  <Variable
+    Name="Kname"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="dats"
+    Kind="viewcriteria"
+    Type="java.sql.Timestamp">
+    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
+  </Variable>
+  <Variable
+    Name="datend"
+    Kind="viewcriteria"
+    Type="java.sql.Timestamp">
+    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
+  </Variable>
   <ViewAccessor
     Name="KontragentsView1"
     ViewObjectName="ua.divas.view.KontragentsView"
@@ -325,7 +341,8 @@ where deleted = 0]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="Orders"
-    AliasName="ID"/>
+    AliasName="ID"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Dat"
     IsNotNull="true"
@@ -348,7 +365,8 @@ where deleted = 0]]></SQLQuery>
     EntityAttrName="KontragId"
     EntityUsage="Orders"
     AliasName="KONTRAG_ID"
-    LOVName="LOV_KontragId">
+    LOVName="LOV_KontragId"
+    IsQueriable="false">
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
@@ -454,40 +472,46 @@ where deleted = 0]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Kurs"
     EntityUsage="Orders"
-    AliasName="KURS"/>
+    AliasName="KURS"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Kratnost"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Kratnost"
     EntityUsage="Orders"
-    AliasName="KRATNOST"/>
+    AliasName="KRATNOST"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Discription"
     PrecisionRule="true"
     EntityAttrName="Discription"
     EntityUsage="Orders"
-    AliasName="DISCRIPTION"/>
+    AliasName="DISCRIPTION"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Deleted"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Deleted"
     EntityUsage="Orders"
-    AliasName="DELETED"/>
+    AliasName="DELETED"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Version"
     PrecisionRule="true"
     EntityAttrName="Version"
     EntityUsage="Orders"
-    AliasName="VERSION"/>
+    AliasName="VERSION"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Posted"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Posted"
     EntityUsage="Orders"
-    AliasName="POSTED"/>
+    AliasName="POSTED"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="FirmId"
     IsNotNull="true"
@@ -544,14 +568,16 @@ where deleted = 0]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="O_EDITABLE"
     Expression="O_EDITABLE"
-    SQLType="NUMERIC"/>
+    SQLType="NUMERIC"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="ZamerId"
     PrecisionRule="true"
     EntityAttrName="ZamerId"
     EntityUsage="Orders"
     AliasName="ZAMER_ID"
-    LOVName="LOV_ZamerId">
+    LOVName="LOV_ZamerId"
+    IsQueriable="false">
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
@@ -597,7 +623,8 @@ where deleted = 0]]></SQLQuery>
     Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
-    SQLType="NUMERIC">
+    SQLType="NUMERIC"
+    IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[OrdersTpUslugiView.sum("Summ != null ? Summ : 0")]]></TransientExpression>
     <Properties>
@@ -618,7 +645,8 @@ where deleted = 0]]></SQLQuery>
     Type="java.lang.Long"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
-    SQLType="NUMERIC">
+    SQLType="NUMERIC"
+    IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[OrdersTpUslugiView.count("Id != null ? Id : 0")]]></TransientExpression>
     <Properties>
@@ -639,7 +667,8 @@ where deleted = 0]]></SQLQuery>
     Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
-    SQLType="NUMERIC">
+    SQLType="NUMERIC"
+    IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[OrdersTpOplatyView.sum("Sum1 != null ? Sum1 : 0")]]></TransientExpression>
     <Properties>
@@ -651,6 +680,59 @@ where deleted = 0]]></SQLQuery>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewCriteria
+    Name="OrdersViewCriteria"
+    ViewObjectName="ua.divas.view.OrdersView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="OrdersViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Dat"
+        ViewAttribute="Dat"
+        Operator="BETWEEN"
+        Conjunction="AND"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional">
+        <ViewCriteriaItemValue
+          Name="OrdersViewCriteria_OrdersViewCriteria_row_0_Dat_vcval0"
+          Value=":dats"
+          IsBindVarValue="true"/>
+        <ViewCriteriaItemValue
+          Name="OrdersViewCriteria_OrdersViewCriteria_row_0_Dat_vcval1"
+          Value=":datend"
+          IsBindVarValue="true"/>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="Kontragname"
+        ViewAttribute="Kontragname"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Value=":Kname"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="OrdersTpUslugiView"
     ViewLink="ua.divas.view.OrdersTpUslugiFk1Link"

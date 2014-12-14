@@ -1,9 +1,12 @@
 package ua.divas.view;
 
+import java.sql.Timestamp;
+
 import oracle.jbo.NameValuePairs;
 import oracle.jbo.Row;
 import oracle.jbo.Variable;
 import oracle.jbo.common.VariableImpl;
+import oracle.jbo.domain.Date;
 import oracle.jbo.server.ViewObjectImpl;
 import oracle.jbo.server.ViewRowSetImpl;
 
@@ -113,5 +116,53 @@ public class OrdersViewImpl extends DivasView implements OrdersView {
     }
 
 
+    /**
+     * Returns the variable value for Kname.
+     * @return variable value for Kname
+     */
+    public String getKname() {
+        return (String) ensureVariableManager().getVariableValue("Kname");
+    }
+
+    /**
+     * Sets <code>value</code> for variable Kname.
+     * @param value value to bind as Kname
+     */
+    public void setKname(String value) {
+        ensureVariableManager().setVariableValue("Kname", value);
+    }
+
+
+    /**
+     * Returns the variable value for dats.
+     * @return variable value for dats
+     */
+    public Timestamp getdats() {
+        return (Timestamp) ensureVariableManager().getVariableValue("dats");
+    }
+
+    /**
+     * Sets <code>value</code> for variable dats.
+     * @param value value to bind as dats
+     */
+    public void setdats(Timestamp value) {
+        ensureVariableManager().setVariableValue("dats", value);
+    }
+
+    /**
+     * Returns the variable value for datend.
+     * @return variable value for datend
+     */
+    public Timestamp getdatend() {
+        return (Timestamp) ensureVariableManager().getVariableValue("datend");
+    }
+
+    /**
+     * Sets <code>value</code> for variable datend.
+     * @param value value to bind as datend
+     */
+    public void setdatend(Timestamp value) {
+        ensureVariableManager().setVariableValue("datend", value);
+    }
 }
 

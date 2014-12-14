@@ -5,7 +5,7 @@
         <af:gridRow height="100%" id="gr1">
             <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
                 <!-- Content -->
-                <af:decorativeBox id="db1" theme="dark">
+                <af:decorativeBox id="db1" theme="medium">
                     <f:facet name="center">
                         <af:panelTabbed id="pt1">
                             <af:showDetailItem text="Реестр" id="sdi1" stretchChildren="first">
@@ -30,8 +30,6 @@
                                                     <af:button text="Обновить" id="b6"
                                                                actionListener="#{orders.onRefreshOrders}"
                                                                disabled="#{bindings.Commit.enabled}"/>
-                                                    <af:button id="b13" icon="/img/filter_(delete)_16x16.gif"
-                                                               actionListener="#{orders.onFilterClear}"/>
                                                 </af:toolbar>
                                             </f:facet>
                                             <af:table value="#{bindings.OrdersView1.collectionModel}" var="row"
@@ -55,8 +53,7 @@
                                                         </af:button>
                                                     </af:toolbar>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.Id.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.Id.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.Id.label}" id="c1"
                                                            visible="false" inlineStyle="font-weight:bold;">
                                                     <af:inputText value="#{row.bindings.Id.inputValue}"
@@ -69,8 +66,7 @@
                                                         <f:validator binding="#{row.bindings.Id.validator}"/>
                                                     </af:inputText>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.StatusId.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.StatusId.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.StatusId.label}"
                                                            id="c17"
                                                            inlineStyle="#{row.bindings.CountUslug.inputValue == 1 ? '' : 'font-weight:bold;'}">
@@ -83,8 +79,7 @@
                                                         <f:validator binding="#{row.bindings.StatusId.validator}"/>
                                                     </af:selectOneChoice>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.Dat.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.Dat.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.Dat.label}" id="c2">
                                                     <f:facet name="filter">
                                                         <af:inputDate value="#{bindings.OrdersView1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.Dat.value}"
@@ -102,8 +97,7 @@
                                                         <af:convertDateTime pattern="#{bindings.OrdersView1.hints.Dat.format}"/>
                                                     </af:inputDate>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.Num.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.Num.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.Num.label}" id="c3">
                                                     <af:inputText value="#{row.bindings.Num.inputValue}"
                                                                   label="#{bindings.OrdersView1.hints.Num.label}"
@@ -115,8 +109,7 @@
                                                         <f:validator binding="#{row.bindings.Num.validator}"/>
                                                     </af:inputText>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.KontragId.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.KontragId.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.KontragId.label}"
                                                            id="c4" visible="false">
                                                     <af:inputListOfValues id="kontragIdId"
@@ -129,8 +122,7 @@
                                                         <f:validator binding="#{row.bindings.KontragId.validator}"/>
                                                     </af:inputListOfValues>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.Kontragname.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.Kontragname.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.Kontragname.label}"
                                                            id="c5" width="200">
                                                     <af:inputListOfValues id="kontragnameId"
@@ -149,8 +141,7 @@
                                                                                 maxSuggestedItems="5"/>
                                                     </af:inputListOfValues>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.CurrId.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.CurrId.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.CurrId.label}"
                                                            id="c6">
                                                     <af:selectOneChoice value="#{row.bindings.CurrId.inputValue}"
@@ -176,8 +167,7 @@
                                                                           pattern="#{bindings.OrdersView1.hints.TotalSumOplaty.format}"/>
                                                     </af:inputText>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.TotalSumUslugi.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.TotalSumUslugi.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.TotalSumUslugi.label}"
                                                            id="c18">
                                                     <af:inputText value="#{row.bindings.TotalSumUslugi.inputValue}"
@@ -192,8 +182,7 @@
                                                                           pattern="#{bindings.OrdersView1.hints.TotalSumUslugi.format}"/>
                                                     </af:inputText>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.KassaId.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.KassaId.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.KassaId.label}"
                                                            id="c7" visible="false">
                                                     <af:selectOneChoice value="#{row.bindings.KassaId.inputValue}"
@@ -205,8 +194,7 @@
                                                         <f:validator binding="#{row.bindings.KassaId.validator}"/>
                                                     </af:selectOneChoice>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.DivisionId.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.DivisionId.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.DivisionId.label}"
                                                            id="c8">
                                                     <af:selectOneChoice value="#{row.bindings.DivisionId.inputValue}"
@@ -219,8 +207,7 @@
                                                         <f:validator binding="#{row.bindings.DivisionId.validator}"/>
                                                     </af:selectOneChoice>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.UserId.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.UserId.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.UserId.label}"
                                                            id="c9">
                                                     <af:selectOneChoice value="#{row.bindings.UserId.inputValue}"
@@ -232,8 +219,7 @@
                                                         <f:validator binding="#{row.bindings.UserId.validator}"/>
                                                     </af:selectOneChoice>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.Kurs.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.Kurs.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.Kurs.label}"
                                                            id="c10" visible="false">
                                                     <af:inputText value="#{row.bindings.Kurs.inputValue}"
@@ -248,8 +234,7 @@
                                                                           pattern="#{bindings.OrdersView1.hints.Kurs.format}"/>
                                                     </af:inputText>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.Kratnost.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.Kratnost.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.Kratnost.label}"
                                                            id="c11" visible="false">
                                                     <af:inputText value="#{row.bindings.Kratnost.inputValue}"
@@ -264,8 +249,7 @@
                                                                           pattern="#{bindings.OrdersView1.hints.Kratnost.format}"/>
                                                     </af:inputText>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.Deleted.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.Deleted.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.Deleted.label}"
                                                            id="c12" visible="false">
                                                     <af:inputText value="#{row.bindings.Deleted.inputValue}"
@@ -280,16 +264,9 @@
                                                                           pattern="#{bindings.OrdersView1.hints.Deleted.format}"/>
                                                     </af:inputText>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.Version.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.Version.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.Version.label}"
                                                            id="c13" visible="false">
-                                                    <f:facet name="filter">
-                                                        <af:inputDate value="#{bindings.OrdersView1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.Version.value}"
-                                                                      id="id3">
-                                                            <af:convertDateTime pattern="#{bindings.OrdersView1.hints.Version.format}"/>
-                                                        </af:inputDate>
-                                                    </f:facet>
                                                     <af:inputDate value="#{row.bindings.Version.inputValue}"
                                                                   label="#{bindings.OrdersView1.hints.Version.label}"
                                                                   required="#{bindings.OrdersView1.hints.Version.mandatory}"
@@ -300,8 +277,7 @@
                                                         <af:convertDateTime pattern="#{bindings.OrdersView1.hints.Version.format}"/>
                                                     </af:inputDate>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.Posted.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.Posted.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.Posted.label}"
                                                            id="c14" visible="false">
                                                     <af:inputText value="#{row.bindings.Posted.inputValue}"
@@ -316,8 +292,7 @@
                                                                           pattern="#{bindings.OrdersView1.hints.Posted.format}"/>
                                                     </af:inputText>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.FirmId.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.FirmId.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.FirmId.label}"
                                                            id="c15" visible="false">
                                                     <af:selectOneChoice value="#{row.bindings.FirmId.inputValue}"
@@ -329,8 +304,7 @@
                                                         <f:validator binding="#{row.bindings.FirmId.validator}"/>
                                                     </af:selectOneChoice>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.ActivitiesId.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.ActivitiesId.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.ActivitiesId.label}"
                                                            id="c16" visible="false">
                                                     <af:selectOneChoice value="#{row.bindings.ActivitiesId.inputValue}"
@@ -343,8 +317,7 @@
                                                         <f:validator binding="#{row.bindings.ActivitiesId.validator}"/>
                                                     </af:selectOneChoice>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.OrdersView1.hints.CountUslug.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.OrdersView1.hints.CountUslug.name}" sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.CountUslug.label}"
                                                            id="c19" visible="false">
                                                     <af:inputText value="#{row.bindings.CountUslug.inputValue}"
@@ -388,7 +361,24 @@
                                         </af:panelBox>
                                     </f:facet>
                                     <f:facet name="start"/>
-                                    <f:facet name="end"/>
+                                    <f:facet name="end">
+                                        <af:panelDrawer id="pd1" height="100%" width="60%">
+                                            <af:showDetailItem text="Фильтр" id="sdi6"
+                                                               stretchChildren="first" icon="/img/search.png"
+                                                               inflexibleHeight="500">
+                                                <af:panelGroupLayout layout="vertical" id="pgl11">
+                                                    <af:panelHeader text="Orders" id="ph1" type="flow">
+                                                        <af:query id="qryId1" headerText="Search" disclosed="true"
+                                                                  value="#{bindings.OrdersViewCriteriaQuery.queryDescriptor}"
+                                                                  model="#{bindings.OrdersViewCriteriaQuery.queryModel}"
+                                                                  queryListener="#{bindings.OrdersViewCriteriaQuery.processQuery}"
+                                                                  queryOperationListener="#{bindings.OrdersViewCriteriaQuery.processQueryOperation}"
+                                                                  resultComponentId="::t1" type="flow"/>
+                                                    </af:panelHeader>
+                                                </af:panelGroupLayout>
+                                            </af:showDetailItem>
+                                        </af:panelDrawer>
+                                    </f:facet>
                                     <f:facet name="top"/>
                                 </af:panelStretchLayout>
                                 <af:popup childCreation="deferred" autoCancel="disabled" id="pEdit"
