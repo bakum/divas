@@ -7,7 +7,7 @@
         <af:gridRow height="100%" id="gr1">
             <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
                 <!-- Content -->
-                <af:decorativeBox id="db1" theme="dark">
+                <af:decorativeBox id="db1" theme="medium">
                     <f:facet name="center">
                         <af:panelTabbed id="pt1">
                             <af:showDetailItem text="Клиенты" id="sdi1" stretchChildren="first">
@@ -51,11 +51,6 @@
                                                       scrollPolicy="page">
                                                 <af:column id="c10" width="60" shortDesc="Удалить запись"
                                                            inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
-                                                    <f:facet name="header">
-                                                        <af:button id="b1" icon="/img/filter_(delete)_16x16.gif"
-                                                                   actionListener="#{filter.resetTableFilter}"
-                                                                   shortDesc="Сбросить все фильтры"/>
-                                                    </f:facet>
                                                     <af:toolbar id="t4">
                                                         <af:button id="b5" partialSubmit="true" icon="/img/edit-16.gif"
                                                                    shortDesc="Редактировать запись"
@@ -107,8 +102,7 @@
                                                                               shortDesc="#{bindings.KontragentsView1.hints.UrFiz.tooltip}"
                                                                               id="sbc1"/>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.KontragentsView1.hints.Fullname.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.KontragentsView1.hints.Fullname.name}" sortable="true"
                                                            headerText="#{bindings.KontragentsView1.hints.Fullname.label}"
                                                            id="c4" width="251"
                                                            inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
@@ -450,7 +444,24 @@
                                         </af:panelBox>
                                     </f:facet>
                                     <f:facet name="start"/>
-                                    <f:facet name="end"/>
+                                    <f:facet name="end">
+                                        <af:panelDrawer id="pd1" height="60%" width="50%">
+                                            <af:showDetailItem text="Фильтр" id="sdi2" stretchChildren="first"
+                                                               icon="/img/search.png" inflexibleHeight="100">
+                                                <af:panelGroupLayout layout="vertical" id="pgl5">
+                                                    <af:panelHeader text="Клиенты" id="ph1" type="flow">
+                                                        <af:query id="qryId1" headerText="Фильтр"
+                                                                  value="#{bindings.KontragentsItemsQuery.queryDescriptor}"
+                                                                  model="#{bindings.KontragentsItemsQuery.queryModel}"
+                                                                  queryListener="#{bindings.KontragentsItemsQuery.processQuery}"
+                                                                  queryOperationListener="#{bindings.KontragentsItemsQuery.processQueryOperation}"
+                                                                  resultComponentId="::t1"
+                                                                  type="flow" disclosed="true" saveQueryMode="hidden"/>
+                                                    </af:panelHeader>
+                                                </af:panelGroupLayout>
+                                            </af:showDetailItem>
+                                        </af:panelDrawer>
+                                    </f:facet>
                                     <f:facet name="top"/>
                                     <f:facet name="bottom"/>
                                 </af:panelStretchLayout>

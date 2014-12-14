@@ -235,5 +235,7 @@ public class KontragentsViewImpl extends DivasView implements KontragentsView {
     public void setZamerName(String value) {
         ensureVariableManager().setVariableValue("ZamerName", value);
     }
+
+
 }
 

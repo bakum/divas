@@ -221,7 +221,8 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Version"
     EntityUsage="Kontragents"
-    AliasName="VERSION"/>
+    AliasName="VERSION"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Predefined"
     IsNotNull="true"
@@ -238,7 +239,8 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     AliasName="EDITABLE"
     Expression="EDITABLE"
     SQLType="NUMERIC"
-    IsNotNull="true"/>
+    IsNotNull="true"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="IsSupplier"
     IsNotNull="true"
@@ -327,7 +329,7 @@ order by Kontragents.FULLNAME]]></SQLQuery>
           Value="InAdvancedMode"/>
         <Property
           Name="autoExecute"
-          Value="false"/>
+          Value="true"/>
         <Property
           Name="allowConjunctionOverride"
           Value="true"/>

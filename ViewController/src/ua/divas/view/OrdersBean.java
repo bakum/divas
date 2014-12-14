@@ -137,11 +137,7 @@ public class OrdersBean {
             String rks = it.getCurrentRow().getKey().toStringFormat(true);
             it.executeQuery();
             if (rks != null) {
-                try {
-                    it.setCurrentRowWithKey(rks);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                it.setCurrentRowWithKey(rks);
             }
         }
     }
