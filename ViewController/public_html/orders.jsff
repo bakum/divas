@@ -1215,15 +1215,7 @@
                                                                                   visible="false">
                                                         <f:validator binding="#{bindings.ParentId.validator}"/>
                                                     </af:inputComboboxListOfValues>
-                                                    <af:inputText value="#{bindings.Parentname.inputValue}"
-                                                                  label="#{bindings.Parentname.hints.label}"
-                                                                  required="#{bindings.Parentname.hints.mandatory}"
-                                                                  columns="#{bindings.Parentname.hints.displayWidth}"
-                                                                  maximumLength="#{bindings.Parentname.hints.precision}"
-                                                                  shortDesc="#{bindings.Parentname.hints.tooltip}"
-                                                                  id="it25" visible="false">
-                                                        <f:validator binding="#{bindings.Parentname.validator}"/>
-                                                    </af:inputText>
+                                                    
                                                     <af:inputText value="#{bindings.Fullname.inputValue}"
                                                                   label="#{bindings.Fullname.hints.label}"
                                                                   required="#{bindings.Fullname.hints.mandatory}"

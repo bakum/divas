@@ -210,11 +210,6 @@
         <Item Value="IsBuyer"/>
       </AttrNames>
     </attributeValues>
-    <attributeValues IterBinding="KontragentsView1Iterator" id="Parentname">
-      <AttrNames>
-        <Item Value="Parentname"/>
-      </AttrNames>
-    </attributeValues>
     <methodAction id="retrieveCustomersFirstParentId" RequiresUpdateModel="true" Action="invokeMethod"
                   MethodName="retrieveCustomersFirstParentId" IsViewObjectMethod="true"
                   DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.KontragentsView1"
