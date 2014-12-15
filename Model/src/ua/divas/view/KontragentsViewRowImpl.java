@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import oracle.jbo.AttributeList;
 import oracle.jbo.RowIterator;
 import oracle.jbo.RowSet;
+import oracle.jbo.domain.Number;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.ViewRowImpl;
 
@@ -60,6 +61,8 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         IsBuyer,
         IsMeasurer,
         UserId,
+        TotalSumm,
+        TotalOplat,
         KontragentsView,
         CompaignsDetailsView,
         ContactDetailsView,
@@ -114,6 +117,8 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
     public static final int ISBUYER = AttributesEnum.IsBuyer.index();
     public static final int ISMEASURER = AttributesEnum.IsMeasurer.index();
     public static final int USERID = AttributesEnum.UserId.index();
+    public static final int TOTALSUMM = AttributesEnum.TotalSumm.index();
+    public static final int TOTALOPLAT = AttributesEnum.TotalOplat.index();
     public static final int KONTRAGENTSVIEW = AttributesEnum.KontragentsView.index();
     public static final int COMPAIGNSDETAILSVIEW = AttributesEnum.CompaignsDetailsView.index();
     public static final int CONTACTDETAILSVIEW = AttributesEnum.ContactDetailsView.index();
@@ -397,6 +402,22 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
      */
     public void setUserId(String value) {
         setAttributeInternal(USERID, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute TotalSumm.
+     * @return the TotalSumm
+     */
+    public Number getTotalSumm() {
+        return (Number) getAttributeInternal(TOTALSUMM);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute TotalOplat.
+     * @return the TotalOplat
+     */
+    public Number getTotalOplat() {
+        return (Number) getAttributeInternal(TOTALOPLAT);
     }
 
     /**

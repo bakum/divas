@@ -4,7 +4,7 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="KontragentsView1" RangeSize="11" DataControl="AppModuleDataControl" id="KontragentsView1Iterator"
+    <iterator Binds="KontragentsView1" RangeSize="12" DataControl="AppModuleDataControl" id="KontragentsView1Iterator"
               Refresh="deferred" ChangeEventPolicy="ppr"/>
     <searchRegion Binds="KontragentsView1Iterator" Criteria=""
                   Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="KontragentsView1Query"/>
@@ -16,6 +16,12 @@
               id="ContactDetailsView1_1Iterator"/>
     <searchRegion Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   Binds="KontragentsView1Iterator" id="KontragentsItemsQuery" Criteria="KontragentsItems"/>
+    <iterator Binds="OrdersViewKontragent" RangeSize="25" DataControl="AppModuleDataControl"
+              id="OrdersViewKontragentIterator" ChangeEventPolicy="ppr">
+      <sortCriteria>
+        <sort attribute="Dat" ascending="false"/>
+      </sortCriteria>
+    </iterator>
   </executables>
   <bindings>
     <tree IterBinding="KontragentsView1Iterator" id="KontragentsView1">
@@ -150,5 +156,36 @@
                   MethodName="retrieveCustomersFirstParentId" IsViewObjectMethod="true"
                   DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.KontragentsView1"
                   ReturnName="data.AppModuleDataControl.methodResults.retrieveCustomersFirstParentId_AppModuleDataControl_KontragentsView1_retrieveCustomersFirstParentId_result"/>
+    <tree IterBinding="OrdersViewKontragentIterator" id="OrdersViewKontragent">
+      <nodeDefinition DefName="ua.divas.view.OrdersView" Name="OrdersViewKontragent0">
+        <AttrNames>
+          <Item Value="Num"/>
+          <Item Value="Dat"/>
+          <Item Value="DivisionId"/>
+          <Item Value="TotalSumUslugi"/>
+          <Item Value="UserId"/>
+          <Item Value="TotalSumOplaty"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="ContactDetailsView2Iterator" id="ContactDetailsView2">
+      <nodeDefinition DefName="ua.divas.view.ContactDetailsView" Name="ContactDetailsView20">
+        <AttrNames>
+          <Item Value="Adress"/>
+          <Item Value="Phone"/>
+          <Item Value="Email"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="KontragentsView1Iterator" id="TotalSumm">
+      <AttrNames>
+        <Item Value="TotalSumm"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="KontragentsView1Iterator" id="TotalOplat">
+      <AttrNames>
+        <Item Value="TotalOplat"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

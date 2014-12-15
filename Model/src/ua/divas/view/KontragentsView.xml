@@ -277,6 +277,32 @@ order by Kontragents.FULLNAME]]></SQLQuery>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="TotalSumm"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[OrdersView.sum("TotalSumUslugi != null ? TotalSumUslugi : 0")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalOplat"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[OrdersView.sum("TotalSumOplaty != null ? TotalSumOplaty : 0")]]></TransientExpression>
+  </ViewAttribute>
   <ViewCriteria
     Name="KontragentsGroup"
     ViewObjectName="ua.divas.view.KontragentsView"

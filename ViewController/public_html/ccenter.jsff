@@ -37,7 +37,7 @@
                                             </f:facet>
                                             <af:table value="#{bindings.KontragentsView1.collectionModel}" var="row"
                                                       rows="#{bindings.KontragentsView1.rangeSize}"
-                                                      emptyText="#{bindings.KontragentsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                      emptyText="#{bindings.KontragentsView1.viewable ? 'Нет данных для отображения.' : 'В доступе отказано.'}"
                                                       rowBandingInterval="0"
                                                       selectedRowKeys="#{bindings.KontragentsView1.collectionModel.selectedRow}"
                                                       fetchSize="#{bindings.KontragentsView1.rangeSize}"
@@ -445,7 +445,7 @@
                                     </f:facet>
                                     <f:facet name="start"/>
                                     <f:facet name="end">
-                                        <af:panelDrawer id="pd1" height="60%" width="50%">
+                                        <af:panelDrawer id="pd1" height="90%" width="50%" position="right">
                                             <af:showDetailItem text="Фильтр" id="sdi2" stretchChildren="first"
                                                                icon="/img/search.png" inflexibleHeight="100">
                                                 <af:panelGroupLayout layout="vertical" id="pgl5">
@@ -455,10 +455,114 @@
                                                                   model="#{bindings.KontragentsItemsQuery.queryModel}"
                                                                   queryListener="#{bindings.KontragentsItemsQuery.processQuery}"
                                                                   queryOperationListener="#{bindings.KontragentsItemsQuery.processQueryOperation}"
-                                                                  resultComponentId="::t1"
-                                                                  type="flow" disclosed="true" saveQueryMode="hidden"/>
+                                                                  resultComponentId="::t1" type="flow" disclosed="true"
+                                                                  saveQueryMode="hidden"/>
                                                     </af:panelHeader>
                                                 </af:panelGroupLayout>
+                                            </af:showDetailItem>
+                                            <af:showDetailItem text="Заказы" id="sdi3"
+                                                               icon="/img/cart.png">
+                                                <af:outputFormatted value="#{bindings.Fullname.inputValue}" id="of6"
+                                                                    styleUsage="instruction"
+                                                                    inlineStyle="font-style:italic; font-weight:bold;"/>
+                                                <af:outputFormatted value="Работ на сумму #{bindings.TotalSumm.inputValue} грн" id="of11"
+                                                                    inlineStyle="color:Blue;"/>
+                                                <af:outputFormatted value="Оплат на сумму #{bindings.TotalOplat.inputValue} грн" id="of12"
+                                                                    inlineStyle="color:Blue;"/>
+                                                <af:listView value="#{bindings.OrdersViewKontragent.collectionModel}"
+                                                             var="item"
+                                                             emptyText="#{bindings.OrdersViewKontragent.viewable ? 'Нет данных для отображения.' : 'В доступе отказано.'}"
+                                                             fetchSize="#{bindings.OrdersViewKontragent.rangeSize}"
+                                                             id="lv1">
+                                                    <af:listItem id="li1">
+                                                        <af:panelGridLayout id="pgl6">
+                                                            <af:gridRow marginTop="5px" height="auto" id="gr2">
+                                                                <af:gridCell marginStart="5px" width="30%" id="gc2">
+                                                                    <af:outputFormatted value="#{item.bindings.Num.inputValue}"
+                                                                                        id="of2"
+                                                                                        styleUsage="inContextBranding"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell marginStart="5px" width="30%"
+                                                                             marginEnd="5px" id="gc3">
+                                                                    <af:outputFormatted value="#{item.bindings.Dat.inputValue}"
+                                                                                        id="of3">
+                                                                        <af:convertDateTime pattern="#{bindings.OrdersViewKontragent.hints.Dat.format}"/>
+                                                                    </af:outputFormatted>
+                                                                </af:gridCell>
+                                                                <af:gridCell id="gc6" width="40%" marginStart="5px"
+                                                                             marginEnd="5px">
+                                                                    <af:inputText value="#{item.bindings.TotalSumOplaty.inputValue}"
+                                                                                  id="of5" label="Оплачено"
+                                                                                  readOnly="true"/>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+                                                            <af:gridRow marginTop="5px" height="auto" marginBottom="5px"
+                                                                        id="gr3">
+                                                                <af:gridCell marginStart="5px" width="30%" id="gc4">
+                                                                    <af:selectOneChoice value="#{item.bindings.DivisionId.inputValue}"
+                                                                                        label="#{item.bindings.DivisionId.label}"
+                                                                                        required="#{bindings.OrdersViewKontragent.hints.DivisionId.mandatory}"
+                                                                                        shortDesc="#{bindings.OrdersViewKontragent.hints.DivisionId.tooltip}"
+                                                                                        readOnly="true" id="soc1">
+                                                                        <f:selectItems value="#{item.bindings.DivisionId.items}"
+                                                                                       id="si1"/>
+                                                                        <f:validator binding="#{item.bindings.DivisionId.validator}"/>
+                                                                    </af:selectOneChoice>
+                                                                </af:gridCell>
+                                                                <af:gridCell marginStart="5px" width="30%"
+                                                                             marginEnd="5px" id="gc5">
+                                                                    <af:inputText value="#{item.bindings.TotalSumUslugi.inputValue}"
+                                                                                  id="of4" label="На сумму:"
+                                                                                  readOnly="true">
+                                                                        <af:convertNumber groupingUsed="false"
+                                                                                          pattern="#{bindings.OrdersViewKontragent.hints.TotalSumUslugi.format}"/>
+                                                                    </af:inputText>
+                                                                </af:gridCell>
+                                                                <af:gridCell id="gc7" width="40%" marginStart="5px"
+                                                                             marginEnd="5px">
+                                                                    <af:selectOneChoice label="#{item.bindings.UserId.label}" id="soc2"
+                                                                                        value="#{item.bindings.UserId.inputValue}"
+                                                                                        readOnly="true">
+                                                                        <f:selectItems value="#{item.bindings.UserId.items}"
+                                                                                       id="si2"/>
+                                                                    </af:selectOneChoice>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+                                                        </af:panelGridLayout>
+                                                        <af:link text="Просмотр" id="l1" icon="/img/view1.png"/>
+                                                    </af:listItem>
+                                                </af:listView>
+                                            </af:showDetailItem>
+                                            <af:showDetailItem text="Контакты" id="sdi4" icon="/img/info.png">
+                                                <af:outputFormatted value="#{bindings.Fullname.inputValue}" id="of10"
+                                                                    styleUsage="instruction"
+                                                                    inlineStyle="font-style:italic; font-weight:bold;"/>
+                                                <af:listView value="#{bindings.ContactDetailsView2.collectionModel}"
+                                                             var="item"
+                                                             emptyText="#{bindings.ContactDetailsView2.viewable ? 'Нет данных для отображения.' : 'В доступе отказано.'}"
+                                                             fetchSize="#{bindings.ContactDetailsView2.rangeSize}"
+                                                             id="lv2">
+                                                    <af:listItem id="li2">
+                                                        <af:panelGridLayout id="pgl7">
+                                                            <af:gridRow marginTop="5px" height="auto" marginBottom="5px"
+                                                                        id="gr4">
+                                                                <af:gridCell marginStart="5px" width="34%" id="gc8">
+                                                                    <af:inputText value="#{item.bindings.Adress.inputValue}"
+                                                                                  id="of7" rows="3" readOnly="true"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell marginStart="5px" width="33%" id="gc9">
+                                                                    <af:outputFormatted value="#{item.bindings.Phone.inputValue}"
+                                                                                        id="of8"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell marginStart="5px" width="33%"
+                                                                             marginEnd="5px" id="gc10">
+                                                                    <af:outputFormatted value="#{item.bindings.Email.inputValue}"
+                                                                                        id="of9"/>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+                                                        </af:panelGridLayout>
+                                                    </af:listItem>
+                                                </af:listView>
                                             </af:showDetailItem>
                                         </af:panelDrawer>
                                     </f:facet>
