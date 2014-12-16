@@ -636,9 +636,8 @@
                                             </af:popup>
                                         </af:panelBox>
                                     </f:facet>
-                                    <f:facet name="start"/>
-                                    <f:facet name="end">
-                                        <af:panelDrawer id="pd1" height="90%" width="50%" position="right">
+                                    <f:facet name="start">
+                                        <af:panelDrawer id="pd1" height="90%" width="50%" position="left">
                                             <af:showDetailItem text="Фильтр" id="sdi2" stretchChildren="first"
                                                                icon="/img/search.png" inflexibleHeight="100">
                                                 <af:panelGroupLayout layout="vertical" id="pgl5">
@@ -653,15 +652,14 @@
                                                     </af:panelHeader>
                                                 </af:panelGroupLayout>
                                             </af:showDetailItem>
-                                            <af:showDetailItem text="Заказы" id="sdi3"
-                                                               icon="/img/cart.png">
+                                            <af:showDetailItem text="Заказы" id="sdi3" icon="/img/cart.png">
                                                 <af:outputFormatted value="#{bindings.Fullname.inputValue}" id="of6"
                                                                     styleUsage="instruction"
                                                                     inlineStyle="font-style:italic; font-weight:bold;"/>
-                                                <af:outputFormatted value="Работ на сумму #{bindings.TotalSumm.inputValue} грн" id="of11"
-                                                                    inlineStyle="color:Blue;"/>
-                                                <af:outputFormatted value="Оплат на сумму #{bindings.TotalOplat.inputValue} грн" id="of12"
-                                                                    inlineStyle="color:Blue;"/>
+                                                <af:outputFormatted value="Работ на сумму #{bindings.TotalSumm.inputValue} грн"
+                                                                    id="of11" inlineStyle="color:Blue;"/>
+                                                <af:outputFormatted value="Оплат на сумму #{bindings.TotalOplat.inputValue} грн"
+                                                                    id="of12" inlineStyle="color:Blue;"/>
                                                 <af:listView value="#{bindings.OrdersViewKontragent.collectionModel}"
                                                              var="item"
                                                              emptyText="#{bindings.OrdersViewKontragent.viewable ? 'Нет данных для отображения.' : 'В доступе отказано.'}"
@@ -714,7 +712,8 @@
                                                                 </af:gridCell>
                                                                 <af:gridCell id="gc7" width="40%" marginStart="5px"
                                                                              marginEnd="5px">
-                                                                    <af:selectOneChoice label="#{item.bindings.UserId.label}" id="soc2"
+                                                                    <af:selectOneChoice label="#{item.bindings.UserId.label}"
+                                                                                        id="soc2"
                                                                                         value="#{item.bindings.UserId.inputValue}"
                                                                                         readOnly="true">
                                                                         <f:selectItems value="#{item.bindings.UserId.items}"
@@ -781,8 +780,11 @@
                                                     </af:listItem>
                                                 </af:listView>
                                             </af:showDetailItem>
+                                            <af:showDetailItem text="Звонки" id="sdi8"
+                                                               stretchChildren="first" icon="/img/call.jpeg"/>
                                         </af:panelDrawer>
                                     </f:facet>
+                                    <f:facet name="end"/>
                                     <f:facet name="top"/>
                                     <f:facet name="bottom"/>
                                 </af:panelStretchLayout>

@@ -32,7 +32,7 @@
     Name="datend"
     Kind="viewcriteria"
     Type="java.sql.Timestamp">
-    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
+    <TransientExpression><![CDATA[adf.currentDate + 1]]></TransientExpression>
   </Variable>
   <ViewAccessor
     Name="KontragentsView1"

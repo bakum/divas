@@ -227,9 +227,14 @@ public class FilterBeans {
     public void refresh() {
         DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = binding.findIteratorBinding("KontragentsView1Iterator");
+        String rks;
         //DCIteratorBinding it_detail = binding.findIteratorBinding("ContactDetailsView2Iterator");
         if (it != null) {
-            String rks = it.getCurrentRow().getKey().toStringFormat(true);
+            try {
+                rks = it.getCurrentRow().getKey().toStringFormat(true);
+            } catch (Exception e) {
+                rks = null;
+            }
             it.executeQuery();
             if (rks != null) {
                 it.setCurrentRowWithKey(rks);
