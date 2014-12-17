@@ -19,6 +19,7 @@ import ua.divas.model.OrdersImpl;
 // ---------------------------------------------------------------------
 public class OrderZamerViewRowImpl extends ViewRowImpl {
 
+
     public static final int ENTITY_ORDERS = 0;
 
     @Override
@@ -96,6 +97,7 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
             return vals;
         }
     }
+
 
     public static final int ACTIVITIESID = AttributesEnum.ActivitiesId.index();
     public static final int CURRID = AttributesEnum.CurrId.index();

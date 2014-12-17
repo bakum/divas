@@ -21,6 +21,7 @@ import ua.divas.view.KassaVOImpl;
 import ua.divas.view.KontragentsViewImpl;
 import ua.divas.view.LastPriceVOImpl;
 import ua.divas.view.NomenklaturaViewImpl;
+import ua.divas.view.OrderZamerViewImpl;
 import ua.divas.view.OrdersTpOplatyViewImpl;
 import ua.divas.view.OrdersTpUslugiViewImpl;
 import ua.divas.view.OrdersViewImpl;
@@ -2411,16 +2412,16 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrderZamerView1.
      * @return OrderZamerView1
      */
-    public ViewObjectImpl getOrderZamerView1() {
-        return (ViewObjectImpl) findViewObject("OrderZamerView1");
+    public OrderZamerViewImpl getOrderZamerView1() {
+        return (OrderZamerViewImpl) findViewObject("OrderZamerView1");
     }
 
     /**
      * Container's getter for OrderZamerView2.
      * @return OrderZamerView2
      */
-    public ViewObjectImpl getOrderZamerView2() {
-        return (ViewObjectImpl) findViewObject("OrderZamerView2");
+    public OrderZamerViewImpl getOrderZamerView2() {
+        return (OrderZamerViewImpl) findViewObject("OrderZamerView2");
     }
 
     /**
@@ -2435,8 +2436,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrderZamerView3.
      * @return OrderZamerView3
      */
-    public ViewObjectImpl getOrderZamerView3() {
-        return (ViewObjectImpl) findViewObject("OrderZamerView3");
+    public OrderZamerViewImpl getOrderZamerView3() {
+        return (OrderZamerViewImpl) findViewObject("OrderZamerView3");
     }
 
     /**
@@ -2451,8 +2452,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrderZamerView4.
      * @return OrderZamerView4
      */
-    public ViewObjectImpl getOrderZamerView4() {
-        return (ViewObjectImpl) findViewObject("OrderZamerView4");
+    public OrderZamerViewImpl getOrderZamerView4() {
+        return (OrderZamerViewImpl) findViewObject("OrderZamerView4");
     }
 
     /**
@@ -2467,8 +2468,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrderZamerView5.
      * @return OrderZamerView5
      */
-    public ViewObjectImpl getOrderZamerView5() {
-        return (ViewObjectImpl) findViewObject("OrderZamerView5");
+    public OrderZamerViewImpl getOrderZamerView5() {
+        return (OrderZamerViewImpl) findViewObject("OrderZamerView5");
     }
 
     /**
@@ -2483,8 +2484,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrderZamerView6.
      * @return OrderZamerView6
      */
-    public ViewObjectImpl getOrderZamerViewKontrag() {
-        return (ViewObjectImpl) findViewObject("OrderZamerViewKontrag");
+    public OrderZamerViewImpl getOrderZamerViewKontrag() {
+        return (OrderZamerViewImpl) findViewObject("OrderZamerViewKontrag");
     }
 
     /**
@@ -2499,8 +2500,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrderZamerView7.
      * @return OrderZamerView7
      */
-    public ViewObjectImpl getOrderZamerViewZamer() {
-        return (ViewObjectImpl) findViewObject("OrderZamerViewZamer");
+    public OrderZamerViewImpl getOrderZamerViewZamer() {
+        return (OrderZamerViewImpl) findViewObject("OrderZamerViewZamer");
     }
 
     /**
@@ -2515,8 +2516,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrderZamerView6.
      * @return OrderZamerView6
      */
-    public ViewObjectImpl getOrderZamerView6() {
-        return (ViewObjectImpl) findViewObject("OrderZamerView6");
+    public OrderZamerViewImpl getOrderZamerView6() {
+        return (OrderZamerViewImpl) findViewObject("OrderZamerView6");
     }
 
     /**
@@ -2531,8 +2532,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrderZamerView7.
      * @return OrderZamerView7
      */
-    public ViewObjectImpl getOrderZamerView7() {
-        return (ViewObjectImpl) findViewObject("OrderZamerView7");
+    public OrderZamerViewImpl getOrderZamerView7() {
+        return (OrderZamerViewImpl) findViewObject("OrderZamerView7");
     }
 
     /**
@@ -2547,8 +2548,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrderZamerView8.
      * @return OrderZamerView8
      */
-    public ViewObjectImpl getOrderZamerView8() {
-        return (ViewObjectImpl) findViewObject("OrderZamerView8");
+    public OrderZamerViewImpl getOrderZamerView8() {
+        return (OrderZamerViewImpl) findViewObject("OrderZamerView8");
     }
 
     /**
