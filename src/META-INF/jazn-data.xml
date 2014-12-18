@@ -40,6 +40,9 @@
         <role>
           <name>z_dispatcher</name>
         </role>
+        <role>
+          <name>tester</name>
+        </role>
       </roles>
     </realm>
   </jazn-realm>
@@ -133,6 +136,16 @@
               </member>
             </members>
           </app-role>
+          <app-role>
+            <name>tester</name>
+            <class>oracle.security.jps.service.policystore.ApplicationRole</class>
+            <members>
+              <member>
+                <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
+                <name>tester</name>
+              </member>
+            </members>
+          </app-role>
         </app-roles>
         <jazn-policy>
           <grant>
@@ -147,17 +160,7 @@
             <permissions>
               <permission>
                 <class>oracle.adf.share.security.authorization.RegionPermission</class>
-                <name>ua.divas.view.pageDefs.indexPageDef</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.share.security.authorization.RegionPermission</class>
                 <name>ua.divas.view.pageDefs.ordersPageDef</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.share.security.authorization.RegionPermission</class>
-                <name>ua.divas.view.pageDefs.ccenterPageDef</name>
                 <actions>view</actions>
               </permission>
               <permission>
@@ -168,6 +171,11 @@
               <permission>
                 <class>oracle.adf.share.security.authorization.RegionPermission</class>
                 <name>ua.divas.view.pageDefs.userPageDef</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.RegionPermission</class>
+                <name>ua.divas.view.pageDefs.ccenterPageDef</name>
                 <actions>view</actions>
               </permission>
             </permissions>
@@ -199,6 +207,16 @@
               </permission>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/orders.xml#orders</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/users.xml#users</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/call_center.xml#call_center</name>
                 <actions>view</actions>
               </permission>
@@ -209,12 +227,12 @@
               </permission>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/orders.xml#orders</name>
+                <name>/WEB-INF/import-price-config.xml#import-price-config</name>
                 <actions>view</actions>
               </permission>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/users.xml#users</name>
+                <name>/WEB-INF/zamer-config.xml#zamer-config</name>
                 <actions>view</actions>
               </permission>
             </permissions>
@@ -232,16 +250,6 @@
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/call_center.xml#call_center</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/directories.xml#direct</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/users.xml#users</name>
                 <actions>view</actions>
               </permission>
             </permissions>
@@ -275,17 +283,7 @@
             <permissions>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/directories.xml#direct</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/orders.xml#orders</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/users.xml#users</name>
                 <actions>view</actions>
               </permission>
             </permissions>
@@ -311,20 +309,15 @@
             <grantee>
               <principals>
                 <principal>
-                  <class>oracle.security.jps.service.policystore.ApplicationRole</class>
-                  <name>administrator</name>
+                  <class>oracle.security.jps.internal.core.principals.JpsAuthenticatedRoleImpl</class>
+                  <name>authenticated-role</name>
                 </principal>
               </principals>
             </grantee>
             <permissions>
               <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/zamer-config.xml#zamer-config</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/import-price-config.xml#import-price-config</name>
+                <class>oracle.adf.share.security.authorization.RegionPermission</class>
+                <name>ua.divas.view.pageDefs.indexPageDef</name>
                 <actions>view</actions>
               </permission>
             </permissions>
@@ -333,16 +326,41 @@
             <grantee>
               <principals>
                 <principal>
-                  <class>oracle.security.jps.service.policystore.ApplicationRole</class>
-                  <name>director</name>
+                  <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
+                  <name>tester</name>
                 </principal>
               </principals>
             </grantee>
             <permissions>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/call_center.xml#call_center</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/orders.xml#orders</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/zamer-config.xml#zamer-config</name>
                 <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
+                <name>ua.divas.model.Currency.IdXml</name>
+                <actions>update</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
+                <name>ua.divas.model.Divisions.ParentId</name>
+                <actions>update</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
+                <name>ua.divas.model.Kontragents.ParentId</name>
+                <actions>update</actions>
               </permission>
             </permissions>
           </grant>
@@ -350,8 +368,8 @@
             <grantee>
               <principals>
                 <principal>
-                  <class>oracle.security.jps.service.policystore.ApplicationRole</class>
-                  <name>manager</name>
+                  <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
+                  <name>z_dispatcher</name>
                 </principal>
               </principals>
             </grantee>

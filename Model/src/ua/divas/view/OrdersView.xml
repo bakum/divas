@@ -22,18 +22,6 @@
     Name="Kname"
     Kind="viewcriteria"
     Type="java.lang.String"/>
-  <Variable
-    Name="dats"
-    Kind="viewcriteria"
-    Type="java.sql.Timestamp">
-    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
-  </Variable>
-  <Variable
-    Name="datend"
-    Kind="viewcriteria"
-    Type="java.sql.Timestamp">
-    <TransientExpression><![CDATA[adf.currentDate + 1]]></TransientExpression>
-  </Variable>
   <ViewAccessor
     Name="KontragentsView1"
     ViewObjectName="ua.divas.view.KontragentsView"
@@ -706,22 +694,6 @@ where deleted = 0]]></SQLQuery>
     <ViewCriteriaRow
       Name="OrdersViewCriteria_row_0"
       UpperColumns="1">
-      <ViewCriteriaItem
-        Name="Dat"
-        ViewAttribute="Dat"
-        Operator="BETWEEN"
-        Conjunction="AND"
-        GenerateIsNullClauseForBindVars="false"
-        Required="Optional">
-        <ViewCriteriaItemValue
-          Name="OrdersViewCriteria_OrdersViewCriteria_row_0_Dat_vcval0"
-          Value=":dats"
-          IsBindVarValue="true"/>
-        <ViewCriteriaItemValue
-          Name="OrdersViewCriteria_OrdersViewCriteria_row_0_Dat_vcval1"
-          Value=":datend"
-          IsBindVarValue="true"/>
-      </ViewCriteriaItem>
       <ViewCriteriaItem
         Name="Kontragname"
         ViewAttribute="Kontragname"

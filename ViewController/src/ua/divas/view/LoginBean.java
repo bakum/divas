@@ -8,6 +8,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import javax.faces.event.ActionEvent;
+
 import javax.security.auth.Subject;
 import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.login.FailedLoginException;
@@ -149,5 +151,9 @@ public class LoginBean {
             System.out.println("Roles: " + r);
         }
         return roles[0];
+    }
+
+    public void onLogin(ActionEvent actionEvent) {
+        doLogin();
     }
 }

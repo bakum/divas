@@ -26,6 +26,10 @@
     <servlet>
         <servlet-name>adfAuthentication</servlet-name>
         <servlet-class>oracle.adf.share.security.authentication.AuthenticationServlet</servlet-class>
+        <init-param>
+            <param-name>success_url</param-name>
+            <param-value>/faces/index.jsf</param-value>
+        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
@@ -200,6 +204,16 @@
             <encoding>ru</encoding>
         </locale-encoding-mapping>
     </locale-encoding-mapping-list>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/faces/home.jsf</form-login-page>
+            <form-error-page>/faces/error.jsf</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <role-name>valid-users</role-name>
+    </security-role>
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>adfAuthentication</web-resource-name>
@@ -209,11 +223,4 @@
             <role-name>valid-users</role-name>
         </auth-constraint>
     </security-constraint>
-    <login-config>
-        <auth-method>BASIC</auth-method>
-        <realm-name>jazn.com</realm-name>
-    </login-config>
-    <security-role>
-        <role-name>valid-users</role-name>
-    </security-role>
 </web-app>

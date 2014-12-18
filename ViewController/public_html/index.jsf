@@ -11,22 +11,26 @@
                             <f:facet name="center">
                                 <af:panelSpringboard id="ps1" displayMode="grid">
                                     <af:showDetailItem text="Реестр заказов" id="sdi1" icon="/img/fork-1-icon.png"
-                                                       stretchChildren="first">
+                                                       stretchChildren="first"
+                                                       rendered="#{securityContext.taskflowViewable['/WEB-INF/orders.xml#orders']}">
                                         <af:region value="#{bindings.orders1.regionModel}" id="r3"/>
                                     </af:showDetailItem>
                                     <af:showDetailItem text="Клиенты" id="sdi2" stretchChildren="first"
-                                                       icon="/img/Customer.png" flex="0">
+                                                       icon="/img/Customer.png" flex="0"
+                                                       rendered="#{securityContext.taskflowViewable['/WEB-INF/call_center.xml#call_center']}">
                                         <af:region value="#{bindings.call_center1.regionModel}" id="r1">
                                             <af:checkRegionUncommittedDataBehavior message="Есть изменённые данные. Оставить страницу?"
                                                                                    regionIds="::r1"/>
                                         </af:region>
                                     </af:showDetailItem>
                                     <af:showDetailItem text="Управление замерами" id="sdi3" stretchChildren="first"
-                                                       icon="/img/st.png">
+                                                       icon="/img/st.png"
+                                                       rendered="#{securityContext.taskflowViewable['/WEB-INF/zamer-config.xml#zamer-config']}">
                                         <af:region value="#{bindings.zamerconfig1.regionModel}" id="r5"/>
                                     </af:showDetailItem>
                                     <af:showDetailItem text="Справочники" id="sdi4" stretchChildren="first"
-                                                       icon="/img/tSystCmp_picture_52.png">
+                                                       icon="/img/tSystCmp_picture_52.png"
+                                                       rendered="#{securityContext.taskflowViewable['/WEB-INF/directories.xml#direct']}">
                                         <af:region value="#{bindings.direct1.regionModel}" id="r2"
                                                    uncommittedDataWarning="on">
                                             <af:checkRegionUncommittedDataBehavior regionIds="::r2"
@@ -40,13 +44,15 @@
                                                        icon="/img/options.png">
                                         <af:panelTabbed id="pt1">
                                             <af:showDetailItem text="Прайс-лист" id="sdi8"
-                                                               stretchChildren="first">
+                                                               stretchChildren="first"
+                                                               rendered="#{securityContext.taskflowViewable['/WEB-INF/import-price-config.xml#import-price-config']}">
                                                 <af:region value="#{bindings.importpriceconfig1.regionModel}" id="r6"/>
                                             </af:showDetailItem>
                                         </af:panelTabbed>
                                     </af:showDetailItem>
                                     <af:showDetailItem text="Пользователи" id="sdi6" stretchChildren="first"
-                                                       icon="/img/people.png">
+                                                       icon="/img/people.png"
+                                                       rendered="#{securityContext.taskflowViewable['/WEB-INF/users.xml#users']}">
                                         <af:region value="#{bindings.users1.regionModel}" id="r4"/>
                                     </af:showDetailItem>
                                 </af:panelSpringboard>
