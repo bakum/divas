@@ -23,6 +23,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.PlanAcc.Id_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.PlanAcc.Id_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="AccType"
@@ -36,6 +44,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.PlanAcc.AccType_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.PlanAcc.AccType_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="ParentId"
@@ -48,6 +64,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.PlanAcc.ParentId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.PlanAcc.ParentId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Fullname"
@@ -62,6 +86,16 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="3000"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.PlanAcc.Fullname_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.PlanAcc.Fullname_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Zabalansov"
@@ -72,7 +106,16 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="PLAN_ACC"/>
+    TableName="PLAN_ACC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.PlanAcc.Zabalansov_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.PlanAcc.Zabalansov_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Valutn"
     IsNotNull="true"
@@ -82,7 +125,16 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="PLAN_ACC"/>
+    TableName="PLAN_ACC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.PlanAcc.Valutn_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.PlanAcc.Valutn_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Kolishestv"
     IsNotNull="true"
@@ -92,7 +144,16 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="PLAN_ACC"/>
+    TableName="PLAN_ACC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.PlanAcc.Kolishestv_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.PlanAcc.Kolishestv_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Deleted"
     IsNotNull="true"
@@ -102,7 +163,16 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="PLAN_ACC"/>
+    TableName="PLAN_ACC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.PlanAcc.Deleted_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.PlanAcc.Deleted_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Version"
     IsNotNull="true"
@@ -110,7 +180,16 @@
     SQLType="TIMESTAMP"
     Type="java.sql.Timestamp"
     ColumnType="TIMESTAMP"
-    TableName="PLAN_ACC"/>
+    TableName="PLAN_ACC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.PlanAcc.Version_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.PlanAcc.Version_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Code"
     IsUnique="true"
@@ -124,6 +203,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="6"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.PlanAcc.Code_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.PlanAcc.Code_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <AccessorAttribute
     Name="PlanAcc"
@@ -260,4 +347,8 @@
       <Item Value="ua.divas.model.PlanAcc.AccType"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>

@@ -9,10 +9,14 @@
   DBObjectType="table"
   DBObjectName="ENTRY_SETTINGS"
   AliasName="EntrySettings"
-  BindingStyle="OracleName">
+  BindingStyle="OracleName"
+  RowClass="ua.divas.model.EntrySettingsImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Attribute
     Name="Id"
-    IsNotNull="true"
     Precision="50"
     ColumnName="ID"
     SQLType="VARCHAR"
@@ -23,6 +27,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.EntrySettings.Id_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.EntrySettings.Id_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="TypedefId"
@@ -36,6 +48,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.EntrySettings.TypedefId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.EntrySettings.TypedefId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="PlanAccDebId"
@@ -49,6 +69,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.EntrySettings.PlanAccDebId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.EntrySettings.PlanAccDebId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="PlanAccKredId"
@@ -62,15 +90,72 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.EntrySettings.PlanAccKredId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.EntrySettings.PlanAccKredId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Version"
-    IsNotNull="true"
     ColumnName="VERSION"
     SQLType="TIMESTAMP"
     Type="java.sql.Timestamp"
     ColumnType="TIMESTAMP"
-    TableName="ENTRY_SETTINGS"/>
+    TableName="ENTRY_SETTINGS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.EntrySettings.Version_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.EntrySettings.Version_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Chain"
+    IsNotNull="true"
+    Precision="10"
+    Scale="0"
+    ColumnName="CHAIN"
+    SQLType="NUMERIC"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    TableName="ENTRY_SETTINGS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.EntrySettings.Chain_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.EntrySettings.Chain_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Description"
+    Precision="1000"
+    ColumnName="DESCRIPTION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="ENTRY_SETTINGS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1000"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.EntrySettings.Description_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.EntrySettings.Description_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="PlanAcc"
     Association="ua.divas.model.EntrySettingsPlanAccKredAssoc"
@@ -135,4 +220,8 @@
       <Item Value="ua.divas.model.EntrySettings.TypedefId"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>

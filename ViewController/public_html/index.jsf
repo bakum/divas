@@ -48,6 +48,9 @@
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/import-price-config.xml#import-price-config']}">
                                                 <af:region value="#{bindings.importpriceconfig1.regionModel}" id="r6"/>
                                             </af:showDetailItem>
+                                            <af:showDetailItem text="Проводки" id="sdi9" stretchChildren="first">
+                                                <af:region value="#{bindings.entry1.regionModel}" id="r7"/>
+                                            </af:showDetailItem>
                                         </af:panelTabbed>
                                     </af:showDetailItem>
                                     <af:showDetailItem text="Пользователи" id="sdi6" stretchChildren="first"

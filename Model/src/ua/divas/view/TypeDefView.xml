@@ -13,6 +13,10 @@
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full">
+  <Variable
+    Name="TableN"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <EntityUsage
     Name="TypeDef"
     Entity="ua.divas.model.TypeDef"/>
@@ -36,6 +40,43 @@
     EntityAttrName="Version"
     EntityUsage="TypeDef"
     AliasName="VERSION"/>
+  <ViewCriteria
+    Name="FindTypeByName"
+    ViewObjectName="ua.divas.view.TypeDefView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="TypeDefViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="TableName"
+        ViewAttribute="TableName"
+        Operator="="
+        Conjunction="AND"
+        Value=":TableN"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="MovesView"
     ViewLink="ua.divas.view.MovesTypeDefFk1Link"
