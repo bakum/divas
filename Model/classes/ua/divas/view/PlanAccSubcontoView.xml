@@ -16,6 +16,52 @@
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full">
+  <ViewAccessor
+    Name="PlanAccView1"
+    ViewObjectName="ua.divas.view.PlanAccView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="PlanTypeSubcontoView1"
+    ViewObjectName="ua.divas.view.PlanTypeSubcontoView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_PlanAccId"
+    ListVOName="PlanAccView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PlanAccId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Code"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_PlanTypeSubc"
+    ListVOName="PlanTypeSubcontoView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PlanTypeSubc"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <EntityUsage
     Name="PlanAccSubconto"
     Entity="ua.divas.model.PlanAccSubconto"/>
@@ -32,14 +78,30 @@
     PrecisionRule="true"
     EntityAttrName="PlanAccId"
     EntityUsage="PlanAccSubconto"
-    AliasName="PLAN_ACC_ID"/>
+    AliasName="PLAN_ACC_ID"
+    LOVName="LOV_PlanAccId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="PlanTypeSubc"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="PlanTypeSubc"
     EntityUsage="PlanAccSubconto"
-    AliasName="PLAN_TYPE_SUBC"/>
+    AliasName="PLAN_TYPE_SUBC"
+    LOVName="LOV_PlanTypeSubc">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="OborotOnly"
     IsNotNull="true"

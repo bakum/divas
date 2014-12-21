@@ -48,8 +48,14 @@
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/import-price-config.xml#import-price-config']}">
                                                 <af:region value="#{bindings.importpriceconfig1.regionModel}" id="r6"/>
                                             </af:showDetailItem>
-                                            <af:showDetailItem text="Проводки" id="sdi9" stretchChildren="first">
+                                            <af:showDetailItem text="Проводки" id="sdi9" stretchChildren="first"
+                                                               rendered="#{securityContext.taskflowViewable['/WEB-INF/entry.xml#entry']}">
                                                 <af:region value="#{bindings.entry1.regionModel}" id="r7"/>
+                                            </af:showDetailItem>
+                                            <af:showDetailItem text="План счетов" id="sdi10"
+                                                               stretchChildren="first"
+                                                               rendered="#{securityContext.taskflowViewable['/WEB-INF/plan_acc.xml#plan_acc']}">
+                                                <af:region value="#{bindings.plan_acc1.regionModel}" id="r8"/>
                                             </af:showDetailItem>
                                         </af:panelTabbed>
                                     </af:showDetailItem>

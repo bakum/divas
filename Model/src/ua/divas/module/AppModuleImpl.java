@@ -2631,5 +2631,29 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getOrdersTpOplatyFkLink1() {
         return (ViewLinkImpl) findViewLink("OrdersTpOplatyFkLink1");
     }
+
+    /**
+     * Container's getter for PlanAccGroupView1.
+     * @return PlanAccGroupView1
+     */
+    public ViewObjectImpl getPlanAccGroupView1() {
+        return (ViewObjectImpl) findViewObject("PlanAccGroupView1");
+    }
+
+    /**
+     * Container's getter for PlanAccView4.
+     * @return PlanAccView4
+     */
+    public ViewObjectImpl getPlanAccView4() {
+        return (ViewObjectImpl) findViewObject("PlanAccView4");
+    }
+
+    /**
+     * Container's getter for PlanAccGroupParentIdFkLink1.
+     * @return PlanAccGroupParentIdFkLink1
+     */
+    public ViewLinkImpl getPlanAccGroupParentIdFkLink1() {
+        return (ViewLinkImpl) findViewLink("PlanAccGroupParentIdFkLink1");
+    }
 }
 

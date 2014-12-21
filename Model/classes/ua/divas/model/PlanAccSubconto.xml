@@ -23,6 +23,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.PlanAccSubconto.Id_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.PlanAccSubconto.Id_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="PlanAccId"
@@ -36,6 +44,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.PlanAccSubconto.PlanAccId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.PlanAccSubconto.PlanAccId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="PlanTypeSubc"
@@ -49,6 +65,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.PlanAccSubconto.PlanTypeSubc_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.PlanAccSubconto.PlanTypeSubc_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="OborotOnly"
@@ -59,7 +83,16 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="PLAN_ACC_SUBCONTO"/>
+    TableName="PLAN_ACC_SUBCONTO">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.PlanAccSubconto.OborotOnly_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.PlanAccSubconto.OborotOnly_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Summovoy"
     IsNotNull="true"
@@ -69,7 +102,16 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="PLAN_ACC_SUBCONTO"/>
+    TableName="PLAN_ACC_SUBCONTO">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.PlanAccSubconto.Summovoy_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.PlanAccSubconto.Summovoy_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Version"
     IsNotNull="true"
@@ -77,7 +119,16 @@
     SQLType="TIMESTAMP"
     Type="java.sql.Timestamp"
     ColumnType="TIMESTAMP"
-    TableName="PLAN_ACC_SUBCONTO"/>
+    TableName="PLAN_ACC_SUBCONTO">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.PlanAccSubconto.Version_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.PlanAccSubconto.Version_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="PlanAcc"
     Association="ua.divas.model.PlanAccSubcontoFk1Assoc"
@@ -142,4 +193,8 @@
       <Item Value="ua.divas.model.PlanAccSubconto.PlanTypeSubc"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>
