@@ -52,6 +52,9 @@ public class OrdersImpl extends DivasEntity {
         ActivitiesId,
         StatusId,
         ZamerId,
+        DatComplete,
+        DatZam,
+        SummPlan,
         Currency,
         Divisions,
         Firms,
@@ -62,7 +65,11 @@ public class OrdersImpl extends DivasEntity {
         Users,
         OrdersTpUslugi,
         Kontragents1,
-        OrdersTpOplaty;
+        OrdersTpOplaty,
+        OrdersTpRashody,
+        OrdersTpRashody1,
+        OrdersTpNachisl,
+        OrdersTpNachisl1;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -105,6 +112,9 @@ public class OrdersImpl extends DivasEntity {
     public static final int ACTIVITIESID = AttributesEnum.ActivitiesId.index();
     public static final int STATUSID = AttributesEnum.StatusId.index();
     public static final int ZAMERID = AttributesEnum.ZamerId.index();
+    public static final int DATCOMPLETE = AttributesEnum.DatComplete.index();
+    public static final int DATZAM = AttributesEnum.DatZam.index();
+    public static final int SUMMPLAN = AttributesEnum.SummPlan.index();
     public static final int CURRENCY = AttributesEnum.Currency.index();
     public static final int DIVISIONS = AttributesEnum.Divisions.index();
     public static final int FIRMS = AttributesEnum.Firms.index();
@@ -116,6 +126,10 @@ public class OrdersImpl extends DivasEntity {
     public static final int ORDERSTPUSLUGI = AttributesEnum.OrdersTpUslugi.index();
     public static final int KONTRAGENTS1 = AttributesEnum.Kontragents1.index();
     public static final int ORDERSTPOPLATY = AttributesEnum.OrdersTpOplaty.index();
+    public static final int ORDERSTPRASHODY = AttributesEnum.OrdersTpRashody.index();
+    public static final int ORDERSTPRASHODY1 = AttributesEnum.OrdersTpRashody1.index();
+    public static final int ORDERSTPNACHISL = AttributesEnum.OrdersTpNachisl.index();
+    public static final int ORDERSTPNACHISL1 = AttributesEnum.OrdersTpNachisl1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -420,6 +434,54 @@ public class OrdersImpl extends DivasEntity {
     }
 
     /**
+     * Gets the attribute value for DatComplete, using the alias name DatComplete.
+     * @return the value of DatComplete
+     */
+    public Timestamp getDatComplete() {
+        return (Timestamp) getAttributeInternal(DATCOMPLETE);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for DatComplete.
+     * @param value value to set the DatComplete
+     */
+    public void setDatComplete(Timestamp value) {
+        setAttributeInternal(DATCOMPLETE, value);
+    }
+
+    /**
+     * Gets the attribute value for DatZam, using the alias name DatZam.
+     * @return the value of DatZam
+     */
+    public Timestamp getDatZam() {
+        return (Timestamp) getAttributeInternal(DATZAM);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for DatZam.
+     * @param value value to set the DatZam
+     */
+    public void setDatZam(Timestamp value) {
+        setAttributeInternal(DATZAM, value);
+    }
+
+    /**
+     * Gets the attribute value for SummPlan, using the alias name SummPlan.
+     * @return the value of SummPlan
+     */
+    public BigDecimal getSummPlan() {
+        return (BigDecimal) getAttributeInternal(SUMMPLAN);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for SummPlan.
+     * @param value value to set the SummPlan
+     */
+    public void setSummPlan(BigDecimal value) {
+        setAttributeInternal(SUMMPLAN, value);
+    }
+
+    /**
      * @return the associated entity CurrencyImpl.
      */
     public CurrencyImpl getCurrency() {
@@ -557,6 +619,34 @@ public class OrdersImpl extends DivasEntity {
      */
     public RowIterator getOrdersTpOplaty() {
         return (RowIterator) getAttributeInternal(ORDERSTPOPLATY);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getOrdersTpRashody() {
+        return (RowIterator) getAttributeInternal(ORDERSTPRASHODY);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getOrdersTpRashody1() {
+        return (RowIterator) getAttributeInternal(ORDERSTPRASHODY1);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getOrdersTpNachisl() {
+        return (RowIterator) getAttributeInternal(ORDERSTPNACHISL);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getOrdersTpNachisl1() {
+        return (RowIterator) getAttributeInternal(ORDERSTPNACHISL1);
     }
 
     /**

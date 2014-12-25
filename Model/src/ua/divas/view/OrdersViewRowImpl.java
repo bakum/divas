@@ -66,11 +66,16 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         OEditable,
         ZamerId,
         Zamername,
+        DatComplete,
+        DatZam,
+        SummPlan,
         TotalSumUslugi,
         CountUslug,
         TotalSumOplaty,
         OrdersTpUslugiView,
         OrdersTpOplatyView,
+        OrdersTpRashodyView,
+        OrdersTpNachislView,
         KontragentsView1,
         CurrencyView1,
         KassaView1,
@@ -126,11 +131,16 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     public static final int OEDITABLE = AttributesEnum.OEditable.index();
     public static final int ZAMERID = AttributesEnum.ZamerId.index();
     public static final int ZAMERNAME = AttributesEnum.Zamername.index();
+    public static final int DATCOMPLETE = AttributesEnum.DatComplete.index();
+    public static final int DATZAM = AttributesEnum.DatZam.index();
+    public static final int SUMMPLAN = AttributesEnum.SummPlan.index();
     public static final int TOTALSUMUSLUGI = AttributesEnum.TotalSumUslugi.index();
     public static final int COUNTUSLUG = AttributesEnum.CountUslug.index();
     public static final int TOTALSUMOPLATY = AttributesEnum.TotalSumOplaty.index();
     public static final int ORDERSTPUSLUGIVIEW = AttributesEnum.OrdersTpUslugiView.index();
     public static final int ORDERSTPOPLATYVIEW = AttributesEnum.OrdersTpOplatyView.index();
+    public static final int ORDERSTPRASHODYVIEW = AttributesEnum.OrdersTpRashodyView.index();
+    public static final int ORDERSTPNACHISLVIEW = AttributesEnum.OrdersTpNachislView.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
     public static final int CURRENCYVIEW1 = AttributesEnum.CurrencyView1.index();
     public static final int KASSAVIEW1 = AttributesEnum.KassaView1.index();
@@ -483,6 +493,7 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         return (Number) getAttributeInternal(TOTALSUMOPLATY);
     }
 
+
     /**
      * Gets the attribute value for ZAMER_ID using the alias name ZamerId.
      * @return the ZAMER_ID
@@ -515,6 +526,55 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         setAttributeInternal(ZAMERNAME, value);
     }
 
+
+    /**
+     * Gets the attribute value for the calculated attribute DatComplete.
+     * @return the DatComplete
+     */
+    public Timestamp getDatComplete() {
+        return (Timestamp) getAttributeInternal(DATCOMPLETE);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for DAT_COMPLETE using the alias name DatComplete.
+     * @param value value to set the DAT_COMPLETE
+     */
+    public void setDatComplete(Timestamp value) {
+        setAttributeInternal(DATCOMPLETE, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute DatZam.
+     * @return the DatZam
+     */
+    public Timestamp getDatZam() {
+        return (Timestamp) getAttributeInternal(DATZAM);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for DAT_ZAM using the alias name DatZam.
+     * @param value value to set the DAT_ZAM
+     */
+    public void setDatZam(Timestamp value) {
+        setAttributeInternal(DATZAM, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute SummPlan.
+     * @return the SummPlan
+     */
+    public BigDecimal getSummPlan() {
+        return (BigDecimal) getAttributeInternal(SUMMPLAN);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for SUMM_PLAN using the alias name SummPlan.
+     * @param value value to set the SUMM_PLAN
+     */
+    public void setSummPlan(BigDecimal value) {
+        setAttributeInternal(SUMMPLAN, value);
+    }
+
     /**
      * Gets the associated <code>RowIterator</code> using master-detail link OrdersTpUslugiView.
      */
@@ -527,6 +587,20 @@ public class OrdersViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getOrdersTpOplatyView() {
         return (RowIterator) getAttributeInternal(ORDERSTPOPLATYVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link OrdersTpRashodyView.
+     */
+    public RowIterator getOrdersTpRashodyView() {
+        return (RowIterator) getAttributeInternal(ORDERSTPRASHODYVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link OrdersTpNachislView.
+     */
+    public RowIterator getOrdersTpNachislView() {
+        return (RowIterator) getAttributeInternal(ORDERSTPNACHISLVIEW);
     }
 
     /**

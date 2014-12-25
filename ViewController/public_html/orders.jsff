@@ -434,6 +434,29 @@
                                                                               id="it11" visible="false">
                                                                     <f:validator binding="#{bindings.Id.validator}"/>
                                                                 </af:inputText>
+                                                                <af:inputDate value="#{bindings.DatComplete.inputValue}"
+                                                                              label="#{bindings.DatComplete.hints.label}"
+                                                                              required="#{bindings.DatComplete.hints.mandatory}"
+                                                                              columns="#{bindings.DatComplete.hints.displayWidth}"
+                                                                              shortDesc="#{bindings.DatComplete.hints.tooltip}"
+                                                                              id="id3"
+                                                                              readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
+                                                                              labelStyle="font-weight: bold;">
+                                                                    <f:validator binding="#{bindings.DatComplete.validator}"/>
+                                                                    <af:convertDateTime pattern="#{bindings.DatComplete.format}"/>
+                                                                </af:inputDate>
+                                                                <af:inputText value="#{bindings.SummPlan.inputValue}"
+                                                                              label="#{bindings.SummPlan.hints.label}"
+                                                                              required="#{bindings.SummPlan.hints.mandatory}"
+                                                                              columns="#{bindings.SummPlan.hints.displayWidth}"
+                                                                              maximumLength="#{bindings.SummPlan.hints.precision}"
+                                                                              shortDesc="#{bindings.SummPlan.hints.tooltip}"
+                                                                              id="it25" labelStyle="font-weight: bold;"
+                                                                              readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
+                                                                    <f:validator binding="#{bindings.SummPlan.validator}"/>
+                                                                    <af:convertNumber groupingUsed="false"
+                                                                                      pattern="#{bindings.SummPlan.format}"/>
+                                                                </af:inputText>
                                                             </af:panelLabelAndMessage>
                                                             <af:separator id="s2"/>
                                                             <af:panelLabelAndMessage label="Реквизиты" id="plam5">
@@ -625,6 +648,17 @@
                                                                 </af:panelGroupLayout>
                                                             </af:panelLabelAndMessage>
                                                             <af:spacer width="10" height="10" id="s8"/>
+                                                            <af:inputDate value="#{bindings.DatZam.inputValue}"
+                                                                          label="#{bindings.DatZam.hints.label}"
+                                                                          required="#{bindings.DatZam.hints.mandatory}"
+                                                                          columns="#{bindings.DatZam.hints.displayWidth}"
+                                                                          shortDesc="#{bindings.DatZam.hints.tooltip}"
+                                                                          id="id9" labelStyle="font-weight: bold;"
+                                                                          readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
+                                                                <f:validator binding="#{bindings.DatZam.validator}"/>
+                                                                <af:convertDateTime pattern="#{bindings.DatZam.format}"/>
+                                                            </af:inputDate>
+                                                            <af:spacer width="10" height="10" id="s10"/>
                                                         </af:panelFormLayout>
                                                         <f:facet name="toolbar">
                                                             <af:toolbar id="t3">

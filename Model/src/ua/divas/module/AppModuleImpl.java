@@ -2655,5 +2655,134 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getPlanAccGroupParentIdFkLink1() {
         return (ViewLinkImpl) findViewLink("PlanAccGroupParentIdFkLink1");
     }
+
+    /**
+     * Container's getter for BaseOfCalcView1.
+     * @return BaseOfCalcView1
+     */
+    public ViewObjectImpl getBaseOfCalcView1() {
+        return (ViewObjectImpl) findViewObject("BaseOfCalcView1");
+    }
+
+
+    /**
+     * Container's getter for OrdersTpRashodyView1.
+     * @return OrdersTpRashodyView1
+     */
+    public ViewObjectImpl getOrdersTpRashodyView1() {
+        return (ViewObjectImpl) findViewObject("OrdersTpRashodyView1");
+    }
+
+    /**
+     * Container's getter for OrdersTpRashodyView2.
+     * @return OrdersTpRashodyView2
+     */
+    public ViewObjectImpl getOrdersTpRashodyView2() {
+        return (ViewObjectImpl) findViewObject("OrdersTpRashodyView2");
+    }
+
+    /**
+     * Container's getter for OrdersTpRashodyFk2Link1.
+     * @return OrdersTpRashodyFk2Link1
+     */
+    public ViewLinkImpl getOrdersTpRashodyFk2Link1() {
+        return (ViewLinkImpl) findViewLink("OrdersTpRashodyFk2Link1");
+    }
+
+    /**
+     * Container's getter for OrdersTpRashodyView3.
+     * @return OrdersTpRashodyView3
+     */
+    public ViewObjectImpl getOrdersTpRashodyView3() {
+        return (ViewObjectImpl) findViewObject("OrdersTpRashodyView3");
+    }
+
+    /**
+     * Container's getter for OrdersTpRashodyFk3Link1.
+     * @return OrdersTpRashodyFk3Link1
+     */
+    public ViewLinkImpl getOrdersTpRashodyFk3Link1() {
+        return (ViewLinkImpl) findViewLink("OrdersTpRashodyFk3Link1");
+    }
+
+    /**
+     * Container's getter for OrdersTpRashodyView4.
+     * @return OrdersTpRashodyView4
+     */
+    public ViewObjectImpl getOrdersTpRashodyView4() {
+        return (ViewObjectImpl) findViewObject("OrdersTpRashodyView4");
+    }
+
+    /**
+     * Container's getter for OrdersOrdersTpRashodyFkLink1.
+     * @return OrdersOrdersTpRashodyFkLink1
+     */
+    public ViewLinkImpl getOrdersOrdersTpRashodyFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrdersOrdersTpRashodyFkLink1");
+    }
+
+    /**
+     * Container's getter for OrdersTpNachislView1.
+     * @return OrdersTpNachislView1
+     */
+    public ViewObjectImpl getOrdersTpNachislView1() {
+        return (ViewObjectImpl) findViewObject("OrdersTpNachislView1");
+    }
+
+    /**
+     * Container's getter for OrdersTpOplatyView2.
+     * @return OrdersTpOplatyView2
+     */
+    public OrdersTpOplatyViewImpl getOrdersTpOplatyView2() {
+        return (OrdersTpOplatyViewImpl) findViewObject("OrdersTpOplatyView2");
+    }
+
+    /**
+     * Container's getter for OrdersTpNachislView2.
+     * @return OrdersTpNachislView2
+     */
+    public ViewObjectImpl getOrdersTpNachislView2() {
+        return (ViewObjectImpl) findViewObject("OrdersTpNachislView2");
+    }
+
+    /**
+     * Container's getter for OrdersOrdersTpNachislFkLink1.
+     * @return OrdersOrdersTpNachislFkLink1
+     */
+    public ViewLinkImpl getOrdersOrdersTpNachislFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrdersOrdersTpNachislFkLink1");
+    }
+
+    /**
+     * Container's getter for OrdersTpNachislView3.
+     * @return OrdersTpNachislView3
+     */
+    public ViewObjectImpl getOrdersTpNachislView3() {
+        return (ViewObjectImpl) findViewObject("OrdersTpNachislView3");
+    }
+
+    /**
+     * Container's getter for OrdersTpNachislFk2Link1.
+     * @return OrdersTpNachislFk2Link1
+     */
+    public ViewLinkImpl getOrdersTpNachislFk2Link1() {
+        return (ViewLinkImpl) findViewLink("OrdersTpNachislFk2Link1");
+    }
+
+    /**
+     * Container's getter for OrdersTpNachislView4.
+     * @return OrdersTpNachislView4
+     */
+    public ViewObjectImpl getOrdersTpNachislView4() {
+        return (ViewObjectImpl) findViewObject("OrdersTpNachislView4");
+    }
+
+    /**
+     * Container's getter for OrdersTpNachislFk3Link1.
+     * @return OrdersTpNachislFk3Link1
+     */
+    public ViewLinkImpl getOrdersTpNachislFk3Link1() {
+        return (ViewLinkImpl) findViewLink("OrdersTpNachislFk3Link1");
+    }
 }
 

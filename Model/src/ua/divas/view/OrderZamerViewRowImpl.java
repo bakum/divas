@@ -66,6 +66,8 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
         Zamername,
         Adress,
         OrdersTpOplatyView,
+        OrdersTpRashodyView,
+        OrdersTpNachislView,
         TypeOfActivitiesView1,
         CurrencyView1,
         DivisionsView1,
@@ -122,6 +124,8 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
     public static final int ZAMERNAME = AttributesEnum.Zamername.index();
     public static final int ADRESS = AttributesEnum.Adress.index();
     public static final int ORDERSTPOPLATYVIEW = AttributesEnum.OrdersTpOplatyView.index();
+    public static final int ORDERSTPRASHODYVIEW = AttributesEnum.OrdersTpRashodyView.index();
+    public static final int ORDERSTPNACHISLVIEW = AttributesEnum.OrdersTpNachislView.index();
     public static final int TYPEOFACTIVITIESVIEW1 = AttributesEnum.TypeOfActivitiesView1.index();
     public static final int CURRENCYVIEW1 = AttributesEnum.CurrencyView1.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
@@ -494,6 +498,20 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getOrdersTpOplatyView() {
         return (RowIterator) getAttributeInternal(ORDERSTPOPLATYVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link OrdersTpRashodyView.
+     */
+    public RowIterator getOrdersTpRashodyView() {
+        return (RowIterator) getAttributeInternal(ORDERSTPRASHODYVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link OrdersTpNachislView.
+     */
+    public RowIterator getOrdersTpNachislView() {
+        return (RowIterator) getAttributeInternal(ORDERSTPNACHISLVIEW);
     }
 
     /**

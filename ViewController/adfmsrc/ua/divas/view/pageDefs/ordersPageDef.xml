@@ -285,5 +285,20 @@
         <Item Value="OtpoEditable"/>
       </AttrNames>
     </attributeValues>
+    <attributeValues IterBinding="OrdersView1Iterator" id="DatComplete">
+      <AttrNames>
+        <Item Value="DatComplete"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OrdersView1Iterator" id="DatZam">
+      <AttrNames>
+        <Item Value="DatZam"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OrdersView1Iterator" id="SummPlan">
+      <AttrNames>
+        <Item Value="SummPlan"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>
