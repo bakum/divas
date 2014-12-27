@@ -11,6 +11,7 @@ import javax.el.ExpressionFactory;
 import javax.el.ValueExpression;
 
 import javax.faces.application.Application;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
@@ -25,6 +26,7 @@ import oracle.adf.view.rich.component.rich.input.RichInputComboboxListOfValues;
 import oracle.adf.view.rich.component.rich.input.RichInputListOfValues;
 import oracle.adf.view.rich.component.rich.input.RichInputText;
 import oracle.adf.view.rich.component.rich.input.RichSelectOneChoice;
+import oracle.adf.view.rich.context.AdfFacesContext;
 import oracle.adf.view.rich.event.DialogEvent;
 import oracle.adf.view.rich.event.LaunchPopupEvent;
 import oracle.adf.view.rich.event.PopupCanceledEvent;
@@ -32,17 +34,27 @@ import oracle.adf.view.rich.event.PopupCanceledEvent;
 import oracle.adf.view.rich.event.PopupFetchEvent;
 
 import oracle.adf.view.rich.event.QueryEvent;
+import oracle.adf.view.rich.event.ReturnPopupEvent;
 import oracle.adf.view.rich.model.AttributeCriterion;
 import oracle.adf.view.rich.model.ConjunctionCriterion;
 import oracle.adf.view.rich.model.Criterion;
 import oracle.adf.view.rich.model.FilterableQueryDescriptor;
+
+import oracle.adf.view.rich.model.ListOfValuesModel;
 
 import oracle.adfinternal.view.faces.model.binding.FacesCtrlLOVBinding;
 
 import oracle.binding.BindingContainer;
 import oracle.binding.OperationBinding;
 
+import oracle.jbo.Key;
 import oracle.jbo.Row;
+
+import oracle.jbo.uicli.binding.JUCtrlHierBinding;
+
+import org.apache.myfaces.trinidad.event.AttributeChangeEvent;
+import org.apache.myfaces.trinidad.model.CollectionModel;
+import org.apache.myfaces.trinidad.model.RowKeySet;
 
 public class OrdersBean {
 
@@ -191,6 +203,11 @@ public class OrdersBean {
     }
 
     public void onPopupFetch(PopupFetchEvent popupFetchEvent) {
+        if (popupFetchEvent.getLaunchSourceClientId().contains("b5")) {
+            BindingContainer bindings = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding operationBinding = bindings.getOperationBinding("CreateInsert");
+            operationBinding.execute();
+        }
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("ExecuteWithParams");
         if (ob != null) {
@@ -208,6 +225,7 @@ public class OrdersBean {
         }
         ob = binding.getOperationBinding("findKontragentById");
         ob.execute();
+
     }
 
     public void onDepChange(ValueChangeEvent valueChangeEvent) {
@@ -229,9 +247,20 @@ public class OrdersBean {
     }
 
     public void onKonChange(ValueChangeEvent valueChangeEvent) {
+        AdfFacesContext fc = AdfFacesContext.getCurrentInstance();
+        fc.addPartialTarget(this.getKontrag());
+        
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("OrdersView1Iterator");
+        Row currRow = it.getCurrentRow();
+        String IdKon = (String) currRow.getAttribute("KontragId");
+        System.out.println(IdKon);
+        
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("findKontragentById");
         if (ob != null) {
+            System.out.println(valueChangeEvent.getNewValue().toString());
+            System.out.println((String) this.getKontrag().getValue());
             ob.getParamsMap().put("Id", (String) this.getKontrag().getValue());
             ob.execute();
         }
@@ -256,6 +285,28 @@ public class OrdersBean {
             }
         }
     }
+    
+    public void onLaunchComboLov(LaunchPopupEvent launchPopupEvent) {
+        String submittedValue = (String) launchPopupEvent.getSubmittedValue();
+        //only perform query if value is submitted
+        if (submittedValue != null && submittedValue.length() > 0) {
+            RichInputComboboxListOfValues lovComp = (RichInputComboboxListOfValues) launchPopupEvent.getComponent();
+            FacesCtrlLOVBinding.ListOfValuesModelImpl lovModel = null;
+            lovModel = (FacesCtrlLOVBinding.ListOfValuesModelImpl) lovComp.getModel();
+            submittedValue = this.firstUpperCase(submittedValue);
+            if (submittedValue != null) {
+                try {
+                    lovModel.getCriteria().getCurrentRow().setAttribute("Fullname", submittedValue);
+                    lovModel.applyCriteria();
+                    lovModel.performQuery(lovModel.getQueryDescriptor());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    
+    
 
     public void onPopupCreateKontrag(PopupFetchEvent popupFetchEvent) {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
@@ -269,6 +320,16 @@ public class OrdersBean {
         Row currRow = it.getCurrentRow();
 
         currRow.setAttribute("IsBuyer", new Integer(1));
+
+
+    }
+    
+    private void setIsSupplier() {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+        Row currRow = it.getCurrentRow();
+
+        currRow.setAttribute("IsSupplier", new Integer(1));
 
 
     }
@@ -306,6 +367,18 @@ public class OrdersBean {
         currRow.setAttribute("ParentId", res);
 
     }
+    
+    private void setSupplierParentId() {
+
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+        Row currRow = it.getCurrentRow();
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding oper = (OperationBinding) binding.getOperationBinding("retrieveSupplierFirstParentId");
+        String res = (String) oper.execute();
+        currRow.setAttribute("ParentId", res);
+
+    }
 
     public void onNewKontragentDialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
@@ -330,6 +403,21 @@ public class OrdersBean {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             this.setIsMeasurer();
             this.setZamerParentId();
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding ob = binding.getOperationBinding("Commit");
+            ob.execute();
+            DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+            if (it != null) {
+                it.executeQuery();
+            }
+        }
+    }
+    
+    public void onNewSupplierDialogListener(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            this.setIsSupplier();
+            this.setSupplierParentId();
             BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
             OperationBinding ob = binding.getOperationBinding("Commit");
             ob.execute();
@@ -418,5 +506,43 @@ public class OrdersBean {
             }
             getMainTable().queueEvent(new QueryEvent(getMainTable(), queryDescriptor));
         }
+    }
+
+    public void onAttrKonChange(AttributeChangeEvent attributeChangeEvent) {
+        System.out.println(attributeChangeEvent.getNewValue().toString());
+    }
+
+    public void onRefreshKon(ActionEvent actionEvent) {
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("findKontragentById");
+        if (ob != null) {
+            System.out.println((String) this.getKontrag().getValue());
+            ob.getParamsMap().put("Id", (String) this.getKontrag().getValue());
+            ob.execute();
+        }
+    }
+
+    public void onKonReturnListener(ReturnPopupEvent returnPopupEvent) {
+        
+          //the selected rows are defined in a RowKeySet.As the LOV table only
+          //supports single selections, there is only one entry in the rks
+          RowKeySet rks = (RowKeySet) returnPopupEvent.getReturnValue();
+          
+          //the ADF Faces table row key is a list. The list contains the 
+          //oracle.jbo.Key
+          List tableRowKey = (List) rks.iterator().next();
+          
+         
+          //get the selected row by its JBO key  
+          Key key = (Key) tableRowKey.get(0);
+          System.out.println(key.getKeyValues()[0]);
+          
+          BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+          OperationBinding ob = binding.getOperationBinding("findKontragentById");
+          if (ob != null) {
+              
+              ob.getParamsMap().put("Id", (String) key.getKeyValues()[0]);
+              ob.execute();
+          }
     }
 }

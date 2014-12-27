@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.2.66.68" id="ordersPageDef"
-                Package="ua.divas.view.pageDefs">
+                Package="ua.divas.view.pageDefs" SkipValidation="true" EnableTokenValidation="false">
   <parameters/>
   <executables>
     <iterator Binds="OrdersView1" RangeSize="12" DataControl="AppModuleDataControl" id="OrdersView1Iterator">
@@ -21,6 +21,8 @@
               id="OrdersTpOplatyView1Iterator"/>
     <searchRegion Criteria="OrdersViewCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   Binds="OrdersView1Iterator" id="OrdersViewCriteriaQuery"/>
+    <iterator Binds="OrdersTpRashodyView4" RangeSize="25" DataControl="AppModuleDataControl"
+              id="OrdersTpRashodyView4Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="OrdersView1Iterator" id="OrdersView1">
@@ -300,5 +302,33 @@
         <Item Value="SummPlan"/>
       </AttrNames>
     </attributeValues>
+    <tree IterBinding="OrdersTpRashodyView4Iterator" id="OrdersTpRashodyView4">
+      <nodeDefinition DefName="ua.divas.view.OrdersTpRashodyView" Name="OrdersTpRashodyView40">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="OrderId"/>
+          <Item Value="DatRash"/>
+          <Item Value="KontrId"/>
+          <Item Value="Kontname"/>
+          <Item Value="Summ"/>
+          <Item Value="ZatratyId"/>
+          <Item Value="Zatrname"/>
+          <Item Value="OtprEditable"/>
+          <Item Value="Description"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="OrdersTpRashodyView4Iterator" id="CreateInsert5" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <attributeValues IterBinding="OrdersTpRashodyView4Iterator" id="OtprEditable">
+      <AttrNames>
+        <Item Value="OtprEditable"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="retrieveSupplierFirstParentId" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="retrieveSupplierFirstParentId" IsViewObjectMethod="true"
+                  DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.KontragentsView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.retrieveSupplierFirstParentId_AppModuleDataControl_KontragentsView1_retrieveSupplierFirstParentId_result"/>
+    <listOfValues Uses="LOV_Kontname" StaticList="false" IterBinding="OrdersTpRashodyView4Iterator" id="Kontname"/>
   </bindings>
 </pageDefinition>

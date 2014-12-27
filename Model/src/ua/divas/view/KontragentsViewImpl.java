@@ -55,6 +55,14 @@ public class KontragentsViewImpl extends DivasView implements KontragentsView {
         return null; 
     }
     
+    public String retrieveSupplierFirstParentId() {
+        String rv = getSupplierParentId();
+        if (rv != null) {
+            return rv;
+        };
+        return null; 
+    }
+    
     public String retrieveCustomersFirstParentName() {
         String rv = getCustomerParentName();
         if (rv != null) {
@@ -237,5 +245,20 @@ public class KontragentsViewImpl extends DivasView implements KontragentsView {
     }
 
 
+    /**
+     * Returns the variable value for SuppId.
+     * @return variable value for SuppId
+     */
+    public String getSuppId() {
+        return (String) ensureVariableManager().getVariableValue("SuppId");
+    }
+
+    /**
+     * Sets <code>value</code> for variable SuppId.
+     * @param value value to bind as SuppId
+     */
+    public void setSuppId(String value) {
+        ensureVariableManager().setVariableValue("SuppId", value);
+    }
 }
 

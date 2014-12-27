@@ -31,6 +31,10 @@
     Name="ZamerName"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <Variable
+    Name="SuppId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="KontragentsView1"
     ViewObjectName="ua.divas.view.KontragentsView"
@@ -486,7 +490,7 @@ order by Kontragents.FULLNAME]]></SQLQuery>
           Value="InAdvancedMode"/>
         <Property
           Name="autoExecute"
-          Value="false"/>
+          Value="true"/>
         <Property
           Name="allowConjunctionOverride"
           Value="true"/>
@@ -539,7 +543,7 @@ order by Kontragents.FULLNAME]]></SQLQuery>
           Value="InAdvancedMode"/>
         <Property
           Name="autoExecute"
-          Value="false"/>
+          Value="true"/>
         <Property
           Name="allowConjunctionOverride"
           Value="true"/>
@@ -574,6 +578,59 @@ order by Kontragents.FULLNAME]]></SQLQuery>
       <ViewCriteriaItem
         Name="IsMeasurer"
         ViewAttribute="IsMeasurer"
+        Operator="="
+        Conjunction="AND"
+        Value="1"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="KontragentsSupplierCriteria"
+    ViewObjectName="ua.divas.view.KontragentsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="KontragentsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="IsGroup"
+        ViewAttribute="IsGroup"
+        Operator="="
+        Conjunction="AND"
+        Value="0"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Fullname"
+        ViewAttribute="Fullname"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Value=":SuppId"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="IsSupplier"
+        ViewAttribute="IsSupplier"
         Operator="="
         Conjunction="AND"
         Value="1"
@@ -767,6 +824,13 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     <Method
       Name="retrieveZamerFirstParentId"
       MethodName="retrieveZamerFirstParentId">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="retrieveSupplierFirstParentId"
+      MethodName="retrieveSupplierFirstParentId">
       <Return
         Name="_return_type_"
         Type="java.lang.String"/>

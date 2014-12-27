@@ -380,6 +380,10 @@ WHERE
           Value="input_text_lov"/>
       </SchemaBasedProperties>
     </Properties>
+    <Dependencies>
+      <Item
+        Value="Kontragname"/>
+    </Dependencies>
   </ViewAttribute>
   <ViewAttribute
     Name="Kontragname"
@@ -587,10 +591,10 @@ WHERE
     IsQueriable="false">
     <Properties>
       <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="combo_lov"/>
         <DISPLAYWIDTH
           Value="20"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

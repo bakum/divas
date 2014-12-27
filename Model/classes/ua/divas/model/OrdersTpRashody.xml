@@ -9,7 +9,12 @@
   DBObjectType="table"
   DBObjectName="ORDERS_TP_RASHODY"
   AliasName="OrdersTpRashody"
-  BindingStyle="OracleName">
+  BindingStyle="OracleName"
+  RowClass="ua.divas.model.OrdersTpRashodyImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Attribute
     Name="Id"
     Precision="50"
@@ -43,10 +48,11 @@
     SQLType="DATE"
     Type="java.sql.Timestamp"
     ColumnType="DATE"
-    TableName="ORDERS_TP_RASHODY"/>
+    TableName="ORDERS_TP_RASHODY">
+    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
+  </Attribute>
   <Attribute
     Name="KontrId"
-    IsNotNull="true"
     Precision="50"
     ColumnName="KONTR_ID"
     SQLType="VARCHAR"

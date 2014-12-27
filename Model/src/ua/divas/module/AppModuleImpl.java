@@ -27,6 +27,7 @@ import ua.divas.view.OrdersTpUslugiViewImpl;
 import ua.divas.view.OrdersViewImpl;
 import ua.divas.view.UserSettingsViewImpl;
 import ua.divas.view.UsersViewImpl;
+import ua.divas.view.ZatratyViewImpl;
 import ua.divas.view.ro.KontragentsItemsLookupVOImpl;
 import ua.divas.view.ro.UsersItemsLookupVOImpl;
 // ---------------------------------------------------------------------
@@ -294,8 +295,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for ZatratyView1.
      * @return ZatratyView1
      */
-    public ViewObjectImpl getZatratyView1() {
-        return (ViewObjectImpl) findViewObject("ZatratyView1");
+    public ZatratyViewImpl getZatratyView1() {
+        return (ZatratyViewImpl) findViewObject("ZatratyView1");
     }
 
     /**
@@ -942,8 +943,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for ZatratyView2.
      * @return ZatratyView2
      */
-    public ViewObjectImpl getZatratyView2() {
-        return (ViewObjectImpl) findViewObject("ZatratyView2");
+    public ZatratyViewImpl getZatratyView2() {
+        return (ZatratyViewImpl) findViewObject("ZatratyView2");
     }
 
     /**
