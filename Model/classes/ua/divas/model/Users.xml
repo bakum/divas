@@ -277,6 +277,13 @@
     AssociationOtherEnd="ua.divas.model.OrdersTpOplatyFk2Assoc.Users"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="Divisions"
+    Association="ua.divas.model.DivisionMainUserFkAcc"
+    AssociationEnd="ua.divas.model.DivisionMainUserFkAcc.Divisions"
+    AssociationOtherEnd="ua.divas.model.DivisionMainUserFkAcc.Users"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="UsersPk"
     PrimaryKey="true">

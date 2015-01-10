@@ -43,7 +43,8 @@ public class UsersImpl extends DivasEntityNoDelete {
         Groupmembers,
         DivisionSotr,
         Kontragents,
-        OrdersTpOplaty;
+        OrdersTpOplaty,
+        Divisions;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -85,6 +86,7 @@ public class UsersImpl extends DivasEntityNoDelete {
     public static final int DIVISIONSOTR = AttributesEnum.DivisionSotr.index();
     public static final int KONTRAGENTS = AttributesEnum.Kontragents.index();
     public static final int ORDERSTPOPLATY = AttributesEnum.OrdersTpOplaty.index();
+    public static final int DIVISIONS = AttributesEnum.Divisions.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -314,6 +316,13 @@ public class UsersImpl extends DivasEntityNoDelete {
      */
     public RowIterator getOrdersTpOplaty() {
         return (RowIterator) getAttributeInternal(ORDERSTPOPLATY);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getDivisions() {
+        return (RowIterator) getAttributeInternal(DIVISIONS);
     }
 
     /**

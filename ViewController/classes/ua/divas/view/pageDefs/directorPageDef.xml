@@ -184,5 +184,7 @@
         <Item Value="KEditable"/>
       </AttrNames>
     </attributeValues>
+    <list IterBinding="DivisionsView1Iterator" StaticList="false" Uses="LOV_MainUser" id="MainUser"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
   </bindings>
 </pageDefinition>

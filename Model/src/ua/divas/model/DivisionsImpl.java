@@ -39,12 +39,14 @@ public class DivisionsImpl extends DivasEntity {
         ParentId,
         Version,
         Predefined,
+        MainUser,
         Divisions,
         ParentIdDivisions,
         Kassa,
         Orders,
         UserSettings,
-        DivisionSotr;
+        DivisionSotr,
+        Users;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -76,12 +78,14 @@ public class DivisionsImpl extends DivasEntity {
     public static final int PARENTID = AttributesEnum.ParentId.index();
     public static final int VERSION = AttributesEnum.Version.index();
     public static final int PREDEFINED = AttributesEnum.Predefined.index();
+    public static final int MAINUSER = AttributesEnum.MainUser.index();
     public static final int DIVISIONS = AttributesEnum.Divisions.index();
     public static final int PARENTIDDIVISIONS = AttributesEnum.ParentIdDivisions.index();
     public static final int KASSA = AttributesEnum.Kassa.index();
     public static final int ORDERS = AttributesEnum.Orders.index();
     public static final int USERSETTINGS = AttributesEnum.UserSettings.index();
     public static final int DIVISIONSOTR = AttributesEnum.DivisionSotr.index();
+    public static final int USERS = AttributesEnum.Users.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -210,6 +214,22 @@ public class DivisionsImpl extends DivasEntity {
     }
 
     /**
+     * Gets the attribute value for MainUser, using the alias name MainUser.
+     * @return the value of MainUser
+     */
+    public String getMainUser() {
+        return (String) getAttributeInternal(MAINUSER);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for MainUser.
+     * @param value value to set the MainUser
+     */
+    public void setMainUser(String value) {
+        setAttributeInternal(MAINUSER, value);
+    }
+
+    /**
      * @return the associated entity oracle.jbo.RowIterator.
      */
     public RowIterator getDivisions() {
@@ -256,6 +276,20 @@ public class DivisionsImpl extends DivasEntity {
      */
     public RowIterator getDivisionSotr() {
         return (RowIterator) getAttributeInternal(DIVISIONSOTR);
+    }
+
+    /**
+     * @return the associated entity UsersImpl.
+     */
+    public UsersImpl getUsers() {
+        return (UsersImpl) getAttributeInternal(USERS);
+    }
+
+    /**
+     * Sets <code>value</code> as the associated entity UsersImpl.
+     */
+    public void setUsers(UsersImpl value) {
+        setAttributeInternal(USERS, value);
     }
 
     /**

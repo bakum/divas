@@ -354,6 +354,14 @@
                                                                       id="it20">
                                                             <f:validator binding="#{bindings.Fullname1.validator}"/>
                                                         </af:inputText>
+                                                        <af:selectOneChoice value="#{bindings.MainUser.inputValue}"
+                                                                            label="#{bindings.MainUser.label}"
+                                                                            required="#{bindings.MainUser.hints.mandatory}"
+                                                                            shortDesc="#{bindings.MainUser.hints.tooltip}"
+                                                                            id="soc5">
+                                                            <f:selectItems value="#{bindings.MainUser.items}" id="si5"/>
+                                                            <f:validator binding="#{bindings.MainUser.validator}"/>
+                                                        </af:selectOneChoice>
                                                     </af:panelFormLayout>
                                                 </af:dialog>
                                             </af:popup>

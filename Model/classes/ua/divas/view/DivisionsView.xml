@@ -20,6 +20,10 @@
     Name="DivisionsView1"
     ViewObjectName="ua.divas.view.DivisionsView"
     RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="UsersView1"
+    ViewObjectName="ua.divas.view.UsersView"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_ParentId"
     ListVOName="DivisionsView1"
@@ -39,13 +43,33 @@
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
+  <ListBinding
+    Name="LOV_MainUser"
+    ListVOName="UsersView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="MainUser"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Login"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <SQLQuery><![CDATA[SELECT Divisions.ID, 
        Divisions.FULLNAME, 
        Divisions.DELETED, 
        Divisions.IS_GROUP, 
        Divisions.PARENT_ID, 
        Divisions.VERSION, 
-       Divisions.PREDEFINED
+       Divisions.PREDEFINED,
+       Divisions.MAIN_USER
 FROM  DIVISIONS Divisions
 where deleted = 0]]></SQLQuery>
   <EntityUsage
@@ -108,6 +132,21 @@ where deleted = 0]]></SQLQuery>
     EntityAttrName="Predefined"
     EntityUsage="Divisions"
     AliasName="PREDEFINED"/>
+  <ViewAttribute
+    Name="MainUser"
+    PrecisionRule="true"
+    EntityAttrName="MainUser"
+    EntityUsage="Divisions"
+    AliasName="MAIN_USER"
+    IsQueriable="false"
+    LOVName="LOV_MainUser">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewCriteria
     Name="DivisionsViewGroup"
     ViewObjectName="ua.divas.view.DivisionsView"

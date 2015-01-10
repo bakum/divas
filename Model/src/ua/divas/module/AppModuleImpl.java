@@ -2785,5 +2785,21 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getOrdersTpNachislFk3Link1() {
         return (ViewLinkImpl) findViewLink("OrdersTpNachislFk3Link1");
     }
+
+    /**
+     * Container's getter for DivisionsView4.
+     * @return DivisionsView4
+     */
+    public DivisionsViewImpl getDivisionsViewMainUser() {
+        return (DivisionsViewImpl) findViewObject("DivisionsViewMainUser");
+    }
+
+    /**
+     * Container's getter for DivisionMainUserFkLink1.
+     * @return DivisionMainUserFkLink1
+     */
+    public ViewLinkImpl getDivisionMainUserFkLink1() {
+        return (ViewLinkImpl) findViewLink("DivisionMainUserFkLink1");
+    }
 }
 
