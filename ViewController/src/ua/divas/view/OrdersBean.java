@@ -545,4 +545,36 @@ public class OrdersBean {
               ob.execute();
           }
     }
+
+    public void onAddEntry(ActionEvent actionEvent) {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("OrdersView1Iterator");
+        Row currRow = it.getCurrentRow();
+        String Id = (String) currRow.getAttribute("Id");
+        
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("addEntry");
+        if (ob != null) {
+            
+            ob.getParamsMap().put("_id", Id);
+            ob.execute();
+            refresh();
+        }
+    }
+
+    public void onRemoveEntry(ActionEvent actionEvent) {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("OrdersView1Iterator");
+        Row currRow = it.getCurrentRow();
+        String Id = (String) currRow.getAttribute("Id");
+        
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("removeEntry");
+        if (ob != null) {
+            
+            ob.getParamsMap().put("_id", Id);
+            ob.execute();
+            refresh();
+        }
+    }
 }

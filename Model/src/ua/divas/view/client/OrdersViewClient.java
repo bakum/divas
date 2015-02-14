@@ -16,11 +16,24 @@ public class OrdersViewClient extends ViewUsageImpl implements OrdersView {
     public OrdersViewClient() {
     }
 
+
+    public void addEntry(String _id) {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "addEntry", new String[] {
+                                                                         "java.lang.String" }, new Object[] { _id });
+        return;
+    }
+
     public void createContactDetail(String KonId, String Tel, String email, String Adress) {
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "createContactDetail", new String[] {
                                                                          "java.lang.String", "java.lang.String",
                                                                          "java.lang.String", "java.lang.String"
         }, new Object[] { KonId, Tel, email, Adress });
+        return;
+    }
+
+    public void removeEntry(String _id) {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "removeEntry", new String[] {
+                                                                         "java.lang.String" }, new Object[] { _id });
         return;
     }
 }

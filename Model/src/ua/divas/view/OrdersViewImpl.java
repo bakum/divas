@@ -131,6 +131,14 @@ public class OrdersViewImpl extends DivasView implements OrdersView {
     public void setKname(String value) {
         ensureVariableManager().setVariableValue("Kname", value);
     }
+    
+    public void addEntry(String _id) {
+        callStoredProcedure("ORDERS_ENTRY.orders_move_plan_acc(?)", new Object[] { _id });
+    }
+    
+    public void removeEntry(String _id) {
+        callStoredProcedure("ORDERS_ENTRY.orders_remove_plan_acc(?)", new Object[] { _id });
+    }
 
 
 }

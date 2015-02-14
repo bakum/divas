@@ -2801,5 +2801,30 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getDivisionMainUserFkLink1() {
         return (ViewLinkImpl) findViewLink("DivisionMainUserFkLink1");
     }
+
+
+    /**
+     * Container's getter for VwOrdersMoves1.
+     * @return VwOrdersMoves1
+     */
+    public ViewObjectImpl getVwOrdersMoves1() {
+        return (ViewObjectImpl) findViewObject("VwOrdersMoves1");
+    }
+
+    /**
+     * Container's getter for VwOrdersMoves2.
+     * @return VwOrdersMoves2
+     */
+    public ViewObjectImpl getVwOrdersMoves2() {
+        return (ViewObjectImpl) findViewObject("VwOrdersMoves2");
+    }
+
+    /**
+     * Container's getter for OrdersVwOrdersMoveFkLink1.
+     * @return OrdersVwOrdersMoveFkLink1
+     */
+    public ViewLinkImpl getOrdersVwOrdersMoveFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrdersVwOrdersMoveFkLink1");
+    }
 }
 

@@ -7,5 +7,9 @@ import oracle.jbo.ViewObject;
 // ---------------------------------------------------------------------
 public interface OrdersView extends ViewObject {
     void createContactDetail(String KonId, String Tel, String email, String Adress);
+
+    void addEntry(String _id);
+
+    void removeEntry(String _id);
 }
 

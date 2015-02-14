@@ -23,6 +23,7 @@
                   Binds="OrdersView1Iterator" id="OrdersViewCriteriaQuery"/>
     <iterator Binds="OrdersTpRashodyView4" RangeSize="25" DataControl="AppModuleDataControl"
               id="OrdersTpRashodyView4Iterator"/>
+    <iterator Binds="VwOrdersMoves2" RangeSize="25" DataControl="AppModuleDataControl" id="VwOrdersMoves2Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="OrdersView1Iterator" id="OrdersView1">
@@ -330,5 +331,29 @@
                   DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.KontragentsView1"
                   ReturnName="data.AppModuleDataControl.methodResults.retrieveSupplierFirstParentId_AppModuleDataControl_KontragentsView1_retrieveSupplierFirstParentId_result"/>
     <listOfValues Uses="LOV_Kontname" StaticList="false" IterBinding="OrdersTpRashodyView4Iterator" id="Kontname"/>
+    <methodAction id="addEntry" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addEntry"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.OrdersView1">
+      <NamedData NDName="_id" NDValue="" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="removeEntry" RequiresUpdateModel="true" Action="invokeMethod" MethodName="removeEntry"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.OrdersView1">
+      <NamedData NDName="_id" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="VwOrdersMoves2Iterator" id="VwOrdersMoves2">
+      <nodeDefinition DefName="ua.divas.view.VwOrdersMoves" Name="VwOrdersMoves20">
+        <AttrNames>
+          <Item Value="RegistratorId"/>
+          <Item Value="Deb"/>
+          <Item Value="SumDeb"/>
+          <Item Value="Kred"/>
+          <Item Value="SumKred"/>
+          <Item Value="Subconto1Deb"/>
+          <Item Value="Subconto1Kred"/>
+          <Item Value="Subconto2Kred"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>
