@@ -313,6 +313,12 @@ public class OrdersBean {
         OperationBinding ob = binding.getOperationBinding("CreateInsert1");
         ob.execute();
     }
+    
+    public void onPopupCreateZatraty(PopupFetchEvent popupFetchEvent) {
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("CreateInsert6");
+        ob.execute();
+    }
 
     private void setIsBuyer() {
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
@@ -423,6 +429,21 @@ public class OrdersBean {
             ob.execute();
             DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
             DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+            if (it != null) {
+                it.executeQuery();
+            }
+        }
+    }
+    
+    public void onNewZatratyDialogListener(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            //this.setIsSupplier();
+            //this.setSupplierParentId();
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding ob = binding.getOperationBinding("Commit");
+            ob.execute();
+            DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("ZatratyView1Iterator");
             if (it != null) {
                 it.executeQuery();
             }

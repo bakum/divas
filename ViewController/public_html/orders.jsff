@@ -1331,26 +1331,10 @@
                                                                         <af:autoSuggestBehavior suggestedItems="#{bindings.Kontname.suggestedItems}"/>
                                                                     </af:inputComboboxListOfValues>
                                                                 </af:column>
-                                                                <af:column sortProperty="#{bindings.OrdersTpRashodyView4.hints.Summ.name}"
-                                                                           sortable="true"
-                                                                           headerText="#{bindings.OrdersTpRashodyView4.hints.Summ.label}"
-                                                                           id="c49">
-                                                                    <af:inputText value="#{row.bindings.Summ.inputValue}"
-                                                                                  label="#{bindings.OrdersTpRashodyView4.hints.Summ.label}"
-                                                                                  required="#{bindings.OrdersTpRashodyView4.hints.Summ.mandatory}"
-                                                                                  columns="#{bindings.OrdersTpRashodyView4.hints.Summ.displayWidth}"
-                                                                                  maximumLength="#{bindings.OrdersTpRashodyView4.hints.Summ.precision}"
-                                                                                  shortDesc="#{bindings.OrdersTpRashodyView4.hints.Summ.tooltip}"
-                                                                                  id="it40">
-                                                                        <f:validator binding="#{row.bindings.Summ.validator}"/>
-                                                                        <af:convertNumber groupingUsed="false"
-                                                                                          pattern="#{bindings.OrdersTpRashodyView4.hints.Summ.format}"/>
-                                                                    </af:inputText>
-                                                                </af:column>
                                                                 <af:column sortProperty="#{bindings.OrdersTpRashodyView4.hints.ZatratyId.name}"
                                                                            sortable="true"
                                                                            headerText="#{bindings.OrdersTpRashodyView4.hints.ZatratyId.label}"
-                                                                           id="c50">
+                                                                           id="c50" visible="false">
                                                                     <af:inputComboboxListOfValues id="zatratyIdId"
                                                                                                   popupTitle="Search and Select: #{bindings.OrdersTpRashodyView4.hints.ZatratyId.label}"
                                                                                                   value="#{row.bindings.ZatratyId.inputValue}"
@@ -1371,14 +1355,32 @@
                                                                                                   model="#{row.bindings.Zatrname.listOfValuesModel}"
                                                                                                   required="#{bindings.OrdersTpRashodyView4.hints.Zatrname.mandatory}"
                                                                                                   columns="#{bindings.OrdersTpRashodyView4.hints.Zatrname.displayWidth}"
-                                                                                                  shortDesc="#{bindings.OrdersTpRashodyView4.hints.Zatrname.tooltip}">
+                                                                                                  shortDesc="#{bindings.OrdersTpRashodyView4.hints.Zatrname.tooltip}"
+                                                                                                  createPopupId="::pZatraty"
+                                                                                                  launchPopupListener="#{orders.onLaunchComboLov}">
                                                                         <f:validator binding="#{row.bindings.Zatrname.validator}"/>
                                                                     </af:inputComboboxListOfValues>
+                                                                </af:column>
+                                                                <af:column sortProperty="#{bindings.OrdersTpRashodyView4.hints.Summ.name}"
+                                                                           sortable="true"
+                                                                           headerText="#{bindings.OrdersTpRashodyView4.hints.Summ.label}"
+                                                                           id="c49">
+                                                                    <af:inputText value="#{row.bindings.Summ.inputValue}"
+                                                                                  label="#{bindings.OrdersTpRashodyView4.hints.Summ.label}"
+                                                                                  required="#{bindings.OrdersTpRashodyView4.hints.Summ.mandatory}"
+                                                                                  columns="#{bindings.OrdersTpRashodyView4.hints.Summ.displayWidth}"
+                                                                                  maximumLength="#{bindings.OrdersTpRashodyView4.hints.Summ.precision}"
+                                                                                  shortDesc="#{bindings.OrdersTpRashodyView4.hints.Summ.tooltip}"
+                                                                                  id="it40">
+                                                                        <f:validator binding="#{row.bindings.Summ.validator}"/>
+                                                                        <af:convertNumber groupingUsed="false"
+                                                                                          pattern="#{bindings.OrdersTpRashodyView4.hints.Summ.format}"/>
+                                                                    </af:inputText>
                                                                 </af:column>
                                                                 <af:column sortProperty="#{bindings.OrdersTpRashodyView4.hints.OtprEditable.name}"
                                                                            sortable="true"
                                                                            headerText="#{bindings.OrdersTpRashodyView4.hints.OtprEditable.label}"
-                                                                           id="c52">
+                                                                           id="c52" visible="false">
                                                                     <af:inputText value="#{row.bindings.OtprEditable.inputValue}"
                                                                                   label="#{bindings.OrdersTpRashodyView4.hints.OtprEditable.label}"
                                                                                   required="#{bindings.OrdersTpRashodyView4.hints.OtprEditable.mandatory}"
@@ -1570,6 +1572,33 @@
                                                                        id="ot8"/>
                                                     </af:column>
                                                 </af:table>
+                                            </af:dialog>
+                                        </af:popup>
+                                        <af:popup childCreation="deferred" autoCancel="disabled" id="pZatraty"
+                                                  contentDelivery="lazyUncached"
+                                                  popupFetchListener="#{orders.onPopupCreateZatraty}">
+                                            <af:dialog id="d6" title="Новая статья затрат"
+                                                       dialogListener="#{orders.onNewZatratyDialogListener}">
+                                                <f:facet name="buttonBar"/>
+                                                <af:panelFormLayout id="pfl7">
+                                                    <af:inputText value="#{bindings.Id2.inputValue}"
+                                                                  label="#{bindings.Id2.hints.label}"
+                                                                  required="#{bindings.Id2.hints.mandatory}"
+                                                                  columns="#{bindings.Id2.hints.displayWidth}"
+                                                                  maximumLength="#{bindings.Id2.hints.precision}"
+                                                                  shortDesc="#{bindings.Id2.hints.tooltip}" id="it44">
+                                                        <f:validator binding="#{bindings.Id2.validator}"/>
+                                                    </af:inputText>
+                                                    <af:inputText value="#{bindings.Fullname1.inputValue}"
+                                                                  label="#{bindings.Fullname1.hints.label}"
+                                                                  required="#{bindings.Fullname1.hints.mandatory}"
+                                                                  columns="#{bindings.Fullname1.hints.displayWidth}"
+                                                                  maximumLength="#{bindings.Fullname1.hints.precision}"
+                                                                  shortDesc="#{bindings.Fullname1.hints.tooltip}"
+                                                                  id="it45">
+                                                        <f:validator binding="#{bindings.Fullname1.validator}"/>
+                                                    </af:inputText>
+                                                </af:panelFormLayout>
                                             </af:dialog>
                                         </af:popup>
                                     </af:showDetailItem>

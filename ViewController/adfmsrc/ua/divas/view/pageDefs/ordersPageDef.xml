@@ -24,6 +24,7 @@
     <iterator Binds="OrdersTpRashodyView4" RangeSize="25" DataControl="AppModuleDataControl"
               id="OrdersTpRashodyView4Iterator" StateValidation="false"/>
     <iterator Binds="VwOrdersMoves2" RangeSize="25" DataControl="AppModuleDataControl" id="VwOrdersMoves2Iterator"/>
+    <iterator Binds="ZatratyView1" RangeSize="25" DataControl="AppModuleDataControl" id="ZatratyView1Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="OrdersView1Iterator" id="OrdersView1">
@@ -355,5 +356,17 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <attributeValues IterBinding="ZatratyView1Iterator" id="Id2">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ZatratyView1Iterator" id="Fullname1">
+      <AttrNames>
+        <Item Value="Fullname"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="ZatratyView1Iterator" id="CreateInsert6" InstanceName="AppModuleDataControl.ZatratyView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
   </bindings>
 </pageDefinition>
