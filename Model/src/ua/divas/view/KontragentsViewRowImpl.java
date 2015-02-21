@@ -423,6 +423,13 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
     }
 
     /**
+     * Gets the associated <code>RowIterator</code> using master-detail link KontragentsView.
+     */
+    public RowIterator getKontragentsView() {
+        return (RowIterator) getAttributeInternal(KONTRAGENTSVIEW);
+    }
+
+    /**
      * Gets the attribute value for IS_SUPPLIER using the alias name IsSupplier.
      * @return the IS_SUPPLIER
      */
@@ -438,12 +445,6 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         setAttributeInternal(ISSUPPLIER, value);
     }
 
-    /**
-     * Gets the associated <code>RowIterator</code> using master-detail link KontragentsView.
-     */
-    public RowIterator getKontragentsView() {
-        return (RowIterator) getAttributeInternal(KONTRAGENTSVIEW);
-    }
 
     /**
      * Gets the associated <code>RowIterator</code> using master-detail link CompaignsDetailsView.
