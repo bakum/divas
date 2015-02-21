@@ -50,6 +50,13 @@
       <Attr Name="_DisplaySize" Value="100"/>
     </DesignTime>
   </Attribute>
+  <AccessorAttribute
+    Name="OrdersTpNachislenia"
+    Association="ua.divas.model.OrdersTpNachislFk3Assoc"
+    AssociationEnd="ua.divas.model.OrdersTpNachislFk3Assoc.OrdersTpNachislenia"
+    AssociationOtherEnd="ua.divas.model.OrdersTpNachislFk3Assoc.BaseOfCalc"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="BaseOfCalcPk"
     PrimaryKey="true">

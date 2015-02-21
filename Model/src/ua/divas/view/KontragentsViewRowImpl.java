@@ -422,6 +422,7 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         return (Number) getAttributeInternal(TOTALOPLAT);
     }
 
+
     /**
      * Gets the associated <code>RowIterator</code> using master-detail link KontragentsView.
      */

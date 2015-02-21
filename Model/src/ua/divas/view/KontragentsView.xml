@@ -890,6 +890,66 @@ order by Kontragents.FULLNAME]]></SQLQuery>
         Name="_return_type_"
         Type="java.lang.String"/>
     </Method>
+    <Method
+      Name="getRowStatus"
+      MethodName="getRowStatus">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="row"
+        Type="oracle.jbo.Row"/>
+    </Method>
+    <Method
+      Name="getCharacterIndexList"
+      MethodName="getCharacterIndexList">
+      <Return
+        Name="_return_type_"
+        Type="java.util.List"
+        IsGeneric="true">
+        <Element
+          Name="IndexCharacterObject"
+          Type="ua.divas.classes.IndexCharacterObject"/>
+      </Return>
+    </Method>
+    <Method
+      Name="findKontragentById"
+      MethodName="findKontragentById">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="Id"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="removeAllViewCriteria"
+      MethodName="removeAllViewCriteria">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+    </Method>
+    <Method
+      Name="retrieveCustomersFirstParentId"
+      MethodName="retrieveCustomersFirstParentId">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="retrieveZamerFirstParentId"
+      MethodName="retrieveZamerFirstParentId">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="retrieveSupplierFirstParentId"
+      MethodName="retrieveSupplierFirstParentId">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+    </Method>
   </ClientInterface>
   <ResourceBundle>
     <PropertiesBundle
