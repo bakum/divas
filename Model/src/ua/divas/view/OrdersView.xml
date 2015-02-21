@@ -855,6 +855,45 @@ WHERE
         Name="_id"
         Type="java.lang.String"/>
     </Method>
+    <Method
+      Name="createContactDetail"
+      MethodName="createContactDetail">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="KonId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="Tel"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="email"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="Adress"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="addEntry"
+      MethodName="addEntry">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="_id"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="removeEntry"
+      MethodName="removeEntry">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="_id"
+        Type="java.lang.String"/>
+    </Method>
   </ClientInterface>
   <ResourceBundle>
     <PropertiesBundle
