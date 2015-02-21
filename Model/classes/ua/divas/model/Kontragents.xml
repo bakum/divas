@@ -427,6 +427,13 @@
     AssociationOtherEnd="ua.divas.model.OrdersTpRashodyFk2Assoc.Kontragents"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="OrdersTpNachislenia"
+    Association="ua.divas.model.OrdersTpNachislFk2Assoc"
+    AssociationEnd="ua.divas.model.OrdersTpNachislFk2Assoc.OrdersTpNachislenia"
+    AssociationOtherEnd="ua.divas.model.OrdersTpNachislFk2Assoc.Kontragents"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="KontragentsIdCheck">
     <DesignTime>

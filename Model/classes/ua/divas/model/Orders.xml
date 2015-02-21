@@ -539,6 +539,13 @@
     AssociationOtherEnd="ua.divas.model.OrdersOrdersTpRashodyFkAssoc.Orders1"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="OrdersTpNachislenia"
+    Association="ua.divas.model.OrdersTpNachislFk1Assoc"
+    AssociationEnd="ua.divas.model.OrdersTpNachislFk1Assoc.OrdersTpNachislenia"
+    AssociationOtherEnd="ua.divas.model.OrdersTpNachislFk1Assoc.Orders"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="OrdersChk1">
     <DesignTime>
