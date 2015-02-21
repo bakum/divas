@@ -74,7 +74,6 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         OrderZamerView1,
         OrdersTpUslugiView1,
         OrdersTpRashodyView,
-        OrdersTpNachislView,
         KontragentsView1,
         UsersView1;
         static AttributesEnum[] vals = null;
@@ -132,7 +131,6 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
     public static final int ORDERZAMERVIEW1 = AttributesEnum.OrderZamerView1.index();
     public static final int ORDERSTPUSLUGIVIEW1 = AttributesEnum.OrdersTpUslugiView1.index();
     public static final int ORDERSTPRASHODYVIEW = AttributesEnum.OrdersTpRashodyView.index();
-    public static final int ORDERSTPNACHISLVIEW = AttributesEnum.OrdersTpNachislView.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
 
@@ -517,12 +515,6 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         return (RowIterator) getAttributeInternal(ORDERSTPRASHODYVIEW);
     }
 
-    /**
-     * Gets the associated <code>RowIterator</code> using master-detail link OrdersTpNachislView.
-     */
-    public RowIterator getOrdersTpNachislView() {
-        return (RowIterator) getAttributeInternal(ORDERSTPNACHISLVIEW);
-    }
 
     /**
      * Gets the view accessor <code>RowSet</code> KontragentsView1.

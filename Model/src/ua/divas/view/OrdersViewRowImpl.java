@@ -75,7 +75,6 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         OrdersTpUslugiView,
         OrdersTpOplatyView,
         OrdersTpRashodyView,
-        OrdersTpNachislView,
         VwOrdersMoves,
         KontragentsView1,
         CurrencyView1,
@@ -141,7 +140,6 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     public static final int ORDERSTPUSLUGIVIEW = AttributesEnum.OrdersTpUslugiView.index();
     public static final int ORDERSTPOPLATYVIEW = AttributesEnum.OrdersTpOplatyView.index();
     public static final int ORDERSTPRASHODYVIEW = AttributesEnum.OrdersTpRashodyView.index();
-    public static final int ORDERSTPNACHISLVIEW = AttributesEnum.OrdersTpNachislView.index();
     public static final int VWORDERSMOVES = AttributesEnum.VwOrdersMoves.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
     public static final int CURRENCYVIEW1 = AttributesEnum.CurrencyView1.index();
@@ -596,13 +594,6 @@ public class OrdersViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getOrdersTpRashodyView() {
         return (RowIterator) getAttributeInternal(ORDERSTPRASHODYVIEW);
-    }
-
-    /**
-     * Gets the associated <code>RowIterator</code> using master-detail link OrdersTpNachislView.
-     */
-    public RowIterator getOrdersTpNachislView() {
-        return (RowIterator) getAttributeInternal(ORDERSTPNACHISLVIEW);
     }
 
 

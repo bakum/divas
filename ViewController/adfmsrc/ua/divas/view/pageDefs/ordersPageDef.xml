@@ -22,7 +22,7 @@
     <searchRegion Criteria="OrdersViewCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   Binds="OrdersView1Iterator" id="OrdersViewCriteriaQuery"/>
     <iterator Binds="OrdersTpRashodyView4" RangeSize="25" DataControl="AppModuleDataControl"
-              id="OrdersTpRashodyView4Iterator"/>
+              id="OrdersTpRashodyView4Iterator" StateValidation="false"/>
     <iterator Binds="VwOrdersMoves2" RangeSize="25" DataControl="AppModuleDataControl" id="VwOrdersMoves2Iterator"/>
   </executables>
   <bindings>

@@ -2738,53 +2738,6 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         return (OrdersTpOplatyViewImpl) findViewObject("OrdersTpOplatyView2");
     }
 
-    /**
-     * Container's getter for OrdersTpNachislView2.
-     * @return OrdersTpNachislView2
-     */
-    public ViewObjectImpl getOrdersTpNachislView2() {
-        return (ViewObjectImpl) findViewObject("OrdersTpNachislView2");
-    }
-
-    /**
-     * Container's getter for OrdersOrdersTpNachislFkLink1.
-     * @return OrdersOrdersTpNachislFkLink1
-     */
-    public ViewLinkImpl getOrdersOrdersTpNachislFkLink1() {
-        return (ViewLinkImpl) findViewLink("OrdersOrdersTpNachislFkLink1");
-    }
-
-    /**
-     * Container's getter for OrdersTpNachislView3.
-     * @return OrdersTpNachislView3
-     */
-    public ViewObjectImpl getOrdersTpNachislView3() {
-        return (ViewObjectImpl) findViewObject("OrdersTpNachislView3");
-    }
-
-    /**
-     * Container's getter for OrdersTpNachislFk2Link1.
-     * @return OrdersTpNachislFk2Link1
-     */
-    public ViewLinkImpl getOrdersTpNachislFk2Link1() {
-        return (ViewLinkImpl) findViewLink("OrdersTpNachislFk2Link1");
-    }
-
-    /**
-     * Container's getter for OrdersTpNachislView4.
-     * @return OrdersTpNachislView4
-     */
-    public ViewObjectImpl getOrdersTpNachislView4() {
-        return (ViewObjectImpl) findViewObject("OrdersTpNachislView4");
-    }
-
-    /**
-     * Container's getter for OrdersTpNachislFk3Link1.
-     * @return OrdersTpNachislFk3Link1
-     */
-    public ViewLinkImpl getOrdersTpNachislFk3Link1() {
-        return (ViewLinkImpl) findViewLink("OrdersTpNachislFk3Link1");
-    }
 
     /**
      * Container's getter for DivisionsView4.
