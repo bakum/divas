@@ -136,6 +136,26 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="ZamerId"
+    Precision="50"
+    ColumnName="ZAMER_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="ORDERS_TP_OPLATY">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.OrdersTpOplaty.ZamerId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.OrdersTpOplaty.ZamerId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="Users"
     Association="ua.divas.model.OrdersTpOplatyFk2Assoc"
@@ -149,6 +169,13 @@
     AssociationEnd="ua.divas.model.OrdersTpOplatyFk1Assoc.Orders"
     AssociationOtherEnd="ua.divas.model.OrdersTpOplatyFk1Assoc.OrdersTpOplaty"
     Type="ua.divas.model.OrdersImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="Kontragents"
+    Association="ua.divas.model.OrdersTpOplatyZamerFkAssoc"
+    AssociationEnd="ua.divas.model.OrdersTpOplatyZamerFkAssoc.Kontragents"
+    AssociationOtherEnd="ua.divas.model.OrdersTpOplatyZamerFkAssoc.OrdersTpOplaty"
+    Type="ua.divas.model.KontragentsImpl"
     IsUpdateable="true"/>
   <Key
     Name="OrdersTpOplatyPk"
@@ -180,6 +207,17 @@
     </DesignTime>
     <AttrArray Name="Attributes">
       <Item Value="ua.divas.model.OrdersTpOplaty.UserId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_OrdersTpOplaty">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="KONTRAGENTS_ID_CHECK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_ORDERS_TP_OPLATY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="ua.divas.model.OrdersTpOplaty.ZamerId"/>
     </AttrArray>
   </Key>
   <ResourceBundle>

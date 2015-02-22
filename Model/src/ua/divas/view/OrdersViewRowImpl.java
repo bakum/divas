@@ -72,6 +72,8 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         TotalSumUslugi,
         CountUslug,
         TotalSumOplaty,
+        TotalSummUslugiAdd,
+        TotalSumm,
         OrdersTpUslugiView,
         OrdersTpOplatyView,
         OrdersTpRashodyView,
@@ -138,6 +140,8 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     public static final int TOTALSUMUSLUGI = AttributesEnum.TotalSumUslugi.index();
     public static final int COUNTUSLUG = AttributesEnum.CountUslug.index();
     public static final int TOTALSUMOPLATY = AttributesEnum.TotalSumOplaty.index();
+    public static final int TOTALSUMMUSLUGIADD = AttributesEnum.TotalSummUslugiAdd.index();
+    public static final int TOTALSUMM = AttributesEnum.TotalSumm.index();
     public static final int ORDERSTPUSLUGIVIEW = AttributesEnum.OrdersTpUslugiView.index();
     public static final int ORDERSTPOPLATYVIEW = AttributesEnum.OrdersTpOplatyView.index();
     public static final int ORDERSTPRASHODYVIEW = AttributesEnum.OrdersTpRashodyView.index();
@@ -495,6 +499,22 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         return (Number) getAttributeInternal(TOTALSUMOPLATY);
     }
 
+
+    /**
+     * Gets the attribute value for the calculated attribute TotalSummUslugiAdd.
+     * @return the TotalSummUslugiAdd
+     */
+    public Number getTotalSummUslugiAdd() {
+        return (Number) getAttributeInternal(TOTALSUMMUSLUGIADD);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute TotalSumm.
+     * @return the TotalSumm
+     */
+    public Number getTotalSumm() {
+        return (Number) getAttributeInternal(TOTALSUMM);
+    }
 
     /**
      * Gets the attribute value for ZAMER_ID using the alias name ZamerId.

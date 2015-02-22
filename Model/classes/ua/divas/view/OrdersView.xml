@@ -664,10 +664,10 @@ WHERE
     <TransientExpression><![CDATA[OrdersTpUslugiView.sum("Summ != null ? Summ : 0")]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.OrdersView.TotalSumUslugi_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.view.OrdersView.TotalSumUslugi_TOOLTIP"/>
+        <LABEL
+          ResId="ua.divas.view.OrdersView.TotalSumUslugi_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -712,6 +712,50 @@ WHERE
           ResId="ua.divas.view.OrdersView.TotalSumOplaty_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.view.OrdersView.TotalSumOplaty_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalSummUslugiAdd"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    IsQueriable="false">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[OrdersTpUslugiView.sum("PriceAdd != null ? PriceAdd : 0")]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.OrdersView.TotalSummUslugiAdd_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.OrdersView.TotalSummUslugiAdd_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalSumm"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    IsQueriable="false">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[(TotalSumUslugi != null ? TotalSumUslugi : 0)+(TotalSummUslugiAdd != null ? TotalSummUslugiAdd : 0)]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.OrdersView.TotalSumm_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.OrdersView.TotalSumm_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

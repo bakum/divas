@@ -43,8 +43,10 @@ public class OrdersTpOplatyImpl extends DivasEntityNoDelete {
         Sum1,
         UserId,
         Comments,
+        ZamerId,
         Users,
-        Orders;
+        Orders,
+        Kontragents;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -67,20 +69,32 @@ public class OrdersTpOplatyImpl extends DivasEntityNoDelete {
             return vals;
         }
     }
+
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int ORDERID = AttributesEnum.OrderId.index();
     public static final int DAT = AttributesEnum.Dat.index();
     public static final int SUM1 = AttributesEnum.Sum1.index();
     public static final int USERID = AttributesEnum.UserId.index();
     public static final int COMMENTS = AttributesEnum.Comments.index();
+    public static final int ZAMERID = AttributesEnum.ZamerId.index();
     public static final int USERS = AttributesEnum.Users.index();
     public static final int ORDERS = AttributesEnum.Orders.index();
+    public static final int KONTRAGENTS = AttributesEnum.Kontragents.index();
 
     /**
      * This is the default constructor (do not remove).
      */
     public OrdersTpOplatyImpl() {
     }
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("ua.divas.model.OrdersTpOplaty");
+    }
+
 
     /**
      * Gets the attribute value for Id, using the alias name Id.
@@ -179,6 +193,22 @@ public class OrdersTpOplatyImpl extends DivasEntityNoDelete {
     }
 
     /**
+     * Gets the attribute value for ZamerId, using the alias name ZamerId.
+     * @return the value of ZamerId
+     */
+    public String getZamerId() {
+        return (String) getAttributeInternal(ZAMERID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for ZamerId.
+     * @param value value to set the ZamerId
+     */
+    public void setZamerId(String value) {
+        setAttributeInternal(ZAMERID, value);
+    }
+
+    /**
      * @return the associated entity UsersImpl.
      */
     public UsersImpl getUsers() {
@@ -207,6 +237,20 @@ public class OrdersTpOplatyImpl extends DivasEntityNoDelete {
     }
 
     /**
+     * @return the associated entity KontragentsImpl.
+     */
+    public KontragentsImpl getKontragents() {
+        return (KontragentsImpl) getAttributeInternal(KONTRAGENTS);
+    }
+
+    /**
+     * Sets <code>value</code> as the associated entity KontragentsImpl.
+     */
+    public void setKontragents(KontragentsImpl value) {
+        setAttributeInternal(KONTRAGENTS, value);
+    }
+
+    /**
      * @param id key constituent
 
      * @return a Key object based on given key constituents.
@@ -215,11 +259,6 @@ public class OrdersTpOplatyImpl extends DivasEntityNoDelete {
         return new Key(new Object[] { id });
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("ua.divas.model.OrdersTpOplaty");
-    }
+
 }
 

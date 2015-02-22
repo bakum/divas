@@ -2835,5 +2835,21 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getOrdersTpNachislKontragFkLink1() {
         return (ViewLinkImpl) findViewLink("OrdersTpNachislKontragFkLink1");
     }
+
+    /**
+     * Container's getter for OrdersTpOplatyView3.
+     * @return OrdersTpOplatyView3
+     */
+    public OrdersTpOplatyViewImpl getOrdersTpOplatyView3() {
+        return (OrdersTpOplatyViewImpl) findViewObject("OrdersTpOplatyView3");
+    }
+
+    /**
+     * Container's getter for OrdersTpOplatyZamerFkLink1.
+     * @return OrdersTpOplatyZamerFkLink1
+     */
+    public ViewLinkImpl getOrdersTpOplatyZamerFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrdersTpOplatyZamerFkLink1");
+    }
 }
 

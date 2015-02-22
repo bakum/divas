@@ -183,7 +183,7 @@
                                                 <af:column sortProperty="#{bindings.OrdersView1.hints.TotalSumUslugi.name}"
                                                            sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.TotalSumUslugi.label}"
-                                                           id="c18">
+                                                           id="c18" visible="false">
                                                     <af:inputText value="#{row.bindings.TotalSumUslugi.inputValue}"
                                                                   label="#{bindings.OrdersView1.hints.TotalSumUslugi.label}"
                                                                   required="#{bindings.OrdersView1.hints.TotalSumUslugi.mandatory}"
@@ -194,6 +194,34 @@
                                                         <f:validator binding="#{row.bindings.TotalSumUslugi.validator}"/>
                                                         <af:convertNumber groupingUsed="false"
                                                                           pattern="#{bindings.OrdersView1.hints.TotalSumUslugi.format}"/>
+                                                    </af:inputText>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.label}"
+                                                           id="c65" visible="false">
+                                                    <af:inputText value="#{row.bindings.TotalSummUslugiAdd.inputValue}"
+                                                                  label="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.label}"
+                                                                  required="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.mandatory}"
+                                                                  columns="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.displayWidth}"
+                                                                  maximumLength="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.precision}"
+                                                                  shortDesc="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.tooltip}"
+                                                                  id="it46">
+                                                        <f:validator binding="#{row.bindings.TotalSummUslugiAdd.validator}"/>
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.format}"/>
+                                                    </af:inputText>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.OrdersView1.hints.TotalSumm.label}"
+                                                           id="c73">
+                                                    <af:inputText value="#{row.bindings.TotalSumm.inputValue}"
+                                                                  label="#{bindings.OrdersView1.hints.TotalSumm.label}"
+                                                                  required="#{bindings.OrdersView1.hints.TotalSumm.mandatory}"
+                                                                  columns="#{bindings.OrdersView1.hints.TotalSumm.displayWidth}"
+                                                                  maximumLength="#{bindings.OrdersView1.hints.TotalSumm.precision}"
+                                                                  shortDesc="#{bindings.OrdersView1.hints.TotalSumm.tooltip}"
+                                                                  id="it52">
+                                                        <f:validator binding="#{row.bindings.TotalSumm.validator}"/>
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.OrdersView1.hints.TotalSumm.format}"/>
                                                     </af:inputText>
                                                 </af:column>
                                                 <af:column sortProperty="#{bindings.OrdersView1.hints.KassaId.name}"
@@ -1317,7 +1345,7 @@
                                                                 <af:column sortProperty="#{bindings.OrdersTpRashodyView4.hints.Kontname.name}"
                                                                            sortable="true"
                                                                            headerText="#{bindings.OrdersTpRashodyView4.hints.Kontname.label}"
-                                                                           id="c48">
+                                                                           id="c48" width="150">
                                                                     <af:inputComboboxListOfValues id="kontnameId"
                                                                                                   popupTitle="Найти и выбрать: #{bindings.OrdersTpRashodyView4.hints.Kontname.label}"
                                                                                                   value="#{row.bindings.Kontname.inputValue}"
@@ -1326,7 +1354,8 @@
                                                                                                   columns="#{bindings.OrdersTpRashodyView4.hints.Kontname.displayWidth}"
                                                                                                   shortDesc="#{bindings.OrdersTpRashodyView4.hints.Kontname.tooltip}"
                                                                                                   createPopupId="::pCreateProrab"
-                                                                                                  launchPopupListener="#{orders.onLaunchComboLov}">
+                                                                                                  launchPopupListener="#{orders.onLaunchComboLov}"
+                                                                                                  autoSubmit="true">
                                                                         <f:validator binding="#{row.bindings.Kontname.validator}"/>
                                                                         <af:autoSuggestBehavior suggestedItems="#{bindings.Kontname.suggestedItems}"/>
                                                                     </af:inputComboboxListOfValues>
@@ -1348,7 +1377,7 @@
                                                                 <af:column sortProperty="#{bindings.OrdersTpRashodyView4.hints.Zatrname.name}"
                                                                            sortable="true"
                                                                            headerText="#{bindings.OrdersTpRashodyView4.hints.Zatrname.label}"
-                                                                           id="c51">
+                                                                           id="c51" width="200">
                                                                     <af:inputComboboxListOfValues id="zatrnameId"
                                                                                                   popupTitle="Search and Select: #{bindings.OrdersTpRashodyView4.hints.Zatrname.label}"
                                                                                                   value="#{row.bindings.Zatrname.inputValue}"
@@ -1357,7 +1386,8 @@
                                                                                                   columns="#{bindings.OrdersTpRashodyView4.hints.Zatrname.displayWidth}"
                                                                                                   shortDesc="#{bindings.OrdersTpRashodyView4.hints.Zatrname.tooltip}"
                                                                                                   createPopupId="::pZatraty"
-                                                                                                  launchPopupListener="#{orders.onLaunchComboLov}">
+                                                                                                  launchPopupListener="#{orders.onLaunchComboLov}"
+                                                                                                  autoSubmit="true">
                                                                         <f:validator binding="#{row.bindings.Zatrname.validator}"/>
                                                                     </af:inputComboboxListOfValues>
                                                                 </af:column>
@@ -1411,11 +1441,11 @@
                                                     <af:showDetailItem text="Начисления" id="sdi8"
                                                                        stretchChildren="first"
                                                                        visible="#{bindings.Num.inputValue == null ? false : true}">
-                                                        <af:panelBox text="PanelBox1" id="pb5" type="flow">
+                                                        <af:panelBox text="Начисления" id="pb5" type="flow">
                                                             <f:facet name="toolbar">
                                                                 <af:toolbar id="t17">
                                                                     <af:button actionListener="#{bindings.CreateInsert7.execute}"
-                                                                               text="CreateInsert7"
+                                                                               text="Добавить"
                                                                                disabled="#{!bindings.CreateInsert7.enabled}"
                                                                                id="b16"/>
                                                                 </af:toolbar>
@@ -1431,19 +1461,33 @@
                                                                       fetchSize="#{bindings.OrdersTpNachisleniaView2.rangeSize}"
                                                                       id="t16" partialTriggers="::b16"
                                                                       editingMode="clickToEdit">
-                                                                <af:column sortProperty="#{bindings.OrdersTpNachisleniaView2.hints.CalcId.name}"
+                                                                <af:column sortProperty="#{bindings.OrdersTpNachisleniaView2.hints.Id.name}"
                                                                            sortable="true"
-                                                                           headerText="#{bindings.OrdersTpNachisleniaView2.hints.CalcId.label}"
-                                                                           id="c63">
-                                                                    <af:selectOneChoice value="#{row.bindings.CalcId.inputValue}"
-                                                                                        label="#{row.bindings.CalcId.label}"
-                                                                                        required="#{bindings.OrdersTpNachisleniaView2.hints.CalcId.mandatory}"
-                                                                                        shortDesc="#{bindings.OrdersTpNachisleniaView2.hints.CalcId.tooltip}"
-                                                                                        id="soc22">
-                                                                        <f:selectItems value="#{row.bindings.CalcId.items}"
-                                                                                       id="si22"/>
-                                                                        <f:validator binding="#{row.bindings.CalcId.validator}"/>
-                                                                    </af:selectOneChoice>
+                                                                           headerText="#{bindings.OrdersTpNachisleniaView2.hints.Id.label}"
+                                                                           id="c66" visible="false">
+                                                                    <af:inputText value="#{row.bindings.Id.inputValue}"
+                                                                                  label="#{bindings.OrdersTpNachisleniaView2.hints.Id.label}"
+                                                                                  required="#{bindings.OrdersTpNachisleniaView2.hints.Id.mandatory}"
+                                                                                  columns="#{bindings.OrdersTpNachisleniaView2.hints.Id.displayWidth}"
+                                                                                  maximumLength="#{bindings.OrdersTpNachisleniaView2.hints.Id.precision}"
+                                                                                  shortDesc="#{bindings.OrdersTpNachisleniaView2.hints.Id.tooltip}"
+                                                                                  id="it47">
+                                                                        <f:validator binding="#{row.bindings.Id.validator}"/>
+                                                                    </af:inputText>
+                                                                </af:column>
+                                                                <af:column sortProperty="#{bindings.OrdersTpNachisleniaView2.hints.OrderId.name}"
+                                                                           sortable="true"
+                                                                           headerText="#{bindings.OrdersTpNachisleniaView2.hints.OrderId.label}"
+                                                                           id="c69" visible="false">
+                                                                    <af:inputText value="#{row.bindings.OrderId.inputValue}"
+                                                                                  label="#{bindings.OrdersTpNachisleniaView2.hints.OrderId.label}"
+                                                                                  required="#{bindings.OrdersTpNachisleniaView2.hints.OrderId.mandatory}"
+                                                                                  columns="#{bindings.OrdersTpNachisleniaView2.hints.OrderId.displayWidth}"
+                                                                                  maximumLength="#{bindings.OrdersTpNachisleniaView2.hints.OrderId.precision}"
+                                                                                  shortDesc="#{bindings.OrdersTpNachisleniaView2.hints.OrderId.tooltip}"
+                                                                                  id="it48">
+                                                                        <f:validator binding="#{row.bindings.OrderId.validator}"/>
+                                                                    </af:inputText>
                                                                 </af:column>
                                                                 <af:column sortProperty="#{bindings.OrdersTpNachisleniaView2.hints.DatNach.name}"
                                                                            sortable="true"
@@ -1459,38 +1503,10 @@
                                                                         <af:convertDateTime pattern="#{bindings.OrdersTpNachisleniaView2.hints.DatNach.format}"/>
                                                                     </af:inputDate>
                                                                 </af:column>
-                                                                <af:column sortProperty="#{bindings.OrdersTpNachisleniaView2.hints.Description.name}"
-                                                                           sortable="true"
-                                                                           headerText="#{bindings.OrdersTpNachisleniaView2.hints.Description.label}"
-                                                                           id="c65">
-                                                                    <af:inputText value="#{row.bindings.Description.inputValue}"
-                                                                                  label="#{bindings.OrdersTpNachisleniaView2.hints.Description.label}"
-                                                                                  required="#{bindings.OrdersTpNachisleniaView2.hints.Description.mandatory}"
-                                                                                  columns="#{bindings.OrdersTpNachisleniaView2.hints.Description.displayWidth}"
-                                                                                  maximumLength="#{bindings.OrdersTpNachisleniaView2.hints.Description.precision}"
-                                                                                  shortDesc="#{bindings.OrdersTpNachisleniaView2.hints.Description.tooltip}"
-                                                                                  id="it46">
-                                                                        <f:validator binding="#{row.bindings.Description.validator}"/>
-                                                                    </af:inputText>
-                                                                </af:column>
-                                                                <af:column sortProperty="#{bindings.OrdersTpNachisleniaView2.hints.Id.name}"
-                                                                           sortable="true"
-                                                                           headerText="#{bindings.OrdersTpNachisleniaView2.hints.Id.label}"
-                                                                           id="c66">
-                                                                    <af:inputText value="#{row.bindings.Id.inputValue}"
-                                                                                  label="#{bindings.OrdersTpNachisleniaView2.hints.Id.label}"
-                                                                                  required="#{bindings.OrdersTpNachisleniaView2.hints.Id.mandatory}"
-                                                                                  columns="#{bindings.OrdersTpNachisleniaView2.hints.Id.displayWidth}"
-                                                                                  maximumLength="#{bindings.OrdersTpNachisleniaView2.hints.Id.precision}"
-                                                                                  shortDesc="#{bindings.OrdersTpNachisleniaView2.hints.Id.tooltip}"
-                                                                                  id="it47">
-                                                                        <f:validator binding="#{row.bindings.Id.validator}"/>
-                                                                    </af:inputText>
-                                                                </af:column>
                                                                 <af:column sortProperty="#{bindings.OrdersTpNachisleniaView2.hints.KontrId.name}"
                                                                            sortable="true"
                                                                            headerText="#{bindings.OrdersTpNachisleniaView2.hints.KontrId.label}"
-                                                                           id="c67">
+                                                                           id="c67" visible="false">
                                                                     <af:inputComboboxListOfValues id="iclov3"
                                                                                                   popupTitle="Search and Select: #{bindings.OrdersTpNachisleniaView2.hints.KontrId.label}"
                                                                                                   value="#{row.bindings.KontrId.inputValue}"
@@ -1504,30 +1520,31 @@
                                                                 <af:column sortProperty="#{bindings.OrdersTpNachisleniaView2.hints.Kontname.name}"
                                                                            sortable="true"
                                                                            headerText="#{bindings.OrdersTpNachisleniaView2.hints.Kontname.label}"
-                                                                           id="c68">
+                                                                           id="c68" width="250">
                                                                     <af:inputComboboxListOfValues id="iclov4"
                                                                                                   popupTitle="Search and Select: #{bindings.OrdersTpNachisleniaView2.hints.Kontname.label}"
                                                                                                   value="#{row.bindings.Kontname.inputValue}"
                                                                                                   model="#{row.bindings.Kontname.listOfValuesModel}"
                                                                                                   required="#{bindings.OrdersTpNachisleniaView2.hints.Kontname.mandatory}"
                                                                                                   columns="#{bindings.OrdersTpNachisleniaView2.hints.Kontname.displayWidth}"
-                                                                                                  shortDesc="#{bindings.OrdersTpNachisleniaView2.hints.Kontname.tooltip}">
+                                                                                                  shortDesc="#{bindings.OrdersTpNachisleniaView2.hints.Kontname.tooltip}"
+                                                                                                  autoSubmit="true">
                                                                         <f:validator binding="#{row.bindings.Kontname.validator}"/>
                                                                     </af:inputComboboxListOfValues>
                                                                 </af:column>
-                                                                <af:column sortProperty="#{bindings.OrdersTpNachisleniaView2.hints.OrderId.name}"
+                                                                <af:column sortProperty="#{bindings.OrdersTpNachisleniaView2.hints.CalcId.name}"
                                                                            sortable="true"
-                                                                           headerText="#{bindings.OrdersTpNachisleniaView2.hints.OrderId.label}"
-                                                                           id="c69">
-                                                                    <af:inputText value="#{row.bindings.OrderId.inputValue}"
-                                                                                  label="#{bindings.OrdersTpNachisleniaView2.hints.OrderId.label}"
-                                                                                  required="#{bindings.OrdersTpNachisleniaView2.hints.OrderId.mandatory}"
-                                                                                  columns="#{bindings.OrdersTpNachisleniaView2.hints.OrderId.displayWidth}"
-                                                                                  maximumLength="#{bindings.OrdersTpNachisleniaView2.hints.OrderId.precision}"
-                                                                                  shortDesc="#{bindings.OrdersTpNachisleniaView2.hints.OrderId.tooltip}"
-                                                                                  id="it48">
-                                                                        <f:validator binding="#{row.bindings.OrderId.validator}"/>
-                                                                    </af:inputText>
+                                                                           headerText="#{bindings.OrdersTpNachisleniaView2.hints.CalcId.label}"
+                                                                           id="c63">
+                                                                    <af:selectOneChoice value="#{row.bindings.CalcId.inputValue}"
+                                                                                        label="#{row.bindings.CalcId.label}"
+                                                                                        required="#{bindings.OrdersTpNachisleniaView2.hints.CalcId.mandatory}"
+                                                                                        shortDesc="#{bindings.OrdersTpNachisleniaView2.hints.CalcId.tooltip}"
+                                                                                        id="soc22">
+                                                                        <f:selectItems value="#{row.bindings.CalcId.items}"
+                                                                                       id="si22"/>
+                                                                        <f:validator binding="#{row.bindings.CalcId.validator}"/>
+                                                                    </af:selectOneChoice>
                                                                 </af:column>
                                                                 <af:column sortProperty="#{bindings.OrdersTpNachisleniaView2.hints.Percent.name}"
                                                                            sortable="true"
@@ -1564,7 +1581,7 @@
                                                                 <af:column sortProperty="#{bindings.OrdersTpNachisleniaView2.hints.OtpnEditable.name}"
                                                                            sortable="true"
                                                                            headerText="#{bindings.OrdersTpNachisleniaView2.hints.OtpnEditable.label}"
-                                                                           id="c72">
+                                                                           id="c72" visible="false">
                                                                     <af:inputText value="#{row.bindings.OtpnEditable.inputValue}"
                                                                                   label="#{bindings.OrdersTpNachisleniaView2.hints.OtpnEditable.label}"
                                                                                   required="#{bindings.OrdersTpNachisleniaView2.hints.OtpnEditable.mandatory}"

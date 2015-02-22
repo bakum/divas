@@ -54,6 +54,8 @@
           <Item Value="Discription"/>
           <Item Value="OEditable"/>
           <Item Value="TotalSumOplaty"/>
+          <Item Value="TotalSummUslugiAdd"/>
+          <Item Value="TotalSumm"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

@@ -698,6 +698,11 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     ViewLink="ua.divas.view.OrdersTpNachislKontragFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="OrdersTpOplatyView"
+    ViewLink="ua.divas.view.OrdersTpOplatyZamerFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ClientInterface
     Name="__clientInterface">
     <Method
