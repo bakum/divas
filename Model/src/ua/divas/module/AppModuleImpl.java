@@ -2779,5 +2779,61 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getOrdersVwOrdersMoveFkLink1() {
         return (ViewLinkImpl) findViewLink("OrdersVwOrdersMoveFkLink1");
     }
+
+    /**
+     * Container's getter for OrdersTpNachisleniaView1.
+     * @return OrdersTpNachisleniaView1
+     */
+    public ViewObjectImpl getOrdersTpNachisleniaView1() {
+        return (ViewObjectImpl) findViewObject("OrdersTpNachisleniaView1");
+    }
+
+    /**
+     * Container's getter for OrdersTpNachisleniaView2.
+     * @return OrdersTpNachisleniaView2
+     */
+    public ViewObjectImpl getOrdersTpNachisleniaView2() {
+        return (ViewObjectImpl) findViewObject("OrdersTpNachisleniaView2");
+    }
+
+    /**
+     * Container's getter for OrdersOrdersTpNachFkLink1.
+     * @return OrdersOrdersTpNachFkLink1
+     */
+    public ViewLinkImpl getOrdersOrdersTpNachFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrdersOrdersTpNachFkLink1");
+    }
+
+    /**
+     * Container's getter for OrdersTpNachisleniaView3.
+     * @return OrdersTpNachisleniaView3
+     */
+    public ViewObjectImpl getOrdersTpNachisleniaView3() {
+        return (ViewObjectImpl) findViewObject("OrdersTpNachisleniaView3");
+    }
+
+    /**
+     * Container's getter for OrdersTpNachislBaseOfCalcFkLink1.
+     * @return OrdersTpNachislBaseOfCalcFkLink1
+     */
+    public ViewLinkImpl getOrdersTpNachislBaseOfCalcFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrdersTpNachislBaseOfCalcFkLink1");
+    }
+
+    /**
+     * Container's getter for OrdersTpNachisleniaView4.
+     * @return OrdersTpNachisleniaView4
+     */
+    public ViewObjectImpl getOrdersTpNachisleniaView4() {
+        return (ViewObjectImpl) findViewObject("OrdersTpNachisleniaView4");
+    }
+
+    /**
+     * Container's getter for OrdersTpNachislKontragFkLink1.
+     * @return OrdersTpNachislKontragFkLink1
+     */
+    public ViewLinkImpl getOrdersTpNachislKontragFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrdersTpNachislKontragFkLink1");
+    }
 }
 

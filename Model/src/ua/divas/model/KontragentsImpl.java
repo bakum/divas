@@ -57,9 +57,9 @@ public class KontragentsImpl extends DivasEntity {
         Orders1,
         Users,
         OrdersTpUslugi1,
-        OrdersTpRashody;
-        static AttributesEnum[] vals = null;
-        ;
+        OrdersTpRashody,
+        OrdersTpNachislenia;
+        private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
         public int index() {
@@ -109,6 +109,7 @@ public class KontragentsImpl extends DivasEntity {
     public static final int USERS = AttributesEnum.Users.index();
     public static final int ORDERSTPUSLUGI1 = AttributesEnum.OrdersTpUslugi1.index();
     public static final int ORDERSTPRASHODY = AttributesEnum.OrdersTpRashody.index();
+    public static final int ORDERSTPNACHISLENIA = AttributesEnum.OrdersTpNachislenia.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -463,6 +464,13 @@ public class KontragentsImpl extends DivasEntity {
      */
     public RowIterator getOrdersTpRashody() {
         return (RowIterator) getAttributeInternal(ORDERSTPRASHODY);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getOrdersTpNachislenia() {
+        return (RowIterator) getAttributeInternal(ORDERSTPNACHISLENIA);
     }
 
     /**

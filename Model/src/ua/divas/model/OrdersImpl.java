@@ -78,8 +78,7 @@ public class OrdersImpl extends DivasEntity {
         OrdersTpOplaty,
         OrdersTpRashody,
         OrdersTpRashody1;
-        static AttributesEnum[] vals = null;
-        ;
+        private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
         public int index() {
