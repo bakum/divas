@@ -24,6 +24,14 @@
       Name="UsersView1"
       ViewObjectName="ua.divas.view.UsersView"
       RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="KontragentsView1"
+        ViewObjectName="ua.divas.view.KontragentsView"
+        RowLevelBinds="true">
+        <ViewCriteriaUsage
+            Name="KontragentsZamerCriteria"
+            FullName="ua.divas.view.KontragentsView.KontragentsZamerCriteria"/>
+    </ViewAccessor>
     <ListBinding
       Name="LOV_OrderId"
       ListVOName="OrdersView1"
@@ -60,6 +68,25 @@
         </AttrArray>
         <AttrArray Name="ListDisplayAttrNames">
             <Item Value="Login"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_ZamerId"
+        ListVOName="KontragentsView1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="ZamerId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Fullname"/>
         </AttrArray>
         <DisplayCriteria/>
     </ListBinding>
@@ -148,5 +175,13 @@ FROM  ORDERS_TP_OPLATY OrdersTpOplaty]]></SQLQuery>
         PrecisionRule="true"
         EntityAttrName="ZamerId"
         EntityUsage="OrdersTpOplaty"
-        AliasName="ZAMER_ID"/>
+        AliasName="ZAMER_ID"
+        LOVName="LOV_ZamerId">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
 </ViewObject>

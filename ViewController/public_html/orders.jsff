@@ -1206,10 +1206,22 @@
                                                                                           pattern="#{bindings.OrdersTpOplatyView1.hints.Sum1.format}"/>
                                                                     </af:inputText>
                                                                 </af:column>
+                                                                <af:column headerText="#{bindings.OrdersTpOplatyView1.hints.ZamerId.label}"
+                                                                           id="c74">
+                                                                    <af:selectOneChoice value="#{row.bindings.ZamerId.inputValue}"
+                                                                                        label="#{row.bindings.ZamerId.label}"
+                                                                                        required="#{bindings.OrdersTpOplatyView1.hints.ZamerId.mandatory}"
+                                                                                        shortDesc="#{bindings.OrdersTpOplatyView1.hints.ZamerId.tooltip}"
+                                                                                        id="soc23">
+                                                                        <f:selectItems value="#{row.bindings.ZamerId.items}"
+                                                                                       id="si23"/>
+                                                                        <f:validator binding="#{row.bindings.ZamerId.validator}"/>
+                                                                    </af:selectOneChoice>
+                                                                </af:column>
                                                                 <af:column sortProperty="#{bindings.OrdersTpOplatyView1.hints.UserId.name}"
                                                                            sortable="true"
                                                                            headerText="#{bindings.OrdersTpOplatyView1.hints.UserId.label}"
-                                                                           id="c41">
+                                                                           id="c41" visible="false">
                                                                     <af:selectOneChoice value="#{row.bindings.UserId.inputValue}"
                                                                                         label="#{row.bindings.UserId.label}"
                                                                                         required="#{bindings.OrdersTpOplatyView1.hints.UserId.mandatory}"

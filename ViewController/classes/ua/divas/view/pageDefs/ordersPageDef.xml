@@ -283,6 +283,7 @@
           <Item Value="UserId"/>
           <Item Value="Comments"/>
           <Item Value="OtpoEditable"/>
+          <Item Value="ZamerId"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

@@ -17,8 +17,10 @@ import ua.divas.model.OrdersTpOplatyImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class OrdersTpOplatyViewRowImpl extends ViewRowImpl {
+
+
     public static final int ENTITY_ORDERSTPOPLATY = 0;
-    
+
     @Override
     public boolean isAttributeUpdateable(int i) {
         BigDecimal editable = this.getOtpoEditable();
@@ -48,8 +50,10 @@ public class OrdersTpOplatyViewRowImpl extends ViewRowImpl {
         OtpoEditable,
         ZamerId,
         OrdersView1,
-        UsersView1;
-        private static AttributesEnum[] vals = null;
+        UsersView1,
+        KontragentsView1;
+        static AttributesEnum[] vals = null;
+        ;
         private static final int firstIndex = 0;
 
         public int index() {
@@ -71,6 +75,8 @@ public class OrdersTpOplatyViewRowImpl extends ViewRowImpl {
             return vals;
         }
     }
+
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int ORDERID = AttributesEnum.OrderId.index();
     public static final int DAT = AttributesEnum.Dat.index();
@@ -81,6 +87,7 @@ public class OrdersTpOplatyViewRowImpl extends ViewRowImpl {
     public static final int ZAMERID = AttributesEnum.ZamerId.index();
     public static final int ORDERSVIEW1 = AttributesEnum.OrdersView1.index();
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
+    public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -236,6 +243,13 @@ public class OrdersTpOplatyViewRowImpl extends ViewRowImpl {
      */
     public RowSet getUsersView1() {
         return (RowSet) getAttributeInternal(USERSVIEW1);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> KontragentsView1.
+     */
+    public RowSet getKontragentsView1() {
+        return (RowSet) getAttributeInternal(KONTRAGENTSVIEW1);
     }
 }
 
