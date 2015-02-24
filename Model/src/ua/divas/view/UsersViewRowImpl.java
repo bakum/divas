@@ -53,6 +53,7 @@ public class UsersViewRowImpl extends ViewRowImpl {
         Predefined,
         UEditable,
         UDescription,
+        IsZamer,
         OrdersView,
         UsersGroupsView,
         UserSettingsView,
@@ -98,6 +99,7 @@ public class UsersViewRowImpl extends ViewRowImpl {
     public static final int PREDEFINED = AttributesEnum.Predefined.index();
     public static final int UEDITABLE = AttributesEnum.UEditable.index();
     public static final int UDESCRIPTION = AttributesEnum.UDescription.index();
+    public static final int ISZAMER = AttributesEnum.IsZamer.index();
     public static final int ORDERSVIEW = AttributesEnum.OrdersView.index();
     public static final int USERSGROUPSVIEW = AttributesEnum.UsersGroupsView.index();
     public static final int USERSETTINGSVIEW = AttributesEnum.UserSettingsView.index();
@@ -296,6 +298,22 @@ public class UsersViewRowImpl extends ViewRowImpl {
      */
     public void setUDescription(String value) {
         setAttributeInternal(UDESCRIPTION, value);
+    }
+
+    /**
+     * Gets the attribute value for IS_ZAMER using the alias name IsZamer.
+     * @return the IS_ZAMER
+     */
+    public Integer getIsZamer() {
+        return (Integer) getAttributeInternal(ISZAMER);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for IS_ZAMER using the alias name IsZamer.
+     * @param value value to set the IS_ZAMER
+     */
+    public void setIsZamer(Integer value) {
+        setAttributeInternal(ISZAMER, value);
     }
 
     /**

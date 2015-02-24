@@ -37,6 +37,7 @@ public class UsersImpl extends DivasEntityNoDelete {
         Version,
         Predefined,
         UDescription,
+        IsZamer,
         Orders,
         UsersGroups,
         UserSettings,
@@ -79,6 +80,7 @@ public class UsersImpl extends DivasEntityNoDelete {
     public static final int VERSION = AttributesEnum.Version.index();
     public static final int PREDEFINED = AttributesEnum.Predefined.index();
     public static final int UDESCRIPTION = AttributesEnum.UDescription.index();
+    public static final int ISZAMER = AttributesEnum.IsZamer.index();
     public static final int ORDERS = AttributesEnum.Orders.index();
     public static final int USERSGROUPS = AttributesEnum.UsersGroups.index();
     public static final int USERSETTINGS = AttributesEnum.UserSettings.index();
@@ -260,6 +262,22 @@ public class UsersImpl extends DivasEntityNoDelete {
      */
     public void setUDescription(String value) {
         setAttributeInternal(UDESCRIPTION, value);
+    }
+
+    /**
+     * Gets the attribute value for IsZamer, using the alias name IsZamer.
+     * @return the value of IsZamer
+     */
+    public Integer getIsZamer() {
+        return (Integer) getAttributeInternal(ISZAMER);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for IsZamer.
+     * @param value value to set the IsZamer
+     */
+    public void setIsZamer(Integer value) {
+        setAttributeInternal(ISZAMER, value);
     }
 
     /**

@@ -232,5 +232,14 @@
         <Item Value="addUserToWls_desc"/>
       </AttrNames>
     </attributeValues>
+    <button IterBinding="UsersView1Iterator" id="IsZamer" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="IsZamer"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="1"/>
+        <Item Value="0"/>
+      </ValueList>
+    </button>
   </bindings>
 </pageDefinition>

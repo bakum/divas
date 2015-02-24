@@ -23,6 +23,7 @@ public class UsersViewImpl extends ViewObjectImpl implements UsersView {
         try {
             WLS_Utility.addUser(username, psw, desc);
         } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -30,6 +31,7 @@ public class UsersViewImpl extends ViewObjectImpl implements UsersView {
         try {
             WLS_Utility.changeUserPassword(username, oldPassword, newPassword);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 

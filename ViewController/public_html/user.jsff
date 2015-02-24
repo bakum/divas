@@ -227,6 +227,11 @@
                                                                   readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
                                                         <f:validator binding="#{bindings.UDescription.validator}"/>
                                                     </af:inputText>
+                                                    <af:selectBooleanCheckbox value="#{bindings.IsZamer.inputValue}"
+                                                                              label="#{bindings.IsZamer.label}"
+                                                                              shortDesc="#{bindings.IsZamer.hints.tooltip}"
+                                                                              id="sbc4"
+                                                                              readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}"/>
                                                     <f:facet name="footer"/>
                                                     <af:spacer width="10" height="10" id="s1"/>
                                                 </af:panelFormLayout>

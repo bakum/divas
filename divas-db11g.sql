@@ -1,3 +1,104 @@
+DROP TABLE "ASTER_SETTINGS" cascade constraints;
+DROP TABLE "BASE_OF_CALC" cascade constraints;
+DROP TABLE "CALL_LISTS" cascade constraints;
+DROP TABLE "CALL_LOG" cascade constraints;
+DROP TABLE "CALL_MEMO" cascade constraints;
+DROP TABLE "CALL_RESULTS" cascade constraints;
+DROP TABLE "CALL_STATUS" cascade constraints;
+DROP TABLE "CDR" cascade constraints;
+DROP TABLE "COMPAIGNS" cascade constraints;
+DROP TABLE "COMPAIGNS_DETAILS" cascade constraints;
+DROP TABLE "CONTACT_DETAILS" cascade constraints;
+DROP TABLE "CURRENCY" cascade constraints;
+DROP TABLE "DIR_FILE_UPLOAD" cascade constraints;
+DROP TABLE "DIVISIONS" cascade constraints;
+DROP TABLE "DIVISION_SOTR" cascade constraints;
+DROP TABLE "ENTRY_SETTINGS" cascade constraints;
+DROP TABLE "ENUM_ACCOUNT_TYPE" cascade constraints;
+DROP TABLE "EX_RATES_SETTINGS" cascade constraints;
+DROP TABLE "FIRMS" cascade constraints;
+DROP TABLE "GROUPMEMBERS" cascade constraints;
+DROP TABLE "GROUPS" cascade constraints;
+DROP TABLE "IMPORTED_PRICE" cascade constraints;
+DROP TABLE "KASSA" cascade constraints;
+DROP TABLE "KONTRAGENTS" cascade constraints;
+DROP TABLE "MEASURE_UNIT" cascade constraints;
+DROP TABLE "MOVES" cascade constraints;
+DROP TABLE "NOMENKLATURA" cascade constraints;
+DROP TABLE "NOTIFICATION" cascade constraints;
+DROP TABLE "NUMERATOR" cascade constraints;
+DROP TABLE "ORDERS" cascade constraints;
+DROP TABLE "ORDERS_TP_NACHISL" cascade constraints;
+DROP TABLE "ORDERS_TP_OPLATY" cascade constraints;
+DROP TABLE "ORDERS_TP_RASHODY" cascade constraints;
+DROP TABLE "ORDERS_TP_USLUGI" cascade constraints;
+DROP TABLE "ORDER_STATUS" cascade constraints;
+DROP TABLE "PLAN_ACC" cascade constraints;
+DROP TABLE "PLAN_ACC_SUBCONTO" cascade constraints;
+DROP TABLE "PLAN_TYPE_SUBCONTO" cascade constraints;
+DROP TABLE "PS_TXN" cascade constraints;
+DROP TABLE "QRTZ_BLOB_TRIGGERS" cascade constraints;
+DROP TABLE "QRTZ_CALENDARS" cascade constraints;
+DROP TABLE "QRTZ_CRON_TRIGGERS" cascade constraints;
+DROP TABLE "QRTZ_FIRED_TRIGGERS" cascade constraints;
+DROP TABLE "QRTZ_JOB_DETAILS" cascade constraints;
+DROP TABLE "QRTZ_LOCKS" cascade constraints;
+DROP TABLE "QRTZ_PAUSED_TRIGGER_GRPS" cascade constraints;
+DROP TABLE "QRTZ_SCHEDULER_STATE" cascade constraints;
+DROP TABLE "QRTZ_SIMPLE_TRIGGERS" cascade constraints;
+DROP TABLE "QRTZ_SIMPROP_TRIGGERS" cascade constraints;
+DROP TABLE "QRTZ_TRIGGERS" cascade constraints;
+DROP TABLE "QUARTZ_PROPERTY" cascade constraints;
+DROP TABLE "REG_PRICES" cascade constraints;
+DROP TABLE "REG_RATES" cascade constraints;
+DROP TABLE "TYPE_DEF" cascade constraints;
+DROP TABLE "TYPE_OF_ACTIVITIES" cascade constraints;
+DROP TABLE "USERS" cascade constraints;
+DROP TABLE "USERS_GROUPS" cascade constraints;
+DROP TABLE "USER_SETTINGS" cascade constraints;
+DROP TABLE "VOUCHER" cascade constraints;
+DROP TABLE "WLS_SETTINGS" cascade constraints;
+DROP TABLE "XML_T" cascade constraints;
+DROP TABLE "ZATRATY" cascade constraints;
+DROP SEQUENCE "ORDERS_NUM_SEQ";
+DROP SEQUENCE "PS_TXN_SEQ";
+DROP VIEW "LAST_PRICES";
+DROP VIEW "MOVE_KASSA";
+DROP VIEW "MOVE_KONTRAG";
+DROP VIEW "OBOROT_600";
+DROP VIEW "OBOROT_MOVIES";
+DROP VIEW "OBOROT_MOVIES_DEB";
+DROP VIEW "OBOROT_MOVIES_KRED";
+DROP VIEW "VW_MOVES";
+DROP VIEW "VW_MOVE_ORDERS";
+DROP FUNCTION "ACC_TYPE_CONV";
+DROP FUNCTION "BOOL_TO_NUM";
+DROP FUNCTION "GET_DIVISIONS";
+DROP FUNCTION "GET_USERS";
+DROP FUNCTION "PLAN_TYPE_SUBCONTO_CONV";
+DROP FUNCTION "RANDOMUUID";
+DROP PACKAGE "CURRENCY_PKG";
+DROP PACKAGE "ENTRY";
+DROP PACKAGE "FTP";
+DROP PACKAGE "KONTRAG";
+DROP PACKAGE "ORDERS_ENTRY";
+DROP PACKAGE "PRICES";
+DROP PACKAGE "P_ENCRYPT";
+DROP PACKAGE "USR_SETT";
+DROP PACKAGE "UTILITY";
+DROP PACKAGE BODY "CURRENCY_PKG";
+DROP PACKAGE BODY "ENTRY";
+DROP PACKAGE BODY "FTP";
+DROP PACKAGE BODY "KONTRAG";
+DROP PACKAGE BODY "ORDERS_ENTRY";
+DROP PACKAGE BODY "PRICES";
+DROP PACKAGE BODY "P_ENCRYPT";
+DROP PACKAGE BODY "USR_SETT";
+DROP PACKAGE BODY "UTILITY";
+DROP TYPE "DIVISIONTABLE";
+DROP TYPE "DIVISIONTYPE";
+DROP TYPE "USERTABLE";
+DROP TYPE "USERTYPE";
 --------------------------------------------------------
 --  DDL for Type DIVISIONTABLE
 --------------------------------------------------------
@@ -39,7 +140,7 @@ AS TABLE OF usertype;
 --  DDL for Sequence PS_TXN_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 107351 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 109451 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Table ASTER_SETTINGS
 --------------------------------------------------------
@@ -782,7 +883,8 @@ AS TABLE OF usertype;
 	"LOGIN" VARCHAR2(30 CHAR), 
 	"VERSION" TIMESTAMP (6) DEFAULT systimestamp, 
 	"PREDEFINED" NUMBER(1,0) DEFAULT 0, 
-	"U_DESCRIPTION" VARCHAR2(1000 CHAR)
+	"U_DESCRIPTION" VARCHAR2(1000 CHAR), 
+	"IS_ZAMER" NUMBER(1,0) DEFAULT 0
    ) ;
 --------------------------------------------------------
 --  DDL for Table USERS_GROUPS
@@ -924,6 +1026,25 @@ GROUP BY KONTRAGENTS.ID,
   VW_MOVES.KRED,
   VW_MOVES.REGISTRATOR_ID,
   VW_MOVES.PERIOD;
+--------------------------------------------------------
+--  DDL for View OBOROT_600
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "OBOROT_600" ("REGISTRATOR_ID", "DEB", "SUM_DEB", "KRED", "SUM_KRED", "OSTATOK") AS 
+  SELECT VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.DEB,
+  SUM(DISTINCT VW_MOVES.SUM_DEB) AS SUM_DEB,
+  VW_MOVES1.KRED,
+  SUM(DISTINCT VW_MOVES1.SUM_KRED) AS SUM_KRED,
+  SUM(DISTINCT VW_MOVES1.SUM_KRED)+SUM(DISTINCT VW_MOVES.SUM_DEB) AS OSTATOK
+FROM VW_MOVES
+INNER JOIN VW_MOVES VW_MOVES1
+ON VW_MOVES.REGISTRATOR_ID = VW_MOVES1.REGISTRATOR_ID
+WHERE VW_MOVES.DEB         = '600'
+AND VW_MOVES1.KRED         = '600'
+GROUP BY VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.DEB,
+  VW_MOVES1.KRED;
 --------------------------------------------------------
 --  DDL for View OBOROT_MOVIES
 --------------------------------------------------------
@@ -1094,6 +1215,70 @@ INNER JOIN KASSA
 ON VW_MOVES.SUBCONTO1_DEB = KASSA.ID
 INNER JOIN KONTRAGENTS
 ON VW_MOVES.SUBCONTO1_KRED = KONTRAGENTS.ID
+LEFT JOIN NOMENKLATURA
+ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID
+UNION
+SELECT VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.DEB,
+  VW_MOVES.SUM_DEB,
+  VW_MOVES.KRED,
+  VW_MOVES.SUM_KRED,
+  ZATRATY.FULLNAME AS Subconto1_Deb,
+  KASSA.FULLNAME   AS Subconto1_Kred,
+  NOMENKLATURA.FULLNAME AS Subconto2_Kred
+FROM VW_MOVES
+INNER JOIN ZATRATY
+ON VW_MOVES.SUBCONTO1_DEB = ZATRATY.ID
+INNER JOIN KASSA
+ON VW_MOVES.SUBCONTO1_KRED = KASSA.ID
+LEFT JOIN NOMENKLATURA
+ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID
+UNION
+SELECT VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.DEB,
+  VW_MOVES.SUM_DEB,
+  VW_MOVES.KRED,
+  VW_MOVES.SUM_KRED,
+  DIVISIONS.FULLNAME,
+  ZATRATY.FULLNAME      AS FULLNAME1,
+  NOMENKLATURA.FULLNAME AS FULLNAME2
+FROM VW_MOVES
+INNER JOIN DIVISIONS
+ON VW_MOVES.SUBCONTO1_DEB = DIVISIONS.ID
+INNER JOIN ZATRATY
+ON VW_MOVES.SUBCONTO1_KRED = ZATRATY.ID
+LEFT JOIN NOMENKLATURA
+ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID
+UNION
+SELECT VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.DEB,
+  VW_MOVES.SUM_DEB,
+  VW_MOVES.KRED,
+  VW_MOVES.SUM_KRED,
+  DIVISIONS.FULLNAME,
+  KONTRAGENTS.FULLNAME  AS FULLNAME1,
+  NOMENKLATURA.FULLNAME AS FULLNAME2
+FROM VW_MOVES
+INNER JOIN DIVISIONS
+ON VW_MOVES.SUBCONTO1_DEB = DIVISIONS.ID
+LEFT JOIN NOMENKLATURA
+ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID
+INNER JOIN KONTRAGENTS
+ON VW_MOVES.SUBCONTO1_KRED = KONTRAGENTS.ID
+UNION
+SELECT VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.DEB,
+  VW_MOVES.SUM_DEB,
+  VW_MOVES.KRED,
+  VW_MOVES.SUM_KRED,
+  DIVISIONS.FULLNAME,
+  DIVISIONS1.FULLNAME   AS FULLNAME1,
+  NOMENKLATURA.FULLNAME AS FULLNAME2
+FROM VW_MOVES
+INNER JOIN DIVISIONS
+ON VW_MOVES.SUBCONTO1_DEB = DIVISIONS.ID
+INNER JOIN DIVISIONS DIVISIONS1
+ON VW_MOVES.SUBCONTO1_KRED = DIVISIONS1.ID
 LEFT JOIN NOMENKLATURA
 ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID;
 --------------------------------------------------------
@@ -2520,6 +2705,8 @@ ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID;
   ALTER TABLE "USERS" MODIFY ("VERSION" NOT NULL ENABLE);
  
   ALTER TABLE "USERS" MODIFY ("PREDEFINED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "USERS" ADD CONSTRAINT "USERS_CHK1" CHECK (is_zamer in (0,1)) ENABLE;
  
   ALTER TABLE "USERS" ADD CONSTRAINT "USERS_PK" PRIMARY KEY ("ID") ENABLE;
  
@@ -5747,6 +5934,510 @@ END KONTRAG;
         RAISE_APPLICATION_ERROR (-20001,'Error order move for plan accounting! '||SQLERRM, TRUE) ;
   end set_subconto_zamer;
   
+   procedure set_subconto_rashody_rko(p_move_rec moves%rowtype) as
+    p_ret_rec moves%rowtype;
+    p_sub_count number(10);
+    p_counter number(10);
+    p_sub_name plan_type_subconto.fullname%type;
+    p_order orders%rowtype;
+    p_plan_acc plan_acc%rowtype;
+    p_upr_val currency.id%type;
+    p_code_plan plan_acc.code%type;
+    p_usluga nomenklatura.usluga%type;
+  begin
+  select * into p_order from orders where id = p_move_rec.registrator_id;
+  select id into p_upr_val from currency where predefined=1;
+  
+  for i in (select * from ORDERS_TP_RASHODY where order_id = p_order.id) loop
+  p_ret_rec:=p_move_rec;
+  
+  select code into p_code_plan from plan_acc where id = p_ret_rec.plan_acc_deb_id;
+  
+  --Субконто дебета
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'СТАТЬЯ ЗАТРАТ' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=i.zatraty_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=i.zatraty_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=i.zatraty_id;
+        end if;
+        end if;
+        
+        if upper(p_sub_name) = 'КАССА' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_order.kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_order.kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_order.kassa_id;
+        end if;
+        end if;
+        
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_order.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_order.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_order.division_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  --Субконто кредита
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'КАССА' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_order.kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_order.kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_order.kassa_id;
+        end if;
+        end if;
+        
+        if upper(p_sub_name) = 'КОНТРАГЕНТЫ' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_order.kontrag_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_order.kontrag_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_order.kontrag_id;
+        end if;
+        end if;
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_order.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_order.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_order.division_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  p_ret_rec.curr_deb := p_order.curr_id;
+  p_ret_rec.summ_val_deb:=entry.sign_of_summ(p_ret_rec.plan_acc_deb_id, i.summ, 1);
+  
+  p_ret_rec.curr_kred := p_order.curr_id;
+  p_ret_rec.summ_val_kredit:=entry.sign_of_summ(p_ret_rec.plan_acc_kred_id, i.summ, 0);
+  
+  p_ret_rec.summ_upr_deb:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_deb, p_upr_val, p_ret_rec.period, p_ret_rec.summ_val_deb);
+  p_ret_rec.summ_upr_kred:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_kred, p_upr_val, p_ret_rec.period,p_ret_rec.summ_val_kredit);
+  
+  p_ret_rec.version:=systimestamp;
+  
+  insert into moves values p_ret_rec;
+  end loop;
+  exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error order move for plan accounting! '||SQLERRM, TRUE) ;
+  end set_subconto_rashody_rko;
+  
+  procedure set_subconto_rashody_sebest(p_move_rec moves%rowtype) as
+    p_ret_rec moves%rowtype;
+    p_sub_count number(10);
+    p_counter number(10);
+    p_sub_name plan_type_subconto.fullname%type;
+    p_order orders%rowtype;
+    p_plan_acc plan_acc%rowtype;
+    p_upr_val currency.id%type;
+    p_code_plan plan_acc.code%type;
+    p_usluga nomenklatura.usluga%type;
+  begin
+  select * into p_order from orders where id = p_move_rec.registrator_id;
+  select id into p_upr_val from currency where predefined=1;
+  
+  for i in (select * from ORDERS_TP_RASHODY where order_id = p_order.id) loop
+  p_ret_rec:=p_move_rec;
+  
+  select code into p_code_plan from plan_acc where id = p_ret_rec.plan_acc_deb_id;
+  
+  --Субконто дебета
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_order.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_order.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_order.division_id;
+        end if;
+        end if;
+        
+        if upper(p_sub_name) = 'КАССА' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_order.kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_order.kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_order.kassa_id;
+        end if;
+        end if;
+        
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_order.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_order.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_order.division_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  --Субконто кредита
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'СТАТЬЯ ЗАТРАТ' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=i.zatraty_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=i.zatraty_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=i.zatraty_id;
+        end if;
+        end if;
+        
+        if upper(p_sub_name) = 'КОНТРАГЕНТЫ' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_order.kontrag_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_order.kontrag_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_order.kontrag_id;
+        end if;
+        end if;
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_order.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_order.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_order.division_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  p_ret_rec.curr_deb := p_order.curr_id;
+  p_ret_rec.summ_val_deb:=entry.sign_of_summ(p_ret_rec.plan_acc_deb_id, i.summ, 1);
+  
+  p_ret_rec.curr_kred := p_order.curr_id;
+  p_ret_rec.summ_val_kredit:=entry.sign_of_summ(p_ret_rec.plan_acc_kred_id, i.summ, 0);
+  
+  p_ret_rec.summ_upr_deb:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_deb, p_upr_val, p_ret_rec.period, p_ret_rec.summ_val_deb);
+  p_ret_rec.summ_upr_kred:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_kred, p_upr_val, p_ret_rec.period,p_ret_rec.summ_val_kredit);
+  
+  p_ret_rec.version:=systimestamp;
+  
+  insert into moves values p_ret_rec;
+  end loop;
+  exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error order move for plan accounting! '||SQLERRM, TRUE) ;
+  end set_subconto_rashody_sebest;
+  
+  procedure set_subconto_nachisl(p_move_rec moves%rowtype) as
+    p_ret_rec moves%rowtype;
+    p_sub_count number(10);
+    p_counter number(10);
+    p_sub_name plan_type_subconto.fullname%type;
+    p_order orders%rowtype;
+    p_plan_acc plan_acc%rowtype;
+    p_upr_val currency.id%type;
+    p_code_plan plan_acc.code%type;
+    p_usluga nomenklatura.usluga%type;
+  begin
+  select * into p_order from orders where id = p_move_rec.registrator_id;
+  select id into p_upr_val from currency where predefined=1;
+  
+  for i in (select * from ORDERS_TP_NACHISL where order_id = p_order.id) loop
+  p_ret_rec:=p_move_rec;
+  
+  select code into p_code_plan from plan_acc where id = p_ret_rec.plan_acc_deb_id;
+  
+  --Субконто дебета
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_order.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_order.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_order.division_id;
+        end if;
+        end if;
+        
+        if upper(p_sub_name) = 'КАССА' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_order.kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_order.kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_order.kassa_id;
+        end if;
+        end if;
+        
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_order.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_order.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_order.division_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  --Субконто кредита
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'КОНТРАГЕНТЫ' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=i.kontr_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=i.kontr_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=i.kontr_id;
+        end if;
+        end if;
+        
+        if upper(p_sub_name) = 'КАССА' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_order.kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_order.kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_order.kassa_id;
+        end if;
+        end if;
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_order.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_order.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_order.division_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  p_ret_rec.curr_deb := p_order.curr_id;
+  p_ret_rec.summ_val_deb:=entry.sign_of_summ(p_ret_rec.plan_acc_deb_id, i.summ, 1);
+  
+  p_ret_rec.curr_kred := p_order.curr_id;
+  p_ret_rec.summ_val_kredit:=entry.sign_of_summ(p_ret_rec.plan_acc_kred_id, i.summ, 0);
+  
+  p_ret_rec.summ_upr_deb:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_deb, p_upr_val, p_ret_rec.period, p_ret_rec.summ_val_deb);
+  p_ret_rec.summ_upr_kred:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_kred, p_upr_val, p_ret_rec.period,p_ret_rec.summ_val_kredit);
+  
+  p_ret_rec.version:=systimestamp;
+  
+  insert into moves values p_ret_rec;
+  end loop;
+  exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error order move for plan accounting! '||SQLERRM, TRUE) ;
+  end set_subconto_nachisl;
+  
+  procedure set_subconto_close_order(p_move_rec moves%rowtype) as
+    p_ret_rec moves%rowtype;
+    p_sub_count number(10);
+    p_counter number(10);
+    p_sub_name plan_type_subconto.fullname%type;
+    p_order orders%rowtype;
+    p_plan_acc plan_acc%rowtype;
+    p_upr_val currency.id%type;
+    p_code_plan plan_acc.code%type;
+    p_usluga nomenklatura.usluga%type;
+  begin
+  select * into p_order from orders where id = p_move_rec.registrator_id;
+  select id into p_upr_val from currency where predefined=1;
+  
+  for i in (select * from vw_moves where registrator_id = p_order.id and deb = '701') loop
+  p_ret_rec:=p_move_rec;
+  
+  select code into p_code_plan from plan_acc where id = p_ret_rec.plan_acc_deb_id;
+  
+  --Субконто дебета
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_order.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_order.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_order.division_id;
+        end if;
+        end if;
+        
+        if upper(p_sub_name) = 'КАССА' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_order.kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_order.kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_order.kassa_id;
+        end if;
+        end if;
+        
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_order.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_order.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_order.division_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  --Субконто кредита
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_order.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_order.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_order.division_id;
+        end if;
+        end if;
+        
+        if upper(p_sub_name) = 'КАССА' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_order.kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_order.kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_order.kassa_id;
+        end if;
+        end if;
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_order.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_order.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_order.division_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  p_ret_rec.curr_deb := p_order.curr_id;
+  p_ret_rec.summ_val_deb:=entry.sign_of_summ(p_ret_rec.plan_acc_deb_id, i.SUM_DEB, 1);
+  
+  p_ret_rec.curr_kred := p_order.curr_id;
+  p_ret_rec.summ_val_kredit:=entry.sign_of_summ(p_ret_rec.plan_acc_kred_id, i.SUM_DEB, 0);
+  
+  p_ret_rec.summ_upr_deb:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_deb, p_upr_val, p_ret_rec.period, p_ret_rec.summ_val_deb);
+  p_ret_rec.summ_upr_kred:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_kred, p_upr_val, p_ret_rec.period,p_ret_rec.summ_val_kredit);
+  
+  p_ret_rec.version:=systimestamp;
+  
+  insert into moves values p_ret_rec;
+  end loop;
+  exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error order move for plan accounting! '||SQLERRM, TRUE) ;
+  end set_subconto_close_order;
+  
   procedure orders_move_plan_acc(p_id in varchar2) as
     p_orders_rec orders%rowtype;
     p_move_rec moves%rowtype;
@@ -5773,18 +6464,42 @@ END KONTRAG;
         
         --Проводка ТЧ Услуги - Выполнили работы
         if p_counter = 1 then
-            p_move_rec.description:='Выполнили работы - выручка';
+            p_move_rec.description:='Проводка ТЧ Услуги - Выполнили работы';
             set_subconto_tp_uslugi(p_move_rec);
         end if; 
         --Проводка ТЧ Оплаты - Получили предоплату
         if p_counter = 2 then
-            p_move_rec.description:='Получили предоплату';
+            p_move_rec.description:='Проводка ТЧ Оплаты - Получили предоплату';
             set_subconto_tp_oplaty(p_move_rec);
         end if;
         --Проводка ТЧ Оплаты - Замерщик взял деньги
         if p_counter = 3 then
-            p_move_rec.description:='Замерщик взял деньги';
+            p_move_rec.description:='Проводка ТЧ Оплаты - Замерщик взял деньги';
             set_subconto_zamer(p_move_rec);
+        end if;
+        
+        --	Проводка ТЧ Расходы - РКО на себестоимость
+        if p_counter = 4 then
+            p_move_rec.description:='Проводка ТЧ Расходы - РКО на себестоимость';
+            set_subconto_rashody_rko(p_move_rec);
+        end if;
+        
+        --	Проводка ТЧ Расходы - Закрытие себестоимости заказа после выполнения
+        if p_counter = 5 then
+            p_move_rec.description:='Проводка ТЧ Расходы - Закрытие себестоимости заказа после выполнения';
+            set_subconto_rashody_sebest(p_move_rec);
+        end if;
+        
+        --Проводка ТЧ Начисления - Начисления на себестоимость (комиссия и т.д.)
+        if p_counter = 6 then
+            p_move_rec.description:='Проводка ТЧ Начисления - Начисления на себестоимость (комиссия и т.д.)';
+            set_subconto_nachisl(p_move_rec);
+        end if;
+        
+        --Закрытие заказа - выполнен!
+        if p_counter = 7 then
+            p_move_rec.description:='Закрытие заказа - выполнен!';
+            set_subconto_close_order(p_move_rec);
         end if;
     end loop;
     

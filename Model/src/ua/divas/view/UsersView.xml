@@ -28,7 +28,8 @@
        Users.VERSION, 
        Users.PREDEFINED,
        (select 0 from dual) U_Editable,
-       Users.U_Description
+       Users.U_Description,
+       Users.IS_ZAMER
 FROM  USERS Users]]></SQLQuery>
   <EntityUsage
     Name="Users"
@@ -106,6 +107,12 @@ FROM  USERS Users]]></SQLQuery>
     EntityAttrName="UDescription"
     EntityUsage="Users"
     AliasName="U_DESCRIPTION"/>
+  <ViewAttribute
+    Name="IsZamer"
+    PrecisionRule="true"
+    EntityAttrName="IsZamer"
+    EntityUsage="Users"
+    AliasName="IS_ZAMER"/>
   <ViewLinkAccessor
     Name="OrdersView"
     ViewLink="ua.divas.view.OrdersUsersFk1Link"

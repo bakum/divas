@@ -228,6 +228,27 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="IsZamer"
+    Precision="1"
+    Scale="0"
+    ColumnName="IS_ZAMER"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="USERS">
+    <TransientExpression><![CDATA[0]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Users.IsZamer_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Users.IsZamer_TOOLTIP"/>
+        <CONTROLTYPE
+          Value="check_box"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="Orders"
     Association="ua.divas.model.OrdersUsersFk1Assoc"
