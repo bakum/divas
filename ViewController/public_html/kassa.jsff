@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelGridLayout id="pgl1">
+        <af:gridRow height="100%" id="gr1">
+            <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
+                <!-- Content -->
+                <af:panelCollection id="pc1">
+                    <f:facet name="menus"/>
+                    <f:facet name="toolbar"/>
+                    <af:treeTable value="#{bindings.KassaView1.treeModel}" var="node"
+                                  selectionListener="#{kassa.onTreeSelect}" rowSelection="single"
+                                  id="tt1" scrollPolicy="page">
+                        <f:facet name="nodeStamp">
+                            <af:column id="c1" width="250" inlineStyle="font-weight:bold;">
+                                <af:outputText value="#{node.Fullname}" id="ot1"/>
+                            </af:column>
+                        </f:facet>
+                        <f:facet name="pathStamp">
+                            <af:outputText value="#{node}" id="ot2"/>
+                        </f:facet>
+                        <af:column id="c3" width="200" headerText="Период">
+                            <af:outputText value="#{node.bindings.Period}" id="ot4"/>
+                        </af:column>
+                        <af:column id="c4" headerText="Приход">
+                            <af:outputText value="#{node.TotalPrihod}" id="ot8" inlineStyle="font-weight:bold;"/>
+                            <af:outputText value="#{node.bindings.SummPrihod}" id="ot6"/>
+                        </af:column>
+                        <af:column id="c5" headerText="Расход">
+                            <af:outputText value="#{node.TotalRashod}" id="ot9" inlineStyle="font-weight:bold;"/>
+                            <af:outputText value="#{node.bindings.SummRashod}" id="ot7"/>
+                        </af:column>
+                        <af:column id="c2" headerText="Остаток">
+                            <af:outputText value="#{node.TotalSumm}" id="ot5" inlineStyle="font-weight:bold;"/>
+                            <af:outputText value="#{node.bindings.Summ}" id="ot3" rendered="false"/>
+                        </af:column>
+                        <f:facet name="contextMenu">
+                            <af:popup childCreation="deferred" autoCancel="disabled" id="p1">
+                                <af:menu text="menu 1" id="m1">
+                                    <af:commandMenuItem text="Документ движения (регистратор)" id="cmi1"
+                                                        useWindow="true" action="onOrder" windowWidth="870"
+                                                        windowHeight="470"/>
+                                </af:menu>
+                            </af:popup>
+                        </f:facet>
+                    </af:treeTable>
+                    <f:facet name="statusbar"/>
+                </af:panelCollection>
+            </af:gridCell>
+        </af:gridRow>
+    </af:panelGridLayout>
+</ui:composition>

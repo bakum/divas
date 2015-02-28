@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import oracle.jbo.AttributeList;
 import oracle.jbo.RowIterator;
 import oracle.jbo.RowSet;
+import oracle.jbo.domain.Number;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.ViewRowImpl;
 
@@ -18,6 +19,7 @@ import ua.divas.model.KassaImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class KassaViewRowImpl extends ViewRowImpl {
+
 
     public static final int ENTITY_KASSA = 0;
 
@@ -52,10 +54,14 @@ public class KassaViewRowImpl extends ViewRowImpl {
         Version,
         Predefined,
         KEditable,
+        TotalSumm,
+        TotalPrihod,
+        TotalRashod,
         KassaView,
         OrdersView,
         UserSettingsView,
         OrderZamerView,
+        VwKassaMoves,
         CurrencyView1,
         DivisionsView1;
         static AttributesEnum[] vals = null;
@@ -82,6 +88,7 @@ public class KassaViewRowImpl extends ViewRowImpl {
         }
     }
 
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int FULLNAME = AttributesEnum.Fullname.index();
     public static final int ISGROUP = AttributesEnum.IsGroup.index();
@@ -93,10 +100,14 @@ public class KassaViewRowImpl extends ViewRowImpl {
     public static final int VERSION = AttributesEnum.Version.index();
     public static final int PREDEFINED = AttributesEnum.Predefined.index();
     public static final int KEDITABLE = AttributesEnum.KEditable.index();
+    public static final int TOTALSUMM = AttributesEnum.TotalSumm.index();
+    public static final int TOTALPRIHOD = AttributesEnum.TotalPrihod.index();
+    public static final int TOTALRASHOD = AttributesEnum.TotalRashod.index();
     public static final int KASSAVIEW = AttributesEnum.KassaView.index();
     public static final int ORDERSVIEW = AttributesEnum.OrdersView.index();
     public static final int USERSETTINGSVIEW = AttributesEnum.UserSettingsView.index();
     public static final int ORDERZAMERVIEW = AttributesEnum.OrderZamerView.index();
+    public static final int VWKASSAMOVES = AttributesEnum.VwKassaMoves.index();
     public static final int CURRENCYVIEW1 = AttributesEnum.CurrencyView1.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
 
@@ -291,6 +302,30 @@ public class KassaViewRowImpl extends ViewRowImpl {
     }
 
     /**
+     * Gets the attribute value for the calculated attribute TotalSumm.
+     * @return the TotalSumm
+     */
+    public Number getTotalSumm() {
+        return (Number) getAttributeInternal(TOTALSUMM);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute TotalPrihod.
+     * @return the TotalPrihod
+     */
+    public Number getTotalPrihod() {
+        return (Number) getAttributeInternal(TOTALPRIHOD);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute TotalRashod.
+     * @return the TotalRashod
+     */
+    public Number getTotalRashod() {
+        return (Number) getAttributeInternal(TOTALRASHOD);
+    }
+
+    /**
      * Gets the associated <code>RowIterator</code> using master-detail link KassaView.
      */
     public RowIterator getKassaView() {
@@ -316,6 +351,13 @@ public class KassaViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getOrderZamerView() {
         return (RowIterator) getAttributeInternal(ORDERZAMERVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link VwKassaMoves.
+     */
+    public RowIterator getVwKassaMoves() {
+        return (RowIterator) getAttributeInternal(VWKASSAMOVES);
     }
 
     /**

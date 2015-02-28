@@ -2851,5 +2851,46 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getOrdersTpOplatyZamerFkLink1() {
         return (ViewLinkImpl) findViewLink("OrdersTpOplatyZamerFkLink1");
     }
+
+
+    /**
+     * Container's getter for VwKassaMoves1.
+     * @return VwKassaMoves1
+     */
+    public ViewObjectImpl getVwKassaMoves1() {
+        return (ViewObjectImpl) findViewObject("VwKassaMoves1");
+    }
+
+    /**
+     * Container's getter for VwKassaMoves2.
+     * @return VwKassaMoves2
+     */
+    public ViewObjectImpl getVwKassaMoves2() {
+        return (ViewObjectImpl) findViewObject("VwKassaMoves2");
+    }
+
+    /**
+     * Container's getter for VwKassaKassaFkLink1.
+     * @return VwKassaKassaFkLink1
+     */
+    public ViewLinkImpl getVwKassaKassaFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwKassaKassaFkLink1");
+    }
+
+    /**
+     * Container's getter for VwKassaMoves3.
+     * @return VwKassaMoves3
+     */
+    public ViewObjectImpl getVwKassaMoves3() {
+        return (ViewObjectImpl) findViewObject("VwKassaMoves3");
+    }
+
+    /**
+     * Container's getter for VwKassaOrdersFkLink1.
+     * @return VwKassaOrdersFkLink1
+     */
+    public ViewLinkImpl getVwKassaOrdersFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwKassaOrdersFkLink1");
+    }
 }
 

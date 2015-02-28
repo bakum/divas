@@ -824,6 +824,11 @@ WHERE
     ViewLink="ua.divas.view.OrdersOrdersTpNachFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="VwKassaMoves"
+    ViewLink="ua.divas.view.VwKassaOrdersFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ClientInterface
     Name="__clientInterface">
     <Method

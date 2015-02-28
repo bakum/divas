@@ -166,6 +166,45 @@ where deleted = 0]]></SQLQuery>
     AliasName="K_EDITABLE"
     Expression="K_EDITABLE"
     SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TotalSumm"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[VwKassaMoves.sum("Summ != null ? Summ : 0")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalPrihod"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[VwKassaMoves.sum("SummPrihod != null ? SummPrihod : 0")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalRashod"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[VwKassaMoves.sum("SummRashod != null ? SummRashod : 0")]]></TransientExpression>
+  </ViewAttribute>
   <ViewLinkAccessor
     Name="KassaView"
     ViewLink="ua.divas.view.KassaKassaFk1Link"
@@ -184,6 +223,11 @@ where deleted = 0]]></SQLQuery>
   <ViewLinkAccessor
     Name="OrderZamerView"
     ViewLink="ua.divas.view.OrderZamerKassaFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="VwKassaMoves"
+    ViewLink="ua.divas.view.VwKassaKassaFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
 </ViewObject>

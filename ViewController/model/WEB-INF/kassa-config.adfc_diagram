@@ -1,0 +1,53 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">kassa</property>
+      <property
+         name="page">/kassa.jsff</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>kassa&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">111.046875</property>
+      <property
+         name="x">98.0</property>
+      <property
+         name="pageFragment">true</property>
+   </View>
+   <TaskFlowCall
+      id="TaskFlowCall6">
+      <property
+         name="taskFlowId">order-dialog-flow</property>
+      <property
+         name="activityId">order-dialog-flow</property>
+      <property
+         name="documentReference">/WEB-INF/order-dialog-flow.xml</property>
+      <property
+         name="runAsDialog">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>order-dialog-flow&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">110.125</property>
+      <property
+         name="x">300.0</property>
+   </TaskFlowCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase7"
+      from="View2"
+      to="TaskFlowCall6">
+      <property
+         name="fromOutcome">onOrder</property>
+      <property
+         name="sdm:polyPoints">R50,139.0,111.0625,259.0,110.125,L50</property>
+   </ControlFlowCase>
+</SDM>

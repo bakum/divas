@@ -72,6 +72,7 @@ public class KassaImpl extends DivasEntity {
         }
     }
 
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int FULLNAME = AttributesEnum.Fullname.index();
     public static final int ISGROUP = AttributesEnum.IsGroup.index();
@@ -102,6 +103,7 @@ public class KassaImpl extends DivasEntity {
     public static synchronized EntityDefImpl getDefinitionObject() {
         return EntityDefImpl.findDefObject("ua.divas.model.Kassa");
     }
+
 
     /**
      * Gets the attribute value for Id, using the alias name Id.

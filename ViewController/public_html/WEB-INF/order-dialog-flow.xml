@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="order-dialog-flow">
+    <default-activity>order</default-activity>
+    <view id="order">
+      <page>/order.jsf</page>
+    </view>
+    <task-flow-return id="Return">
+      <outcome>
+        <name>Return</name>
+      </outcome>
+    </task-flow-return>
+    <control-flow-rule id="__1">
+      <from-activity-id>order</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>close</from-outcome>
+        <to-activity-id>Return</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

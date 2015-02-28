@@ -20,6 +20,8 @@
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
     <taskFlow id="plan_acc1" taskFlowId="/WEB-INF/plan_acc.xml#plan_acc" activation="deferred"
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="kassaconfig1" taskFlowId="/WEB-INF/kassa-config.xml#kassa-config" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
   </executables>
   <bindings/>
 </pageDefinition>

@@ -667,6 +667,15 @@
   <ViewUsage
     Name="OrdersTpOplatyView3"
     ViewObjectName="ua.divas.view.OrdersTpOplatyView"/>
+  <ViewUsage
+    Name="VwKassaMoves1"
+    ViewObjectName="ua.divas.view.VwKassaMoves"/>
+  <ViewUsage
+    Name="VwKassaMoves2"
+    ViewObjectName="ua.divas.view.VwKassaMoves"/>
+  <ViewUsage
+    Name="VwKassaMoves3"
+    ViewObjectName="ua.divas.view.VwKassaMoves"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -1452,6 +1461,18 @@
     ViewLinkObjectName="ua.divas.view.OrdersTpOplatyZamerFkLink"
     SrcViewUsageName="ua.divas.module.AppModule.KontragentsView1"
     DstViewUsageName="ua.divas.module.AppModule.OrdersTpOplatyView3"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="VwKassaKassaFkLink1"
+    ViewLinkObjectName="ua.divas.view.VwKassaKassaFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.KassaView1"
+    DstViewUsageName="ua.divas.module.AppModule.VwKassaMoves2"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="VwKassaOrdersFkLink1"
+    ViewLinkObjectName="ua.divas.view.VwKassaOrdersFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.OrdersView1"
+    DstViewUsageName="ua.divas.module.AppModule.VwKassaMoves3"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">
