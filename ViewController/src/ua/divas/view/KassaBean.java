@@ -119,11 +119,7 @@ public class KassaBean {
                 RowSetIterator rsi = iter.getRowSetIterator();
                 Row row = rsi.findByKey(k, 1)[0];
                 rsi.setCurrentRow(row);
-            } else {
-                System.out.println("Huh????");
-            } 
-
-            // ... do more useful stuff here
+            }
         } 
     }
 }

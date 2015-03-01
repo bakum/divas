@@ -25,7 +25,16 @@
   <ViewAccessor
     Name="KontragentsView1"
     ViewObjectName="ua.divas.view.KontragentsView"
-    RowLevelBinds="true"/>
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="KontragentsFilterItemsByName"
+      FullName="ua.divas.view.KontragentsView.KontragentsFilterItemsByName"/>
+    <ParameterMap>
+      <PIMap Variable="KonName">
+        <TransientExpression><![CDATA[Kontragname]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
   <ViewAccessor
     Name="CurrencyView1"
     ViewObjectName="ua.divas.view.CurrencyView"
@@ -58,6 +67,19 @@
     Name="KassaVO1"
     ViewObjectName="ua.divas.view.KassaVO"
     RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="KontragentsView2"
+    ViewObjectName="ua.divas.view.KontragentsView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="KontragentsZamerCriteria"
+      FullName="ua.divas.view.KontragentsView.KontragentsZamerCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="ZamerName">
+        <TransientExpression><![CDATA[Zamername]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
   <ListBinding
     Name="LOV_CurrId"
     ListVOName="CurrencyView1"
@@ -242,7 +264,7 @@
   </ListBinding>
   <ListBinding
     Name="LOV_ZamerId"
-    ListVOName="KontragentsView1"
+    ListVOName="KontragentsView2"
     ListRangeSize="-1"
     ComboRowCountHint="10"
     NullValueFlag="start"
@@ -271,7 +293,7 @@
   </ListBinding>
   <ListBinding
     Name="LOV_Zamername"
-    ListVOName="KontragentsView1"
+    ListVOName="KontragentsView2"
     ListRangeSize="-1"
     ComboRowCountHint="10"
     NullValueFlag="start"
@@ -597,6 +619,10 @@ WHERE
           Value="combo_lov"/>
       </SchemaBasedProperties>
     </Properties>
+    <Dependencies>
+      <Item
+        Value="Zamername"/>
+    </Dependencies>
   </ViewAttribute>
   <ViewAttribute
     Name="Zamername"

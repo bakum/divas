@@ -3,7 +3,8 @@
                 Package="ua.divas.view.pageDefs" SkipValidation="true" EnableTokenValidation="false">
   <parameters/>
   <executables>
-    <iterator Binds="OrdersView1" RangeSize="12" DataControl="AppModuleDataControl" id="OrdersView1Iterator">
+    <iterator Binds="OrdersView1" RangeSize="12" DataControl="AppModuleDataControl" id="OrdersView1Iterator"
+              StateValidation="false">
       <sortCriteria>
         <sort attribute="Dat" ascending="false"/>
       </sortCriteria>
@@ -24,9 +25,10 @@
     <iterator Binds="OrdersTpRashodyView4" RangeSize="25" DataControl="AppModuleDataControl"
               id="OrdersTpRashodyView4Iterator" StateValidation="false"/>
     <iterator Binds="VwOrdersMoves2" RangeSize="25" DataControl="AppModuleDataControl" id="VwOrdersMoves2Iterator"/>
-    <iterator Binds="ZatratyView1" RangeSize="25" DataControl="AppModuleDataControl" id="ZatratyView1Iterator"/>
+    <iterator Binds="ZatratyView1" RangeSize="25" DataControl="AppModuleDataControl" id="ZatratyView1Iterator"
+              StateValidation="false"/>
     <iterator Binds="OrdersTpNachisleniaView2" RangeSize="25" DataControl="AppModuleDataControl"
-              id="OrdersTpNachisleniaView2Iterator"/>
+              id="OrdersTpNachisleniaView2Iterator" StateValidation="false"/>
   </executables>
   <bindings>
     <tree IterBinding="OrdersView1Iterator" id="OrdersView1">

@@ -47,9 +47,13 @@ import oracle.adfinternal.view.faces.model.binding.FacesCtrlLOVBinding;
 import oracle.binding.BindingContainer;
 import oracle.binding.OperationBinding;
 
+import oracle.jbo.ApplicationModule;
 import oracle.jbo.Key;
 import oracle.jbo.Row;
 
+import oracle.jbo.ViewCriteria;
+import oracle.jbo.ViewCriteriaManager;
+import oracle.jbo.ViewObject;
 import oracle.jbo.uicli.binding.JUCtrlHierBinding;
 
 import org.apache.myfaces.trinidad.event.AttributeChangeEvent;
@@ -179,6 +183,11 @@ public class OrdersBean {
         refresh();
         return null;
     }
+    
+    public void onNewKontragCancel(PopupCanceledEvent popupCanceledEvent) {
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        binding.getOperationBinding("Rollback").execute();
+    }
 
     public void onOrderCancel(PopupCanceledEvent popupCanceledEvent) {
         rollbackChange();
@@ -265,6 +274,26 @@ public class OrdersBean {
             ob.execute();
         }
     }
+    
+    private void applyBuyerCriteria () {
+        BindingContainer bindings = BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding dciter = (DCIteratorBinding)bindings.get("KontragentsView1Iterator");
+        ViewObject vo=dciter.getViewObject();
+        ViewCriteriaManager vcm = vo.getViewCriteriaManager();
+        ViewCriteria vc = vcm.getViewCriteria("KontragentsFilterItemsByName");
+        vo.applyViewCriteria(vc);
+        vo.executeQuery();
+    }
+    
+    private void applyZamerCriteria () {
+        BindingContainer bindings = BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding dciter = (DCIteratorBinding)bindings.get("KontragentsView1Iterator");
+        ViewObject vo=dciter.getViewObject();
+        ViewCriteriaManager vcm = vo.getViewCriteriaManager();
+        ViewCriteria vc = vcm.getViewCriteria("KontragentsZamerCriteria");
+        vo.applyViewCriteria(vc);
+        vo.executeQuery();
+    }
 
     public void onLaunchLov(LaunchPopupEvent launchPopupEvent) {
         String submittedValue = (String) launchPopupEvent.getSubmittedValue();
@@ -280,13 +309,15 @@ public class OrdersBean {
                     lovModel.applyCriteria();
                     lovModel.performQuery(lovModel.getQueryDescriptor());
                 } catch (Exception e) {
+                    applyBuyerCriteria();
                     e.printStackTrace();
                 }
             }
         }
+        applyBuyerCriteria();
     }
     
-    public void onLaunchComboLov(LaunchPopupEvent launchPopupEvent) {
+    public void onLaunchComboLov(LaunchPopupEvent launchPopupEvent) {    
         String submittedValue = (String) launchPopupEvent.getSubmittedValue();
         //only perform query if value is submitted
         if (submittedValue != null && submittedValue.length() > 0) {
@@ -300,10 +331,12 @@ public class OrdersBean {
                     lovModel.applyCriteria();
                     lovModel.performQuery(lovModel.getQueryDescriptor());
                 } catch (Exception e) {
+                    applyZamerCriteria();
                     e.printStackTrace();
                 }
             }
         }
+        applyZamerCriteria();
     }
     
     

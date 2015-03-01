@@ -694,8 +694,8 @@
                                                                                                       readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
                                                                                                       autoSubmit="true"
                                                                                                       partialTriggers="zamerIdId"
-                                                                                                      createPopupId="pCreateZamer"
-                                                                                                      labelStyle="font-weight: bold;">
+                                                                                                      labelStyle="font-weight: bold;"
+                                                                                                      launchPopupListener="#{orders.onLaunchComboLov}">
                                                                             <f:validator binding="#{bindings.Zamername.validator}"/>
                                                                         </af:inputComboboxListOfValues>
                                                                         <af:inputDate value="#{bindings.DatZam.inputValue}"
