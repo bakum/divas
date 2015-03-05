@@ -29,11 +29,6 @@
     <ViewCriteriaUsage
       Name="KontragentsFilterItemsByName"
       FullName="ua.divas.view.KontragentsView.KontragentsFilterItemsByName"/>
-    <ParameterMap>
-      <PIMap Variable="KonName">
-        <TransientExpression><![CDATA[Kontragname]]></TransientExpression>
-      </PIMap>
-    </ParameterMap>
   </ViewAccessor>
   <ViewAccessor
     Name="CurrencyView1"
@@ -74,11 +69,6 @@
     <ViewCriteriaUsage
       Name="KontragentsZamerCriteria"
       FullName="ua.divas.view.KontragentsView.KontragentsZamerCriteria"/>
-    <ParameterMap>
-      <PIMap Variable="ZamerName">
-        <TransientExpression><![CDATA[Zamername]]></TransientExpression>
-      </PIMap>
-    </ParameterMap>
   </ViewAccessor>
   <ListBinding
     Name="LOV_CurrId"
@@ -417,8 +407,7 @@ WHERE
     AliasName="KONTRAGNAME"
     Expression="KONTRAGNAME"
     SQLType="VARCHAR"
-    LOVName="LOV_Kontragname"
-    IsNotNull="true">
+    LOVName="LOV_Kontragname">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="150"/>
     </DesignTime>

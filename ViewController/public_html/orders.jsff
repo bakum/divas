@@ -1799,6 +1799,13 @@
                                                 </af:panelFormLayout>
                                             </af:dialog>
                                         </af:popup>
+                                        <af:popup childCreation="deferred" autoCancel="disabled"
+                                                  id="pCreateTrainOrder" contentDelivery="lazyUncached">
+                                            <af:dialog id="d7">
+                                                <af:region value="#{bindings.createkontragent1.regionModel}" id="r1"/>
+                                                <f:facet name="buttonBar"/>
+                                            </af:dialog>
+                                        </af:popup>
                                     </af:showDetailItem>
                                 </af:panelTabbed>
                             </f:facet>

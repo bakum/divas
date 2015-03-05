@@ -29,6 +29,8 @@
               StateValidation="false"/>
     <iterator Binds="OrdersTpNachisleniaView2" RangeSize="25" DataControl="AppModuleDataControl"
               id="OrdersTpNachisleniaView2Iterator" StateValidation="false"/>
+    <taskFlow id="createkontragent1" taskFlowId="/WEB-INF/create-kontragent.xml#create-kontragent" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
   </executables>
   <bindings>
     <tree IterBinding="OrdersView1Iterator" id="OrdersView1">

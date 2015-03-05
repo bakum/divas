@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="create-kontragent">
+    <default-activity>start</default-activity>
+    <transaction>
+      <requires-transaction/>
+    </transaction>
+    <managed-bean id="__11">
+      <managed-bean-name>new_order</managed-bean-name>
+      <managed-bean-class>ua.divas.view.NewOrderBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <task-flow-return id="ok">
+      <outcome>
+        <name>ok</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="cancel">
+      <outcome>
+        <name>cancel</name>
+        <rollback/>
+      </outcome>
+    </task-flow-return>
+    <view id="start">
+      <display-name>Основные реквизиты</display-name>
+      <page>/start.jsff</page>
+      <train-stop/>
+    </view>
+    <task-flow-call id="addKontrag">
+      <task-flow-reference>
+        <document>/WEB-INF/addKontrag.xml</document>
+        <id>addKontrag</id>
+      </task-flow-reference>
+      <return-value id="__13">
+        <name>KontragId</name>
+        <value>#{pageFlowScope.KontragId}</value>
+      </return-value>
+    </task-flow-call>
+    <train/>
+    <control-flow-rule id="__8">
+      <from-activity-id>start</from-activity-id>
+      <control-flow-case id="__12">
+        <from-outcome>addKontrag</from-outcome>
+        <to-activity-id>addKontrag</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__1">
+        <from-outcome>ok</from-outcome>
+        <to-activity-id>ok</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__2">
+        <from-outcome>cancel</from-outcome>
+        <to-activity-id>cancel</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

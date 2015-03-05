@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelGridLayout id="pgl1">
+        <af:gridRow height="100%" id="gr1">
+            <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
+                <!-- Content -->
+                <af:panelBox text="PanelBox1" id="pb1" type="flow">
+                    <f:facet name="toolbar"/>
+                    <af:trainButtonBar value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}"
+                                       id="tbb1"/>
+                    <af:panelHeader text="Контактная информация" id="ph1">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar"/>
+                        <f:facet name="toolbar">
+                            <af:toolbar id="t1">
+                                <af:button text="Сохранить" id="b1" action="ok">
+                                    <af:setPropertyListener from="#{bindings.KontragId.inputValue}"
+                                                            to="#{pageFlowScope.KontragId}" type="action"/>
+                                </af:button>
+                                <af:button text="Отменить" id="b2" action="cancel"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="legend"/>
+                        <f:facet name="info"/>
+                        <af:inputText value="#{bindings.KontragId.inputValue}" label="#{bindings.KontragId.hints.label}"
+                                      required="#{bindings.KontragId.hints.mandatory}"
+                                      columns="#{bindings.KontragId.hints.displayWidth}"
+                                      maximumLength="#{bindings.KontragId.hints.precision}"
+                                      shortDesc="#{bindings.KontragId.hints.tooltip}" id="it5">
+                            <f:validator binding="#{bindings.KontragId.validator}"/>
+                        </af:inputText>
+                        <af:panelFormLayout id="pfl1">
+                            <af:inputText value="#{bindings.Adress.inputValue}" label="#{bindings.Adress.hints.label}"
+                                          required="#{bindings.Adress.hints.mandatory}"
+                                          columns="#{bindings.Adress.hints.displayWidth}"
+                                          shortDesc="#{bindings.Adress.hints.tooltip}" id="it1" rows="4"/>
+                            <af:inputText value="#{bindings.Phone.inputValue}" label="#{bindings.Phone.hints.label}"
+                                          required="#{bindings.Phone.hints.mandatory}"
+                                          columns="#{bindings.Phone.hints.displayWidth}"
+                                          maximumLength="#{bindings.Phone.hints.precision}"
+                                          shortDesc="#{bindings.Phone.hints.tooltip}" id="it2">
+                                <f:validator binding="#{bindings.Phone.validator}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.Email.inputValue}" label="#{bindings.Email.hints.label}"
+                                          required="#{bindings.Email.hints.mandatory}"
+                                          columns="#{bindings.Email.hints.displayWidth}"
+                                          maximumLength="#{bindings.Email.hints.precision}"
+                                          shortDesc="#{bindings.Email.hints.tooltip}" id="it3">
+                                <f:validator binding="#{bindings.Email.validator}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.Editable.inputValue}"
+                                          label="#{bindings.Editable.hints.label}"
+                                          required="#{bindings.Editable.hints.mandatory}"
+                                          columns="#{bindings.Editable.hints.displayWidth}"
+                                          maximumLength="#{bindings.Editable.hints.precision}"
+                                          shortDesc="#{bindings.Editable.hints.tooltip}" id="it4">
+                                <f:validator binding="#{bindings.Editable.validator}"/>
+                                <af:convertNumber groupingUsed="false" pattern="#{bindings.Editable.format}"/>
+                            </af:inputText>
+                        </af:panelFormLayout>
+                    </af:panelHeader>
+                    <af:button actionListener="#{bindings.CreateInsert.execute}" text="Новый контакт"
+                               disabled="#{!bindings.CreateInsert.enabled}" id="b3"/>
+                </af:panelBox>
+            </af:gridCell>
+        </af:gridRow>
+    </af:panelGridLayout>
+</ui:composition>

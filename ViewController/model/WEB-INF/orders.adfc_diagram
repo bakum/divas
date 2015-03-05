@@ -17,8 +17,35 @@
       <property
          name="y">154.04688</property>
       <property
-         name="x">226.0</property>
-      <property
          name="pageFragment">true</property>
+      <property
+         name="x">226.0</property>
    </View>
+   <TaskFlowCall
+      id="TaskFlowCall7">
+      <property
+         name="taskFlowId">create-kontragent</property>
+      <property
+         name="activityId">create-kontragent</property>
+      <property
+         name="documentReference">/WEB-INF/create-kontragent.xml</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>create-kontragent&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">150.54688</property>
+      <property
+         name="x">405.44238</property>
+   </TaskFlowCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase8"
+      from="View2"
+      to="TaskFlowCall7">
+      <property
+         name="fromOutcome">addOrder</property>
+      <property
+         name="sdm:polyPoints">R50,267.0,154.0625,364.44238,150.5625,L50</property>
+   </ControlFlowCase>
 </SDM>

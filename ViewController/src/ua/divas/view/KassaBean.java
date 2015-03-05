@@ -1,5 +1,7 @@
 package ua.divas.view;
 
+import java.math.BigDecimal;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -118,6 +120,7 @@ public class KassaBean {
                 DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("OrdersView1Iterator");
                 RowSetIterator rsi = iter.getRowSetIterator();
                 Row row = rsi.findByKey(k, 1)[0];
+                //row.setAttribute("OEditable", new BigDecimal(1));
                 rsi.setCurrentRow(row);
             }
         } 

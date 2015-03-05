@@ -10,6 +10,19 @@
     <view id="order">
       <page>/orders.jsff</page>
     </view>
+    <task-flow-call id="create-kontragent">
+      <task-flow-reference>
+        <document>/WEB-INF/create-kontragent.xml</document>
+        <id>create-kontragent</id>
+      </task-flow-reference>
+    </task-flow-call>
+    <control-flow-rule id="__6">
+      <from-activity-id>order</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>addOrder</from-outcome>
+        <to-activity-id>create-kontragent</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
     <use-page-fragments/>
   </task-flow-definition>
 </adfc-config>

@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:pageTemplate viewId="/createcomtragTempl.jsf" id="pt1">
+        <f:facet name="body">
+            <af:panelHeader text="Основные реквизиты" id="ph1" type="flow">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <af:panelFormLayout id="pfl1">
+                    <af:panelGroupLayout id="pgl1" layout="horizontal">
+                        <af:inputText value="#{bindings.dataObject.inputValue}"
+                                      label="#{bindings.dataObject.hints.label}"
+                                      required="#{bindings.dataObject.hints.mandatory}"
+                                      columns="#{bindings.dataObject.hints.displayWidth}"
+                                      maximumLength="#{bindings.dataObject.hints.precision}"
+                                      shortDesc="#{bindings.dataObject.hints.tooltip}" id="it4">
+                            <f:validator binding="#{bindings.dataObject.validator}"/>
+                        </af:inputText>
+                        <af:link text="Новый контрагент" id="l1" action="addKontrag"/>
+                        <af:link text="link 1" id="l2" action="#{new_order.onNewOrder}"/>
+                    </af:panelGroupLayout>
+                </af:panelFormLayout>
+                <f:facet name="toolbar">
+                    <af:toolbar id="t1">
+                        <af:button text="Cохранить" id="b2" action="ok"/>
+                        <af:button text="Отмена" id="b1" action="cancel">
+                            <af:resetListener type="action"/>
+                        </af:button>
+                    </af:toolbar>
+                </f:facet>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelFormLayout id="pfl2">
+                    <af:inputText value="#{bindings.Id.inputValue}" label="#{bindings.Id.hints.label}"
+                                  required="#{bindings.Id.hints.mandatory}" columns="#{bindings.Id.hints.displayWidth}"
+                                  maximumLength="#{bindings.Id.hints.precision}"
+                                  shortDesc="#{bindings.Id.hints.tooltip}" id="it1">
+                        <f:validator binding="#{bindings.Id.validator}"/>
+                    </af:inputText>
+                    <af:inputDate value="#{bindings.Dat.inputValue}" label="#{bindings.Dat.hints.label}"
+                                  required="#{bindings.Dat.hints.mandatory}"
+                                  columns="#{bindings.Dat.hints.displayWidth}" shortDesc="#{bindings.Dat.hints.tooltip}"
+                                  id="id1">
+                        <f:validator binding="#{bindings.Dat.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.Dat.format}"/>
+                    </af:inputDate>
+                    <af:inputText value="#{bindings.KontragId.inputValue}" label="#{bindings.KontragId.hints.label}"
+                                  required="#{bindings.KontragId.hints.mandatory}"
+                                  columns="#{bindings.KontragId.hints.displayWidth}"
+                                  maximumLength="#{bindings.KontragId.hints.precision}"
+                                  shortDesc="#{bindings.KontragId.hints.tooltip}" id="it5">
+                        <f:validator binding="#{bindings.KontragId.validator}"/>
+                    </af:inputText>
+                    <af:inputListOfValues id="kontragnameId"
+                                          popupTitle="Search and Select: #{bindings.Kontragname.hints.label}"
+                                          value="#{bindings.Kontragname.inputValue}"
+                                          label="#{bindings.Kontragname.hints.label}"
+                                          model="#{bindings.Kontragname.listOfValuesModel}"
+                                          columns="#{bindings.Kontragname.hints.displayWidth}"
+                                          shortDesc="#{bindings.Kontragname.hints.tooltip}"
+                                          partialTriggers="it5" autoSubmit="true" immediate="true"
+                                          binding="#{new_order.kontrag}">
+                        <f:validator binding="#{bindings.Kontragname.validator}"/>
+                    </af:inputListOfValues>
+                    <af:inputText value="#{bindings.Discription.inputValue}" label="#{bindings.Discription.hints.label}"
+                                  required="#{bindings.Discription.hints.mandatory}"
+                                  columns="#{bindings.Discription.hints.displayWidth}"
+                                  maximumLength="#{bindings.Discription.hints.precision}"
+                                  shortDesc="#{bindings.Discription.hints.tooltip}" id="it2">
+                        <f:validator binding="#{bindings.Discription.validator}"/>
+                    </af:inputText>
+                    <af:selectOneChoice value="#{bindings.StatusId.inputValue}" label="#{bindings.StatusId.label}"
+                                        required="#{bindings.StatusId.hints.mandatory}"
+                                        shortDesc="#{bindings.StatusId.hints.tooltip}" id="soc1">
+                        <f:selectItems value="#{bindings.StatusId.items}" id="si1"/>
+                        <f:validator binding="#{bindings.StatusId.validator}"/>
+                    </af:selectOneChoice>
+                    <af:inputDate value="#{bindings.DatComplete.inputValue}" label="#{bindings.DatComplete.hints.label}"
+                                  required="#{bindings.DatComplete.hints.mandatory}"
+                                  columns="#{bindings.DatComplete.hints.displayWidth}"
+                                  shortDesc="#{bindings.DatComplete.hints.tooltip}" id="id2">
+                        <f:validator binding="#{bindings.DatComplete.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DatComplete.format}"/>
+                    </af:inputDate>
+                    <af:inputDate value="#{bindings.DatZam.inputValue}" label="#{bindings.DatZam.hints.label}"
+                                  required="#{bindings.DatZam.hints.mandatory}"
+                                  columns="#{bindings.DatZam.hints.displayWidth}"
+                                  shortDesc="#{bindings.DatZam.hints.tooltip}" id="id3">
+                        <f:validator binding="#{bindings.DatZam.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DatZam.format}"/>
+                    </af:inputDate>
+                    <af:inputText value="#{bindings.SummPlan.inputValue}" label="#{bindings.SummPlan.hints.label}"
+                                  columns="#{bindings.SummPlan.hints.displayWidth}"
+                                  maximumLength="#{bindings.SummPlan.hints.precision}"
+                                  shortDesc="#{bindings.SummPlan.hints.tooltip}" id="it3">
+                        <f:validator binding="#{bindings.SummPlan.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.SummPlan.format}"/>
+                    </af:inputText>
+                </af:panelFormLayout>
+            </af:panelHeader>
+        </f:facet>
+    </af:pageTemplate>
+</ui:composition>

@@ -55,11 +55,6 @@
         <Item Value="OEditable"/>
       </AttrNames>
     </attributeValues>
-    <attributeValues IterBinding="OrdersView1Iterator" id="DatComplete">
-      <AttrNames>
-        <Item Value="DatComplete"/>
-      </AttrNames>
-    </attributeValues>
     <attributeValues IterBinding="OrdersView1Iterator" id="DatZam">
       <AttrNames>
         <Item Value="DatZam"/>
@@ -70,9 +65,9 @@
         <Item Value="SummPlan"/>
       </AttrNames>
     </attributeValues>
-    <attributeValues IterBinding="OrdersView1Iterator" id="TotalSumm">
+    <attributeValues IterBinding="OrdersView1Iterator" id="DatComplete">
       <AttrNames>
-        <Item Value="TotalSumm"/>
+        <Item Value="DatComplete"/>
       </AttrNames>
     </attributeValues>
   </bindings>
