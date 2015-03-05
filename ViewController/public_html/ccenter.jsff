@@ -45,7 +45,7 @@
                                                       queryListener="#{bindings.KontragentsView1Query.processQuery}"
                                                       filterVisible="true" varStatus="vs" id="t1"
                                                       blockRowNavigationOnError="always" editingMode="clickToEdit"
-                                                      binding="#{filter.mainTable}" partialTriggers="b5 ::b6 b7"
+                                                      binding="#{filter.mainTable}" partialTriggers="::b6 b5 b7 ::p1"
                                                       rowSelection="#{bindings.Editable.inputValue == 1 ? 'none' : 'single'}"
                                                       selectionListener="#{filter.selectedListener}"
                                                       scrollPolicy="page">
@@ -634,6 +634,8 @@
                                                     </af:panelAccordion>
                                                 </af:dialog>
                                             </af:popup>
+                                            <af:poll id="p1" rendered="#{!bindings.Commit.enabled}"
+                                                     pollListener="#{filter.onPoll}" interval="10000"/>
                                         </af:panelBox>
                                     </f:facet>
                                     <f:facet name="start">

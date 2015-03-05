@@ -38,6 +38,7 @@ import oracle.jbo.uicli.binding.JUCtrlHierBinding;
 
 import oracle.jbo.uicli.binding.JUCtrlHierNodeBinding;
 
+import org.apache.myfaces.trinidad.event.PollEvent;
 import org.apache.myfaces.trinidad.event.RowDisclosureEvent;
 import org.apache.myfaces.trinidad.event.SelectionEvent;
 import org.apache.myfaces.trinidad.model.CollectionModel;
@@ -488,5 +489,11 @@ public class FilterBeans {
         }
 
         return DnDAction.MOVE;
+    }
+
+    public void onPoll(PollEvent pollEvent) {
+        DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = binding.findIteratorBinding("KontragentsView1Iterator");
+        it.executeQuery();
     }
 }

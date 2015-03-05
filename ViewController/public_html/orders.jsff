@@ -46,7 +46,7 @@
                                                       queryListener="#{bindings.OrdersView1Query.processQuery}"
                                                       filterVisible="true" varStatus="vs" id="t1"
                                                       editingMode="clickToEdit" scrollPolicy="page"
-                                                      partialTriggers="::b5 ::b9" binding="#{orders.mainTable}">
+                                                      partialTriggers="::b5 ::b9 ::p1" binding="#{orders.mainTable}">
                                                 <af:column id="c54" width="30">
                                                     <af:image id="i1"
                                                               source="#{row.Posted==1 ? '/img/icon_commit.png' :  '/img/document.png'}"/>
@@ -428,6 +428,8 @@
                                                     </af:popup>
                                                 </f:facet>
                                             </af:table>
+                                            <af:poll id="p1" pollListener="#{orders.onPollListener}"
+                                                     rendered="#{!bindings.Commit.enabled}"/>
                                         </af:panelBox>
                                         <af:popup childCreation="deferred" autoCancel="disabled" id="pEdit"
                                                   contentDelivery="lazyUncached" resetEditableValues="whenCanceled"

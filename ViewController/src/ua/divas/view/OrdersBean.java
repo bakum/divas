@@ -57,6 +57,7 @@ import oracle.jbo.ViewObject;
 import oracle.jbo.uicli.binding.JUCtrlHierBinding;
 
 import org.apache.myfaces.trinidad.event.AttributeChangeEvent;
+import org.apache.myfaces.trinidad.event.PollEvent;
 import org.apache.myfaces.trinidad.model.CollectionModel;
 import org.apache.myfaces.trinidad.model.RowKeySet;
 
@@ -630,5 +631,11 @@ public class OrdersBean {
             ob.execute();
             refresh();
         }
+    }
+
+    public void onPollListener(PollEvent pollEvent) {
+        DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = binding.findIteratorBinding("OrdersView1Iterator");
+        it.executeQuery();
     }
 }
