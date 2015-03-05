@@ -47,6 +47,17 @@
                                                 <af:region value="#{bindings.kassaconfig1.regionModel}" id="r9"/>
                                             </af:showDetailItem>
                                             <!--В доступе отказано-->
+                                            <af:showDetailItem text="Взаиморасчеты" id="sdi12"
+                                                               stretchChildren="first">
+                                                <af:panelTabbed id="pt3">
+                                                    <af:showDetailItem text="Замерщики" id="sdi14"
+                                                                       stretchChildren="first"
+                                                                       rendered="#{securityContext.taskflowViewable['/WEB-INF/zamer_debt-config.xml#zamer_debt-config']}">
+                                                        <af:region value="#{bindings.zamer_debtconfig1.regionModel}"
+                                                                   id="r10"/>
+                                                    </af:showDetailItem>
+                                                </af:panelTabbed>
+                                            </af:showDetailItem>
                                         </af:panelTabbed>
                                     </af:showDetailItem>
                                     <af:showDetailItem text="Настройки" id="sdi7" stretchChildren="first"

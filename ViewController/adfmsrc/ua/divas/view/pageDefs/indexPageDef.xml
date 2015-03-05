@@ -22,6 +22,8 @@
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
     <taskFlow id="kassaconfig1" taskFlowId="/WEB-INF/kassa-config.xml#kassa-config" activation="deferred"
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="zamer_debtconfig1" taskFlowId="/WEB-INF/zamer_debt-config.xml#zamer_debt-config" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
   </executables>
   <bindings/>
 </pageDefinition>

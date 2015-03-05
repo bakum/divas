@@ -28,6 +28,7 @@
     <page path="/WEB-INF/addKontr.xml#addKontr@CreateInsert"
           usageId="ua_divas_view_addKontr_addKontr_CreateInsertPageDef"/>
     <page path="/addKontragent.jsf" usageId="ua_divas_view_addKontragentPageDef"/>
+    <page path="/zamer_debt.jsff" usageId="ua_divas_view_zamer_debtPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="ua_divas_view_indexPageDef" path="ua.divas.view.pageDefs.indexPageDef"/>
@@ -49,6 +50,7 @@
     <page id="ua_divas_view_addKontr_addKontr_CreateInsertPageDef"
           path="ua.divas.view.pageDefs.addKontr_addKontr_CreateInsertPageDef"/>
     <page id="ua_divas_view_addKontragentPageDef" path="ua.divas.view.pageDefs.addKontragentPageDef"/>
+    <page id="ua_divas_view_zamer_debtPageDef" path="ua.divas.view.pageDefs.zamer_debtPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <dc id="DataPackage" path="ua.divas.view.DataPackage"/>

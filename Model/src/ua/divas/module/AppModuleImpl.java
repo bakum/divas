@@ -2892,5 +2892,62 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getVwKassaOrdersFkLink1() {
         return (ViewLinkImpl) findViewLink("VwKassaOrdersFkLink1");
     }
+
+    /**
+     * Container's getter for VwZamerMoves1.
+     * @return VwZamerMoves1
+     */
+    public ViewObjectImpl getVwZamerMoves1() {
+        return (ViewObjectImpl) findViewObject("VwZamerMoves1");
+    }
+
+    /**
+     * Container's getter for VwBuyerMoves1.
+     * @return VwBuyerMoves1
+     */
+    public ViewObjectImpl getVwBuyerMoves1() {
+        return (ViewObjectImpl) findViewObject("VwBuyerMoves1");
+    }
+
+    /**
+     * Container's getter for VwBuyerMoves2.
+     * @return VwBuyerMoves2
+     */
+    public ViewObjectImpl getVwBuyerMoves2() {
+        return (ViewObjectImpl) findViewObject("VwBuyerMoves2");
+    }
+
+    /**
+     * Container's getter for VwBuyerMovesKontragFkLink1.
+     * @return VwBuyerMovesKontragFkLink1
+     */
+    public ViewLinkImpl getVwBuyerMovesKontragFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwBuyerMovesKontragFkLink1");
+    }
+
+
+    /**
+     * Container's getter for VwKontragZamer1.
+     * @return VwKontragZamer1
+     */
+    public ViewObjectImpl getVwKontragZamer1() {
+        return (ViewObjectImpl) findViewObject("VwKontragZamer1");
+    }
+
+    /**
+     * Container's getter for VwZamerMoves2.
+     * @return VwZamerMoves2
+     */
+    public ViewObjectImpl getVwZamerMoves2() {
+        return (ViewObjectImpl) findViewObject("VwZamerMoves2");
+    }
+
+    /**
+     * Container's getter for VwKontragZamerZamerMovesFkLink1.
+     * @return VwKontragZamerZamerMovesFkLink1
+     */
+    public ViewLinkImpl getVwKontragZamerZamerMovesFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwKontragZamerZamerMovesFkLink1");
+    }
 }
 

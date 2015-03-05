@@ -16,7 +16,12 @@
   <Containee
     Name="model"
     PackageName="ua.divas.model"
-    ObjectType="JboPackage"/>
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_EO" Value="true"/>
+      <Attr Name="_AS" Value="true"/>
+    </DesignTime>
+  </Containee>
   <Containee
     Name="module"
     PackageName="ua.divas.module"

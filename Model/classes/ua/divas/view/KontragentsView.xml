@@ -307,6 +307,19 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[OrdersView.sum("TotalSumOplaty != null ? TotalSumOplaty : 0")]]></TransientExpression>
   </ViewAttribute>
+  <ViewAttribute
+    Name="DebtBuyer"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[VwBuyerMoves.sum("Summ != null ? Summ : 0")]]></TransientExpression>
+  </ViewAttribute>
   <ViewCriteria
     Name="KontragentsGroup"
     ViewObjectName="ua.divas.view.KontragentsView"
@@ -701,6 +714,11 @@ order by Kontragents.FULLNAME]]></SQLQuery>
   <ViewLinkAccessor
     Name="OrdersTpOplatyView"
     ViewLink="ua.divas.view.OrdersTpOplatyZamerFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="VwBuyerMoves"
+    ViewLink="ua.divas.view.VwBuyerMovesKontragFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <ClientInterface

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelGridLayout id="pgl1">
+        <af:gridRow height="100%" id="gr1">
+            <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
+                <!-- Content -->
+                <af:panelCollection id="pc1">
+                    <f:facet name="menus"/>
+                    <f:facet name="toolbar"/>
+                    <af:treeTable value="#{bindings.VwKontragZamer1.treeModel}" var="node"
+                                  selectionListener="#{bindings.VwKontragZamer1.treeModel.makeCurrent}"
+                                  rowSelection="single" id="tt1">
+                        <f:facet name="nodeStamp">
+                            <af:column id="c1" headerText="Наименование" width="250" inlineStyle="font-weight:bold;">
+                                <af:outputText value="#{node.Fullname}" id="ot1"/>
+                            </af:column>
+                        </f:facet>
+                        <f:facet name="pathStamp">
+                            <af:outputText value="#{node}" id="ot2"/>
+                        </f:facet>
+                        <af:column id="c2" width="200" headerText="Счет">
+                            <af:outputText value="#{node.bindings.Code}" id="ot3"/>
+                        </af:column>
+                        <af:column id="c3" headerText="Задолженность (нам должен)">
+                            <af:outputText value="#{node.DebtZamer}" id="ot5" inlineStyle="font-weight:bold;"/>
+                            <af:outputText value="#{node.bindings.Summ}" id="ot4"/>
+                        </af:column>
+                    </af:treeTable>
+                    <f:facet name="statusbar"/>
+                </af:panelCollection>
+            </af:gridCell>
+        </af:gridRow>
+    </af:panelGridLayout>
+</ui:composition>

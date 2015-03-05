@@ -63,6 +63,7 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         UserId,
         TotalSumm,
         TotalOplat,
+        DebtBuyer,
         KontragentsView,
         CompaignsDetailsView,
         ContactDetailsView,
@@ -76,6 +77,7 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         OrdersTpRashodyView,
         OrdersTpNachisleniaView,
         OrdersTpOplatyView,
+        VwBuyerMoves,
         KontragentsView1,
         UsersView1;
         static AttributesEnum[] vals = null;
@@ -122,6 +124,7 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
     public static final int USERID = AttributesEnum.UserId.index();
     public static final int TOTALSUMM = AttributesEnum.TotalSumm.index();
     public static final int TOTALOPLAT = AttributesEnum.TotalOplat.index();
+    public static final int DEBTBUYER = AttributesEnum.DebtBuyer.index();
     public static final int KONTRAGENTSVIEW = AttributesEnum.KontragentsView.index();
     public static final int COMPAIGNSDETAILSVIEW = AttributesEnum.CompaignsDetailsView.index();
     public static final int CONTACTDETAILSVIEW = AttributesEnum.ContactDetailsView.index();
@@ -135,6 +138,7 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
     public static final int ORDERSTPRASHODYVIEW = AttributesEnum.OrdersTpRashodyView.index();
     public static final int ORDERSTPNACHISLENIAVIEW = AttributesEnum.OrdersTpNachisleniaView.index();
     public static final int ORDERSTPOPLATYVIEW = AttributesEnum.OrdersTpOplatyView.index();
+    public static final int VWBUYERMOVES = AttributesEnum.VwBuyerMoves.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
 
@@ -428,6 +432,15 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
 
 
     /**
+     * Gets the attribute value for the calculated attribute DebtBuyer.
+     * @return the DebtBuyer
+     */
+    public Number getDebtBuyer() {
+        return (Number) getAttributeInternal(DEBTBUYER);
+    }
+
+
+    /**
      * Gets the associated <code>RowIterator</code> using master-detail link KontragentsView.
      */
     public RowIterator getKontragentsView() {
@@ -535,6 +548,14 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
     public RowIterator getOrdersTpOplatyView() {
         return (RowIterator) getAttributeInternal(ORDERSTPOPLATYVIEW);
     }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link VwBuyerMoves.
+     */
+    public RowIterator getVwBuyerMoves() {
+        return (RowIterator) getAttributeInternal(VWBUYERMOVES);
+    }
+
 
     /**
      * Gets the view accessor <code>RowSet</code> KontragentsView1.
