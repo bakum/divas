@@ -85,6 +85,7 @@
           <Item Value="PassWd"/>
           <Item Value="IsAdmin" Binds="IsAdmin"/>
           <Item Value="UEditable"/>
+          <Item Value="IsZamer"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

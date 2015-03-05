@@ -161,6 +161,12 @@
                                                                   pattern="#{bindings.UsersView1.hints.UEditable.format}"/>
                                             </af:inputText>
                                         </af:column>
+                                        <af:column headerText="#{bindings.UsersView1.hints.IsZamer.label}" id="c10">
+                                            <af:selectBooleanCheckbox value="#{row.bindings.IsZamer.inputValue}"
+                                                                      label="#{row.bindings.IsZamer.label}"
+                                                                      shortDesc="#{bindings.UsersView1.hints.IsZamer.tooltip}"
+                                                                      id="sbc5"/>
+                                        </af:column>
                                     </af:table>
                                 </af:panelBox>
                                 <af:popup childCreation="deferred" id="pCreateInsert"
