@@ -176,6 +176,13 @@
     AssociationOtherEnd="ua.divas.model.OrdersTpRashodyFk3Assoc.Zatraty"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="OtherZatratyTabPartZatraty"
+    Association="ua.divas.model.OtherZatratyTabPartZaFk2Assoc"
+    AssociationEnd="ua.divas.model.OtherZatratyTabPartZaFk2Assoc.OtherZatratyTabPartZatraty"
+    AssociationOtherEnd="ua.divas.model.OtherZatratyTabPartZaFk2Assoc.Zatraty"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="ZatratyPk"
     PrimaryKey="true">

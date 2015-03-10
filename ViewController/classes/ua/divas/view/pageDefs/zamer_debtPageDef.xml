@@ -25,6 +25,8 @@
           <Item Value="Summ"/>
           <Item Value="Period"/>
           <Item Value="Code"/>
+          <Item Value="SummPrihod"/>
+          <Item Value="SummRashod"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

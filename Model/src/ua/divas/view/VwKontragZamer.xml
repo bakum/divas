@@ -258,7 +258,7 @@ FROM
     AliasName="VIEW_ATTR"
     SQLType="NUMERIC">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[VwZamerMoves.sum("Summ != null ? Summ : 0")]]></TransientExpression>
+    <TransientExpression><![CDATA[VwZamerMoves.sum("Summ != null ? (-1)*Summ : 0")]]></TransientExpression>
   </ViewAttribute>
   <ViewLinkAccessor
     Name="VwZamerMoves"

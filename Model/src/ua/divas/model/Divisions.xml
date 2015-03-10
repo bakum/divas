@@ -231,6 +231,13 @@
     AssociationOtherEnd="ua.divas.model.DivisionMainUserFkAcc.Divisions"
     Type="ua.divas.model.UsersImpl"
     IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="OtherZatraty"
+    Association="ua.divas.model.OtherZatratyFk1Assoc"
+    AssociationEnd="ua.divas.model.OtherZatratyFk1Assoc.OtherZatraty"
+    AssociationOtherEnd="ua.divas.model.OtherZatratyFk1Assoc.Divisions"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="DivisionsPk"
     PrimaryKey="true">

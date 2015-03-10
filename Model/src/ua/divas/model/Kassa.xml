@@ -264,6 +264,13 @@
     AssociationOtherEnd="ua.divas.model.UserSettingsKassaFk1Assoc.Kassa"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="OtherZatraty"
+    Association="ua.divas.model.OtherZatratyFk4Assoc"
+    AssociationEnd="ua.divas.model.OtherZatratyFk4Assoc.OtherZatraty"
+    AssociationOtherEnd="ua.divas.model.OtherZatratyFk4Assoc.Kassa"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="KassaDivisionIdCheck">
     <DesignTime>

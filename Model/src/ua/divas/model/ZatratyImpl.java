@@ -41,7 +41,8 @@ public class ZatratyImpl extends DivasEntity {
         Predefined,
         Zatraty,
         ParentIdZatraty,
-        OrdersTpRashody;
+        OrdersTpRashody,
+        OtherZatratyTabPartZatraty;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -64,6 +65,8 @@ public class ZatratyImpl extends DivasEntity {
             return vals;
         }
     }
+
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int ISGROUP = AttributesEnum.IsGroup.index();
     public static final int PARENTID = AttributesEnum.ParentId.index();
@@ -74,12 +77,21 @@ public class ZatratyImpl extends DivasEntity {
     public static final int ZATRATY = AttributesEnum.Zatraty.index();
     public static final int PARENTIDZATRATY = AttributesEnum.ParentIdZatraty.index();
     public static final int ORDERSTPRASHODY = AttributesEnum.OrdersTpRashody.index();
+    public static final int OTHERZATRATYTABPARTZATRATY = AttributesEnum.OtherZatratyTabPartZatraty.index();
 
     /**
      * This is the default constructor (do not remove).
      */
     public ZatratyImpl() {
     }
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("ua.divas.model.Zatraty");
+    }
+
 
     /**
      * Gets the attribute value for Id, using the alias name Id.
@@ -222,6 +234,13 @@ public class ZatratyImpl extends DivasEntity {
     }
 
     /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getOtherZatratyTabPartZatraty() {
+        return (RowIterator) getAttributeInternal(OTHERZATRATYTABPARTZATRATY);
+    }
+
+    /**
      * @param id key constituent
 
      * @return a Key object based on given key constituents.
@@ -230,11 +249,6 @@ public class ZatratyImpl extends DivasEntity {
         return new Key(new Object[] { id });
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("ua.divas.model.Zatraty");
-    }
+
 }
 

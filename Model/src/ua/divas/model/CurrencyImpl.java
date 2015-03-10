@@ -48,7 +48,8 @@ public class CurrencyImpl extends DivasEntity {
         Moves1,
         Orders,
         RegRates,
-        UserSettings;
+        UserSettings,
+        OtherZatraty;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -72,6 +73,7 @@ public class CurrencyImpl extends DivasEntity {
         }
     }
 
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int ISGROUP = AttributesEnum.IsGroup.index();
     public static final int PARENTID = AttributesEnum.ParentId.index();
@@ -89,6 +91,7 @@ public class CurrencyImpl extends DivasEntity {
     public static final int ORDERS = AttributesEnum.Orders.index();
     public static final int REGRATES = AttributesEnum.RegRates.index();
     public static final int USERSETTINGS = AttributesEnum.UserSettings.index();
+    public static final int OTHERZATRATY = AttributesEnum.OtherZatraty.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -102,6 +105,7 @@ public class CurrencyImpl extends DivasEntity {
     public static synchronized EntityDefImpl getDefinitionObject() {
         return EntityDefImpl.findDefObject("ua.divas.model.Currency");
     }
+
 
     /**
      * Gets the attribute value for Id, using the alias name Id.
@@ -317,6 +321,13 @@ public class CurrencyImpl extends DivasEntity {
      */
     public RowIterator getUserSettings() {
         return (RowIterator) getAttributeInternal(USERSETTINGS);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getOtherZatraty() {
+        return (RowIterator) getAttributeInternal(OTHERZATRATY);
     }
 
     /**

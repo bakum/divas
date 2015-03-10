@@ -271,6 +271,13 @@
     AssociationOtherEnd="ua.divas.model.UserSettingsCurrencyFk1Assoc.Currency"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="OtherZatraty"
+    Association="ua.divas.model.OtherZatratyFk3Assoc"
+    AssociationEnd="ua.divas.model.OtherZatratyFk3Assoc.OtherZatraty"
+    AssociationOtherEnd="ua.divas.model.OtherZatratyFk3Assoc.Currency"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="CurrencyChk1">
     <DesignTime>

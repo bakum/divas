@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="other_zatr-config">
+    <default-activity>other_zatr</default-activity>
+    <view id="other_zatr">
+      <page>/other_zatr.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

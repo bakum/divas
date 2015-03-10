@@ -48,7 +48,8 @@ public class KassaImpl extends DivasEntity {
         Divisions,
         Firms,
         Orders,
-        UserSettings;
+        UserSettings,
+        OtherZatraty;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -90,6 +91,7 @@ public class KassaImpl extends DivasEntity {
     public static final int FIRMS = AttributesEnum.Firms.index();
     public static final int ORDERS = AttributesEnum.Orders.index();
     public static final int USERSETTINGS = AttributesEnum.UserSettings.index();
+    public static final int OTHERZATRATY = AttributesEnum.OtherZatraty.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -340,6 +342,13 @@ public class KassaImpl extends DivasEntity {
      */
     public RowIterator getUserSettings() {
         return (RowIterator) getAttributeInternal(USERSETTINGS);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getOtherZatraty() {
+        return (RowIterator) getAttributeInternal(OTHERZATRATY);
     }
 
     /**

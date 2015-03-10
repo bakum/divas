@@ -158,6 +158,11 @@ FROM  USERS Users]]></SQLQuery>
     ViewLink="ua.divas.view.DivisionMainUserFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="OtherZatratyView"
+    ViewLink="ua.divas.view.OtherZatratyFk2Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ClientInterface
     Name="__clientInterface">
     <Method

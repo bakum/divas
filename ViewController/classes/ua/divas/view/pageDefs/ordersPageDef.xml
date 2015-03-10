@@ -25,8 +25,7 @@
     <iterator Binds="OrdersTpRashodyView4" RangeSize="25" DataControl="AppModuleDataControl"
               id="OrdersTpRashodyView4Iterator" StateValidation="false"/>
     <iterator Binds="VwOrdersMoves2" RangeSize="25" DataControl="AppModuleDataControl" id="VwOrdersMoves2Iterator"/>
-    <iterator Binds="ZatratyView1" RangeSize="25" DataControl="AppModuleDataControl" id="ZatratyView1Iterator"
-              StateValidation="false"/>
+    <iterator Binds="ZatratyView1" RangeSize="25" DataControl="AppModuleDataControl" id="ZatratyView1Iterator"/>
     <iterator Binds="OrdersTpNachisleniaView2" RangeSize="25" DataControl="AppModuleDataControl"
               id="OrdersTpNachisleniaView2Iterator" StateValidation="false"/>
     <taskFlow id="createkontragent1" taskFlowId="/WEB-INF/create-kontragent.xml#create-kontragent" activation="deferred"

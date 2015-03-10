@@ -24,6 +24,10 @@
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
     <taskFlow id="zamer_debtconfig1" taskFlowId="/WEB-INF/zamer_debt-config.xml#zamer_debt-config" activation="deferred"
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="buyer_debtconfig1" taskFlowId="/WEB-INF/buyer_debt-config.xml#buyer_debt-config" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="other_zatrconfig1" taskFlowId="/WEB-INF/other_zatr-config.xml#other_zatr-config" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
   </executables>
   <bindings/>
 </pageDefinition>

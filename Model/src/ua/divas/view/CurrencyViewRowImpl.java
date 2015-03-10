@@ -19,6 +19,7 @@ import ua.divas.model.CurrencyImpl;
 // ---------------------------------------------------------------------
 public class CurrencyViewRowImpl extends ViewRowImpl {
 
+
     public static final int ENTITY_CURRENCY = 0;
 
     @Override
@@ -59,7 +60,8 @@ public class CurrencyViewRowImpl extends ViewRowImpl {
         OrdersView,
         RegRatesView,
         UserSettingsView,
-        OrderZamerView;
+        OrderZamerView,
+        OtherZatratyView;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -84,6 +86,7 @@ public class CurrencyViewRowImpl extends ViewRowImpl {
         }
     }
 
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int ISGROUP = AttributesEnum.IsGroup.index();
     public static final int PARENTID = AttributesEnum.ParentId.index();
@@ -103,6 +106,7 @@ public class CurrencyViewRowImpl extends ViewRowImpl {
     public static final int REGRATESVIEW = AttributesEnum.RegRatesView.index();
     public static final int USERSETTINGSVIEW = AttributesEnum.UserSettingsView.index();
     public static final int ORDERZAMERVIEW = AttributesEnum.OrderZamerView.index();
+    public static final int OTHERZATRATYVIEW = AttributesEnum.OtherZatratyView.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -355,6 +359,13 @@ public class CurrencyViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getOrderZamerView() {
         return (RowIterator) getAttributeInternal(ORDERZAMERVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link OtherZatratyView.
+     */
+    public RowIterator getOtherZatratyView() {
+        return (RowIterator) getAttributeInternal(OTHERZATRATYVIEW);
     }
 }
 

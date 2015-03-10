@@ -25,6 +25,7 @@ import ua.divas.view.OrderZamerViewImpl;
 import ua.divas.view.OrdersTpOplatyViewImpl;
 import ua.divas.view.OrdersTpUslugiViewImpl;
 import ua.divas.view.OrdersViewImpl;
+import ua.divas.view.OtherZatratyViewImpl;
 import ua.divas.view.UserSettingsViewImpl;
 import ua.divas.view.UsersViewImpl;
 import ua.divas.view.ZatratyViewImpl;
@@ -2948,6 +2949,118 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getVwKontragZamerZamerMovesFkLink1() {
         return (ViewLinkImpl) findViewLink("VwKontragZamerZamerMovesFkLink1");
+    }
+
+    /**
+     * Container's getter for OtherZatratyView1.
+     * @return OtherZatratyView1
+     */
+    public OtherZatratyViewImpl getOtherZatratyView1() {
+        return (OtherZatratyViewImpl) findViewObject("OtherZatratyView1");
+    }
+
+    /**
+     * Container's getter for OtherZatratyTabPartZatratyView1.
+     * @return OtherZatratyTabPartZatratyView1
+     */
+    public ViewObjectImpl getOtherZatratyTabPartZatratyView1() {
+        return (ViewObjectImpl) findViewObject("OtherZatratyTabPartZatratyView1");
+    }
+
+    /**
+     * Container's getter for OtherZatratyTabPartZatratyView2.
+     * @return OtherZatratyTabPartZatratyView2
+     */
+    public ViewObjectImpl getOtherZatratyTabPartZatratyView2() {
+        return (ViewObjectImpl) findViewObject("OtherZatratyTabPartZatratyView2");
+    }
+
+    /**
+     * Container's getter for OtherZatratyTabPartZaFk1Link1.
+     * @return OtherZatratyTabPartZaFk1Link1
+     */
+    public ViewLinkImpl getOtherZatratyTabPartZaFk1Link1() {
+        return (ViewLinkImpl) findViewLink("OtherZatratyTabPartZaFk1Link1");
+    }
+
+    /**
+     * Container's getter for OtherZatratyView2.
+     * @return OtherZatratyView2
+     */
+    public OtherZatratyViewImpl getOtherZatratyView2() {
+        return (OtherZatratyViewImpl) findViewObject("OtherZatratyView2");
+    }
+
+    /**
+     * Container's getter for OtherZatratyFk3Link1.
+     * @return OtherZatratyFk3Link1
+     */
+    public ViewLinkImpl getOtherZatratyFk3Link1() {
+        return (ViewLinkImpl) findViewLink("OtherZatratyFk3Link1");
+    }
+
+    /**
+     * Container's getter for OtherZatratyView3.
+     * @return OtherZatratyView3
+     */
+    public OtherZatratyViewImpl getOtherZatratyView3() {
+        return (OtherZatratyViewImpl) findViewObject("OtherZatratyView3");
+    }
+
+    /**
+     * Container's getter for OtherZatratyFk4Link1.
+     * @return OtherZatratyFk4Link1
+     */
+    public ViewLinkImpl getOtherZatratyFk4Link1() {
+        return (ViewLinkImpl) findViewLink("OtherZatratyFk4Link1");
+    }
+
+    /**
+     * Container's getter for OtherZatratyView4.
+     * @return OtherZatratyView4
+     */
+    public OtherZatratyViewImpl getOtherZatratyView4() {
+        return (OtherZatratyViewImpl) findViewObject("OtherZatratyView4");
+    }
+
+    /**
+     * Container's getter for OtherZatratyFk2Link1.
+     * @return OtherZatratyFk2Link1
+     */
+    public ViewLinkImpl getOtherZatratyFk2Link1() {
+        return (ViewLinkImpl) findViewLink("OtherZatratyFk2Link1");
+    }
+
+    /**
+     * Container's getter for OtherZatratyView5.
+     * @return OtherZatratyView5
+     */
+    public OtherZatratyViewImpl getOtherZatratyView5() {
+        return (OtherZatratyViewImpl) findViewObject("OtherZatratyView5");
+    }
+
+    /**
+     * Container's getter for OtherZatratyFk1Link1.
+     * @return OtherZatratyFk1Link1
+     */
+    public ViewLinkImpl getOtherZatratyFk1Link1() {
+        return (ViewLinkImpl) findViewLink("OtherZatratyFk1Link1");
+    }
+
+    /**
+     * Container's getter for OtherZatratyTabPartZatratyView3.
+     * @return OtherZatratyTabPartZatratyView3
+     */
+    public ViewObjectImpl getOtherZatratyTabPartZatratyView3() {
+        return (ViewObjectImpl) findViewObject("OtherZatratyTabPartZatratyView3");
+    }
+
+    /**
+     * Container's getter for OtherZatratyTabPartZaFk2Link1.
+     * @return OtherZatratyTabPartZaFk2Link1
+     */
+    public ViewLinkImpl getOtherZatratyTabPartZaFk2Link1() {
+        return (ViewLinkImpl) findViewLink("OtherZatratyTabPartZaFk2Link1");
     }
 }
 

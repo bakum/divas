@@ -22,9 +22,14 @@
                         <af:column id="c2" width="200" headerText="Счет">
                             <af:outputText value="#{node.bindings.Code}" id="ot3"/>
                         </af:column>
+                        <af:column id="c4" headerText="Приход">
+                            <af:outputText value="#{node.bindings.SummPrihod}" id="ot6"/>
+                        </af:column>
+                        <af:column id="c5" headerText="Расход">
+                            <af:outputText value="#{node.bindings.SummRashod}" id="ot7"/>
+                        </af:column>
                         <af:column id="c3" headerText="Задолженность (нам должен)">
                             <af:outputText value="#{node.DebtZamer}" id="ot5" inlineStyle="font-weight:bold;"/>
-                            <af:outputText value="#{node.bindings.Summ}" id="ot4"/>
                         </af:column>
                     </af:treeTable>
                     <f:facet name="statusbar"/>

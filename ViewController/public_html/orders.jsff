@@ -428,8 +428,7 @@
                                                     </af:popup>
                                                 </f:facet>
                                             </af:table>
-                                            <af:poll id="p1" pollListener="#{orders.onPollListener}"
-                                                     rendered="#{!bindings.Commit.enabled}"/>
+                                            <af:poll id="p1" pollListener="#{orders.onPollListener}" rendered="false"/>
                                         </af:panelBox>
                                         <af:popup childCreation="deferred" autoCancel="disabled" id="pEdit"
                                                   contentDelivery="lazyUncached" resetEditableValues="whenCanceled"

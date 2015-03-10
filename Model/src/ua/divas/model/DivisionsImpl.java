@@ -46,7 +46,8 @@ public class DivisionsImpl extends DivasEntity {
         Orders,
         UserSettings,
         DivisionSotr,
-        Users;
+        Users,
+        OtherZatraty;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -86,6 +87,7 @@ public class DivisionsImpl extends DivasEntity {
     public static final int USERSETTINGS = AttributesEnum.UserSettings.index();
     public static final int DIVISIONSOTR = AttributesEnum.DivisionSotr.index();
     public static final int USERS = AttributesEnum.Users.index();
+    public static final int OTHERZATRATY = AttributesEnum.OtherZatraty.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -290,6 +292,13 @@ public class DivisionsImpl extends DivasEntity {
      */
     public void setUsers(UsersImpl value) {
         setAttributeInternal(USERS, value);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getOtherZatraty() {
+        return (RowIterator) getAttributeInternal(OTHERZATRATY);
     }
 
     /**

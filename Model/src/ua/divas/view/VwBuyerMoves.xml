@@ -23,6 +23,14 @@
   MOVE_KONTRAG.KONTRAG,
   MOVE_KONTRAG.CODE,
   MOVE_KONTRAG.SUMM,
+  case 
+        when MOVE_KONTRAG.SUMM >=0
+        then MOVE_KONTRAG.SUMM
+    end as summ_prihod,
+    case 
+        when MOVE_KONTRAG.SUMM < 0
+        then (-1)*MOVE_KONTRAG.SUMM
+    end as summ_rashod,
   MOVE_KONTRAG.REGISTRATOR_ID,
   MOVE_KONTRAG.PERIOD
 FROM MOVE_KONTRAG
@@ -141,6 +149,26 @@ WHERE KONTRAGENTS.IS_BUYER = 1 and MOVE_KONTRAG.CODE='20711']]></SQLQuery>
     </Properties>
   </ViewAttribute>
   <ViewAttribute
+    Name="SummPrihod"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SUMM_PRIHOD"
+    Expression="SUMM_PRIHOD"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SummRashod"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SUMM_RASHOD"
+    Expression="SUMM_RASHOD"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
     Name="RegistratorId"
     IsUpdateable="false"
     IsPersistent="false"
@@ -172,7 +200,7 @@ WHERE KONTRAGENTS.IS_BUYER = 1 and MOVE_KONTRAG.CODE='20711']]></SQLQuery>
     ColumnType="TIMESTAMP"
     AliasName="PERIOD"
     Expression="PERIOD"
-    SQLType="TIMESTAMP">
+    SQLType="DATE">
     <Properties>
       <SchemaBasedProperties>
         <LABEL

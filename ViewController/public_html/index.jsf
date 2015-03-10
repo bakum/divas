@@ -28,6 +28,11 @@
                                                        rendered="#{securityContext.taskflowViewable['/WEB-INF/zamer-config.xml#zamer-config']}">
                                         <af:region value="#{bindings.zamerconfig1.regionModel}" id="r5"/>
                                     </af:showDetailItem>
+                                    <af:showDetailItem text="Управление затратами" id="sdi15"
+                                                       icon="/img/sovmest_work-icon.png" stretchChildren="first"
+                                                       rendered="#{securityContext.taskflowViewable['/WEB-INF/other_zatr-config.xml#other_zatr-config']}">
+                                        <af:region value="#{bindings.other_zatrconfig1.regionModel}" id="r12"/>
+                                    </af:showDetailItem>
                                     <af:showDetailItem text="Справочники" id="sdi4" stretchChildren="first"
                                                        icon="/img/tSystCmp_picture_52.png"
                                                        rendered="#{securityContext.taskflowViewable['/WEB-INF/directories.xml#direct']}">
@@ -55,6 +60,12 @@
                                                                        rendered="#{securityContext.taskflowViewable['/WEB-INF/zamer_debt-config.xml#zamer_debt-config']}">
                                                         <af:region value="#{bindings.zamer_debtconfig1.regionModel}"
                                                                    id="r10"/>
+                                                    </af:showDetailItem>
+                                                    <af:showDetailItem text="Клиенты" id="sdi13"
+                                                                       stretchChildren="first"
+                                                                       rendered="#{securityContext.taskflowViewable['/WEB-INF/buyer_debt-config.xml#buyer_debt-config']}">
+                                                        <af:region value="#{bindings.buyer_debtconfig1.regionModel}"
+                                                                   id="r11"/>
                                                     </af:showDetailItem>
                                                 </af:panelTabbed>
                                             </af:showDetailItem>
