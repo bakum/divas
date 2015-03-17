@@ -11,7 +11,24 @@
                             <f:facet name="bottom"/>
                             <f:facet name="center">
                                 <af:panelBox text="Административные затраты" id="pb1" type="flow">
-                                    <f:facet name="toolbar"/>
+                                    <f:facet name="toolbar">
+                                        <af:toolbar id="t2">
+                                            <af:button actionListener="#{bindings.CreateInsert.execute}"
+                                                       text="Добавить" disabled="#{!bindings.CreateInsert.enabled}"
+                                                       id="bCreate">
+                                                <af:showPopupBehavior popupId="pCreateEdit"/>
+                                            </af:button>
+                                            <af:button actionListener="#{bindings.Commit.execute}" text="Сохранить"
+                                                       disabled="#{!bindings.Commit.enabled}" id="b2"
+                                                       action="#{other.commitChange}"/>
+                                            <af:button actionListener="#{bindings.Rollback.execute}" text="Отменить"
+                                                       disabled="#{!bindings.Rollback.enabled}" immediate="true"
+                                                       id="b3">
+                                                <af:resetActionListener/>
+                                            </af:button>
+                                            <af:button text="Обновить" id="b6" actionListener="#{other.onRefresh}"/>
+                                        </af:toolbar>
+                                    </f:facet>
                                     <af:table value="#{bindings.OtherZatratyView1.collectionModel}" var="row"
                                               rows="#{bindings.OtherZatratyView1.rangeSize}"
                                               emptyText="#{bindings.OtherZatratyView1.viewable ? 'Нет данных для отображения.' : 'В доступе отказано.'}"
@@ -19,10 +36,19 @@
                                               selectedRowKeys="#{bindings.OtherZatratyView1.collectionModel.selectedRow}"
                                               selectionListener="#{bindings.OtherZatratyView1.collectionModel.makeCurrent}"
                                               rowSelection="single" fetchSize="#{bindings.OtherZatratyView1.rangeSize}"
-                                              id="t1" editingMode="clickToEdit">
+                                              id="t1" editingMode="clickToEdit" partialTriggers="::bCreate"
+                                              scrollPolicy="page">
+                                        <af:column id="c9">
+                                            <af:toolbar id="t3">
+                                                <af:button id="b4" icon="/img/edit-16.gif">
+                                                    <af:showPopupBehavior popupId="::pCreateEdit"/>
+                                                </af:button>
+                                            </af:toolbar>
+                                        </af:column>
                                         <af:column sortProperty="#{bindings.OtherZatratyView1.hints.Id.name}"
                                                    sortable="true"
-                                                   headerText="#{bindings.OtherZatratyView1.hints.Id.label}" id="c1">
+                                                   headerText="#{bindings.OtherZatratyView1.hints.Id.label}" id="c1"
+                                                   visible="false">
                                             <af:inputText value="#{row.bindings.Id.inputValue}"
                                                           label="#{bindings.OtherZatratyView1.hints.Id.label}"
                                                           required="#{bindings.OtherZatratyView1.hints.Id.mandatory}"
@@ -62,7 +88,7 @@
                                         <af:column sortProperty="#{bindings.OtherZatratyView1.hints.Posted.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.OtherZatratyView1.hints.Posted.label}"
-                                                   id="c4">
+                                                   id="c4" visible="false">
                                             <af:inputText value="#{row.bindings.Posted.inputValue}"
                                                           label="#{bindings.OtherZatratyView1.hints.Posted.label}"
                                                           required="#{bindings.OtherZatratyView1.hints.Posted.mandatory}"
@@ -104,7 +130,7 @@
                                         <af:column sortProperty="#{bindings.OtherZatratyView1.hints.CurrId.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.OtherZatratyView1.hints.CurrId.label}"
-                                                   id="c7">
+                                                   id="c7" visible="false">
                                             <af:selectOneChoice value="#{row.bindings.CurrId.inputValue}"
                                                                 label="#{row.bindings.CurrId.label}"
                                                                 required="#{bindings.OtherZatratyView1.hints.CurrId.mandatory}"
@@ -117,7 +143,7 @@
                                         <af:column sortProperty="#{bindings.OtherZatratyView1.hints.OthEditable.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.OtherZatratyView1.hints.OthEditable.label}"
-                                                   id="c8">
+                                                   id="c8" visible="false">
                                             <af:inputText value="#{row.bindings.OthEditable.inputValue}"
                                                           label="#{bindings.OtherZatratyView1.hints.OthEditable.label}"
                                                           required="#{bindings.OtherZatratyView1.hints.OthEditable.mandatory}"
@@ -131,6 +157,187 @@
                                             </af:inputText>
                                         </af:column>
                                     </af:table>
+                                    <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateEdit"
+                                              contentDelivery="lazyUncached" popupFetchListener="#{other.onPopupFetch}"
+                                              popupCanceledListener="#{other.onCancelPopup}">
+                                        <af:dialog id="d1" dialogListener="#{other.dialogListener}"
+                                                   title="Административные затраты" contentWidth="600"
+                                                   contentHeight="300" resize="on">
+                                            <f:facet name="buttonBar"/>
+                                            <af:panelAccordion id="pa1">
+                                                <af:showDetailItem text="Главная" id="sdi2">
+                                                    <af:panelFormLayout id="pfl1">
+                                                        <af:inputDate value="#{bindings.Dat.inputValue}"
+                                                                      label="#{bindings.Dat.hints.label}"
+                                                                      required="#{bindings.Dat.hints.mandatory}"
+                                                                      columns="#{bindings.Dat.hints.displayWidth}"
+                                                                      shortDesc="#{bindings.Dat.hints.tooltip}"
+                                                                      id="id2">
+                                                            <f:validator binding="#{bindings.Dat.validator}"/>
+                                                            <af:convertDateTime pattern="#{bindings.Dat.format}"/>
+                                                        </af:inputDate>
+                                                        <af:inputText value="#{bindings.Num.inputValue}"
+                                                                      label="#{bindings.Num.hints.label}"
+                                                                      required="#{bindings.Num.hints.mandatory}"
+                                                                      columns="#{bindings.Num.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.Num.hints.precision}"
+                                                                      shortDesc="#{bindings.Num.hints.tooltip}"
+                                                                      id="it5">
+                                                            <f:validator binding="#{bindings.Num.validator}"/>
+                                                        </af:inputText>
+                                                        <af:selectOneChoice value="#{bindings.DivisionId.inputValue}"
+                                                                            label="#{bindings.DivisionId.label}"
+                                                                            required="#{bindings.DivisionId.hints.mandatory}"
+                                                                            shortDesc="#{bindings.DivisionId.hints.tooltip}"
+                                                                            id="soc4" autoSubmit="true">
+                                                            <f:selectItems value="#{bindings.DivisionId.items}"
+                                                                           id="si4"/>
+                                                            <f:validator binding="#{bindings.DivisionId.validator}"/>
+                                                        </af:selectOneChoice>
+                                                        <af:selectOneChoice value="#{bindings.UserId.inputValue}"
+                                                                            label="#{bindings.UserId.label}"
+                                                                            required="#{bindings.UserId.hints.mandatory}"
+                                                                            shortDesc="#{bindings.UserId.hints.tooltip}"
+                                                                            id="soc5">
+                                                            <f:selectItems value="#{bindings.UserId.items}" id="si5"/>
+                                                            <f:validator binding="#{bindings.UserId.validator}"/>
+                                                        </af:selectOneChoice>
+                                                        <af:selectOneChoice value="#{bindings.CurrId.inputValue}"
+                                                                            label="#{bindings.CurrId.label}"
+                                                                            required="#{bindings.CurrId.hints.mandatory}"
+                                                                            shortDesc="#{bindings.CurrId.hints.tooltip}"
+                                                                            id="soc6" autoSubmit="true">
+                                                            <f:selectItems value="#{bindings.CurrId.items}" id="si6"/>
+                                                            <f:validator binding="#{bindings.CurrId.validator}"/>
+                                                        </af:selectOneChoice>
+                                                        <af:selectOneChoice value="#{bindings.KassaId.inputValue}"
+                                                                            label="#{bindings.KassaId.label}"
+                                                                            required="#{bindings.KassaId.hints.mandatory}"
+                                                                            shortDesc="#{bindings.KassaId.hints.tooltip}"
+                                                                            id="soc7">
+                                                            <f:selectItems value="#{bindings.KassaId.items}" id="si7"/>
+                                                            <f:validator binding="#{bindings.KassaId.validator}"/>
+                                                        </af:selectOneChoice>
+                                                        <af:inputText value="#{bindings.Comments.inputValue}"
+                                                                      label="#{bindings.Comments.hints.label}"
+                                                                      required="#{bindings.Comments.hints.mandatory}"
+                                                                      columns="#{bindings.Comments.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.Comments.hints.precision}"
+                                                                      shortDesc="#{bindings.Comments.hints.tooltip}"
+                                                                      id="it6" rows="4">
+                                                            <f:validator binding="#{bindings.Comments.validator}"/>
+                                                        </af:inputText>
+                                                        <af:spacer width="10" height="10" id="s1"/>
+                                                    </af:panelFormLayout>
+                                                </af:showDetailItem>
+                                                <af:showDetailItem text="Затраты" id="sdi3" stretchChildren="first">
+                                                    <af:panelBox text="PanelBox1" id="pb2" type="flow">
+                                                        <f:facet name="toolbar">
+                                                            <af:toolbar id="t5">
+                                                                <af:button actionListener="#{bindings.CreateInsert1.execute}"
+                                                                           text="CreateInsert1"
+                                                                           disabled="#{!bindings.CreateInsert1.enabled}"
+                                                                           id="b1"/>
+                                                            </af:toolbar>
+                                                        </f:facet>
+                                                        <af:table value="#{bindings.OtherZatratyTabPartZatratyView2.collectionModel}"
+                                                                  var="row"
+                                                                  rows="#{bindings.OtherZatratyTabPartZatratyView2.rangeSize}"
+                                                                  emptyText="#{bindings.OtherZatratyTabPartZatratyView2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                                  rowBandingInterval="0"
+                                                                  selectedRowKeys="#{bindings.OtherZatratyTabPartZatratyView2.collectionModel.selectedRow}"
+                                                                  selectionListener="#{bindings.OtherZatratyTabPartZatratyView2.collectionModel.makeCurrent}"
+                                                                  rowSelection="single"
+                                                                  fetchSize="#{bindings.OtherZatratyTabPartZatratyView2.rangeSize}"
+                                                                  id="t4" scrollPolicy="page" partialTriggers="::b1">
+                                                            <af:column id="c16">
+                                                                <af:toolbar id="t6">
+                                                                    <af:button id="b5"
+                                                                               icon="/img/edit-16.gif"/>
+                                                                </af:toolbar>
+                                                            </af:column>
+                                                            <af:column headerText="#{bindings.OtherZatratyTabPartZatratyView2.hints.Id.label}"
+                                                                       id="c10" visible="false">
+                                                                <af:inputText value="#{row.bindings.Id.inputValue}"
+                                                                              label="#{bindings.OtherZatratyTabPartZatratyView2.hints.Id.label}"
+                                                                              required="#{bindings.OtherZatratyTabPartZatratyView2.hints.Id.mandatory}"
+                                                                              columns="#{bindings.OtherZatratyTabPartZatratyView2.hints.Id.displayWidth}"
+                                                                              maximumLength="#{bindings.OtherZatratyTabPartZatratyView2.hints.Id.precision}"
+                                                                              shortDesc="#{bindings.OtherZatratyTabPartZatratyView2.hints.Id.tooltip}"
+                                                                              id="it7">
+                                                                    <f:validator binding="#{row.bindings.Id.validator}"/>
+                                                                </af:inputText>
+                                                            </af:column>
+                                                            <af:column headerText="#{bindings.OtherZatratyTabPartZatratyView2.hints.OthId.label}"
+                                                                       id="c11" visible="false">
+                                                                <af:inputText value="#{row.bindings.OthId.inputValue}"
+                                                                              label="#{bindings.OtherZatratyTabPartZatratyView2.hints.OthId.label}"
+                                                                              required="#{bindings.OtherZatratyTabPartZatratyView2.hints.OthId.mandatory}"
+                                                                              columns="#{bindings.OtherZatratyTabPartZatratyView2.hints.OthId.displayWidth}"
+                                                                              maximumLength="#{bindings.OtherZatratyTabPartZatratyView2.hints.OthId.precision}"
+                                                                              shortDesc="#{bindings.OtherZatratyTabPartZatratyView2.hints.OthId.tooltip}"
+                                                                              id="it8">
+                                                                    <f:validator binding="#{row.bindings.OthId.validator}"/>
+                                                                </af:inputText>
+                                                            </af:column>
+                                                            <af:column headerText="#{bindings.OtherZatratyTabPartZatratyView2.hints.ZatrId.label}"
+                                                                       id="c12" visible="false">
+                                                                <af:inputListOfValues id="zatrIdId"
+                                                                                      popupTitle="Search and Select: #{bindings.OtherZatratyTabPartZatratyView2.hints.ZatrId.label}"
+                                                                                      value="#{row.bindings.ZatrId.inputValue}"
+                                                                                      model="#{row.bindings.ZatrId.listOfValuesModel}"
+                                                                                      required="#{bindings.OtherZatratyTabPartZatratyView2.hints.ZatrId.mandatory}"
+                                                                                      columns="#{bindings.OtherZatratyTabPartZatratyView2.hints.ZatrId.displayWidth}"
+                                                                                      shortDesc="#{bindings.OtherZatratyTabPartZatratyView2.hints.ZatrId.tooltip}">
+                                                                    <f:validator binding="#{row.bindings.ZatrId.validator}"/>
+                                                                </af:inputListOfValues>
+                                                            </af:column>
+                                                            <af:column headerText="#{bindings.OtherZatratyTabPartZatratyView2.hints.Zatrname.label}"
+                                                                       id="c13">
+                                                                <af:inputListOfValues id="zatrnameId"
+                                                                                      popupTitle="Search and Select: #{bindings.OtherZatratyTabPartZatratyView2.hints.Zatrname.label}"
+                                                                                      value="#{row.bindings.Zatrname.inputValue}"
+                                                                                      model="#{row.bindings.Zatrname.listOfValuesModel}"
+                                                                                      required="#{bindings.OtherZatratyTabPartZatratyView2.hints.Zatrname.mandatory}"
+                                                                                      columns="#{bindings.OtherZatratyTabPartZatratyView2.hints.Zatrname.displayWidth}"
+                                                                                      shortDesc="#{bindings.OtherZatratyTabPartZatratyView2.hints.Zatrname.tooltip}">
+                                                                    <f:validator binding="#{row.bindings.Zatrname.validator}"/>
+                                                                </af:inputListOfValues>
+                                                            </af:column>
+                                                            <af:column headerText="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.label}"
+                                                                       id="c14">
+                                                                <af:inputText value="#{row.bindings.Summa.inputValue}"
+                                                                              label="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.label}"
+                                                                              required="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.mandatory}"
+                                                                              columns="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.displayWidth}"
+                                                                              maximumLength="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.precision}"
+                                                                              shortDesc="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.tooltip}"
+                                                                              id="it9">
+                                                                    <f:validator binding="#{row.bindings.Summa.validator}"/>
+                                                                    <af:convertNumber groupingUsed="false"
+                                                                                      pattern="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.format}"/>
+                                                                </af:inputText>
+                                                            </af:column>
+                                                            <af:column headerText="#{bindings.OtherZatratyTabPartZatratyView2.hints.OthtpEditable.label}"
+                                                                       id="c15">
+                                                                <af:inputText value="#{row.bindings.OthtpEditable.inputValue}"
+                                                                              label="#{bindings.OtherZatratyTabPartZatratyView2.hints.OthtpEditable.label}"
+                                                                              required="#{bindings.OtherZatratyTabPartZatratyView2.hints.OthtpEditable.mandatory}"
+                                                                              columns="#{bindings.OtherZatratyTabPartZatratyView2.hints.OthtpEditable.displayWidth}"
+                                                                              maximumLength="#{bindings.OtherZatratyTabPartZatratyView2.hints.OthtpEditable.precision}"
+                                                                              shortDesc="#{bindings.OtherZatratyTabPartZatratyView2.hints.OthtpEditable.tooltip}"
+                                                                              id="it10">
+                                                                    <f:validator binding="#{row.bindings.OthtpEditable.validator}"/>
+                                                                    <af:convertNumber groupingUsed="false"
+                                                                                      pattern="#{bindings.OtherZatratyTabPartZatratyView2.hints.OthtpEditable.format}"/>
+                                                                </af:inputText>
+                                                            </af:column>
+                                                        </af:table>
+                                                    </af:panelBox>
+                                                </af:showDetailItem>
+                                            </af:panelAccordion>
+                                        </af:dialog>
+                                    </af:popup>
                                 </af:panelBox>
                             </f:facet>
                             <f:facet name="start">

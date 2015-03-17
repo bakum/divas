@@ -55,6 +55,7 @@ public class OtherZatratyTabPartZatratyImpl extends DivasEntityNoDelete {
         }
     }
 
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int OTHID = AttributesEnum.OthId.index();
     public static final int ZATRID = AttributesEnum.ZatrId.index();
@@ -74,6 +75,7 @@ public class OtherZatratyTabPartZatratyImpl extends DivasEntityNoDelete {
     public static synchronized EntityDefImpl getDefinitionObject() {
         return EntityDefImpl.findDefObject("ua.divas.model.OtherZatratyTabPartZatraty");
     }
+
 
     /**
      * Gets the attribute value for Id, using the alias name Id.
