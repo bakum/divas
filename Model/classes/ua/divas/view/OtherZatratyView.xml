@@ -265,9 +265,34 @@ FROM  OTHER_ZATRATY OtherZatraty]]></SQLQuery>
     Expression="OTH_EDITABLE"
     SQLType="NUMERIC"
     IsQueriable="false"/>
+  <ViewAttribute
+    Name="TotalZatr"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[OtherZatratyTabPartZatratyView.sum("Summa != null ? Summa : 0")]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.OtherZatratyView.TotalZatr_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.OtherZatratyView.TotalZatr_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewLinkAccessor
     Name="OtherZatratyTabPartZatratyView"
     ViewLink="ua.divas.view.OtherZatratyTabPartZaFk1Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>

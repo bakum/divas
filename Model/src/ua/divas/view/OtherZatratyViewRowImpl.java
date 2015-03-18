@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import oracle.jbo.AttributeList;
 import oracle.jbo.RowIterator;
 import oracle.jbo.RowSet;
+import oracle.jbo.domain.Number;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.ViewRowImpl;
 
@@ -55,6 +56,7 @@ public class OtherZatratyViewRowImpl extends ViewRowImpl {
         CurrId,
         KassaId,
         OthEditable,
+        TotalZatr,
         OtherZatratyTabPartZatratyView,
         DivisionsView1,
         UsersView1,
@@ -97,6 +99,7 @@ public class OtherZatratyViewRowImpl extends ViewRowImpl {
     public static final int CURRID = AttributesEnum.CurrId.index();
     public static final int KASSAID = AttributesEnum.KassaId.index();
     public static final int OTHEDITABLE = AttributesEnum.OthEditable.index();
+    public static final int TOTALZATR = AttributesEnum.TotalZatr.index();
     public static final int OTHERZATRATYTABPARTZATRATYVIEW = AttributesEnum.OtherZatratyTabPartZatratyView.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
@@ -307,6 +310,14 @@ public class OtherZatratyViewRowImpl extends ViewRowImpl {
      */
     public void setOthEditable(BigDecimal value) {
         setAttributeInternal(OTHEDITABLE, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute TotalZatr.
+     * @return the TotalZatr
+     */
+    public Number getTotalZatr() {
+        return (Number) getAttributeInternal(TOTALZATR);
     }
 
     /**

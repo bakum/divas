@@ -38,12 +38,16 @@
                                               rowSelection="single" fetchSize="#{bindings.OtherZatratyView1.rangeSize}"
                                               id="t1" editingMode="clickToEdit" partialTriggers="::bCreate"
                                               scrollPolicy="page">
-                                        <af:column id="c9">
+                                        <af:column id="c9" width="60" rowHeader="true">
                                             <af:toolbar id="t3">
                                                 <af:button id="b4" icon="/img/edit-16.gif">
                                                     <af:showPopupBehavior popupId="::pCreateEdit"/>
                                                 </af:button>
                                             </af:toolbar>
+                                        </af:column>
+                                        <af:column id="c17" width="30">
+                                            <af:image id="i1"
+                                                      source="#{row.Posted==1 ? '/img/icon_commit.png' :  '/img/document.png'}"/>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.OtherZatratyView1.hints.Id.name}"
                                                    sortable="true"
@@ -101,6 +105,20 @@
                                                                   pattern="#{bindings.OtherZatratyView1.hints.Posted.format}"/>
                                             </af:inputText>
                                         </af:column>
+                                        <af:column headerText="#{bindings.OtherZatratyView1.hints.TotalZatr.label}"
+                                                   id="c18">
+                                            <af:inputText value="#{row.bindings.TotalZatr.inputValue}"
+                                                          label="#{bindings.OtherZatratyView1.hints.TotalZatr.label}"
+                                                          required="#{bindings.OtherZatratyView1.hints.TotalZatr.mandatory}"
+                                                          columns="#{bindings.OtherZatratyView1.hints.TotalZatr.displayWidth}"
+                                                          maximumLength="#{bindings.OtherZatratyView1.hints.TotalZatr.precision}"
+                                                          shortDesc="#{bindings.OtherZatratyView1.hints.TotalZatr.tooltip}"
+                                                          id="it11" readOnly="true">
+                                                <f:validator binding="#{row.bindings.TotalZatr.validator}"/>
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.OtherZatratyView1.hints.TotalZatr.format}"/>
+                                            </af:inputText>
+                                        </af:column>
                                         <af:column sortProperty="#{bindings.OtherZatratyView1.hints.DivisionId.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.OtherZatratyView1.hints.DivisionId.label}"
@@ -156,6 +174,13 @@
                                                                   pattern="#{bindings.OtherZatratyView1.hints.OthEditable.format}"/>
                                             </af:inputText>
                                         </af:column>
+                                        <f:facet name="detailStamp">
+                                            <af:panelLabelAndMessage label="#{bindings.OtherZatratyView1.hints.Comments.label}"
+                                                                     id="plam1">
+                                                <af:outputFormatted value="#{row.bindings.Comments.inputValue}"
+                                                                    id="of1"/>
+                                            </af:panelLabelAndMessage>
+                                        </f:facet>
                                     </af:table>
                                     <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateEdit"
                                               contentDelivery="lazyUncached" popupFetchListener="#{other.onPopupFetch}"
@@ -172,7 +197,7 @@
                                                                       required="#{bindings.Dat.hints.mandatory}"
                                                                       columns="#{bindings.Dat.hints.displayWidth}"
                                                                       shortDesc="#{bindings.Dat.hints.tooltip}"
-                                                                      id="id2">
+                                                                      id="id2" autoSubmit="true">
                                                             <f:validator binding="#{bindings.Dat.validator}"/>
                                                             <af:convertDateTime pattern="#{bindings.Dat.format}"/>
                                                         </af:inputDate>
@@ -230,14 +255,16 @@
                                                         <af:spacer width="10" height="10" id="s1"/>
                                                     </af:panelFormLayout>
                                                 </af:showDetailItem>
-                                                <af:showDetailItem text="Затраты" id="sdi3" stretchChildren="first">
-                                                    <af:panelBox text="PanelBox1" id="pb2" type="flow">
+                                                <af:showDetailItem text="Затраты" id="sdi3" stretchChildren="first"
+                                                                   partialTriggers="id2"
+                                                                   rendered="#{bindings.Dat.inputValue==null ? false : true}">
+                                                    <af:panelBox text="Административные затраты" id="pb2" type="flow">
                                                         <f:facet name="toolbar">
                                                             <af:toolbar id="t5">
                                                                 <af:button actionListener="#{bindings.CreateInsert1.execute}"
-                                                                           text="CreateInsert1"
+                                                                           text="Добавить"
                                                                            disabled="#{!bindings.CreateInsert1.enabled}"
-                                                                           id="b1"/>
+                                                                           id="b1" icon="/img/Symbol_Add.png"/>
                                                             </af:toolbar>
                                                         </f:facet>
                                                         <af:table value="#{bindings.OtherZatratyTabPartZatratyView2.collectionModel}"
@@ -249,7 +276,8 @@
                                                                   selectionListener="#{bindings.OtherZatratyTabPartZatratyView2.collectionModel.makeCurrent}"
                                                                   rowSelection="single"
                                                                   fetchSize="#{bindings.OtherZatratyTabPartZatratyView2.rangeSize}"
-                                                                  id="t4" scrollPolicy="page" partialTriggers="::b1">
+                                                                  id="t4" scrollPolicy="page" partialTriggers="::b1"
+                                                                  editingMode="clickToEdit">
                                                             <af:column id="c16">
                                                                 <af:toolbar id="t6">
                                                                     <af:button id="b5"

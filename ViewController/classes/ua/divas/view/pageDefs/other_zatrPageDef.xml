@@ -27,6 +27,8 @@
           <Item Value="UserId"/>
           <Item Value="CurrId"/>
           <Item Value="OthEditable"/>
+          <Item Value="TotalZatr"/>
+          <Item Value="Comments"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
