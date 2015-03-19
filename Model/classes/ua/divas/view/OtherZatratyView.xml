@@ -10,7 +10,9 @@
   CustomQuery="true"
   PageIterMode="Full"
   RowClass="ua.divas.view.OtherZatratyViewRowImpl"
-  ComponentClass="ua.divas.view.OtherZatratyViewImpl">
+  ComponentClass="ua.divas.view.OtherZatratyViewImpl"
+  ComponentInterface="ua.divas.view.common.OtherZatratyView"
+  ClientProxyName="ua.divas.view.client.OtherZatratyViewClient">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
     <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
@@ -41,6 +43,10 @@
       </PIMap>
     </ParameterMap>
   </ViewAccessor>
+  <ViewAccessor
+    Name="TypeOfActivitiesView1"
+    ViewObjectName="ua.divas.view.TypeOfActivitiesView"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_DivisionId"
     ListVOName="DivisionsView1"
@@ -116,6 +122,25 @@
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
+  <ListBinding
+    Name="LOV_ActivitiesId"
+    ListVOName="TypeOfActivitiesView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ActivitiesId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <SQLQuery><![CDATA[SELECT OtherZatraty.ID, 
        OtherZatraty.DAT, 
        OtherZatraty.NUM, 
@@ -130,7 +155,8 @@
        (SELECT 
         0 
     FROM 
-        dual) oth_editable
+        dual) oth_editable,
+        OtherZatraty.ACTIVITIES_ID
 FROM  OTHER_ZATRATY OtherZatraty]]></SQLQuery>
   <EntityUsage
     Name="OtherZatraty"
@@ -266,6 +292,22 @@ FROM  OTHER_ZATRATY OtherZatraty]]></SQLQuery>
     SQLType="NUMERIC"
     IsQueriable="false"/>
   <ViewAttribute
+    Name="ActivitiesId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ActivitiesId"
+    EntityUsage="OtherZatraty"
+    AliasName="ACTIVITIES_ID"
+    LOVName="LOV_ActivitiesId">
+    <TransientExpression><![CDATA[viewObject.retrieveActivitiesId()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
     Name="TotalZatr"
     IsUpdateable="false"
     IsSelected="false"
@@ -291,6 +333,34 @@ FROM  OTHER_ZATRATY OtherZatraty]]></SQLQuery>
     ViewLink="ua.divas.view.OtherZatratyTabPartZaFk1Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="VwOtherMoves"
+    ViewLink="ua.divas.view.OtherVwOtherMovesFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="addEntry"
+      MethodName="addEntry">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="_id"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="removeEntry"
+      MethodName="removeEntry">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="_id"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

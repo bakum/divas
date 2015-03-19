@@ -56,12 +56,15 @@ public class OtherZatratyViewRowImpl extends ViewRowImpl {
         CurrId,
         KassaId,
         OthEditable,
+        ActivitiesId,
         TotalZatr,
         OtherZatratyTabPartZatratyView,
+        VwOtherMoves,
         DivisionsView1,
         UsersView1,
         CurrencyView1,
-        KassaVO1;
+        KassaVO1,
+        TypeOfActivitiesView1;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -99,12 +102,15 @@ public class OtherZatratyViewRowImpl extends ViewRowImpl {
     public static final int CURRID = AttributesEnum.CurrId.index();
     public static final int KASSAID = AttributesEnum.KassaId.index();
     public static final int OTHEDITABLE = AttributesEnum.OthEditable.index();
+    public static final int ACTIVITIESID = AttributesEnum.ActivitiesId.index();
     public static final int TOTALZATR = AttributesEnum.TotalZatr.index();
     public static final int OTHERZATRATYTABPARTZATRATYVIEW = AttributesEnum.OtherZatratyTabPartZatratyView.index();
+    public static final int VWOTHERMOVES = AttributesEnum.VwOtherMoves.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
     public static final int CURRENCYVIEW1 = AttributesEnum.CurrencyView1.index();
     public static final int KASSAVO1 = AttributesEnum.KassaVO1.index();
+    public static final int TYPEOFACTIVITIESVIEW1 = AttributesEnum.TypeOfActivitiesView1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -321,10 +327,33 @@ public class OtherZatratyViewRowImpl extends ViewRowImpl {
     }
 
     /**
+     * Gets the attribute value for ACTIVITIES_ID using the alias name ActivitiesId.
+     * @return the ACTIVITIES_ID
+     */
+    public String getActivitiesId() {
+        return (String) getAttributeInternal(ACTIVITIESID);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for ACTIVITIES_ID using the alias name ActivitiesId.
+     * @param value value to set the ACTIVITIES_ID
+     */
+    public void setActivitiesId(String value) {
+        setAttributeInternal(ACTIVITIESID, value);
+    }
+
+    /**
      * Gets the associated <code>RowIterator</code> using master-detail link OtherZatratyTabPartZatratyView.
      */
     public RowIterator getOtherZatratyTabPartZatratyView() {
         return (RowIterator) getAttributeInternal(OTHERZATRATYTABPARTZATRATYVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link VwOtherMoves.
+     */
+    public RowIterator getVwOtherMoves() {
+        return (RowIterator) getAttributeInternal(VWOTHERMOVES);
     }
 
     /**
@@ -353,6 +382,13 @@ public class OtherZatratyViewRowImpl extends ViewRowImpl {
      */
     public RowSet getKassaVO1() {
         return (RowSet) getAttributeInternal(KASSAVO1);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> TypeOfActivitiesView1.
+     */
+    public RowSet getTypeOfActivitiesView1() {
+        return (RowSet) getAttributeInternal(TYPEOFACTIVITIESVIEW1);
     }
 
 

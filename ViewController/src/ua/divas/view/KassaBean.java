@@ -28,6 +28,7 @@ import oracle.jbo.uicli.binding.JUCtrlHierBinding;
 import oracle.jbo.uicli.binding.JUCtrlHierNodeBinding;
 import oracle.jbo.uicli.binding.JUIteratorBinding;
 
+import org.apache.myfaces.trinidad.context.RequestContext;
 import org.apache.myfaces.trinidad.event.SelectionEvent;
 import org.apache.myfaces.trinidad.model.CollectionModel;
 import org.apache.myfaces.trinidad.model.RowKeySet;
@@ -87,10 +88,10 @@ public class KassaBean {
         me = exprFactory.createMethodExpression(elCtx, adfSelectionListener, Object.class, new Class[] {
                                                 SelectionEvent.class });
         me.invoke(elCtx, new Object[] { selectionEvent });
-        
+
 
         /* END PRESERVER DEFAULT ADF SELECT BEHAVIOR */
-         RichTreeTable tree = (RichTreeTable) selectionEvent.getSource();
+        RichTreeTable tree = (RichTreeTable) selectionEvent.getSource();
         TreeModel model = (TreeModel) tree.getValue();
 
         //get selected nodes
@@ -116,13 +117,25 @@ public class KassaBean {
             if (rowType.equalsIgnoreCase("VwKassaMoves")) {
                 //System.out.println(rw.getAttribute("RegistratorId"));
                 String regId = (String) rw.getAttribute("RegistratorId");
-                Key k = new Key(new Object[] { regId });                
-                DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("OrdersView1Iterator");
-                RowSetIterator rsi = iter.getRowSetIterator();
-                Row row = rsi.findByKey(k, 1)[0];
-                //row.setAttribute("OEditable", new BigDecimal(1));
-                rsi.setCurrentRow(row);
+                String regType = (String) rw.getAttribute("TableName");
+                if (regType.equalsIgnoreCase("orders")) {
+                    Key k = new Key(new Object[] { regId });
+                    DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("OrdersView1Iterator");
+                    RowSetIterator rsi = iter.getRowSetIterator();
+                    Row row = rsi.findByKey(k, 1)[0];
+                    //row.setAttribute("OEditable", new BigDecimal(1));
+                    rsi.setCurrentRow(row);
+                    RequestContext.getCurrentInstance().getPageFlowScope().put("case", "orders");
+                } else {
+                    Key k = new Key(new Object[] { regId });
+                    DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("OtherZatratyView1Iterator");
+                    RowSetIterator rsi = iter.getRowSetIterator();
+                    Row row = rsi.findByKey(k, 1)[0];
+                    //row.setAttribute("OEditable", new BigDecimal(1));
+                    rsi.setCurrentRow(row);
+                    RequestContext.getCurrentInstance().getPageFlowScope().put("case", "other");
+                }
             }
-        } 
+        }
     }
 }

@@ -167,14 +167,14 @@
                                                     </af:selectOneChoice>
                                                 </af:column>
                                                 <af:column headerText="#{bindings.OrdersView1.hints.TotalSumOplaty.label}"
-                                                           id="c25">
+                                                           id="c25" align="right">
                                                     <af:inputText value="#{row.bindings.TotalSumOplaty.inputValue}"
                                                                   label="#{bindings.OrdersView1.hints.TotalSumOplaty.label}"
                                                                   required="#{bindings.OrdersView1.hints.TotalSumOplaty.mandatory}"
                                                                   columns="#{bindings.OrdersView1.hints.TotalSumOplaty.displayWidth}"
                                                                   maximumLength="#{bindings.OrdersView1.hints.TotalSumOplaty.precision}"
                                                                   shortDesc="#{bindings.OrdersView1.hints.TotalSumOplaty.tooltip}"
-                                                                  id="it30">
+                                                                  id="it30" contentStyle="font-weight: bold;">
                                                         <f:validator binding="#{row.bindings.TotalSumOplaty.validator}"/>
                                                         <af:convertNumber groupingUsed="false"
                                                                           pattern="#{bindings.OrdersView1.hints.TotalSumOplaty.format}"/>
@@ -183,42 +183,42 @@
                                                 <af:column sortProperty="#{bindings.OrdersView1.hints.TotalSumUslugi.name}"
                                                            sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.TotalSumUslugi.label}"
-                                                           id="c18" visible="false">
+                                                           id="c18" visible="false" align="right">
                                                     <af:inputText value="#{row.bindings.TotalSumUslugi.inputValue}"
                                                                   label="#{bindings.OrdersView1.hints.TotalSumUslugi.label}"
                                                                   required="#{bindings.OrdersView1.hints.TotalSumUslugi.mandatory}"
                                                                   columns="#{bindings.OrdersView1.hints.TotalSumUslugi.displayWidth}"
                                                                   maximumLength="#{bindings.OrdersView1.hints.TotalSumUslugi.precision}"
                                                                   shortDesc="#{bindings.OrdersView1.hints.TotalSumUslugi.tooltip}"
-                                                                  id="it7">
+                                                                  id="it7" contentStyle="font-weight: bold;">
                                                         <f:validator binding="#{row.bindings.TotalSumUslugi.validator}"/>
                                                         <af:convertNumber groupingUsed="false"
                                                                           pattern="#{bindings.OrdersView1.hints.TotalSumUslugi.format}"/>
                                                     </af:inputText>
                                                 </af:column>
                                                 <af:column headerText="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.label}"
-                                                           id="c65" visible="false">
+                                                           id="c65" visible="false" align="right">
                                                     <af:inputText value="#{row.bindings.TotalSummUslugiAdd.inputValue}"
                                                                   label="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.label}"
                                                                   required="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.mandatory}"
                                                                   columns="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.displayWidth}"
                                                                   maximumLength="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.precision}"
                                                                   shortDesc="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.tooltip}"
-                                                                  id="it46">
+                                                                  id="it46" contentStyle="font-weight: bold;">
                                                         <f:validator binding="#{row.bindings.TotalSummUslugiAdd.validator}"/>
                                                         <af:convertNumber groupingUsed="false"
                                                                           pattern="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.format}"/>
                                                     </af:inputText>
                                                 </af:column>
                                                 <af:column headerText="#{bindings.OrdersView1.hints.TotalSumm.label}"
-                                                           id="c73">
+                                                           id="c73" align="right">
                                                     <af:inputText value="#{row.bindings.TotalSumm.inputValue}"
                                                                   label="#{bindings.OrdersView1.hints.TotalSumm.label}"
                                                                   required="#{bindings.OrdersView1.hints.TotalSumm.mandatory}"
                                                                   columns="#{bindings.OrdersView1.hints.TotalSumm.displayWidth}"
                                                                   maximumLength="#{bindings.OrdersView1.hints.TotalSumm.precision}"
                                                                   shortDesc="#{bindings.OrdersView1.hints.TotalSumm.tooltip}"
-                                                                  id="it52">
+                                                                  id="it52" contentStyle="font-weight: bold;">
                                                         <f:validator binding="#{row.bindings.TotalSumm.validator}"/>
                                                         <af:convertNumber groupingUsed="false"
                                                                           pattern="#{bindings.OrdersView1.hints.TotalSumm.format}"/>

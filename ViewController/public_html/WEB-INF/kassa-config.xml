@@ -21,11 +21,44 @@
         </display-type>
       </run-as-dialog>
     </task-flow-call>
+    <router id="routerCase">
+      <case id="__6">
+        <expression>#{pageFlowScope.case == 'orders'}</expression>
+        <outcome>onOrder</outcome>
+      </case>
+      <case id="__8">
+        <expression>#{pageFlowScope.case == 'other'}</expression>
+        <outcome>onOther</outcome>
+      </case>
+      <default-outcome>onOrder</default-outcome>
+    </router>
+    <task-flow-call id="other-dialod-flow">
+      <task-flow-reference>
+        <document>/WEB-INF/other-dialod-flow.xml</document>
+        <id>other-dialod-flow</id>
+      </task-flow-reference>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
     <control-flow-rule id="__1">
       <from-activity-id>kassa</from-activity-id>
       <control-flow-case id="__2">
+        <from-outcome>onCase</from-outcome>
+        <to-activity-id>routerCase</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>routerCase</from-activity-id>
+      <control-flow-case id="__5">
         <from-outcome>onOrder</from-outcome>
         <to-activity-id>order-dialog-flow</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__7">
+        <from-outcome>onOther</from-outcome>
+        <to-activity-id>other-dialod-flow</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>

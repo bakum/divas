@@ -66,21 +66,21 @@
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
-  <SQLQuery><![CDATA[SELECT MOVE_KASSA.ID,
+  <SQLQuery><![CDATA[SELECT 
+    MOVE_KASSA.ID, 
     MOVE_KASSA.KASSA_ID KASSA_ID, 
     MOVE_KASSA.KASSA KASSA, 
-    MOVE_KASSA.CODE CODE,
-    MOVE_KASSA.SUMM,
-    case 
-        when MOVE_KASSA.SUMM >=0
-        then MOVE_KASSA.SUMM
-    end as summ_prihod,
-    case 
-        when MOVE_KASSA.SUMM < 0
-        then (-1)*MOVE_KASSA.SUMM
-    end as summ_rashod,
+    MOVE_KASSA.CODE CODE, 
+    MOVE_KASSA.SUMM, 
+    CASE 
+      WHEN MOVE_KASSA.SUMM >= 0 THEN MOVE_KASSA.SUMM 
+    END AS summ_prihod, 
+    CASE 
+      WHEN MOVE_KASSA.SUMM < 0 THEN -1 * MOVE_KASSA.SUMM 
+    END AS summ_rashod, 
     MOVE_KASSA.REGISTRATOR_ID REGISTRATOR_ID, 
-    MOVE_KASSA.PERIOD PERIOD 
+    MOVE_KASSA.PERIOD PERIOD, 
+    MOVE_KASSA.TABLE_NAME TABLE_NAME 
 FROM 
     MOVE_KASSA]]></SQLQuery>
   <ViewAttribute
@@ -245,6 +245,21 @@ FROM
           ResId="ua.divas.view.VwKassaMoves.Period_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TableName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TABLE_NAME"
+    Expression="TABLE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
   </ViewAttribute>
   <AttrArray Name="KeyAttributes">
     <Item Value="Id"/>

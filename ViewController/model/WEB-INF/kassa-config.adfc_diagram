@@ -17,9 +17,9 @@
       <property
          name="y">111.046875</property>
       <property
-         name="x">98.0</property>
-      <property
          name="pageFragment">true</property>
+      <property
+         name="x">98.0</property>
    </View>
    <TaskFlowCall
       id="TaskFlowCall6">
@@ -36,18 +36,70 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">110.125</property>
+         name="y">75.1875</property>
       <property
-         name="x">300.0</property>
+         name="x">443.0</property>
    </TaskFlowCall>
+   <Router
+      id="Router5">
+      <property
+         name="activityId">routerCase</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>routerCase&lt;/b>&lt;/p>&lt;p>Activity Type:  Router&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">114.09375</property>
+      <property
+         name="x">264.0</property>
+   </Router>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="View2"
+      to="Router5">
+      <property
+         name="fromOutcome">onCase</property>
+      <property
+         name="sdm:polyPoints">R50,139.0,111.0625,223.0,114.109375,L50</property>
+   </ControlFlowCase>
    <ControlFlowCase
       islink="true"
       id="ControlFlowCase7"
-      from="View2"
+      from="Router5"
       to="TaskFlowCall6">
       <property
          name="fromOutcome">onOrder</property>
       <property
-         name="sdm:polyPoints">R50,139.0,111.0625,259.0,110.125,L50</property>
+         name="sdm:polyPoints">R50,305.0,114.109375,402.0,75.203125,L50</property>
+   </ControlFlowCase>
+   <TaskFlowCall
+      id="TaskFlowCall8">
+      <property
+         name="taskFlowId">other-dialod-flow</property>
+      <property
+         name="activityId">other-dialod-flow</property>
+      <property
+         name="documentReference">/WEB-INF/other-dialod-flow.xml</property>
+      <property
+         name="runAsDialog">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>other-dialod-flow&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">194.14062</property>
+      <property
+         name="x">445.0</property>
+   </TaskFlowCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase9"
+      from="Router5"
+      to="TaskFlowCall8">
+      <property
+         name="fromOutcome">onOther</property>
+      <property
+         name="sdm:polyPoints">R54,305.0,117.609375,404.0,194.15625,L50</property>
    </ControlFlowCase>
 </SDM>

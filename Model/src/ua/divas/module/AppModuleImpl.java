@@ -3062,5 +3062,45 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getOtherZatratyTabPartZaFk2Link1() {
         return (ViewLinkImpl) findViewLink("OtherZatratyTabPartZaFk2Link1");
     }
+
+    /**
+     * Container's getter for OtherZatratyView6.
+     * @return OtherZatratyView6
+     */
+    public OtherZatratyViewImpl getOtherZatratyView6() {
+        return (OtherZatratyViewImpl) findViewObject("OtherZatratyView6");
+    }
+
+    /**
+     * Container's getter for OtherZatratyActivitiesFkLink1.
+     * @return OtherZatratyActivitiesFkLink1
+     */
+    public ViewLinkImpl getOtherZatratyActivitiesFkLink1() {
+        return (ViewLinkImpl) findViewLink("OtherZatratyActivitiesFkLink1");
+    }
+
+    /**
+     * Container's getter for VwOtherMoves1.
+     * @return VwOtherMoves1
+     */
+    public ViewObjectImpl getVwOtherMoves1() {
+        return (ViewObjectImpl) findViewObject("VwOtherMoves1");
+    }
+
+    /**
+     * Container's getter for VwOtherMoves2.
+     * @return VwOtherMoves2
+     */
+    public ViewObjectImpl getVwOtherMoves2() {
+        return (ViewObjectImpl) findViewObject("VwOtherMoves2");
+    }
+
+    /**
+     * Container's getter for OtherVwOtherMovesFkLink1.
+     * @return OtherVwOtherMovesFkLink1
+     */
+    public ViewLinkImpl getOtherVwOtherMovesFkLink1() {
+        return (ViewLinkImpl) findViewLink("OtherVwOtherMovesFkLink1");
+    }
 }
 

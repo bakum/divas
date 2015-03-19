@@ -32,7 +32,8 @@ public class TypeOfActivitiesImpl extends DivasEntityNoDelete {
         Fullname,
         Moves,
         Orders,
-        UserSettings;
+        UserSettings,
+        OtherZatraty;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -56,12 +57,14 @@ public class TypeOfActivitiesImpl extends DivasEntityNoDelete {
         }
     }
 
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int VERSION = AttributesEnum.Version.index();
     public static final int FULLNAME = AttributesEnum.Fullname.index();
     public static final int MOVES = AttributesEnum.Moves.index();
     public static final int ORDERS = AttributesEnum.Orders.index();
     public static final int USERSETTINGS = AttributesEnum.UserSettings.index();
+    public static final int OTHERZATRATY = AttributesEnum.OtherZatraty.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -75,6 +78,7 @@ public class TypeOfActivitiesImpl extends DivasEntityNoDelete {
     public static synchronized EntityDefImpl getDefinitionObject() {
         return EntityDefImpl.findDefObject("ua.divas.model.TypeOfActivities");
     }
+
 
     /**
      * Gets the attribute value for Id, using the alias name Id.
@@ -143,6 +147,13 @@ public class TypeOfActivitiesImpl extends DivasEntityNoDelete {
      */
     public RowIterator getUserSettings() {
         return (RowIterator) getAttributeInternal(USERSETTINGS);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getOtherZatraty() {
+        return (RowIterator) getAttributeInternal(OTHERZATRATY);
     }
 
     /**

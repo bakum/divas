@@ -106,14 +106,15 @@
                                             </af:inputText>
                                         </af:column>
                                         <af:column headerText="#{bindings.OtherZatratyView1.hints.TotalZatr.label}"
-                                                   id="c18">
+                                                   id="c18" align="right">
                                             <af:inputText value="#{row.bindings.TotalZatr.inputValue}"
                                                           label="#{bindings.OtherZatratyView1.hints.TotalZatr.label}"
                                                           required="#{bindings.OtherZatratyView1.hints.TotalZatr.mandatory}"
                                                           columns="#{bindings.OtherZatratyView1.hints.TotalZatr.displayWidth}"
                                                           maximumLength="#{bindings.OtherZatratyView1.hints.TotalZatr.precision}"
                                                           shortDesc="#{bindings.OtherZatratyView1.hints.TotalZatr.tooltip}"
-                                                          id="it11" readOnly="true">
+                                                          id="it11" readOnly="true"
+                                                          contentStyle="font-weight: bold;">
                                                 <f:validator binding="#{row.bindings.TotalZatr.validator}"/>
                                                 <af:convertNumber groupingUsed="false"
                                                                   pattern="#{bindings.OtherZatratyView1.hints.TotalZatr.format}"/>
@@ -180,6 +181,22 @@
                                                 <af:outputFormatted value="#{row.bindings.Comments.inputValue}"
                                                                     id="of1"/>
                                             </af:panelLabelAndMessage>
+                                        </f:facet><f:facet name="contextMenu">
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p1">
+                                                <af:menu text="menu 1" id="m1">
+                                                    <af:group id="g1">
+                                                        <af:commandMenuItem text="Провести" id="cmi1"
+                                                                            icon="/img/icon_commit.png"
+                                                                            actionListener="#{other.onAddEntry}"/>
+                                                        <af:commandMenuItem text="Отменить проведение" id="cmi2"
+                                                                            icon="/img/icon_rollback.png"
+                                                                            actionListener="#{other.onRemoveEntry}"/>
+                                                    </af:group>
+                                                    <af:commandMenuItem text="Проводки" id="cmi3">
+                                                        <af:showPopupBehavior popupId="::pEntry"/>
+                                                    </af:commandMenuItem>
+                                                </af:menu>
+                                            </af:popup>
                                         </f:facet>
                                     </af:table>
                                     <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateEdit"
@@ -197,7 +214,8 @@
                                                                       required="#{bindings.Dat.hints.mandatory}"
                                                                       columns="#{bindings.Dat.hints.displayWidth}"
                                                                       shortDesc="#{bindings.Dat.hints.tooltip}"
-                                                                      id="id2" autoSubmit="true">
+                                                                      id="id2" autoSubmit="true"
+                                                                      labelStyle="font-weight: bold;">
                                                             <f:validator binding="#{bindings.Dat.validator}"/>
                                                             <af:convertDateTime pattern="#{bindings.Dat.format}"/>
                                                         </af:inputDate>
@@ -207,41 +225,62 @@
                                                                       columns="#{bindings.Num.hints.displayWidth}"
                                                                       maximumLength="#{bindings.Num.hints.precision}"
                                                                       shortDesc="#{bindings.Num.hints.tooltip}"
-                                                                      id="it5">
+                                                                      id="it5" labelStyle="font-weight: bold;">
                                                             <f:validator binding="#{bindings.Num.validator}"/>
                                                         </af:inputText>
-                                                        <af:selectOneChoice value="#{bindings.DivisionId.inputValue}"
-                                                                            label="#{bindings.DivisionId.label}"
-                                                                            required="#{bindings.DivisionId.hints.mandatory}"
-                                                                            shortDesc="#{bindings.DivisionId.hints.tooltip}"
-                                                                            id="soc4" autoSubmit="true">
-                                                            <f:selectItems value="#{bindings.DivisionId.items}"
-                                                                           id="si4"/>
-                                                            <f:validator binding="#{bindings.DivisionId.validator}"/>
-                                                        </af:selectOneChoice>
-                                                        <af:selectOneChoice value="#{bindings.UserId.inputValue}"
-                                                                            label="#{bindings.UserId.label}"
-                                                                            required="#{bindings.UserId.hints.mandatory}"
-                                                                            shortDesc="#{bindings.UserId.hints.tooltip}"
-                                                                            id="soc5">
-                                                            <f:selectItems value="#{bindings.UserId.items}" id="si5"/>
-                                                            <f:validator binding="#{bindings.UserId.validator}"/>
-                                                        </af:selectOneChoice>
-                                                        <af:selectOneChoice value="#{bindings.CurrId.inputValue}"
-                                                                            label="#{bindings.CurrId.label}"
-                                                                            required="#{bindings.CurrId.hints.mandatory}"
-                                                                            shortDesc="#{bindings.CurrId.hints.tooltip}"
-                                                                            id="soc6" autoSubmit="true">
-                                                            <f:selectItems value="#{bindings.CurrId.items}" id="si6"/>
-                                                            <f:validator binding="#{bindings.CurrId.validator}"/>
-                                                        </af:selectOneChoice>
-                                                        <af:selectOneChoice value="#{bindings.KassaId.inputValue}"
-                                                                            label="#{bindings.KassaId.label}"
-                                                                            required="#{bindings.KassaId.hints.mandatory}"
-                                                                            shortDesc="#{bindings.KassaId.hints.tooltip}"
-                                                                            id="soc7">
-                                                            <f:selectItems value="#{bindings.KassaId.items}" id="si7"/>
-                                                            <f:validator binding="#{bindings.KassaId.validator}"/>
+                                                        <af:panelLabelAndMessage label="Оплата" id="plam2"
+                                                                                 inlineStyle="font-weight: bold;">
+                                                            <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                                                <af:selectOneChoice value="#{bindings.CurrId.inputValue}"
+                                                                                    label="#{bindings.CurrId.label}"
+                                                                                    required="#{bindings.CurrId.hints.mandatory}"
+                                                                                    shortDesc="#{bindings.CurrId.hints.tooltip}"
+                                                                                    id="soc6" autoSubmit="true">
+                                                                    <f:selectItems value="#{bindings.CurrId.items}"
+                                                                                   id="si6"/>
+                                                                    <f:validator binding="#{bindings.CurrId.validator}"/>
+                                                                </af:selectOneChoice>
+                                                                <af:selectOneChoice value="#{bindings.KassaId.inputValue}"
+                                                                                    label="#{bindings.KassaId.label}"
+                                                                                    required="#{bindings.KassaId.hints.mandatory}"
+                                                                                    shortDesc="#{bindings.KassaId.hints.tooltip}"
+                                                                                    id="soc7">
+                                                                    <f:selectItems value="#{bindings.KassaId.items}"
+                                                                                   id="si7"/>
+                                                                    <f:validator binding="#{bindings.KassaId.validator}"/>
+                                                                </af:selectOneChoice>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelLabelAndMessage>
+                                                        <af:panelLabelAndMessage label="Принадлежность" id="plam3">
+                                                            <af:panelGroupLayout id="pgl4" layout="horizontal">
+                                                                <af:selectOneChoice value="#{bindings.DivisionId.inputValue}"
+                                                                                    label="#{bindings.DivisionId.label}"
+                                                                                    required="#{bindings.DivisionId.hints.mandatory}"
+                                                                                    shortDesc="#{bindings.DivisionId.hints.tooltip}"
+                                                                                    id="soc4" autoSubmit="true">
+                                                                    <f:selectItems value="#{bindings.DivisionId.items}"
+                                                                                   id="si4"/>
+                                                                    <f:validator binding="#{bindings.DivisionId.validator}"/>
+                                                                </af:selectOneChoice>
+                                                                <af:selectOneChoice value="#{bindings.UserId.inputValue}"
+                                                                                    label="#{bindings.UserId.label}"
+                                                                                    required="#{bindings.UserId.hints.mandatory}"
+                                                                                    shortDesc="#{bindings.UserId.hints.tooltip}"
+                                                                                    id="soc5">
+                                                                    <f:selectItems value="#{bindings.UserId.items}"
+                                                                                   id="si5"/>
+                                                                    <f:validator binding="#{bindings.UserId.validator}"/>
+                                                                </af:selectOneChoice>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelLabelAndMessage>
+                                                        <af:selectOneChoice value="#{bindings.ActivitiesId.inputValue}"
+                                                                            label="#{bindings.ActivitiesId.label}"
+                                                                            required="#{bindings.ActivitiesId.hints.mandatory}"
+                                                                            shortDesc="#{bindings.ActivitiesId.hints.tooltip}"
+                                                                            id="soc8" labelStyle="font-weight: bold;">
+                                                            <f:selectItems value="#{bindings.ActivitiesId.items}"
+                                                                           id="si8"/>
+                                                            <f:validator binding="#{bindings.ActivitiesId.validator}"/>
                                                         </af:selectOneChoice>
                                                         <af:inputText value="#{bindings.Comments.inputValue}"
                                                                       label="#{bindings.Comments.hints.label}"
@@ -249,7 +288,7 @@
                                                                       columns="#{bindings.Comments.hints.displayWidth}"
                                                                       maximumLength="#{bindings.Comments.hints.precision}"
                                                                       shortDesc="#{bindings.Comments.hints.tooltip}"
-                                                                      id="it6" rows="4">
+                                                                      id="it6" rows="4" labelStyle="font-weight: bold;">
                                                             <f:validator binding="#{bindings.Comments.validator}"/>
                                                         </af:inputText>
                                                         <af:spacer width="10" height="10" id="s1"/>
@@ -364,6 +403,71 @@
                                                     </af:panelBox>
                                                 </af:showDetailItem>
                                             </af:panelAccordion>
+                                        </af:dialog>
+                                    </af:popup>
+                                    <af:popup childCreation="deferred" autoCancel="disabled" id="pEntry"
+                                              contentDelivery="lazyUncached">
+                                        <af:dialog id="d2" title="Проводки">
+                                            <f:facet name="buttonBar"/>
+                                            <af:table value="#{bindings.VwOtherMoves2.collectionModel}" var="row"
+                                                      rows="#{bindings.VwOtherMoves2.rangeSize}"
+                                                      emptyText="#{bindings.VwOtherMoves2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                      rowBandingInterval="0"
+                                                      selectedRowKeys="#{bindings.VwOtherMoves2.collectionModel.selectedRow}"
+                                                      selectionListener="#{bindings.VwOtherMoves2.collectionModel.makeCurrent}"
+                                                      rowSelection="single"
+                                                      fetchSize="#{bindings.VwOtherMoves2.rangeSize}" id="t7">
+                                                <af:column headerText="#{bindings.VwOtherMoves2.hints.RegistratorId.label}"
+                                                           id="c19" visible="false">
+                                                    <af:outputText value="#{row.RegistratorId}"
+                                                                   shortDesc="#{bindings.VwOtherMoves2.hints.RegistratorId.tooltip}"
+                                                                   id="ot1"/>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.VwOtherMoves2.hints.Deb.label}"
+                                                           id="c20" inlineStyle="font-weight:bold;">
+                                                    <af:outputText value="#{row.Deb}"
+                                                                   shortDesc="#{bindings.VwOtherMoves2.hints.Deb.tooltip}"
+                                                                   id="ot2"/>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.VwOtherMoves2.hints.SumDeb.label}"
+                                                           id="c21"
+                                                           inlineStyle="#{row.SumDeb &lt; 0 ? 'color: Red' : 'color: Black'}">
+                                                    <af:outputText value="#{row.SumDeb}"
+                                                                   shortDesc="#{bindings.VwOtherMoves2.hints.SumDeb.tooltip}"
+                                                                   id="ot3">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.VwOtherMoves2.hints.SumDeb.format}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.VwOtherMoves2.hints.Kred.label}"
+                                                           id="c22" inlineStyle="font-weight:bold;">
+                                                    <af:outputText value="#{row.Kred}"
+                                                                   shortDesc="#{bindings.VwOtherMoves2.hints.Kred.tooltip}"
+                                                                   id="ot4"/>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.VwOtherMoves2.hints.SumKred.label}"
+                                                           id="c23"
+                                                           inlineStyle="#{row.SumKred &lt; 0 ? 'color: Red' : 'color: Black'}">
+                                                    <af:outputText value="#{row.SumKred}"
+                                                                   shortDesc="#{bindings.VwOtherMoves2.hints.SumKred.tooltip}"
+                                                                   id="ot5">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.VwOtherMoves2.hints.SumKred.format}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.VwOtherMoves2.hints.Subconto1Deb.label}"
+                                                           id="c24">
+                                                    <af:outputText value="#{row.Subconto1Deb}"
+                                                                   shortDesc="#{bindings.VwOtherMoves2.hints.Subconto1Deb.tooltip}"
+                                                                   id="ot6"/>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.VwOtherMoves2.hints.Subconto1Kred.label}"
+                                                           id="c25">
+                                                    <af:outputText value="#{row.Subconto1Kred}"
+                                                                   shortDesc="#{bindings.VwOtherMoves2.hints.Subconto1Kred.tooltip}"
+                                                                   id="ot7"/>
+                                                </af:column>
+                                            </af:table>
                                         </af:dialog>
                                     </af:popup>
                                 </af:panelBox>

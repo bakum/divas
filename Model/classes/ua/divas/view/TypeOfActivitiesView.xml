@@ -57,4 +57,9 @@
     ViewLink="ua.divas.view.OrderZamerActivitiesFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="OtherZatratyView"
+    ViewLink="ua.divas.view.OtherZatratyActivitiesFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
 </ViewObject>

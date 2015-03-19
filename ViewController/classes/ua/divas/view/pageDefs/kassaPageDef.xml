@@ -7,6 +7,8 @@
     <iterator Binds="KassaView1" RangeSize="25" DataControl="AppModuleDataControl" id="KassaView1Iterator"/>
     <iterator Binds="VwKassaMoves1" RangeSize="10" DataControl="AppModuleDataControl" id="VwKassaMoves1Iterator"/>
     <iterator id="OrdersView1Iterator" Binds="OrdersView1" DataControl="AppModuleDataControl" RangeSize="25"/>
+    <iterator id="OtherZatratyView1Iterator" Binds="OtherZatratyView1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
   </executables>
   <bindings>
     <tree IterBinding="KassaView1Iterator" id="KassaView1">
@@ -33,6 +35,7 @@
           <Item Value="Summ"/>
           <Item Value="SummPrihod"/>
           <Item Value="SummRashod"/>
+          <Item Value="TableName"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

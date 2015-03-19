@@ -96,6 +96,13 @@
     AssociationOtherEnd="ua.divas.model.UserSettingsFk1Assoc.TypeOfActivities"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="OtherZatraty"
+    Association="ua.divas.model.OtherZatratyActivitiesFkAssoc"
+    AssociationEnd="ua.divas.model.OtherZatratyActivitiesFkAssoc.OtherZatraty"
+    AssociationOtherEnd="ua.divas.model.OtherZatratyActivitiesFkAssoc.TypeOfActivities"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="TypeOfActivitiesPk"
     PrimaryKey="true">
