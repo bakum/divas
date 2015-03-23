@@ -19,7 +19,11 @@
   <ViewAccessor
     Name="DivisionsView1"
     ViewObjectName="ua.divas.view.DivisionsView"
-    RowLevelBinds="true"/>
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="DivisionsViewGroup"
+      FullName="ua.divas.view.DivisionsView.DivisionsViewGroup"/>
+  </ViewAccessor>
   <ViewAccessor
     Name="UsersView1"
     ViewObjectName="ua.divas.view.UsersView"
@@ -147,6 +151,32 @@ where deleted = 0]]></SQLQuery>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="TotalActiveStart"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[VwBallansAp.sum("ActiveStart != null ? ActiveStart : 0")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalActiveOborot"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[VwBallansAp.sum("ActiveOborot != null ? ActiveOborot : 0")]]></TransientExpression>
+  </ViewAttribute>
   <ViewCriteria
     Name="DivisionsViewGroup"
     ViewObjectName="ua.divas.view.DivisionsView"
@@ -190,6 +220,50 @@ where deleted = 0]]></SQLQuery>
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ViewCriteria
+    Name="DivisionsViewItems"
+    ViewObjectName="ua.divas.view.DivisionsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="DivisionsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="DivisionsViewCriteria_DivisionsViewCriteria_row_0_Deleted"
+        ViewAttribute="Deleted"
+        Operator="="
+        Conjunction="AND"
+        Value="0"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="IsGroup"
+        ViewAttribute="IsGroup"
+        Operator="="
+        Conjunction="AND"
+        Value="0"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="DivisionsView"
     ViewLink="ua.divas.view.DivisionsDivisionsFk1Link"
@@ -223,6 +297,11 @@ where deleted = 0]]></SQLQuery>
   <ViewLinkAccessor
     Name="OtherZatratyView"
     ViewLink="ua.divas.view.OtherZatratyFk1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="VwBallansAp"
+    ViewLink="ua.divas.view.VwBallansApDivisionFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <ClientInterface

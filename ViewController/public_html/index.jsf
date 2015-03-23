@@ -69,6 +69,11 @@
                                                     </af:showDetailItem>
                                                 </af:panelTabbed>
                                             </af:showDetailItem>
+                                            <af:showDetailItem text="Баланс" id="sdi16"
+                                                               stretchChildren="first"
+                                                               rendered="#{securityContext.taskflowViewable['/WEB-INF/ballans-config.xml#ballans-config']}">
+                                                <af:region value="#{bindings.ballansconfig1.regionModel}" id="r13"/>
+                                            </af:showDetailItem>
                                         </af:panelTabbed>
                                     </af:showDetailItem>
                                     <af:showDetailItem text="Настройки" id="sdi7" stretchChildren="first"

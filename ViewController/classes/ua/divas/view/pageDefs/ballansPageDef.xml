@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.2.66.68" id="ballansPageDef"
+                Package="ua.divas.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables">
+      <variable Name="p_div" Type="java.lang.String"/>
+    </variableIterator>
+    <iterator Binds="VwBallansAp1" RangeSize="25" DataControl="AppModuleDataControl" id="VwBallansAp1Iterator"/>
+    <iterator Binds="DivisionsView1" RangeSize="-1" DataControl="AppModuleDataControl" id="DivisionsView1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="VwBallansAp1Iterator" id="VwBallansAp1">
+      <nodeDefinition DefName="ua.divas.view.VwBallansAp" Name="VwBallansAp10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Code"/>
+          <Item Value="Fullname"/>
+          <Item Value="ActiveStart"/>
+          <Item Value="ActiveOborot"/>
+          <Item Value="ActiveEnd"/>
+          <Item Value="PassiveStart"/>
+          <Item Value="PassiveOborot"/>
+          <Item Value="PassiveEnd"/>
+          <Item Value="DivisionId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="DivisionsView1Iterator" id="TotalActiveOborot">
+      <AttrNames>
+        <Item Value="TotalActiveOborot"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DivisionsView1Iterator" id="TotalActiveStart">
+      <AttrNames>
+        <Item Value="TotalActiveStart"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="VwBallansAp1Iterator" id="ExecuteWithParams" InstanceName="AppModuleDataControl.VwBallansAp1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="div" NDValue="#{bindings.p_div}" NDType="java.lang.String"/>
+    </action>
+    <list StaticList="false" IterBinding="variables" ListIter="DivisionsView1Iterator" id="div1">
+      <AttrNames>
+        <Item Value="p_div"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="Id"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Fullname"/>
+      </ListDisplayAttrNames>
+    </list>
+  </bindings>
+</pageDefinition>

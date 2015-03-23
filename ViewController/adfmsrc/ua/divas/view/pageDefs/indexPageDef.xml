@@ -28,6 +28,8 @@
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
     <taskFlow id="other_zatrconfig1" taskFlowId="/WEB-INF/other_zatr-config.xml#other_zatr-config" activation="deferred"
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="ballansconfig1" taskFlowId="/WEB-INF/ballans-config.xml#ballans-config" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
   </executables>
   <bindings/>
 </pageDefinition>

@@ -28,6 +28,7 @@ import ua.divas.view.OrdersViewImpl;
 import ua.divas.view.OtherZatratyViewImpl;
 import ua.divas.view.UserSettingsViewImpl;
 import ua.divas.view.UsersViewImpl;
+import ua.divas.view.VwBallansApImpl;
 import ua.divas.view.ZatratyViewImpl;
 import ua.divas.view.ro.KontragentsItemsLookupVOImpl;
 import ua.divas.view.ro.UsersItemsLookupVOImpl;
@@ -3101,6 +3102,30 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getOtherVwOtherMovesFkLink1() {
         return (ViewLinkImpl) findViewLink("OtherVwOtherMovesFkLink1");
+    }
+
+    /**
+     * Container's getter for VwBallansAp1.
+     * @return VwBallansAp1
+     */
+    public VwBallansApImpl getVwBallansAp1() {
+        return (VwBallansApImpl) findViewObject("VwBallansAp1");
+    }
+
+    /**
+     * Container's getter for VwBallansAp2.
+     * @return VwBallansAp2
+     */
+    public VwBallansApImpl getVwBallansAp2() {
+        return (VwBallansApImpl) findViewObject("VwBallansAp2");
+    }
+
+    /**
+     * Container's getter for VwBallansApDivisionFkLink1.
+     * @return VwBallansApDivisionFkLink1
+     */
+    public ViewLinkImpl getVwBallansApDivisionFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwBallansApDivisionFkLink1");
     }
 }
 

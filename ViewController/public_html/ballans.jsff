@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces" xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelGridLayout id="pgl1">
+        <af:gridRow height="100%" id="gr1">
+            <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
+                <!-- Content -->
+                <af:panelBox text="Баланс за период по подразделению" id="pb1" type="flow">
+                    <f:facet name="toolbar">
+                        <af:panelGroupLayout id="pgl4" layout="horizontal">
+                            <af:selectOneChoice label="Подразделение" id="soc2" value="#{bindings.div1.inputValue}"
+                                                autoSubmit="true">
+                                <f:selectItems value="#{bindings.div1.items}" id="si2"/>
+                            </af:selectOneChoice>
+                            <af:toolbar id="t2">
+                                <af:button text="Обновить" id="b1"
+                                           actionListener="#{bindings.ExecuteWithParams.execute}"/>
+                            </af:toolbar>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <af:table value="#{bindings.VwBallansAp1.collectionModel}" var="row"
+                              rows="#{bindings.VwBallansAp1.rangeSize}"
+                              emptyText="#{bindings.VwBallansAp1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.VwBallansAp1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.VwBallansAp1.collectionModel.makeCurrent}"
+                              rowSelection="single" fetchSize="#{bindings.VwBallansAp1.rangeSize}" id="t1"
+                              allDetailsEnabled="true" partialTriggers="::b1">
+                        <af:column headerText="#{bindings.VwBallansAp1.hints.Id.label}" id="c1" visible="false">
+                            <af:outputText value="#{row.Id}" shortDesc="#{bindings.VwBallansAp1.hints.Id.tooltip}"
+                                           id="ot1"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.VwBallansAp1.hints.Code.label}" id="c2">
+                            <af:outputText value="#{row.Code}" shortDesc="#{bindings.VwBallansAp1.hints.Code.tooltip}"
+                                           id="ot2"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.VwBallansAp1.hints.Fullname.label}" id="c3" width="350">
+                            <af:outputText value="#{row.Fullname}"
+                                           shortDesc="#{bindings.VwBallansAp1.hints.Fullname.tooltip}" id="ot3"/>
+                            <f:facet name="footer"/>
+                        </af:column>
+                        <af:column id="c11" headerText="Актив" align="center" inlineStyle="font-weight:bold;">
+                            <af:column headerText="#{bindings.VwBallansAp1.hints.ActiveStart.label}" id="c4"
+                                       align="right">
+                                <af:outputText value="#{row.ActiveStart}"
+                                               shortDesc="#{bindings.VwBallansAp1.hints.ActiveStart.tooltip}" id="ot4"
+                                               inlineStyle="#{row.ActiveStart &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.VwBallansAp1.hints.ActiveStart.format}"/>
+                                </af:outputText>
+                                <f:facet name="footer">
+                                    <af:panelGroupLayout id="pgl2" layout="horizontal" halign="right">
+                                        <af:outputText value="#{bindings.TotalActiveStart.inputValue}"
+                                                       shortDesc="#{bindings.TotalActiveStart.hints.tooltip}" id="ot11">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.TotalActiveStart.format}"/>
+                                        </af:outputText>
+                                    </af:panelGroupLayout>
+                                </f:facet>
+                            </af:column>
+                            <af:column headerText="#{bindings.VwBallansAp1.hints.ActiveOborot.label}" id="c5"
+                                       align="right">
+                                <af:outputText value="#{row.ActiveOborot}"
+                                               shortDesc="#{bindings.VwBallansAp1.hints.ActiveOborot.tooltip}" id="ot5"
+                                               inlineStyle="#{row.ActiveOborot &lt; '0' ? 'color:Red;' : ''}">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.VwBallansAp1.hints.ActiveOborot.format}"/>
+                                </af:outputText>
+                                <f:facet name="footer">
+                                    <af:panelGroupLayout id="pgl3" layout="horizontal" halign="right">
+                                        <af:outputText value="#{bindings.TotalActiveOborot.inputValue}"
+                                                       shortDesc="#{bindings.TotalActiveOborot.hints.tooltip}"
+                                                       id="ot10">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.TotalActiveOborot.format}"/>
+                                        </af:outputText>
+                                    </af:panelGroupLayout>
+                                </f:facet>
+                            </af:column>
+                            <af:column headerText="#{bindings.VwBallansAp1.hints.ActiveEnd.label}" id="c6"
+                                       align="right">
+                                <af:outputText value="#{row.ActiveEnd}"
+                                               shortDesc="#{bindings.VwBallansAp1.hints.ActiveEnd.tooltip}" id="ot6"
+                                               inlineStyle="#{row.ActiveEnd &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.VwBallansAp1.hints.ActiveEnd.format}"/>
+                                </af:outputText>
+                            </af:column>
+                        </af:column>
+                        <af:column id="c12" headerText="Пассив" align="center">
+                            <af:column headerText="#{bindings.VwBallansAp1.hints.PassiveStart.label}" id="c7"
+                                       align="right">
+                                <af:outputText value="#{row.PassiveStart}"
+                                               shortDesc="#{bindings.VwBallansAp1.hints.PassiveStart.tooltip}" id="ot7"
+                                               inlineStyle="#{row.PassiveStart &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.VwBallansAp1.hints.PassiveStart.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column headerText="#{bindings.VwBallansAp1.hints.PassiveOborot.label}" id="c8"
+                                       align="right">
+                                <af:outputText value="#{row.PassiveOborot}"
+                                               shortDesc="#{bindings.VwBallansAp1.hints.PassiveOborot.tooltip}" id="ot8"
+                                               inlineStyle="#{row.PassiveOborot &lt; '0' ? 'color:Red;' : ''}">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.VwBallansAp1.hints.PassiveOborot.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column headerText="#{bindings.VwBallansAp1.hints.PassiveEnd.label}" id="c9"
+                                       align="right">
+                                <af:outputText value="#{row.PassiveEnd}"
+                                               shortDesc="#{bindings.VwBallansAp1.hints.PassiveEnd.tooltip}" id="ot9"
+                                               inlineStyle="#{row.PassiveEnd &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.VwBallansAp1.hints.PassiveEnd.format}"/>
+                                </af:outputText>
+                            </af:column>
+                        </af:column>
+                        <af:column headerText="#{bindings.VwBallansAp1.hints.DivisionId.label}" id="c10"
+                                   visible="false">
+                            <af:selectOneChoice value="#{row.bindings.DivisionId.inputValue}"
+                                                label="#{row.bindings.DivisionId.label}"
+                                                required="#{bindings.VwBallansAp1.hints.DivisionId.mandatory}"
+                                                shortDesc="#{bindings.VwBallansAp1.hints.DivisionId.tooltip}"
+                                                readOnly="true" id="soc1">
+                                <f:selectItems value="#{row.bindings.DivisionId.items}" id="si1"/>
+                                <f:validator binding="#{row.bindings.DivisionId.validator}"/>
+                            </af:selectOneChoice>
+                        </af:column>
+                        <f:facet name="footer"/>
+                    </af:table>
+                </af:panelBox>
+            </af:gridCell>
+        </af:gridRow>
+    </af:panelGridLayout>
+</ui:composition>
