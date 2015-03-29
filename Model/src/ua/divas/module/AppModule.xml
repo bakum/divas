@@ -730,6 +730,30 @@
   <ViewUsage
     Name="VwBallansAp2"
     ViewObjectName="ua.divas.view.VwBallansAp"/>
+  <ViewUsage
+    Name="VwSales1"
+    ViewObjectName="ua.divas.view.VwSales"/>
+  <ViewUsage
+    Name="VwSales2"
+    ViewObjectName="ua.divas.view.VwSales"/>
+  <ViewUsage
+    Name="VwSales3"
+    ViewObjectName="ua.divas.view.VwSales"/>
+  <ViewUsage
+    Name="VwSales4"
+    ViewObjectName="ua.divas.view.VwSales"/>
+  <ViewUsage
+    Name="VwZatraty1"
+    ViewObjectName="ua.divas.view.VwZatraty"/>
+  <ViewUsage
+    Name="VwZatraty2"
+    ViewObjectName="ua.divas.view.VwZatraty"/>
+  <ViewUsage
+    Name="VwZatraty3"
+    ViewObjectName="ua.divas.view.VwZatraty"/>
+  <ViewUsage
+    Name="VwZatraty4"
+    ViewObjectName="ua.divas.view.VwZatraty"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -1593,6 +1617,42 @@
     ViewLinkObjectName="ua.divas.view.VwBallansApDivisionFkLink"
     SrcViewUsageName="ua.divas.module.AppModule.DivisionsView1"
     DstViewUsageName="ua.divas.module.AppModule.VwBallansAp2"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="VwSalesDivisionFkLink1"
+    ViewLinkObjectName="ua.divas.view.VwSalesDivisionFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.DivisionsView1"
+    DstViewUsageName="ua.divas.module.AppModule.VwSales2"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="VwSalesKontragFkLink1"
+    ViewLinkObjectName="ua.divas.view.VwSalesKontragFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.KontragentsView1"
+    DstViewUsageName="ua.divas.module.AppModule.VwSales3"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="VwSalesOrdersFkLink1"
+    ViewLinkObjectName="ua.divas.view.VwSalesOrdersFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.OrdersView1"
+    DstViewUsageName="ua.divas.module.AppModule.VwSales4"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="VwZatratyOtherZatratyFkLink1"
+    ViewLinkObjectName="ua.divas.view.VwZatratyOtherZatratyFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.OtherZatratyView1"
+    DstViewUsageName="ua.divas.module.AppModule.VwZatraty2"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="VwZatratyDivisionsFkLink1"
+    ViewLinkObjectName="ua.divas.view.VwZatratyDivisionsFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.DivisionsView1"
+    DstViewUsageName="ua.divas.module.AppModule.VwZatraty3"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="VwZatratyZatratyFkLink1"
+    ViewLinkObjectName="ua.divas.view.VwZatratyZatratyFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.ZatratyView1"
+    DstViewUsageName="ua.divas.module.AppModule.VwZatraty4"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">

@@ -320,6 +320,16 @@
                 <name>/WEB-INF/ballans-config.xml#ballans-config</name>
                 <actions>view</actions>
               </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/sales-config.xml#sales-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/zatraty-config.xml#zatraty-config</name>
+                <actions>view</actions>
+              </permission>
             </permissions>
           </grant>
           <grant>
@@ -390,6 +400,16 @@
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/ballans-config.xml#ballans-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/sales-config.xml#sales-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/zatraty-config.xml#zatraty-config</name>
                 <actions>view</actions>
               </permission>
             </permissions>
@@ -571,6 +591,16 @@
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/ballans-config.xml#ballans-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/sales-config.xml#sales-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/zatraty-config.xml#zatraty-config</name>
                 <actions>view</actions>
               </permission>
             </permissions>

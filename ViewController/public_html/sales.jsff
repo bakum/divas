@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+    <af:panelGridLayout id="pgl1">
+        <af:gridRow height="100%" id="gr1">
+            <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
+                <!-- Content -->
+                <af:panelBox text="Продажи по подразделениям" id="pb1" type="flow">
+                    <f:facet name="toolbar"/>
+                    <af:table value="#{bindings.VwSales1.collectionModel}" var="row"
+                              rows="#{bindings.VwSales1.rangeSize}"
+                              emptyText="#{bindings.VwSales1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              rowBandingInterval="0" selectedRowKeys="#{bindings.VwSales1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.VwSales1.collectionModel.makeCurrent}" rowSelection="single"
+                              fetchSize="#{bindings.VwSales1.rangeSize}"
+                              filterModel="#{bindings.VwSales1Query.queryDescriptor}"
+                              queryListener="#{bindings.VwSales1Query.processQuery}" filterVisible="true" varStatus="vs"
+                              id="t1" binding="#{sales.tb}">
+                        <af:column id="c8" width="50" filterable="true">
+                            <f:facet name="filter">
+                                <af:button id="b1" icon="/img/filter_(delete)_16x16.gif"
+                                           actionListener="#{sales.resetTableFilter}" shortDesc="Сбросить все фильтры"/>
+                            </f:facet>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.VwSales1.hints.KontragId.name}" filterable="true"
+                                   headerText="#{bindings.VwSales1.hints.KontragId.label}" id="c2" width="250">
+                            <af:selectOneChoice value="#{row.bindings.KontragId.inputValue}"
+                                                label="#{row.bindings.KontragId.label}"
+                                                required="#{bindings.VwSales1.hints.KontragId.mandatory}"
+                                                shortDesc="#{bindings.VwSales1.hints.KontragId.tooltip}" readOnly="true"
+                                                id="soc2">
+                                <f:selectItems value="#{row.bindings.KontragId.items}" id="si2"/>
+                                <f:validator binding="#{row.bindings.KontragId.validator}"/>
+                            </af:selectOneChoice>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.VwSales1.hints.OrderId.name}" filterable="true"
+                                   headerText="#{bindings.VwSales1.hints.OrderId.label}" id="c1" width="250">
+                            <af:selectOneChoice value="#{row.bindings.OrderId.inputValue}"
+                                                label="#{row.bindings.OrderId.label}"
+                                                required="#{bindings.VwSales1.hints.OrderId.mandatory}"
+                                                shortDesc="#{bindings.VwSales1.hints.OrderId.tooltip}" readOnly="true"
+                                                id="soc1">
+                                <f:selectItems value="#{row.bindings.OrderId.items}" id="si1"/>
+                                <f:validator binding="#{row.bindings.OrderId.validator}"/>
+                            </af:selectOneChoice>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.VwSales1.hints.Period.name}"
+                                   headerText="#{bindings.VwSales1.hints.Period.label}" id="c4">
+                            <f:facet name="filter">
+                                <af:inputDate value="#{bindings.VwSales1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.Period.value}"
+                                              id="id1">
+                                    <af:convertDateTime pattern="#{bindings.VwSales1.hints.Period.format}"/>
+                                </af:inputDate>
+                            </f:facet>
+                            <af:outputText value="#{row.Period}" shortDesc="#{bindings.VwSales1.hints.Period.tooltip}"
+                                           id="ot1">
+                                <af:convertDateTime pattern="#{bindings.VwSales1.hints.Period.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.VwSales1.hints.SalesSumma.name}" filterable="true"
+                                   headerText="#{bindings.VwSales1.hints.SalesSumma.label}" id="c5" align="right">
+                            <af:outputText value="#{row.SalesSumma}"
+                                           shortDesc="#{bindings.VwSales1.hints.SalesSumma.tooltip}" id="ot2"
+                                           inlineStyle="#{row.SalesSumma &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.VwSales1.hints.SalesSumma.format}"/>
+                            </af:outputText>
+                            <f:facet name="footer">
+                                <af:outputText value="#{bindings.VwSales1Iterator.viewObject.sum['SalesSumma']}" id="ot5"
+                                               inlineStyle="font-weight:bold;"/>
+                            </f:facet>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.VwSales1.hints.PlanSebestSumma.name}" filterable="true"
+                                   headerText="#{bindings.VwSales1.hints.PlanSebestSumma.label}" id="c7" align="right">
+                            <af:outputText value="#{row.PlanSebestSumma}"
+                                           shortDesc="#{bindings.VwSales1.hints.PlanSebestSumma.tooltip}" id="ot4"
+                                           inlineStyle="#{row.PlanSebestSumma &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.VwSales1.hints.PlanSebestSumma.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.VwSales1.hints.FactSebestSumma.name}" filterable="true"
+                                   headerText="#{bindings.VwSales1.hints.FactSebestSumma.label}" id="c6" align="right">
+                            <af:outputText value="#{row.FactSebestSumma}"
+                                           shortDesc="#{bindings.VwSales1.hints.FactSebestSumma.tooltip}" id="ot3"
+                                           inlineStyle="#{row.FactSebestSumma &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.VwSales1.hints.FactSebestSumma.format}"/>
+                            </af:outputText>
+                            <f:facet name="footer">
+                                <af:outputText value="#{bindings.VwSales1Iterator.viewObject.sum['FactSebestSumma']}" id="ot6"
+                                               inlineStyle="font-weight:bold;"/>
+                            </f:facet>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.VwSales1.hints.DivisionId.name}" filterable="true"
+                                   headerText="#{bindings.VwSales1.hints.DivisionId.label}" id="c3" align="center">
+                            <af:selectOneChoice value="#{row.bindings.DivisionId.inputValue}"
+                                                label="#{row.bindings.DivisionId.label}"
+                                                required="#{bindings.VwSales1.hints.DivisionId.mandatory}"
+                                                shortDesc="#{bindings.VwSales1.hints.DivisionId.tooltip}"
+                                                readOnly="true" id="soc3">
+                                <f:selectItems value="#{row.bindings.DivisionId.items}" id="si3"/>
+                                <f:validator binding="#{row.bindings.DivisionId.validator}"/>
+                            </af:selectOneChoice>
+                            <f:facet name="filter">
+                                <af:selectOneChoice label="Подразделение" id="soc4" value="#{vs.filterCriteria.DivisionId}"
+                                                    autoSubmit="true">
+                                    <f:selectItems value="#{bindings.DivisionId.items}" id="si4"/>
+                                </af:selectOneChoice>
+                            </f:facet>
+                        </af:column>
+                        <f:facet name="footer"/>
+                    </af:table>
+                </af:panelBox>
+            </af:gridCell>
+        </af:gridRow>
+    </af:panelGridLayout>
+</ui:composition>

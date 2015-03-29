@@ -57,9 +57,11 @@ public class OtherZatratyViewRowImpl extends ViewRowImpl {
         KassaId,
         OthEditable,
         ActivitiesId,
+        Objname,
         TotalZatr,
         OtherZatratyTabPartZatratyView,
         VwOtherMoves,
+        VwZatraty,
         DivisionsView1,
         UsersView1,
         CurrencyView1,
@@ -103,9 +105,11 @@ public class OtherZatratyViewRowImpl extends ViewRowImpl {
     public static final int KASSAID = AttributesEnum.KassaId.index();
     public static final int OTHEDITABLE = AttributesEnum.OthEditable.index();
     public static final int ACTIVITIESID = AttributesEnum.ActivitiesId.index();
+    public static final int OBJNAME = AttributesEnum.Objname.index();
     public static final int TOTALZATR = AttributesEnum.TotalZatr.index();
     public static final int OTHERZATRATYTABPARTZATRATYVIEW = AttributesEnum.OtherZatratyTabPartZatratyView.index();
     public static final int VWOTHERMOVES = AttributesEnum.VwOtherMoves.index();
+    public static final int VWZATRATY = AttributesEnum.VwZatraty.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
     public static final int CURRENCYVIEW1 = AttributesEnum.CurrencyView1.index();
@@ -343,6 +347,14 @@ public class OtherZatratyViewRowImpl extends ViewRowImpl {
     }
 
     /**
+     * Gets the attribute value for the calculated attribute Objname.
+     * @return the Objname
+     */
+    public String getObjname() {
+        return (String) getAttributeInternal(OBJNAME);
+    }
+
+    /**
      * Gets the associated <code>RowIterator</code> using master-detail link OtherZatratyTabPartZatratyView.
      */
     public RowIterator getOtherZatratyTabPartZatratyView() {
@@ -354,6 +366,13 @@ public class OtherZatratyViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getVwOtherMoves() {
         return (RowIterator) getAttributeInternal(VWOTHERMOVES);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link VwZatraty.
+     */
+    public RowIterator getVwZatraty() {
+        return (RowIterator) getAttributeInternal(VWZATRATY);
     }
 
     /**

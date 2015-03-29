@@ -347,7 +347,8 @@
         ID = ZAMER_ID) ZamerName, 
     Orders.DAT_COMPLETE DAT_COMPLETE, 
     Orders.DAT_ZAM DAT_ZAM, 
-    Orders.SUMM_PLAN SUMM_PLAN 
+    Orders.SUMM_PLAN SUMM_PLAN,
+    'Заказ' ObjName
 FROM 
     ORDERS Orders 
 WHERE 
@@ -665,6 +666,21 @@ WHERE
     EntityUsage="Orders"
     AliasName="SUMM_PLAN"/>
   <ViewAttribute
+    Name="Objname"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="OBJNAME"
+    Expression="OBJNAME"
+    SQLType="CHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
     Name="TotalSumUslugi"
     IsUpdateable="false"
     IsSelected="false"
@@ -842,6 +858,11 @@ WHERE
   <ViewLinkAccessor
     Name="VwKassaMoves"
     ViewLink="ua.divas.view.VwKassaOrdersFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="VwSales"
+    ViewLink="ua.divas.view.VwSalesOrdersFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <ClientInterface

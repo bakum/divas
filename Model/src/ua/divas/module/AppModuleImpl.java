@@ -29,6 +29,7 @@ import ua.divas.view.OtherZatratyViewImpl;
 import ua.divas.view.UserSettingsViewImpl;
 import ua.divas.view.UsersViewImpl;
 import ua.divas.view.VwBallansApImpl;
+import ua.divas.view.VwSalesImpl;
 import ua.divas.view.ZatratyViewImpl;
 import ua.divas.view.ro.KontragentsItemsLookupVOImpl;
 import ua.divas.view.ro.UsersItemsLookupVOImpl;
@@ -3126,6 +3127,118 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getVwBallansApDivisionFkLink1() {
         return (ViewLinkImpl) findViewLink("VwBallansApDivisionFkLink1");
+    }
+
+    /**
+     * Container's getter for VwSales1.
+     * @return VwSales1
+     */
+    public VwSalesImpl getVwSales1() {
+        return (VwSalesImpl) findViewObject("VwSales1");
+    }
+
+    /**
+     * Container's getter for VwSales2.
+     * @return VwSales2
+     */
+    public VwSalesImpl getVwSales2() {
+        return (VwSalesImpl) findViewObject("VwSales2");
+    }
+
+    /**
+     * Container's getter for VwSalesDivisionFkLink1.
+     * @return VwSalesDivisionFkLink1
+     */
+    public ViewLinkImpl getVwSalesDivisionFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwSalesDivisionFkLink1");
+    }
+
+    /**
+     * Container's getter for VwSales3.
+     * @return VwSales3
+     */
+    public VwSalesImpl getVwSales3() {
+        return (VwSalesImpl) findViewObject("VwSales3");
+    }
+
+    /**
+     * Container's getter for VwSalesKontragFkLink1.
+     * @return VwSalesKontragFkLink1
+     */
+    public ViewLinkImpl getVwSalesKontragFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwSalesKontragFkLink1");
+    }
+
+    /**
+     * Container's getter for VwSales4.
+     * @return VwSales4
+     */
+    public VwSalesImpl getVwSales4() {
+        return (VwSalesImpl) findViewObject("VwSales4");
+    }
+
+    /**
+     * Container's getter for VwSalesOrdersFkLink1.
+     * @return VwSalesOrdersFkLink1
+     */
+    public ViewLinkImpl getVwSalesOrdersFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwSalesOrdersFkLink1");
+    }
+
+    /**
+     * Container's getter for VwZatraty1.
+     * @return VwZatraty1
+     */
+    public ViewObjectImpl getVwZatraty1() {
+        return (ViewObjectImpl) findViewObject("VwZatraty1");
+    }
+
+    /**
+     * Container's getter for VwZatraty2.
+     * @return VwZatraty2
+     */
+    public ViewObjectImpl getVwZatraty2() {
+        return (ViewObjectImpl) findViewObject("VwZatraty2");
+    }
+
+    /**
+     * Container's getter for VwZatratyOtherZatratyFkLink1.
+     * @return VwZatratyOtherZatratyFkLink1
+     */
+    public ViewLinkImpl getVwZatratyOtherZatratyFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwZatratyOtherZatratyFkLink1");
+    }
+
+    /**
+     * Container's getter for VwZatraty3.
+     * @return VwZatraty3
+     */
+    public ViewObjectImpl getVwZatraty3() {
+        return (ViewObjectImpl) findViewObject("VwZatraty3");
+    }
+
+    /**
+     * Container's getter for VwZatratyDivisionsFkLink1.
+     * @return VwZatratyDivisionsFkLink1
+     */
+    public ViewLinkImpl getVwZatratyDivisionsFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwZatratyDivisionsFkLink1");
+    }
+
+    /**
+     * Container's getter for VwZatraty4.
+     * @return VwZatraty4
+     */
+    public ViewObjectImpl getVwZatraty4() {
+        return (ViewObjectImpl) findViewObject("VwZatraty4");
+    }
+
+    /**
+     * Container's getter for VwZatratyZatratyFkLink1.
+     * @return VwZatratyZatratyFkLink1
+     */
+    public ViewLinkImpl getVwZatratyZatratyFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwZatratyZatratyFkLink1");
     }
 }
 

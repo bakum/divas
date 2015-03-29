@@ -19,7 +19,8 @@
        Divisions.PARENT_ID,
        Divisions.VERSION,
        Divisions.PREDEFINED
-FROM DIVISIONS Divisions]]></SQLQuery>
+FROM DIVISIONS Divisions
+where is_group = 0 and deleted = 0]]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"
@@ -64,7 +65,7 @@ FROM DIVISIONS Divisions]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="DELETED"
     Expression="DELETED"
-    SQLType="NUMERIC"/>
+    SQLType="INTEGER"/>
   <ViewAttribute
     Name="IsGroup"
     IsUpdateable="false"
@@ -77,7 +78,7 @@ FROM DIVISIONS Divisions]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="IS_GROUP"
     Expression="IS_GROUP"
-    SQLType="NUMERIC"/>
+    SQLType="INTEGER"/>
   <ViewAttribute
     Name="ParentId"
     IsUpdateable="false"
@@ -103,7 +104,7 @@ FROM DIVISIONS Divisions]]></SQLQuery>
     ColumnType="TIMESTAMP"
     AliasName="VERSION"
     Expression="VERSION"
-    SQLType="TIMESTAMP"/>
+    SQLType="DATE"/>
   <ViewAttribute
     Name="Predefined"
     IsUpdateable="false"
@@ -116,7 +117,7 @@ FROM DIVISIONS Divisions]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="PREDEFINED"
     Expression="PREDEFINED"
-    SQLType="NUMERIC"/>
+    SQLType="INTEGER"/>
   <AttrArray Name="KeyAttributes">
     <Item Value="Id"/>
   </AttrArray>

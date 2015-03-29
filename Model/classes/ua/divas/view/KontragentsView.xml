@@ -721,6 +721,11 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     ViewLink="ua.divas.view.VwBuyerMovesKontragFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="VwSales"
+    ViewLink="ua.divas.view.VwSalesKontragFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ClientInterface
     Name="__clientInterface">
     <Method

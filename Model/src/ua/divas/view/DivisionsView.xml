@@ -304,6 +304,16 @@ where deleted = 0]]></SQLQuery>
     ViewLink="ua.divas.view.VwBallansApDivisionFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="VwSales"
+    ViewLink="ua.divas.view.VwSalesDivisionFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="VwZatraty"
+    ViewLink="ua.divas.view.VwZatratyDivisionsFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ClientInterface
     Name="__clientInterface">
     <Method

@@ -7,6 +7,16 @@
    background-color: Red; 
 }
 
+.MyHeaderBoldClass {
+    color: Black; 
+    font-weight: bold; 
+}
+
+.MyHeaderItalicClass {
+    color: Black; 
+    font-style: italic; 
+}
+
 .UnModClass {
    background-color: transparent; 
 }

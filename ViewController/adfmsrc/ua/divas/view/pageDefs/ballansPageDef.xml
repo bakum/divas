@@ -7,7 +7,7 @@
       <variable Name="p_div" Type="java.lang.String"/>
     </variableIterator>
     <iterator Binds="VwBallansAp1" RangeSize="25" DataControl="AppModuleDataControl" id="VwBallansAp1Iterator"/>
-    <iterator Binds="DivisionsView1" RangeSize="-1" DataControl="AppModuleDataControl" id="DivisionsView1Iterator"/>
+    <iterator id="DivisionsView1_1Iterator" Binds="DivisionsView1_1" DataControl="AppModuleDataControl" RangeSize="-1"/>
   </executables>
   <bindings>
     <tree IterBinding="VwBallansAp1Iterator" id="VwBallansAp1">
@@ -23,24 +23,20 @@
           <Item Value="PassiveOborot"/>
           <Item Value="PassiveEnd"/>
           <Item Value="DivisionId"/>
+          <Item Value="TotalActiveOborot"/>
+          <Item Value="TotalPassiveOborot"/>
+          <Item Value="ActiveDeb"/>
+          <Item Value="ActiveKred"/>
+          <Item Value="PassiveDeb"/>
+          <Item Value="PassiveKred"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <attributeValues IterBinding="DivisionsView1Iterator" id="TotalActiveOborot">
-      <AttrNames>
-        <Item Value="TotalActiveOborot"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="DivisionsView1Iterator" id="TotalActiveStart">
-      <AttrNames>
-        <Item Value="TotalActiveStart"/>
-      </AttrNames>
-    </attributeValues>
     <action IterBinding="VwBallansAp1Iterator" id="ExecuteWithParams" InstanceName="AppModuleDataControl.VwBallansAp1"
             DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="executeWithParams">
       <NamedData NDName="div" NDValue="#{bindings.p_div}" NDType="java.lang.String"/>
     </action>
-    <list StaticList="false" IterBinding="variables" ListIter="DivisionsView1Iterator" id="div1">
+    <list StaticList="false" IterBinding="variables" ListIter="DivisionsView1_1Iterator" id="div1">
       <AttrNames>
         <Item Value="p_div"/>
       </AttrNames>

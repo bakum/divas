@@ -51,7 +51,6 @@
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/kassa-config.xml#kassa-config']}">
                                                 <af:region value="#{bindings.kassaconfig1.regionModel}" id="r9"/>
                                             </af:showDetailItem>
-                                            <!--В доступе отказано-->
                                             <af:showDetailItem text="Взаиморасчеты" id="sdi12"
                                                                stretchChildren="first">
                                                 <af:panelTabbed id="pt3">
@@ -68,6 +67,14 @@
                                                                    id="r11"/>
                                                     </af:showDetailItem>
                                                 </af:panelTabbed>
+                                            </af:showDetailItem>
+                                            <af:showDetailItem text="Продажи" id="sdi17" stretchChildren="first"
+                                                               rendered="#{securityContext.taskflowViewable['/WEB-INF/sales-config.xml#sales-config']}">
+                                                <af:region value="#{bindings.salesconfig1.regionModel}" id="r14"/>
+                                            </af:showDetailItem>
+                                            <af:showDetailItem text="Затраты" id="sdi18" stretchChildren="first"
+                                                               rendered="#{securityContext.taskflowViewable['/WEB-INF/zatraty-config.xml#zatraty-config']}">
+                                                <af:region value="#{bindings.zatratyconfig1.regionModel}" id="r15"/>
                                             </af:showDetailItem>
                                             <af:showDetailItem text="Баланс" id="sdi16"
                                                                stretchChildren="first"

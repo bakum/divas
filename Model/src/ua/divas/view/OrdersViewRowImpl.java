@@ -69,6 +69,7 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         DatComplete,
         DatZam,
         SummPlan,
+        Objname,
         TotalSumUslugi,
         CountUslug,
         TotalSumOplaty,
@@ -80,6 +81,7 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         VwOrdersMoves,
         OrdersTpNachisleniaView,
         VwKassaMoves,
+        VwSales,
         KontragentsView1,
         CurrencyView1,
         KassaView1,
@@ -139,6 +141,7 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     public static final int DATCOMPLETE = AttributesEnum.DatComplete.index();
     public static final int DATZAM = AttributesEnum.DatZam.index();
     public static final int SUMMPLAN = AttributesEnum.SummPlan.index();
+    public static final int OBJNAME = AttributesEnum.Objname.index();
     public static final int TOTALSUMUSLUGI = AttributesEnum.TotalSumUslugi.index();
     public static final int COUNTUSLUG = AttributesEnum.CountUslug.index();
     public static final int TOTALSUMOPLATY = AttributesEnum.TotalSumOplaty.index();
@@ -150,6 +153,7 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     public static final int VWORDERSMOVES = AttributesEnum.VwOrdersMoves.index();
     public static final int ORDERSTPNACHISLENIAVIEW = AttributesEnum.OrdersTpNachisleniaView.index();
     public static final int VWKASSAMOVES = AttributesEnum.VwKassaMoves.index();
+    public static final int VWSALES = AttributesEnum.VwSales.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
     public static final int CURRENCYVIEW1 = AttributesEnum.CurrencyView1.index();
     public static final int KASSAVIEW1 = AttributesEnum.KassaView1.index();
@@ -602,6 +606,14 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     }
 
     /**
+     * Gets the attribute value for the calculated attribute Objname.
+     * @return the Objname
+     */
+    public String getObjname() {
+        return (String) getAttributeInternal(OBJNAME);
+    }
+
+    /**
      * Gets the associated <code>RowIterator</code> using master-detail link OrdersTpUslugiView.
      */
     public RowIterator getOrdersTpUslugiView() {
@@ -642,6 +654,13 @@ public class OrdersViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getVwKassaMoves() {
         return (RowIterator) getAttributeInternal(VWKASSAMOVES);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link VwSales.
+     */
+    public RowIterator getVwSales() {
+        return (RowIterator) getAttributeInternal(VWSALES);
     }
 
     /**

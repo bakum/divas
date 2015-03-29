@@ -30,6 +30,10 @@
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
     <taskFlow id="ballansconfig1" taskFlowId="/WEB-INF/ballans-config.xml#ballans-config" activation="deferred"
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="salesconfig1" taskFlowId="/WEB-INF/sales-config.xml#sales-config" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="zatratyconfig1" taskFlowId="/WEB-INF/zatraty-config.xml#zatraty-config" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
   </executables>
   <bindings/>
 </pageDefinition>

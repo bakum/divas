@@ -156,7 +156,8 @@
         0 
     FROM 
         dual) oth_editable,
-        OtherZatraty.ACTIVITIES_ID
+        OtherZatraty.ACTIVITIES_ID,
+        'Прочие затраты' ObjName
 FROM  OTHER_ZATRATY OtherZatraty]]></SQLQuery>
   <EntityUsage
     Name="OtherZatraty"
@@ -308,6 +309,21 @@ FROM  OTHER_ZATRATY OtherZatraty]]></SQLQuery>
     </Properties>
   </ViewAttribute>
   <ViewAttribute
+    Name="Objname"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="14"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="OBJNAME"
+    Expression="OBJNAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="14"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
     Name="TotalZatr"
     IsUpdateable="false"
     IsSelected="false"
@@ -336,6 +352,11 @@ FROM  OTHER_ZATRATY OtherZatraty]]></SQLQuery>
   <ViewLinkAccessor
     Name="VwOtherMoves"
     ViewLink="ua.divas.view.OtherVwOtherMovesFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="VwZatraty"
+    ViewLink="ua.divas.view.VwZatratyOtherZatratyFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <ClientInterface
