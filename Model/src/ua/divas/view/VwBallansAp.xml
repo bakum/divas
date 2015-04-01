@@ -32,6 +32,18 @@
       </SchemaBasedProperties>
     </Properties>
   </Variable>
+  <Variable
+    Name="f_dat"
+    Kind="where"
+    Type="oracle.jbo.domain.Date">
+    <TransientExpression><![CDATA[viewObject.getDateLast()]]></TransientExpression>
+  </Variable>
+  <Variable
+    Name="l_dat"
+    Kind="where"
+    Type="oracle.jbo.domain.Date">
+    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
+  </Variable>
   <ViewAccessor
     Name="DivisionsView1"
     ViewObjectName="ua.divas.view.DivisionsView"
@@ -77,7 +89,7 @@
     SUM(VW_BALLANS_AP.ACTIVE_OBOROT) over (PARTITION by null order by null) Total_Active_Oborot,
     SUM(VW_BALLANS_AP.PASSIVE_OBOROT) over (PARTITION by null order by null) Total_Passive_Oborot
 FROM 
-    VW_BALLANS_AP
+    table(cast(REPORT_PKG.GETBALLANS(:f_dat, :l_dat) as tbl_ballans)) VW_BALLANS_AP
 Where  UPPER(VW_BALLANS_AP.DIVISION_ID) LIKE UPPER((:div||'%'))]]></SQLQuery>
   <ViewAttribute
     Name="Id"

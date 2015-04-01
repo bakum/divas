@@ -6,7 +6,28 @@
             <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
                 <!-- Content -->
                 <af:panelBox text="Продажи по подразделениям" id="pb1" type="flow">
-                    <f:facet name="toolbar"/>
+                    <f:facet name="toolbar">
+                        <af:panelGroupLayout id="pgl2" layout="horizontal">
+                            <af:inputDate value="#{bindings.f_dat.inputValue}" label="От:"
+                                          required="#{bindings.f_dat.hints.mandatory}"
+                                          columns="#{bindings.f_dat.hints.displayWidth}"
+                                          shortDesc="#{bindings.f_dat.hints.tooltip}" id="id2">
+                                <f:validator binding="#{bindings.f_dat.validator}"/>
+                                <af:convertDateTime pattern="#{bindings.f_dat.format}"/>
+                            </af:inputDate>
+                            <af:spacer width="10" height="10" id="s2"/>
+                            <af:inputDate value="#{bindings.l_dat.inputValue}" label="До:"
+                                          required="#{bindings.l_dat.hints.mandatory}"
+                                          columns="#{bindings.l_dat.hints.displayWidth}"
+                                          shortDesc="#{bindings.l_dat.hints.tooltip}" id="id3">
+                                <f:validator binding="#{bindings.l_dat.validator}"/>
+                                <af:convertDateTime pattern="#{bindings.l_dat.format}"/>
+                            </af:inputDate>
+                            <af:spacer width="10" height="10" id="s1"/>
+                            <af:button actionListener="#{bindings.ExecuteWithParams.execute}" text="Обновить"
+                                       disabled="#{!bindings.ExecuteWithParams.enabled}" id="b2"/>
+                        </af:panelGroupLayout>
+                    </f:facet>
                     <af:table value="#{bindings.VwSales1.collectionModel}" var="row"
                               rows="#{bindings.VwSales1.rangeSize}"
                               emptyText="#{bindings.VwSales1.viewable ? 'No data to display.' : 'Access Denied.'}"
@@ -15,7 +36,7 @@
                               fetchSize="#{bindings.VwSales1.rangeSize}"
                               filterModel="#{bindings.VwSales1Query.queryDescriptor}"
                               queryListener="#{bindings.VwSales1Query.processQuery}" filterVisible="true" varStatus="vs"
-                              id="t1" binding="#{sales.tb}">
+                              id="t1" binding="#{sales.tb}" partialTriggers="::b2">
                         <af:column id="c8" width="50" filterable="true">
                             <f:facet name="filter">
                                 <af:button id="b1" icon="/img/filter_(delete)_16x16.gif"
@@ -93,7 +114,8 @@
                             </f:facet>
                         </af:column>
                         <af:column sortProperty="#{bindings.VwSales1.hints.DivisionId.name}" filterable="true"
-                                   headerText="#{bindings.VwSales1.hints.DivisionId.label}" id="c3" align="center">
+                                   headerText="#{bindings.VwSales1.hints.DivisionId.label}" id="c3" align="center"
+                                   width="150">
                             <af:selectOneChoice value="#{row.bindings.DivisionId.inputValue}"
                                                 label="#{row.bindings.DivisionId.label}"
                                                 required="#{bindings.VwSales1.hints.DivisionId.mandatory}"

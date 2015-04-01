@@ -20,6 +20,18 @@
         ResId="ua.divas.view.VwZatraty_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
+  <Variable
+    Name="f_dat"
+    Kind="where"
+    Type="oracle.jbo.domain.Date">
+    <TransientExpression><![CDATA[viewObject.getDateLast()]]></TransientExpression>
+  </Variable>
+  <Variable
+    Name="l_dat"
+    Kind="where"
+    Type="oracle.jbo.domain.Date">
+    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
+  </Variable>
   <ViewAccessor
     Name="OtherZatratyView1"
     ViewObjectName="ua.divas.view.OtherZatratyView"
@@ -101,7 +113,7 @@
     VW_ZATRATY.DIVISION_ID DIVISION_ID, 
     VW_ZATRATY.PERIOD PERIOD
 FROM 
-    VW_ZATRATY]]></SQLQuery>
+ table(cast(REPORT_PKG.GETZATRATY(:f_dat, :l_dat) as tbl_zatraty)) VW_ZATRATY]]></SQLQuery>
   <ViewAttribute
     Name="RegistratorId"
     IsUpdateable="false"

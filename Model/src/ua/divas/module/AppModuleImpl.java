@@ -30,6 +30,7 @@ import ua.divas.view.UserSettingsViewImpl;
 import ua.divas.view.UsersViewImpl;
 import ua.divas.view.VwBallansApImpl;
 import ua.divas.view.VwSalesImpl;
+import ua.divas.view.VwZatratyImpl;
 import ua.divas.view.ZatratyViewImpl;
 import ua.divas.view.ro.KontragentsItemsLookupVOImpl;
 import ua.divas.view.ro.UsersItemsLookupVOImpl;
@@ -3189,16 +3190,16 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for VwZatraty1.
      * @return VwZatraty1
      */
-    public ViewObjectImpl getVwZatraty1() {
-        return (ViewObjectImpl) findViewObject("VwZatraty1");
+    public VwZatratyImpl getVwZatraty1() {
+        return (VwZatratyImpl) findViewObject("VwZatraty1");
     }
 
     /**
      * Container's getter for VwZatraty2.
      * @return VwZatraty2
      */
-    public ViewObjectImpl getVwZatraty2() {
-        return (ViewObjectImpl) findViewObject("VwZatraty2");
+    public VwZatratyImpl getVwZatraty2() {
+        return (VwZatratyImpl) findViewObject("VwZatraty2");
     }
 
     /**
@@ -3213,8 +3214,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for VwZatraty3.
      * @return VwZatraty3
      */
-    public ViewObjectImpl getVwZatraty3() {
-        return (ViewObjectImpl) findViewObject("VwZatraty3");
+    public VwZatratyImpl getVwZatraty3() {
+        return (VwZatratyImpl) findViewObject("VwZatraty3");
     }
 
     /**
@@ -3229,8 +3230,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for VwZatraty4.
      * @return VwZatraty4
      */
-    public ViewObjectImpl getVwZatraty4() {
-        return (ViewObjectImpl) findViewObject("VwZatraty4");
+    public VwZatratyImpl getVwZatraty4() {
+        return (VwZatratyImpl) findViewObject("VwZatraty4");
     }
 
     /**
