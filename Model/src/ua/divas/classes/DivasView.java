@@ -26,7 +26,7 @@ public class DivasView extends ViewObjectImpl {
         getDefaultRowSet().insertRow(row);
     }
      
-    private String getSessionUser() {
+    public String getSessionUser() {
         ADFContext adfCtx = ADFContext.getCurrent();
         SecurityContext secCntx = adfCtx.getSecurityContext();
         String user = secCntx.getUserPrincipal().getName();

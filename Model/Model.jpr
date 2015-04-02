@@ -71,6 +71,7 @@
    <hash n="oracle.ide.model.TechnologyScopeConfiguration">
       <list n="technologyScope">
          <string v="ADFbc"/>
+         <string v="Database"/>
          <string v="EJB"/>
          <string v="JSF"/>
          <string v="JSP"/>

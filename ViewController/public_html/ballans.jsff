@@ -90,7 +90,8 @@
                                 </af:outputText>
                             </af:column>
                             <af:column headerText="#{bindings.VwBallansAp1.hints.ActiveEnd.label}" id="c6"
-                                       align="right" headerClass="MyHeaderItalicClass">
+                                       align="right" headerClass="MyHeaderItalicClass"
+                                       inlineStyle="border-right-width:medium; border-right-color:#151515;">
                                 <af:outputText value="#{row.ActiveEnd}"
                                                shortDesc="#{bindings.VwBallansAp1.hints.ActiveEnd.tooltip}" id="ot6"
                                                inlineStyle="#{row.ActiveEnd &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}">
@@ -105,7 +106,8 @@
                         </af:column>
                         <af:column id="c12" headerText="Пассив" align="center" headerClass="MyHeaderBoldClass">
                             <af:column headerText="#{bindings.VwBallansAp1.hints.PassiveStart.label}" id="c7"
-                                       align="right" headerClass="MyHeaderItalicClass">
+                                       align="right" headerClass="MyHeaderItalicClass"
+                                       inlineStyle="#{row.Code == '600' or row.Code == '900' ? 'background-color: #B2CA7E;' : ''}">
                                 <af:outputText value="#{row.PassiveStart}"
                                                shortDesc="#{bindings.VwBallansAp1.hints.PassiveStart.tooltip}" id="ot7"
                                                inlineStyle="#{row.PassiveStart &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}">
@@ -118,7 +120,8 @@
                                 </f:facet>
                             </af:column>
                             <af:column headerText="#{bindings.VwBallansAp1.hints.PassiveDeb.label}" id="c13"
-                                       align="right" headerClass="MyHeaderItalicClass">
+                                       align="right" headerClass="MyHeaderItalicClass"
+                                       inlineStyle="#{row.Code == '600' or row.Code == '900' ? 'background-color: #B2CA7E;' : ''}">
                                 <af:outputText value="#{row.PassiveDeb}"
                                                shortDesc="#{bindings.VwBallansAp1.hints.PassiveDeb.tooltip}" id="ot5"
                                                inlineStyle="#{row.PassiveDeb &lt; '0' ? 'color:Red;' : ''}">
@@ -127,7 +130,8 @@
                                 </af:outputText>
                             </af:column>
                             <af:column headerText="#{bindings.VwBallansAp1.hints.PassiveKred.label}" id="c14"
-                                       align="right" headerClass="MyHeaderItalicClass">
+                                       align="right" headerClass="MyHeaderItalicClass"
+                                       inlineStyle="#{row.Code == '600' or row.Code == '900' ? 'background-color: #B2CA7E;' : ''}">
                                 <af:outputText value="#{row.PassiveKred}"
                                                shortDesc="#{bindings.VwBallansAp1.hints.PassiveKred.tooltip}" id="ot8"
                                                inlineStyle="#{row.PassiveKred &lt; '0' ? 'color:Red;' : ''}">
@@ -136,7 +140,8 @@
                                 </af:outputText>
                             </af:column>
                             <af:column headerText="#{bindings.VwBallansAp1.hints.PassiveEnd.label}" id="c9"
-                                       align="right" headerClass="MyHeaderItalicClass">
+                                       align="right" headerClass="MyHeaderItalicClass"
+                                       inlineStyle="#{row.Code == '600' or row.Code == '900' ? 'background-color: #B2CA7E;' : ''}">
                                 <af:outputText value="#{row.PassiveEnd}"
                                                shortDesc="#{bindings.VwBallansAp1.hints.PassiveEnd.tooltip}" id="ot9"
                                                inlineStyle="#{row.PassiveEnd &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}">

@@ -22,6 +22,12 @@
     Name="Kname"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <Variable
+    Name="u_name"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression><![CDATA[viewObject.getSessionUser()]]></TransientExpression>
+  </Variable>
   <ViewAccessor
     Name="KontragentsView1"
     ViewObjectName="ua.divas.view.KontragentsView"
@@ -352,7 +358,8 @@
 FROM 
     ORDERS Orders 
 WHERE 
-    DELETED = 0]]></SQLQuery>
+    DELETED = 0 and
+upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))]]></SQLQuery>
   <EntityUsage
     Name="Orders"
     Entity="ua.divas.model.Orders"/>
@@ -675,7 +682,7 @@ WHERE
     ColumnType="CHAR"
     AliasName="OBJNAME"
     Expression="OBJNAME"
-    SQLType="CHAR">
+    SQLType="VARCHAR">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="5"/>
     </DesignTime>
