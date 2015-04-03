@@ -100,6 +100,92 @@
    <hash n="oracle.jdeveloper.deploy.SecurityDeploymentSettings">
       <value n="Security-Deployment-Migrate-Users-And-Groups-Key" v="false"/>
    </hash>
+   <hash n="oracle.jdeveloper.model.ApplicationLibraries">
+      <hash n="internalDefinitions">
+         <list n="libraryDefinitions">
+            <hash>
+               <list n="classPath">
+                  <url path="../../../quartz-2.2.1/lib/c3p0-0.9.1.1.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="C3p0-0.9.1.1.jar"/>
+               <value n="id" v="C3p0-0.9.1.1.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../quartz-2.2.1/lib/log4j-1.2.16.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Log4j-1.2.16.jar"/>
+               <value n="id" v="Log4j-1.2.16.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../quartz-2.2.1/lib/quartz-2.2.1.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Quartz-2.2.1.jar"/>
+               <value n="id" v="Quartz-2.2.1.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../quartz-2.2.1/lib/quartz-jobs-2.2.1.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Quartz-jobs-2.2.1.jar"/>
+               <value n="id" v="Quartz-jobs-2.2.1.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../quartz-2.2.1/lib/slf4j-api-1.6.6.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Slf4j-api-1.6.6.jar"/>
+               <value n="id" v="Slf4j-api-1.6.6.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../quartz-2.2.1/lib/slf4j-log4j12-1.6.6.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Slf4j-log4j12-1.6.6.jar"/>
+               <value n="id" v="Slf4j-log4j12-1.6.6.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+         </list>
+      </hash>
+      <list n="libraryReferences">
+         <hash>
+            <value n="id" v="C3p0-0.9.1.1.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Log4j-1.2.16.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Quartz-2.2.1.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Quartz-jobs-2.2.1.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Slf4j-api-1.6.6.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Slf4j-log4j12-1.6.6.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+      </list>
+   </hash>
    <hash n="oracle.jdeveloper.model.PathsConfiguration">
       <hash n="ApplicationSrcContentSet">
          <list n="pattern-filters">

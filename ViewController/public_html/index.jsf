@@ -51,8 +51,7 @@
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/kassa-config.xml#kassa-config']}">
                                                 <af:region value="#{bindings.kassaconfig1.regionModel}" id="r9"/>
                                             </af:showDetailItem>
-                                            <af:showDetailItem text="Взаиморасчеты" id="sdi12"
-                                                               stretchChildren="first">
+                                            <af:showDetailItem text="Взаиморасчеты" id="sdi12" stretchChildren="first">
                                                 <af:panelTabbed id="pt3">
                                                     <af:showDetailItem text="Замерщики" id="sdi14"
                                                                        stretchChildren="first"
@@ -60,8 +59,7 @@
                                                         <af:region value="#{bindings.zamer_debtconfig1.regionModel}"
                                                                    id="r10"/>
                                                     </af:showDetailItem>
-                                                    <af:showDetailItem text="Клиенты" id="sdi13"
-                                                                       stretchChildren="first"
+                                                    <af:showDetailItem text="Клиенты" id="sdi13" stretchChildren="first"
                                                                        rendered="#{securityContext.taskflowViewable['/WEB-INF/buyer_debt-config.xml#buyer_debt-config']}">
                                                         <af:region value="#{bindings.buyer_debtconfig1.regionModel}"
                                                                    id="r11"/>
@@ -76,8 +74,7 @@
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/zatraty-config.xml#zatraty-config']}">
                                                 <af:region value="#{bindings.zatratyconfig1.regionModel}" id="r15"/>
                                             </af:showDetailItem>
-                                            <af:showDetailItem text="Баланс" id="sdi16"
-                                                               stretchChildren="first"
+                                            <af:showDetailItem text="Баланс" id="sdi16" stretchChildren="first"
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/ballans-config.xml#ballans-config']}">
                                                 <af:region value="#{bindings.ballansconfig1.regionModel}" id="r13"/>
                                             </af:showDetailItem>
@@ -86,8 +83,7 @@
                                     <af:showDetailItem text="Настройки" id="sdi7" stretchChildren="first"
                                                        icon="/img/options.png">
                                         <af:panelTabbed id="pt1">
-                                            <af:showDetailItem text="Прайс-лист" id="sdi8"
-                                                               stretchChildren="first"
+                                            <af:showDetailItem text="Прайс-лист" id="sdi8" stretchChildren="first"
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/import-price-config.xml#import-price-config']}">
                                                 <af:region value="#{bindings.importpriceconfig1.regionModel}" id="r6"/>
                                             </af:showDetailItem>
@@ -95,8 +91,7 @@
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/entry.xml#entry']}">
                                                 <af:region value="#{bindings.entry1.regionModel}" id="r7"/>
                                             </af:showDetailItem>
-                                            <af:showDetailItem text="План счетов" id="sdi10"
-                                                               stretchChildren="first"
+                                            <af:showDetailItem text="План счетов" id="sdi10" stretchChildren="first"
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/plan_acc.xml#plan_acc']}">
                                                 <af:region value="#{bindings.plan_acc1.regionModel}" id="r8"/>
                                             </af:showDetailItem>
@@ -121,10 +116,13 @@
                                     <af:link text="Выйти" id="l2" icon="/img/glbl_logout.gif"
                                              rendered="#{securityContext.authenticated}" action="#{login.logout}"/>
                                     <af:spacer width="50" height="10" id="s2"/>
-                                    <af:outputFormatted value="#{securityContext.userName}" id="of1"
+                                    <af:outputFormatted value="Пользователь: #{securityContext.userName}" id="of1"
                                                         styleClass="Linkclass"/>
                                     <af:spacer width="10" height="10" id="s4"/>
-                                    <af:outputFormatted value="#{login.roleUser}" id="of2" styleClass="Linkclass"/>
+                                    <af:outputFormatted value="Права: #{login.roleUser}" id="of2" styleClass="Linkclass"/>
+                                    <af:spacer width="30" height="10" id="s5"/>
+                                    <af:link text="Непрочитанных оповещений: 0" id="l3" icon="/img/bell.png"
+                                             actionListener="#{notification.onNotification}"/>
                                     <af:popup childCreation="deferred" autoCancel="disabled" id="pLogin">
                                         <af:dialog id="d2" title="Авторизация" dialogListener="#{login.OnLoginAction}">
                                             <f:facet name="buttonBar"/>
@@ -144,5 +142,13 @@
                 </af:gridRow>
             </af:panelGridLayout>
         </af:form>
+        <f:facet name="metaContainer">
+            <af:group id="gp12">
+                <af:resource type="javascript" source="/js/jquery-2.1.3.min.js"/>
+                <af:resource type="javascript" source="/js/jquery.growl.js"/>
+                <af:resource type="javascript" source="/js/jquery_notification.js"/>
+                <af:resource type="css" source="/css/jquery.growl.css"/>
+            </af:group>
+        </f:facet>
     </af:document>
 </f:view>
