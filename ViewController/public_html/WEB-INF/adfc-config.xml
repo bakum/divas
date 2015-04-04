@@ -50,4 +50,9 @@
     <managed-bean-class>ua.divas.view.control.NotificationBean</managed-bean-class>
     <managed-bean-scope>request</managed-bean-scope>
   </managed-bean>
+  <managed-bean id="__11">
+    <managed-bean-name>reminder</managed-bean-name>
+    <managed-bean-class>ua.divas.view.control.ReminderBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
 </adfc-config>

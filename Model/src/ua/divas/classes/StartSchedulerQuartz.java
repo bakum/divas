@@ -28,6 +28,8 @@ import ua.divas.ejb.entity.DataQuery;
 import ua.divas.ejb.entity.QuartzProperty;
 
 public class StartSchedulerQuartz extends GenericServlet {
+    @SuppressWarnings("compatibility:2272303327017717660")
+    private static final long serialVersionUID = 1L;
 
     public static Scheduler sched;
     private QuartzProperty p;

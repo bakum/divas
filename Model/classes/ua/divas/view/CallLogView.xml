@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CallLogView"
+  Version="12.1.2.66.68"
+  InheritPersonalization="merge"
+  SelectList="CallLog.ID, 
+       CallLog.DAT, 
+       CallLog.CALL_STATUS, 
+       CallLog.CONTACT_ID, 
+       CallLog.COMP_DET_ID, 
+       CallLog.MEMO, 
+       CallLog.VERSION"
+  FromList="CALL_LOG CallLog"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full">
+  <ViewAccessor
+    Name="CallStatusView1"
+    ViewObjectName="ua.divas.view.CallStatusView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ContactDetailsView1"
+    ViewObjectName="ua.divas.view.ContactDetailsView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CompaignsView1"
+    ViewObjectName="ua.divas.view.CompaignsView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_CallStatus"
+    ListVOName="CallStatusView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CallStatus"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ContactId"
+    ListVOName="ContactDetailsView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ContactId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Phone"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CompDetId"
+    ListVOName="CompaignsView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CompDetId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="CallLog"
+    Entity="ua.divas.model.CallLog"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="CallLog"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="Dat"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Dat"
+    EntityUsage="CallLog"
+    AliasName="DAT"/>
+  <ViewAttribute
+    Name="CallStatus"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CallStatus"
+    EntityUsage="CallLog"
+    AliasName="CALL_STATUS"
+    LOVName="LOV_CallStatus">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ContactId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ContactId"
+    EntityUsage="CallLog"
+    AliasName="CONTACT_ID"
+    LOVName="LOV_ContactId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CompDetId"
+    PrecisionRule="true"
+    EntityAttrName="CompDetId"
+    EntityUsage="CallLog"
+    AliasName="COMP_DET_ID"
+    LOVName="LOV_CompDetId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Memo"
+    PrecisionRule="true"
+    EntityAttrName="Memo"
+    EntityUsage="CallLog"
+    AliasName="MEMO"/>
+  <ViewAttribute
+    Name="Version"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Version"
+    EntityUsage="CallLog"
+    AliasName="VERSION"/>
+</ViewObject>

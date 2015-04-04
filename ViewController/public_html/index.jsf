@@ -122,7 +122,7 @@
                                     <af:outputFormatted value="Права: #{login.roleUser}" id="of2" styleClass="Linkclass"/>
                                     <af:spacer width="30" height="10" id="s5"/>
                                     <af:link text="Непрочитанных оповещений: 0" id="l3" icon="/img/bell.png"
-                                             actionListener="#{notification.onNotification}"/>
+                                             actionListener="#{reminder.onReminder}"/>
                                     <af:popup childCreation="deferred" autoCancel="disabled" id="pLogin">
                                         <af:dialog id="d2" title="Авторизация" dialogListener="#{login.OnLoginAction}">
                                             <f:facet name="buttonBar"/>
