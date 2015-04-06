@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.2.66.68" id="calendarPageDef"
+                Package="ua.divas.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="CalendarView1" RangeSize="-1" DataControl="AppModuleDataControl" id="CalendarView1Iterator"/>
+    <iterator Binds="UsersView1" RangeSize="25" DataControl="AppModuleDataControl" id="UsersView1Iterator"/>
+  </executables>
+  <bindings>
+    <action IterBinding="CalendarView1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="StartDat" NDValue="#{bindings.CalendarView1.startDate}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="EndDat" NDValue="#{bindings.CalendarView1.endDate}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="Tz" NDValue="#{bindings.CalendarView1.timeZoneId}" NDType="java.lang.String"/>
+    </action>
+    <calendar IterBinding="CalendarView1Iterator" id="CalendarView1" xmlns="http://xmlns.oracle.com/adf/faces/binding"
+              ActionBindingName="ExecuteWithParams">
+      <nodeDefinition DefName="ua.divas.view.CalendarView">
+        <AttrNames>
+          <Item Type="id" Value="Id"/>
+          <Item Type="providerId" Value="UserId"/>
+          <Item Type="title" Value="Description"/>
+          <Item Type="startTime" Value="StartDate"/>
+          <Item Type="endTime" Value="EndDate"/>
+          <Item Type="custom" Value="Client"/>
+          <Item Type="custom" Value="Contact"/>
+          <Item Type="custom" Value="Dat"/>
+          <Item Type="custom" Value="Description"/>
+          <Item Type="custom" Value="EndDate"/>
+          <Item Type="custom" Value="Id"/>
+          <Item Type="custom" Value="ObjectId"/>
+          <Item Type="custom" Value="Server"/>
+          <Item Type="custom" Value="StartDate"/>
+          <Item Type="custom" Value="TrgName"/>
+          <Item Type="custom" Value="UserId"/>
+          <Item Type="custom" Value="UserLogin"/>
+          <Item Type="custom" Value="Version"/>
+        </AttrNames>
+      </nodeDefinition>
+      <providerDefinition IterBindingName="UsersView1Iterator">
+        <AttrNames>
+          <Item Type="id" Value="Id"/>
+          <Item Type="displayName" Value="Login"/>
+        </AttrNames>
+      </providerDefinition>
+    </calendar>
+    <action IterBinding="CalendarView1Iterator" id="Delete" InstanceName="AppModuleDataControl.CalendarView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Commit" DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" DataControl="AppModuleDataControl" RequiresUpdateModel="false" Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>
