@@ -1,5 +1,7 @@
 package ua.divas.module;
 
+import java.util.Date;
+
 import oracle.jbo.Key;
 import oracle.jbo.Row;
 import oracle.jbo.RowIterator;
@@ -11,6 +13,7 @@ import oracle.jbo.server.ViewLinkImpl;
 import oracle.jbo.server.ViewObjectImpl;
 
 import ua.divas.module.common.AppModule;
+import ua.divas.view.CalendarViewImpl;
 import ua.divas.view.CompaignsViewImpl;
 import ua.divas.view.ContactDetailsViewImpl;
 import ua.divas.view.CurrencyViewImpl;
@@ -21,6 +24,7 @@ import ua.divas.view.KassaVOImpl;
 import ua.divas.view.KontragentsViewImpl;
 import ua.divas.view.LastPriceVOImpl;
 import ua.divas.view.NomenklaturaViewImpl;
+import ua.divas.view.NotificationViewImpl;
 import ua.divas.view.OrderZamerViewImpl;
 import ua.divas.view.OrdersTpOplatyViewImpl;
 import ua.divas.view.OrdersTpUslugiViewImpl;
@@ -2200,29 +2204,29 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getDivRootDivisionsFkLink() {
         return (ViewLinkImpl) findViewLink("DivRootDivisionsFkLink");
     }
-    
+
     public void deleteChildren(RowIterator ri, Key selectedNodeKey) {
-            if (ri != null && selectedNodeKey != null) {
+        if (ri != null && selectedNodeKey != null) {
 
-                Row last = ri.last();
-                Key lastRowKey = last.getKey();
-                // if the select row is not the last row in the row iterator...
+            Row last = ri.last();
+            Key lastRowKey = last.getKey();
+            // if the select row is not the last row in the row iterator...
 
-                Row[] rows = ri.findByKey(selectedNodeKey, 1);
-                if (rows != null) {
+            Row[] rows = ri.findByKey(selectedNodeKey, 1);
+            if (rows != null) {
 
-                    for (Row row : rows) {
-                        row.remove();
-                        //this.getTransaction().commit();
-                    }
-
-                } else {
-                    System.out.println("Node not Found for " + selectedNodeKey);
+                for (Row row : rows) {
+                    row.remove();
+                    //this.getTransaction().commit();
                 }
 
-
+            } else {
+                System.out.println("Node not Found for " + selectedNodeKey);
             }
+
+
         }
+    }
 
 
     /**
@@ -3240,6 +3244,49 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getVwZatratyZatratyFkLink1() {
         return (ViewLinkImpl) findViewLink("VwZatratyZatratyFkLink1");
+    }
+
+    /**
+     * Container's getter for NotificationView1.
+     * @return NotificationView1
+     */
+    public NotificationViewImpl getNotificationView1() {
+        return (NotificationViewImpl) findViewObject("NotificationView1");
+    }
+
+    public void addNotification(String cutid, String desc, Date dat, 
+                                String ObjId, String ContId) {
+        long t = dat.getTime();
+        Date afterAddingTenMins = new Date(t + (10 * 60000));
+        ViewObjectImpl not = getNotificationView1();
+        Row r2 = not.createRow();
+        r2.setAttribute("Dat", dat);
+        r2.setAttribute("Description", desc);
+        r2.setAttribute("Server", 0);
+        r2.setAttribute("Client", 0);
+        r2.setAttribute("TrgName", "trigger" + cutid);
+        r2.setAttribute("StartDate", dat);
+        r2.setAttribute("EndDate", afterAddingTenMins);
+        r2.setAttribute("ObjectId", ObjId);
+        r2.setAttribute("Contact", ContId);
+        
+        try {
+            not.insertRow(r2); //Insert that row in ViewObject
+            getDBTransaction().commit(); //Commit the changes
+            not.executeQuery();
+        } catch (Exception e) {
+            getDBTransaction().rollback(); //Commit the changes
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * Container's getter for CalendarView1.
+     * @return CalendarView1
+     */
+    public CalendarViewImpl getCalendarView1() {
+        return (CalendarViewImpl) findViewObject("CalendarView1");
     }
 }
 

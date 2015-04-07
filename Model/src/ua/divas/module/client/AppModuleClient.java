@@ -1,5 +1,7 @@
 package ua.divas.module.client;
 
+import java.util.Date;
+
 import oracle.jbo.Key;
 import oracle.jbo.RowIterator;
 import oracle.jbo.client.remote.ApplicationModuleImpl;
@@ -16,6 +18,14 @@ public class AppModuleClient extends ApplicationModuleImpl implements AppModule 
      * This is the default constructor (do not remove).
      */
     public AppModuleClient() {
+    }
+
+    public void addNotification(String cutid, String desc, Date dat, String ObjId, String ContId) {
+        Object _ret = this.riInvokeExportedMethod(this, "addNotification", new String[] {
+                                                  "java.lang.String", "java.lang.String", "java.util.Date",
+                                                  "java.lang.String", "java.lang.String"
+        }, new Object[] { cutid, desc, dat, ObjId, ContId });
+        return;
     }
 
     public void deleteChildren(RowIterator ri, Key selectedNodeKey) {

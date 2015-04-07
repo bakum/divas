@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" locale="ru">
     <af:document title="Divas CRM" id="d1">
+        <af:messages id="m1"/>
         <af:form id="f1" usesUpload="true">
             <af:panelGridLayout id="pgl1">
                 <af:gridRow height="100%" id="gr1">
@@ -121,8 +122,10 @@
                                     <af:spacer width="10" height="10" id="s4"/>
                                     <af:outputFormatted value="Права: #{login.roleUser}" id="of2" styleClass="Linkclass"/>
                                     <af:spacer width="30" height="10" id="s5"/>
-                                    <af:link text="Непрочитанных оповещений: 0" id="l3" icon="/img/bell.png"
-                                             actionListener="#{reminder.onReminder}"/>
+                                    <af:link text="Непрочитанных оповещений: #{bindings.CountUnread.inputValue == null ? 0 : bindings.CountUnread.inputValue}" id="l3" icon="/img/bell.png"
+                                             inlineStyle="#{bindings.CountUnread.inputValue != null ? 'color:Lime;' : ''}">
+                                        <af:showPopupBehavior popupId="p1"/>
+                                    </af:link>
                                     <af:popup childCreation="deferred" autoCancel="disabled" id="pLogin">
                                         <af:dialog id="d2" title="Авторизация" dialogListener="#{login.OnLoginAction}">
                                             <f:facet name="buttonBar"/>
@@ -134,6 +137,81 @@
                                             </af:panelFormLayout>
                                         </af:dialog>
                                         <af:resetListener type="popupCanceled"/>
+                                    </af:popup>
+                                    <af:serverListener type="customEvent" method="#{notification.onCustomEvent}"/>
+                                    <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                                              contentDelivery="lazyUncached">
+                                        <af:dialog id="d3" title="Панель уведомлений"
+                                                   dialogListener="#{notification.onDialogListener}"
+                                                   closeIconVisible="false" contentWidth="700" contentHeight="400"
+                                                   resize="on">
+                                            <f:facet name="buttonBar">
+                                                <af:button text="Тест уведомления" id="b1"
+                                                           actionListener="#{reminder.onReminder}"/>
+                                                <af:button text="Обновить" id="b2"
+                                                           actionListener="#{notification.onRefresh}"/>
+                                            </f:facet>
+                                            <af:panelBox text="Протокол планировщика" id="pb1" type="flow">
+                                                <f:facet name="toolbar"/>
+                                                <af:table value="#{bindings.NotificationView1.collectionModel}"
+                                                          var="row" rows="#{bindings.NotificationView1.rangeSize}"
+                                                          emptyText="#{bindings.NotificationView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                          rowBandingInterval="0"
+                                                          selectedRowKeys="#{bindings.NotificationView1.collectionModel.selectedRow}"
+                                                          selectionListener="#{bindings.NotificationView1.collectionModel.makeCurrent}"
+                                                          rowSelection="single"
+                                                          fetchSize="#{bindings.NotificationView1.rangeSize}" id="t1"
+                                                          scrollPolicy="page"
+                                                          disclosedRowKeys="#{pageFlowScope.rks.rks}">
+                                                    <af:column headerText="#{bindings.NotificationView1.hints.Dat.label}"
+                                                               id="c1" width="200">
+                                                        <af:outputText value="#{row.Dat}"
+                                                                       shortDesc="#{bindings.NotificationView1.hints.Dat.tooltip}"
+                                                                       id="ot1">
+                                                            <af:convertDateTime pattern="#{bindings.NotificationView1.hints.Dat.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.NotificationView1.hints.Server.label}"
+                                                               id="c3" width="200">
+                                                        <af:selectBooleanCheckbox value="#{row.bindings.Server.inputValue}"
+                                                                                  label="#{row.bindings.Server.label}"
+                                                                                  shortDesc="#{bindings.NotificationView1.hints.Server.tooltip}"
+                                                                                  id="sbc2" readOnly="true"/>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.NotificationView1.hints.TrgName.label}"
+                                                               id="c5" visible="false">
+                                                        <af:outputText value="#{row.TrgName}"
+                                                                       shortDesc="#{bindings.NotificationView1.hints.TrgName.tooltip}"
+                                                                       id="ot5"/>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.NotificationView1.hints.UserLogin.label}"
+                                                               id="c6" visible="false">
+                                                        <af:outputText value="#{row.UserLogin}"
+                                                                       shortDesc="#{bindings.NotificationView1.hints.UserLogin.tooltip}"
+                                                                       id="ot6"/>
+                                                    </af:column>
+                                                    <f:facet name="detailStamp">
+                                                        <af:panelGroupLayout id="pgl3" layout="vertical">
+                                                            <af:panelLabelAndMessage label="#{bindings.NotificationView1.hints.Description.label}"
+                                                                                     id="plam1">
+                                                                <af:outputFormatted value="#{row.bindings.Description.inputValue}"
+                                                                                    id="of3"
+                                                                                    styleUsage="inContextBranding"
+                                                                                    inlineStyle="font-size:large;"/>
+                                                            </af:panelLabelAndMessage>
+                                                            <af:spacer width="10" height="10" id="s6"/>
+                                                            <af:panelLabelAndMessage label="#{bindings.NotificationView1.hints.Client.label}"
+                                                                                     id="plam2">
+                                                                <af:selectBooleanCheckbox value="#{row.bindings.Client.inputValue}"
+                                                                                          shortDesc="#{bindings.NotificationView1.hints.Client.tooltip}"
+                                                                                          id="sbc1"/>
+                                                            </af:panelLabelAndMessage>
+                                                            <f:facet name="separator"/>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                </af:table>
+                                            </af:panelBox>
+                                        </af:dialog>
                                     </af:popup>
                                 </af:panelGroupLayout>
                             </f:facet>
@@ -147,6 +225,7 @@
                 <af:resource type="javascript" source="/js/jquery-2.1.3.min.js"/>
                 <af:resource type="javascript" source="/js/jquery.growl.js"/>
                 <af:resource type="javascript" source="/js/jquery_notification.js"/>
+                <af:resource type="javascript" source="/js/WebSocketCli.js"/>
                 <af:resource type="css" source="/css/jquery.growl.css"/>
             </af:group>
         </f:facet>

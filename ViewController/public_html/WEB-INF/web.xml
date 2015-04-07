@@ -24,15 +24,6 @@
         <servlet-class>oracle.adf.view.faces.bi.webapp.MapProxyServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>adfAuthentication</servlet-name>
-        <servlet-class>oracle.adf.share.security.authentication.AuthenticationServlet</servlet-class>
-        <init-param>
-            <param-name>success_url</param-name>
-            <param-value>/faces/index.jsf</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet>
         <servlet-name>QuartzInitializer</servlet-name>
         <servlet-class>org.quartz.ee.servlet.QuartzInitializerServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
@@ -43,6 +34,11 @@
         <servlet-class>ua.divas.classes.StartSchedulerQuartz</servlet-class>
         <load-on-startup>2</load-on-startup>
         <async-supported>true</async-supported>
+    </servlet>
+    <servlet>
+        <servlet-name>adfAuthentication</servlet-name>
+        <servlet-class>oracle.adf.share.security.authentication.AuthenticationServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
@@ -216,6 +212,15 @@
             <encoding>ru</encoding>
         </locale-encoding-mapping>
     </locale-encoding-mapping-list>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>adfAuthentication</web-resource-name>
+            <url-pattern>/adfAuthentication</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>valid-users</role-name>
+        </auth-constraint>
+    </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
         <form-login-config>
@@ -226,13 +231,4 @@
     <security-role>
         <role-name>valid-users</role-name>
     </security-role>
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>adfAuthentication</web-resource-name>
-            <url-pattern>/adfAuthentication</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>valid-users</role-name>
-        </auth-constraint>
-    </security-constraint>
 </web-app>

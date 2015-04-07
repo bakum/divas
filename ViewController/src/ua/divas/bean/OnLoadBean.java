@@ -1,4 +1,4 @@
-package ua.divas.view;
+package ua.divas.bean;
 
 import oracle.adf.share.ADFContext;
 import oracle.adf.share.security.SecurityContext;

@@ -57,6 +57,10 @@
                                                                    disabled="#{bindings.Commit.enabled}">
                                                             <af:showPopupBehavior popupId="::pEdit"/>
                                                         </af:button>
+                                                        <af:button id="b18" icon="/img/bell.png"
+                                                                   disabled="#{bindings.Commit.enabled}">
+                                                            <af:showPopupBehavior popupId="::pNotice"/>
+                                                        </af:button>
                                                     </af:toolbar>
                                                 </af:column>
                                                 <af:column sortProperty="#{bindings.OrdersView1.hints.Id.name}"
@@ -1805,6 +1809,37 @@
                                             <af:dialog id="d7">
                                                 <af:region value="#{bindings.createkontragent1.regionModel}" id="r1"/>
                                                 <f:facet name="buttonBar"/>
+                                            </af:dialog>
+                                        </af:popup>
+                                        <af:popup childCreation="deferred" autoCancel="disabled" id="pNotice"
+                                                  contentDelivery="lazyUncached">
+                                            <af:dialog id="d8" title="Новое уведомление"
+                                                       dialogListener="#{orders.onNotifiDialog}">
+                                                <f:facet name="buttonBar"/>
+                                                <af:panelFormLayout id="pfl8">
+                                                    <af:inputDate value="#{bindings.dat.inputValue}"
+                                                                  label="Время уведомления"
+                                                                  columns="#{bindings.dat.hints.displayWidth}"
+                                                                  shortDesc="#{bindings.dat.hints.tooltip}" id="id12"
+                                                                  required="true" binding="#{orders.dat}"
+                                                                  autoSubmit="true">
+                                                        <f:validator binding="#{bindings.dat.validator}"/>
+                                                        <af:convertDateTime pattern="dd-MMM-yyy HH:mm"/>
+                                                    </af:inputDate>
+                                                    <af:inputText value="#{bindings.desc.inputValue}"
+                                                                  label="Сообщение"
+                                                                  columns="#{bindings.desc.hints.displayWidth}"
+                                                                  maximumLength="#{bindings.desc.hints.precision}"
+                                                                  shortDesc="#{bindings.desc.hints.tooltip}" id="it53"
+                                                                  required="true" rows="4" binding="#{orders.desc}"
+                                                                  autoSubmit="true">
+                                                        <f:validator binding="#{bindings.desc.validator}"/>
+                                                    </af:inputText>
+                                                    <af:button actionListener="#{bindings.addNotification.execute}"
+                                                               text="addNotification"
+                                                               disabled="#{!bindings.addNotification.enabled}"
+                                                               id="b17" visible="false"/>
+                                                </af:panelFormLayout>
                                             </af:dialog>
                                         </af:popup>
                                     </af:showDetailItem>

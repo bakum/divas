@@ -4,7 +4,7 @@
     <default-activity>other_zatr</default-activity>
     <managed-bean id="__1">
       <managed-bean-name>other</managed-bean-name>
-      <managed-bean-class>ua.divas.view.OtherBean</managed-bean-class>
+      <managed-bean-class>ua.divas.bean.OtherBean</managed-bean-class>
       <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <view id="other_zatr">

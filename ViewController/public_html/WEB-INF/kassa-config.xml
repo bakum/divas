@@ -4,7 +4,7 @@
     <default-activity>kassa</default-activity>
     <managed-bean id="__3">
       <managed-bean-name>kassa</managed-bean-name>
-      <managed-bean-class>ua.divas.view.KassaBean</managed-bean-class>
+      <managed-bean-class>ua.divas.bean.KassaBean</managed-bean-class>
       <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <view id="kassa">

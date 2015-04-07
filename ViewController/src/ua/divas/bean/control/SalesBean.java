@@ -1,4 +1,4 @@
-package ua.divas.view.control;
+package ua.divas.bean.control;
 
 import java.util.List;
 

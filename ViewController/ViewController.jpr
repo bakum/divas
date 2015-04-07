@@ -57,7 +57,7 @@
       <string v="oracle.toplink.workbench.addin/toplinkContentSet"/>
    </list>
    <value n="defaultPackage" v="ua.divas.view"/>
-   <value n="jbo.JpxName" v="ua.divas.view.ViewController"/>
+   <value n="jbo.JpxName" v="ua.divas.bean.ViewController"/>
    <value n="JboProject" v="true"/>
    <hash n="oracle.adfdtinternal.model.ide.security.SecurityPolicies">
       <value n="grantOption" v="none"/>

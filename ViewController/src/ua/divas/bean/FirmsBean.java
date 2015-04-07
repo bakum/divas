@@ -1,4 +1,4 @@
-package ua.divas.view;
+package ua.divas.bean;
 
 
 

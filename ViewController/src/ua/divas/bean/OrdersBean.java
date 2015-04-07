@@ -1,9 +1,12 @@
-package ua.divas.view;
+package ua.divas.bean;
 
 
 import java.math.BigDecimal;
 
+import java.util.Date;
 import java.util.List;
+
+import java.util.UUID;
 
 import javax.el.ELContext;
 
@@ -19,10 +22,13 @@ import javax.faces.event.ValueChangeEvent;
 import oracle.adf.model.AttributeBinding;
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
+import oracle.adf.model.binding.DCDataControl;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.share.ADFContext;
+import oracle.adf.share.security.SecurityContext;
 import oracle.adf.view.rich.component.rich.data.RichTable;
 import oracle.adf.view.rich.component.rich.input.RichInputComboboxListOfValues;
+import oracle.adf.view.rich.component.rich.input.RichInputDate;
 import oracle.adf.view.rich.component.rich.input.RichInputListOfValues;
 import oracle.adf.view.rich.component.rich.input.RichInputText;
 import oracle.adf.view.rich.component.rich.input.RichSelectOneChoice;
@@ -61,8 +67,23 @@ import org.apache.myfaces.trinidad.event.PollEvent;
 import org.apache.myfaces.trinidad.model.CollectionModel;
 import org.apache.myfaces.trinidad.model.RowKeySet;
 
+import org.apache.myfaces.trinidad.render.ExtendedRenderKitService;
+import org.apache.myfaces.trinidad.util.Service;
+
+import org.quartz.JobBuilder;
+import org.quartz.JobDetail;
+import org.quartz.SchedulerException;
+import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
+
+import ua.divas.classes.StartSchedulerQuartz;
+import ua.divas.module.AppModuleImpl;
+
 public class OrdersBean {
 
+
+    private RichInputDate dat;
+    private RichInputText desc;
 
     public OrdersBean() {
     }
@@ -184,7 +205,7 @@ public class OrdersBean {
         refresh();
         return null;
     }
-    
+
     public void onNewKontragCancel(PopupCanceledEvent popupCanceledEvent) {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         binding.getOperationBinding("Rollback").execute();
@@ -259,13 +280,13 @@ public class OrdersBean {
     public void onKonChange(ValueChangeEvent valueChangeEvent) {
         AdfFacesContext fc = AdfFacesContext.getCurrentInstance();
         fc.addPartialTarget(this.getKontrag());
-        
+
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = bd.findIteratorBinding("OrdersView1Iterator");
         Row currRow = it.getCurrentRow();
         String IdKon = (String) currRow.getAttribute("KontragId");
         System.out.println(IdKon);
-        
+
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("findKontragentById");
         if (ob != null) {
@@ -275,21 +296,21 @@ public class OrdersBean {
             ob.execute();
         }
     }
-    
-    private void applyBuyerCriteria () {
+
+    private void applyBuyerCriteria() {
         BindingContainer bindings = BindingContext.getCurrent().getCurrentBindingsEntry();
-        DCIteratorBinding dciter = (DCIteratorBinding)bindings.get("KontragentsView1Iterator");
-        ViewObject vo=dciter.getViewObject();
+        DCIteratorBinding dciter = (DCIteratorBinding) bindings.get("KontragentsView1Iterator");
+        ViewObject vo = dciter.getViewObject();
         ViewCriteriaManager vcm = vo.getViewCriteriaManager();
         ViewCriteria vc = vcm.getViewCriteria("KontragentsFilterItemsByName");
         vo.applyViewCriteria(vc);
         vo.executeQuery();
     }
-    
-    private void applyZamerCriteria () {
+
+    private void applyZamerCriteria() {
         BindingContainer bindings = BindingContext.getCurrent().getCurrentBindingsEntry();
-        DCIteratorBinding dciter = (DCIteratorBinding)bindings.get("KontragentsView1Iterator");
-        ViewObject vo=dciter.getViewObject();
+        DCIteratorBinding dciter = (DCIteratorBinding) bindings.get("KontragentsView1Iterator");
+        ViewObject vo = dciter.getViewObject();
         ViewCriteriaManager vcm = vo.getViewCriteriaManager();
         ViewCriteria vc = vcm.getViewCriteria("KontragentsZamerCriteria");
         vo.applyViewCriteria(vc);
@@ -317,8 +338,8 @@ public class OrdersBean {
         }
         applyBuyerCriteria();
     }
-    
-    public void onLaunchComboLov(LaunchPopupEvent launchPopupEvent) {    
+
+    public void onLaunchComboLov(LaunchPopupEvent launchPopupEvent) {
         String submittedValue = (String) launchPopupEvent.getSubmittedValue();
         //only perform query if value is submitted
         if (submittedValue != null && submittedValue.length() > 0) {
@@ -339,15 +360,14 @@ public class OrdersBean {
         }
         applyZamerCriteria();
     }
-    
-    
+
 
     public void onPopupCreateKontrag(PopupFetchEvent popupFetchEvent) {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("CreateInsert1");
         ob.execute();
     }
-    
+
     public void onPopupCreateZatraty(PopupFetchEvent popupFetchEvent) {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("CreateInsert6");
@@ -363,7 +383,7 @@ public class OrdersBean {
 
 
     }
-    
+
     private void setIsSupplier() {
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
@@ -407,7 +427,7 @@ public class OrdersBean {
         currRow.setAttribute("ParentId", res);
 
     }
-    
+
     private void setSupplierParentId() {
 
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
@@ -453,7 +473,7 @@ public class OrdersBean {
             }
         }
     }
-    
+
     public void onNewSupplierDialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             this.setIsSupplier();
@@ -468,7 +488,7 @@ public class OrdersBean {
             }
         }
     }
-    
+
     public void onNewZatratyDialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             //this.setIsSupplier();
@@ -578,27 +598,27 @@ public class OrdersBean {
     }
 
     public void onKonReturnListener(ReturnPopupEvent returnPopupEvent) {
-        
-          //the selected rows are defined in a RowKeySet.As the LOV table only
-          //supports single selections, there is only one entry in the rks
-          RowKeySet rks = (RowKeySet) returnPopupEvent.getReturnValue();
-          
-          //the ADF Faces table row key is a list. The list contains the 
-          //oracle.jbo.Key
-          List tableRowKey = (List) rks.iterator().next();
-          
-         
-          //get the selected row by its JBO key  
-          Key key = (Key) tableRowKey.get(0);
-          System.out.println(key.getKeyValues()[0]);
-          
-          BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-          OperationBinding ob = binding.getOperationBinding("findKontragentById");
-          if (ob != null) {
-              
-              ob.getParamsMap().put("Id", (String) key.getKeyValues()[0]);
-              ob.execute();
-          }
+
+        //the selected rows are defined in a RowKeySet.As the LOV table only
+        //supports single selections, there is only one entry in the rks
+        RowKeySet rks = (RowKeySet) returnPopupEvent.getReturnValue();
+
+        //the ADF Faces table row key is a list. The list contains the
+        //oracle.jbo.Key
+        List tableRowKey = (List) rks.iterator().next();
+
+
+        //get the selected row by its JBO key
+        Key key = (Key) tableRowKey.get(0);
+        System.out.println(key.getKeyValues()[0]);
+
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("findKontragentById");
+        if (ob != null) {
+
+            ob.getParamsMap().put("Id", (String) key.getKeyValues()[0]);
+            ob.execute();
+        }
     }
 
     public void onAddEntry(ActionEvent actionEvent) {
@@ -606,11 +626,11 @@ public class OrdersBean {
         DCIteratorBinding it = bd.findIteratorBinding("OrdersView1Iterator");
         Row currRow = it.getCurrentRow();
         String Id = (String) currRow.getAttribute("Id");
-        
+
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("addEntry");
         if (ob != null) {
-            
+
             ob.getParamsMap().put("_id", Id);
             ob.execute();
             refresh();
@@ -622,11 +642,11 @@ public class OrdersBean {
         DCIteratorBinding it = bd.findIteratorBinding("OrdersView1Iterator");
         Row currRow = it.getCurrentRow();
         String Id = (String) currRow.getAttribute("Id");
-        
+
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("removeEntry");
         if (ob != null) {
-            
+
             ob.getParamsMap().put("_id", Id);
             ob.execute();
             refresh();
@@ -637,5 +657,62 @@ public class OrdersBean {
         DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = binding.findIteratorBinding("OrdersView1Iterator");
         it.executeQuery();
+    }
+    
+    private String getSessionUser() {
+        ADFContext adfCtx = ADFContext.getCurrent();
+        SecurityContext secCntx = adfCtx.getSecurityContext();
+        String user = secCntx.getUserPrincipal().getName();
+        return user;
+    }
+
+    public void onNotifiDialog(DialogEvent dialogEvent) throws SchedulerException {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding ob = binding.getOperationBinding("addNotification");
+            if (ob != null) {
+                String cutid = UUID.randomUUID().toString().substring(0, 7);
+                JobDetail job =
+                    JobBuilder.newJob(Notice.class).withDescription("trigger" + cutid).withIdentity("job" + cutid,
+                                                                                                             "group").build();
+                Date runDate = (Date)getDat().getValue();
+                Trigger trigger =
+                    TriggerBuilder.newTrigger().startAt(runDate).withDescription(getSessionUser()).withIdentity("trigger" +                                                                                                                cutid,
+                                                                                                                "group").build();
+                job.getJobDataMap().put("UserName", getSessionUser());
+                
+                ob.getParamsMap().put("cutid", cutid);
+                ob.getParamsMap().put("dat", runDate);
+                ob.getParamsMap().put("desc", (String)getDesc().getValue());
+                ob.getParamsMap().put("ContId", null);
+                if (StartSchedulerQuartz.sched != null) {
+                    StartSchedulerQuartz.sched.scheduleJob(job, trigger);
+                    System.out.println("------- Новое напоминание! ----------------");
+                    ob.execute();
+                    FacesContext context = FacesContext.getCurrentInstance();
+                    ExtendedRenderKitService erks = Service.getService(context.getRenderKit(), ExtendedRenderKitService.class);
+                    erks.addScript(context,
+                                   "Growl('Внимание'," +
+                        "'Сообщение поставлено в расписание!','warning')");
+                }
+                
+            }
+        }
+    }
+
+    public void setDat(RichInputDate dat) {
+        this.dat = dat;
+    }
+
+    public RichInputDate getDat() {
+        return dat;
+    }
+
+    public void setDesc(RichInputText desc) {
+        this.desc = desc;
+    }
+
+    public RichInputText getDesc() {
+        return desc;
     }
 }

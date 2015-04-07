@@ -1,4 +1,4 @@
-package ua.divas.view;
+package ua.divas.bean;
 
 import oracle.adf.view.rich.component.rich.input.RichInputListOfValues;
 import oracle.adf.view.rich.event.LaunchPopupEvent;

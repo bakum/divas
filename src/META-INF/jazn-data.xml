@@ -4,41 +4,21 @@
   <jazn-realm default="jazn.com">
     <realm>
       <name>jazn.com</name>
-      <users>
-        <user>
-          <name>test-all</name>
-          <credentials>{903}rU6KB2izP6Ehpk9QRUnxeL+lGJllqxiZlCM2qARUjqE=</credentials>
-        </user>
-      </users>
       <roles>
         <role>
           <name>administrator</name>
-          <display-name></display-name>
-          <description></description>
         </role>
         <role>
           <name>director</name>
-          <display-name></display-name>
-          <description></description>
-        </role>
-        <role>
-          <name>cc_manager</name>
-          <display-name></display-name>
-          <description></description>
-        </role>
-        <role>
-          <name>cc_director</name>
-          <display-name></display-name>
-          <description></description>
         </role>
         <role>
           <name>manager</name>
         </role>
         <role>
-          <name>z_manager</name>
+          <name>z_dispatcher</name>
         </role>
         <role>
-          <name>z_dispatcher</name>
+          <name>z_manager</name>
         </role>
         <role>
           <name>tester</name>
@@ -54,6 +34,7 @@
           <app-role>
             <name>administrator</name>
             <class>oracle.security.jps.service.policystore.ApplicationRole</class>
+            <display-name>administrator</display-name>
             <members>
               <member>
                 <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
@@ -68,41 +49,6 @@
               <member>
                 <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
                 <name>director</name>
-              </member>
-            </members>
-          </app-role>
-          <app-role>
-            <name>cc_manager</name>
-            <class>oracle.security.jps.service.policystore.ApplicationRole</class>
-            <members>
-              <member>
-                <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
-                <name>cc_manager</name>
-              </member>
-            </members>
-          </app-role>
-          <app-role>
-            <name>cc_director</name>
-            <class>oracle.security.jps.service.policystore.ApplicationRole</class>
-            <members>
-              <member>
-                <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
-                <name>cc_director</name>
-              </member>
-            </members>
-          </app-role>
-          <app-role>
-            <class>oracle.security.jps.service.policystore.ApplicationRole</class>
-            <name>test-all</name>
-            <display-name>test-all</display-name>
-            <members>
-              <member>
-                <class>oracle.security.jps.internal.core.principals.JpsAnonymousRoleImpl</class>
-                <name>anonymous-role</name>
-              </member>
-              <member>
-                <class>oracle.security.jps.internal.core.principals.JpsXmlUserImpl</class>
-                <name>test-all</name>
               </member>
             </members>
           </app-role>
@@ -152,38 +98,6 @@
             <grantee>
               <principals>
                 <principal>
-                  <class>oracle.security.jps.internal.core.principals.JpsAnonymousRoleImpl</class>
-                  <name>anonymous-role</name>
-                </principal>
-              </principals>
-            </grantee>
-            <permissions>
-              <permission>
-                <class>oracle.adf.share.security.authorization.RegionPermission</class>
-                <name>ua.divas.view.pageDefs.ordersPageDef</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.share.security.authorization.RegionPermission</class>
-                <name>ua.divas.view.pageDefs.directorPageDef</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.share.security.authorization.RegionPermission</class>
-                <name>ua.divas.view.pageDefs.userPageDef</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.share.security.authorization.RegionPermission</class>
-                <name>ua.divas.view.pageDefs.ccenterPageDef</name>
-                <actions>view</actions>
-              </permission>
-            </permissions>
-          </grant>
-          <grant>
-            <grantee>
-              <principals>
-                <principal>
                   <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
                   <name>administrator</name>
                 </principal>
@@ -197,7 +111,7 @@
               </permission>
               <permission>
                 <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
-                <name>ua.divas.model.Kontragents.ParentId</name>
+                <name>ua.divas.model.Divisions.MainUser</name>
                 <actions>update</actions>
               </permission>
               <permission>
@@ -206,89 +120,9 @@
                 <actions>update</actions>
               </permission>
               <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/orders.xml#orders</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/users.xml#users</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/call_center.xml#call_center</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/directories.xml#direct</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/import-price-config.xml#import-price-config</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/zamer-config.xml#zamer-config</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/entry.xml#entry</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/plan_acc.xml#plan_acc</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/kassa-config.xml#kassa-config</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/order-dialog-flow.xml#order-dialog-flow</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/addKontrag.xml#addKontrag</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/create-kontragent.xml#create-kontragent</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/addKontr.xml#addKontr</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/zamer_debt-config.xml#zamer_debt-config</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/buyer_debt-config.xml#buyer_debt-config</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/other_zatr-config.xml#other_zatr-config</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/other-dialod-flow.xml#other-dialod-flow</name>
-                <actions>view</actions>
+                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
+                <name>ua.divas.model.Kontragents.ParentId</name>
+                <actions>update</actions>
               </permission>
               <permission>
                 <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
@@ -311,9 +145,14 @@
                 <actions>update</actions>
               </permission>
               <permission>
-                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
-                <name>ua.divas.model.Divisions.MainUser</name>
-                <actions>update</actions>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/addKontr.xml#addKontr</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/addKontrag.xml#addKontrag</name>
+                <actions>view</actions>
               </permission>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
@@ -322,29 +161,32 @@
               </permission>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/sales-config.xml#sales-config</name>
+                <name>/WEB-INF/buyer_debt-config.xml#buyer_debt-config</name>
                 <actions>view</actions>
               </permission>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/zatraty-config.xml#zatraty-config</name>
+                <name>/WEB-INF/call_center.xml#call_center</name>
                 <actions>view</actions>
               </permission>
-            </permissions>
-          </grant>
-          <grant>
-            <grantee>
-              <principals>
-                <principal>
-                  <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
-                  <name>director</name>
-                </principal>
-              </principals>
-            </grantee>
-            <permissions>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/orders.xml#orders</name>
+                <name>/WEB-INF/create-kontragent.xml#create-kontragent</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/directories.xml#direct</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/entry.xml#entry</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/import-price-config.xml#import-price-config</name>
                 <actions>view</actions>
               </permission>
               <permission>
@@ -359,37 +201,7 @@
               </permission>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/addKontrag.xml#addKontrag</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/create-kontragent.xml#create-kontragent</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/addKontr.xml#addKontr</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/zamer_debt-config.xml#zamer_debt-config</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/call_center.xml#call_center</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/buyer_debt-config.xml#buyer_debt-config</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/other_zatr-config.xml#other_zatr-config</name>
+                <name>/WEB-INF/orders.xml#orders</name>
                 <actions>view</actions>
               </permission>
               <permission>
@@ -399,7 +211,12 @@
               </permission>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/ballans-config.xml#ballans-config</name>
+                <name>/WEB-INF/other_zatr-config.xml#other_zatr-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/plan_acc.xml#plan_acc</name>
                 <actions>view</actions>
               </permission>
               <permission>
@@ -409,44 +226,27 @@
               </permission>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/users.xml#users</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/zamer-config.xml#zamer-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/zamer_debt-config.xml#zamer_debt-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/zatraty-config.xml#zatraty-config</name>
                 <actions>view</actions>
               </permission>
-            </permissions>
-          </grant>
-          <grant>
-            <grantee>
-              <principals>
-                <principal>
-                  <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
-                  <name>manager</name>
-                </principal>
-              </principals>
-            </grantee>
-            <permissions>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/orders.xml#orders</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/addKontrag.xml#addKontrag</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/create-kontragent.xml#create-kontragent</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/addKontr.xml#addKontr</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/call_center.xml#call_center</name>
+                <name>/WEB-INF/calendar-config.xml#calendar-config</name>
                 <actions>view</actions>
               </permission>
             </permissions>
@@ -463,7 +263,104 @@
             <permissions>
               <permission>
                 <class>oracle.adf.share.security.authorization.RegionPermission</class>
-                <name>ua.divas.view.pageDefs.indexPageDef</name>
+                <name>ua.divas.bean.pageDefs.indexPageDef</name>
+                <actions>view</actions>
+              </permission>
+            </permissions>
+          </grant>
+          <grant>
+            <grantee>
+              <principals>
+                <principal>
+                  <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
+                  <name>director</name>
+                </principal>
+              </principals>
+            </grantee>
+            <permissions>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/ballans-config.xml#ballans-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/buyer_debt-config.xml#buyer_debt-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/call_center.xml#call_center</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/addKontr.xml#addKontr</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/addKontrag.xml#addKontrag</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/create-kontragent.xml#create-kontragent</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/import-price-config.xml#import-price-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/order-dialog-flow.xml#order-dialog-flow</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/orders.xml#orders</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/other-dialod-flow.xml#other-dialod-flow</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/other_zatr-config.xml#other_zatr-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/plan_acc.xml#plan_acc</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/sales-config.xml#sales-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/zamer-config.xml#zamer-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/zamer_debt-config.xml#zamer_debt-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/zatraty-config.xml#zatraty-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/calendar-config.xml#calendar-config</name>
                 <actions>view</actions>
               </permission>
             </permissions>
@@ -480,33 +377,48 @@
             <permissions>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/ballans-config.xml#ballans-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/addKontr.xml#addKontr</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/addKontrag.xml#addKontrag</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/buyer_debt-config.xml#buyer_debt-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/call_center.xml#call_center</name>
                 <actions>view</actions>
               </permission>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/orders.xml#orders</name>
+                <name>/WEB-INF/create-kontragent.xml#create-kontragent</name>
                 <actions>view</actions>
               </permission>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/zamer-config.xml#zamer-config</name>
+                <name>/WEB-INF/directories.xml#direct</name>
                 <actions>view</actions>
               </permission>
               <permission>
-                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
-                <name>ua.divas.model.Currency.IdXml</name>
-                <actions>update</actions>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/entry.xml#entry</name>
+                <actions>view</actions>
               </permission>
               <permission>
-                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
-                <name>ua.divas.model.Divisions.ParentId</name>
-                <actions>update</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
-                <name>ua.divas.model.Kontragents.ParentId</name>
-                <actions>update</actions>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/import-price-config.xml#import-price-config</name>
+                <actions>view</actions>
               </permission>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
@@ -520,27 +432,12 @@
               </permission>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/create-kontragent.xml#create-kontragent</name>
+                <name>/WEB-INF/orders.xml#orders</name>
                 <actions>view</actions>
               </permission>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/addKontrag.xml#addKontrag</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/addKontr.xml#addKontr</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/zamer_debt-config.xml#zamer_debt-config</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/buyer_debt-config.xml#buyer_debt-config</name>
+                <name>/WEB-INF/other-dialod-flow.xml#other-dialod-flow</name>
                 <actions>view</actions>
               </permission>
               <permission>
@@ -550,47 +447,7 @@
               </permission>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/other-dialod-flow.xml#other-dialod-flow</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
-                <name>ua.divas.model.Orders.DivisionId</name>
-                <actions>update</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
-                <name>ua.divas.model.Orders.UserId</name>
-                <actions>update</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
-                <name>ua.divas.model.OtherZatraty.DivisionId</name>
-                <actions>update</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
-                <name>ua.divas.model.OtherZatraty.UserId</name>
-                <actions>update</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
-                <name>ua.divas.model.Divisions.MainUser</name>
-                <actions>update</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/import-price-config.xml#import-price-config</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/plan_acc.xml#plan_acc</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/ballans-config.xml#ballans-config</name>
                 <actions>view</actions>
               </permission>
               <permission>
@@ -600,7 +457,84 @@
               </permission>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/users.xml#users</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/zamer-config.xml#zamer-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/zamer_debt-config.xml#zamer_debt-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/zatraty-config.xml#zatraty-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/calendar-config.xml#calendar-config</name>
+                <actions>view</actions>
+              </permission>
+            </permissions>
+          </grant>
+          <grant>
+            <grantee>
+              <principals>
+                <principal>
+                  <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
+                  <name>manager</name>
+                </principal>
+              </principals>
+            </grantee>
+            <permissions>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/call_center.xml#call_center</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/addKontr.xml#addKontr</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/addKontrag.xml#addKontrag</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/create-kontragent.xml#create-kontragent</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/order-dialog-flow.xml#order-dialog-flow</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/orders.xml#orders</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/other-dialod-flow.xml#other-dialod-flow</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/other_zatr-config.xml#other_zatr-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/calendar-config.xml#calendar-config</name>
                 <actions>view</actions>
               </permission>
             </permissions>
@@ -618,6 +552,16 @@
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/zamer-config.xml#zamer-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/zamer_debt-config.xml#zamer_debt-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/calendar-config.xml#calendar-config</name>
                 <actions>view</actions>
               </permission>
             </permissions>

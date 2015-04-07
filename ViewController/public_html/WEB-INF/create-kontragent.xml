@@ -7,7 +7,7 @@
     </transaction>
     <managed-bean id="__11">
       <managed-bean-name>new_order</managed-bean-name>
-      <managed-bean-class>ua.divas.view.NewOrderBean</managed-bean-class>
+      <managed-bean-class>ua.divas.bean.NewOrderBean</managed-bean-class>
       <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <task-flow-return id="ok">

@@ -6,6 +6,6 @@
     <extends>skyros-v1.desktop</extends>
     <render-kit-id>org.apache.myfaces.trinidad.desktop</render-kit-id>
     <style-sheet-name>skins/divas/divas.css</style-sheet-name>
-    <bundle-name>ua.divas.view.skinBundle</bundle-name>
+    <bundle-name>ua.divas.bean.skinBundle</bundle-name>
   </skin>
 </skins>

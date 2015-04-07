@@ -11,7 +11,7 @@
     </return-value-definition>
     <managed-bean id="__8">
       <managed-bean-name>new_kontrag</managed-bean-name>
-      <managed-bean-class>ua.divas.view.NewKontragBean</managed-bean-class>
+      <managed-bean-class>ua.divas.bean.NewKontragBean</managed-bean-class>
       <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <method-call id="CreateInsert">

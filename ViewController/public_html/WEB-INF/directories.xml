@@ -4,12 +4,12 @@
     <default-activity>director</default-activity>
     <managed-bean id="__1">
       <managed-bean-name>currency</managed-bean-name>
-      <managed-bean-class>ua.divas.view.CurrencyBean</managed-bean-class>
+      <managed-bean-class>ua.divas.bean.CurrencyBean</managed-bean-class>
       <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean id="__2">
       <managed-bean-name>firms</managed-bean-name>
-      <managed-bean-class>ua.divas.view.FirmsBean</managed-bean-class>
+      <managed-bean-class>ua.divas.bean.FirmsBean</managed-bean-class>
       <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <view id="director">

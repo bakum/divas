@@ -4,7 +4,7 @@
     <default-activity>order</default-activity>
     <managed-bean id="__5">
       <managed-bean-name>order_jsf</managed-bean-name>
-      <managed-bean-class>ua.divas.view.OrderjsfBean</managed-bean-class>
+      <managed-bean-class>ua.divas.bean.OrderjsfBean</managed-bean-class>
       <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <view id="order">

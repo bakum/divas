@@ -1,5 +1,7 @@
 package ua.divas.module.common;
 
+import java.util.Date;
+
 import oracle.jbo.ApplicationModule;
 import oracle.jbo.Key;
 import oracle.jbo.RowIterator;
@@ -9,5 +11,7 @@ import oracle.jbo.RowIterator;
 // ---------------------------------------------------------------------
 public interface AppModule extends ApplicationModule {
     void deleteChildren(RowIterator ri, Key selectedNodeKey);
+
+    void addNotification(String cutid, String desc, Date dat, String ObjId, String ContId);
 }
 

@@ -36,7 +36,8 @@ public class ContactDetailsImpl extends DivasEntityNoDelete {
         CallLog,
         CompaignsDetails,
         Kontragents;
-        private static AttributesEnum[] vals = null;
+        static AttributesEnum[] vals = null;
+        ;
         private static final int firstIndex = 0;
 
         public int index() {
@@ -58,6 +59,7 @@ public class ContactDetailsImpl extends DivasEntityNoDelete {
             return vals;
         }
     }
+
 
     public static final int ID = AttributesEnum.Id.index();
     public static final int VERSION = AttributesEnum.Version.index();
@@ -81,6 +83,7 @@ public class ContactDetailsImpl extends DivasEntityNoDelete {
     public static synchronized EntityDefImpl getDefinitionObject() {
         return EntityDefImpl.findDefObject("ua.divas.model.ContactDetails");
     }
+
 
     /**
      * Gets the attribute value for Id, using the alias name Id.

@@ -1,4 +1,4 @@
-package ua.divas.view;
+package ua.divas.bean;
 
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;

@@ -5,41 +5,6 @@
         <af:gridRow height="100%" id="gr1">
             <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
                 <!-- Content -->
-                <af:calendar value="#{bindings.CalendarView1.calendarModel}" id="c1" availableViews="all"
-                             startDayOfWeek="mon" calendarActivityListener="#{business.activityListener}"
-                             binding="#{business.calendar}">
-                    <f:facet name="activityDelete">
-                        <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
-                                  binding="#{business.deletePopup}">
-                            <af:dialog id="pw_deleteAction" title="Удалить" closeIconVisible="false"
-                                       dialogListener="#{business.onDialogDelete}">
-                                <af:outputFormatted value="Удалить событие?" id="of1"
-                                                    inlineStyle="font-size:large; color:Red;"/>
-                            </af:dialog>
-                        </af:popup>
-                    </f:facet>
-                    <f:facet name="activityContextMenu">
-                        <af:popup childCreation="deferred" autoCancel="disabled" id="p2">
-                            <af:menu text="menu 1" id="m1">
-                                <af:commandMenuItem text="Редактировать" id="cmi2">
-                                    <af:showPopupBehavior popupId="p3"/>
-                                </af:commandMenuItem>
-                                <af:commandMenuItem text="Удалить событие" id="cmi1">
-                                    <af:showPopupBehavior popupId="p1"/>
-                                </af:commandMenuItem>
-                            </af:menu>
-                        </af:popup>
-                    </f:facet>
-                    <f:facet name="activityDetail">
-                        <af:popup childCreation="deferred" autoCancel="disabled" id="p3"
-                                  contentDelivery="lazyUncached" binding="#{business.updatePopup}">
-                            <af:dialog id="pw_editAction" type="none" title="Редактировать событие">
-                                <f:facet name="buttonBar"/>
-                            </af:dialog>
-                        </af:popup>
-                    </f:facet>
-                    <f:facet name="create"/>
-                </af:calendar>
             </af:gridCell>
         </af:gridRow>
     </af:panelGridLayout>

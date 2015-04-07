@@ -4,7 +4,7 @@
     <default-activity>order</default-activity>
     <managed-bean id="__1">
       <managed-bean-name>orders</managed-bean-name>
-      <managed-bean-class>ua.divas.view.OrdersBean</managed-bean-class>
+      <managed-bean-class>ua.divas.bean.OrdersBean</managed-bean-class>
       <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <view id="order">
