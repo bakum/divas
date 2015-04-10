@@ -10,17 +10,21 @@
     <view id="order">
       <page>/orders.jsff</page>
     </view>
-    <task-flow-call id="create-kontragent">
+    <task-flow-call id="addKontrag">
       <task-flow-reference>
-        <document>/WEB-INF/create-kontragent.xml</document>
-        <id>create-kontragent</id>
+        <document>/WEB-INF/addKontrag.xml</document>
+        <id>addKontrag</id>
       </task-flow-reference>
+      <input-parameter id="__4">
+        <name>ContactId</name>
+        <value>'neworder'</value>
+      </input-parameter>
     </task-flow-call>
-    <control-flow-rule id="__6">
+    <control-flow-rule id="__2">
       <from-activity-id>order</from-activity-id>
-      <control-flow-case id="__7">
-        <from-outcome>addOrder</from-outcome>
-        <to-activity-id>create-kontragent</to-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>addKontrag</from-outcome>
+        <to-activity-id>addKontrag</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>

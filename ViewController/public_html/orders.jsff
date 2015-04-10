@@ -16,6 +16,7 @@
                                                      icon="/img/shoppingcart.png">
                                             <f:facet name="toolbar">
                                                 <af:toolbar id="t4">
+                                                    <af:button text="button 1" id="b19" action="addKontrag"/>
                                                     <af:button actionListener="#{bindings.CreateInsert.execute}"
                                                                text="Добавить" disabled="#{bindings.Commit.enabled}"
                                                                id="b5">

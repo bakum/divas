@@ -7,4 +7,4 @@ function Growl(ttl,mess, stl){
           duration: 6200
         }
     );
-}
+}    

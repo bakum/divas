@@ -15,6 +15,20 @@
     <view id="ccenter">
       <page>/ccenter.jsff</page>
     </view>
+    <task-flow-call id="addKontrag">
+      <task-flow-reference>
+        <document>/WEB-INF/addKontrag.xml</document>
+        <id>addKontrag</id>
+      </task-flow-reference>
+      <after-listener>#{filter.afterListener}</after-listener>
+    </task-flow-call>
+    <control-flow-rule id="__3">
+      <from-activity-id>ccenter</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>addKontrag</from-outcome>
+        <to-activity-id>addKontrag</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
     <use-page-fragments/>
   </task-flow-definition>
 </adfc-config>

@@ -16,9 +16,11 @@
                                         <af:panelBox id="pb1" type="flow" text="Абоненты">
                                             <f:facet name="toolbar">
                                                 <af:toolbar id="t2">
+                                                    <af:button text="Добавить" id="b19" action="addKontrag"
+                                                               returnListener="#{filter.onAddReturn}"/>
                                                     <af:button actionListener="#{bindings.CreateInsert.execute}"
                                                                disabled="#{bindings.Commit.enabled}" id="b6"
-                                                               shortDesc="Добавить" text="Добавить"/>
+                                                               shortDesc="Добавить" text="Добавить" visible="false"/>
                                                     <af:button actionListener="#{bindings.Commit.execute}"
                                                                disabled="#{!bindings.Commit.enabled}" id="b2"
                                                                shortDesc="Сохранить" text="Сохранить"
@@ -635,7 +637,8 @@
                                                 </af:dialog>
                                             </af:popup>
                                             <af:poll id="p1"
-                                                     pollListener="#{filter.onPoll}" interval="10000" rendered="false"/>
+                                                     pollListener="#{filter.onPoll}" interval="1000" rendered="false"/>
+                                            <af:serverListener type="refreshEvent" method="#{filter.onServerEvent}"/>
                                         </af:panelBox>
                                     </f:facet>
                                     <f:facet name="start">

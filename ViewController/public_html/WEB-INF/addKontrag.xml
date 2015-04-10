@@ -5,9 +5,15 @@
     <transaction>
       <requires-transaction/>
     </transaction>
+    <input-parameter-definition id="__10">
+      <name>ContactId</name>
+      <value>#{pageFlowScope.ContactId}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
     <return-value-definition id="__9">
       <name>KontragId</name>
       <value>#{pageFlowScope.KontragId}</value>
+      <class>java.lang.String</class>
     </return-value-definition>
     <managed-bean id="__8">
       <managed-bean-name>new_kontrag</managed-bean-name>
@@ -21,6 +27,7 @@
       </outcome>
     </method-call>
     <view id="newKontrag">
+      <display-name>Шаг.1</display-name>
       <page>/newKontrag.jsff</page>
       <train-stop/>
     </view>
@@ -37,8 +44,16 @@
       </outcome>
     </task-flow-return>
     <view id="detail">
+      <display-name>Шаг 2</display-name>
       <page>/detail.jsff</page>
       <train-stop/>
+    </view>
+    <view id="addOrder">
+      <display-name>Шаг 3</display-name>
+      <page>/addOrder.jsff</page>
+      <train-stop>
+        <skip>#{pageFlowScope.ContactId == null ? true : false}</skip>
+      </train-stop>
     </view>
     <train/>
     <control-flow-rule id="__1">
@@ -48,14 +63,32 @@
         <to-activity-id>newKontrag</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
-    <control-flow-rule id="__3">
+    <control-flow-rule id="__6">
+      <from-activity-id>newKontrag</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>cancel1</from-outcome>
+        <to-activity-id>cancel</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__14">
       <from-activity-id>detail</from-activity-id>
-      <control-flow-case id="__4">
+      <control-flow-case id="__15">
         <from-outcome>ok</from-outcome>
         <to-activity-id>ok</to-activity-id>
       </control-flow-case>
-      <control-flow-case id="__5">
+      <control-flow-case id="__16">
         <from-outcome>cancel</from-outcome>
+        <to-activity-id>cancel</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__17">
+      <from-activity-id>addOrder</from-activity-id>
+      <control-flow-case id="__18">
+        <from-outcome>save</from-outcome>
+        <to-activity-id>ok</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__19">
+        <from-outcome>noSave</from-outcome>
         <to-activity-id>cancel</to-activity-id>
       </control-flow-case>
     </control-flow-rule>

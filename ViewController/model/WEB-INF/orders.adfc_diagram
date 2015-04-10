@@ -17,35 +17,35 @@
       <property
          name="y">154.04688</property>
       <property
-         name="pageFragment">true</property>
-      <property
          name="x">226.0</property>
+      <property
+         name="pageFragment">true</property>
    </View>
    <TaskFlowCall
-      id="TaskFlowCall7">
+      id="TaskFlowCall5">
       <property
-         name="taskFlowId">create-kontragent</property>
+         name="taskFlowId">addKontrag</property>
       <property
-         name="activityId">create-kontragent</property>
+         name="activityId">addKontrag</property>
       <property
-         name="documentReference">/WEB-INF/create-kontragent.xml</property>
+         name="documentReference">/WEB-INF/addKontrag.xml</property>
       <property
-         name="description">&lt;html>&lt;p>&lt;b>create-kontragent&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+         name="description">&lt;html>&lt;p>&lt;b>addKontrag&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">150.54688</property>
+         name="y">155.54688</property>
       <property
-         name="x">405.44238</property>
+         name="x">385.00684</property>
    </TaskFlowCall>
    <ControlFlowCase
       islink="true"
-      id="ControlFlowCase8"
+      id="ControlFlowCase6"
       from="View2"
-      to="TaskFlowCall7">
+      to="TaskFlowCall5">
       <property
-         name="fromOutcome">addOrder</property>
+         name="fromOutcome">addKontrag</property>
       <property
-         name="sdm:polyPoints">R50,267.0,154.0625,364.44238,150.5625,L50</property>
+         name="sdm:polyPoints">R50,267.0,154.0625,344.00684,155.5625,L50</property>
    </ControlFlowCase>
 </SDM>

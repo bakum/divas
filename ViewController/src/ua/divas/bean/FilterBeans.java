@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import java.util.Map;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -12,7 +14,9 @@ import javax.faces.event.ActionEvent;
 import oracle.adf.controller.ControllerContext;
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
+import oracle.adf.model.binding.DCDataControl;
 import oracle.adf.model.binding.DCIteratorBinding;
+import oracle.adf.share.ADFContext;
 import oracle.adf.view.rich.component.rich.data.RichTable;
 import oracle.adf.view.rich.component.rich.data.RichTree;
 import oracle.adf.view.rich.component.rich.layout.RichPanelFormLayout;
@@ -26,6 +30,8 @@ import oracle.adf.view.rich.event.PopupFetchEvent;
 import oracle.adf.view.rich.event.QueryEvent;
 
 import oracle.adf.view.rich.model.FilterableQueryDescriptor;
+
+import oracle.adf.view.rich.render.ClientEvent;
 
 import oracle.binding.BindingContainer;
 
@@ -41,12 +47,15 @@ import oracle.jbo.uicli.binding.JUCtrlHierBinding;
 import oracle.jbo.uicli.binding.JUCtrlHierNodeBinding;
 
 import org.apache.myfaces.trinidad.event.PollEvent;
+import org.apache.myfaces.trinidad.event.ReturnEvent;
 import org.apache.myfaces.trinidad.event.RowDisclosureEvent;
 import org.apache.myfaces.trinidad.event.SelectionEvent;
 import org.apache.myfaces.trinidad.model.CollectionModel;
 import org.apache.myfaces.trinidad.model.RowKeySet;
 
 import org.apache.myfaces.trinidad.model.RowKeySetImpl;
+
+import ua.divas.module.AppModuleImpl;
 
 
 public class FilterBeans {
@@ -319,16 +328,28 @@ public class FilterBeans {
         it.executeQuery();
         DCIteratorBinding it_detail = it_binding.findIteratorBinding("ContactDetailsView2Iterator");
         if (rks != null) {
-            it.setCurrentRowWithKey(rks);
-            Row masterRow = it.getCurrentRow();
-            String masterId = (String) masterRow.getAttribute("Id");
-            it_detail.executeQuery();
-            RowIterator rIter = it_detail.findRowsByAttributeValue("KontragId", true, masterId);
-            if (rIter != null && rIter.first() != null) {
+            try {
+                String rks1 = it.getCurrentRow().getKey().toStringFormat(true);
+            } catch (Exception e) {
+                rks = null;
+            }
+            if (rks != null) {
                 try {
-                    String contId = rIter.first().getAttribute("Id").toString();
-                    Key k = new Key(new Object[] { contId });
-                    it_detail.setCurrentRowWithKey(k.toStringFormat(true));
+                    it.setCurrentRowWithKey(rks);
+                    Row masterRow = it.getCurrentRow();
+                    String masterId = (String) masterRow.getAttribute("Id");
+                    it_detail.executeQuery();
+                    RowIterator rIter = it_detail.findRowsByAttributeValue("KontragId", true, masterId);
+                    if (rIter != null && rIter.first() != null) {
+                        try {
+                            String contId = rIter.first().getAttribute("Id").toString();
+                            Key k = new Key(new Object[] { contId });
+                            it_detail.setCurrentRowWithKey(k.toStringFormat(true));
+                        } catch (Exception e) {
+                            // TODO: Add catch code
+                            e.printStackTrace();
+                        }
+                    }
                 } catch (Exception e) {
                     // TODO: Add catch code
                     e.printStackTrace();
@@ -537,8 +558,30 @@ public class FilterBeans {
     }
 
     public void onPoll(PollEvent pollEvent) {
+        ADFContext adfCtx = ADFContext.getCurrent();
+        Map pageFlowScope = adfCtx.getPageFlowScope();
+        Object val = pageFlowScope.get("KontragId"); //Name = PageFlowScope value name
+
+        if (val == null) { //Avoid null pointer exception
+            DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = binding.findIteratorBinding("KontragentsView1Iterator");
+            it.executeQuery();
+        }
+    }
+
+    public void onAddReturn(ReturnEvent returnEvent) {
+        System.out.println("Return value " + returnEvent.getReturnValue());
         DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = binding.findIteratorBinding("KontragentsView1Iterator");
         it.executeQuery();
+    }
+
+    public void afterListener() {
+        System.out.println("After listener called ");
+        BindingContext bindingContext = BindingContext.getCurrent();
+        DCDataControl dc =
+            bindingContext.findDataControl("AppModuleDataControl"); // Name of application module in datacontrolBinding.cpx
+        AppModuleImpl am = (AppModuleImpl) dc.getDataProvider();
+        am.getKontragentsView1().executeQuery();
     }
 }
