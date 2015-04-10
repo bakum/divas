@@ -11,6 +11,8 @@ import oracle.adf.model.binding.DCDataControl;
 import oracle.adf.share.ADFContext;
 import oracle.adf.share.security.SecurityContext;
 
+import org.quartz.CronScheduleBuilder;
+import org.quartz.CronTrigger;
 import org.quartz.JobBuilder;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
@@ -42,10 +44,16 @@ public class ReminderBean {
         long t = new Date().getTime();
         Date afterAddingTenMins=new Date(t + (1 * 60000));
         Date runDate = afterAddingTenMins;
-        Trigger trigger =
-            TriggerBuilder.newTrigger().startAt(runDate).withDescription(getSessionUser()).withIdentity("trigger" +
-                                                                                                        cutid,
-                                                                                                        "group").build();
+        /* Trigger trigger =
+            TriggerBuilder.newTrigger()
+            .startAt(runDate)
+            .withDescription(getSessionUser())
+            .withIdentity("trigger"+cutid,"group").build(); */
+        
+        Trigger trigger = (Trigger) TriggerBuilder.newTrigger()
+                .withDescription(getSessionUser())
+                .withIdentity("trigger" + cutid, "group").forJob(job)
+                .withSchedule(CronScheduleBuilder.cronSchedule("0 0/2 * * * ?")).build();
         if (StartSchedulerQuartz.sched != null) {
             StartSchedulerQuartz.sched.scheduleJob(job, trigger);
             System.out.println("------- Новое напоминание! ----------------");

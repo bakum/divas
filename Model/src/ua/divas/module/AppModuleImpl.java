@@ -13,7 +13,6 @@ import oracle.jbo.server.ViewLinkImpl;
 import oracle.jbo.server.ViewObjectImpl;
 
 import ua.divas.module.common.AppModule;
-import ua.divas.view.CalendarViewImpl;
 import ua.divas.view.CompaignsViewImpl;
 import ua.divas.view.ContactDetailsViewImpl;
 import ua.divas.view.CurrencyViewImpl;
@@ -3281,12 +3280,5 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
 
     }
 
-    /**
-     * Container's getter for CalendarView1.
-     * @return CalendarView1
-     */
-    public CalendarViewImpl getCalendarView1() {
-        return (CalendarViewImpl) findViewObject("CalendarView1");
-    }
 }
 

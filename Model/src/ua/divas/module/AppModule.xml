@@ -757,9 +757,6 @@
   <ViewUsage
     Name="NotificationView1"
     ViewObjectName="ua.divas.view.NotificationView"/>
-  <ViewUsage
-    Name="CalendarView1"
-    ViewObjectName="ua.divas.view.CalendarView"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"

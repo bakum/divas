@@ -26,7 +26,7 @@
                                                         <af:setPropertyListener to="#{bindings.Editable.inputValue}"
                                                                                 type="action" from="#{0}"/>
                                                     </af:button>
-                                                    <af:button actionListener="#{bindings.Rollback.execute}"
+                                                    <af:button
                                                                text="Отменить" disabled="#{!bindings.Rollback.enabled}"
                                                                immediate="true" id="b3"
                                                                action="#{filter.rollbackChange}"/>
@@ -247,21 +247,21 @@
                                                             </af:inputComboboxListOfValues>
                                                         </af:panelLabelAndMessage>
                                                         <af:panelLabelAndMessage label="#{bindings.Adress.hints.label}"
-                                                                                 id="plam8">
+                                                                                 id="plam8"
+                                                                                 visible="#{bindings.CountContacts.inputValue &lt; '1' ? true : false}">
                                                             <af:inputText value="#{bindings.Adress.inputValue}"
-                                                                          required="#{bindings.Adress.hints.mandatory}"
                                                                           columns="#{bindings.Adress.hints.displayWidth}"
                                                                           shortDesc="#{bindings.Adress.hints.tooltip}"
-                                                                          id="it12" rows="3"/>
+                                                                          id="it12" rows="3"
+                                                                          required="#{bindings.CountContacts.inputValue > '1' ? false : true}"/>
                                                         </af:panelLabelAndMessage>
                                                         <af:panelLabelAndMessage label="#{bindings.Phone.hints.label}"
                                                                                  id="plam9">
                                                             <af:inputText value="#{bindings.Phone.inputValue}"
-                                                                          required="#{bindings.Phone.hints.mandatory}"
                                                                           columns="#{bindings.Phone.hints.displayWidth}"
                                                                           maximumLength="#{bindings.Phone.hints.precision}"
                                                                           shortDesc="#{bindings.Phone.hints.tooltip}"
-                                                                          id="it13">
+                                                                          id="it13" required="true">
                                                                 <f:validator binding="#{bindings.Phone.validator}"/>
                                                             </af:inputText>
                                                         </af:panelLabelAndMessage>
@@ -634,8 +634,8 @@
                                                     </af:panelAccordion>
                                                 </af:dialog>
                                             </af:popup>
-                                            <af:poll id="p1" rendered="#{!bindings.Commit.enabled}"
-                                                     pollListener="#{filter.onPoll}" interval="10000"/>
+                                            <af:poll id="p1"
+                                                     pollListener="#{filter.onPoll}" interval="10000" rendered="false"/>
                                         </af:panelBox>
                                     </f:facet>
                                     <f:facet name="start">
@@ -748,34 +748,35 @@
                                                                action="#{filter.commitChange}"/>
                                                     <af:button id="b18" icon="/img/redo.png"
                                                                disabled="#{!bindings.Commit.enabled}"
-                                                               actionListener="#{bindings.Rollback.execute}">
-                                                        <af:resetActionListener/>
-                                                    </af:button>
+                                                               action="#{filter.rollbackChange}"/>
                                                 </af:toolbar>
                                                 <af:listView value="#{bindings.ContactDetailsView2.collectionModel}"
                                                              var="item"
                                                              emptyText="#{bindings.ContactDetailsView2.viewable ? 'Нет данных для отображения.' : 'В доступе отказано.'}"
                                                              fetchSize="#{bindings.ContactDetailsView2.rangeSize}"
-                                                             id="lv2">
+                                                             id="lv2" varStatus="vs">
                                                     <af:listItem id="li2">
                                                         <af:panelGridLayout id="pgl7">
                                                             <af:gridRow marginTop="5px" height="auto" marginBottom="5px"
                                                                         id="gr4">
-                                                                <af:gridCell marginStart="5px" width="34%" id="gc8">
-                                                                    <af:inputText value="#{item.bindings.Adress.inputValue}"
-                                                                                  id="of7" rows="3"
-                                                                                  readOnly="#{bindings.Editable1.inputValue == 0 ? true : false}"/>
-                                                                </af:gridCell>
-                                                                <af:gridCell marginStart="5px" width="33%" id="gc9">
+                                                                <af:gridCell marginStart="5px" width="100%" id="gc8">
                                                                     <af:inputText value="#{item.bindings.Phone.inputValue}"
                                                                                   id="of8"
-                                                                                  readOnly="#{bindings.Editable1.inputValue == 0 ? true : false}"/>
-                                                                </af:gridCell>
-                                                                <af:gridCell marginStart="5px" width="33%"
-                                                                             marginEnd="5px" id="gc10">
+                                                                                  readOnly="#{bindings.Editable1.inputValue == 0 ? true : false}"
+                                                                                  inlineStyle="font-weight:bold;"
+                                                                                  placeholder="#{item.bindings.Phone.label}"
+                                                                                  required="true"/>
                                                                     <af:inputText value="#{item.bindings.Email.inputValue}"
                                                                                   id="of9"
-                                                                                  readOnly="#{bindings.Editable1.inputValue == 0 ? true : false}"/>
+                                                                                  readOnly="#{bindings.Editable1.inputValue == 0 ? true : false}"
+                                                                                  placeholder="#{item.bindings.Email.label}"/>
+                                                                    <af:spacer width="10" height="10" id="s7"/>
+                                                                    <af:inputText value="#{item.bindings.Adress.inputValue}"
+                                                                                  id="of7" rows="3"
+                                                                                  readOnly="#{bindings.Editable1.inputValue == 0 ? true : false}"
+                                                                                  placeholder="#{item.bindings.Adress.label}"
+                                                                                  required="#{bindings.CountContacts.inputValue > '1' ? false : true}"
+                                                                                  visible="#{vs.index > '0' ? false : true}"/>
                                                                 </af:gridCell>
                                                             </af:gridRow>
                                                         </af:panelGridLayout>

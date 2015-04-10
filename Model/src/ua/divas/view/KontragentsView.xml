@@ -320,6 +320,19 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[VwBuyerMoves.sum("Summ != null ? Summ : 0")]]></TransientExpression>
   </ViewAttribute>
+  <ViewAttribute
+    Name="CountContacts"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[ContactDetailsView.count("Id != null ? Id : 0")]]></TransientExpression>
+  </ViewAttribute>
   <ViewCriteria
     Name="KontragentsGroup"
     ViewObjectName="ua.divas.view.KontragentsView"

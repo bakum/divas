@@ -34,6 +34,8 @@ import oracle.binding.OperationBinding;
 import oracle.jbo.Key;
 
 import oracle.jbo.Row;
+import oracle.jbo.RowIterator;
+import oracle.jbo.RowSetIterator;
 import oracle.jbo.uicli.binding.JUCtrlHierBinding;
 
 import oracle.jbo.uicli.binding.JUCtrlHierNodeBinding;
@@ -225,11 +227,25 @@ public class FilterBeans {
         }
     }
 
+    private String getRks() {
+        DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = binding.findIteratorBinding("KontragentsView1Iterator");
+        String rks;
+        if (it != null) {
+            try {
+                return it.getCurrentRow().getKey().toStringFormat(true);
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
     public void refresh() {
         DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = binding.findIteratorBinding("KontragentsView1Iterator");
         String rks;
-        //DCIteratorBinding it_detail = binding.findIteratorBinding("ContactDetailsView2Iterator");
+        DCIteratorBinding it_detail = binding.findIteratorBinding("ContactDetailsView2Iterator");
         if (it != null) {
             try {
                 rks = it.getCurrentRow().getKey().toStringFormat(true);
@@ -239,14 +255,21 @@ public class FilterBeans {
             it.executeQuery();
             if (rks != null) {
                 it.setCurrentRowWithKey(rks);
-            }
-            /* if (it_detail != null) {
-                rks = it_detail.getCurrentRow().getKey().toStringFormat(true);
+                Row masterRow = it.getCurrentRow();
+                String masterId = (String) masterRow.getAttribute("Id");
                 it_detail.executeQuery();
-                if (rks != null) {
-                    it_detail.setCurrentRowWithKey(rks);
+                RowIterator rIter = it_detail.findRowsByAttributeValue("KontragId", true, masterId);
+                if (rIter != null && rIter.first() != null) {
+                    try {
+                        String contId = rIter.first().getAttribute("Id").toString();
+                        Key k = new Key(new Object[] { contId });
+                        it_detail.setCurrentRowWithKey(k.toStringFormat(true));
+                    } catch (Exception e) {
+                        // TODO: Add catch code
+                        e.printStackTrace();
+                    }
                 }
-            } */
+            }
         }
     }
 
@@ -286,10 +309,32 @@ public class FilterBeans {
 
 
     public String rollbackChange() {
+        String rks = getRks();
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("Rollback");
         ob.execute();
-        callSelectionListener();
+        //refresh();
+        DCBindingContainer it_binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = it_binding.findIteratorBinding("KontragentsView1Iterator");
+        it.executeQuery();
+        DCIteratorBinding it_detail = it_binding.findIteratorBinding("ContactDetailsView2Iterator");
+        if (rks != null) {
+            it.setCurrentRowWithKey(rks);
+            Row masterRow = it.getCurrentRow();
+            String masterId = (String) masterRow.getAttribute("Id");
+            it_detail.executeQuery();
+            RowIterator rIter = it_detail.findRowsByAttributeValue("KontragId", true, masterId);
+            if (rIter != null && rIter.first() != null) {
+                try {
+                    String contId = rIter.first().getAttribute("Id").toString();
+                    Key k = new Key(new Object[] { contId });
+                    it_detail.setCurrentRowWithKey(k.toStringFormat(true));
+                } catch (Exception e) {
+                    // TODO: Add catch code
+                    e.printStackTrace();
+                }
+            }
+        }
         return null;
     }
 

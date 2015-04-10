@@ -64,6 +64,7 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         TotalSumm,
         TotalOplat,
         DebtBuyer,
+        CountContacts,
         KontragentsView,
         CompaignsDetailsView,
         ContactDetailsView,
@@ -126,6 +127,7 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
     public static final int TOTALSUMM = AttributesEnum.TotalSumm.index();
     public static final int TOTALOPLAT = AttributesEnum.TotalOplat.index();
     public static final int DEBTBUYER = AttributesEnum.DebtBuyer.index();
+    public static final int COUNTCONTACTS = AttributesEnum.CountContacts.index();
     public static final int KONTRAGENTSVIEW = AttributesEnum.KontragentsView.index();
     public static final int COMPAIGNSDETAILSVIEW = AttributesEnum.CompaignsDetailsView.index();
     public static final int CONTACTDETAILSVIEW = AttributesEnum.ContactDetailsView.index();
@@ -441,6 +443,14 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         return (Number) getAttributeInternal(DEBTBUYER);
     }
 
+
+    /**
+     * Gets the attribute value for the calculated attribute CountContacts.
+     * @return the CountContacts
+     */
+    public Number getCountContacts() {
+        return (Number) getAttributeInternal(COUNTCONTACTS);
+    }
 
     /**
      * Gets the associated <code>RowIterator</code> using master-detail link KontragentsView.

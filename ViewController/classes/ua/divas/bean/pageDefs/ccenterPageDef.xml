@@ -232,5 +232,10 @@
           DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
     <list IterBinding="OrdersViewKontragentIterator" StaticList="false" Uses="LOV_StatusId" id="StatusId"
           DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="KontragentsView1Iterator" id="CountContacts">
+      <AttrNames>
+        <Item Value="CountContacts"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>
