@@ -699,6 +699,16 @@ public class OrdersBean {
             }
         }
     }
+    
+    public void afterListener() {
+        System.out.println("After listener called ");
+        BindingContext bindingContext = BindingContext.getCurrent();
+        DCDataControl dc =
+            bindingContext.findDataControl("AppModuleDataControl"); // Name of application module in datacontrolBinding.cpx
+        AppModuleImpl am = (AppModuleImpl) dc.getDataProvider();
+        am.getOrdersView1().executeQuery();
+    }
+    
 
     public void setDat(RichInputDate dat) {
         this.dat = dat;

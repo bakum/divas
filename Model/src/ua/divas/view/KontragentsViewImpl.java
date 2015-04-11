@@ -260,5 +260,21 @@ public class KontragentsViewImpl extends DivasView implements KontragentsView {
     public void setSuppId(String value) {
         ensureVariableManager().setVariableValue("SuppId", value);
     }
+
+    /**
+     * Returns the bind variable value for u_name.
+     * @return bind variable value for u_name
+     */
+    public String getu_name() {
+        return (String) getNamedWhereClauseParam("u_name");
+    }
+
+    /**
+     * Sets <code>value</code> for bind variable u_name.
+     * @param value value to bind as u_name
+     */
+    public void setu_name(String value) {
+        setNamedWhereClauseParam("u_name", value);
+    }
 }
 

@@ -27,6 +27,12 @@
     Kind="where"
     Type="java.lang.String">
     <TransientExpression><![CDATA[viewObject.getSessionUser()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Variable>
   <ViewAccessor
     Name="KontragentsView1"
@@ -514,6 +520,7 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
     IsQueriable="false"/>
   <ViewAttribute
     Name="Discription"
+    IsNotNull="true"    
     PrecisionRule="true"
     EntityAttrName="Discription"
     EntityUsage="Orders"
@@ -662,16 +669,15 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
     PrecisionRule="true"
     EntityAttrName="DatZam"
     EntityUsage="Orders"
-    AliasName="DAT_ZAM">
-    <TransientExpression><![CDATA[adf.currentDateTime]]></TransientExpression>
-  </ViewAttribute>
+    AliasName="DAT_ZAM"/>
   <ViewAttribute
     Name="SummPlan"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="SummPlan"
     EntityUsage="Orders"
-    AliasName="SUMM_PLAN"/>
+    AliasName="SUMM_PLAN"
+    DefaultValue="1000"/>
   <ViewAttribute
     Name="Objname"
     IsUpdateable="false"

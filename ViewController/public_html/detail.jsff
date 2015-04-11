@@ -24,8 +24,6 @@
                                            disabled="#{pageFlowScope.ContactId != null ? true : bindings.KontragId.inputValue == null ? true : false}">
                                     <af:setPropertyListener from="#{bindings.KontragId.inputValue}"
                                                             to="#{pageFlowScope.KontragId}" type="action"/>
-                                    <af:setPropertyListener from="#{0}" to="#{bindings.Editable.inputValue}"
-                                                            type="action"/>
                                 </af:button>
                                 <af:button text="Отменить" id="b2" action="cancel"/>
                             </af:toolbar>

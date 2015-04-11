@@ -28,8 +28,6 @@
     <iterator Binds="ZatratyView1" RangeSize="25" DataControl="AppModuleDataControl" id="ZatratyView1Iterator"/>
     <iterator Binds="OrdersTpNachisleniaView2" RangeSize="25" DataControl="AppModuleDataControl"
               id="OrdersTpNachisleniaView2Iterator" StateValidation="false"/>
-    <taskFlow id="createkontragent1" taskFlowId="/WEB-INF/create-kontragent.xml#create-kontragent" activation="deferred"
-              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
     <variableIterator id="variables">
       <variable Type="java.util.Date" Name="addNotification_dat" IsQueriable="false"/>
       <variable Type="java.lang.String" Name="addNotification_desc" IsQueriable="false"/>

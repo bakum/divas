@@ -1,10 +1,15 @@
 package ua.divas.bean;
 
+import java.util.Map;
+
 import javax.faces.event.ValueChangeEvent;
 
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
+
+import oracle.adf.share.ADFContext;
+import oracle.adf.view.rich.component.rich.input.RichInputText;
 
 import oracle.binding.BindingContainer;
 import oracle.binding.OperationBinding;
@@ -12,6 +17,8 @@ import oracle.binding.OperationBinding;
 import oracle.jbo.Row;
 
 public class NewKontragBean {
+    private RichInputText kontragId;
+
     public NewKontragBean() {
     }
     
@@ -42,5 +49,17 @@ public class NewKontragBean {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding oper = (OperationBinding) binding.getOperationBinding("initializeDataObject");
         oper.execute();
+        
+        ADFContext adfCtx = ADFContext.getCurrent();
+        Map pageFlowScope = adfCtx.getPageFlowScope();
+        pageFlowScope.put("KontragId", getKontragId().getValue());
+    }
+
+    public void setKontragId(RichInputText kontragId) {
+        this.kontragId = kontragId;
+    }
+
+    public RichInputText getKontragId() {
+        return kontragId;
     }
 }

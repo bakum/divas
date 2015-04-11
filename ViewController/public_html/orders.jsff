@@ -15,25 +15,37 @@
                                         <af:panelBox text="Заказы менеджеров" id="pb1" type="flow"
                                                      icon="/img/shoppingcart.png">
                                             <f:facet name="toolbar">
-                                                <af:toolbar id="t4">
-                                                    <af:button text="button 1" id="b19" action="addKontrag"/>
-                                                    <af:button actionListener="#{bindings.CreateInsert.execute}"
-                                                               text="Добавить" disabled="#{bindings.Commit.enabled}"
-                                                               id="b5">
-                                                        <af:showPopupBehavior popupId="pEdit"/>
-                                                    </af:button>
-                                                    <af:button actionListener="#{bindings.Commit.execute}"
-                                                               text="Сохранить" disabled="#{!bindings.Commit.enabled}"
-                                                               id="b3" action="#{orders.commitChange}"/>
-                                                    <af:button actionListener="#{bindings.Rollback.execute}"
-                                                               text="Отменить" disabled="#{!bindings.Rollback.enabled}"
-                                                               immediate="true" id="b4">
-                                                        <af:resetActionListener/>
-                                                    </af:button>
-                                                    <af:button text="Обновить" id="b6"
-                                                               actionListener="#{orders.onRefreshOrders}"
-                                                               disabled="#{bindings.Commit.enabled}"/>
-                                                </af:toolbar>
+                                                <af:panelGroupLayout id="pgl12" layout="horizontal">
+                                                    <af:menuBar id="mb1" visible="false">
+                                                        <af:menu text="Добавить заказ" id="m2">
+                                                            <af:commandMenuItem text="Новый клиент" id="cmi4"
+                                                                                action="addKontrag"/>
+                                                            <af:commandMenuItem text="Старый клиент"
+                                                                                id="cmib5" action="addOrder"/>
+                                                        </af:menu>
+                                                    </af:menuBar>
+                                                    <af:toolbar id="t4">
+                                                        <af:button text="Новый заказ" id="b19" action="addOrder"/>
+                                                        <af:button actionListener="#{bindings.CreateInsert.execute}"
+                                                                   text="Добавить" disabled="#{bindings.Commit.enabled}"
+                                                                   id="b5" visible="false">
+                                                            <af:showPopupBehavior popupId="pEdit"/>
+                                                        </af:button>
+                                                        <af:button actionListener="#{bindings.Commit.execute}"
+                                                                   text="Сохранить"
+                                                                   disabled="#{!bindings.Commit.enabled}" id="b3"
+                                                                   action="#{orders.commitChange}"/>
+                                                        <af:button actionListener="#{bindings.Rollback.execute}"
+                                                                   text="Отменить"
+                                                                   disabled="#{!bindings.Rollback.enabled}"
+                                                                   immediate="true" id="b4">
+                                                            <af:resetActionListener/>
+                                                        </af:button>
+                                                        <af:button text="Обновить" id="b6"
+                                                                   actionListener="#{orders.onRefreshOrders}"
+                                                                   disabled="#{bindings.Commit.enabled}"/>
+                                                    </af:toolbar>
+                                                </af:panelGroupLayout>
                                             </f:facet>
                                             <af:table value="#{bindings.OrdersView1.collectionModel}" var="row"
                                                       rows="#{bindings.OrdersView1.rangeSize}"
@@ -47,7 +59,7 @@
                                                       queryListener="#{bindings.OrdersView1Query.processQuery}"
                                                       filterVisible="true" varStatus="vs" id="t1"
                                                       editingMode="clickToEdit" scrollPolicy="page"
-                                                      partialTriggers="::b5 ::b9 ::p1" binding="#{orders.mainTable}">
+                                                      partialTriggers="::b5 ::b9 ::p1 ::b3 ::b4" binding="#{orders.mainTable}">
                                                 <af:column id="c54" width="30">
                                                     <af:image id="i1"
                                                               source="#{row.Posted==1 ? '/img/icon_commit.png' :  '/img/document.png'}"/>

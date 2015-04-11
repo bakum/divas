@@ -20,11 +20,22 @@
         <value>'neworder'</value>
       </input-parameter>
     </task-flow-call>
+    <task-flow-call id="addOrder">
+      <task-flow-reference>
+        <document>/WEB-INF/addOrder.xml</document>
+        <id>addOrder</id>
+      </task-flow-reference>
+      <after-listener>#{orders.afterListener}</after-listener>
+    </task-flow-call>
     <control-flow-rule id="__2">
       <from-activity-id>order</from-activity-id>
       <control-flow-case id="__3">
         <from-outcome>addKontrag</from-outcome>
         <to-activity-id>addKontrag</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__5">
+        <from-outcome>addOrder</from-outcome>
+        <to-activity-id>addOrder</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>

@@ -35,6 +35,18 @@
     Name="SuppId"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <Variable
+    Name="u_name"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression><![CDATA[viewObject.getSessionUser()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
   <ViewAccessor
     Name="KontragentsView1"
     ViewObjectName="ua.divas.view.KontragentsView"
@@ -105,7 +117,8 @@
         Kontragents.IS_MEASURER,
         Kontragents.USER_ID
 FROM  KONTRAGENTS Kontragents
-where deleted = 0
+where deleted = 0 and
+upper(Kontragents.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))
 order by Kontragents.FULLNAME]]></SQLQuery>
   <EntityUsage
     Name="Kontragents"

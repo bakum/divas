@@ -17,9 +17,9 @@
       <property
          name="y">154.04688</property>
       <property
-         name="x">226.0</property>
-      <property
          name="pageFragment">true</property>
+      <property
+         name="x">226.0</property>
    </View>
    <TaskFlowCall
       id="TaskFlowCall5">
@@ -34,9 +34,9 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">155.54688</property>
+         name="y">64.578125</property>
       <property
-         name="x">385.00684</property>
+         name="x">375.00684</property>
    </TaskFlowCall>
    <ControlFlowCase
       islink="true"
@@ -46,6 +46,33 @@
       <property
          name="fromOutcome">addKontrag</property>
       <property
-         name="sdm:polyPoints">R50,267.0,154.0625,344.00684,155.5625,L50</property>
+         name="sdm:polyPoints">R50,267.0,154.0625,334.00684,64.59375,L50</property>
+   </ControlFlowCase>
+   <TaskFlowCall
+      id="TaskFlowCall6">
+      <property
+         name="taskFlowId">addOrder</property>
+      <property
+         name="activityId">addOrder</property>
+      <property
+         name="documentReference">/WEB-INF/addOrder.xml</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>addOrder&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">213.14062</property>
+      <property
+         name="x">387.0</property>
+   </TaskFlowCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase7"
+      from="View2"
+      to="TaskFlowCall6">
+      <property
+         name="fromOutcome">addOrder</property>
+      <property
+         name="sdm:polyPoints">R51,L44</property>
    </ControlFlowCase>
 </SDM>

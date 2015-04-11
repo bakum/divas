@@ -5,6 +5,9 @@
     <transaction>
       <requires-transaction/>
     </transaction>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
     <input-parameter-definition id="__10">
       <name>ContactId</name>
       <value>#{pageFlowScope.ContactId}</value>

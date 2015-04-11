@@ -7,4 +7,12 @@ function Growl(ttl,mess, stl){
           duration: 6200
         }
     );
-}    
+} 
+
+/*
+function clientMethodCall() {                   
+    var component = AdfPage.PAGE.findComponentByAbsoluteId("pglKontragId");
+    AdfCustomEvent.queue(component, "onSetKontragId", 
+        null, true);                     
+    event.cancel();                    
+}       */

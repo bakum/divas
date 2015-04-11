@@ -20,14 +20,10 @@
     <page path="/plan.jsff" usageId="ua_divas_view_planPageDef"/>
     <page path="/kassa.jsff" usageId="ua_divas_view_kassaPageDef"/>
     <page path="/order.jsf" usageId="ua_divas_view_orderPageDef"/>
-    <page path="/start.jsff" usageId="ua_divas_view_startPageDef"/>
     <page path="/WEB-INF/addKontrag.xml#addKontrag@CreateInsert"
           usageId="ua_divas_view_addKontrag_addKontrag_CreateInsertPageDef"/>
     <page path="/newKontrag.jsff" usageId="ua_divas_view_newKontragPageDef"/>
     <page path="/detail.jsff" usageId="ua_divas_view_detailPageDef"/>
-    <page path="/WEB-INF/addKontr.xml#addKontr@CreateInsert"
-          usageId="ua_divas_view_addKontr_addKontr_CreateInsertPageDef"/>
-    <page path="/addKontragent.jsf" usageId="ua_divas_view_addKontragentPageDef"/>
     <page path="/zamer_debt.jsff" usageId="ua_divas_view_zamer_debtPageDef"/>
     <page path="/buyer_debt.jsff" usageId="ua_divas_view_buyer_debtPageDef"/>
     <page path="/other_zatr.jsff" usageId="ua_divas_view_other_zatrPageDef"/>
@@ -35,6 +31,9 @@
     <page path="/ballans.jsff" usageId="ua_divas_view_ballansPageDef"/>
     <page path="/sales.jsff" usageId="ua_divas_view_salesPageDef"/>
     <page path="/zatraty.jsff" usageId="ua_divas_view_zatratyPageDef"/>
+    <page path="/WEB-INF/addOrder.xml#addOrder@CreateInsert"
+          usageId="ua_divas_bean_addOrder_addOrder_CreateInsertPageDef"/>
+    <page path="/newOrder.jsff" usageId="ua_divas_bean_newOrderPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="ua_divas_view_indexPageDef" path="ua.divas.bean.pageDefs.indexPageDef"/>
@@ -48,13 +47,10 @@
     <page id="ua_divas_view_planPageDef" path="ua.divas.bean.pageDefs.planPageDef"/>
     <page id="ua_divas_view_kassaPageDef" path="ua.divas.bean.pageDefs.kassaPageDef"/>
     <page id="ua_divas_view_orderPageDef" path="ua.divas.bean.pageDefs.orderPageDef"/>
-    <page id="ua_divas_view_startPageDef" path="ua.divas.bean.pageDefs.startPageDef"/>
     <page id="ua_divas_view_addKontrag_addKontrag_CreateInsertPageDef"
           path="ua.divas.bean.pageDefs.addKontrag_addKontrag_CreateInsertPageDef"/>
     <page id="ua_divas_view_newKontragPageDef" path="ua.divas.bean.pageDefs.newKontragPageDef"/>
     <page id="ua_divas_view_detailPageDef" path="ua.divas.bean.pageDefs.detailPageDef"/>
-    <page id="ua_divas_view_addKontr_addKontr_CreateInsertPageDef"
-          path="ua.divas.bean.pageDefs.addKontr_addKontr_CreateInsertPageDef"/>
     <page id="ua_divas_view_addKontragentPageDef" path="ua.divas.bean.pageDefs.addKontragentPageDef"/>
     <page id="ua_divas_view_zamer_debtPageDef" path="ua.divas.bean.pageDefs.zamer_debtPageDef"/>
     <page id="ua_divas_view_buyer_debtPageDef" path="ua.divas.bean.pageDefs.buyer_debtPageDef"/>
@@ -63,6 +59,9 @@
     <page id="ua_divas_view_ballansPageDef" path="ua.divas.bean.pageDefs.ballansPageDef"/>
     <page id="ua_divas_view_salesPageDef" path="ua.divas.bean.pageDefs.salesPageDef"/>
     <page id="ua_divas_view_zatratyPageDef" path="ua.divas.bean.pageDefs.zatratyPageDef"/>
+    <page id="ua_divas_bean_addOrder_addOrder_CreateInsertPageDef"
+          path="ua.divas.bean.pageDefs.addOrder_addOrder_CreateInsertPageDef"/>
+    <page id="ua_divas_bean_newOrderPageDef" path="ua.divas.bean.pageDefs.newOrderPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <dc id="DataPackage" path="ua.divas.bean.DataPackage"/>

@@ -1,5 +1,6 @@
 package ua.divas.bean;
 
+import oracle.adf.view.rich.component.rich.input.RichInputListOfValues;
 import oracle.adf.view.rich.context.AdfFacesContext;
 
 import org.apache.myfaces.trinidad.model.RowKeySet;

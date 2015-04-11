@@ -240,7 +240,8 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="ORDERS">
+    TableName="ORDERS"
+    IsNotNull="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="2000"/>
     </DesignTime>
@@ -570,6 +571,18 @@
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>
     <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="OrdersDiscriptionCheck">
+    <DesignTime>
+      <Attr Name="_isNotNull" Value="true"/>
+      <Attr Name="_DBObjectName" Value="ORDERS_DISCRIPTION_CHECK"/>
+      <Attr Name="_checkCondition" Value='"DISCRIPTION" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="ua.divas.model.Orders.Discription"/>
+    </AttrArray>
   </Key>
   <Key
     Name="OrdersPk"

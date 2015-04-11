@@ -56,7 +56,8 @@
                                           maximumLength="#{bindings.Fullname.hints.precision}"
                                           shortDesc="#{bindings.Fullname.hints.tooltip}" id="it2"
                                           valueChangeListener="#{new_kontrag.onKonNameChange}"
-                                          required="#{bindings.Fullname.hints.mandatory}">
+                                          required="#{bindings.Fullname.hints.mandatory}"
+                                          binding="#{new_kontrag.kontragId}">
                                 <f:validator binding="#{bindings.Fullname.validator}"/>
                             </af:inputText>
                             <af:selectBooleanCheckbox value="#{bindings.IsBuyer.inputValue}"
