@@ -214,7 +214,9 @@
                                                 </af:column>
                                                 <af:column id="c17">
                                                     <af:toolbar id="t7">
-                                                        <af:button text="button 1" id="b20">
+                                                        <af:button id="b20" icon="/img/Phone.png"
+                                                                   disabled="#{bindings.Commit.enabled}"
+                                                                   shortDesc="Позвонить">
                                                             <af:showPopupBehavior popupId="::pLog"/>
                                                         </af:button>
                                                     </af:toolbar>
@@ -661,7 +663,7 @@
                                                                       columns="#{bindings.Id1.hints.displayWidth}"
                                                                       maximumLength="#{bindings.Id1.hints.precision}"
                                                                       shortDesc="#{bindings.Id1.hints.tooltip}"
-                                                                      id="it21">
+                                                                      id="it21" visible="false">
                                                             <f:validator binding="#{bindings.Id1.validator}"/>
                                                         </af:inputText>
                                                         <af:inputDate value="#{bindings.Dat1.inputValue}"
@@ -694,33 +696,32 @@
                                                                 </af:selectOneChoice>
                                                             </af:panelGroupLayout>
                                                         </af:panelLabelAndMessage>
-                                                        <af:selectOneChoice value="#{bindings.ContactId.inputValue}"
-                                                                            label="#{bindings.ContactId.label}"
-                                                                            required="#{bindings.ContactId.hints.mandatory}"
-                                                                            shortDesc="#{bindings.ContactId.hints.tooltip}"
-                                                                            id="soc16">
-                                                            <f:selectItems value="#{bindings.ContactId.items}"
-                                                                           id="si16"/>
-                                                            <f:validator binding="#{bindings.ContactId.validator}"/>
+                                                        <af:selectOneChoice value="#{bindings.CompDetId.inputValue}"
+                                                                            required="#{bindings.CompDetId.hints.mandatory}"
+                                                                            shortDesc="#{bindings.CompDetId.hints.tooltip}"
+                                                                            id="soc17" visible="false">
+                                                            <f:selectItems value="#{bindings.CompDetId.items}"
+                                                                           id="si17"/>
+                                                            <f:validator binding="#{bindings.CompDetId.validator}"/>
                                                         </af:selectOneChoice>
-                                                        <af:panelLabelAndMessage label="#{bindings.CompDetId.label}" id="plam4">
+                                                        <af:panelLabelAndMessage label="#{bindings.KontragId2.label}" id="plam4">
                                                             <af:panelGroupLayout id="pgl16" layout="horizontal">
-                                                                <af:selectOneChoice value="#{bindings.CompDetId.inputValue}"
-                                                                                    required="#{bindings.CompDetId.hints.mandatory}"
-                                                                                    shortDesc="#{bindings.CompDetId.hints.tooltip}"
-                                                                                    id="soc17">
-                                                                    <f:selectItems value="#{bindings.CompDetId.items}"
-                                                                                   id="si17"/>
-                                                                    <f:validator binding="#{bindings.CompDetId.validator}"/>
-                                                                </af:selectOneChoice>
                                                                 <af:selectOneChoice value="#{bindings.KontragId2.inputValue}"
-                                                                                    label="#{bindings.KontragId2.label}"
                                                                                     required="#{bindings.KontragId2.hints.mandatory}"
                                                                                     shortDesc="#{bindings.KontragId2.hints.tooltip}"
-                                                                                    id="soc18">
+                                                                                    id="soc18" autoSubmit="true">
                                                                     <f:selectItems value="#{bindings.KontragId2.items}"
                                                                                    id="si18"/>
                                                                     <f:validator binding="#{bindings.KontragId2.validator}"/>
+                                                                </af:selectOneChoice>
+                                                                <af:selectOneChoice value="#{bindings.ContactId.inputValue}"
+                                                                                    label="#{bindings.ContactId.label}"
+                                                                                    required="#{bindings.ContactId.hints.mandatory}"
+                                                                                    shortDesc="#{bindings.ContactId.hints.tooltip}"
+                                                                                    id="soc16">
+                                                                    <f:selectItems value="#{bindings.ContactId.items}"
+                                                                                   id="si16"/>
+                                                                    <f:validator binding="#{bindings.ContactId.validator}"/>
                                                                 </af:selectOneChoice>
                                                             </af:panelGroupLayout>
                                                         </af:panelLabelAndMessage>

@@ -37,6 +37,42 @@
     EntityAttrName="Fullname"
     EntityUsage="CallStatus"
     AliasName="FULLNAME"/>
+  <ViewCriteria
+    Name="CallStatusNewCriteria"
+    ViewObjectName="ua.divas.view.CallStatusView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="CallStatusViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Name"
+        ViewAttribute="Name"
+        Operator="="
+        Conjunction="AND"
+        Value="NEW"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="CallLogView"
     ViewLink="ua.divas.view.CallLogFk1Link"

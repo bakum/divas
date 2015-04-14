@@ -62,5 +62,21 @@ public class ContactDetailsViewImpl extends ViewObjectImpl {
         }
         currentRowKey = null; 
     }
+
+    /**
+     * Returns the variable value for KonId.
+     * @return variable value for KonId
+     */
+    public String getKonId() {
+        return (String) ensureVariableManager().getVariableValue("KonId");
+    }
+
+    /**
+     * Sets <code>value</code> for variable KonId.
+     * @param value value to bind as KonId
+     */
+    public void setKonId(String value) {
+        ensureVariableManager().setVariableValue("KonId", value);
+    }
 }
 

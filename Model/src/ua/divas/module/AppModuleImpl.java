@@ -13,6 +13,7 @@ import oracle.jbo.server.ViewLinkImpl;
 import oracle.jbo.server.ViewObjectImpl;
 
 import ua.divas.module.common.AppModule;
+import ua.divas.view.CallLogViewImpl;
 import ua.divas.view.CompaignsViewImpl;
 import ua.divas.view.ContactDetailsViewImpl;
 import ua.divas.view.CurrencyViewImpl;
@@ -54,8 +55,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for CallLogView1.
      * @return CallLogView1
      */
-    public ViewObjectImpl getCallLogView1() {
-        return (ViewObjectImpl) findViewObject("CallLogView1");
+    public CallLogViewImpl getCallLogView1() {
+        return (CallLogViewImpl) findViewObject("CallLogView1");
     }
 
     /**
@@ -566,16 +567,16 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for CallLogView2.
      * @return CallLogView2
      */
-    public ViewObjectImpl getCallLogView2() {
-        return (ViewObjectImpl) findViewObject("CallLogView2");
+    public CallLogViewImpl getCallLogView2() {
+        return (CallLogViewImpl) findViewObject("CallLogView2");
     }
 
     /**
      * Container's getter for CallLogView3.
      * @return CallLogView3
      */
-    public ViewObjectImpl getCallLogView3() {
-        return (ViewObjectImpl) findViewObject("CallLogView3");
+    public CallLogViewImpl getCallLogView3() {
+        return (CallLogViewImpl) findViewObject("CallLogView3");
     }
 
     /**
@@ -590,8 +591,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for CallLogView4.
      * @return CallLogView4
      */
-    public ViewObjectImpl getCallLogView4() {
-        return (ViewObjectImpl) findViewObject("CallLogView4");
+    public CallLogViewImpl getCallLogView4() {
+        return (CallLogViewImpl) findViewObject("CallLogView4");
     }
 
     /**
@@ -3284,8 +3285,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for CallLogView5.
      * @return CallLogView5
      */
-    public ViewObjectImpl getCallLogView5() {
-        return (ViewObjectImpl) findViewObject("CallLogView5");
+    public CallLogViewImpl getCallLogView5() {
+        return (CallLogViewImpl) findViewObject("CallLogView5");
     }
 
     /**

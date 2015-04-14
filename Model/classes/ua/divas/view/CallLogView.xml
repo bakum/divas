@@ -8,18 +8,33 @@
   InheritPersonalization="merge"
   BindingStyle="OracleName"
   CustomQuery="true"
-  PageIterMode="Full">
+  PageIterMode="Full"
+  ComponentClass="ua.divas.view.CallLogViewImpl">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
   <ViewAccessor
     Name="CallStatusView1"
     ViewObjectName="ua.divas.view.CallStatusView"
-    RowLevelBinds="true"/>
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="CallStatusNewCriteria"
+      FullName="ua.divas.view.CallStatusView.CallStatusNewCriteria"/>
+  </ViewAccessor>
   <ViewAccessor
     Name="ContactDetailsView1"
     ViewObjectName="ua.divas.view.ContactDetailsView"
-    RowLevelBinds="true"/>
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="ContactDetailsViewCriteria"
+      FullName="ua.divas.view.ContactDetailsView.ContactDetailsViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="KonId">
+        <TransientExpression><![CDATA[KontragId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
   <ViewAccessor
     Name="CompaignsView1"
     ViewObjectName="ua.divas.view.CompaignsView"
@@ -172,6 +187,7 @@ FROM  CALL_LOG CallLog]]></SQLQuery>
     EntityUsage="CallLog"
     AliasName="CALL_STATUS"
     LOVName="LOV_CallStatus">
+    <TransientExpression><![CDATA[viewObject.retrieveNewCallStatusId()]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
@@ -191,8 +207,16 @@ FROM  CALL_LOG CallLog]]></SQLQuery>
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="choice"/>
+        <LABEL
+          ResId="ua.divas.view.CallLogView.ContactId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.CallLogView.ContactId_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
+    <Dependencies>
+      <Item
+        Value="KontragId"/>
+    </Dependencies>
   </ViewAttribute>
   <ViewAttribute
     Name="CompDetId"
@@ -205,6 +229,10 @@ FROM  CALL_LOG CallLog]]></SQLQuery>
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="choice"/>
+        <LABEL
+          ResId="ua.divas.view.CallLogView.CompDetId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.CallLogView.CompDetId_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
