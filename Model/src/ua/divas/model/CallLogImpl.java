@@ -33,9 +33,12 @@ public class CallLogImpl extends DivasEntityNoDelete {
         Memo,
         Version,
         Dat,
+        CallResults,
+        KontragId,
         CallStatus1,
         CompaignsDetails,
-        ContactDetails;
+        ContactDetails,
+        Kontragents;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -59,6 +62,7 @@ public class CallLogImpl extends DivasEntityNoDelete {
         }
     }
 
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int CALLSTATUS = AttributesEnum.CallStatus.index();
     public static final int CONTACTID = AttributesEnum.ContactId.index();
@@ -66,9 +70,12 @@ public class CallLogImpl extends DivasEntityNoDelete {
     public static final int MEMO = AttributesEnum.Memo.index();
     public static final int VERSION = AttributesEnum.Version.index();
     public static final int DAT = AttributesEnum.Dat.index();
+    public static final int CALLRESULTS = AttributesEnum.CallResults.index();
+    public static final int KONTRAGID = AttributesEnum.KontragId.index();
     public static final int CALLSTATUS1 = AttributesEnum.CallStatus1.index();
     public static final int COMPAIGNSDETAILS = AttributesEnum.CompaignsDetails.index();
     public static final int CONTACTDETAILS = AttributesEnum.ContactDetails.index();
+    public static final int KONTRAGENTS = AttributesEnum.Kontragents.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -82,6 +89,7 @@ public class CallLogImpl extends DivasEntityNoDelete {
     public static synchronized EntityDefImpl getDefinitionObject() {
         return EntityDefImpl.findDefObject("ua.divas.model.CallLog");
     }
+
 
     /**
      * Gets the attribute value for Id, using the alias name Id.
@@ -196,6 +204,38 @@ public class CallLogImpl extends DivasEntityNoDelete {
     }
 
     /**
+     * Gets the attribute value for CallResults, using the alias name CallResults.
+     * @return the value of CallResults
+     */
+    public String getCallResults() {
+        return (String) getAttributeInternal(CALLRESULTS);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for CallResults.
+     * @param value value to set the CallResults
+     */
+    public void setCallResults(String value) {
+        setAttributeInternal(CALLRESULTS, value);
+    }
+
+    /**
+     * Gets the attribute value for KontragId, using the alias name KontragId.
+     * @return the value of KontragId
+     */
+    public String getKontragId() {
+        return (String) getAttributeInternal(KONTRAGID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for KontragId.
+     * @param value value to set the KontragId
+     */
+    public void setKontragId(String value) {
+        setAttributeInternal(KONTRAGID, value);
+    }
+
+    /**
      * @return the associated entity oracle.jbo.server.EntityImpl.
      */
     public EntityImpl getCallStatus1() {
@@ -235,6 +275,20 @@ public class CallLogImpl extends DivasEntityNoDelete {
      */
     public void setContactDetails(ContactDetailsImpl value) {
         setAttributeInternal(CONTACTDETAILS, value);
+    }
+
+    /**
+     * @return the associated entity KontragentsImpl.
+     */
+    public KontragentsImpl getKontragents() {
+        return (KontragentsImpl) getAttributeInternal(KONTRAGENTS);
+    }
+
+    /**
+     * Sets <code>value</code> as the associated entity KontragentsImpl.
+     */
+    public void setKontragents(KontragentsImpl value) {
+        setAttributeInternal(KONTRAGENTS, value);
     }
 
     /**

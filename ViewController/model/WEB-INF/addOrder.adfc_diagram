@@ -32,9 +32,9 @@
       <property
          name="y">110.15625</property>
       <property
-         name="pageFragment">true</property>
-      <property
          name="x">238.0</property>
+      <property
+         name="pageFragment">true</property>
    </View>
    <TaskFlowReturn
       id="TaskFlowReturn6">

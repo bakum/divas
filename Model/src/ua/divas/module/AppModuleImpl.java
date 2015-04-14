@@ -3280,5 +3280,20 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
 
     }
 
+    /**
+     * Container's getter for CallLogView5.
+     * @return CallLogView5
+     */
+    public ViewObjectImpl getCallLogView5() {
+        return (ViewObjectImpl) findViewObject("CallLogView5");
+    }
+
+    /**
+     * Container's getter for CallLogKontragentFkLink1.
+     * @return CallLogKontragentFkLink1
+     */
+    public ViewLinkImpl getCallLogKontragentFkLink1() {
+        return (ViewLinkImpl) findViewLink("CallLogKontragentFkLink1");
+    }
 }
 

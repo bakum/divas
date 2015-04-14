@@ -584,4 +584,10 @@ public class FilterBeans {
         AppModuleImpl am = (AppModuleImpl) dc.getDataProvider();
         am.getKontragentsView1().executeQuery();
     }
+
+    public void LogFetshListener(PopupFetchEvent popupFetchEvent) {
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("CreateInsert2");
+        ob.execute();
+    }
 }

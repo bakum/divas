@@ -17,7 +17,8 @@
                                             <f:facet name="toolbar">
                                                 <af:toolbar id="t2">
                                                     <af:button text="Добавить" id="b19" action="addKontrag"
-                                                               returnListener="#{filter.onAddReturn}"/>
+                                                               returnListener="#{filter.onAddReturn}"
+                                                               disabled="#{bindings.Commit.enabled}"/>
                                                     <af:button actionListener="#{bindings.CreateInsert.execute}"
                                                                disabled="#{bindings.Commit.enabled}" id="b6"
                                                                shortDesc="Добавить" text="Добавить" visible="false"/>
@@ -210,6 +211,13 @@
                                                                                   align="afterStart"/>
                                                         </af:button>
                                                     </af:panelGroupLayout>
+                                                </af:column>
+                                                <af:column id="c17">
+                                                    <af:toolbar id="t7">
+                                                        <af:button text="button 1" id="b20">
+                                                            <af:showPopupBehavior popupId="::pLog"/>
+                                                        </af:button>
+                                                    </af:toolbar>
                                                 </af:column>
                                             </af:table>
                                             <af:popup childCreation="deferred" id="pNewContact"
@@ -639,6 +647,95 @@
                                             <af:poll id="p1"
                                                      pollListener="#{filter.onPoll}" interval="1000" rendered="false"/>
                                             <af:serverListener type="refreshEvent" method="#{filter.onServerEvent}"/>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="pLog"
+                                                      contentDelivery="lazyUncached"
+                                                      popupFetchListener="#{filter.LogFetshListener}"
+                                                      popupCanceledListener="#{filter.cancelListener}">
+                                                <af:dialog id="d5" title="Протокол звонка"
+                                                           dialogListener="#{filter.dialogListener}">
+                                                    <f:facet name="buttonBar"/>
+                                                    <af:panelFormLayout id="pfl4">
+                                                        <af:inputText value="#{bindings.Id1.inputValue}"
+                                                                      label="#{bindings.Id1.hints.label}"
+                                                                      required="#{bindings.Id1.hints.mandatory}"
+                                                                      columns="#{bindings.Id1.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.Id1.hints.precision}"
+                                                                      shortDesc="#{bindings.Id1.hints.tooltip}"
+                                                                      id="it21">
+                                                            <f:validator binding="#{bindings.Id1.validator}"/>
+                                                        </af:inputText>
+                                                        <af:inputDate value="#{bindings.Dat1.inputValue}"
+                                                                      label="#{bindings.Dat1.hints.label}"
+                                                                      required="#{bindings.Dat1.hints.mandatory}"
+                                                                      columns="#{bindings.Dat1.hints.displayWidth}"
+                                                                      shortDesc="#{bindings.Dat1.hints.tooltip}"
+                                                                      id="id3">
+                                                            <f:validator binding="#{bindings.Dat1.validator}"/>
+                                                            <af:convertDateTime pattern="#{bindings.Dat1.format}"/>
+                                                        </af:inputDate>
+                                                        <af:panelLabelAndMessage label="#{bindings.CallStatus.label}" id="plam3">
+                                                            <af:panelGroupLayout id="pgl15" layout="horizontal">
+                                                                <af:selectOneChoice value="#{bindings.CallStatus.inputValue}"
+                                                                                    required="#{bindings.CallStatus.hints.mandatory}"
+                                                                                    shortDesc="#{bindings.CallStatus.hints.tooltip}"
+                                                                                    id="soc14">
+                                                                    <f:selectItems value="#{bindings.CallStatus.items}"
+                                                                                   id="si14"/>
+                                                                    <f:validator binding="#{bindings.CallStatus.validator}"/>
+                                                                </af:selectOneChoice>
+                                                                <af:selectOneChoice value="#{bindings.CallResults.inputValue}"
+                                                                                    label="#{bindings.CallResults.label}"
+                                                                                    required="#{bindings.CallResults.hints.mandatory}"
+                                                                                    shortDesc="#{bindings.CallResults.hints.tooltip}"
+                                                                                    id="soc15">
+                                                                    <f:selectItems value="#{bindings.CallResults.items}"
+                                                                                   id="si15"/>
+                                                                    <f:validator binding="#{bindings.CallResults.validator}"/>
+                                                                </af:selectOneChoice>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelLabelAndMessage>
+                                                        <af:selectOneChoice value="#{bindings.ContactId.inputValue}"
+                                                                            label="#{bindings.ContactId.label}"
+                                                                            required="#{bindings.ContactId.hints.mandatory}"
+                                                                            shortDesc="#{bindings.ContactId.hints.tooltip}"
+                                                                            id="soc16">
+                                                            <f:selectItems value="#{bindings.ContactId.items}"
+                                                                           id="si16"/>
+                                                            <f:validator binding="#{bindings.ContactId.validator}"/>
+                                                        </af:selectOneChoice>
+                                                        <af:panelLabelAndMessage label="#{bindings.CompDetId.label}" id="plam4">
+                                                            <af:panelGroupLayout id="pgl16" layout="horizontal">
+                                                                <af:selectOneChoice value="#{bindings.CompDetId.inputValue}"
+                                                                                    required="#{bindings.CompDetId.hints.mandatory}"
+                                                                                    shortDesc="#{bindings.CompDetId.hints.tooltip}"
+                                                                                    id="soc17">
+                                                                    <f:selectItems value="#{bindings.CompDetId.items}"
+                                                                                   id="si17"/>
+                                                                    <f:validator binding="#{bindings.CompDetId.validator}"/>
+                                                                </af:selectOneChoice>
+                                                                <af:selectOneChoice value="#{bindings.KontragId2.inputValue}"
+                                                                                    label="#{bindings.KontragId2.label}"
+                                                                                    required="#{bindings.KontragId2.hints.mandatory}"
+                                                                                    shortDesc="#{bindings.KontragId2.hints.tooltip}"
+                                                                                    id="soc18">
+                                                                    <f:selectItems value="#{bindings.KontragId2.items}"
+                                                                                   id="si18"/>
+                                                                    <f:validator binding="#{bindings.KontragId2.validator}"/>
+                                                                </af:selectOneChoice>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelLabelAndMessage>
+                                                        <af:inputText value="#{bindings.Memo.inputValue}"
+                                                                      label="#{bindings.Memo.hints.label}"
+                                                                      required="#{bindings.Memo.hints.mandatory}"
+                                                                      columns="#{bindings.Memo.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.Memo.hints.precision}"
+                                                                      shortDesc="#{bindings.Memo.hints.tooltip}"
+                                                                      id="it22" rows="5">
+                                                            <f:validator binding="#{bindings.Memo.validator}"/>
+                                                        </af:inputText>
+                                                    </af:panelFormLayout>
+                                                </af:dialog>
+                                            </af:popup>
                                         </af:panelBox>
                                     </f:facet>
                                     <f:facet name="start">
@@ -787,7 +884,86 @@
                                                 </af:listView>
                                             </af:showDetailItem>
                                             <af:showDetailItem text="Звонки" id="sdi8"
-                                                               stretchChildren="first" icon="/img/call.jpeg"/>
+                                                               stretchChildren="first" icon="/img/call.jpeg">
+                                                <af:panelBox text="Протокол звонков" id="pb2" type="flow">
+                                                    <f:facet name="toolbar"/>
+                                                    <af:table value="#{bindings.CallLogView5.collectionModel}" var="row"
+                                                              rows="#{bindings.CallLogView5.rangeSize}"
+                                                              emptyText="#{bindings.CallLogView5.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                              rowBandingInterval="0"
+                                                              selectedRowKeys="#{bindings.CallLogView5.collectionModel.selectedRow}"
+                                                              selectionListener="#{bindings.CallLogView5.collectionModel.makeCurrent}"
+                                                              rowSelection="single"
+                                                              fetchSize="#{bindings.CallLogView5.rangeSize}" id="t5"
+                                                              scrollPolicy="page"
+                                                              disclosedRowKeys="#{pageFlowScope.rks.log}"
+                                                              allDetailsEnabled="true">
+                                                        <af:column headerText="#{bindings.CallLogView5.hints.Dat.label}"
+                                                                   id="c11">
+                                                            <af:outputText value="#{row.Dat}"
+                                                                           shortDesc="#{bindings.CallLogView5.hints.Dat.tooltip}"
+                                                                           id="ot1">
+                                                                <af:convertDateTime pattern="#{bindings.CallLogView5.hints.Dat.format}"/>
+                                                            </af:outputText>
+                                                        </af:column>
+                                                        <af:column headerText="#{bindings.CallLogView5.hints.CallStatus.label}"
+                                                                   id="c12">
+                                                            <af:selectOneChoice value="#{row.bindings.CallStatus.inputValue}"
+                                                                                label="#{row.bindings.CallStatus.label}"
+                                                                                required="#{bindings.CallLogView5.hints.CallStatus.mandatory}"
+                                                                                shortDesc="#{bindings.CallLogView5.hints.CallStatus.tooltip}"
+                                                                                readOnly="true" id="soc10">
+                                                                <f:selectItems value="#{row.bindings.CallStatus.items}"
+                                                                               id="si10"/>
+                                                                <f:validator binding="#{row.bindings.CallStatus.validator}"/>
+                                                            </af:selectOneChoice>
+                                                        </af:column>
+                                                        <af:column headerText="#{bindings.CallLogView5.hints.CallResults.label}"
+                                                                   id="c13">
+                                                            <af:selectOneChoice value="#{row.bindings.CallResults.inputValue}"
+                                                                                label="#{row.bindings.CallResults.label}"
+                                                                                required="#{bindings.CallLogView5.hints.CallResults.mandatory}"
+                                                                                shortDesc="#{bindings.CallLogView5.hints.CallResults.tooltip}"
+                                                                                readOnly="true" id="soc11">
+                                                                <f:selectItems value="#{row.bindings.CallResults.items}"
+                                                                               id="si11"/>
+                                                                <f:validator binding="#{row.bindings.CallResults.validator}"/>
+                                                            </af:selectOneChoice>
+                                                        </af:column>
+                                                        <af:column headerText="#{bindings.CallLogView5.hints.ContactId.label}"
+                                                                   id="c15">
+                                                            <af:selectOneChoice value="#{row.bindings.ContactId.inputValue}"
+                                                                                label="#{row.bindings.ContactId.label}"
+                                                                                required="#{bindings.CallLogView5.hints.ContactId.mandatory}"
+                                                                                shortDesc="#{bindings.CallLogView5.hints.ContactId.tooltip}"
+                                                                                readOnly="true" id="soc12">
+                                                                <f:selectItems value="#{row.bindings.ContactId.items}"
+                                                                               id="si12"/>
+                                                                <f:validator binding="#{row.bindings.ContactId.validator}"/>
+                                                            </af:selectOneChoice>
+                                                        </af:column>
+                                                        <af:column headerText="#{bindings.CallLogView5.hints.KontragId.label}"
+                                                                   id="c16">
+                                                            <af:selectOneChoice value="#{row.bindings.KontragId.inputValue}"
+                                                                                label="#{row.bindings.KontragId.label}"
+                                                                                required="#{bindings.CallLogView5.hints.KontragId.mandatory}"
+                                                                                shortDesc="#{bindings.CallLogView5.hints.KontragId.tooltip}"
+                                                                                readOnly="true" id="soc13">
+                                                                <f:selectItems value="#{row.bindings.KontragId.items}"
+                                                                               id="si13"/>
+                                                                <f:validator binding="#{row.bindings.KontragId.validator}"/>
+                                                            </af:selectOneChoice>
+                                                        </af:column>
+                                                        <f:facet name="detailStamp">
+                                                            <af:panelLabelAndMessage label="#{bindings.CallLogView5.hints.Memo.label}"
+                                                                                     id="plam2">
+                                                                <af:outputFormatted value="#{row.bindings.Memo.inputValue}"
+                                                                                    id="of13"/>
+                                                            </af:panelLabelAndMessage>
+                                                        </f:facet>
+                                                    </af:table>
+                                                </af:panelBox>
+                                            </af:showDetailItem>
                                         </af:panelDrawer>
                                     </f:facet>
                                     <f:facet name="end"/>

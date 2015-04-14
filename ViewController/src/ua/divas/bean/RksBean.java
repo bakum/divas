@@ -8,6 +8,15 @@ import org.apache.myfaces.trinidad.model.RowKeySetImpl;
 
 public class RksBean {
     RowKeySet rks = new RowKeySetImpl(true);
+    RowKeySet log = new RowKeySetImpl(true);
+
+    public void setLog(RowKeySet log) {
+        this.log = log;
+    }
+
+    public RowKeySet getLog() {
+        return log;
+    }
 
     public void setRks(RowKeySet rks) {
         this.rks = rks;
