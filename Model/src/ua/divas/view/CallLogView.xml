@@ -46,7 +46,16 @@
   <ViewAccessor
     Name="KontragentsView1"
     ViewObjectName="ua.divas.view.KontragentsView"
-    RowLevelBinds="true"/>
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="KontragentByIdFilter"
+      FullName="ua.divas.view.KontragentsView.KontragentByIdFilter"/>
+    <ParameterMap>
+      <PIMap Variable="KonId">
+        <TransientExpression><![CDATA[KontragId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
   <ListBinding
     Name="LOV_CallStatus"
     ListVOName="CallStatusView1"

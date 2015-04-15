@@ -30,6 +30,8 @@ import ua.divas.view.OrdersTpOplatyViewImpl;
 import ua.divas.view.OrdersTpUslugiViewImpl;
 import ua.divas.view.OrdersViewImpl;
 import ua.divas.view.OtherZatratyViewImpl;
+import ua.divas.view.PkoViewImpl;
+import ua.divas.view.RkoViewImpl;
 import ua.divas.view.UserSettingsViewImpl;
 import ua.divas.view.UsersViewImpl;
 import ua.divas.view.VwBallansApImpl;
@@ -3295,6 +3297,22 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getCallLogKontragentFkLink1() {
         return (ViewLinkImpl) findViewLink("CallLogKontragentFkLink1");
+    }
+
+    /**
+     * Container's getter for PkoView1.
+     * @return PkoView1
+     */
+    public PkoViewImpl getPkoView1() {
+        return (PkoViewImpl) findViewObject("PkoView1");
+    }
+
+    /**
+     * Container's getter for RkoView1.
+     * @return RkoView1
+     */
+    public RkoViewImpl getRkoView1() {
+        return (RkoViewImpl) findViewObject("RkoView1");
     }
 }
 

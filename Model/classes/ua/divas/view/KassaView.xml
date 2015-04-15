@@ -15,6 +15,14 @@
     <Attr Name="_codeGenFlag2" Value="Access"/>
     <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
+  <Variable
+    Name="CId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="DId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="CurrencyView1"
     ViewObjectName="ua.divas.view.CurrencyView"
@@ -205,6 +213,52 @@ where deleted = 0]]></SQLQuery>
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[VwKassaMoves.sum("SummRashod != null ? SummRashod : 0")]]></TransientExpression>
   </ViewAttribute>
+  <ViewCriteria
+    Name="KassaViewByCurrAndDivisions"
+    ViewObjectName="ua.divas.view.KassaView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="KassaViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="KassaViewCriteria_KassaViewCriteria_row_0_CurrId"
+        ViewAttribute="CurrId"
+        Operator="="
+        Conjunction="AND"
+        Value=":CId"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="DivisionId"
+        ViewAttribute="DivisionId"
+        Operator="="
+        Conjunction="AND"
+        Value=":DId"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="KassaView"
     ViewLink="ua.divas.view.KassaKassaFk1Link"

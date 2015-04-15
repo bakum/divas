@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PkoView"
+  Version="12.1.2.66.68"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  ComponentClass="ua.divas.view.PkoViewImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="DivisionsView1"
+    ViewObjectName="ua.divas.view.DivisionsView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="DivisionsViewItems"
+      FullName="ua.divas.view.DivisionsView.DivisionsViewItems"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="UsersView1"
+    ViewObjectName="ua.divas.view.UsersView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CurrencyView1"
+    ViewObjectName="ua.divas.view.CurrencyView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="KassaView1"
+    ViewObjectName="ua.divas.view.KassaView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="KassaViewByCurrAndDivisions"
+      FullName="ua.divas.view.KassaView.KassaViewByCurrAndDivisions"/>
+    <ParameterMap>
+      <PIMap Variable="CId">
+        <TransientExpression><![CDATA[CurrId]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="DId">
+        <TransientExpression><![CDATA[DivisionId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="TypeOfActivitiesView1"
+    ViewObjectName="ua.divas.view.TypeOfActivitiesView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="OperationPkoView1"
+    ViewObjectName="ua.divas.view.OperationPkoView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="KontragentsView1"
+    ViewObjectName="ua.divas.view.KontragentsView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="KontragentsFilterItemsByName"
+      FullName="ua.divas.view.KontragentsView.KontragentsFilterItemsByName"/>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_DivisionId"
+    ListVOName="DivisionsView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DivisionId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_UserId"
+    ListVOName="UsersView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="UserId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Login"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CurrId"
+    ListVOName="CurrencyView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CurrId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_KassaId"
+    ListVOName="KassaView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="KassaId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ActivitiesId"
+    ListVOName="TypeOfActivitiesView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ActivitiesId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_OperationId"
+    ListVOName="OperationPkoView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="OperationId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_KontragId"
+    ListVOName="KontragentsView1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="KontragId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Kontragname"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Kontragname"
+    ListVOName="KontragentsView1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Kontragname"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="KontragId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Fullname"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <SQLQuery><![CDATA[SELECT Pko.ID, 
+       Pko.DAT, 
+       Pko.NUM, 
+       Pko.DELETED, 
+       Pko.POSTED, 
+       Pko.DIVISION_ID, 
+       Pko.USER_ID, 
+       Pko.COMMENTS, 
+       Pko.VERSION, 
+       Pko.CURR_ID, 
+       Pko.KASSA_ID, 
+       Pko.ACTIVITIES_ID, 
+       Pko.OPERATION_ID, 
+       Pko.KONTRAG_ID,
+       (SELECT 
+        FULLNAME 
+    FROM 
+        KONTRAGENTS 
+    WHERE 
+        ID = KONTRAG_ID) KontragName,
+       Pko.SUMMA
+FROM  PKO Pko]]></SQLQuery>
+  <EntityUsage
+    Name="Pko"
+    Entity="ua.divas.model.Pko"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="Pko"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="Dat"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Dat"
+    EntityUsage="Pko"
+    AliasName="DAT"/>
+  <ViewAttribute
+    Name="Num"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Num"
+    EntityUsage="Pko"
+    AliasName="NUM"/>
+  <ViewAttribute
+    Name="Deleted"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Deleted"
+    EntityUsage="Pko"
+    AliasName="DELETED"/>
+  <ViewAttribute
+    Name="Posted"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Posted"
+    EntityUsage="Pko"
+    AliasName="POSTED"/>
+  <ViewAttribute
+    Name="DivisionId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DivisionId"
+    EntityUsage="Pko"
+    AliasName="DIVISION_ID"
+    LOVName="LOV_DivisionId">
+    <TransientExpression><![CDATA[viewObject.retrieveDivisionId()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="UserId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="UserId"
+    EntityUsage="Pko"
+    AliasName="USER_ID"
+    LOVName="LOV_UserId">
+    <TransientExpression><![CDATA[viewObject.getSessionUserId()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Comments"
+    PrecisionRule="true"
+    EntityAttrName="Comments"
+    EntityUsage="Pko"
+    AliasName="COMMENTS"/>
+  <ViewAttribute
+    Name="Version"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Version"
+    EntityUsage="Pko"
+    AliasName="VERSION"/>
+  <ViewAttribute
+    Name="CurrId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CurrId"
+    EntityUsage="Pko"
+    AliasName="CURR_ID"
+    LOVName="LOV_CurrId">
+    <TransientExpression><![CDATA[viewObject.retrieveCurrencyId()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="KassaId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="KassaId"
+    EntityUsage="Pko"
+    AliasName="KASSA_ID"
+    LOVName="LOV_KassaId">
+    <TransientExpression><![CDATA[viewObject.retrieveKassaId()]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="CurrId"/>
+      <Item
+        Value="DivisionId"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ActivitiesId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ActivitiesId"
+    EntityUsage="Pko"
+    AliasName="ACTIVITIES_ID"
+    LOVName="LOV_ActivitiesId">
+    <TransientExpression><![CDATA[viewObject.retrieveActivitiesId()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OperationId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="OperationId"
+    EntityUsage="Pko"
+    AliasName="OPERATION_ID"
+    LOVName="LOV_OperationId">
+    <TransientExpression><![CDATA[viewObject.retrieveOperationId()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="KontragId"
+    PrecisionRule="true"
+    EntityAttrName="KontragId"
+    EntityUsage="Pko"
+    AliasName="KONTRAG_ID"
+    LOVName="LOV_KontragId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+    <Dependencies>
+      <Item
+        Value="Kontragname"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Kontragname"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="150"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="KONTRAGNAME"
+    Expression="KONTRAGNAME"
+    SQLType="VARCHAR"
+    LOVName="LOV_Kontragname">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="150"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.PkoView.Kontragname_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.PkoView.Kontragname_TOOLTIP"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Summa"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Summa"
+    EntityUsage="Pko"
+    AliasName="SUMMA"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

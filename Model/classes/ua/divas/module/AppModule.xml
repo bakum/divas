@@ -760,6 +760,12 @@
   <ViewUsage
     Name="CallLogView5"
     ViewObjectName="ua.divas.view.CallLogView"/>
+  <ViewUsage
+    Name="PkoView1"
+    ViewObjectName="ua.divas.view.PkoView"/>
+  <ViewUsage
+    Name="RkoView1"
+    ViewObjectName="ua.divas.view.RkoView"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
