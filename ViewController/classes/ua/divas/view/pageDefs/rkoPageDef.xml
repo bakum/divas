@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.2.66.68" id="rkoPageDef"
+                Package="ua.divas.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="RkoView1" RangeSize="25" DataControl="AppModuleDataControl" id="RkoView1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="RkoView1Iterator" id="RkoView1">
+      <nodeDefinition DefName="ua.divas.view.RkoView" Name="RkoView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Dat"/>
+          <Item Value="Num"/>
+          <Item Value="Deleted"/>
+          <Item Value="Posted"/>
+          <Item Value="DivisionId"/>
+          <Item Value="UserId"/>
+          <Item Value="Comments"/>
+          <Item Value="Version"/>
+          <Item Value="CurrId"/>
+          <Item Value="KassaId"/>
+          <Item Value="ActivitiesId"/>
+          <Item Value="OperationId"/>
+          <Item Value="KontragId"/>
+          <Item Value="Kontragname"/>
+          <Item Value="Summa"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

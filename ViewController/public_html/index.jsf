@@ -34,6 +34,11 @@
                                                        rendered="#{securityContext.taskflowViewable['/WEB-INF/other_zatr-config.xml#other_zatr-config']}">
                                         <af:region value="#{bindings.other_zatrconfig1.regionModel}" id="r12"/>
                                     </af:showDetailItem>
+                                    <af:showDetailItem text="Касса" id="sdi19" stretchChildren="first"
+                                                       icon="/img/money.png"
+                                                       rendered="#{securityContext.taskflowViewable['/WEB-INF/money-config.xml#money-config']}">
+                                        <af:region value="#{bindings.moneyconfig1.regionModel}" id="r16"/>
+                                    </af:showDetailItem>
                                     <af:showDetailItem text="Справочники" id="sdi4" stretchChildren="first"
                                                        icon="/img/tSystCmp_picture_52.png"
                                                        rendered="#{securityContext.taskflowViewable['/WEB-INF/directories.xml#direct']}">
@@ -81,6 +86,11 @@
                                             </af:showDetailItem>
                                         </af:panelTabbed>
                                     </af:showDetailItem>
+                                    <af:showDetailItem text="Пользователи" id="sdi6" stretchChildren="first"
+                                                       icon="/img/people.png"
+                                                       rendered="#{securityContext.taskflowViewable['/WEB-INF/users.xml#users']}">
+                                        <af:region value="#{bindings.users1.regionModel}" id="r4"/>
+                                    </af:showDetailItem>
                                     <af:showDetailItem text="Настройки" id="sdi7" stretchChildren="first"
                                                        icon="/img/options.png">
                                         <af:panelTabbed id="pt1">
@@ -97,11 +107,6 @@
                                                 <af:region value="#{bindings.plan_acc1.regionModel}" id="r8"/>
                                             </af:showDetailItem>
                                         </af:panelTabbed>
-                                    </af:showDetailItem>
-                                    <af:showDetailItem text="Пользователи" id="sdi6" stretchChildren="first"
-                                                       icon="/img/people.png"
-                                                       rendered="#{securityContext.taskflowViewable['/WEB-INF/users.xml#users']}">
-                                        <af:region value="#{bindings.users1.regionModel}" id="r4"/>
                                     </af:showDetailItem>
                                 </af:panelSpringboard>
                             </f:facet>

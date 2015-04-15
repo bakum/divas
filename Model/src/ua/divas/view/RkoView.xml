@@ -265,7 +265,14 @@ FROM  RKO Rko]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Num"
     EntityUsage="Rko"
-    AliasName="NUM"/>
+    AliasName="NUM">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Deleted"
     IsNotNull="true"
@@ -317,7 +324,14 @@ FROM  RKO Rko]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Comments"
     EntityUsage="Rko"
-    AliasName="COMMENTS"/>
+    AliasName="COMMENTS">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Version"
     IsNotNull="true"
@@ -387,7 +401,6 @@ FROM  RKO Rko]]></SQLQuery>
     EntityUsage="Rko"
     AliasName="OPERATION_ID"
     LOVName="LOV_OperationId">
-    <TransientExpression><![CDATA[viewObject.retrieveOperationId()]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
@@ -410,6 +423,8 @@ FROM  RKO Rko]]></SQLQuery>
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="input_text_lov"/>
+        <DISPLAYWIDTH
+          Value="30"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -435,6 +450,8 @@ FROM  RKO Rko]]></SQLQuery>
           ResId="ua.divas.view.RkoView.Kontragname_TOOLTIP"/>
         <CONTROLTYPE
           Value="input_text_lov"/>
+        <DISPLAYWIDTH
+          Value="30"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.2.66.68"
+                id="EditRko_EditRko_SetCurrentRowWithKeyPageDef" Package="ua.divas.bean.pageDefs" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="RkoView1" RangeSize="25" DataControl="AppModuleDataControl" id="RkoView1Iterator"/>
+  </executables>
+  <bindings>
+    <action IterBinding="RkoView1Iterator" id="setCurrentRowWithKey" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKeyValue" InstanceName="AppModuleDataControl.RkoView1"
+            DataControl="AppModuleDataControl">
+      <NamedData NDName="rowKey" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

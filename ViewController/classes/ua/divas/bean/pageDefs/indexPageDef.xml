@@ -36,6 +36,8 @@
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
     <iterator Binds="NotificationView1" RangeSize="6" DataControl="AppModuleDataControl"
               id="NotificationView1Iterator"/>
+    <taskFlow id="moneyconfig1" taskFlowId="/WEB-INF/money-config.xml#money-config" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="NotificationView1Iterator" id="CountUnread">
