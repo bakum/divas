@@ -50,6 +50,14 @@
     Name="OperationRkoView1"
     ViewObjectName="ua.divas.view.OperationRkoView"
     RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="KontragentsView1"
+    ViewObjectName="ua.divas.view.KontragentsView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="KontragentsAllItems"
+      FullName="ua.divas.view.KontragentsView.KontragentsAllItems"/>
+  </ViewAccessor>
   <ListBinding
     Name="LOV_DivisionId"
     ListVOName="DivisionsView1"
@@ -163,6 +171,54 @@
       <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_KontragId"
+    ListVOName="KontragentsView1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="KontragId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Kontragname"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Kontragname"
+    ListVOName="KontragentsView1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Kontragname"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="KontragId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Fullname"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
   </ListBinding>
   <SQLQuery><![CDATA[SELECT Rko.ID, 
        Rko.DAT, 
@@ -344,11 +400,18 @@ FROM  RKO Rko]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="KontragId"
     EntityUsage="Rko"
-    AliasName="KONTRAG_ID">
+    AliasName="KONTRAG_ID"
+    LOVName="LOV_KontragId">
     <Dependencies>
       <Item
         Value="Kontragname"/>
     </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="Kontragname"
@@ -359,7 +422,8 @@ FROM  RKO Rko]]></SQLQuery>
     ColumnType="VARCHAR2"
     AliasName="KONTRAGNAME"
     Expression="KONTRAGNAME"
-    SQLType="VARCHAR">
+    SQLType="VARCHAR"
+    LOVName="LOV_Kontragname">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="150"/>
     </DesignTime>
@@ -369,6 +433,8 @@ FROM  RKO Rko]]></SQLQuery>
           ResId="ua.divas.view.RkoView.Kontragname_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.view.RkoView.Kontragname_TOOLTIP"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

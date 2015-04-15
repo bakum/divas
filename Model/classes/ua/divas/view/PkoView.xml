@@ -59,8 +59,8 @@
     ViewObjectName="ua.divas.view.KontragentsView"
     RowLevelBinds="true">
     <ViewCriteriaUsage
-      Name="KontragentsFilterItemsByName"
-      FullName="ua.divas.view.KontragentsView.KontragentsFilterItemsByName"/>
+      Name="KontragentsAllItems"
+      FullName="ua.divas.view.KontragentsView.KontragentsAllItems"/>
   </ViewAccessor>
   <ListBinding
     Name="LOV_DivisionId"
