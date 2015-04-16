@@ -1,104 +1,11 @@
-DROP TABLE "ASTER_SETTINGS" cascade constraints;
-DROP TABLE "BASE_OF_CALC" cascade constraints;
-DROP TABLE "CALL_LISTS" cascade constraints;
-DROP TABLE "CALL_LOG" cascade constraints;
-DROP TABLE "CALL_MEMO" cascade constraints;
-DROP TABLE "CALL_RESULTS" cascade constraints;
-DROP TABLE "CALL_STATUS" cascade constraints;
-DROP TABLE "CDR" cascade constraints;
-DROP TABLE "COMPAIGNS" cascade constraints;
-DROP TABLE "COMPAIGNS_DETAILS" cascade constraints;
-DROP TABLE "CONTACT_DETAILS" cascade constraints;
-DROP TABLE "CURRENCY" cascade constraints;
-DROP TABLE "DIR_FILE_UPLOAD" cascade constraints;
-DROP TABLE "DIVISIONS" cascade constraints;
-DROP TABLE "DIVISION_SOTR" cascade constraints;
-DROP TABLE "ENTRY_SETTINGS" cascade constraints;
-DROP TABLE "ENUM_ACCOUNT_TYPE" cascade constraints;
-DROP TABLE "EX_RATES_SETTINGS" cascade constraints;
-DROP TABLE "FIRMS" cascade constraints;
-DROP TABLE "GROUPMEMBERS" cascade constraints;
-DROP TABLE "GROUPS" cascade constraints;
-DROP TABLE "IMPORTED_PRICE" cascade constraints;
-DROP TABLE "KASSA" cascade constraints;
-DROP TABLE "KONTRAGENTS" cascade constraints;
-DROP TABLE "MEASURE_UNIT" cascade constraints;
-DROP TABLE "MOVES" cascade constraints;
-DROP TABLE "NOMENKLATURA" cascade constraints;
-DROP TABLE "NOTIFICATION" cascade constraints;
-DROP TABLE "NUMERATOR" cascade constraints;
-DROP TABLE "ORDERS" cascade constraints;
-DROP TABLE "ORDERS_TP_NACHISL" cascade constraints;
-DROP TABLE "ORDERS_TP_OPLATY" cascade constraints;
-DROP TABLE "ORDERS_TP_RASHODY" cascade constraints;
-DROP TABLE "ORDERS_TP_USLUGI" cascade constraints;
-DROP TABLE "ORDER_STATUS" cascade constraints;
-DROP TABLE "PLAN_ACC" cascade constraints;
-DROP TABLE "PLAN_ACC_SUBCONTO" cascade constraints;
-DROP TABLE "PLAN_TYPE_SUBCONTO" cascade constraints;
-DROP TABLE "PS_TXN" cascade constraints;
-DROP TABLE "QRTZ_BLOB_TRIGGERS" cascade constraints;
-DROP TABLE "QRTZ_CALENDARS" cascade constraints;
-DROP TABLE "QRTZ_CRON_TRIGGERS" cascade constraints;
-DROP TABLE "QRTZ_FIRED_TRIGGERS" cascade constraints;
-DROP TABLE "QRTZ_JOB_DETAILS" cascade constraints;
-DROP TABLE "QRTZ_LOCKS" cascade constraints;
-DROP TABLE "QRTZ_PAUSED_TRIGGER_GRPS" cascade constraints;
-DROP TABLE "QRTZ_SCHEDULER_STATE" cascade constraints;
-DROP TABLE "QRTZ_SIMPLE_TRIGGERS" cascade constraints;
-DROP TABLE "QRTZ_SIMPROP_TRIGGERS" cascade constraints;
-DROP TABLE "QRTZ_TRIGGERS" cascade constraints;
-DROP TABLE "QUARTZ_PROPERTY" cascade constraints;
-DROP TABLE "REG_PRICES" cascade constraints;
-DROP TABLE "REG_RATES" cascade constraints;
-DROP TABLE "TYPE_DEF" cascade constraints;
-DROP TABLE "TYPE_OF_ACTIVITIES" cascade constraints;
-DROP TABLE "USERS" cascade constraints;
-DROP TABLE "USERS_GROUPS" cascade constraints;
-DROP TABLE "USER_SETTINGS" cascade constraints;
-DROP TABLE "VOUCHER" cascade constraints;
-DROP TABLE "WLS_SETTINGS" cascade constraints;
-DROP TABLE "XML_T" cascade constraints;
-DROP TABLE "ZATRATY" cascade constraints;
-DROP SEQUENCE "ORDERS_NUM_SEQ";
-DROP SEQUENCE "PS_TXN_SEQ";
-DROP VIEW "LAST_PRICES";
-DROP VIEW "MOVE_KASSA";
-DROP VIEW "MOVE_KONTRAG";
-DROP VIEW "OBOROT_600";
-DROP VIEW "OBOROT_MOVIES";
-DROP VIEW "OBOROT_MOVIES_DEB";
-DROP VIEW "OBOROT_MOVIES_KRED";
-DROP VIEW "VW_MOVES";
-DROP VIEW "VW_MOVE_ORDERS";
-DROP FUNCTION "ACC_TYPE_CONV";
-DROP FUNCTION "BOOL_TO_NUM";
-DROP FUNCTION "GET_DIVISIONS";
-DROP FUNCTION "GET_USERS";
-DROP FUNCTION "PLAN_TYPE_SUBCONTO_CONV";
-DROP FUNCTION "RANDOMUUID";
-DROP PACKAGE "CURRENCY_PKG";
-DROP PACKAGE "ENTRY";
-DROP PACKAGE "FTP";
-DROP PACKAGE "KONTRAG";
-DROP PACKAGE "ORDERS_ENTRY";
-DROP PACKAGE "PRICES";
-DROP PACKAGE "P_ENCRYPT";
-DROP PACKAGE "USR_SETT";
-DROP PACKAGE "UTILITY";
-DROP PACKAGE BODY "CURRENCY_PKG";
-DROP PACKAGE BODY "ENTRY";
-DROP PACKAGE BODY "FTP";
-DROP PACKAGE BODY "KONTRAG";
-DROP PACKAGE BODY "ORDERS_ENTRY";
-DROP PACKAGE BODY "PRICES";
-DROP PACKAGE BODY "P_ENCRYPT";
-DROP PACKAGE BODY "USR_SETT";
-DROP PACKAGE BODY "UTILITY";
-DROP TYPE "DIVISIONTABLE";
-DROP TYPE "DIVISIONTYPE";
-DROP TYPE "USERTABLE";
-DROP TYPE "USERTYPE";
+--------------------------------------------------------
+--  DDL for Type DIVISIONTYPE
+--------------------------------------------------------
+
+  CREATE OR REPLACE TYPE "DIVISIONTYPE" AS OBJECT 
+(n varchar2(50), u_name varchar2(1000))
+
+/
 --------------------------------------------------------
 --  DDL for Type DIVISIONTABLE
 --------------------------------------------------------
@@ -108,10 +15,88 @@ AS TABLE OF divisiontype;
 
 /
 --------------------------------------------------------
---  DDL for Type DIVISIONTYPE
+--  DDL for Type ROW_BALLANS
 --------------------------------------------------------
 
-  CREATE OR REPLACE TYPE "DIVISIONTYPE" AS OBJECT 
+  CREATE OR REPLACE TYPE "ROW_BALLANS" as object 
+( ID VARCHAR2(50 CHAR),
+    CODE VARCHAR2(6 CHAR),
+    FULLNAME VARCHAR2(3000 CHAR),
+    ACTIVE_START NUMBER,
+    ACTIVE_DEB NUMBER,
+    ACTIVE_KRED NUMBER,
+    ACTIVE_OBOROT NUMBER,
+    ACTIVE_END NUMBER,
+    PASSIVE_START NUMBER,
+    PASSIVE_DEB NUMBER,
+    PASSIVE_KRED NUMBER,
+    PASSIVE_OBOROT NUMBER,
+    PASSIVE_END NUMBER,
+    DIVISION_ID VARCHAR2(50 CHAR)    
+)
+
+/
+--------------------------------------------------------
+--  DDL for Type ROW_SALES
+--------------------------------------------------------
+
+  CREATE OR REPLACE TYPE "ROW_SALES" as object 
+( ORDER_ID VARCHAR2(50 CHAR),
+    KONTRAG_ID VARCHAR2(50 CHAR),
+    PERIOD DATE,
+    DIVISION_ID VARCHAR2(50 CHAR),
+    SALES_SUMMA NUMBER,
+    FACT_SEBEST_SUMMA NUMBER,
+    PLAN_SEBEST_SUMMA NUMBER
+)
+
+/
+--------------------------------------------------------
+--  DDL for Type ROW_ZATRATY
+--------------------------------------------------------
+
+  CREATE OR REPLACE TYPE "ROW_ZATRATY" as object 
+( REGISTRATOR_ID VARCHAR2(50 CHAR),
+    TABLE_NAME VARCHAR2(100 CHAR),
+    CODE VARCHAR2(6 CHAR),
+    SUMMA number,
+    ZATRATY_ID varchar2(50 CHAR),
+    ZATRATY_NAME varchar2(150 CHAR),
+    DIVISION_ID varchar2(50 CHAR),
+    PERIOD TIMESTAMP(6)
+)
+
+/
+--------------------------------------------------------
+--  DDL for Type TBL_BALLANS
+--------------------------------------------------------
+
+  CREATE OR REPLACE TYPE "TBL_BALLANS" 
+AS TABLE OF row_ballans;
+
+/
+--------------------------------------------------------
+--  DDL for Type TBL_SALES
+--------------------------------------------------------
+
+  CREATE OR REPLACE TYPE "TBL_SALES" 
+AS TABLE OF row_sales;
+
+/
+--------------------------------------------------------
+--  DDL for Type TBL_ZATRATY
+--------------------------------------------------------
+
+  CREATE OR REPLACE TYPE "TBL_ZATRATY" 
+AS TABLE OF row_zatraty;
+
+/
+
+--------------------------------------------------------
+--  DDL for Type USERTYPE
+--------------------------------------------------------
+
+  CREATE OR REPLACE TYPE "USERTYPE" as object 
 (n varchar2(50), u_name varchar2(1000))
 
 /
@@ -124,23 +109,30 @@ AS TABLE OF usertype;
 
 /
 --------------------------------------------------------
---  DDL for Type USERTYPE
---------------------------------------------------------
-
-  CREATE OR REPLACE TYPE "USERTYPE" as object 
-(n varchar2(50), u_name varchar2(1000))
-
-/
---------------------------------------------------------
 --  DDL for Sequence ORDERS_NUM_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "ORDERS_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 241 CACHE 20 NOORDER  CYCLE ;
+   CREATE SEQUENCE  "ORDERS_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 541 CACHE 20 NOORDER  CYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence OTHER_ZATR_NUM_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "OTHER_ZATR_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 121 CACHE 20 NOORDER  CYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence PKO_NUM_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "PKO_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 61 CACHE 20 NOORDER  CYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence PS_TXN_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 109451 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 152501 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence RKO_NUM_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "RKO_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 84 CACHE 20 NOORDER  CYCLE ;
 --------------------------------------------------------
 --  DDL for Table ASTER_SETTINGS
 --------------------------------------------------------
@@ -165,6 +157,17 @@ AS TABLE OF usertype;
 	"FULLNAME" VARCHAR2(100 CHAR)
    ) ;
 --------------------------------------------------------
+--  DDL for Table CALENDAR
+--------------------------------------------------------
+
+  CREATE TABLE "CALENDAR" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"PROVIDER" VARCHAR2(100 CHAR), 
+	"START_DATE" DATE, 
+	"END_DATE" DATE, 
+	"DESCRIPTION" VARCHAR2(200 CHAR)
+   ) ;
+--------------------------------------------------------
 --  DDL for Table CALL_LISTS
 --------------------------------------------------------
 
@@ -187,7 +190,8 @@ AS TABLE OF usertype;
 	"MEMO" VARCHAR2(2000 CHAR), 
 	"VERSION" TIMESTAMP (6) DEFAULT systimestamp, 
 	"DAT" DATE DEFAULT current_timestamp, 
-	"CALL_RESULTS" VARCHAR2(50 CHAR)
+	"CALL_RESULTS" VARCHAR2(50 CHAR), 
+	"KONTRAG_ID" VARCHAR2(50 CHAR)
    ) ;
 --------------------------------------------------------
 --  DDL for Table CALL_MEMO
@@ -473,7 +477,8 @@ AS TABLE OF usertype;
 	"SUMM_UPR_DEB" NUMBER(10,2), 
 	"SUMM_UPR_KRED" NUMBER(10,2), 
 	"ACTIVITIES_ID" VARCHAR2(50 CHAR), 
-	"DESCRIPTION" VARCHAR2(1000 CHAR)
+	"DESCRIPTION" VARCHAR2(1000 CHAR), 
+	"DIVISION_ID" VARCHAR2(50 CHAR)
    ) ;
 --------------------------------------------------------
 --  DDL for Table NOMENKLATURA
@@ -496,7 +501,7 @@ AS TABLE OF usertype;
 
   CREATE TABLE "NOTIFICATION" 
    (	"ID" VARCHAR2(50 CHAR), 
-	"VERSION" TIMESTAMP (6), 
+	"VERSION" TIMESTAMP (6) DEFAULT systimestamp, 
 	"DAT" DATE, 
 	"DESCRIPTION" VARCHAR2(200 CHAR), 
 	"USER_ID" VARCHAR2(50 CHAR), 
@@ -504,7 +509,10 @@ AS TABLE OF usertype;
 	"SERVER" NUMBER(1,0), 
 	"CLIENT" NUMBER(1,0), 
 	"TRG_NAME" VARCHAR2(50 CHAR), 
-	"USER_LOGIN" VARCHAR2(50 CHAR)
+	"USER_LOGIN" VARCHAR2(50 CHAR), 
+	"OBJECT_ID" VARCHAR2(50 CHAR), 
+	"START_DATE" DATE, 
+	"END_DATE" DATE
    ) ;
 --------------------------------------------------------
 --  DDL for Table NUMERATOR
@@ -515,6 +523,24 @@ AS TABLE OF usertype;
 	"TYPEDEF_ID" VARCHAR2(50 CHAR), 
 	"PREFIX" VARCHAR2(20 CHAR), 
 	"VERSION" TIMESTAMP (6) DEFAULT systimestamp
+   ) ;
+--------------------------------------------------------
+--  DDL for Table OPERATION_PKO
+--------------------------------------------------------
+
+  CREATE TABLE "OPERATION_PKO" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"NAME" VARCHAR2(50 CHAR), 
+	"FULLNAME" VARCHAR2(50 CHAR)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table OPERATION_RKO
+--------------------------------------------------------
+
+  CREATE TABLE "OPERATION_RKO" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"NAME" VARCHAR2(50 CHAR), 
+	"FULLNAME" VARCHAR2(50 CHAR)
    ) ;
 --------------------------------------------------------
 --  DDL for Table ORDERS
@@ -612,6 +638,55 @@ AS TABLE OF usertype;
 	"VERSION" TIMESTAMP (6) DEFAULT systimestamp, 
 	"NAME" VARCHAR2(50 CHAR), 
 	"FULLNAME" VARCHAR2(50 CHAR)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table OTHER_ZATRATY
+--------------------------------------------------------
+
+  CREATE TABLE "OTHER_ZATRATY" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"DAT" DATE DEFAULT sysdate, 
+	"NUM" VARCHAR2(50 CHAR), 
+	"DELETED" NUMBER(1,0) DEFAULT 0, 
+	"POSTED" NUMBER(1,0) DEFAULT 0, 
+	"DIVISION_ID" VARCHAR2(50 CHAR), 
+	"USER_ID" VARCHAR2(50 CHAR), 
+	"COMMENTS" VARCHAR2(255 CHAR), 
+	"VERSION" TIMESTAMP (6) DEFAULT systimestamp, 
+	"CURR_ID" VARCHAR2(50 CHAR), 
+	"KASSA_ID" VARCHAR2(50 CHAR), 
+	"ACTIVITIES_ID" VARCHAR2(50 CHAR)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table OTHER_ZATRATY_TAB_PART_ZATRATY
+--------------------------------------------------------
+
+  CREATE TABLE "OTHER_ZATRATY_TAB_PART_ZATRATY" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"OTH_ID" VARCHAR2(50 CHAR), 
+	"ZATR_ID" VARCHAR2(50 CHAR), 
+	"SUMMA" NUMBER(38,2)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table PKO
+--------------------------------------------------------
+
+  CREATE TABLE "PKO" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"DAT" DATE DEFAULT sysdate, 
+	"NUM" VARCHAR2(50 CHAR), 
+	"DELETED" NUMBER(1,0) DEFAULT 0, 
+	"POSTED" NUMBER(1,0) DEFAULT 0, 
+	"DIVISION_ID" VARCHAR2(50 CHAR), 
+	"USER_ID" VARCHAR2(50 CHAR), 
+	"COMMENTS" VARCHAR2(255 CHAR), 
+	"VERSION" TIMESTAMP (6) DEFAULT systimestamp, 
+	"CURR_ID" VARCHAR2(50 CHAR), 
+	"KASSA_ID" VARCHAR2(50 CHAR), 
+	"ACTIVITIES_ID" VARCHAR2(50 CHAR), 
+	"OPERATION_ID" VARCHAR2(50 CHAR), 
+	"SUMMA" VARCHAR2(50 CHAR), 
+	"KONTRAG_ID" VARCHAR2(50 CHAR)
    ) ;
 --------------------------------------------------------
 --  DDL for Table PLAN_ACC
@@ -852,6 +927,27 @@ AS TABLE OF usertype;
 	"VERSION" TIMESTAMP (6) DEFAULT systimestamp
    ) ;
 --------------------------------------------------------
+--  DDL for Table RKO
+--------------------------------------------------------
+
+  CREATE TABLE "RKO" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"DAT" DATE DEFAULT sysdate, 
+	"NUM" VARCHAR2(50 CHAR), 
+	"DELETED" NUMBER(1,0) DEFAULT 0, 
+	"POSTED" NUMBER(1,0) DEFAULT 0, 
+	"DIVISION_ID" VARCHAR2(50 CHAR), 
+	"USER_ID" VARCHAR2(50 CHAR), 
+	"COMMENTS" VARCHAR2(255 CHAR), 
+	"VERSION" TIMESTAMP (6) DEFAULT systimestamp, 
+	"CURR_ID" VARCHAR2(50 CHAR), 
+	"KASSA_ID" VARCHAR2(50 CHAR), 
+	"ACTIVITIES_ID" VARCHAR2(50 CHAR), 
+	"OPERATION_ID" VARCHAR2(50 CHAR), 
+	"KONTRAG_ID" VARCHAR2(50 CHAR), 
+	"SUMMA" NUMBER
+   ) ;
+--------------------------------------------------------
 --  DDL for Table TYPE_DEF
 --------------------------------------------------------
 
@@ -962,47 +1058,57 @@ AS TABLE OF usertype;
 --  DDL for View MOVE_KASSA
 --------------------------------------------------------
 
-  CREATE OR REPLACE FORCE VIEW "MOVE_KASSA" ("KASSA_ID", "KASSA", "CODE", "SUMM", "REGISTRATOR_ID", "PERIOD") AS 
-  SELECT KASSA.ID            AS Kassa_id,
-  KASSA.FULLNAME           AS Kassa,
+  CREATE OR REPLACE FORCE VIEW "MOVE_KASSA" ("ID", "KASSA_ID", "KASSA", "CODE", "SUMM", "REGISTRATOR_ID", "TABLE_NAME", "PERIOD") AS 
+  SELECT VW_MOVES.ID,
+  KASSA.ID                       AS Kassa_id,
+  KASSA.FULLNAME                 AS Kassa,
   VW_MOVES.DEB                   AS Code,
   SUM(DISTINCT VW_MOVES.SUM_DEB) AS Summ,
   VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.TABLE_NAME,
   VW_MOVES.PERIOD
 FROM KASSA
 INNER JOIN VW_MOVES
 ON KASSA.ID = VW_MOVES.SUBCONTO1_DEB
-GROUP BY KASSA.ID,
+GROUP BY VW_MOVES.ID,
+  KASSA.ID,
   KASSA.FULLNAME,
   VW_MOVES.DEB,
   VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.TABLE_NAME,
   VW_MOVES.PERIOD
 UNION ALL
-SELECT KASSA.ID AS Kontrag_id,
+SELECT VW_MOVES.ID,
+  KASSA.ID AS Kontrag_id,
   KASSA.FULLNAME,
   VW_MOVES.KRED,
   SUM(DISTINCT VW_MOVES.SUM_KRED) AS Summ,
   VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.TABLE_NAME,
   VW_MOVES.PERIOD
 FROM KASSA
 INNER JOIN VW_MOVES
 ON KASSA.ID = VW_MOVES.SUBCONTO1_KRED
-GROUP BY KASSA.ID,
+GROUP BY VW_MOVES.ID,
+  KASSA.ID,
   KASSA.FULLNAME,
   VW_MOVES.KRED,
   VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.TABLE_NAME,
   VW_MOVES.PERIOD;
 --------------------------------------------------------
 --  DDL for View MOVE_KONTRAG
 --------------------------------------------------------
 
-  CREATE OR REPLACE FORCE VIEW "MOVE_KONTRAG" ("KONTRAG_ID", "KONTRAG", "CODE", "SUMM", "REGISTRATOR_ID", "PERIOD") AS 
+  CREATE OR REPLACE FORCE VIEW "MOVE_KONTRAG" ("KONTRAG_ID", "KONTRAG", "CODE", "SUMM", "REGISTRATOR_ID", "TABLE_NAME", "PERIOD", "ID") AS 
   SELECT KONTRAGENTS.ID            AS Kontrag_id,
   KONTRAGENTS.FULLNAME           AS Kontrag,
   VW_MOVES.DEB                   AS Code,
   SUM(DISTINCT VW_MOVES.SUM_DEB) AS Summ,
   VW_MOVES.REGISTRATOR_ID,
-  VW_MOVES.PERIOD
+  VW_MOVES.TABLE_NAME,
+  VW_MOVES.PERIOD,
+  VW_MOVES.ID
 FROM KONTRAGENTS
 INNER JOIN VW_MOVES
 ON KONTRAGENTS.ID = VW_MOVES.SUBCONTO1_DEB
@@ -1010,14 +1116,18 @@ GROUP BY KONTRAGENTS.ID,
   KONTRAGENTS.FULLNAME,
   VW_MOVES.DEB,
   VW_MOVES.REGISTRATOR_ID,
-  VW_MOVES.PERIOD
+  VW_MOVES.TABLE_NAME,
+  VW_MOVES.PERIOD,
+  VW_MOVES.ID
 UNION ALL
 SELECT KONTRAGENTS.ID AS Kontrag_id,
   KONTRAGENTS.FULLNAME,
   VW_MOVES.KRED,
   SUM(DISTINCT VW_MOVES.SUM_KRED) AS Summ,
   VW_MOVES.REGISTRATOR_ID,
-  VW_MOVES.PERIOD
+  VW_MOVES.TABLE_NAME,
+  VW_MOVES.PERIOD,
+  VW_MOVES.ID
 FROM KONTRAGENTS
 INNER JOIN VW_MOVES
 ON KONTRAGENTS.ID = VW_MOVES.SUBCONTO1_KRED
@@ -1025,7 +1135,9 @@ GROUP BY KONTRAGENTS.ID,
   KONTRAGENTS.FULLNAME,
   VW_MOVES.KRED,
   VW_MOVES.REGISTRATOR_ID,
-  VW_MOVES.PERIOD;
+  VW_MOVES.TABLE_NAME,
+  VW_MOVES.PERIOD,
+  VW_MOVES.ID;
 --------------------------------------------------------
 --  DDL for View OBOROT_600
 --------------------------------------------------------
@@ -1049,46 +1161,48 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
 --  DDL for View OBOROT_MOVIES
 --------------------------------------------------------
 
-  CREATE OR REPLACE FORCE VIEW "OBOROT_MOVIES" ("ID", "ACC_TYPE", "PARENT_ID", "FULLNAME", "CODE", "START_OST", "SUM_DEB", "SUM_KRED", "END_OST") AS 
+  CREATE OR REPLACE FORCE VIEW "OBOROT_MOVIES" ("ID", "ACC_TYPE", "PARENT_ID", "FULLNAME", "DIVISION_ID", "CODE", "START_OST", "SUM_DEB", "SUM_KRED", "END_OST") AS 
   WITH acc_deb AS
-  (SELECT OBOROT_MOVIES_DEB.PLAN_ACC_ID,
-    SUM(DISTINCT OBOROT_MOVIES_DEB.SUM_DEB) Sum_Deb
+  (SELECT OBOROT_MOVIES_DEB.PLAN_ACC_ID, OBOROT_MOVIES_DEB.DIVISION_ID,
+    SUM(OBOROT_MOVIES_DEB.SUM_DEB) Sum_Deb
   FROM OBOROT_MOVIES_DEB
-  GROUP BY OBOROT_MOVIES_DEB.PLAN_ACC_ID
+  GROUP BY OBOROT_MOVIES_DEB.PLAN_ACC_ID, OBOROT_MOVIES_DEB.DIVISION_ID
   ),
   acc_kred as
-  (SELECT OBOROT_MOVIES_KRED.PLAN_ACC_ID,
-    SUM(DISTINCT OBOROT_MOVIES_KRED.SUM_KRED) Sum_Kred
+  (SELECT OBOROT_MOVIES_KRED.PLAN_ACC_ID, OBOROT_MOVIES_KRED.DIVISION_ID,
+    SUM(OBOROT_MOVIES_KRED.SUM_KRED) Sum_Kred
   FROM OBOROT_MOVIES_KRED
-  GROUP BY OBOROT_MOVIES_KRED.PLAN_ACC_ID
-  )
-SELECT p.ID, p.ACC_TYPE, p.PARENT_ID, p.FULLNAME,
-  p.CODE, entry.get_ostatok_by_date(p.CODE,ORDERS_ENTRY.get_startdatmoves()) start_ost,
-  NVL((SELECT Sum_Deb FROM acc_deb WHERE acc_deb.PLAN_ACC_ID = p.ID
+  GROUP BY OBOROT_MOVIES_KRED.PLAN_ACC_ID, OBOROT_MOVIES_KRED.DIVISION_ID
+  ), div as
+  (select id from divisions where is_group = 0 and deleted = 0)
+SELECT p.ID, p.ACC_TYPE, p.PARENT_ID, p.FULLNAME, div.id division_id,
+  p.CODE, entry.get_ostatok_by_date(p.CODE,ORDERS_ENTRY.get_startdatmoves(),div.id) start_ost,
+  NVL((SELECT Sum_Deb FROM acc_deb WHERE acc_deb.PLAN_ACC_ID = p.ID and acc_deb.DIVISION_ID = div.id
   ),0) sum_deb,
-  NVL((SELECT Sum_Kred FROM acc_kred WHERE acc_kred.PLAN_ACC_ID = p.ID
-  ),0) sum_kred, entry.get_ostatok_by_date(p.CODE,ORDERS_ENTRY.get_enddatmoves()) end_ost
-FROM PLAN_ACC p
+  NVL((SELECT Sum_Kred FROM acc_kred WHERE acc_kred.PLAN_ACC_ID = p.ID and acc_kred.DIVISION_ID = div.id
+  ),0) sum_kred, entry.get_ostatok_by_date(p.CODE,ORDERS_ENTRY.get_enddatmoves(), div.id) end_ost
+FROM PLAN_ACC p, div
 order by p.CODE;
 --------------------------------------------------------
 --  DDL for View OBOROT_MOVIES_DEB
 --------------------------------------------------------
 
-  CREATE OR REPLACE FORCE VIEW "OBOROT_MOVIES_DEB" ("PLAN_ACC_ID", "DEB", "SUM_DEB", "SUBCONTO1_DEB", "SUBCONTO2_DEB", "CURRENCY", "REGISTRATOR_ID", "ACTIVITIES_ID", "PERIOD") AS 
-  SELECT PLAN_ACC.ID                       AS Plan_Acc_Id,
-  PLAN_ACC.CODE                          AS Deb,
-  NVL(SUM(DISTINCT VW_MOVES.SUM_DEB), 0) AS Sum_Deb,
+  CREATE OR REPLACE FORCE VIEW "OBOROT_MOVIES_DEB" ("PLAN_ACC_ID", "DEB", "SUM_DEB", "SUBCONTO1_DEB", "SUBCONTO2_DEB", "CURRENCY", "REGISTRATOR_ID", "ACTIVITIES_ID", "PERIOD", "DIVISION_ID") AS 
+  SELECT PLAN_ACC.ID              AS Plan_Acc_Id,
+  PLAN_ACC.CODE                 AS Deb,
+  NVL(SUM(VW_MOVES.SUM_DEB), 0) AS Sum_Deb,
   VW_MOVES.SUBCONTO1_DEB,
   VW_MOVES.SUBCONTO2_DEB,
   VW_MOVES.CURRENCY,
   VW_MOVES.REGISTRATOR_ID,
   VW_MOVES.ACTIVITIES_ID,
-  VW_MOVES.PERIOD
+  VW_MOVES.PERIOD,
+  VW_MOVES.DIVISION_ID
 FROM PLAN_ACC
 INNER JOIN VW_MOVES
-ON PLAN_ACC.CODE = VW_MOVES.DEB
-where trunc(VW_MOVES.PERIOD)>=trunc(ORDERS_ENTRY.get_startdatmoves())
-    and trunc(VW_MOVES.PERIOD)<=trunc(ORDERS_ENTRY.GET_ENDDATMOVES())
+ON PLAN_ACC.CODE              = VW_MOVES.DEB
+WHERE TRUNC(VW_MOVES.PERIOD) >= TRUNC(ORDERS_ENTRY.get_startdatmoves())
+AND TRUNC(VW_MOVES.PERIOD)   <= TRUNC(ORDERS_ENTRY.GET_ENDDATMOVES())
 GROUP BY PLAN_ACC.ID,
   PLAN_ACC.CODE,
   VW_MOVES.SUBCONTO1_DEB,
@@ -1096,27 +1210,29 @@ GROUP BY PLAN_ACC.ID,
   VW_MOVES.CURRENCY,
   VW_MOVES.REGISTRATOR_ID,
   VW_MOVES.ACTIVITIES_ID,
-  VW_MOVES.PERIOD
+  VW_MOVES.PERIOD,
+  VW_MOVES.DIVISION_ID
 ORDER BY Deb;
 --------------------------------------------------------
 --  DDL for View OBOROT_MOVIES_KRED
 --------------------------------------------------------
 
-  CREATE OR REPLACE FORCE VIEW "OBOROT_MOVIES_KRED" ("PLAN_ACC_ID", "KRED", "SUM_KRED", "SUBCONTO1_KRED", "SUBCONTO2_KRED", "CURRENCY", "REGISTRATOR_ID", "ACTIVITIES_ID", "PERIOD") AS 
-  SELECT PLAN_ACC.ID                AS Plan_Acc_Id,
-  PLAN_ACC.CODE                   AS Kred,
-  NVL(SUM(DISTINCT VW_MOVES.SUM_KRED),0) AS Sum_Kred,
+  CREATE OR REPLACE FORCE VIEW "OBOROT_MOVIES_KRED" ("PLAN_ACC_ID", "KRED", "SUM_KRED", "SUBCONTO1_KRED", "SUBCONTO2_KRED", "CURRENCY", "REGISTRATOR_ID", "ACTIVITIES_ID", "PERIOD", "DIVISION_ID") AS 
+  SELECT PLAN_ACC.ID               AS Plan_Acc_Id,
+  PLAN_ACC.CODE                  AS Kred,
+  NVL(SUM(VW_MOVES.SUM_KRED), 0) AS Sum_Kred,
   VW_MOVES.SUBCONTO1_KRED,
   VW_MOVES.SUBCONTO2_KRED,
   VW_MOVES.CURRENCY,
   VW_MOVES.REGISTRATOR_ID,
   VW_MOVES.ACTIVITIES_ID,
-  VW_MOVES.PERIOD
+  VW_MOVES.PERIOD,
+  VW_MOVES.DIVISION_ID
 FROM PLAN_ACC
 INNER JOIN VW_MOVES
-ON PLAN_ACC.CODE = VW_MOVES.KRED
-where trunc(VW_MOVES.PERIOD)>=trunc(ORDERS_ENTRY.get_startdatmoves())
-    and trunc(VW_MOVES.PERIOD)<=trunc(ORDERS_ENTRY.GET_ENDDATMOVES())
+ON PLAN_ACC.CODE              = VW_MOVES.KRED
+WHERE TRUNC(VW_MOVES.PERIOD) >= TRUNC(ORDERS_ENTRY.get_startdatmoves())
+AND TRUNC(VW_MOVES.PERIOD)   <= TRUNC(ORDERS_ENTRY.GET_ENDDATMOVES())
 GROUP BY PLAN_ACC.ID,
   PLAN_ACC.CODE,
   VW_MOVES.SUBCONTO1_KRED,
@@ -1124,14 +1240,60 @@ GROUP BY PLAN_ACC.ID,
   VW_MOVES.CURRENCY,
   VW_MOVES.REGISTRATOR_ID,
   VW_MOVES.ACTIVITIES_ID,
-  VW_MOVES.PERIOD
+  VW_MOVES.PERIOD,
+  VW_MOVES.DIVISION_ID
 ORDER BY Kred;
+--------------------------------------------------------
+--  DDL for View VW_BALLANS
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "VW_BALLANS" ("ID", "PARENT_ID", "ACC_TYPE", "ACTIVE_PASSIVE", "CODE", "FULLNAME", "START_OST", "SUM_DEB", "SUM_KRED", "END_OST", "DIVISION_ID") AS 
+  SELECT oborot_movies.ID,
+  oborot_movies.PARENT_ID,
+  oborot_movies.ACC_TYPE,
+  ENUM_ACCOUNT_TYPE.FULLNAME AS Active_Passive,
+  oborot_movies.CODE,
+  oborot_movies.FULLNAME,
+  oborot_movies.START_OST,
+  oborot_movies.SUM_DEB,
+  oborot_movies.SUM_KRED,
+  oborot_movies.END_OST,
+  oborot_movies.DIVISION_ID
+FROM oborot_movies
+INNER JOIN ENUM_ACCOUNT_TYPE
+ON oborot_movies.ACC_TYPE     = ENUM_ACCOUNT_TYPE.ID
+WHERE (oborot_movies.SUM_DEB <> 0)
+OR (oborot_movies.SUM_KRED   <> 0)
+OR (oborot_movies.START_OST  <> 0)
+OR (oborot_movies.END_OST    <> 0);
+--------------------------------------------------------
+--  DDL for View VW_BALLANS_AP
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "VW_BALLANS_AP" ("ID", "CODE", "FULLNAME", "ACTIVE_START", "ACTIVE_DEB", "ACTIVE_KRED", "ACTIVE_OBOROT", "ACTIVE_END", "PASSIVE_START", "PASSIVE_DEB", "PASSIVE_KRED", "PASSIVE_OBOROT", "PASSIVE_END", "DIVISION_ID") AS 
+  with act as
+(select code,start_ost, sum_deb, sum_kred, end_ost, end_ost-start_ost oborot from vw_ballans where upper(ACTIVE_PASSIVE)=upper('Активный')),
+pass as
+(select code,start_ost, sum_deb, sum_kred, end_ost, end_ost-start_ost oborot from vw_ballans where upper(ACTIVE_PASSIVE)=upper('Пассивный'))
+select b.id, b.code, b.fullname, nvl((select start_ost from act where code = b.code),0) Active_Start,
+nvl((select sum_deb from act where code = b.code),0) Active_Deb,
+nvl((select sum_kred from act where code = b.code),0) Active_Kred,
+nvl((select oborot from act where code = b.code),0) Active_Oborot,
+nvl((select end_ost from act where code = b.code),0) Active_end,
+nvl((select start_ost from pass where code = b.code),0) Passive_Start,
+nvl((select sum_deb from pass where code = b.code),0) Passive_Deb,
+nvl((select sum_kred from pass where code = b.code),0) Passive_Kred,
+nvl((select oborot from pass where code = b.code),0) Passive_Oborot,
+nvl((select end_ost from pass where code = b.code),0) Passive_End,
+b.division_id from vw_ballans b;
 --------------------------------------------------------
 --  DDL for View VW_MOVES
 --------------------------------------------------------
 
-  CREATE OR REPLACE FORCE VIEW "VW_MOVES" ("REGISTRATOR_ID", "DEB", "SUM_DEB", "KRED", "SUM_KRED", "CURRENCY", "SUBCONTO1_DEB", "SUBCONTO2_DEB", "SUBCONTO1_KRED", "SUBCONTO2_KRED", "ACTIVITIES_ID", "PERIOD", "CURR_ID", "DESCRIPTION") AS 
-  SELECT MOVES.REGISTRATOR_ID,
+  CREATE OR REPLACE FORCE VIEW "VW_MOVES" ("ID", "REGISTRATOR_ID", "TABLE_NAME", "DEB", "SUM_DEB", "KRED", "SUM_KRED", "CURRENCY", "SUBCONTO1_DEB", "SUBCONTO2_DEB", "SUBCONTO1_KRED", "SUBCONTO2_KRED", "ACTIVITIES_ID", "DIVISION_ID", "PERIOD", "CURR_ID", "DESCRIPTION") AS 
+  SELECT MOVES.ID,
+  MOVES.REGISTRATOR_ID,
+  TYPE_DEF.TABLE_NAME,
   PLAN_ACC.CODE              AS Deb,
   SUM(MOVES.SUMM_VAL_DEB)    AS Sum_Deb,
   PLAN_ACC1.CODE             AS Kred,
@@ -1142,6 +1304,7 @@ ORDER BY Kred;
   MOVES.SUBCONTO1_KRED,
   MOVES.SUBCONTO2_KRED,
   MOVES.ACTIVITIES_ID,
+  MOVES.DIVISION_ID,
   MOVES.PERIOD,
   CURRENCY.ID AS Curr_Id,
   MOVES.DESCRIPTION
@@ -1152,7 +1315,11 @@ INNER JOIN PLAN_ACC PLAN_ACC1
 ON PLAN_ACC1.ID = MOVES.PLAN_ACC_KRED_ID
 INNER JOIN CURRENCY
 ON CURRENCY.ID = MOVES.CURR_DEB
-GROUP BY MOVES.REGISTRATOR_ID,
+INNER JOIN TYPE_DEF
+ON MOVES.REGISTRATOR_TYPE = TYPE_DEF.ID
+GROUP BY MOVES.ID,
+  MOVES.REGISTRATOR_ID,
+  TYPE_DEF.TABLE_NAME,
   PLAN_ACC.CODE,
   PLAN_ACC1.CODE,
   CURRENCY.FULLNAME,
@@ -1161,6 +1328,7 @@ GROUP BY MOVES.REGISTRATOR_ID,
   MOVES.SUBCONTO1_KRED,
   MOVES.SUBCONTO2_KRED,
   MOVES.ACTIVITIES_ID,
+  MOVES.DIVISION_ID,
   MOVES.PERIOD,
   CURRENCY.ID,
   MOVES.DESCRIPTION
@@ -1282,6 +1450,206 @@ ON VW_MOVES.SUBCONTO1_KRED = DIVISIONS1.ID
 LEFT JOIN NOMENKLATURA
 ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID;
 --------------------------------------------------------
+--  DDL for View VW_MOVE_OTHER
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "VW_MOVE_OTHER" ("REGISTRATOR_ID", "DEB", "SUM_DEB", "KRED", "SUM_KRED", "SUBCONTO1_DEB", "SUBCONTO1_KRED") AS 
+  SELECT VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.DEB,
+  VW_MOVES.SUM_DEB,
+  VW_MOVES.KRED,
+  VW_MOVES.SUM_KRED,
+  ZATRATY.FULLNAME AS Subconto1_Deb,
+  KASSA.FULLNAME   AS Subconto1_Kred
+FROM VW_MOVES
+INNER JOIN ZATRATY
+ON VW_MOVES.SUBCONTO1_DEB = ZATRATY.ID
+INNER JOIN KASSA
+ON VW_MOVES.SUBCONTO1_KRED = KASSA.ID
+UNION
+SELECT VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.DEB,
+  VW_MOVES.SUM_DEB,
+  VW_MOVES.KRED,
+  VW_MOVES.SUM_KRED,
+  DIVISIONS.FULLNAME,
+  ZATRATY.FULLNAME AS FULLNAME1
+FROM VW_MOVES
+INNER JOIN DIVISIONS
+ON VW_MOVES.SUBCONTO1_DEB = DIVISIONS.ID
+INNER JOIN ZATRATY
+ON VW_MOVES.SUBCONTO1_KRED = ZATRATY.ID;
+--------------------------------------------------------
+--  DDL for View VW_MOVE_PKO
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "VW_MOVE_PKO" ("REGISTRATOR_ID", "DEB", "SUM_DEB", "KRED", "SUM_KRED", "SUBCONTO_DEB1", "SUBCONTO_KRED1") AS 
+  SELECT VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.DEB,
+  VW_MOVES.SUM_DEB,
+  VW_MOVES.KRED,
+  VW_MOVES.SUM_KRED,
+  KASSA.FULLNAME       AS Subconto_Deb1,
+  KONTRAGENTS.FULLNAME AS Subconto_kred1
+FROM VW_MOVES
+LEFT JOIN KASSA
+ON VW_MOVES.SUBCONTO1_DEB = KASSA.ID
+LEFT JOIN KONTRAGENTS
+ON VW_MOVES.SUBCONTO1_KRED = KONTRAGENTS.ID
+WHERE VW_MOVES.DEB         = '2081' and
+UPPER(VW_MOVES.TABLE_NAME) = UPPER('PKO');
+--------------------------------------------------------
+--  DDL for View VW_MOVE_RKO
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "VW_MOVE_RKO" ("REGISTRATOR_ID", "DEB", "SUM_DEB", "KRED", "SUM_KRED", "SUBCONTO_DEB1", "SUBCONTO_KRED1") AS 
+  SELECT VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.DEB,
+  VW_MOVES.SUM_DEB,
+  VW_MOVES.KRED,
+  VW_MOVES.SUM_KRED,
+  KONTRAGENTS.FULLNAME AS Subconto_Deb1,
+  KASSA.FULLNAME       AS Subconto_Kred1
+FROM VW_MOVES
+LEFT JOIN KONTRAGENTS
+ON VW_MOVES.SUBCONTO1_DEB = KONTRAGENTS.ID
+LEFT JOIN KASSA
+ON VW_MOVES.SUBCONTO1_KRED     = KASSA.ID
+WHERE VW_MOVES.KRED            = '2081'
+AND UPPER(VW_MOVES.TABLE_NAME) = UPPER('RKO');
+--------------------------------------------------------
+--  DDL for View VW_NOTIFICATION_CALENDAR
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "VW_NOTIFICATION_CALENDAR" ("ID", "SCHED_NAME", "JOB_NAME", "JOB_GROUP", "JOB_DESCRIPTION", "JOB_CLASS_NAME", "TRIGGER_NAME", "NEXT_FIRE_TIME", "PREV_FIRE_TIME", "TRG_DESCRIPTION", "TRIGGER_TYPE", "CRON_EXPRESSION", "DAT", "DESCRIPTION", "USER_ID", "CONTACT", "SERVER", "CLIENT", "USER_LOGIN", "OBJECT_ID", "START_DATE", "END_DATE") AS 
+  SELECT NOTIFICATION.ID,
+  QRTZ_JOB_DETAILS.SCHED_NAME,
+  QRTZ_JOB_DETAILS.JOB_NAME,
+  QRTZ_JOB_DETAILS.JOB_GROUP,
+  QRTZ_JOB_DETAILS.DESCRIPTION AS JOB_DESCRIPTION,
+  QRTZ_JOB_DETAILS.JOB_CLASS_NAME,
+  QRTZ_TRIGGERS.TRIGGER_NAME,
+  (TO_DATE('01/01/1970 00:00:00','DD/MM/YYYY HH24:MI:SS') + (QRTZ_TRIGGERS.NEXT_FIRE_TIME /1000/60/60/24)) AS NEXT_FIRE_TIME,
+  (TO_DATE('01/01/1970 00:00:00','DD/MM/YYYY HH24:MI:SS') + (QRTZ_TRIGGERS.PREV_FIRE_TIME /1000/60/60/24)) AS PREV_FIRE_TIME,
+  QRTZ_TRIGGERS.DESCRIPTION AS TRG_DESCRIPTION,
+  QRTZ_TRIGGERS.TRIGGER_TYPE,
+  QRTZ_CRON_TRIGGERS.CRON_EXPRESSION,
+  NOTIFICATION.DAT,
+  NOTIFICATION.DESCRIPTION,
+  NOTIFICATION.USER_ID,
+  NOTIFICATION.CONTACT,
+  NOTIFICATION.SERVER,
+  NOTIFICATION.CLIENT,
+  NOTIFICATION.USER_LOGIN,
+  NOTIFICATION.OBJECT_ID,
+  NOTIFICATION.START_DATE,
+  NOTIFICATION.END_DATE
+FROM QRTZ_JOB_DETAILS
+INNER JOIN QRTZ_TRIGGERS
+ON QRTZ_JOB_DETAILS.SCHED_NAME = QRTZ_TRIGGERS.SCHED_NAME
+AND QRTZ_JOB_DETAILS.JOB_NAME  = QRTZ_TRIGGERS.JOB_NAME
+AND QRTZ_JOB_DETAILS.JOB_GROUP = QRTZ_TRIGGERS.JOB_GROUP
+INNER JOIN QRTZ_CRON_TRIGGERS
+ON QRTZ_TRIGGERS.SCHED_NAME     = QRTZ_CRON_TRIGGERS.SCHED_NAME
+AND QRTZ_TRIGGERS.TRIGGER_NAME  = QRTZ_CRON_TRIGGERS.TRIGGER_NAME
+AND QRTZ_TRIGGERS.TRIGGER_GROUP = QRTZ_CRON_TRIGGERS.TRIGGER_GROUP
+RIGHT JOIN NOTIFICATION
+ON QRTZ_TRIGGERS.TRIGGER_NAME = NOTIFICATION.TRG_NAME;
+--------------------------------------------------------
+--  DDL for View VW_SALES
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "VW_SALES" ("ORDER_ID", "KONTRAG_ID", "PERIOD", "DIVISION_ID", "SALES_SUMMA", "FACT_SEBEST_SUMMA", "PLAN_SEBEST_SUMMA") AS 
+  with sales as
+(select registrator_id, period, summa, VW_SALES_ORDERS.SUBCONTO1_DEB kontrag_id from VW_SALES_ORDERS
+where trunc(period) >= trunc(ORDERS_ENTRY.get_startdatmoves())
+and trunc(period) <= trunc(ORDERS_ENTRY.get_enddatmoves())),
+sebest as
+(select registrator_id, period, summa, summ_plan, VW_SEBEST_ORDERS.SUBCONTO1_DEB division_id from VW_SEBEST_ORDERS
+where trunc(period) >= trunc(ORDERS_ENTRY.get_startdatmoves())
+and trunc(period) <= trunc(ORDERS_ENTRY.get_enddatmoves()))
+select o.id order_id, o.kontrag_id, o.dat period, o.division_id,
+(select sales.summa from sales where sales.registrator_id =o.id) sales_summa,
+(select sebest.summa from sebest where sebest.registrator_id =o.id) fact_sebest_summa,
+(select sebest.summ_plan from sebest where sebest.registrator_id =o.id) plan_sebest_summa
+from orders o where o.deleted = 0
+and trunc(o.dat) >= trunc(ORDERS_ENTRY.get_startdatmoves())
+and trunc(o.dat) <= trunc(ORDERS_ENTRY.get_enddatmoves());
+--------------------------------------------------------
+--  DDL for View VW_SALES_ORDERS
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "VW_SALES_ORDERS" ("REGISTRATOR_ID", "TABLE_NAME", "CODE", "SUMMA", "SUBCONTO1_DEB", "FULLNAME", "PERIOD") AS 
+  SELECT VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.TABLE_NAME,
+  VW_MOVES.DEB           AS Code,
+  SUM(VW_MOVES.SUM_DEB)  AS Summa,
+  VW_MOVES.SUBCONTO1_DEB AS Subconto1_Deb,
+  KONTRAGENTS.FULLNAME,
+  VW_MOVES.PERIOD
+FROM VW_MOVES
+INNER JOIN KONTRAGENTS
+ON VW_MOVES.SUBCONTO1_DEB = KONTRAGENTS.ID
+WHERE VW_MOVES.DEB        = '20711'
+GROUP BY VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.TABLE_NAME,
+  VW_MOVES.DEB,
+  VW_MOVES.SUBCONTO1_DEB,
+  KONTRAGENTS.FULLNAME,
+  VW_MOVES.PERIOD;
+--------------------------------------------------------
+--  DDL for View VW_SEBEST_ORDERS
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "VW_SEBEST_ORDERS" ("REGISTRATOR_ID", "TABLE_NAME", "CODE", "SUMMA", "SUMM_PLAN", "SUBCONTO1_DEB", "FULLNAME", "PERIOD") AS 
+  SELECT VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.TABLE_NAME,
+  VW_MOVES.DEB          AS Code,
+  SUM(VW_MOVES.SUM_DEB) AS Summa,
+  ORDERS.SUMM_PLAN,
+  VW_MOVES.SUBCONTO1_DEB AS Subconto1_Deb,
+  DIVISIONS.FULLNAME,
+  VW_MOVES.PERIOD
+FROM VW_MOVES
+INNER JOIN DIVISIONS
+ON VW_MOVES.SUBCONTO1_DEB = DIVISIONS.ID
+INNER JOIN ORDERS
+ON VW_MOVES.REGISTRATOR_ID = ORDERS.ID
+WHERE VW_MOVES.DEB         = '701'
+GROUP BY VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.TABLE_NAME,
+  VW_MOVES.DEB,
+  ORDERS.SUMM_PLAN,
+  VW_MOVES.SUBCONTO1_DEB,
+  DIVISIONS.FULLNAME,
+  VW_MOVES.PERIOD;
+--------------------------------------------------------
+--  DDL for View VW_ZATRATY
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "VW_ZATRATY" ("REGISTRATOR_ID", "TABLE_NAME", "CODE", "SUMMA", "ZATRATY_ID", "ZATRATY_NAME", "DIVISION_ID", "PERIOD") AS 
+  SELECT VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.TABLE_NAME,
+  VW_MOVES.DEB           AS Code,
+  SUM(VW_MOVES.SUM_DEB)  AS Summa,
+  VW_MOVES.SUBCONTO1_DEB AS Zatraty_id,
+  ZATRATY.FULLNAME       AS Zatraty_name,
+  VW_MOVES.DIVISION_ID,
+  VW_MOVES.PERIOD
+FROM VW_MOVES
+INNER JOIN ZATRATY
+ON VW_MOVES.SUBCONTO1_DEB = ZATRATY.ID
+WHERE VW_MOVES.DEB        = '80212'
+and trunc(VW_MOVES.PERIOD) >= trunc(ORDERS_ENTRY.get_startdatmoves())
+and trunc(VW_MOVES.PERIOD) <= trunc(ORDERS_ENTRY.get_enddatmoves())
+GROUP BY VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.TABLE_NAME,
+  VW_MOVES.DEB,
+  VW_MOVES.SUBCONTO1_DEB,
+  ZATRATY.FULLNAME,
+  VW_MOVES.DIVISION_ID,
+  VW_MOVES.PERIOD;
+--------------------------------------------------------
 --  DDL for Index ASTER_SETTINGS_PK
 --------------------------------------------------------
 
@@ -1292,6 +1660,12 @@ ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID;
 --------------------------------------------------------
 
   CREATE UNIQUE INDEX "BASE_OF_CALC_PK" ON "BASE_OF_CALC" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index CALENDAR_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "CALENDAR_PK" ON "CALENDAR" ("ID") 
   ;
 --------------------------------------------------------
 --  DDL for Index CALL_LISTS_PK
@@ -1588,6 +1962,18 @@ ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID;
   CREATE UNIQUE INDEX "NUMERATOR_PK" ON "NUMERATOR" ("ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index OPERATION_PKO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "OPERATION_PKO_PK" ON "OPERATION_PKO" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index OPERATION_RKO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "OPERATION_RKO_PK" ON "OPERATION_RKO" ("ID") 
+  ;
+--------------------------------------------------------
 --  DDL for Index ORDERS_PK
 --------------------------------------------------------
 
@@ -1622,6 +2008,24 @@ ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID;
 --------------------------------------------------------
 
   CREATE UNIQUE INDEX "ORDER_STATUS_PK" ON "ORDER_STATUS" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index OTHER_ZATRATY_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "OTHER_ZATRATY_PK" ON "OTHER_ZATRATY" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index OTHER_ZATRATY_TAB_PART_ZAT_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "OTHER_ZATRATY_TAB_PART_ZAT_PK" ON "OTHER_ZATRATY_TAB_PART_ZATRATY" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PKO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PKO_PK" ON "PKO" ("ID") 
   ;
 --------------------------------------------------------
 --  DDL for Index PLAN_ACC_PK
@@ -1744,6 +2148,12 @@ ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID;
   CREATE UNIQUE INDEX "REG_RATES_PK" ON "REG_RATES" ("ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index RKO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "RKO_PK" ON "RKO" ("ID") 
+  ;
+--------------------------------------------------------
 --  DDL for Index TYPE_DEF_PK
 --------------------------------------------------------
 
@@ -1841,6 +2251,21 @@ ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID;
   ALTER TABLE "BASE_OF_CALC" MODIFY ("NAME" NOT NULL ENABLE);
  
   ALTER TABLE "BASE_OF_CALC" MODIFY ("FULLNAME" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table CALENDAR
+--------------------------------------------------------
+
+  ALTER TABLE "CALENDAR" ADD CONSTRAINT "CALENDAR_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "CALENDAR" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "CALENDAR" MODIFY ("PROVIDER" NOT NULL ENABLE);
+ 
+  ALTER TABLE "CALENDAR" MODIFY ("START_DATE" NOT NULL ENABLE);
+ 
+  ALTER TABLE "CALENDAR" MODIFY ("END_DATE" NOT NULL ENABLE);
+ 
+  ALTER TABLE "CALENDAR" MODIFY ("DESCRIPTION" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table CALL_LISTS
 --------------------------------------------------------
@@ -2219,6 +2644,8 @@ ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID;
   ALTER TABLE "MOVES" MODIFY ("SUMM_UPR_KRED" NOT NULL ENABLE);
  
   ALTER TABLE "MOVES" MODIFY ("ACTIVITIES_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "MOVES" MODIFY ("DIVISION_ID" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table NOMENKLATURA
 --------------------------------------------------------
@@ -2253,6 +2680,10 @@ ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID;
   ALTER TABLE "NOTIFICATION" MODIFY ("DESCRIPTION" NOT NULL ENABLE);
  
   ALTER TABLE "NOTIFICATION" MODIFY ("USER_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "NOTIFICATION" MODIFY ("START_DATE" NOT NULL ENABLE);
+ 
+  ALTER TABLE "NOTIFICATION" MODIFY ("END_DATE" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table NUMERATOR
 --------------------------------------------------------
@@ -2266,6 +2697,28 @@ ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID;
   ALTER TABLE "NUMERATOR" MODIFY ("PREFIX" NOT NULL ENABLE);
  
   ALTER TABLE "NUMERATOR" MODIFY ("VERSION" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table OPERATION_PKO
+--------------------------------------------------------
+
+  ALTER TABLE "OPERATION_PKO" ADD CONSTRAINT "OPERATION_PKO_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "OPERATION_PKO" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "OPERATION_PKO" MODIFY ("NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "OPERATION_PKO" MODIFY ("FULLNAME" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table OPERATION_RKO
+--------------------------------------------------------
+
+  ALTER TABLE "OPERATION_RKO" ADD CONSTRAINT "OPERATION_RKO_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "OPERATION_RKO" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "OPERATION_RKO" MODIFY ("NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "OPERATION_RKO" MODIFY ("FULLNAME" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table ORDERS
 --------------------------------------------------------
@@ -2396,6 +2849,77 @@ ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID;
   ALTER TABLE "ORDER_STATUS" MODIFY ("VERSION" NOT NULL ENABLE);
  
   ALTER TABLE "ORDER_STATUS" MODIFY ("NAME" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table OTHER_ZATRATY
+--------------------------------------------------------
+
+  ALTER TABLE "OTHER_ZATRATY" ADD CONSTRAINT "OTHER_ZATRATY_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "OTHER_ZATRATY" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "OTHER_ZATRATY" MODIFY ("DAT" NOT NULL ENABLE);
+ 
+  ALTER TABLE "OTHER_ZATRATY" MODIFY ("NUM" NOT NULL ENABLE);
+ 
+  ALTER TABLE "OTHER_ZATRATY" MODIFY ("DELETED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "OTHER_ZATRATY" MODIFY ("POSTED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "OTHER_ZATRATY" MODIFY ("VERSION" NOT NULL ENABLE);
+ 
+  ALTER TABLE "OTHER_ZATRATY" MODIFY ("DIVISION_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "OTHER_ZATRATY" MODIFY ("USER_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "OTHER_ZATRATY" MODIFY ("CURR_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "OTHER_ZATRATY" MODIFY ("KASSA_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "OTHER_ZATRATY" MODIFY ("ACTIVITIES_ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table OTHER_ZATRATY_TAB_PART_ZATRATY
+--------------------------------------------------------
+
+  ALTER TABLE "OTHER_ZATRATY_TAB_PART_ZATRATY" ADD CONSTRAINT "OTHER_ZATRATY_TAB_PART_ZAT_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "OTHER_ZATRATY_TAB_PART_ZATRATY" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "OTHER_ZATRATY_TAB_PART_ZATRATY" MODIFY ("OTH_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "OTHER_ZATRATY_TAB_PART_ZATRATY" MODIFY ("ZATR_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "OTHER_ZATRATY_TAB_PART_ZATRATY" MODIFY ("SUMMA" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table PKO
+--------------------------------------------------------
+
+  ALTER TABLE "PKO" ADD CONSTRAINT "PKO_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "PKO" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PKO" MODIFY ("DAT" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PKO" MODIFY ("NUM" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PKO" MODIFY ("DELETED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PKO" MODIFY ("POSTED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PKO" MODIFY ("DIVISION_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PKO" MODIFY ("USER_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PKO" MODIFY ("VERSION" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PKO" MODIFY ("CURR_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PKO" MODIFY ("KASSA_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PKO" MODIFY ("ACTIVITIES_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PKO" MODIFY ("OPERATION_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PKO" MODIFY ("SUMMA" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table PLAN_ACC
 --------------------------------------------------------
@@ -2665,6 +3189,37 @@ ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID;
  
   ALTER TABLE "REG_RATES" MODIFY ("VERSION" NOT NULL ENABLE);
 --------------------------------------------------------
+--  Constraints for Table RKO
+--------------------------------------------------------
+
+  ALTER TABLE "RKO" ADD CONSTRAINT "RKO_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "RKO" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "RKO" MODIFY ("DAT" NOT NULL ENABLE);
+ 
+  ALTER TABLE "RKO" MODIFY ("NUM" NOT NULL ENABLE);
+ 
+  ALTER TABLE "RKO" MODIFY ("DELETED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "RKO" MODIFY ("POSTED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "RKO" MODIFY ("DIVISION_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "RKO" MODIFY ("USER_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "RKO" MODIFY ("VERSION" NOT NULL ENABLE);
+ 
+  ALTER TABLE "RKO" MODIFY ("CURR_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "RKO" MODIFY ("KASSA_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "RKO" MODIFY ("ACTIVITIES_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "RKO" MODIFY ("OPERATION_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "RKO" MODIFY ("SUMMA" NOT NULL ENABLE);
+--------------------------------------------------------
 --  Constraints for Table TYPE_DEF
 --------------------------------------------------------
 
@@ -2822,6 +3377,9 @@ ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID;
  
   ALTER TABLE "CALL_LOG" ADD CONSTRAINT "CALL_LOG_FK4" FOREIGN KEY ("CALL_RESULTS")
 	  REFERENCES "CALL_RESULTS" ("ID") ENABLE;
+ 
+  ALTER TABLE "CALL_LOG" ADD CONSTRAINT "CALL_LOG_FK5" FOREIGN KEY ("KONTRAG_ID")
+	  REFERENCES "KONTRAGENTS" ("ID") ON DELETE CASCADE ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table CALL_MEMO
 --------------------------------------------------------
@@ -2927,6 +3485,9 @@ ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID;
  
   ALTER TABLE "MOVES" ADD CONSTRAINT "MOVES_FK1" FOREIGN KEY ("ACTIVITIES_ID")
 	  REFERENCES "TYPE_OF_ACTIVITIES" ("ID") ENABLE;
+ 
+  ALTER TABLE "MOVES" ADD CONSTRAINT "MOVES_FK2" FOREIGN KEY ("DIVISION_ID")
+	  REFERENCES "DIVISIONS" ("ID") ENABLE;
  
   ALTER TABLE "MOVES" ADD CONSTRAINT "MOVES_PLAN_ACC_FK1" FOREIGN KEY ("PLAN_ACC_DEB_ID")
 	  REFERENCES "PLAN_ACC" ("ID") ENABLE;
@@ -3039,6 +3600,57 @@ ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID;
   ALTER TABLE "ORDERS_TP_USLUGI" ADD CONSTRAINT "ORDERS_TP_USLUGI_FK5" FOREIGN KEY ("MEASURE_ID")
 	  REFERENCES "MEASURE_UNIT" ("ID") ENABLE;
 --------------------------------------------------------
+--  Ref Constraints for Table OTHER_ZATRATY
+--------------------------------------------------------
+
+  ALTER TABLE "OTHER_ZATRATY" ADD CONSTRAINT "OTHER_ZATRATY_FK1" FOREIGN KEY ("DIVISION_ID")
+	  REFERENCES "DIVISIONS" ("ID") ENABLE;
+ 
+  ALTER TABLE "OTHER_ZATRATY" ADD CONSTRAINT "OTHER_ZATRATY_FK2" FOREIGN KEY ("USER_ID")
+	  REFERENCES "USERS" ("ID") ENABLE;
+ 
+  ALTER TABLE "OTHER_ZATRATY" ADD CONSTRAINT "OTHER_ZATRATY_FK3" FOREIGN KEY ("CURR_ID")
+	  REFERENCES "CURRENCY" ("ID") ENABLE;
+ 
+  ALTER TABLE "OTHER_ZATRATY" ADD CONSTRAINT "OTHER_ZATRATY_FK4" FOREIGN KEY ("KASSA_ID")
+	  REFERENCES "KASSA" ("ID") ENABLE;
+ 
+  ALTER TABLE "OTHER_ZATRATY" ADD CONSTRAINT "OTHER_ZATRATY_FK5" FOREIGN KEY ("ACTIVITIES_ID")
+	  REFERENCES "TYPE_OF_ACTIVITIES" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table OTHER_ZATRATY_TAB_PART_ZATRATY
+--------------------------------------------------------
+
+  ALTER TABLE "OTHER_ZATRATY_TAB_PART_ZATRATY" ADD CONSTRAINT "OTHER_ZATRATY_TAB_PART_ZA_FK1" FOREIGN KEY ("OTH_ID")
+	  REFERENCES "OTHER_ZATRATY" ("ID") ON DELETE CASCADE ENABLE;
+ 
+  ALTER TABLE "OTHER_ZATRATY_TAB_PART_ZATRATY" ADD CONSTRAINT "OTHER_ZATRATY_TAB_PART_ZA_FK2" FOREIGN KEY ("ZATR_ID")
+	  REFERENCES "ZATRATY" ("ID") ON DELETE SET NULL ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table PKO
+--------------------------------------------------------
+
+  ALTER TABLE "PKO" ADD CONSTRAINT "PKO_FK1" FOREIGN KEY ("DIVISION_ID")
+	  REFERENCES "DIVISIONS" ("ID") ENABLE;
+ 
+  ALTER TABLE "PKO" ADD CONSTRAINT "PKO_FK2" FOREIGN KEY ("USER_ID")
+	  REFERENCES "USERS" ("ID") ENABLE;
+ 
+  ALTER TABLE "PKO" ADD CONSTRAINT "PKO_FK3" FOREIGN KEY ("CURR_ID")
+	  REFERENCES "CURRENCY" ("ID") ENABLE;
+ 
+  ALTER TABLE "PKO" ADD CONSTRAINT "PKO_FK4" FOREIGN KEY ("KASSA_ID")
+	  REFERENCES "KASSA" ("ID") ENABLE;
+ 
+  ALTER TABLE "PKO" ADD CONSTRAINT "PKO_FK5" FOREIGN KEY ("ACTIVITIES_ID")
+	  REFERENCES "TYPE_OF_ACTIVITIES" ("ID") ENABLE;
+ 
+  ALTER TABLE "PKO" ADD CONSTRAINT "PKO_FK6" FOREIGN KEY ("OPERATION_ID")
+	  REFERENCES "OPERATION_PKO" ("ID") ENABLE;
+ 
+  ALTER TABLE "PKO" ADD CONSTRAINT "PKO_FK7" FOREIGN KEY ("KONTRAG_ID")
+	  REFERENCES "KONTRAGENTS" ("ID") ENABLE;
+--------------------------------------------------------
 --  Ref Constraints for Table PLAN_ACC
 --------------------------------------------------------
 
@@ -3107,6 +3719,30 @@ ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID;
 
   ALTER TABLE "REG_RATES" ADD CONSTRAINT "REG_RATES_FK1" FOREIGN KEY ("CURR_ID")
 	  REFERENCES "CURRENCY" ("ID") ON DELETE CASCADE ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table RKO
+--------------------------------------------------------
+
+  ALTER TABLE "RKO" ADD CONSTRAINT "RKO_FK1" FOREIGN KEY ("DIVISION_ID")
+	  REFERENCES "DIVISIONS" ("ID") ENABLE;
+ 
+  ALTER TABLE "RKO" ADD CONSTRAINT "RKO_FK2" FOREIGN KEY ("USER_ID")
+	  REFERENCES "USERS" ("ID") ENABLE;
+ 
+  ALTER TABLE "RKO" ADD CONSTRAINT "RKO_FK3" FOREIGN KEY ("CURR_ID")
+	  REFERENCES "CURRENCY" ("ID") ENABLE;
+ 
+  ALTER TABLE "RKO" ADD CONSTRAINT "RKO_FK4" FOREIGN KEY ("KASSA_ID")
+	  REFERENCES "KASSA" ("ID") ENABLE;
+ 
+  ALTER TABLE "RKO" ADD CONSTRAINT "RKO_FK5" FOREIGN KEY ("ACTIVITIES_ID")
+	  REFERENCES "TYPE_OF_ACTIVITIES" ("ID") ENABLE;
+ 
+  ALTER TABLE "RKO" ADD CONSTRAINT "RKO_FK6" FOREIGN KEY ("OPERATION_ID")
+	  REFERENCES "OPERATION_RKO" ("ID") ENABLE;
+ 
+  ALTER TABLE "RKO" ADD CONSTRAINT "RKO_FK7" FOREIGN KEY ("KONTRAG_ID")
+	  REFERENCES "KONTRAGENTS" ("ID") ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table USER_SETTINGS
 --------------------------------------------------------
@@ -3545,9 +4181,13 @@ ALTER TRIGGER "IMPORTED_PRICE_TRG" ENABLE;
 --------------------------------------------------------
 
   CREATE OR REPLACE TRIGGER "JOB_END_TRG" 
-  BEFORE DELETE ON "QRTZ_TRIGGERS"
-  BEGIN  
- UPDATE NOTIFICATION SET SERVER='1' WHERE TRG_NAME=(SELECT TRIGGER_NAME FROM (SELECT TRIGGER_NAME FROM QRTZ_TRIGGERS ORDER BY NEXT_FIRE_TIME)  WHERE ROWNUM = 1);
+  BEFORE UPDATE OR DELETE ON "QRTZ_TRIGGERS"
+  BEGIN 
+ IF DELETING OR UPDATING THEN  
+    UPDATE NOTIFICATION
+    SET SERVER='1', CLIENT='0'
+    WHERE TRG_NAME=(SELECT TRIGGER_NAME FROM (SELECT TRIGGER_NAME FROM QRTZ_TRIGGERS ORDER BY NEXT_FIRE_TIME)  WHERE ROWNUM = 1);
+ END IF;
 END;
 /
 ALTER TRIGGER "JOB_END_TRG" ENABLE;
@@ -3647,6 +4287,25 @@ end;
 /
 ALTER TRIGGER "NOMENKLATURA_TRG" ENABLE;
 --------------------------------------------------------
+--  DDL for Trigger NOTIFICATION_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "NOTIFICATION_TRG" 
+  BEFORE INSERT OR UPDATE ON "NOTIFICATION"
+  REFERENCING FOR EACH ROW
+  begin  
+   if inserting then 
+      if :NEW."ID" is null then 
+        select utility.uuid() into :new."ID" from dual; 
+      end if; 
+   end if;
+    if updating then
+      select systimestamp into :new."VERSION" from dual;
+   end if;   
+end;
+/
+ALTER TRIGGER "NOTIFICATION_TRG" ENABLE;
+--------------------------------------------------------
 --  DDL for Trigger NUMERATOR_TGR
 --------------------------------------------------------
 
@@ -3665,6 +4324,38 @@ ALTER TRIGGER "NOMENKLATURA_TRG" ENABLE;
 end;
 /
 ALTER TRIGGER "NUMERATOR_TGR" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger OPERATION_PKO_TGR
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "OPERATION_PKO_TGR" 
+  BEFORE INSERT OR UPDATE ON "OPERATION_PKO"
+  REFERENCING FOR EACH ROW
+  begin  
+   if inserting then 
+      if :NEW."ID" is null then 
+         select utility.uuid() into :new."ID" from dual;
+      end if; 
+   end if; 
+end;
+/
+ALTER TRIGGER "OPERATION_PKO_TGR" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger OPERATION_RKO_TGR
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "OPERATION_RKO_TGR" 
+  BEFORE INSERT OR UPDATE ON "OPERATION_RKO"
+  REFERENCING FOR EACH ROW
+  begin  
+   if inserting then 
+      if :NEW."ID" is null then 
+         select utility.uuid() into :new."ID" from dual;
+      end if; 
+   end if; 
+end;
+/
+ALTER TRIGGER "OPERATION_RKO_TGR" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger ORDERS_TP_NACHISL_TRG
 --------------------------------------------------------
@@ -3787,6 +4478,90 @@ end;
 /
 ALTER TRIGGER "ORDER_STATUS_TGR" ENABLE;
 --------------------------------------------------------
+--  DDL for Trigger OTHER_ZATRATY_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "OTHER_ZATRATY_TRG" 
+  BEFORE INSERT OR UPDATE ON "OTHER_ZATRATY"
+  REFERENCING FOR EACH ROW
+  declare
+  l_rec type_def%rowtype;
+  l_num numerator.prefix%type;
+begin  
+   if inserting then
+      select * into l_rec from type_def where upper(table_name) = 'OTHER_ZATRATY';
+      if l_rec.id is not null then
+          select prefix into l_num from numerator where typedef_id = l_rec.id;
+      end if;
+      
+      if :NEW."ID" is null then 
+         select utility.uuid() into :NEW."ID" from dual;
+      end if;
+      if :new."NUM" is null then
+          if l_num is null then
+            select other_zatr_num_seq.nextval into :new."NUM" from dual;
+          else
+            select l_num||other_zatr_num_seq.nextval into :new."NUM" from dual;
+          end if;  
+      end if;
+   end if;
+   if updating then
+      select systimestamp into :new."VERSION" from dual;
+   end if;
+end;
+/
+ALTER TRIGGER "OTHER_ZATRATY_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger OTHER_ZATR_TP_ZATRATY_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "OTHER_ZATR_TP_ZATRATY_TRG" 
+  BEFORE INSERT OR UPDATE ON "OTHER_ZATRATY_TAB_PART_ZATRATY"
+  REFERENCING FOR EACH ROW
+begin  
+   if inserting then      
+      if :NEW."ID" is null then 
+         select utility.uuid() into :NEW."ID" from dual;
+      end if;
+      end if;
+end;
+/
+ALTER TRIGGER "OTHER_ZATR_TP_ZATRATY_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger PKO_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "PKO_TRG" 
+  BEFORE INSERT OR UPDATE ON "PKO"
+  REFERENCING FOR EACH ROW
+  declare
+  l_rec type_def%rowtype;
+  l_num numerator.prefix%type;
+begin  
+   if inserting then
+      select * into l_rec from type_def where upper(table_name) = 'PKO';
+      if l_rec.id is not null then
+          select prefix into l_num from numerator where typedef_id = l_rec.id;
+      end if;
+      
+      if :NEW."ID" is null then 
+         select utility.uuid() into :NEW."ID" from dual;
+      end if;
+      if :new."NUM" is null then
+          if l_num is null then
+            select pko_num_seq.nextval into :new."NUM" from dual;
+          else
+            select l_num||pko_num_seq.nextval into :new."NUM" from dual;
+          end if;  
+      end if;
+   end if;
+   if updating then
+      select systimestamp into :new."VERSION" from dual;
+   end if;
+end;
+/
+ALTER TRIGGER "PKO_TRG" ENABLE;
+--------------------------------------------------------
 --  DDL for Trigger PLAN_ACC_SUBCONTO_TRG
 --------------------------------------------------------
 
@@ -3894,6 +4669,40 @@ ALTER TRIGGER "REG_PRICES_TRG" ENABLE;
 end;
 /
 ALTER TRIGGER "REG_RATES_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger RKO_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "RKO_TRG" 
+  BEFORE INSERT OR UPDATE ON "RKO"
+  REFERENCING FOR EACH ROW
+  declare
+  l_rec type_def%rowtype;
+  l_num numerator.prefix%type;
+begin  
+   if inserting then
+      select * into l_rec from type_def where upper(table_name) = 'RKO';
+      if l_rec.id is not null then
+          select prefix into l_num from numerator where typedef_id = l_rec.id;
+      end if;
+      
+      if :NEW."ID" is null then 
+         select utility.uuid() into :NEW."ID" from dual;
+      end if;
+      if :new."NUM" is null then
+          if l_num is null then
+            select rko_num_seq.nextval into :new."NUM" from dual;
+          else
+            select l_num||rko_num_seq.nextval into :new."NUM" from dual;
+          end if;  
+      end if;
+   end if;
+   if updating then
+      select systimestamp into :new."VERSION" from dual;
+   end if;
+end;
+/
+ALTER TRIGGER "RKO_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger TYPE_DEF_TRG
 --------------------------------------------------------
@@ -4249,7 +5058,7 @@ end currency_pkg;
   CREATE OR REPLACE PACKAGE "ENTRY" as 
 
   function sign_of_summ(p_acc in plan_acc.id%type, p_summ in number, p_type in number) return number;
-  function get_ostatok_by_date(p_acc in plan_acc.code%type, p_dat in date) return number;
+  function get_ostatok_by_date(p_acc in plan_acc.code%type, p_dat in date, p_division_id divisions.id%type) return number;
 
 end entry;
 
@@ -4400,7 +5209,7 @@ END KONTRAG;
 --------------------------------------------------------
 
   CREATE OR REPLACE PACKAGE "ORDERS_ENTRY" as 
-   gn$startdatmoves   date:= TO_DATE('01-01-1970 00:00:00','DD-MM-YYYY HH24:MI:SS');
+   gn$startdatmoves   date:= to_date('01-01-1970 00:00:00','DD-MM-YYYY HH24:MI:SS');
    gn$enddatmoves   date:= systimestamp;
    
   procedure set_startdatmoves (in_dat date);
@@ -4416,6 +5225,34 @@ END KONTRAG;
   procedure orders_remove_all;
 
 end orders_entry;
+
+/
+--------------------------------------------------------
+--  DDL for Package OTHER_ENTRY
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "OTHER_ENTRY" as 
+
+  procedure other_move_plan_acc(p_id in varchar2);
+  procedure other_remove_plan_acc(p_id in varchar2, p_del in number default 0);
+  procedure other_move_all;
+  procedure other_remove_all;
+
+end other_entry;
+
+/
+--------------------------------------------------------
+--  DDL for Package PKO_ENTRY
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "PKO_ENTRY" as 
+
+  procedure pko_move_plan_acc(p_id in varchar2);
+  procedure pko_remove_plan_acc(p_id in varchar2, p_del in number default 0);
+  procedure pko_move_all;
+  procedure pko_remove_all;
+
+end pko_entry;
 
 /
 --------------------------------------------------------
@@ -4439,6 +5276,38 @@ AS
   FUNCTION encrypt_ssn( p_ssn IN VARCHAR2, p_key IN VARCHAR2) RETURN RAW;
   FUNCTION decrypt_ssn( p_ssn IN RAW, p_key IN VARCHAR2 ) RETURN VARCHAR2;
 END p_encrypt;
+
+/
+--------------------------------------------------------
+--  DDL for Package REPORT_PKG
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "REPORT_PKG" as
+
+  function getzatraty(f_data date default null, l_data date default null)
+      return tbl_zatraty;
+  
+  function getsales(f_data date default null, l_data date default null)
+      return tbl_sales;
+      
+  function getballans(f_data date default null, l_data date default null)
+      return tbl_ballans;    
+
+end report_pkg;
+
+/
+--------------------------------------------------------
+--  DDL for Package RKO_ENTRY
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "RKO_ENTRY" AS 
+
+  procedure rko_move_plan_acc(p_id in varchar2);
+  procedure rko_remove_plan_acc(p_id in varchar2, p_del in number default 0);
+  procedure rko_move_all;
+  procedure rko_remove_all;
+
+END RKO_ENTRY;
 
 /
 --------------------------------------------------------
@@ -4531,11 +5400,17 @@ begin
     return;
   end if;  
   select * into p_curr_rec from currency where id=p_code;
-  select to_char(p_dat,'dd')|| to_char(p_dat,'mm')|| to_char(p_dat,'yyyy') into p_date_str from dual;
   
-  select to_number(t.xml.extract('//ValCurs/Valute[@id='||p_curr_rec.id_xml||']/Nominal/text()'),'9999'),
-      to_number(t.xml.extract('//ValCurs/Valute[@id='||p_curr_rec.id_xml||']/Value/text()'),'9999.999999') into nominal, val
-  from (select currency_pkg.get_xmlfromurl('http://pfsoft.com.ua/service/currency/?date='||p_date_str||'','CL8MSWIN1251') xml from dual) t;
+  select to_number(extractValue(value(dtl),'item/size'),'9999'),
+      to_number(extractValue(value(dtl),'item/rate'),'9999.999999') into nominal, val
+  from (select currency_pkg.get_xmlfromurl('http://bank-ua.com/export/currrate.xml','CL8MSWIN1251') xml from dual) s,
+    table(XMLSequence(s.xml.extract('chapter/item'))) dtl
+  where extractValue(value(dtl),'item/code') = p_curr_rec.code; 
+  --select to_char(p_dat,'dd')|| to_char(p_dat,'mm')|| to_char(p_dat,'yyyy') into p_date_str from dual;
+  
+  --select to_number(t.xml.extract('//ValCurs/Valute[@id='||p_curr_rec.id_xml||']/Nominal/text()'),'9999'),
+      --to_number(t.xml.extract('//ValCurs/Valute[@id='||p_curr_rec.id_xml||']/Value/text()'),'9999.999999') into nominal, val
+  --from (select currency_pkg.get_xmlfromurl('http://pfsoft.com.ua/service/currency/?date='||p_date_str||'','CL8MSWIN1251') xml from dual) t;
   
   insert into reg_rates(curr_id,period,kurs,kratnost) values (p_code,p_dat,val,nominal);
   
@@ -4614,17 +5489,17 @@ end currency_pkg;
     return p_out_summ;
   end sign_of_summ;
   
-  function get_ostatok_by_date(p_acc in plan_acc.code%type, p_dat in date) return number as
+  function get_ostatok_by_date(p_acc in plan_acc.code%type, p_dat in date, p_division_id divisions.id%type) return number as
   p_sum_deb number;
   p_sum_kred number;
   begin
-  SELECT NVL(SUM(DISTINCT vw_moves.SUM_DEB),0) into p_sum_deb 
+  SELECT NVL(SUM(vw_moves.SUM_DEB),0) into p_sum_deb 
   FROM vw_moves
-  where deb = p_acc and trunc(period) <= trunc(p_dat);
+  where deb = p_acc and DIVISION_ID = p_division_id and trunc(period) <= trunc(p_dat);
   
-  SELECT NVL(SUM(DISTINCT vw_moves.SUM_KRED),0) into p_sum_kred 
+  SELECT NVL(SUM(vw_moves.SUM_KRED),0) into p_sum_kred 
   FROM vw_moves
-  where kred = p_acc and trunc(period) <= trunc(p_dat);
+  where kred = p_acc and DIVISION_ID = p_division_id and trunc(period) <= trunc(p_dat);
   
   return p_sum_deb+p_sum_kred;
   
@@ -5797,6 +6672,7 @@ END KONTRAG;
   p_ret_rec.summ_upr_kred:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_kred, p_upr_val, p_ret_rec.period,p_ret_rec.summ_val_kredit);
   
   p_ret_rec.version:=systimestamp;
+  p_ret_rec.period:=i.dat;
   
   insert into moves values p_ret_rec;
   end loop;
@@ -6438,18 +7314,158 @@ END KONTRAG;
         RAISE_APPLICATION_ERROR (-20001,'Error order move for plan accounting! '||SQLERRM, TRUE) ;
   end set_subconto_close_order;
   
+  procedure set_subconto_finrez_order(p_move_rec moves%rowtype) as
+    p_ret_rec moves%rowtype;
+    p_sub_count number(10);
+    p_counter number(10);
+    p_sub_name plan_type_subconto.fullname%type;
+    p_order orders%rowtype;
+    p_plan_acc plan_acc%rowtype;
+    p_upr_val currency.id%type;
+    --p_code_plan plan_acc.code%type;
+    p_usluga nomenklatura.usluga%type;
+    p_summ_sales number;
+    p_summ_sebest number;
+  begin
+  select * into p_order from orders where id = p_move_rec.registrator_id;
+  select id into p_upr_val from currency where predefined=1;
+  
+  --for i in (select * from vw_moves where registrator_id = p_order.id and deb = '701') loop
+  p_ret_rec:=p_move_rec;
+  select sum(nvl(summa,0)) into p_summ_sales from VW_SALES_ORDERS where registrator_id = p_move_rec.registrator_id;
+  select sum(nvl(summa,0)) into p_summ_sebest from VW_SEBEST_ORDERS where registrator_id = p_move_rec.registrator_id;
+  
+  if (p_summ_sales = 0) or (p_summ_sales is null) then
+    return;
+  end if; 
+  
+  if (p_summ_sebest is null) then
+    p_summ_sebest:=0;
+  end if;
+  --select code into p_code_plan from plan_acc where id = p_ret_rec.plan_acc_deb_id;
+  
+  --Субконто дебета
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_order.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_order.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_order.division_id;
+        end if;
+        end if;
+        
+        if upper(p_sub_name) = 'КАССА' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_order.kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_order.kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_order.kassa_id;
+        end if;
+        end if;
+        
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_order.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_order.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_order.division_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  --Субконто кредита
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_order.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_order.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_order.division_id;
+        end if;
+        end if;
+        
+        if upper(p_sub_name) = 'КАССА' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_order.kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_order.kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_order.kassa_id;
+        end if;
+        end if;
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_order.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_order.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_order.division_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  p_ret_rec.curr_deb := p_order.curr_id;
+  p_ret_rec.summ_val_deb:=entry.sign_of_summ(p_ret_rec.plan_acc_deb_id, (p_summ_sales-p_summ_sebest), 1);
+  
+  p_ret_rec.curr_kred := p_order.curr_id;
+  p_ret_rec.summ_val_kredit:=entry.sign_of_summ(p_ret_rec.plan_acc_kred_id, (p_summ_sales-p_summ_sebest), 0);
+  
+  p_ret_rec.summ_upr_deb:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_deb, p_upr_val, p_ret_rec.period, p_ret_rec.summ_val_deb);
+  p_ret_rec.summ_upr_kred:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_kred, p_upr_val, p_ret_rec.period,p_ret_rec.summ_val_kredit);
+  
+  p_ret_rec.version:=systimestamp;
+  
+  insert into moves values p_ret_rec;
+  --end loop;
+  exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error order move for plan accounting! '||SQLERRM, TRUE) ;
+  end set_subconto_finrez_order;
+  
   procedure orders_move_plan_acc(p_id in varchar2) as
     p_orders_rec orders%rowtype;
     p_move_rec moves%rowtype;
     p_version varchar2(1000);
     in_use exception;
     p_counter number(10);
+    p_status order_status.id%type;
   pragma exception_init(in_use, -54);
   begin
     orders_remove_plan_acc(p_id);
     select * into p_orders_rec from orders where id = p_id for update nowait;
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from orders
       where id = p_id;
+      
+    select id into p_status from order_status where upper(name) = upper('Закрыт');
       
     p_move_rec.period:=p_orders_rec.dat;
     p_counter:=0;
@@ -6459,6 +7475,7 @@ END KONTRAG;
         p_move_rec.registrator_id:=p_id;
         p_move_rec.plan_acc_deb_id:=i.plan_acc_deb_id;
         p_move_rec.activities_id:=p_orders_rec.activities_id;
+        p_move_rec.division_id:=p_orders_rec.division_id;
         
         p_move_rec.plan_acc_kred_id:=i.plan_acc_kred_id;
         
@@ -6501,6 +7518,14 @@ END KONTRAG;
             p_move_rec.description:='Закрытие заказа - выполнен!';
             set_subconto_close_order(p_move_rec);
         end if;
+        
+        --Заказ выполнен - Отнесение маржи на финансовый результат
+        if p_counter = 8 then
+            if p_orders_rec.status_id = p_status then
+              p_move_rec.description:='Заказ выполнен - Отнесение маржи на финансовый результат';
+              set_subconto_finrez_order(p_move_rec);
+            end if;
+        end if;
     end loop;
     
     p_orders_rec.posted:=1;
@@ -6515,6 +7540,610 @@ END KONTRAG;
   end orders_move_plan_acc;
 
 end orders_entry;
+
+/
+--------------------------------------------------------
+--  DDL for Package Body OTHER_ENTRY
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "OTHER_ENTRY" as
+
+procedure set_subconto_tp_zatraty(p_move_rec moves%rowtype) as
+    p_ret_rec moves%rowtype;
+    p_sub_count number(10);
+    p_counter number(10);
+    p_sub_name plan_type_subconto.fullname%type;
+    p_other other_zatraty%rowtype;
+    p_plan_acc plan_acc%rowtype;
+    p_upr_val currency.id%type;
+  begin
+  select * into p_other from OTHER_ZATRATY where id = p_move_rec.registrator_id;
+  select id into p_upr_val from currency where predefined=1;
+  
+  for i in (select * from other_zatraty_tab_part_zatraty where oth_id = p_other.id) loop
+  p_ret_rec:=p_move_rec;
+
+  
+  --Субконто дебета
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'СТАТЬЯ ЗАТРАТ' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=i.zatr_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=i.zatr_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=i.zatr_id;
+        end if;
+        end if;
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_other.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_other.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_other.division_id;
+        end if;
+        end if;
+        if upper(p_sub_name) = 'КАССА' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_other.kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_other.kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_other.kassa_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  --Субконто кредита
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'КАССА' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_other.kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_other.kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_other.kassa_id;
+        end if;
+        end if;
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_other.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_other.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_other.division_id;
+        end if;
+        end if;
+        if upper(p_sub_name) = 'СТАТЬЯ ЗАТРАТ' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=i.zatr_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=i.zatr_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=i.zatr_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  p_ret_rec.curr_deb := p_other.curr_id;
+  p_ret_rec.summ_val_deb:=entry.sign_of_summ(p_ret_rec.plan_acc_deb_id, i.summa, 1);
+  
+  p_ret_rec.curr_kred := p_other.curr_id;
+  p_ret_rec.summ_val_kredit:=entry.sign_of_summ(p_ret_rec.plan_acc_kred_id, i.summa, 0);
+  
+  p_ret_rec.summ_upr_deb:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_deb, p_upr_val, p_ret_rec.period, p_ret_rec.summ_val_deb);
+  p_ret_rec.summ_upr_kred:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_kred, p_upr_val, p_ret_rec.period,p_ret_rec.summ_val_kredit);
+  
+  p_ret_rec.version:=systimestamp;
+  
+  insert into moves values p_ret_rec;
+  end loop;
+  exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error other_zatraty move for plan accounting! '||SQLERRM, TRUE) ;
+  end set_subconto_tp_zatraty;
+  
+  procedure set_subconto_tp_result(p_move_rec moves%rowtype) as
+    p_ret_rec moves%rowtype;
+    p_sub_count number(10);
+    p_counter number(10);
+    p_sub_name plan_type_subconto.fullname%type;
+    p_other other_zatraty%rowtype;
+    p_plan_acc plan_acc%rowtype;
+    p_upr_val currency.id%type;
+  begin
+  select * into p_other from OTHER_ZATRATY where id = p_move_rec.registrator_id;
+  select id into p_upr_val from currency where predefined=1;
+  
+  for i in (select * from other_zatraty_tab_part_zatraty where oth_id = p_other.id) loop
+  p_ret_rec:=p_move_rec;
+
+  
+  --Субконто дебета
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_other.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_other.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_other.division_id;
+        end if;
+        end if;
+        if upper(p_sub_name) = 'СТАТЬЯ ЗАТРАТ' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=i.zatr_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=i.zatr_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=i.zatr_id;
+        end if;
+        end if;
+        if upper(p_sub_name) = 'КАССА' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_other.kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_other.kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_other.kassa_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  --Субконто кредита
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'СТАТЬЯ ЗАТРАТ' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=i.zatr_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=i.zatr_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=i.zatr_id;
+        end if;
+        end if;
+        if upper(p_sub_name) = 'КАССА' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_other.kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_other.kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_other.kassa_id;
+        end if;
+        end if;
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_other.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_other.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_other.division_id;
+        end if;
+        end if;
+        
+    end loop;
+  end if;
+  
+  p_ret_rec.curr_deb := p_other.curr_id;
+  p_ret_rec.summ_val_deb:=entry.sign_of_summ(p_ret_rec.plan_acc_deb_id, i.summa, 1);
+  
+  p_ret_rec.curr_kred := p_other.curr_id;
+  p_ret_rec.summ_val_kredit:=entry.sign_of_summ(p_ret_rec.plan_acc_kred_id, i.summa, 0);
+  
+  p_ret_rec.summ_upr_deb:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_deb, p_upr_val, p_ret_rec.period, p_ret_rec.summ_val_deb);
+  p_ret_rec.summ_upr_kred:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_kred, p_upr_val, p_ret_rec.period,p_ret_rec.summ_val_kredit);
+  
+  p_ret_rec.version:=systimestamp;
+  
+  insert into moves values p_ret_rec;
+  end loop;
+  exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error other_zatraty move for plan accounting! '||SQLERRM, TRUE) ;
+  end set_subconto_tp_result;
+
+procedure other_move_plan_acc(p_id in varchar2) as
+    p_other_rec other_zatraty%rowtype;
+    p_move_rec moves%rowtype;
+    p_version varchar2(1000);
+    in_use exception;
+    p_counter number(10);
+    pragma exception_init(in_use, -54);
+  begin
+    other_remove_plan_acc(p_id);
+    select * into p_other_rec from OTHER_ZATRATY where id = p_id for update nowait;
+    select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from OTHER_ZATRATY
+      where id = p_id;
+      
+    p_move_rec.period:=p_other_rec.dat;
+    p_counter:=0;
+    for i in (select * from entry_settings where typedef_id=(select id from type_def where upper(type_def.table_name)=upper('other_zatraty')) order by chain) loop
+        p_counter:=p_counter+1;
+        p_move_rec.registrator_type:=i.typedef_id;
+        p_move_rec.registrator_id:=p_id;
+        p_move_rec.plan_acc_deb_id:=i.plan_acc_deb_id;
+        p_move_rec.activities_id:=p_other_rec.activities_id;
+        p_move_rec.division_id:=p_other_rec.division_id;
+        
+        p_move_rec.plan_acc_kred_id:=i.plan_acc_kred_id;
+        
+        --Проводка ТЧ Затраты - Списание на административные затраты
+        if p_counter = 1 then
+            p_move_rec.description:='Проводка ТЧ Затраты - Списание на административные затраты';
+            set_subconto_tp_zatraty(p_move_rec);
+        end if;
+        
+        --Проводка ТЧ Затраты - Списание на затрат на финансовый результат
+        if p_counter = 2 then
+            p_move_rec.description:='Проводка ТЧ Затраты - Списание на затрат на финансовый результат';
+            set_subconto_tp_result(p_move_rec);
+        end if; 
+    end loop;
+    
+    p_other_rec.posted:=1;
+    update OTHER_ZATRATY set row = p_other_rec
+    where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF'); 
+    
+    exception
+        WHEN IN_USE THEN
+        RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error other_zatraty move for plan accounting! '||SQLERRM, TRUE) ;
+end other_move_plan_acc;
+
+procedure other_remove_plan_acc(p_id in varchar2, p_del in number default 0) as
+    p_other_rec other_zatraty%rowtype;
+    p_move_count number;
+    p_version varchar2(1000);
+    in_use exception;
+  pragma exception_init(in_use, -54);
+  begin
+    select * into p_other_rec from OTHER_ZATRATY where id = p_id for update nowait;
+    select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from OTHER_ZATRATY
+      where id = p_id;
+    select count(*) into p_move_count from moves where registrator_id = p_id;
+    if p_move_count > 0 then
+      execute immediate ('select * from moves where registrator_id='''||p_id||''' for update nowait');  
+      delete from moves where registrator_id = p_id;
+    end if; 
+    
+    if p_del <> 0 then
+      p_other_rec.deleted:=1;
+    end if;
+    p_other_rec.posted:=0;
+    update OTHER_ZATRATY set row = p_other_rec
+      where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF');
+  exception
+        WHEN IN_USE THEN
+        RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
+        when others then 
+        raise_application_error (-20001,'Error order move for plan accounting! '||sqlerrm, true) ;
+  end other_remove_plan_acc;
+
+procedure other_move_all as
+  begin
+    for i in (select * from OTHER_ZATRATY) loop
+    other_move_plan_acc(i.id);
+    end loop;
+     exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error other_zatraty move  all for plan accounting! '||SQLERRM, TRUE) ;
+  end other_move_all;
+
+procedure other_remove_all as
+  begin
+    for i in (select * from OTHER_ZATRATY) loop
+    other_remove_plan_acc(i.id);
+    end loop;
+     exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error other_zatraty remove all for plan accounting! '||SQLERRM, TRUE) ;
+  end other_remove_all;
+
+end other_entry;
+
+/
+--------------------------------------------------------
+--  DDL for Package Body PKO_ENTRY
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "PKO_ENTRY" as
+
+procedure set_subconto_other(p_move_rec moves%rowtype) as
+    p_ret_rec moves%rowtype;
+    p_sub_count number(10);
+    p_counter number(10);
+    p_sub_name plan_type_subconto.fullname%type;
+    p_pko pko%rowtype;
+    p_plan_acc plan_acc%rowtype;
+    p_upr_val currency.id%type;
+  begin
+  select * into p_pko from PKO where id = p_move_rec.registrator_id;
+  select id into p_upr_val from currency where predefined=1;
+  
+  p_ret_rec:=p_move_rec;
+  
+  --Субконто дебета
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'КАССА' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_pko.kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_pko.kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_pko.kassa_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  p_ret_rec.curr_deb := p_pko.curr_id;
+  p_ret_rec.summ_val_deb:=entry.sign_of_summ(p_ret_rec.plan_acc_deb_id, p_pko.summa, 1);
+  
+  p_ret_rec.curr_kred := p_pko.curr_id;
+  p_ret_rec.summ_val_kredit:=entry.sign_of_summ(p_ret_rec.plan_acc_kred_id, p_pko.summa, 0);
+  
+  p_ret_rec.summ_upr_deb:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_deb, p_upr_val, p_ret_rec.period, p_ret_rec.summ_val_deb);
+  p_ret_rec.summ_upr_kred:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_kred, p_upr_val, p_ret_rec.period,p_ret_rec.summ_val_kredit);
+  
+  p_ret_rec.version:=systimestamp;
+  
+  insert into moves values p_ret_rec;
+
+  exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error pko move for plan accounting! '||SQLERRM, TRUE) ;
+  end set_subconto_other;
+  
+  procedure set_subconto_buyer(p_move_rec moves%rowtype) as
+    p_ret_rec moves%rowtype;
+    p_sub_count number(10);
+    p_counter number(10);
+    p_sub_name plan_type_subconto.fullname%type;
+    p_pko pko%rowtype;
+    p_plan_acc plan_acc%rowtype;
+    p_upr_val currency.id%type;
+  begin
+  select * into p_pko from PKO where id = p_move_rec.registrator_id;
+  select id into p_upr_val from currency where predefined=1;
+  
+  p_ret_rec:=p_move_rec;
+  
+  --Субконто дебета
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'КАССА' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_pko.kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_pko.kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_pko.kassa_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  --Субконто кредита
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'КОНТРАГЕНТЫ' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_pko.kontrag_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_pko.kontrag_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_pko.kontrag_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  p_ret_rec.curr_deb := p_pko.curr_id;
+  p_ret_rec.summ_val_deb:=entry.sign_of_summ(p_ret_rec.plan_acc_deb_id, p_pko.summa, 1);
+  
+  p_ret_rec.curr_kred := p_pko.curr_id;
+  p_ret_rec.summ_val_kredit:=entry.sign_of_summ(p_ret_rec.plan_acc_kred_id, p_pko.summa, 0);
+  
+  p_ret_rec.summ_upr_deb:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_deb, p_upr_val, p_ret_rec.period, p_ret_rec.summ_val_deb);
+  p_ret_rec.summ_upr_kred:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_kred, p_upr_val, p_ret_rec.period,p_ret_rec.summ_val_kredit);
+  
+  p_ret_rec.version:=systimestamp;
+  
+  insert into moves values p_ret_rec;
+
+  exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error pko move for plan accounting! '||SQLERRM, TRUE) ;
+  end set_subconto_buyer;
+
+procedure pko_move_plan_acc(p_id in varchar2) as
+    p_pko_rec pko%rowtype;
+    p_move_rec moves%rowtype;
+    p_version varchar2(1000);
+    in_use exception;
+    p_id_other_operation operation_pko.id%type;
+    p_id_buyer_operation operation_pko.id%type;
+    p_id_supplier_operation operation_pko.id%type;
+    p_counter number(10);
+    pragma exception_init(in_use, -54);
+  begin
+    pko_remove_plan_acc(p_id);
+    select * into p_pko_rec from PKO where id = p_id for update nowait;
+    select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from PKO
+      where id = p_id;
+    
+    select id into p_id_other_operation from operation_pko 
+        where upper(name)=upper('OTHER_PAYMENT')
+        and rownum = 1;
+    select id into p_id_buyer_operation from operation_pko 
+        where upper(name)=upper('FROM_BUYER')
+        and rownum = 1;   
+    select id into p_id_supplier_operation from operation_pko 
+        where upper(name)=upper('RETURN_SUPPLIER')
+        and rownum = 1;    
+    p_move_rec.period:=p_pko_rec.dat;
+    p_counter:=0;
+    for i in (select * from entry_settings where typedef_id=(select id from type_def where upper(type_def.table_name)=upper('pko')) order by chain) loop
+        p_counter:=p_counter+1;
+        p_move_rec.registrator_type:=i.typedef_id;
+        p_move_rec.registrator_id:=p_id;
+        p_move_rec.plan_acc_deb_id:=i.plan_acc_deb_id;
+        p_move_rec.activities_id:=p_pko_rec.activities_id;
+        p_move_rec.division_id:=p_pko_rec.division_id;
+        
+        p_move_rec.plan_acc_kred_id:=i.plan_acc_kred_id;
+        p_move_rec.description:=i.description;
+        
+        --ПКО - Прочие приходы денежных средств
+        if p_counter = 1 then 
+          if p_pko_rec.operation_id = p_id_other_operation then
+            set_subconto_other(p_move_rec);
+          end if;  
+        end if;
+        
+        --ПКО - Оплата от покупателя
+        if p_counter = 2 then
+          if p_pko_rec.operation_id = p_id_buyer_operation then
+            set_subconto_buyer(p_move_rec);
+          end if; 
+        end if; 
+        
+        --ПКО - Возврат от поставщика
+        if p_counter = 3 then
+          if p_pko_rec.operation_id = p_id_supplier_operation then
+            set_subconto_buyer(p_move_rec);
+          end if; 
+        end if; 
+    end loop;
+    
+    p_pko_rec.posted:=1;
+    update PKO set row = p_pko_rec
+    where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF'); 
+    
+    exception
+        WHEN IN_USE THEN
+        RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error PKO move for plan accounting! '||SQLERRM, TRUE) ;
+  end pko_move_plan_acc;
+
+procedure pko_remove_plan_acc(p_id in varchar2, p_del in number default 0) as
+    p_pko_rec pko%rowtype;
+    p_move_count number;
+    p_version varchar2(1000);
+    in_use exception;
+  pragma exception_init(in_use, -54);
+  begin
+    select * into p_pko_rec from PKO where id = p_id for update nowait;
+    select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from PKO
+      where id = p_id;
+    select count(*) into p_move_count from moves where registrator_id = p_id;
+    if p_move_count > 0 then
+      execute immediate ('select * from moves where registrator_id='''||p_id||''' for update nowait');  
+      delete from moves where registrator_id = p_id;
+    end if; 
+    
+    if p_del <> 0 then
+      p_pko_rec.deleted:=1;
+    end if;
+    p_pko_rec.posted:=0;
+    update PKO set row = p_pko_rec
+      where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF');
+  exception
+        WHEN IN_USE THEN
+        RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
+        when others then 
+        raise_application_error (-20001,'Error PKO move for plan accounting! '||sqlerrm, true) ;
+  end pko_remove_plan_acc;
+
+procedure pko_move_all as
+  begin
+    for i in (select * from PKO) loop
+    pko_move_plan_acc(i.id);
+    end loop;
+     exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error pko move  all for plan accounting! '||SQLERRM, TRUE) ;
+  end pko_move_all;
+
+procedure pko_remove_all as
+  begin
+    for i in (select * from PKO) loop
+    pko_remove_plan_acc(i.id);
+    end loop;
+     exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error pko remove all for plan accounting! '||SQLERRM, TRUE) ;
+  end pko_remove_all;
+
+end pko_entry;
 
 /
 --------------------------------------------------------
@@ -6654,6 +8283,335 @@ AS
   END decrypt_ssn;
   
 END p_encrypt;
+
+/
+--------------------------------------------------------
+--  DDL for Package Body REPORT_PKG
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "REPORT_PKG" as
+
+function getzatraty(f_data date default null, l_data date default null)
+      return tbl_zatraty as
+  l_datatbl tbl_zatraty := tbl_zatraty();
+  p_counter number := 0;    
+  begin
+    if f_data is not null then
+      ORDERS_ENTRY.set_startdatmoves(f_data);
+    end if;
+    if l_data is not null then
+      ORDERS_ENTRY.set_enddatmoves(l_data);
+    end if;
+    
+    for i in (select * from vw_zatraty) loop
+      p_counter:=p_counter+1;
+      l_datatbl.extend;
+      l_datatbl(p_counter) := row_zatraty(i.REGISTRATOR_ID, 
+          i.TABLE_NAME, i.CODE, i.SUMMA, i.ZATRATY_ID, i.ZATRATY_NAME, i.DIVISION_ID, i.PERIOD);
+    end loop;
+    return l_datatbl;
+  end getzatraty;
+  
+function getsales(f_data date default null, l_data date default null)
+      return tbl_sales as
+  l_datatbl tbl_sales := tbl_sales();
+  p_counter number := 0;    
+  begin
+    if f_data is not null then
+      ORDERS_ENTRY.set_startdatmoves(f_data);
+    end if;
+    if l_data is not null then
+      ORDERS_ENTRY.set_enddatmoves(l_data);
+    end if;
+    
+    for i in (select * from vw_sales) loop
+      p_counter:=p_counter+1;
+      l_datatbl.extend;
+      l_datatbl(p_counter) := row_sales(i.ORDER_ID, 
+          i.KONTRAG_ID, i.PERIOD, i.DIVISION_ID, i.SALES_SUMMA, i.FACT_SEBEST_SUMMA, i.PLAN_SEBEST_SUMMA);
+    end loop;
+    return l_datatbl;
+  end getsales;  
+  
+function getballans(f_data date default null, l_data date default null)
+      return tbl_ballans as
+  l_datatbl tbl_ballans := tbl_ballans();
+  p_counter number := 0;    
+  begin
+    if f_data is not null then
+      ORDERS_ENTRY.set_startdatmoves(f_data);
+    end if;
+    if l_data is not null then
+      ORDERS_ENTRY.set_enddatmoves(l_data);
+    end if;
+    
+    for i in (select * from vw_ballans_ap) loop
+      p_counter:=p_counter+1;
+      l_datatbl.extend;
+      l_datatbl(p_counter) := row_ballans(i.ID, 
+          i.CODE, i.FULLNAME, i.ACTIVE_START, i.ACTIVE_DEB, i.ACTIVE_KRED, i.ACTIVE_OBOROT,
+          i.ACTIVE_END, i.PASSIVE_START, i.PASSIVE_DEB, i.PASSIVE_KRED, i.PASSIVE_OBOROT, i.PASSIVE_END, i.DIVISION_ID);
+    end loop;
+    return l_datatbl;
+  end getballans;   
+
+end report_pkg;
+
+/
+--------------------------------------------------------
+--  DDL for Package Body RKO_ENTRY
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "RKO_ENTRY" AS
+
+procedure set_subconto_other(p_move_rec moves%rowtype) as
+    p_ret_rec moves%rowtype;
+    p_sub_count number(10);
+    p_counter number(10);
+    p_sub_name plan_type_subconto.fullname%type;
+    p_rko rko%rowtype;
+    p_plan_acc plan_acc%rowtype;
+    p_upr_val currency.id%type;
+  begin
+  select * into p_rko from RKO where id = p_move_rec.registrator_id;
+  select id into p_upr_val from currency where predefined=1;
+  
+  p_ret_rec:=p_move_rec;
+  
+  --Субконто кредита
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'КАССА' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_rko.kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto1_kred:=p_rko.kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto1_kred:=p_rko.kassa_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  p_ret_rec.curr_deb := p_rko.curr_id;
+  p_ret_rec.summ_val_deb:=entry.sign_of_summ(p_ret_rec.plan_acc_deb_id, p_rko.summa, 1);
+  
+  p_ret_rec.curr_kred := p_rko.curr_id;
+  p_ret_rec.summ_val_kredit:=entry.sign_of_summ(p_ret_rec.plan_acc_kred_id, p_rko.summa, 0);
+  
+  p_ret_rec.summ_upr_deb:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_deb, p_upr_val, p_ret_rec.period, p_ret_rec.summ_val_deb);
+  p_ret_rec.summ_upr_kred:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_kred, p_upr_val, p_ret_rec.period,p_ret_rec.summ_val_kredit);
+  
+  p_ret_rec.version:=systimestamp;
+  
+  insert into moves values p_ret_rec;
+
+  exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error rko move for plan accounting! '||SQLERRM, TRUE) ;
+  end set_subconto_other;
+  
+  procedure set_subconto_buyer(p_move_rec moves%rowtype) as
+    p_ret_rec moves%rowtype;
+    p_sub_count number(10);
+    p_counter number(10);
+    p_sub_name plan_type_subconto.fullname%type;
+    p_rko rko%rowtype;
+    p_plan_acc plan_acc%rowtype;
+    p_upr_val currency.id%type;
+  begin
+  select * into p_rko from RKO where id = p_move_rec.registrator_id;
+  select id into p_upr_val from currency where predefined=1;
+  
+  p_ret_rec:=p_move_rec;
+  
+  --Субконто дебета
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'КОНТРАГЕНТЫ' then 
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_rko.kontrag_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_rko.kontrag_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_rko.kontrag_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  --Субконто кредита
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'КАССА' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_rko.kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_rko.kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_rko.kassa_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  p_ret_rec.curr_deb := p_rko.curr_id;
+  p_ret_rec.summ_val_deb:=entry.sign_of_summ(p_ret_rec.plan_acc_deb_id, p_rko.summa, 1);
+  
+  p_ret_rec.curr_kred := p_rko.curr_id;
+  p_ret_rec.summ_val_kredit:=entry.sign_of_summ(p_ret_rec.plan_acc_kred_id, p_rko.summa, 0);
+  
+  p_ret_rec.summ_upr_deb:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_deb, p_upr_val, p_ret_rec.period, p_ret_rec.summ_val_deb);
+  p_ret_rec.summ_upr_kred:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_kred, p_upr_val, p_ret_rec.period,p_ret_rec.summ_val_kredit);
+  
+  p_ret_rec.version:=systimestamp;
+  
+  insert into moves values p_ret_rec;
+
+  exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error pko move for plan accounting! '||SQLERRM, TRUE) ;
+  end set_subconto_buyer;
+
+  procedure rko_move_plan_acc(p_id in varchar2) AS
+    p_rko_rec rko%rowtype;
+    p_move_rec moves%rowtype;
+    p_version varchar2(1000);
+    in_use exception;
+    p_id_other_operation operation_rko.id%type;
+    p_id_buyer_operation operation_rko.id%type;
+    p_id_supplier_operation operation_rko.id%type;
+    p_counter number(10);
+    pragma exception_init(in_use, -54);
+  begin
+    rko_remove_plan_acc(p_id);
+    select * into p_rko_rec from RKO where id = p_id for update nowait;
+    select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from RKO
+      where id = p_id;
+    
+    select id into p_id_other_operation from operation_rko 
+        where upper(name)=upper('OTHER_PAYMENT')
+        and rownum = 1;
+    select id into p_id_supplier_operation from operation_rko 
+        where upper(name)=upper('PAYMENT_SUPPLIER')
+        and rownum = 1;   
+    select id into p_id_buyer_operation from operation_rko 
+        where upper(name)=upper('RETURN_BUYER')
+        and rownum = 1;    
+    p_move_rec.period:=p_rko_rec.dat;
+    p_counter:=0;
+    for i in (select * from entry_settings where typedef_id=(select id from type_def where upper(type_def.table_name)=upper('rko')) order by chain) loop
+        p_counter:=p_counter+1;
+        p_move_rec.registrator_type:=i.typedef_id;
+        p_move_rec.registrator_id:=p_id;
+        p_move_rec.plan_acc_deb_id:=i.plan_acc_deb_id;
+        p_move_rec.activities_id:=p_rko_rec.activities_id;
+        p_move_rec.division_id:=p_rko_rec.division_id;
+        
+        p_move_rec.plan_acc_kred_id:=i.plan_acc_kred_id;
+        p_move_rec.description:=i.description;
+        
+        --РКО - Прочий расход денежных средств
+        if p_counter = 1 then 
+          if p_rko_rec.operation_id = p_id_other_operation then
+            set_subconto_other(p_move_rec);
+          end if;  
+        end if;
+        
+        --РКО - Оплата поставщику
+        if p_counter = 2 then
+          if p_rko_rec.operation_id = p_id_supplier_operation then
+            set_subconto_buyer(p_move_rec);
+          end if; 
+        end if; 
+        
+        --РКО - Возврат покупателю
+        if p_counter = 3 then
+          if p_rko_rec.operation_id = p_id_buyer_operation then
+            set_subconto_buyer(p_move_rec);
+          end if; 
+        end if; 
+    end loop;
+    
+    p_rko_rec.posted:=1;
+    update RKO set row = p_rko_rec
+    where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF'); 
+    
+    exception
+        WHEN IN_USE THEN
+        RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error RKO move for plan accounting! '||SQLERRM, TRUE) ;
+  END rko_move_plan_acc;
+
+  procedure rko_remove_plan_acc(p_id in varchar2, p_del in number default 0) AS
+    p_rko_rec rko%rowtype;
+    p_move_count number;
+    p_version varchar2(1000);
+    in_use exception;
+  pragma exception_init(in_use, -54);
+  begin
+    select * into p_rko_rec from RKO where id = p_id for update nowait;
+    select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from RKO
+      where id = p_id;
+    select count(*) into p_move_count from moves where registrator_id = p_id;
+    if p_move_count > 0 then
+      execute immediate ('select * from moves where registrator_id='''||p_id||''' for update nowait');  
+      delete from moves where registrator_id = p_id;
+    end if; 
+    
+    if p_del <> 0 then
+      p_rko_rec.deleted:=1;
+    end if;
+    p_rko_rec.posted:=0;
+    update RKO set row = p_rko_rec
+      where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF');
+  exception
+        WHEN IN_USE THEN
+        RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
+        when others then 
+        raise_application_error (-20001,'Error RKO move for plan accounting! '||sqlerrm, true) ;
+  END rko_remove_plan_acc;
+
+  procedure rko_move_all AS
+  begin
+    for i in (select * from RKO) loop
+    rko_move_plan_acc(i.id);
+    end loop;
+     exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error rko move  all for plan accounting! '||SQLERRM, TRUE) ;
+  END rko_move_all;
+
+  procedure rko_remove_all AS
+  begin
+    for i in (select * from RKO) loop
+    rko_remove_plan_acc(i.id);
+    end loop;
+     exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error rko remove all for plan accounting! '||SQLERRM, TRUE) ;
+  END rko_remove_all;
+
+END RKO_ENTRY;
 
 /
 --------------------------------------------------------
@@ -6925,6 +8883,12 @@ end usr_sett;
     --Инициализация нумератора документов
     insert into numerator(typedef_id,prefix)
         values((select id from type_def where upper(table_name)=upper('orders')),'OR-');
+    insert into numerator(typedef_id,prefix)
+        values((select id from type_def where upper(table_name)=upper('other_zatraty')),'OR-'); 
+    insert into numerator(typedef_id,prefix)
+        values((select id from type_def where upper(table_name)=upper('pko')),'OR-');
+    insert into numerator(typedef_id,prefix)
+        values((select id from type_def where upper(table_name)=upper('rko')),'OR-');    
     
     --Справочник единиц измерений
     insert into measure_unit(fullname,code) 
@@ -7061,7 +9025,24 @@ end usr_sett;
     insert into CALL_RESULTS(name, fullname)
         values('CallLater','Перезвонить позже');
     insert into CALL_RESULTS(name, fullname)
-        values('Measuring','Вызов на замер');     
+        values('Measuring','Вызов на замер'); 
+        
+    --Виды операций ПКО    
+    Insert into OPERATION_PKO (NAME,FULLNAME)
+      values ('OTHER_PAYMENT','Прочие приходы денежных средств');
+    Insert into OPERATION_PKO (NAME,FULLNAME)
+      values ('FROM_BUYER','Оплата от покупателя');
+      Insert into OPERATION_PKO (NAME,FULLNAME)
+    values ('RETURN_SUPPLIER','Возврат от поставщика');
+    
+    --Виды операций РКО    
+    Insert into OPERATION_RKO (NAME,FULLNAME)
+      values ('OTHER_PAYMENT','Прочий расход денежных средств');
+    Insert into OPERATION_RKO (NAME,FULLNAME)
+      values ('PAYMENT_SUPPLIER','Оплата поставщику');
+    Insert into OPERATION_RKO (NAME,FULLNAME)
+      values ('RETURN_BUYER','Возврат покупателю');
+        
         
      --Кампании (колл-листы) по-умолчанию
      insert into COMPAIGNS(name, PREDEFINED)
@@ -7104,7 +9085,58 @@ end usr_sett;
         values((select id from type_def where upper(type_def.table_name)=upper('orders')),
                (select id from plan_acc where code = '600'),
                (select id from plan_acc where code = '701'),7,
-               'Закрытие заказа - выполнен!');           
+               'Закрытие заказа - выполнен!'); 
+    insert into entry_settings(typedef_id,plan_acc_deb_id,plan_acc_kred_id,chain,description)
+        values((select id from type_def where upper(type_def.table_name)=upper('orders')),
+               (select id from plan_acc where code = '600'),
+               (select id from plan_acc where code = '900'),8,
+               'Заказ выполнен - Отнесение маржи на финансовый результат');           
+               
+    --Проводки для Прочих затрат           
+    insert into entry_settings(typedef_id,plan_acc_deb_id,plan_acc_kred_id,chain,description)
+        values((select id from type_def where upper(type_def.table_name)=upper('OTHER_ZATRATY')),
+               (select id from plan_acc where code = '80212'),
+               (select id from plan_acc where code = '2081'),1,
+               'Проводка ТЧ Затраты - Списание на административные затраты');
+    insert into entry_settings(typedef_id,plan_acc_deb_id,plan_acc_kred_id,chain,description)
+        values((select id from type_def where upper(type_def.table_name)=upper('OTHER_ZATRATY')),
+               (select id from plan_acc where code = '900'),
+               (select id from plan_acc where code = '80212'),2,
+               'Проводка ТЧ Затраты - Списание на затрат на финансовый результат');
+   
+    --Проводки для ПКО             
+    insert into entry_settings(typedef_id,plan_acc_deb_id,plan_acc_kred_id,chain,description)
+        values((select id from type_def where upper(type_def.table_name)=upper('PKO')),
+               (select id from plan_acc where code = '2081'),
+               (select id from plan_acc where code = '000'),1,
+               'ПКО - Прочие приходы денежных средств'); 
+    insert into entry_settings(typedef_id,plan_acc_deb_id,plan_acc_kred_id,chain,description)
+        values((select id from type_def where upper(type_def.table_name)=upper('PKO')),
+               (select id from plan_acc where code = '2081'),
+               (select id from plan_acc where code = '20711'),2,
+               'ПКО - Оплата от покупателя'); 
+    insert into entry_settings(typedef_id,plan_acc_deb_id,plan_acc_kred_id,chain,description)
+        values((select id from type_def where upper(type_def.table_name)=upper('PKO')),
+               (select id from plan_acc where code = '2081'),
+               (select id from plan_acc where code = '5091'),3,
+               'ПКО - Возврат от поставщика'); 
+               
+    --Проводки для РКО             
+    insert into entry_settings(typedef_id,plan_acc_deb_id,plan_acc_kred_id,chain,description)
+        values((select id from type_def where upper(type_def.table_name)=upper('RKO')),
+               (select id from plan_acc where code = '000'),
+               (select id from plan_acc where code = '2081'),1,
+               'РКО - Прочий расход денежных средств'); 
+    insert into entry_settings(typedef_id,plan_acc_deb_id,plan_acc_kred_id,chain,description)
+        values((select id from type_def where upper(type_def.table_name)=upper('RKO')),
+               (select id from plan_acc where code = '5091'),
+               (select id from plan_acc where code = '2081'),2,
+               'РКО - Оплата поставщику'); 
+    insert into entry_settings(typedef_id,plan_acc_deb_id,plan_acc_kred_id,chain,description)
+        values((select id from type_def where upper(type_def.table_name)=upper('RKO')),
+               (select id from plan_acc where code = '20711'),
+               (select id from plan_acc where code = '2081'),3,
+               'РКО - Возврат покупателю');           
       
     
     EXCEPTION
