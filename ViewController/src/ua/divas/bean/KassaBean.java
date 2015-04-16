@@ -126,7 +126,7 @@ public class KassaBean {
                     //row.setAttribute("OEditable", new BigDecimal(1));
                     rsi.setCurrentRow(row);
                     RequestContext.getCurrentInstance().getPageFlowScope().put("case", "orders");
-                } else {
+                } else if (regType.equalsIgnoreCase("OTHER_ZATRATY")) {
                     Key k = new Key(new Object[] { regId });
                     DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("OtherZatratyView1Iterator");
                     RowSetIterator rsi = iter.getRowSetIterator();
@@ -134,6 +134,14 @@ public class KassaBean {
                     //row.setAttribute("OEditable", new BigDecimal(1));
                     rsi.setCurrentRow(row);
                     RequestContext.getCurrentInstance().getPageFlowScope().put("case", "other");
+                } else if (regType.equalsIgnoreCase("PKO")) {
+                    Key k = new Key(new Object[] { regId });
+                    DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("PkoView1Iterator");
+                    RowSetIterator rsi = iter.getRowSetIterator();
+                    Row row = rsi.findByKey(k, 1)[0];
+                    //row.setAttribute("OEditable", new BigDecimal(1));
+                    rsi.setCurrentRow(row);
+                    RequestContext.getCurrentInstance().getPageFlowScope().put("case", "pko");
                 }
             }
         }

@@ -30,6 +30,10 @@
         <expression>#{pageFlowScope.case == 'other'}</expression>
         <outcome>onOther</outcome>
       </case>
+      <case id="__10">
+        <expression>#{pageFlowScope.case == 'pko'}</expression>
+        <outcome>onPko</outcome>
+      </case>
       <default-outcome>onOrder</default-outcome>
     </router>
     <task-flow-call id="other-dialod-flow">
@@ -41,6 +45,22 @@
         <display-type>
           <inline-popup/>
         </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <task-flow-call id="EditPko">
+      <task-flow-reference>
+        <document>/WEB-INF/EditPko.xml</document>
+        <id>EditPko</id>
+      </task-flow-reference>
+      <return-value id="__11">
+        <name>PkoId</name>
+        <value>#{pageFlowScope.PkoId}</value>
+      </return-value>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+        <dialog-return-value>#{pageFlowScope.PkoId}</dialog-return-value>
       </run-as-dialog>
     </task-flow-call>
     <control-flow-rule id="__1">
@@ -59,6 +79,10 @@
       <control-flow-case id="__7">
         <from-outcome>onOther</from-outcome>
         <to-activity-id>other-dialod-flow</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__9">
+        <from-outcome>onPko</from-outcome>
+        <to-activity-id>EditPko</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>

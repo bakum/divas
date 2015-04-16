@@ -43,8 +43,8 @@
                                 <af:menu text="menu 1" id="m1">
                                     <af:commandMenuItem text="Документ движения (регистратор)" id="cmi1"
                                                         useWindow="true"
-                                                        action="onCase" windowWidth="870"
-                                                        windowHeight="470"/>
+                                                        action="onCase" windowWidth="670"
+                                                        windowHeight="500"/>
                                 </af:menu>
                             </af:popup>
                         </f:facet>

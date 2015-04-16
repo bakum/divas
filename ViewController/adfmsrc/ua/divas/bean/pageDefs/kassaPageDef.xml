@@ -9,6 +9,7 @@
     <iterator id="OrdersView1Iterator" Binds="OrdersView1" DataControl="AppModuleDataControl" RangeSize="25"/>
     <iterator id="OtherZatratyView1Iterator" Binds="OtherZatratyView1" DataControl="AppModuleDataControl"
               RangeSize="25"/>
+    <iterator id="PkoView1Iterator" Binds="PkoView1" DataControl="AppModuleDataControl" RangeSize="25"/>
   </executables>
   <bindings>
     <tree IterBinding="KassaView1Iterator" id="KassaView1">

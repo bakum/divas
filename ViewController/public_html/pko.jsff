@@ -47,6 +47,10 @@
                                                            returnListener="#{pko.onReturn}"/>
                                             </af:toolbar>
                                         </af:column>
+                                        <af:column id="c12" width="30">
+                                            <af:image id="i1"
+                                                      source="#{row.Posted==1 ? '/img/icon_commit.png' :  '/img/document.png'}"/>
+                                        </af:column>
                                         <af:column sortProperty="#{bindings.PkoView1.hints.Id.name}" sortable="true"
                                                    headerText="#{bindings.PkoView1.hints.Id.label}" id="c1"
                                                    visible="false">
@@ -139,7 +143,104 @@
                                                 <f:validator binding="#{row.bindings.UserId.validator}"/>
                                             </af:selectOneChoice>
                                         </af:column>
+                                        <af:column headerText="#{bindings.PkoView1.hints.Posted.label}" id="c13"
+                                                   visible="false">
+                                            <af:inputText value="#{row.bindings.Posted.inputValue}"
+                                                          label="#{bindings.PkoView1.hints.Posted.label}"
+                                                          required="#{bindings.PkoView1.hints.Posted.mandatory}"
+                                                          columns="#{bindings.PkoView1.hints.Posted.displayWidth}"
+                                                          maximumLength="#{bindings.PkoView1.hints.Posted.precision}"
+                                                          shortDesc="#{bindings.PkoView1.hints.Posted.tooltip}"
+                                                          id="it1">
+                                                <f:validator binding="#{row.bindings.Posted.validator}"/>
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.PkoView1.hints.Posted.format}"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <f:facet name="contextMenu">
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                                                      contentDelivery="lazyUncached">
+                                                <af:menu text="menu 1" id="m1">
+                                                    <af:group id="g2">
+                                                        <af:commandMenuItem text="Провести" id="cmi1"
+                                                                            icon="/img/icon_commit.png"
+                                                                            actionListener="#{pko.onAddEntry}"/>
+                                                        <af:commandMenuItem text="Отменить проведение" id="cmi2"
+                                                                            icon="/img/icon_rollback.png"
+                                                                            actionListener="#{pko.onRemoveEntry}"/>
+                                                    </af:group>
+                                                    <af:commandMenuItem text="Проводки" id="cmi3">
+                                                        <af:showPopupBehavior popupId="::pEntry"/>
+                                                    </af:commandMenuItem>
+                                                </af:menu>
+                                            </af:popup>
+                                        </f:facet>
                                     </af:table>
+                                    <af:popup childCreation="deferred" autoCancel="disabled" id="pEntry"
+                                              contentDelivery="lazyUncached">
+                                        <af:dialog id="d1" title="Проводки">
+                                            <f:facet name="buttonBar"/>
+                                            <af:table value="#{bindings.VwPkoMoves2.collectionModel}" var="row"
+                                                      rows="#{bindings.VwPkoMoves2.rangeSize}"
+                                                      emptyText="#{bindings.VwPkoMoves2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                      rowBandingInterval="0"
+                                                      selectedRowKeys="#{bindings.VwPkoMoves2.collectionModel.selectedRow}"
+                                                      selectionListener="#{bindings.VwPkoMoves2.collectionModel.makeCurrent}"
+                                                      rowSelection="single"
+                                                      fetchSize="#{bindings.VwPkoMoves2.rangeSize}" id="t4">
+                                                <af:column headerText="#{bindings.VwPkoMoves2.hints.RegistratorId.label}"
+                                                           id="c14" visible="false">
+                                                    <af:outputText value="#{row.RegistratorId}"
+                                                                   shortDesc="#{bindings.VwPkoMoves2.hints.RegistratorId.tooltip}"
+                                                                   id="ot6"/>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.VwPkoMoves2.hints.Deb.label}"
+                                                           id="c15">
+                                                    <af:outputText value="#{row.Deb}"
+                                                                   shortDesc="#{bindings.VwPkoMoves2.hints.Deb.tooltip}"
+                                                                   id="ot7"/>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.VwPkoMoves2.hints.SumDeb.label}"
+                                                           id="c16"
+                                                           inlineStyle="#{row.SumDeb &lt; 0 ? 'color: Red' : 'color: Black'}">
+                                                    <af:outputText value="#{row.SumDeb}"
+                                                                   shortDesc="#{bindings.VwPkoMoves2.hints.SumDeb.tooltip}"
+                                                                   id="ot8">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.VwPkoMoves2.hints.SumDeb.format}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.VwPkoMoves2.hints.Kred.label}"
+                                                           id="c17">
+                                                    <af:outputText value="#{row.Kred}"
+                                                                   shortDesc="#{bindings.VwPkoMoves2.hints.Kred.tooltip}"
+                                                                   id="ot9"/>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.VwPkoMoves2.hints.SumKred.label}"
+                                                           id="c18"
+                                                           inlineStyle="#{row.SumKred &lt; 0 ? 'color: Red' : 'color: Black'}">
+                                                    <af:outputText value="#{row.SumKred}"
+                                                                   shortDesc="#{bindings.VwPkoMoves2.hints.SumKred.tooltip}"
+                                                                   id="ot10">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.VwPkoMoves2.hints.SumKred.format}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.VwPkoMoves2.hints.SubcontoDeb1.label}"
+                                                           id="c19">
+                                                    <af:outputText value="#{row.SubcontoDeb1}"
+                                                                   shortDesc="#{bindings.VwPkoMoves2.hints.SubcontoDeb1.tooltip}"
+                                                                   id="ot11"/>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.VwPkoMoves2.hints.SubcontoKred1.label}"
+                                                           id="c20">
+                                                    <af:outputText value="#{row.SubcontoKred1}"
+                                                                   shortDesc="#{bindings.VwPkoMoves2.hints.SubcontoKred1.tooltip}"
+                                                                   id="ot12"/>
+                                                </af:column>
+                                            </af:table>
+                                        </af:dialog>
+                                    </af:popup>
                                 </af:panelBox>
                             </f:facet>
                             <f:facet name="start"/>
