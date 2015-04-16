@@ -26,6 +26,7 @@
           <Item Value="DivisionId"/>
           <Item Value="UserId"/>
           <Item Value="Posted"/>
+          <Item Value="Comments"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

@@ -9,7 +9,9 @@
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
-  ComponentClass="ua.divas.view.RkoViewImpl">
+  ComponentClass="ua.divas.view.RkoViewImpl"
+  ComponentInterface="ua.divas.view.common.RkoView"
+  ClientProxyName="ua.divas.view.client.RkoViewClient">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
@@ -463,6 +465,34 @@ FROM  RKO Rko]]></SQLQuery>
     EntityAttrName="Summa"
     EntityUsage="Rko"
     AliasName="SUMMA"/>
+  <ViewLinkAccessor
+    Name="VwRkoMoves"
+    ViewLink="ua.divas.view.VwRkoRkoFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="addEntry"
+      MethodName="addEntry">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="_id"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="removeEntry"
+      MethodName="removeEntry">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="_id"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

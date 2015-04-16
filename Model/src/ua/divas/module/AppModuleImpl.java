@@ -3338,5 +3338,29 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getVwPkoPkoFkLink1() {
         return (ViewLinkImpl) findViewLink("VwPkoPkoFkLink1");
     }
+
+    /**
+     * Container's getter for VwRkoMoves1.
+     * @return VwRkoMoves1
+     */
+    public ViewObjectImpl getVwRkoMoves1() {
+        return (ViewObjectImpl) findViewObject("VwRkoMoves1");
+    }
+
+    /**
+     * Container's getter for VwRkoMoves2.
+     * @return VwRkoMoves2
+     */
+    public ViewObjectImpl getVwRkoMoves2() {
+        return (ViewObjectImpl) findViewObject("VwRkoMoves2");
+    }
+
+    /**
+     * Container's getter for VwRkoRkoFkLink1.
+     * @return VwRkoRkoFkLink1
+     */
+    public ViewLinkImpl getVwRkoRkoFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwRkoRkoFkLink1");
+    }
 }
 

@@ -4,11 +4,12 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="RkoView1" RangeSize="25" DataControl="AppModuleDataControl" id="RkoView1Iterator">
+    <iterator Binds="RkoView1" RangeSize="12" DataControl="AppModuleDataControl" id="RkoView1Iterator">
       <sortCriteria>
         <sort attribute="Dat" ascending="false"/>
       </sortCriteria>
     </iterator>
+    <iterator Binds="VwRkoMoves2" RangeSize="25" DataControl="AppModuleDataControl" id="VwRkoMoves2Iterator"/>
   </executables>
   <bindings>
     <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
@@ -26,6 +27,31 @@
           <Item Value="KassaId"/>
           <Item Value="DivisionId"/>
           <Item Value="UserId"/>
+          <Item Value="Posted"/>
+          <Item Value="Comments"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="addEntry" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addEntry"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.RkoView1">
+      <NamedData NDName="_id" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="removeEntry" RequiresUpdateModel="true" Action="invokeMethod" MethodName="removeEntry"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.RkoView1">
+      <NamedData NDName="_id" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="VwRkoMoves2Iterator" id="VwRkoMoves2">
+      <nodeDefinition DefName="ua.divas.view.VwRkoMoves" Name="VwRkoMoves20">
+        <AttrNames>
+          <Item Value="Deb"/>
+          <Item Value="SumDeb"/>
+          <Item Value="Kred"/>
+          <Item Value="SumKred"/>
+          <Item Value="SubcontoDeb1"/>
+          <Item Value="SubcontoKred1"/>
+          <Item Value="RegistratorId"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

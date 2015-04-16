@@ -39,13 +39,17 @@
                                               selectionListener="#{bindings.RkoView1.collectionModel.makeCurrent}"
                                               rowSelection="single" fetchSize="#{bindings.RkoView1.rangeSize}" id="t1"
                                               scrollPolicy="page" binding="#{rko.table}">
-                                        <af:column id="c11" width="60">
+                                        <af:column id="c11" width="60" rowHeader="true">
                                             <af:toolbar id="t3">
                                                 <af:button id="b2" icon="/img/edit-16.gif" useWindow="true"
                                                            disabled="#{bindings.Commit.enabled}" windowHeight="500"
                                                            windowWidth="550" returnListener="#{rko.onReturn}"
                                                            action="editRko"/>
                                             </af:toolbar>
+                                        </af:column>
+                                        <af:column id="c12" width="30">
+                                            <af:image id="i1"
+                                                      source="#{row.Posted==1 ? '/img/icon_commit.png' :  '/img/document.png'}"/>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.RkoView1.hints.Id.name}" sortable="true"
                                                    headerText="#{bindings.RkoView1.hints.Id.label}" id="c1"
@@ -142,7 +146,109 @@
                                                 <f:validator binding="#{row.bindings.UserId.validator}"/>
                                             </af:selectOneChoice>
                                         </af:column>
+                                        <af:column headerText="#{bindings.RkoView1.hints.Posted.label}" id="c13"
+                                                   visible="false">
+                                            <af:inputText value="#{row.bindings.Posted.inputValue}"
+                                                          label="#{bindings.RkoView1.hints.Posted.label}"
+                                                          required="#{bindings.RkoView1.hints.Posted.mandatory}"
+                                                          columns="#{bindings.RkoView1.hints.Posted.displayWidth}"
+                                                          maximumLength="#{bindings.RkoView1.hints.Posted.precision}"
+                                                          shortDesc="#{bindings.RkoView1.hints.Posted.tooltip}"
+                                                          id="it1">
+                                                <f:validator binding="#{row.bindings.Posted.validator}"/>
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.RkoView1.hints.Posted.format}"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <f:facet name="contextMenu">
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p1">
+                                                <af:menu text="menu 1" id="m1">
+                                                    <af:group id="g2">
+                                                        <af:commandMenuItem text="Провести" id="cmi2"
+                                                                            icon="/img/icon_commit.png"
+                                                                            actionListener="#{rko.onAddEntry}"/>
+                                                        <af:commandMenuItem text="Отменить проведение" id="cmi3"
+                                                                            icon="/img/icon_rollback.png"
+                                                                            actionListener="#{rko.onRemoveEntry}"/>
+                                                    </af:group>
+                                                    <af:commandMenuItem text="Проводки" id="cmi1">
+                                                        <af:showPopupBehavior popupId="::pEntryRko"/>
+                                                    </af:commandMenuItem>
+                                                </af:menu>
+                                            </af:popup>
+                                        </f:facet><f:facet name="detailStamp">
+                                            <af:panelLabelAndMessage label="#{bindings.RkoView1.hints.Comments.label}"
+                                                                     id="plam1">
+                                                <af:outputFormatted value="#{row.bindings.Comments.inputValue}"
+                                                                    id="of1" inlineStyle="font-size:large;"/>
+                                            </af:panelLabelAndMessage>
+                                        </f:facet>
                                     </af:table>
+                                    <af:popup childCreation="deferred" autoCancel="disabled" id="pEntryRko"
+                                              contentDelivery="lazyUncached">
+                                        <af:dialog id="d1" title="Проводки">
+                                            <f:facet name="buttonBar"/>
+                                            <af:table value="#{bindings.VwRkoMoves2.collectionModel}" var="row"
+                                                      rows="#{bindings.VwRkoMoves2.rangeSize}"
+                                                      emptyText="#{bindings.VwRkoMoves2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                      rowBandingInterval="0"
+                                                      selectedRowKeys="#{bindings.VwRkoMoves2.collectionModel.selectedRow}"
+                                                      selectionListener="#{bindings.VwRkoMoves2.collectionModel.makeCurrent}"
+                                                      rowSelection="single"
+                                                      fetchSize="#{bindings.VwRkoMoves2.rangeSize}" id="t4">
+                                                <af:column headerText="#{bindings.VwRkoMoves2.hints.Deb.label}"
+                                                           id="c14">
+                                                    <af:outputText value="#{row.Deb}"
+                                                                   shortDesc="#{bindings.VwRkoMoves2.hints.Deb.tooltip}"
+                                                                   id="ot6"/>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.VwRkoMoves2.hints.SumDeb.label}"
+                                                           id="c15"
+                                                           inlineStyle="#{row.SumDeb &lt; 0 ? 'color: Red' : 'color: Black'}">
+                                                    <af:outputText value="#{row.SumDeb}"
+                                                                   shortDesc="#{bindings.VwRkoMoves2.hints.SumDeb.tooltip}"
+                                                                   id="ot7">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.VwRkoMoves2.hints.SumDeb.format}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.VwRkoMoves2.hints.Kred.label}"
+                                                           id="c16">
+                                                    <af:outputText value="#{row.Kred}"
+                                                                   shortDesc="#{bindings.VwRkoMoves2.hints.Kred.tooltip}"
+                                                                   id="ot8"/>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.VwRkoMoves2.hints.SumKred.label}"
+                                                           id="c17"
+                                                           inlineStyle="#{row.SumKred &lt; 0 ? 'color: Red' : 'color: Black'}">
+                                                    <af:outputText value="#{row.SumKred}"
+                                                                   shortDesc="#{bindings.VwRkoMoves2.hints.SumKred.tooltip}"
+                                                                   id="ot9">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.VwRkoMoves2.hints.SumKred.format}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.VwRkoMoves2.hints.SubcontoDeb1.label}"
+                                                           id="c18">
+                                                    <af:outputText value="#{row.SubcontoDeb1}"
+                                                                   shortDesc="#{bindings.VwRkoMoves2.hints.SubcontoDeb1.tooltip}"
+                                                                   id="ot10"/>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.VwRkoMoves2.hints.SubcontoKred1.label}"
+                                                           id="c19">
+                                                    <af:outputText value="#{row.SubcontoKred1}"
+                                                                   shortDesc="#{bindings.VwRkoMoves2.hints.SubcontoKred1.tooltip}"
+                                                                   id="ot11"/>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.VwRkoMoves2.hints.RegistratorId.label}"
+                                                           id="c20" visible="false">
+                                                    <af:outputText value="#{row.RegistratorId}"
+                                                                   shortDesc="#{bindings.VwRkoMoves2.hints.RegistratorId.tooltip}"
+                                                                   id="ot12"/>
+                                                </af:column>
+                                            </af:table>
+                                        </af:dialog>
+                                    </af:popup>
                                 </af:panelBox>
                             </f:facet>
                             <f:facet name="start"/>

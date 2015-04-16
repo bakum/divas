@@ -234,7 +234,7 @@
          <hash n="Default">
             <value n="custom" v="false"/>
             <value n="name" v="Default"/>
-            <url n="targetURL" protocol="sqldev.nav" path="IdeConnections%2523divas//DBA_DIVAS/PACKAGE+BODY/OTHER_ENTRY"/>
+            <url n="targetURL" protocol="sqldev.nav" path="IdeConnections%2523divas//DBA_DIVAS/PACKAGE+BODY/PKO_ENTRY"/>
          </hash>
       </hash>
    </hash>
