@@ -198,7 +198,8 @@
       <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria
-      Hint="showAndExecute"/>
+      Hint="showAndExecute"
+      Name="KontragentsAllItems"/>
   </ListBinding>
   <ListBinding
     Name="LOV_Kontragname"
@@ -222,7 +223,8 @@
       <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria
-      Hint="showAndExecute"/>
+      Hint="showAndExecute"
+      Name="KontragentsAllItems"/>
   </ListBinding>
   <SQLQuery><![CDATA[SELECT Pko.ID, 
        Pko.DAT, 
@@ -269,7 +271,14 @@ FROM  PKO Pko]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Num"
     EntityUsage="Pko"
-    AliasName="NUM"/>
+    AliasName="NUM">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Deleted"
     IsNotNull="true"
@@ -321,7 +330,14 @@ FROM  PKO Pko]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Comments"
     EntityUsage="Pko"
-    AliasName="COMMENTS"/>
+    AliasName="COMMENTS">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Version"
     IsNotNull="true"
@@ -407,6 +423,8 @@ FROM  PKO Pko]]></SQLQuery>
     LOVName="LOV_KontragId">
     <Properties>
       <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="30"/>
         <CONTROLTYPE
           Value="input_text_lov"/>
       </SchemaBasedProperties>
@@ -436,6 +454,8 @@ FROM  PKO Pko]]></SQLQuery>
           ResId="ua.divas.view.PkoView.Kontragname_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.view.PkoView.Kontragname_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="30"/>
         <CONTROLTYPE
           Value="input_text_lov"/>
       </SchemaBasedProperties>

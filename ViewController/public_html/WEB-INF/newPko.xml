@@ -1,37 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
-  <task-flow-definition id="EditPko">
-    <default-activity>editpko</default-activity>
+  <task-flow-definition id="newPko">
+    <default-activity>CreateInsert</default-activity>
     <transaction>
       <requires-transaction/>
     </transaction>
-    <return-value-definition id="__4">
+    <return-value-definition id="__6">
       <name>PkoId</name>
       <value>#{pageFlowScope.PkoId}</value>
       <class>java.lang.String</class>
     </return-value-definition>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
     <view id="editpko">
       <page>/editpko.jsf</page>
+      <train-stop/>
     </view>
     <task-flow-return id="ok">
       <outcome>
-        <name>taskFlowReturn1</name>
+        <name>ok</name>
         <commit/>
       </outcome>
     </task-flow-return>
     <task-flow-return id="cancel">
       <outcome>
-        <name>taskFlowReturn2</name>
+        <name>cancel</name>
         <rollback/>
       </outcome>
     </task-flow-return>
+    <train/>
     <control-flow-rule id="__1">
-      <from-activity-id>editpko</from-activity-id>
+      <from-activity-id>CreateInsert</from-activity-id>
       <control-flow-case id="__2">
+        <from-outcome>CreateInsert</from-outcome>
+        <to-activity-id>editpko</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>editpko</from-activity-id>
+      <control-flow-case id="__4">
         <from-outcome>ok</from-outcome>
         <to-activity-id>ok</to-activity-id>
       </control-flow-case>
-      <control-flow-case id="__3">
+      <control-flow-case id="__5">
         <from-outcome>cancel</from-outcome>
         <to-activity-id>cancel</to-activity-id>
       </control-flow-case>

@@ -6,34 +6,28 @@
     <variableIterator id="variables"/>
     <iterator Binds="RkoView1" RangeSize="25" DataControl="AppModuleDataControl" id="RkoView1Iterator">
       <sortCriteria>
-        <sort attribute="Dat" ascending="true"/>
+        <sort attribute="Dat" ascending="false"/>
       </sortCriteria>
     </iterator>
   </executables>
   <bindings>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
     <tree IterBinding="RkoView1Iterator" id="RkoView1">
       <nodeDefinition DefName="ua.divas.view.RkoView" Name="RkoView10">
         <AttrNames>
           <Item Value="Id"/>
           <Item Value="Dat"/>
           <Item Value="Num"/>
-          <Item Value="Deleted"/>
-          <Item Value="Posted"/>
-          <Item Value="DivisionId"/>
-          <Item Value="UserId"/>
-          <Item Value="Comments"/>
-          <Item Value="Version"/>
-          <Item Value="CurrId"/>
-          <Item Value="KassaId"/>
-          <Item Value="ActivitiesId"/>
           <Item Value="OperationId"/>
-          <Item Value="KontragId"/>
           <Item Value="Kontragname"/>
           <Item Value="Summa"/>
+          <Item Value="CurrId"/>
+          <Item Value="KassaId"/>
+          <Item Value="DivisionId"/>
+          <Item Value="UserId"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
   </bindings>
 </pageDefinition>

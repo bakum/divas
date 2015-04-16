@@ -218,7 +218,8 @@
       <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria
-      Hint="showAndExecute"/>
+      Hint="showAndExecute"
+      Name="KontragentsAllItems"/>
   </ListBinding>
   <SQLQuery><![CDATA[SELECT Rko.ID, 
        Rko.DAT, 
@@ -448,10 +449,10 @@ FROM  RKO Rko]]></SQLQuery>
           ResId="ua.divas.view.RkoView.Kontragname_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.view.RkoView.Kontragname_TOOLTIP"/>
-        <CONTROLTYPE
-          Value="input_text_lov"/>
         <DISPLAYWIDTH
           Value="30"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

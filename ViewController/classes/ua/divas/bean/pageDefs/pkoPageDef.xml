@@ -4,7 +4,11 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="PkoView1" RangeSize="25" DataControl="AppModuleDataControl" id="PkoView1Iterator"/>
+    <iterator Binds="PkoView1" RangeSize="12" DataControl="AppModuleDataControl" id="PkoView1Iterator">
+      <sortCriteria>
+        <sort attribute="Dat" ascending="false"/>
+      </sortCriteria>
+    </iterator>
   </executables>
   <bindings>
     <tree IterBinding="PkoView1Iterator" id="PkoView1">
@@ -13,21 +17,17 @@
           <Item Value="Id"/>
           <Item Value="Dat"/>
           <Item Value="Num"/>
-          <Item Value="Deleted"/>
-          <Item Value="Posted"/>
+          <Item Value="OperationId"/>
+          <Item Value="Kontragname"/>
+          <Item Value="CurrId"/>
+          <Item Value="Summa"/>
+          <Item Value="KassaId"/>
           <Item Value="DivisionId"/>
           <Item Value="UserId"/>
-          <Item Value="Comments"/>
-          <Item Value="Version"/>
-          <Item Value="CurrId"/>
-          <Item Value="KassaId"/>
-          <Item Value="ActivitiesId"/>
-          <Item Value="OperationId"/>
-          <Item Value="KontragId"/>
-          <Item Value="Kontragname"/>
-          <Item Value="Summa"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
   </bindings>
 </pageDefinition>

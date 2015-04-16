@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE html>
 <f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" locale="ru">
-    <af:document title="Расходный кассовый ордер" id="d1">
+    <af:document title="Расходный кассовый ордер #{bindings.Num.inputValue == null ? '(Новый)': bindings.Num.inputValue}" id="d1">
         <af:messages id="m1"/>
         <af:form id="f1">
             <af:panelGridLayout id="pgl1">
@@ -34,22 +34,36 @@
                                     </af:inputText>
                                 </af:panelGroupLayout>
                             </af:panelLabelAndMessage>
-                            <af:panelLabelAndMessage label="#{bindings.DivisionId.label}" id="plam2">
-                                <af:panelGroupLayout id="pgl3" layout="horizontal">
-                                    <af:selectOneChoice value="#{bindings.DivisionId.inputValue}"
-                                                        required="#{bindings.DivisionId.hints.mandatory}"
-                                                        shortDesc="#{bindings.DivisionId.hints.tooltip}" id="soc1"
-                                                        autoSubmit="true">
-                                        <f:selectItems value="#{bindings.DivisionId.items}" id="si1"/>
-                                        <f:validator binding="#{bindings.DivisionId.validator}"/>
-                                    </af:selectOneChoice>
-                                    <af:selectOneChoice value="#{bindings.UserId.inputValue}"
-                                                        label="#{bindings.UserId.label}"
-                                                        required="#{bindings.UserId.hints.mandatory}"
-                                                        shortDesc="#{bindings.UserId.hints.tooltip}" id="soc2">
-                                        <f:selectItems value="#{bindings.UserId.items}" id="si2"/>
-                                        <f:validator binding="#{bindings.UserId.validator}"/>
-                                    </af:selectOneChoice>
+                            <af:selectOneChoice value="#{bindings.OperationId.inputValue}"
+                                                label="#{bindings.OperationId.label}"
+                                                required="#{bindings.OperationId.hints.mandatory}"
+                                                shortDesc="#{bindings.OperationId.hints.tooltip}" id="soc6">
+                                <f:selectItems value="#{bindings.OperationId.items}" id="si6"/>
+                                <f:validator binding="#{bindings.OperationId.validator}"/>
+                            </af:selectOneChoice>
+                            <af:panelLabelAndMessage label="#{bindings.Kontragname.hints.label}" id="plam4">
+                                <af:panelGroupLayout id="pgl5" layout="horizontal">
+                                    <af:inputListOfValues id="kontragIdId"
+                                                          popupTitle="Search and Select: #{bindings.KontragId.hints.label}"
+                                                          value="#{bindings.KontragId.inputValue}"
+                                                          model="#{bindings.KontragId.listOfValuesModel}"
+                                                          required="#{bindings.KontragId.hints.mandatory}"
+                                                          columns="#{bindings.KontragId.hints.displayWidth}"
+                                                          shortDesc="#{bindings.KontragId.hints.tooltip}"
+                                                          visible="false">
+                                        <f:validator binding="#{bindings.KontragId.validator}"/>
+                                    </af:inputListOfValues>
+                                    <af:inputListOfValues id="kontragnameId"
+                                                          popupTitle="Search and Select: #{bindings.Kontragname.hints.label}"
+                                                          value="#{bindings.Kontragname.inputValue}"
+                                                          model="#{bindings.Kontragname.listOfValuesModel}"
+                                                          required="#{bindings.Kontragname.hints.mandatory}"
+                                                          columns="#{bindings.Kontragname.hints.displayWidth}"
+                                                          shortDesc="#{bindings.Kontragname.hints.tooltip}"
+                                                          autoSubmit="true">
+                                        <f:validator binding="#{bindings.Kontragname.validator}"/>
+                                        <af:autoSuggestBehavior suggestedItems="#{bindings.Kontragname.suggestedItems}"/>
+                                    </af:inputListOfValues>
                                 </af:panelGroupLayout>
                             </af:panelLabelAndMessage>
                             <af:panelLabelAndMessage label="#{bindings.CurrId.label}" id="plam3">
@@ -70,6 +84,14 @@
                                     </af:selectOneChoice>
                                 </af:panelGroupLayout>
                             </af:panelLabelAndMessage>
+                            <af:inputNumberSpinbox value="#{bindings.Summa.inputValue}"
+                                                   label="#{bindings.Summa.hints.label}"
+                                                   required="#{bindings.Summa.hints.mandatory}"
+                                                   columns="#{bindings.Summa.hints.displayWidth}"
+                                                   shortDesc="#{bindings.Summa.hints.tooltip}" id="it4">
+                                <f:validator binding="#{bindings.Summa.validator}"/>
+                                <af:convertNumber groupingUsed="false" pattern="#{bindings.Summa.format}"/>
+                            </af:inputNumberSpinbox>
                             <af:inputText value="#{bindings.Comments.inputValue}"
                                           label="#{bindings.Comments.hints.label}"
                                           required="#{bindings.Comments.hints.mandatory}"
@@ -78,6 +100,24 @@
                                           shortDesc="#{bindings.Comments.hints.tooltip}" id="it3" rows="5">
                                 <f:validator binding="#{bindings.Comments.validator}"/>
                             </af:inputText>
+                            <af:panelLabelAndMessage label="#{bindings.DivisionId.label}" id="plam2">
+                                <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                    <af:selectOneChoice value="#{bindings.DivisionId.inputValue}"
+                                                        required="#{bindings.DivisionId.hints.mandatory}"
+                                                        shortDesc="#{bindings.DivisionId.hints.tooltip}" id="soc1"
+                                                        autoSubmit="true">
+                                        <f:selectItems value="#{bindings.DivisionId.items}" id="si1"/>
+                                        <f:validator binding="#{bindings.DivisionId.validator}"/>
+                                    </af:selectOneChoice>
+                                    <af:selectOneChoice value="#{bindings.UserId.inputValue}"
+                                                        label="#{bindings.UserId.label}"
+                                                        required="#{bindings.UserId.hints.mandatory}"
+                                                        shortDesc="#{bindings.UserId.hints.tooltip}" id="soc2">
+                                        <f:selectItems value="#{bindings.UserId.items}" id="si2"/>
+                                        <f:validator binding="#{bindings.UserId.validator}"/>
+                                    </af:selectOneChoice>
+                                </af:panelGroupLayout>
+                            </af:panelLabelAndMessage>
                             <af:selectOneChoice value="#{bindings.ActivitiesId.inputValue}"
                                                 label="#{bindings.ActivitiesId.label}"
                                                 required="#{bindings.ActivitiesId.hints.mandatory}"
@@ -85,50 +125,18 @@
                                 <f:selectItems value="#{bindings.ActivitiesId.items}" id="si5"/>
                                 <f:validator binding="#{bindings.ActivitiesId.validator}"/>
                             </af:selectOneChoice>
-                            <af:selectOneChoice value="#{bindings.OperationId.inputValue}"
-                                                label="#{bindings.OperationId.label}"
-                                                required="#{bindings.OperationId.hints.mandatory}"
-                                                shortDesc="#{bindings.OperationId.hints.tooltip}" id="soc6">
-                                <f:selectItems value="#{bindings.OperationId.items}" id="si6"/>
-                                <f:validator binding="#{bindings.OperationId.validator}"/>
-                            </af:selectOneChoice>
-                            <af:inputListOfValues id="kontragIdId"
-                                                  popupTitle="Search and Select: #{bindings.KontragId.hints.label}"
-                                                  value="#{bindings.KontragId.inputValue}"
-                                                  label="#{bindings.KontragId.hints.label}"
-                                                  model="#{bindings.KontragId.listOfValuesModel}"
-                                                  required="#{bindings.KontragId.hints.mandatory}"
-                                                  columns="#{bindings.KontragId.hints.displayWidth}"
-                                                  shortDesc="#{bindings.KontragId.hints.tooltip}">
-                                <f:validator binding="#{bindings.KontragId.validator}"/>
-                            </af:inputListOfValues>
-                            <af:inputListOfValues id="kontragnameId"
-                                                  popupTitle="Search and Select: #{bindings.Kontragname.hints.label}"
-                                                  value="#{bindings.Kontragname.inputValue}"
-                                                  label="#{bindings.Kontragname.hints.label}"
-                                                  model="#{bindings.Kontragname.listOfValuesModel}"
-                                                  required="#{bindings.Kontragname.hints.mandatory}"
-                                                  columns="#{bindings.Kontragname.hints.displayWidth}"
-                                                  shortDesc="#{bindings.Kontragname.hints.tooltip}">
-                                <f:validator binding="#{bindings.Kontragname.validator}"/>
-                            </af:inputListOfValues>
-                            <af:inputText value="#{bindings.Summa.inputValue}" label="#{bindings.Summa.hints.label}"
-                                          required="#{bindings.Summa.hints.mandatory}"
-                                          columns="#{bindings.Summa.hints.displayWidth}"
-                                          maximumLength="#{bindings.Summa.hints.precision}"
-                                          shortDesc="#{bindings.Summa.hints.tooltip}" id="it4">
-                                <f:validator binding="#{bindings.Summa.validator}"/>
-                                <af:convertNumber groupingUsed="false" pattern="#{bindings.Summa.format}"/>
-                            </af:inputText>
                             <f:facet name="footer">
-                                <af:toolbar id="t1">
-                                    <af:button text="Ok" id="b1" action="ok">
-                                        <af:setPropertyListener from="#{bindings.Id.inputValue}"
-                                                                to="#{pageFlowScope.RkoId}" type="action"/>
-                                    </af:button>
-                                    <af:button text="Cancel" id="b2" action="cancel"/>
-                                </af:toolbar>
+                                <af:panelGroupLayout id="pgl6" layout="horizontal" halign="right">
+                                    <af:toolbar id="t1">
+                                        <af:button text="Ok" id="b1" action="ok">
+                                            <af:setPropertyListener from="#{bindings.Id.inputValue}"
+                                                                    to="#{pageFlowScope.RkoId}" type="action"/>
+                                        </af:button>
+                                        <af:button text="Cancel" id="b2" action="cancel"/>
+                                    </af:toolbar>
+                                </af:panelGroupLayout>
                             </f:facet>
+                            <af:spacer width="10" height="10" id="s1"/>
                         </af:panelFormLayout>
                     </af:gridCell>
                 </af:gridRow>

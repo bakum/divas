@@ -688,7 +688,7 @@ order by Kontragents.FULLNAME]]></SQLQuery>
           Value="InAdvancedMode"/>
         <Property
           Name="autoExecute"
-          Value="false"/>
+          Value="true"/>
         <Property
           Name="allowConjunctionOverride"
           Value="true"/>
@@ -710,6 +710,15 @@ order by Kontragents.FULLNAME]]></SQLQuery>
         Conjunction="AND"
         Value="0"
         GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Fullname"
+        ViewAttribute="Fullname"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Value=":KonName"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>

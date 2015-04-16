@@ -2,21 +2,18 @@ package ua.divas.bean;
 
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
-
 import oracle.adf.model.binding.DCIteratorBinding;
-
 import oracle.adf.view.rich.component.rich.data.RichTable;
-
 import oracle.adf.view.rich.context.AdfFacesContext;
 
 import org.apache.myfaces.trinidad.event.ReturnEvent;
 
-public class RkoBean {
+public class PkoBean {
     private RichTable table;
 
-    public RkoBean() {
+    public PkoBean() {
     }
-    
+
     public void setTable(RichTable table) {
         this.table = table;
     }
@@ -24,11 +21,11 @@ public class RkoBean {
     public RichTable getTable() {
         return table;
     }
-
+    
     public String refresh() {
 
         DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
-        DCIteratorBinding it = binding.findIteratorBinding("RkoView1Iterator");
+        DCIteratorBinding it = binding.findIteratorBinding("PkoView1Iterator");
         String rks;
         if (it != null) {
             try {
@@ -50,7 +47,7 @@ public class RkoBean {
     }
 
     public void onReturn(ReturnEvent re) {
-        System.out.println(re.getReturnParameters().get("RkoId")+" Return listener called ");
+        System.out.println(re.getReturnParameters().get("PkoId")+" Return listener called ");
         AdfFacesContext.getCurrentInstance().addPartialTarget(getTable());
         refresh();
     }

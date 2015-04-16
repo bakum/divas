@@ -39,6 +39,7 @@
     <page path="/editpko.jsf" usageId="ua_divas_bean_editpkoPageDef"/>
     <page path="/editrko.jsf" usageId="ua_divas_bean_editrkoPageDef"/>
     <page path="/WEB-INF/newRko.xml#newRko@CreateInsert" usageId="ua_divas_bean_newRko_newRko_CreateInsertPageDef"/>
+    <page path="/WEB-INF/newPko.xml#newPko@CreateInsert" usageId="ua_divas_bean_newPko_newPko_CreateInsertPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="ua_divas_view_indexPageDef" path="ua.divas.bean.pageDefs.indexPageDef"/>
@@ -73,6 +74,8 @@
     <page id="ua_divas_bean_editrkoPageDef" path="ua.divas.bean.pageDefs.editrkoPageDef"/>
     <page id="ua_divas_bean_newRko_newRko_CreateInsertPageDef"
           path="ua.divas.bean.pageDefs.newRko_newRko_CreateInsertPageDef"/>
+    <page id="ua_divas_bean_newPko_newPko_CreateInsertPageDef"
+          path="ua.divas.bean.pageDefs.newPko_newPko_CreateInsertPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <dc id="DataPackage" path="ua.divas.bean.DataPackage"/>

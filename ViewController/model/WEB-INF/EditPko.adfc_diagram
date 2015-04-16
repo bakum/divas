@@ -67,6 +67,6 @@
       <property
          name="fromOutcome">cancel</property>
       <property
-         name="sdm:polyPoints">R54,172.0,120.5625,279.0,201.0625,L50</property>
+         name="sdm:polyPoints">R54,172.0,120.5625,279.0,201.07812,L50</property>
    </ControlFlowCase>
 </SDM>
