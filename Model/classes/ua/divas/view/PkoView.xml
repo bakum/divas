@@ -409,6 +409,7 @@ FROM  PKO Pko]]></SQLQuery>
     EntityUsage="Pko"
     AliasName="OPERATION_ID"
     LOVName="LOV_OperationId">
+    <TransientExpression><![CDATA[viewObject.retrieveOperationId()]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE

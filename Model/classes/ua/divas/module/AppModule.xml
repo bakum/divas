@@ -778,6 +778,12 @@
   <ViewUsage
     Name="VwRkoMoves2"
     ViewObjectName="ua.divas.view.VwRkoMoves"/>
+  <ViewUsage
+    Name="OperationPkoView1"
+    ViewObjectName="ua.divas.view.OperationPkoView"/>
+  <ViewUsage
+    Name="OperationRkoView1"
+    ViewObjectName="ua.divas.view.OperationRkoView"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"

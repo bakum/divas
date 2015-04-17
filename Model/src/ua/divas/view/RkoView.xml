@@ -404,6 +404,7 @@ FROM  RKO Rko]]></SQLQuery>
     EntityUsage="Rko"
     AliasName="OPERATION_ID"
     LOVName="LOV_OperationId">
+    <TransientExpression><![CDATA[viewObject.retrieveOperationId()]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE

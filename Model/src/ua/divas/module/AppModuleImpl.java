@@ -3362,5 +3362,21 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getVwRkoRkoFkLink1() {
         return (ViewLinkImpl) findViewLink("VwRkoRkoFkLink1");
     }
+
+    /**
+     * Container's getter for OperationPkoView1.
+     * @return OperationPkoView1
+     */
+    public ViewObjectImpl getOperationPkoView1() {
+        return (ViewObjectImpl) findViewObject("OperationPkoView1");
+    }
+
+    /**
+     * Container's getter for OperationRkoView1.
+     * @return OperationRkoView1
+     */
+    public ViewObjectImpl getOperationRkoView1() {
+        return (ViewObjectImpl) findViewObject("OperationRkoView1");
+    }
 }
 
