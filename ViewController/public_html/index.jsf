@@ -106,6 +106,10 @@
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/plan_acc.xml#plan_acc']}">
                                                 <af:region value="#{bindings.plan_acc1.regionModel}" id="r8"/>
                                             </af:showDetailItem>
+                                            <af:showDetailItem text="Календарь" id="sdi20" stretchChildren="first"
+                                                               rendered="#{securityContext.taskflowViewable['/WEB-INF/calendar-config.xml#calendar-config']}">
+                                                <af:region value="#{bindings.calendarconfig1.regionModel}" id="r17"/>
+                                            </af:showDetailItem>
                                         </af:panelTabbed>
                                     </af:showDetailItem>
                                 </af:panelSpringboard>

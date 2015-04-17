@@ -7,6 +7,8 @@
     <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
     <factory nameSpace="http://xmlns.oracle.com/adfm/dvt"
              className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"/>
+    <factory className="oracle.adfinternal.view.faces.model.binding.ExtendedFacesBindingDefFactoryImpl"
+             nameSpace="http://xmlns.oracle.com/adf/faces/binding"/>
   </definitionFactories>
   <pageMap>
     <page path="/index.jsf" usageId="ua_divas_view_indexPageDef"/>
@@ -40,6 +42,7 @@
     <page path="/editrko.jsf" usageId="ua_divas_bean_editrkoPageDef"/>
     <page path="/WEB-INF/newRko.xml#newRko@CreateInsert" usageId="ua_divas_bean_newRko_newRko_CreateInsertPageDef"/>
     <page path="/WEB-INF/newPko.xml#newPko@CreateInsert" usageId="ua_divas_bean_newPko_newPko_CreateInsertPageDef"/>
+    <page path="/calendar.jsff" usageId="ua_divas_bean_calendarPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="ua_divas_view_indexPageDef" path="ua.divas.bean.pageDefs.indexPageDef"/>
@@ -76,6 +79,7 @@
           path="ua.divas.bean.pageDefs.newRko_newRko_CreateInsertPageDef"/>
     <page id="ua_divas_bean_newPko_newPko_CreateInsertPageDef"
           path="ua.divas.bean.pageDefs.newPko_newPko_CreateInsertPageDef"/>
+    <page id="ua_divas_bean_calendarPageDef" path="ua.divas.bean.pageDefs.calendarPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <dc id="DataPackage" path="ua.divas.bean.DataPackage"/>

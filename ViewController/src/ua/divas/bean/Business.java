@@ -3,6 +3,8 @@ package ua.divas.bean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import javax.faces.event.ValueChangeEvent;
+
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
@@ -21,6 +23,7 @@ import oracle.jbo.Key;
 import oracle.jbo.Row;
 import oracle.jbo.RowSetIterator;
 
+import org.apache.myfaces.trinidad.component.UIXGroup;
 import org.apache.myfaces.trinidad.render.ExtendedRenderKitService;
 import org.apache.myfaces.trinidad.util.Service;
 
@@ -32,10 +35,10 @@ public class Business {
     public Business() {
         super();
     }
-    
+
     public void refresh() {
         DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
-        DCIteratorBinding it = binding.findIteratorBinding("CalendarView1Iterator");
+        DCIteratorBinding it = binding.findIteratorBinding("VwNotificationCalendarView1Iterator");
         String rks;
         if (it != null) {
             try {
@@ -52,6 +55,7 @@ public class Business {
                 }
             }
         }
+        AdfFacesContext.getCurrentInstance().addPartialTarget(getCalendar());
     }
 
     public void activityListener(CalendarActivityEvent calendarActivityEvent) {
@@ -59,7 +63,7 @@ public class Business {
 
         if (activity != null) {
             DCBindingContainer dcbindings = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
-            DCIteratorBinding iterator = dcbindings.findIteratorBinding("CalendarView1Iterator");
+            DCIteratorBinding iterator = dcbindings.findIteratorBinding("VwNotificationCalendarView1Iterator");
             Key key = new Key(new Object[] { activity.getId() });
             RowSetIterator rsi = iterator.getRowSetIterator();
             Row row = rsi.findByKey(key, 1)[0];
@@ -104,15 +108,12 @@ public class Business {
         }
         //hidePopup(getDeletePopup());
     }
-    
+
     public void hidePopup(RichPopup popup) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        ExtendedRenderKitService service =
-            Service.getRenderKitService(facesContext,
-                                        ExtendedRenderKitService.class);
+        ExtendedRenderKitService service = Service.getRenderKitService(facesContext, ExtendedRenderKitService.class);
         service.addScript(facesContext,
-                          "AdfPage.PAGE.findComponent('" + popup.getClientId(facesContext) +
-                          "').hide();");
+                          "AdfPage.PAGE.findComponent('" + popup.getClientId(facesContext) + "').hide();");
     }
 
     public void setDeletePopup(RichPopup deletePopup) {
@@ -133,5 +134,19 @@ public class Business {
 
     public RichCalendar getCalendar() {
         return calendar;
+    }
+
+    public void onCangeRegular(ValueChangeEvent vce) {
+        System.out.println("Value changed " + vce.getNewValue().toString());
+        //Boolean newVal = (Boolean) vce.getNewValue();
+    }
+
+    public void onCreateDialogListener(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            //commitChange();
+        } else if (dialogEvent.getOutcome().name().equals("cancel")) {
+            //rollbackChange();
+        }
+        refresh();
     }
 }

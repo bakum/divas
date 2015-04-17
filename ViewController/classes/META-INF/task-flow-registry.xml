@@ -4,8 +4,8 @@
    <task-flow-descriptor path="WEB-INF/addOrder.xml" id="addOrder" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="true" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/EditRko.xml" id="EditRko" type="task-flow-definition" uses-page-fragments="false" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/plan_acc.xml" id="plan_acc" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
-   <task-flow-descriptor path="WEB-INF/orders.xml" id="orders" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/kassa-config.xml" id="kassa-config" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/orders.xml" id="orders" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/users.xml" id="users" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/calendar-config.xml" id="calendar-config" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/addKontrag.xml" id="addKontrag" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="true" critical="false" page-type="facelets">

@@ -3378,5 +3378,13 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewObjectImpl getOperationRkoView1() {
         return (ViewObjectImpl) findViewObject("OperationRkoView1");
     }
+
+    /**
+     * Container's getter for VwNotificationCalendarView1.
+     * @return VwNotificationCalendarView1
+     */
+    public ViewObjectImpl getVwNotificationCalendarView1() {
+        return (ViewObjectImpl) findViewObject("VwNotificationCalendarView1");
+    }
 }
 

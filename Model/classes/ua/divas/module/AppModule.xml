@@ -784,6 +784,9 @@
   <ViewUsage
     Name="OperationRkoView1"
     ViewObjectName="ua.divas.view.OperationRkoView"/>
+  <ViewUsage
+    Name="VwNotificationCalendarView1"
+    ViewObjectName="ua.divas.view.VwNotificationCalendarView"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
