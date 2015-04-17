@@ -49,13 +49,13 @@ public class PkoBean {
                 }
             }
         }
-
+        AdfFacesContext.getCurrentInstance().addPartialTarget(getTable());
         return null;
     }
 
     public void onReturn(ReturnEvent re) {
         System.out.println(re.getReturnParameters().get("PkoId")+" Return listener called ");
-        AdfFacesContext.getCurrentInstance().addPartialTarget(getTable());
+        //AdfFacesContext.getCurrentInstance().addPartialTarget(getTable());
         refresh();
     }
     

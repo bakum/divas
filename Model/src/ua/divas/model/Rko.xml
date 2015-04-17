@@ -10,7 +10,8 @@
   DBObjectName="RKO"
   AliasName="Rko"
   BindingStyle="OracleName"
-  RowClass="ua.divas.model.RkoImpl">
+  RowClass="ua.divas.model.RkoImpl"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Access"/>
     <Attr Name="_isCodegen" Value="true"/>
@@ -412,6 +413,10 @@
       <Item Value="ua.divas.model.Rko.OperationId"/>
     </AttrArray>
   </Key>
+  <validation:MethodValidationBean
+    Name="RkoRule0"
+    ResId="ua.divas.model.Rko_Rule_0"
+    MethodName="validateRko"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

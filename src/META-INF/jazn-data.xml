@@ -395,11 +395,6 @@
               </permission>
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/plan_acc.xml#plan_acc</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/sales-config.xml#sales-config</name>
                 <actions>view</actions>
               </permission>
@@ -675,11 +670,6 @@
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/other-dialod-flow.xml#other-dialod-flow</name>
-                <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.controller.security.TaskFlowPermission</class>
-                <name>/WEB-INF/other_zatr-config.xml#other_zatr-config</name>
                 <actions>view</actions>
               </permission>
               <permission>

@@ -10,7 +10,8 @@
   DBObjectName="PKO"
   AliasName="Pko"
   BindingStyle="OracleName"
-  RowClass="ua.divas.model.PkoImpl">
+  RowClass="ua.divas.model.PkoImpl"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Access"/>
     <Attr Name="_isCodegen" Value="true"/>
@@ -416,6 +417,10 @@
       <Item Value="ua.divas.model.Pko.OperationId"/>
     </AttrArray>
   </Key>
+  <validation:MethodValidationBean
+    Name="PkoRule0"
+    ResId="ua.divas.model.Pko_Rule_0"
+    MethodName="validatePko"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

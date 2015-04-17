@@ -36,6 +36,14 @@ public class PkoImpl extends DivasEntity {
     protected void callId() {
         this.setId(UUID.randomUUID().toString());
     }
+    
+    private String getOperationName(String Id) {
+        String _id = (String) callStoredFunction(VARCHAR2, "PKO_ENTRY.get_operationname(?)", new Object[] { Id });
+        if (_id.equals("none"))
+            return null;
+        else
+            return _id;
+    }
     /**
      * AttributesEnum: generated enum for identifying attributes and accessors. DO NOT MODIFY.
      */
@@ -78,6 +86,7 @@ public class PkoImpl extends DivasEntity {
         }
     }
 
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int DAT = AttributesEnum.Dat.index();
     public static final int NUM = AttributesEnum.Num.index();
@@ -106,6 +115,7 @@ public class PkoImpl extends DivasEntity {
     public static synchronized EntityDefImpl getDefinitionObject() {
         return EntityDefImpl.findDefObject("ua.divas.model.Pko");
     }
+
 
     /**
      * Gets the attribute value for Id, using the alias name Id.
@@ -345,6 +355,19 @@ public class PkoImpl extends DivasEntity {
      */
     public void setSumma(String value) {
         setAttributeInternal(SUMMA, value);
+    }
+
+    /**
+     * Validation method for Pko.
+     */
+    public boolean validatePko() {
+        String konId = getKontragId();
+        String opId = getOperationId();
+        String opName = getOperationName(opId);
+        if (konId == null && !opName.equalsIgnoreCase("OTHER_PAYMENT")) {
+            return false;
+        }
+        return true;
     }
 
     /**

@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 import java.sql.Timestamp;
 
+import java.sql.Types;
+
 import java.util.UUID;
 
 import oracle.jbo.Key;
@@ -21,14 +23,16 @@ import ua.divas.classes.DivasEntity;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class RkoImpl extends DivasEntity {
-    
+
+    protected static int VARCHAR2 = Types.VARCHAR;
+
     @Override
     protected void doDML(int i, TransactionEvent transactionEvent) {
         super.doDML(i, transactionEvent);
         String _id = this.getId();
         callStoredProcedure("RKO_ENTRY.rko_move_plan_acc(?)", new Object[] { _id });
     }
-    
+
     @Override
     protected void callDeleted() {
         this.setDeleted(1);
@@ -38,6 +42,15 @@ public class RkoImpl extends DivasEntity {
     protected void callId() {
         this.setId(UUID.randomUUID().toString());
     }
+
+    private String getOperationName(String Id) {
+        String _id = (String) callStoredFunction(VARCHAR2, "RKO_ENTRY.get_operationname(?)", new Object[] { Id });
+        if (_id.equals("none"))
+            return null;
+        else
+            return _id;
+    }
+
     /**
      * AttributesEnum: generated enum for identifying attributes and accessors. DO NOT MODIFY.
      */
@@ -349,6 +362,19 @@ public class RkoImpl extends DivasEntity {
      */
     public void setSumma(BigDecimal value) {
         setAttributeInternal(SUMMA, value);
+    }
+
+    /**
+     * Validation method for Rko.
+     */
+    public boolean validateRko() {
+        String konId = getKontragId();
+        String opId = getOperationId();
+        String opName = getOperationName(opId);
+        if (konId == null && !opName.equalsIgnoreCase("OTHER_PAYMENT")) {
+            return false;
+        }
+        return true;
     }
 
     /**

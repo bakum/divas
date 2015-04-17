@@ -52,13 +52,13 @@ public class RkoBean {
                 }
             }
         }
-
+        AdfFacesContext.getCurrentInstance().addPartialTarget(getTable());
         return null;
     }
 
     public void onReturn(ReturnEvent re) {
         System.out.println(re.getReturnParameters().get("RkoId")+" Return listener called ");
-        AdfFacesContext.getCurrentInstance().addPartialTarget(getTable());
+        //AdfFacesContext.getCurrentInstance().addPartialTarget(getTable());
         refresh();
     }
     

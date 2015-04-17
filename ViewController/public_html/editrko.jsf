@@ -37,7 +37,8 @@
                             <af:selectOneChoice value="#{bindings.OperationId.inputValue}"
                                                 label="#{bindings.OperationId.label}"
                                                 required="#{bindings.OperationId.hints.mandatory}"
-                                                shortDesc="#{bindings.OperationId.hints.tooltip}" id="soc6">
+                                                shortDesc="#{bindings.OperationId.hints.tooltip}" id="soc6"
+                                                autoSubmit="true">
                                 <f:selectItems value="#{bindings.OperationId.items}" id="si6"/>
                                 <f:validator binding="#{bindings.OperationId.validator}"/>
                             </af:selectOneChoice>
@@ -88,7 +89,7 @@
                                                    label="#{bindings.Summa.hints.label}"
                                                    required="#{bindings.Summa.hints.mandatory}"
                                                    columns="#{bindings.Summa.hints.displayWidth}"
-                                                   shortDesc="#{bindings.Summa.hints.tooltip}" id="it4">
+                                                   shortDesc="#{bindings.Summa.hints.tooltip}" id="it4" minimum="0">
                                 <f:validator binding="#{bindings.Summa.validator}"/>
                                 <af:convertNumber groupingUsed="false" pattern="#{bindings.Summa.format}"/>
                             </af:inputNumberSpinbox>
