@@ -15,6 +15,7 @@ import javax.faces.application.Application;
 import javax.faces.context.FacesContext;
 
 import oracle.adf.model.BindingContext;
+import oracle.adf.model.binding.DCDataControl;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichTreeTable;
 
@@ -33,6 +34,8 @@ import org.apache.myfaces.trinidad.event.SelectionEvent;
 import org.apache.myfaces.trinidad.model.CollectionModel;
 import org.apache.myfaces.trinidad.model.RowKeySet;
 import org.apache.myfaces.trinidad.model.TreeModel;
+
+import ua.divas.module.AppModuleImpl;
 
 public class KassaBean {
 
@@ -153,5 +156,15 @@ public class KassaBean {
                 }
             }
         }
+    }
+    
+    public void afterListener() {
+        System.out.println("After listener called ");
+        BindingContext bindingContext = BindingContext.getCurrent();
+        DCDataControl dc =
+            bindingContext.findDataControl("AppModuleDataControl"); // Name of application module in datacontrolBinding.cpx
+        AppModuleImpl am = (AppModuleImpl) dc.getDataProvider();
+        am.getKontragentsView1().executeQuery();
+        am.getOrdersView1().executeQuery();
     }
 }

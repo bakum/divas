@@ -127,13 +127,14 @@
                                 <f:validator binding="#{bindings.ActivitiesId.validator}"/>
                             </af:selectOneChoice>
                             <f:facet name="footer">
-                                <af:panelGroupLayout id="pgl6" layout="horizontal" halign="right">
+                                <af:panelGroupLayout id="pgl6" layout="horizontal" halign="right"
+                                                     inlineStyle="background-color:#e7e7e7;">
                                     <af:toolbar id="t1">
                                         <af:button text="Ok" id="b1" action="ok">
                                             <af:setPropertyListener from="#{bindings.Id.inputValue}"
                                                                     to="#{pageFlowScope.RkoId}" type="action"/>
                                         </af:button>
-                                        <af:button text="Cancel" id="b2" action="cancel"/>
+                                        <af:button text="Отмена" id="b2" action="cancel"/>
                                     </af:toolbar>
                                 </af:panelGroupLayout>
                             </f:facet>

@@ -15,6 +15,7 @@
         <document>/WEB-INF/order-dialog-flow.xml</document>
         <id>order-dialog-flow</id>
       </task-flow-reference>
+      <after-listener>#{kassa.afterListener}</after-listener>
       <run-as-dialog>
         <display-type>
           <inline-popup/>

@@ -46,7 +46,12 @@ public class Business {
             } catch (Exception e) {
                 rks = null;
             }
-            it.executeQuery();
+            //it.executeQuery();
+            BindingContainer bd = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding ob = bd.getOperationBinding("ExecuteWithParams");
+            if (ob != null) {
+                ob.execute();
+            }
             if (rks != null) {
                 try {
                     it.setCurrentRowWithKey(rks);

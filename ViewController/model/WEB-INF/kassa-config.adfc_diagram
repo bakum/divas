@@ -17,9 +17,9 @@
       <property
          name="y">115.078125</property>
       <property
-         name="x">97.0</property>
-      <property
          name="pageFragment">true</property>
+      <property
+         name="x">97.0</property>
    </View>
    <TaskFlowCall
       id="TaskFlowCall6">
@@ -88,9 +88,9 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">264.20312</property>
+         name="y">269.23438</property>
       <property
-         name="x">442.0</property>
+         name="x">264.0</property>
    </TaskFlowCall>
    <ControlFlowCase
       islink="true"
@@ -100,7 +100,7 @@
       <property
          name="fromOutcome">onOther</property>
       <property
-         name="sdm:polyPoints">B50,264.0,168.10938,401.0,264.21875,L50</property>
+         name="sdm:polyPoints">B50,264.0,168.10938,264.0,215.21875,T50</property>
    </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall10">
@@ -158,6 +158,6 @@
       <property
          name="fromOutcome">onRko</property>
       <property
-         name="sdm:polyPoints">R58,305.0,121.109375,596.5,279.53125,T50</property>
+         name="sdm:polyPoints">R58,305.0,121.109375,555.5,333.53125,L50</property>
    </ControlFlowCase>
 </SDM>

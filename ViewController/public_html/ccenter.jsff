@@ -655,7 +655,19 @@
                                                       popupCanceledListener="#{filter.cancelListener}">
                                                 <af:dialog id="d5" title="Протокол звонка"
                                                            dialogListener="#{filter.dialogListener}">
-                                                    <f:facet name="buttonBar"/>
+                                                    <f:facet name="buttonBar">
+                                                        <af:panelGroupLayout id="pgl17" layout="horizontal"
+                                                                             halign="left">
+                                                            <af:toolbar id="t6">
+                                                                <af:group id="g1">
+                                                                    <af:button text="Новый заказ" id="b21"
+                                                                               icon="/img/format-bullet-list.png"/>
+                                                                    <af:button text="Напоминание" id="b22"
+                                                                               icon="/img/bell.png"/>
+                                                                </af:group>
+                                                            </af:toolbar>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
                                                     <af:panelFormLayout id="pfl4">
                                                         <af:inputText value="#{bindings.Id1.inputValue}"
                                                                       label="#{bindings.Id1.hints.label}"
@@ -680,19 +692,20 @@
                                                                 <af:selectOneChoice value="#{bindings.CallStatus.inputValue}"
                                                                                     required="#{bindings.CallStatus.hints.mandatory}"
                                                                                     shortDesc="#{bindings.CallStatus.hints.tooltip}"
-                                                                                    id="soc14">
+                                                                                    id="soc14" readOnly="true">
                                                                     <f:selectItems value="#{bindings.CallStatus.items}"
                                                                                    id="si14"/>
                                                                     <f:validator binding="#{bindings.CallStatus.validator}"/>
                                                                 </af:selectOneChoice>
-                                                                <af:selectOneChoice value="#{bindings.CallResults.inputValue}"
-                                                                                    label="#{bindings.CallResults.label}"
-                                                                                    required="#{bindings.CallResults.hints.mandatory}"
-                                                                                    shortDesc="#{bindings.CallResults.hints.tooltip}"
-                                                                                    id="soc15">
-                                                                    <f:selectItems value="#{bindings.CallResults.items}"
-                                                                                   id="si15"/>
-                                                                    <f:validator binding="#{bindings.CallResults.validator}"/>
+                                                                <af:selectOneChoice value="#{bindings.KontragId2.inputValue}"
+                                                                                    required="#{bindings.KontragId2.hints.mandatory}"
+                                                                                    shortDesc="#{bindings.KontragId2.hints.tooltip}"
+                                                                                    id="soc18" autoSubmit="true"
+                                                                                    label="#{bindings.KontragId2.label}"
+                                                                                    readOnly="true">
+                                                                    <f:selectItems value="#{bindings.KontragId2.items}"
+                                                                                   id="si18"/>
+                                                                    <f:validator binding="#{bindings.KontragId2.validator}"/>
                                                                 </af:selectOneChoice>
                                                             </af:panelGroupLayout>
                                                         </af:panelLabelAndMessage>
@@ -704,15 +717,16 @@
                                                                            id="si17"/>
                                                             <f:validator binding="#{bindings.CompDetId.validator}"/>
                                                         </af:selectOneChoice>
-                                                        <af:panelLabelAndMessage label="#{bindings.KontragId2.label}" id="plam4">
+                                                        <af:panelLabelAndMessage id="plam4"
+                                                                                 label="#{bindings.CallResults.label}">
                                                             <af:panelGroupLayout id="pgl16" layout="horizontal">
-                                                                <af:selectOneChoice value="#{bindings.KontragId2.inputValue}"
-                                                                                    required="#{bindings.KontragId2.hints.mandatory}"
-                                                                                    shortDesc="#{bindings.KontragId2.hints.tooltip}"
-                                                                                    id="soc18" autoSubmit="true">
-                                                                    <f:selectItems value="#{bindings.KontragId2.items}"
-                                                                                   id="si18"/>
-                                                                    <f:validator binding="#{bindings.KontragId2.validator}"/>
+                                                                <af:selectOneChoice value="#{bindings.CallResults.inputValue}"
+                                                                                    required="#{bindings.CallResults.hints.mandatory}"
+                                                                                    shortDesc="#{bindings.CallResults.hints.tooltip}"
+                                                                                    id="soc15">
+                                                                    <f:selectItems value="#{bindings.CallResults.items}"
+                                                                                   id="si15"/>
+                                                                    <f:validator binding="#{bindings.CallResults.validator}"/>
                                                                 </af:selectOneChoice>
                                                                 <af:selectOneChoice value="#{bindings.ContactId.inputValue}"
                                                                                     label="#{bindings.ContactId.label}"

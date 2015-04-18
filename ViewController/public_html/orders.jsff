@@ -457,12 +457,12 @@
                                                        dialogListener="#{orders.dialogListener}">
                                                 <f:facet name="buttonBar"/>
                                                 <af:panelAccordion id="pa1">
-                                                    <af:showDetailItem text="Главная" id="sdi2" stretchChildren="first">
+                                                    <af:showDetailItem text="Главная" id="sdi2" stretchChildren="first"
+                                                                       disclosed="true">
                                                         <af:panelFormLayout id="pfl1">
                                                             <af:panelLabelAndMessage id="plam2" label="Номер и дата">
                                                                 <af:panelGroupLayout id="pgl2" layout="horizontal">
                                                                     <af:inputText value="#{bindings.Num.inputValue}"
-                                                                                  label="#{bindings.Num.hints.label}"
                                                                                   required="#{bindings.Num.hints.mandatory}"
                                                                                   columns="#{bindings.Num.hints.displayWidth}"
                                                                                   maximumLength="#{bindings.Num.hints.precision}"
@@ -578,10 +578,9 @@
                                                                 </af:panelGroupLayout>
                                                             </af:panelLabelAndMessage>
                                                             <af:separator id="s3"/>
-                                                            <af:panelLabelAndMessage label="Валюта и курс" id="plam3">
+                                                            <af:panelLabelAndMessage label="#{bindings.CurrId.label}" id="plam3">
                                                                 <af:panelGroupLayout id="pgl4" layout="horizontal">
                                                                     <af:selectOneChoice value="#{bindings.CurrId.inputValue}"
-                                                                                        label="#{bindings.CurrId.label}"
                                                                                         required="#{bindings.CurrId.hints.mandatory}"
                                                                                         shortDesc="#{bindings.CurrId.hints.tooltip}"
                                                                                         id="soc8"
@@ -637,10 +636,9 @@
                                                                 </af:group>
                                                             </af:panelLabelAndMessage>
                                                             <af:separator id="s4"/>
-                                                            <af:panelLabelAndMessage label="Подразделение" id="plam4">
+                                                            <af:panelLabelAndMessage label="#{bindings.DivisionId.label}" id="plam4">
                                                                 <af:panelGroupLayout id="pgl5" layout="horizontal">
                                                                     <af:selectOneChoice value="#{bindings.DivisionId.inputValue}"
-                                                                                        label="#{bindings.DivisionId.label}"
                                                                                         required="#{bindings.DivisionId.hints.mandatory}"
                                                                                         shortDesc="#{bindings.DivisionId.hints.tooltip}"
                                                                                         id="soc10"
@@ -674,10 +672,11 @@
                                                                           id="it15"
                                                                           readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
                                                                           rows="3" labelStyle="font-weight: bold;"/>
-                                                            <af:panelLabelAndMessage id="plam8">
+                                                            <af:panelLabelAndMessage id="plam8"
+                                                                                     label="#{bindings.ActivitiesId.label}"
+                                                                                     inlineStyle="font-weight: bold;">
                                                                 <af:panelGroupLayout id="pgl8" layout="horizontal">
                                                                     <af:selectOneChoice value="#{bindings.ActivitiesId.inputValue}"
-                                                                                        label="#{bindings.ActivitiesId.label}"
                                                                                         required="#{bindings.ActivitiesId.hints.mandatory}"
                                                                                         shortDesc="#{bindings.ActivitiesId.hints.tooltip}"
                                                                                         id="soc13"
@@ -1305,7 +1304,7 @@
                                                                       rowSelection="single"
                                                                       fetchSize="#{bindings.OrdersTpRashodyView4.rangeSize}"
                                                                       id="t12" editingMode="clickToEdit"
-                                                                      partialTriggers="::b14">
+                                                                      partialTriggers="::b14" scrollPolicy="page">
                                                                 <af:column id="c53" width="60">
                                                                     <af:toolbar id="t14">
                                                                         <af:button id="b15" icon="/img/edit-16.gif"
@@ -1490,7 +1489,14 @@
                                                                       rowSelection="single"
                                                                       fetchSize="#{bindings.OrdersTpNachisleniaView2.rangeSize}"
                                                                       id="t16" partialTriggers="::b16"
-                                                                      editingMode="clickToEdit">
+                                                                      editingMode="clickToEdit" scrollPolicy="page">
+                                                                <af:column id="c75" width="60">
+                                                                    <af:toolbar id="t18">
+                                                                        <af:button id="b20"
+                                                                                   icon="/img/edit-16.gif"
+                                                                                   disabled="#{bindings.Commit.enabled}"/>
+                                                                    </af:toolbar>
+                                                                </af:column>
                                                                 <af:column sortProperty="#{bindings.OrdersTpNachisleniaView2.hints.Id.name}"
                                                                            sortable="true"
                                                                            headerText="#{bindings.OrdersTpNachisleniaView2.hints.Id.label}"

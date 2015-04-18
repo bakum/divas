@@ -252,7 +252,7 @@
         <TOOLTIP
           ResId="ua.divas.model.Orders.Discription_TOOLTIP"/>
         <DISPLAYWIDTH
-          Value="80"/>
+          Value="50"/>
         <DISPLAYHEIGHT
           Value="3"/>
       </SchemaBasedProperties>
