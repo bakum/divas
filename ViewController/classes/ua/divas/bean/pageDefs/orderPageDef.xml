@@ -11,6 +11,12 @@
               id="ContactDetailsView2Iterator" ChangeEventPolicy="ppr"/>
     <iterator Binds="OrdersTpUslugiView2" RangeSize="5" DataControl="AppModuleDataControl"
               id="OrdersTpUslugiView2Iterator"/>
+    <iterator Binds="OrdersTpOplatyView1" RangeSize="5" DataControl="AppModuleDataControl"
+              id="OrdersTpOplatyView1Iterator"/>
+    <iterator Binds="OrdersTpRashodyView4" RangeSize="5" DataControl="AppModuleDataControl"
+              id="OrdersTpRashodyView4Iterator"/>
+    <iterator Binds="OrdersTpNachisleniaView2" RangeSize="5" DataControl="AppModuleDataControl"
+              id="OrdersTpNachisleniaView2Iterator"/>
   </executables>
   <bindings>
     <listOfValues IterBinding="OrdersView1Iterator" StaticList="false" Uses="LOV_KontragId" id="KontragId"/>
@@ -187,6 +193,8 @@
           <Item Value="Sotrname"/>
           <Item Value="DatToPay"/>
           <Item Value="OtpuEditable"/>
+          <Item Value="AddWork"/>
+          <Item Value="PriceAdd"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -216,5 +224,79 @@
         <Item Value="OtpuEditable"/>
       </AttrNames>
     </attributeValues>
+    <tree IterBinding="OrdersTpOplatyView1Iterator" id="OrdersTpOplatyView1">
+      <nodeDefinition DefName="ua.divas.view.OrdersTpOplatyView" Name="OrdersTpOplatyView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="OrderId"/>
+          <Item Value="Dat"/>
+          <Item Value="Sum1"/>
+          <Item Value="UserId"/>
+          <Item Value="Comments"/>
+          <Item Value="OtpoEditable"/>
+          <Item Value="ZamerId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="OrdersTpOplatyView1Iterator" id="CreateInsert2" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <attributeValues IterBinding="OrdersTpOplatyView1Iterator" id="OtpoEditable">
+      <AttrNames>
+        <Item Value="OtpoEditable"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="OrdersTpRashodyView4Iterator" id="OrdersTpRashodyView4">
+      <nodeDefinition DefName="ua.divas.view.OrdersTpRashodyView" Name="OrdersTpRashodyView40">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="OrderId"/>
+          <Item Value="DatRash"/>
+          <Item Value="KontrId"/>
+          <Item Value="Kontname"/>
+          <Item Value="Summ"/>
+          <Item Value="Description"/>
+          <Item Value="ZatratyId"/>
+          <Item Value="Zatrname"/>
+          <Item Value="OtprEditable"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="OrdersTpRashodyView4Iterator" id="CreateInsert3" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <attributeValues IterBinding="OrdersTpRashodyView4Iterator" id="OtprEditable">
+      <AttrNames>
+        <Item Value="OtprEditable"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="OrdersTpUslugiView2Iterator" id="Delete" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <action IterBinding="OrdersTpOplatyView1Iterator" id="Delete1" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <action IterBinding="OrdersTpRashodyView4Iterator" id="Delete2" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <tree IterBinding="OrdersTpNachisleniaView2Iterator" id="OrdersTpNachisleniaView2">
+      <nodeDefinition DefName="ua.divas.view.OrdersTpNachisleniaView" Name="OrdersTpNachisleniaView20">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="KontrId"/>
+          <Item Value="Kontname"/>
+          <Item Value="DatNach"/>
+          <Item Value="CalcId"/>
+          <Item Value="OrderId"/>
+          <Item Value="Percent"/>
+          <Item Value="Summ"/>
+          <Item Value="OtpnEditable"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="OrdersTpNachisleniaView2Iterator" id="Delete3" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <attributeValues IterBinding="OrdersTpNachisleniaView2Iterator" id="OtpnEditable">
+      <AttrNames>
+        <Item Value="OtpnEditable"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="OrdersTpNachisleniaView2Iterator" id="CreateInsert4" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
   </bindings>
 </pageDefinition>

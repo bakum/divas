@@ -109,51 +109,56 @@ public class KassaBean {
             treeBinding = (JUCtrlHierBinding) collectionModel.getWrappedData();
             JUCtrlHierNodeBinding nodeBinding = null;
             nodeBinding = treeBinding.findNodeByKeyPath(key);
-            Row rw = nodeBinding.getRow();
+            try {
+                Row rw = nodeBinding.getRow();
 
-            //print first row attribute. Note that in a tree you have to
-            //determine the node type if you want to select node attributes
-            //by name and not index
-            String rowType = rw.getStructureDef().getDefName();
-            System.out.println(rowType);
+                //print first row attribute. Note that in a tree you have to
+                //determine the node type if you want to select node attributes
+                //by name and not index
+                String rowType = rw.getStructureDef().getDefName();
+                System.out.println(rowType);
 
-            if (rowType.equalsIgnoreCase("VwKassaMoves")) {
-                //System.out.println(rw.getAttribute("RegistratorId"));
-                String regId = (String) rw.getAttribute("RegistratorId");
-                String regType = (String) rw.getAttribute("TableName");
-                if (regType.equalsIgnoreCase("orders")) {
-                    Key k = new Key(new Object[] { regId });
-                    DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("OrdersView1Iterator");
-                    RowSetIterator rsi = iter.getRowSetIterator();
-                    Row row = rsi.findByKey(k, 1)[0];
-                    //row.setAttribute("OEditable", new BigDecimal(1));
-                    rsi.setCurrentRow(row);
-                    RequestContext.getCurrentInstance().getPageFlowScope().put("case", "orders");
-                } else if (regType.equalsIgnoreCase("OTHER_ZATRATY")) {
-                    Key k = new Key(new Object[] { regId });
-                    DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("OtherZatratyView1Iterator");
-                    RowSetIterator rsi = iter.getRowSetIterator();
-                    Row row = rsi.findByKey(k, 1)[0];
-                    //row.setAttribute("OEditable", new BigDecimal(1));
-                    rsi.setCurrentRow(row);
-                    RequestContext.getCurrentInstance().getPageFlowScope().put("case", "other");
-                } else if (regType.equalsIgnoreCase("PKO")) {
-                    Key k = new Key(new Object[] { regId });
-                    DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("PkoView1Iterator");
-                    RowSetIterator rsi = iter.getRowSetIterator();
-                    Row row = rsi.findByKey(k, 1)[0];
-                    //row.setAttribute("OEditable", new BigDecimal(1));
-                    rsi.setCurrentRow(row);
-                    RequestContext.getCurrentInstance().getPageFlowScope().put("case", "pko");
-                } else if (regType.equalsIgnoreCase("RKO")) {
-                    Key k = new Key(new Object[] { regId });
-                    DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("RkoView1Iterator");
-                    RowSetIterator rsi = iter.getRowSetIterator();
-                    Row row = rsi.findByKey(k, 1)[0];
-                    //row.setAttribute("OEditable", new BigDecimal(1));
-                    rsi.setCurrentRow(row);
-                    RequestContext.getCurrentInstance().getPageFlowScope().put("case", "rko");
+                if (rowType.equalsIgnoreCase("VwKassaMoves")) {
+                    //System.out.println(rw.getAttribute("RegistratorId"));
+                    String regId = (String) rw.getAttribute("RegistratorId");
+                    String regType = (String) rw.getAttribute("TableName");
+                    if (regType.equalsIgnoreCase("orders")) {
+                        Key k = new Key(new Object[] { regId });
+                        DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("OrdersView1Iterator");
+                        RowSetIterator rsi = iter.getRowSetIterator();
+                        Row row = rsi.findByKey(k, 1)[0];
+                        //row.setAttribute("OEditable", new BigDecimal(1));
+                        rsi.setCurrentRow(row);
+                        RequestContext.getCurrentInstance().getPageFlowScope().put("case", "orders");
+                    } else if (regType.equalsIgnoreCase("OTHER_ZATRATY")) {
+                        Key k = new Key(new Object[] { regId });
+                        DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("OtherZatratyView1Iterator");
+                        RowSetIterator rsi = iter.getRowSetIterator();
+                        Row row = rsi.findByKey(k, 1)[0];
+                        //row.setAttribute("OEditable", new BigDecimal(1));
+                        rsi.setCurrentRow(row);
+                        RequestContext.getCurrentInstance().getPageFlowScope().put("case", "other");
+                    } else if (regType.equalsIgnoreCase("PKO")) {
+                        Key k = new Key(new Object[] { regId });
+                        DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("PkoView1Iterator");
+                        RowSetIterator rsi = iter.getRowSetIterator();
+                        Row row = rsi.findByKey(k, 1)[0];
+                        //row.setAttribute("OEditable", new BigDecimal(1));
+                        rsi.setCurrentRow(row);
+                        RequestContext.getCurrentInstance().getPageFlowScope().put("case", "pko");
+                    } else if (regType.equalsIgnoreCase("RKO")) {
+                        Key k = new Key(new Object[] { regId });
+                        DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("RkoView1Iterator");
+                        RowSetIterator rsi = iter.getRowSetIterator();
+                        Row row = rsi.findByKey(k, 1)[0];
+                        //row.setAttribute("OEditable", new BigDecimal(1));
+                        rsi.setCurrentRow(row);
+                        RequestContext.getCurrentInstance().getPageFlowScope().put("case", "rko");
+                    }
                 }
+            } catch (Exception e) {
+                // TODO: Add catch code
+                e.printStackTrace();
             }
         }
     }
