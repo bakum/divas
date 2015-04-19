@@ -56,6 +56,7 @@
    </list>
    <value n="defaultPackage" v="ua.divas.model"/>
    <hash n="ejbModuleContainer">
+      <value n="dbConnection" v="divas"/>
       <hash n="ejb21IdToEjbNameMap">
          <value n="ejb:8b6a23ff-0149-1000-8001-7f0000017b3e" v="ua.divas.module.common.AppModuleServiceBean"/>
       </hash>

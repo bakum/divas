@@ -11,8 +11,10 @@ import javax.faces.model.SelectItem;
 
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
+import oracle.adf.model.binding.DCDataControl;
 import oracle.adf.model.binding.DCIteratorBinding;
 
+import oracle.adf.view.rich.component.rich.input.RichInputText;
 import oracle.adf.view.rich.component.rich.input.RichSelectOneChoice;
 import oracle.adf.view.rich.event.DialogEvent;
 
@@ -28,13 +30,24 @@ import oracle.binding.OperationBinding;
 import oracle.jbo.NameValuePairs;
 import oracle.jbo.Row;
 
+import ua.divas.module.AppModuleImpl;
+
 public class ShuttleGroup {
     List selectedValues = new ArrayList();
     List allValues = new ArrayList();
     private RichSelectOneChoice division;
     private RichSelectOneChoice currency;
+    private RichInputText konName;
 
     public ShuttleGroup() {
+    }
+    
+    public void setKonName(RichInputText konName) {
+        this.konName = konName;
+    }
+
+    public RichInputText getKonName() {
+        return konName;
     }
     
     private List union(List set1, List set2) {
@@ -307,4 +320,70 @@ public class ShuttleGroup {
            
         }
     }
+    
+    private void setIsMeasurer() {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+        Row currRow = it.getCurrentRow();
+
+        currRow.setAttribute("IsMeasurer", new Integer(1));
+    }
+    
+    private void setZamerParentId() {
+
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+        Row currRow = it.getCurrentRow();
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding oper = (OperationBinding) binding.getOperationBinding("retrieveZamerFirstParentId");
+        String res = (String) oper.execute();
+        currRow.setAttribute("ParentId", res);
+
+    }
+    
+    protected void refreshKontrag() {
+        BindingContext bindingContext = BindingContext.getCurrent();
+        DCDataControl dc =
+            bindingContext.findDataControl("AppModuleDataControl"); // Name of application module in datacontrolBinding.cpx
+        AppModuleImpl am = (AppModuleImpl) dc.getDataProvider();
+        am.getKontragentsView1().executeQuery();
+    }
+    
+    private void setFullName() {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+        Row currRow = it.getCurrentRow();
+
+        currRow.setAttribute("Fullname", getKonName().getValue().toString());
+    }
+    
+    public void onPopupCreateZamer(PopupFetchEvent popupFetchEvent) {
+        try {
+            getKonName().setValue("");
+        } catch (Exception e) {
+            // TODO: Add catch code
+            e.printStackTrace();
+        }
+    }
+    
+    public void onNewZamerDialogListener(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding ob = binding.getOperationBinding("CreateInsert4");
+            ob.execute();
+            setFullName();
+            setIsMeasurer();
+            setZamerParentId();
+            //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            ob = binding.getOperationBinding("Commit");
+            ob.execute();
+            refreshKontrag();
+            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+            if (it != null) {
+                it.executeQuery();
+            } */
+        }
+    }
+    
 }

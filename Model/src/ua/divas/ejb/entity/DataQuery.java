@@ -41,6 +41,20 @@ public class DataQuery {
         }
     }
     
+    public static Users getZamerUser(String Id) {
+        try {
+            Users u = getEm().createNamedQuery("Users.findById", Users.class)
+                .setParameter("id", Id)
+                .getSingleResult();
+            if (u != null) {
+                return u;
+            }
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
     public static List<QuartzProperty> getAllQuartzSettings() {
         try {
             List<QuartzProperty> u = getEm().createNamedQuery("QuartzProperty.findAll", QuartzProperty.class).getResultList();

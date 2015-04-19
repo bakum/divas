@@ -48,6 +48,14 @@
     Name="TypeOfActivitiesView1"
     ViewObjectName="ua.divas.view.TypeOfActivitiesView"
     RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="KontragentsView1"
+    ViewObjectName="ua.divas.view.KontragentsView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="KontragentsZamerCriteria"
+      FullName="ua.divas.view.KontragentsView.KontragentsZamerCriteria"/>
+  </ViewAccessor>
   <ListBinding
     Name="LOV_UserId"
     ListVOName="UsersView1"
@@ -241,6 +249,56 @@
     <DisplayCriteria
       Hint="showAndExecute"/>
   </ListBinding>
+  <ListBinding
+    Name="LOV_ZamerkontragId"
+    ListVOName="KontragentsView1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ZamerkontragId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ZamerkontragName"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="KontragentsZamerCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ZamerkontragName"
+    ListVOName="KontragentsView1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ZamerkontragName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ZamerkontragId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Fullname"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="KontragentsZamerCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
   <SQLQuery><![CDATA[SELECT UserSettings.ID, 
        UserSettings.USER_ID, 
        UserSettings.DIVISION_ID, 
@@ -250,7 +308,9 @@
        UserSettings.MAIN_USLUGA,
        (select fullname from nomenklatura where id = UserSettings.MAIN_USLUGA) MUslugaName,
        (select fullname from TYPE_OF_ACTIVITIES where id = UserSettings.ACTIVITIES_ID) activities_name,
-       UserSettings.ACTIVITIES_ID
+       UserSettings.ACTIVITIES_ID,
+       UserSettings.ZAMERKONTRAG_ID,
+       (select fullname from kontragents where id = UserSettings.ZAMERKONTRAG_ID) ZamerKontrag_Name
 FROM  USER_SETTINGS UserSettings]]></SQLQuery>
   <EntityUsage
     Name="UserSettings"
@@ -418,6 +478,51 @@ FROM  USER_SETTINGS UserSettings]]></SQLQuery>
     LOVName="LOV_ActivitiesId">
     <Properties>
       <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ZamerkontragId"
+    PrecisionRule="true"
+    EntityAttrName="ZamerkontragId"
+    EntityUsage="UserSettings"
+    AliasName="ZAMERKONTRAG_ID"
+    LOVName="LOV_ZamerkontragId">
+    <Dependencies>
+      <Item
+        Value="ZamerkontragName"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ZamerkontragName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="150"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ZAMERKONTRAG_NAME"
+    Expression="ZAMERKONTRAG_NAME"
+    SQLType="VARCHAR"
+    LOVName="LOV_ZamerkontragName">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="150"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.UserSettingsView.ZamerkontragName_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.UserSettingsView.ZamerkontragName_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="30"/>
         <CONTROLTYPE
           Value="input_text_lov"/>
       </SchemaBasedProperties>

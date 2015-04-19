@@ -42,7 +42,9 @@
       <variable Type="java.lang.String" Name="addUserToWls_username" IsQueriable="false" IsNotNull="true"/>
       <variable Type="java.lang.String" Name="addUserToWls_psw" IsQueriable="false" IsNotNull="true"/>
       <variable Type="java.lang.String" Name="addUserToWls_desc" IsQueriable="false"/>
+      <variable Name="KonName" Type="java.lang.String"/>
     </variableIterator>
+    <iterator Binds="KontragentsView1" RangeSize="10" DataControl="AppModuleDataControl" id="KontragentsView1Iterator"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="UsersView1Iterator" id="Login">
@@ -242,5 +244,21 @@
         <Item Value="0"/>
       </ValueList>
     </button>
+    <listOfValues IterBinding="UserSettingsView8Iterator" StaticList="false" Uses="LOV_ZamerkontragId"
+                  id="ZamerkontragId"/>
+    <listOfValues IterBinding="UserSettingsView8Iterator" StaticList="false" Uses="LOV_ZamerkontragName"
+                  id="ZamerkontragName"/>
+    <attributeValues IterBinding="variables" id="KonName1">
+      <AttrNames>
+        <Item Value="KonName"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="KontragentsView1Iterator" id="CreateInsert4"
+            InstanceName="AppModuleDataControl.KontragentsView1" DataControl="AppModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <methodAction id="retrieveZamerFirstParentId" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="retrieveZamerFirstParentId" IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.KontragentsView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.retrieveZamerFirstParentId_AppModuleDataControl_KontragentsView1_retrieveZamerFirstParentId_result"/>
   </bindings>
 </pageDefinition>

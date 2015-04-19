@@ -384,6 +384,28 @@
                                                         <f:validator binding="#{bindings.ActivitiesName.validator}"/>
                                                         <af:autoSuggestBehavior suggestedItems="#{bindings.ActivitiesName.suggestedItems}"/>
                                                     </af:inputListOfValues>
+                                                    <af:inputListOfValues id="zamerkontragIdId"
+                                                                          popupTitle="Search and Select: #{bindings.ZamerkontragId.hints.label}"
+                                                                          value="#{bindings.ZamerkontragId.inputValue}"
+                                                                          label="#{bindings.ZamerkontragId.hints.label}"
+                                                                          model="#{bindings.ZamerkontragId.listOfValuesModel}"
+                                                                          required="#{bindings.ZamerkontragId.hints.mandatory}"
+                                                                          columns="#{bindings.ZamerkontragId.hints.displayWidth}"
+                                                                          shortDesc="#{bindings.ZamerkontragId.hints.tooltip}"
+                                                                          visible="false">
+                                                        <f:validator binding="#{bindings.ZamerkontragId.validator}"/>
+                                                    </af:inputListOfValues>
+                                                    <af:inputListOfValues id="zamerkontragNameId"
+                                                                          popupTitle="Search and Select: #{bindings.ZamerkontragName.hints.label}"
+                                                                          value="#{bindings.ZamerkontragName.inputValue}"
+                                                                          label="#{bindings.ZamerkontragName.hints.label}"
+                                                                          model="#{bindings.ZamerkontragName.listOfValuesModel}"
+                                                                          required="#{bindings.ZamerkontragName.hints.mandatory}"
+                                                                          columns="#{bindings.ZamerkontragName.hints.displayWidth}"
+                                                                          shortDesc="#{bindings.ZamerkontragName.hints.tooltip}"
+                                                                          autoSubmit="true" createPopupId="pZamer">
+                                                        <f:validator binding="#{bindings.ZamerkontragName.validator}"/>
+                                                    </af:inputListOfValues>
                                                     <af:spacer width="10" height="10" id="s2"/>
                                                 </af:panelFormLayout>
                                                 <f:facet name="toolbar">
@@ -549,6 +571,17 @@
                                                        text="addUserToWls" disabled="#{!bindings.addUserToWls.enabled}"
                                                        id="b11" rendered="false"/>
                                         </af:panelFormLayout>
+                                    </af:dialog>
+                                </af:popup>
+                                <af:popup childCreation="deferred" autoCancel="disabled" id="pZamer"
+                                          contentDelivery="lazyUncached"
+                                          popupFetchListener="#{shuttle_group.onPopupCreateZamer}">
+                                    <af:dialog id="d6" title="Новый контрагент для замеров"
+                                               dialogListener="#{shuttle_group.onNewZamerDialogListener}">
+                                        <f:facet name="buttonBar"/>
+                                        <af:inputText label="Наименование" id="it24"
+                                                      value="#{bindings.KonName1.inputValue}" columns="30"
+                                                      binding="#{shuttle_group.konName}"/>
                                     </af:dialog>
                                 </af:popup>
                             </af:showDetailItem>
