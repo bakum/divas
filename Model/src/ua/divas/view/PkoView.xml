@@ -11,10 +11,12 @@
   PageIterMode="Full"
   ComponentClass="ua.divas.view.PkoViewImpl"
   ComponentInterface="ua.divas.view.common.PkoView"
-  ClientProxyName="ua.divas.view.client.PkoViewClient">
+  ClientProxyName="ua.divas.view.client.PkoViewClient"
+  RowClass="ua.divas.view.PkoViewRowImpl">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
-    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
   <ViewAccessor
     Name="DivisionsView1"
@@ -248,7 +250,8 @@
         KONTRAGENTS 
     WHERE 
         ID = KONTRAG_ID) KontragName,
-       Pko.SUMMA
+       Pko.SUMMA,
+       (select 0 from dual) P_Editable
 FROM  PKO Pko]]></SQLQuery>
   <EntityUsage
     Name="Pko"
@@ -471,6 +474,15 @@ FROM  PKO Pko]]></SQLQuery>
     EntityAttrName="Summa"
     EntityUsage="Pko"
     AliasName="SUMMA"/>
+  <ViewAttribute
+    Name="PEditable"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="P_EDITABLE"
+    Expression="P_EDITABLE"
+    SQLType="NUMERIC"/>
   <ViewLinkAccessor
     Name="VwPkoMoves"
     ViewLink="ua.divas.view.VwPkoPkoFkLink"

@@ -46,5 +46,10 @@
         <Item Value="Summa"/>
       </AttrNames>
     </attributeValues>
+    <attributeValues IterBinding="RkoView1Iterator" id="REditable">
+      <AttrNames>
+        <Item Value="REditable"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>
