@@ -7,14 +7,6 @@
 
 /
 --------------------------------------------------------
---  DDL for Type DIVISIONTABLE
---------------------------------------------------------
-
-  CREATE OR REPLACE TYPE "DIVISIONTABLE" 
-AS TABLE OF divisiontype;
-
-/
---------------------------------------------------------
 --  DDL for Type ROW_BALLANS
 --------------------------------------------------------
 
@@ -36,6 +28,15 @@ AS TABLE OF divisiontype;
 )
 
 /
+--------------------------------------------------------
+--  DDL for Type DIVISIONTABLE
+--------------------------------------------------------
+
+  CREATE OR REPLACE TYPE "DIVISIONTABLE" 
+AS TABLE OF divisiontype;
+
+/
+
 --------------------------------------------------------
 --  DDL for Type ROW_SALES
 --------------------------------------------------------
@@ -91,7 +92,6 @@ AS TABLE OF row_sales;
 AS TABLE OF row_zatraty;
 
 /
-
 --------------------------------------------------------
 --  DDL for Type USERTYPE
 --------------------------------------------------------
@@ -108,11 +108,12 @@ AS TABLE OF row_zatraty;
 AS TABLE OF usertype;
 
 /
+
 --------------------------------------------------------
 --  DDL for Sequence ORDERS_NUM_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "ORDERS_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 541 CACHE 20 NOORDER  CYCLE ;
+   CREATE SEQUENCE  "ORDERS_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 581 CACHE 20 NOORDER  CYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence OTHER_ZATR_NUM_SEQ
 --------------------------------------------------------
@@ -122,17 +123,17 @@ AS TABLE OF usertype;
 --  DDL for Sequence PKO_NUM_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PKO_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 61 CACHE 20 NOORDER  CYCLE ;
+   CREATE SEQUENCE  "PKO_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 101 CACHE 20 NOORDER  CYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence PS_TXN_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 152501 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 158251 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence RKO_NUM_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "RKO_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 84 CACHE 20 NOORDER  CYCLE ;
+   CREATE SEQUENCE  "RKO_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 125 CACHE 20 NOORDER  CYCLE ;
 --------------------------------------------------------
 --  DDL for Table ASTER_SETTINGS
 --------------------------------------------------------
@@ -1003,7 +1004,8 @@ AS TABLE OF usertype;
 	"CURRENCY_ID" VARCHAR2(50 CHAR), 
 	"KASSA_ID" VARCHAR2(50 CHAR), 
 	"MAIN_USLUGA" VARCHAR2(50 CHAR), 
-	"ACTIVITIES_ID" VARCHAR2(50 CHAR)
+	"ACTIVITIES_ID" VARCHAR2(50 CHAR), 
+	"ZAMERKONTRAG_ID" VARCHAR2(50 CHAR)
    ) ;
 --------------------------------------------------------
 --  DDL for Table VOUCHER
@@ -3759,6 +3761,9 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   ALTER TABLE "USER_SETTINGS" ADD CONSTRAINT "USER_SETTINGS_FK1" FOREIGN KEY ("ACTIVITIES_ID")
 	  REFERENCES "TYPE_OF_ACTIVITIES" ("ID") ENABLE;
  
+  ALTER TABLE "USER_SETTINGS" ADD CONSTRAINT "USER_SETTINGS_FK2" FOREIGN KEY ("ZAMERKONTRAG_ID")
+	  REFERENCES "KONTRAGENTS" ("ID") ENABLE;
+ 
   ALTER TABLE "USER_SETTINGS" ADD CONSTRAINT "USER_SETTINGS_KASSA_FK1" FOREIGN KEY ("KASSA_ID")
 	  REFERENCES "KASSA" ("ID") ENABLE;
  
@@ -5251,6 +5256,7 @@ end other_entry;
   procedure pko_remove_plan_acc(p_id in varchar2, p_del in number default 0);
   procedure pko_move_all;
   procedure pko_remove_all;
+  function get_operationname(p_id in varchar2) return varchar2;
 
 end pko_entry;
 
@@ -5306,6 +5312,7 @@ end report_pkg;
   procedure rko_remove_plan_acc(p_id in varchar2, p_del in number default 0);
   procedure rko_move_all;
   procedure rko_remove_all;
+  function get_operationname(p_id in varchar2) return varchar2;
 
 END RKO_ENTRY;
 
@@ -8143,6 +8150,17 @@ procedure pko_remove_all as
         RAISE_APPLICATION_ERROR (-20001,'Error pko remove all for plan accounting! '||SQLERRM, TRUE) ;
   end pko_remove_all;
 
+function get_operationname(p_id in varchar2) return varchar2 as
+  pp_id varchar2(60);
+  begin
+    select r.name into pp_id from operation_pko r where upper(r.id) = upper(p_id);
+    return pp_id;
+    
+    exception
+        when no_data_found then 
+        return 'none';
+  end get_operationname;
+
 end pko_entry;
 
 /
@@ -8610,6 +8628,17 @@ procedure set_subconto_other(p_move_rec moves%rowtype) as
         when others then 
         RAISE_APPLICATION_ERROR (-20001,'Error rko remove all for plan accounting! '||SQLERRM, TRUE) ;
   END rko_remove_all;
+  
+  function get_operationname(p_id in varchar2) return varchar2 as
+  pp_id varchar2(60);
+  begin
+    select r.name into pp_id from operation_rko r where upper(r.id) = upper(p_id);
+    return pp_id;
+    
+    exception
+        when no_data_found then 
+        return 'none';
+  end get_operationname;
 
 END RKO_ENTRY;
 
