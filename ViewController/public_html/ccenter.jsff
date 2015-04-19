@@ -839,9 +839,10 @@
                                                                 </af:gridCell>
                                                             </af:gridRow>
                                                         </af:panelGridLayout>
-                                                        <af:link text="Просмотр" id="l1" icon="/img/view1.png">
-                                                            <af:showPopupBehavior popupId="::pViewOrder"/>
-                                                        </af:link>
+                                                        <af:link text="Просмотр" id="l1" icon="/img/view1.png"
+                                                                 action="viewOrder" useWindow="true"
+                                                                 windowHeight="500" windowWidth="780"
+                                                                 returnListener="#{filter.onReturnValue}"/>
                                                     </af:listItem>
                                                 </af:listView>
                                             </af:showDetailItem>

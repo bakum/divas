@@ -17,9 +17,9 @@
       <property
          name="y">151.04688</property>
       <property
-         name="pageFragment">true</property>
-      <property
          name="x">110.0</property>
+      <property
+         name="pageFragment">true</property>
    </View>
    <TaskFlowCall
       id="TaskFlowCall4">
@@ -49,5 +49,34 @@
          name="fromOutcome">addKontrag</property>
       <property
          name="sdm:polyPoints">R50,151.0,151.0625,270.00684,139.53125,L50</property>
+   </ControlFlowCase>
+   <TaskFlowCall
+      id="TaskFlowCall5">
+      <property
+         name="taskFlowId">order-dialog-flow</property>
+      <property
+         name="activityId">order-dialog-flow</property>
+      <property
+         name="documentReference">/WEB-INF/order-dialog-flow.xml</property>
+      <property
+         name="runAsDialog">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>order-dialog-flow&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">293.53125</property>
+      <property
+         name="x">281.09082</property>
+   </TaskFlowCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="View2"
+      to="TaskFlowCall5">
+      <property
+         name="fromOutcome">viewOrder</property>
+      <property
+         name="sdm:polyPoints">B50,110.0,205.0625,240.09082,293.54688,L50</property>
    </ControlFlowCase>
 </SDM>

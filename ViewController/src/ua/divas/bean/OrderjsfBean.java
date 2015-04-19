@@ -12,6 +12,7 @@ import javax.faces.event.ValueChangeEvent;
 
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
+import oracle.adf.model.binding.DCDataControl;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.input.RichInputListOfValues;
 import oracle.adf.view.rich.component.rich.input.RichInputText;
@@ -28,11 +29,32 @@ import oracle.binding.OperationBinding;
 
 import oracle.jbo.Row;
 
+import ua.divas.module.AppModuleImpl;
+
 public class OrderjsfBean {
     private RichInputText price;
     private RichInputText qtt;
+    private RichInputText konName;
+    private RichInputText prorName;
+    private RichInputText zatrName;
 
     public OrderjsfBean() {
+    }
+    
+    public void setKonName(RichInputText konName) {
+        this.konName = konName;
+    }
+
+    public RichInputText getKonName() {
+        return konName;
+    }
+
+    public void setProrName(RichInputText prorName) {
+        this.prorName = prorName;
+    }
+
+    public RichInputText getProrName() {
+        return prorName;
     }
     
     public void setPrice(RichInputText price) {
@@ -49,6 +71,30 @@ public class OrderjsfBean {
 
     public RichInputText getQtt() {
         return qtt;
+    }
+    
+    public void setZatrName(RichInputText zatrName) {
+        this.zatrName = zatrName;
+    }
+
+    public RichInputText getZatrName() {
+        return zatrName;
+    }
+    
+    protected void refreshKontrag() {
+        BindingContext bindingContext = BindingContext.getCurrent();
+        DCDataControl dc =
+            bindingContext.findDataControl("AppModuleDataControl"); // Name of application module in datacontrolBinding.cpx
+        AppModuleImpl am = (AppModuleImpl) dc.getDataProvider();
+        am.getKontragentsView1().executeQuery();
+    }
+    
+    protected void refreshZatraty() {
+        BindingContext bindingContext = BindingContext.getCurrent();
+        DCDataControl dc =
+            bindingContext.findDataControl("AppModuleDataControl"); // Name of application module in datacontrolBinding.cpx
+        AppModuleImpl am = (AppModuleImpl) dc.getDataProvider();
+        am.getZatratyView1().executeQuery();
     }
 
     public void onLaunchLov(LaunchPopupEvent launchPopupEvent) {
@@ -158,6 +204,158 @@ public class OrderjsfBean {
             BigDecimal s = (BigDecimal) ob.execute();
             System.out.println(s);
             currRow.setAttribute("Summ", s);
+        }
+    }
+    
+    private void setIsBuyer() {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+        Row currRow = it.getCurrentRow();
+
+        currRow.setAttribute("IsBuyer", new Integer(1));
+
+    }
+    
+    private void setIsSupplier() {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+        Row currRow = it.getCurrentRow();
+
+        currRow.setAttribute("IsSupplier", new Integer(1));
+    }
+    
+    private void setFullName() {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+        Row currRow = it.getCurrentRow();
+
+        currRow.setAttribute("Fullname", getKonName().getValue().toString());
+    }
+    
+    private void setProrName() {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+        Row currRow = it.getCurrentRow();
+
+        currRow.setAttribute("Fullname", getProrName().getValue().toString());
+    }
+    
+    private void setZatrName() {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("ZatratyView1Iterator");
+        Row currRow = it.getCurrentRow();
+
+        currRow.setAttribute("Fullname", getZatrName().getValue().toString());
+    }
+    
+    private void setParentId() {
+
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+        Row currRow = it.getCurrentRow();
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding oper = (OperationBinding) binding.getOperationBinding("retrieveCustomersFirstParentId");
+        String res = (String) oper.execute();
+        currRow.setAttribute("ParentId", res);
+    }
+    
+    private void setSupplierParentId() {
+
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+        Row currRow = it.getCurrentRow();
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding oper = (OperationBinding) binding.getOperationBinding("retrieveSupplierFirstParentId");
+        String res = (String) oper.execute();
+        currRow.setAttribute("ParentId", res);
+
+    }
+    
+    public void onPopupCreateKontrag(PopupFetchEvent popupFetchEvent) {
+        try {
+            getKonName().setValue("");
+        } catch (Exception e) {
+            // TODO: Add catch code
+            e.printStackTrace();
+        }
+    }
+    
+    public void onPopupCreatePror(PopupFetchEvent popupFetchEvent) {
+        try {
+            getProrName().setValue("");
+        } catch (Exception e) {
+            // TODO: Add catch code
+            e.printStackTrace();
+        }
+    }
+    
+    public void onPopupCreateZatraty(PopupFetchEvent popupFetchEvent) {
+        try {
+            getZatrName().setValue("");
+        } catch (Exception e) {
+            // TODO: Add catch code
+            e.printStackTrace();
+        }
+    }
+    
+    public void onNewKontragentDialogListener(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding ob = binding.getOperationBinding("CreateInsert5");
+            ob.execute();
+            this.setFullName();
+            this.setIsBuyer();
+            this.setParentId();
+            //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            ob = binding.getOperationBinding("Commit");
+            ob.execute();
+            refreshKontrag();
+            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+            if (it != null) {
+                it.executeQuery();
+            } */
+        }
+    }
+    
+    public void onNewSupplierDialogListener(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding ob = binding.getOperationBinding("CreateInsert5");
+            ob.execute();
+            this.setProrName();
+            this.setIsSupplier();
+            this.setSupplierParentId();
+            //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            ob = binding.getOperationBinding("Commit");
+            ob.execute();
+            refreshKontrag();
+            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+            if (it != null) {
+                it.executeQuery();
+            } */
+        }
+    }
+    
+    public void onNewZatratyDialogListener(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding ob = binding.getOperationBinding("CreateInsert6");
+            ob.execute();
+            setZatrName();
+            /* this.setFullName();
+            this.setIsBuyer();
+            this.setParentId(); */
+            //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            ob = binding.getOperationBinding("Commit");
+            ob.execute();
+            refreshZatraty();
+            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+            if (it != null) {
+                it.executeQuery();
+            } */
         }
     }
 }

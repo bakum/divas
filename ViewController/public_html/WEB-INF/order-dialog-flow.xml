@@ -5,6 +5,11 @@
     <transaction>
       <requires-transaction/>
     </transaction>
+    <return-value-definition id="__4">
+      <name>OrderId</name>
+      <value>#{pageFlowScope.OrderId}</value>
+      <class>java.lang.String</class>
+    </return-value-definition>
     <managed-bean id="__5">
       <managed-bean-name>order_jsf</managed-bean-name>
       <managed-bean-class>ua.divas.bean.OrderjsfBean</managed-bean-class>

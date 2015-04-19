@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE html>
 <f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" locale="ru">
-    <af:document title="Заказ" id="d1" uncommittedDataWarning="on">
+    <af:document title="Заказ #{bindings.Num.inputValue} от #{bindings.Dat.inputValue}" id="d1" uncommittedDataWarning="on">
         <af:messages id="m1"/>
         <af:form id="f1">
             <af:panelGridLayout id="pgl1">
@@ -77,7 +77,7 @@
                                                 <f:validator binding="#{bindings.KontragId.validator}"/>
                                             </af:inputListOfValues>
                                             <af:inputListOfValues id="kontragnameId"
-                                                                  popupTitle="Search and Select: #{bindings.Kontragname.hints.label}"
+                                                                  popupTitle="Найти и выбрать: #{bindings.Kontragname.hints.label}"
                                                                   value="#{bindings.Kontragname.inputValue}"
                                                                   label="#{bindings.Kontragname.hints.label}"
                                                                   model="#{bindings.Kontragname.listOfValuesModel}"
@@ -86,7 +86,8 @@
                                                                   shortDesc="#{bindings.Kontragname.hints.tooltip}"
                                                                   labelStyle="font-weight: bold;"
                                                                   readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
-                                                                  launchPopupListener="#{order_jsf.onLaunchLov}">
+                                                                  launchPopupListener="#{order_jsf.onLaunchLov}"
+                                                                  createPopupId="pCreateKon">
                                                 <f:validator binding="#{bindings.Kontragname.validator}"/>
                                                 <af:autoSuggestBehavior suggestedItems="#{bindings.Kontragname.suggestedItems}"/>
                                                 <f:facet name="context">
@@ -287,6 +288,94 @@
                                                     </af:panelAccordion>
                                                 </af:dialog>
                                             </af:popup>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateKon"
+                                                      contentDelivery="lazyUncached"
+                                                      popupFetchListener="#{order_jsf.onPopupCreateKontrag}">
+                                                <af:dialog id="d3" title="Новый контрагент" closeIconVisible="false"
+                                                           dialogListener="#{order_jsf.onNewKontragentDialogListener}">
+                                                    <af:panelFormLayout id="pfl4" labelAlignment="start">
+                                                        <af:inputText value="#{bindings.KonName1.inputValue}"
+                                                                      label="Наименование"
+                                                                      required="#{bindings.Fullname.hints.mandatory}"
+                                                                      columns="#{bindings.Fullname.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.Fullname.hints.precision}"
+                                                                      shortDesc="#{bindings.Fullname.hints.tooltip}"
+                                                                      id="it37" autoSubmit="true"
+                                                                      binding="#{order_jsf.konName}">
+                                                            <f:validator binding="#{bindings.Fullname.validator}"/>
+                                                        </af:inputText>
+                                                    </af:panelFormLayout>
+                                                    <f:facet name="buttonBar"/>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="pMoves"
+                                                      contentDelivery="lazyUncached">
+                                                <af:dialog id="d6" title="Движения документа" closeIconVisible="false"
+                                                           type="ok">
+                                                    <f:facet name="buttonBar"/>
+                                                    <af:panelBox text="Движения по счетам" id="pb5">
+                                                        <f:facet name="toolbar"/>
+                                                        <af:table value="#{bindings.VwOrdersMoves2.collectionModel}"
+                                                                  var="row" rows="#{bindings.VwOrdersMoves2.rangeSize}"
+                                                                  emptyText="#{bindings.VwOrdersMoves2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                                  rowBandingInterval="0"
+                                                                  selectedRowKeys="#{bindings.VwOrdersMoves2.collectionModel.selectedRow}"
+                                                                  selectionListener="#{bindings.VwOrdersMoves2.collectionModel.makeCurrent}"
+                                                                  rowSelection="single"
+                                                                  fetchSize="#{bindings.VwOrdersMoves2.rangeSize}"
+                                                                  id="t16">
+                                                            <af:column headerText="#{bindings.VwOrdersMoves2.hints.Deb.label}"
+                                                                       id="c41">
+                                                                <af:outputText value="#{row.Deb}"
+                                                                               shortDesc="#{bindings.VwOrdersMoves2.hints.Deb.tooltip}"
+                                                                               id="ot2"/>
+                                                            </af:column>
+                                                            <af:column headerText="#{bindings.VwOrdersMoves2.hints.SumDeb.label}"
+                                                                       id="c42">
+                                                                <af:outputText value="#{row.SumDeb}"
+                                                                               shortDesc="#{bindings.VwOrdersMoves2.hints.SumDeb.tooltip}"
+                                                                               id="ot3">
+                                                                    <af:convertNumber groupingUsed="false"
+                                                                                      pattern="#{bindings.VwOrdersMoves2.hints.SumDeb.format}"/>
+                                                                </af:outputText>
+                                                            </af:column>
+                                                            <af:column headerText="#{bindings.VwOrdersMoves2.hints.Kred.label}"
+                                                                       id="c43">
+                                                                <af:outputText value="#{row.Kred}"
+                                                                               shortDesc="#{bindings.VwOrdersMoves2.hints.Kred.tooltip}"
+                                                                               id="ot4"/>
+                                                            </af:column>
+                                                            <af:column headerText="#{bindings.VwOrdersMoves2.hints.SumKred.label}"
+                                                                       id="c44">
+                                                                <af:outputText value="#{row.SumKred}"
+                                                                               shortDesc="#{bindings.VwOrdersMoves2.hints.SumKred.tooltip}"
+                                                                               id="ot5">
+                                                                    <af:convertNumber groupingUsed="false"
+                                                                                      pattern="#{bindings.VwOrdersMoves2.hints.SumKred.format}"/>
+                                                                </af:outputText>
+                                                            </af:column>
+                                                            <af:column headerText="#{bindings.VwOrdersMoves2.hints.Subconto1Deb.label}"
+                                                                       id="c45">
+                                                                <af:outputText value="#{row.Subconto1Deb}"
+                                                                               shortDesc="#{bindings.VwOrdersMoves2.hints.Subconto1Deb.tooltip}"
+                                                                               id="ot6"/>
+                                                            </af:column>
+                                                            <af:column headerText="#{bindings.VwOrdersMoves2.hints.Subconto1Kred.label}"
+                                                                       id="c46">
+                                                                <af:outputText value="#{row.Subconto1Kred}"
+                                                                               shortDesc="#{bindings.VwOrdersMoves2.hints.Subconto1Kred.tooltip}"
+                                                                               id="ot7"/>
+                                                            </af:column>
+                                                            <af:column headerText="#{bindings.VwOrdersMoves2.hints.Subconto2Kred.label}"
+                                                                       id="c47">
+                                                                <af:outputText value="#{row.Subconto2Kred}"
+                                                                               shortDesc="#{bindings.VwOrdersMoves2.hints.Subconto2Kred.tooltip}"
+                                                                               id="ot8"/>
+                                                            </af:column>
+                                                        </af:table>
+                                                    </af:panelBox>
+                                                </af:dialog>
+                                            </af:popup>
                                         </af:panelGroupLayout>
                                     </af:panelLabelAndMessage>
                                     <af:separator id="s2"/>
@@ -422,6 +511,13 @@
                                 </af:panelFormLayout>
                                 <f:facet name="toolbar">
                                     <af:toolbar id="t1">
+                                        <af:outputText value="Движения" id="ot1">
+                                            <f:facet name="context">
+                                                <af:contextInfo id="ci2">
+                                                    <af:showPopupBehavior triggerType="contextInfo" popupId="pMoves"/>
+                                                </af:contextInfo>
+                                            </f:facet>
+                                        </af:outputText>
                                         <af:button text="Редактировать" id="b1" icon="/img/edit-16.gif"
                                                    disabled="#{bindings.OEditable.inputValue == '1' ? true: false}"
                                                    shortDesc="Редактировать данные">
@@ -897,7 +993,8 @@
                                                                           model="#{row.bindings.Kontname.listOfValuesModel}"
                                                                           required="#{bindings.OrdersTpRashodyView4.hints.Kontname.mandatory}"
                                                                           columns="#{bindings.OrdersTpRashodyView4.hints.Kontname.displayWidth}"
-                                                                          shortDesc="#{bindings.OrdersTpRashodyView4.hints.Kontname.tooltip}">
+                                                                          shortDesc="#{bindings.OrdersTpRashodyView4.hints.Kontname.tooltip}"
+                                                                          createPopupId="::pSuppl">
                                                 <f:validator binding="#{row.bindings.Kontname.validator}"/>
                                             </af:inputComboboxListOfValues>
                                         </af:column>
@@ -925,7 +1022,8 @@
                                                                           model="#{row.bindings.Zatrname.listOfValuesModel}"
                                                                           required="#{bindings.OrdersTpRashodyView4.hints.Zatrname.mandatory}"
                                                                           columns="#{bindings.OrdersTpRashodyView4.hints.Zatrname.displayWidth}"
-                                                                          shortDesc="#{bindings.OrdersTpRashodyView4.hints.Zatrname.tooltip}">
+                                                                          shortDesc="#{bindings.OrdersTpRashodyView4.hints.Zatrname.tooltip}"
+                                                                          createPopupId="::pZatr">
                                                 <f:validator binding="#{row.bindings.Zatrname.validator}"/>
                                             </af:inputComboboxListOfValues>
                                         </af:column>
@@ -973,6 +1071,28 @@
                                             </af:panelLabelAndMessage>
                                         </f:facet>
                                     </af:table>
+                                    <af:popup childCreation="deferred" autoCancel="disabled" id="pSuppl"
+                                              contentDelivery="lazyUncached"
+                                              popupFetchListener="#{order_jsf.onPopupCreatePror}">
+                                        <af:dialog id="d4" title="Новый прораб"
+                                                   dialogListener="#{order_jsf.onNewSupplierDialogListener}">
+                                            <f:facet name="buttonBar"/>
+                                            <af:inputText label="Наименование" id="it36"
+                                                          value="#{bindings.ProrabName1.inputValue}"
+                                                          binding="#{order_jsf.prorName}" columns="40"/>
+                                        </af:dialog>
+                                    </af:popup>
+                                    <af:popup childCreation="deferred" autoCancel="disabled" id="pZatr"
+                                              contentDelivery="lazyUncached"
+                                              popupFetchListener="#{order_jsf.onPopupCreateZatraty}">
+                                        <af:dialog id="d5" title="Новая статья затрат"
+                                                   dialogListener="#{order_jsf.onNewZatratyDialogListener}">
+                                            <f:facet name="buttonBar"/>
+                                            <af:inputText label="Наименование" id="it38" columns="50"
+                                                          value="#{bindings.ZatratyName1.inputValue}"
+                                                          binding="#{order_jsf.zatrName}"/>
+                                        </af:dialog>
+                                    </af:popup>
                                 </af:panelBox>
                             </af:showDetailItem>
                             <af:showDetailItem text="Начисления" id="sdi7" stretchChildren="first">

@@ -590,4 +590,8 @@ public class FilterBeans {
         OperationBinding ob = binding.getOperationBinding("CreateInsert2");
         ob.execute();
     }
+
+    public void onReturnValue(ReturnEvent returnEvent) {
+        refresh();
+    }
 }

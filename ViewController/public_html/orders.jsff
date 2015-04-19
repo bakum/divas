@@ -67,9 +67,10 @@
                                                 <af:column id="c21" rowHeader="true" width="60">
                                                     <af:toolbar id="t2">
                                                         <af:button id="b1" icon="/img/edit-16.gif"
-                                                                   disabled="#{bindings.Commit.enabled}">
-                                                            <af:showPopupBehavior popupId="::pEdit"/>
-                                                        </af:button>
+                                                                   disabled="#{bindings.Commit.enabled}"
+                                                                   action="viewOrder" useWindow="true"
+                                                                   windowHeight="500" windowWidth="780"
+                                                                   returnListener="#{orders.onReturnValue}"/>
                                                         <af:button id="b18" icon="/img/bell.png"
                                                                    disabled="#{bindings.Commit.enabled}">
                                                             <af:showPopupBehavior popupId="::pNotice"/>

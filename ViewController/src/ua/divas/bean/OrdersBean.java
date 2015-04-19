@@ -64,6 +64,7 @@ import oracle.jbo.uicli.binding.JUCtrlHierBinding;
 
 import org.apache.myfaces.trinidad.event.AttributeChangeEvent;
 import org.apache.myfaces.trinidad.event.PollEvent;
+import org.apache.myfaces.trinidad.event.ReturnEvent;
 import org.apache.myfaces.trinidad.model.CollectionModel;
 import org.apache.myfaces.trinidad.model.RowKeySet;
 
@@ -187,6 +188,8 @@ public class OrdersBean {
                 }
             }
         }
+        
+        AdfFacesContext.getCurrentInstance().addPartialTarget(getMainTable());
     }
 
     public String commitChange() {
@@ -706,6 +709,7 @@ public class OrdersBean {
         DCDataControl dc =
             bindingContext.findDataControl("AppModuleDataControl"); // Name of application module in datacontrolBinding.cpx
         AppModuleImpl am = (AppModuleImpl) dc.getDataProvider();
+        am.getKontragentsView1().executeQuery();
         am.getOrdersView1().executeQuery();
     }
     
@@ -724,5 +728,9 @@ public class OrdersBean {
 
     public RichInputText getDesc() {
         return desc;
+    }
+
+    public void onReturnValue(ReturnEvent returnEvent) {
+        refresh();
     }
 }

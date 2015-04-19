@@ -3,8 +3,13 @@
                 Package="ua.divas.bean.pageDefs">
   <parameters/>
   <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="OrdersView1" RangeSize="25" DataControl="AppModuleDataControl" id="OrdersView1Iterator"/>
+    <variableIterator id="variables">
+      <variable Name="KonName" Type="java.lang.String"/>
+      <variable Name="ProrabName" Type="java.lang.String"/>
+      <variable Name="ZatratyName" Type="java.lang.String"/>
+    </variableIterator>
+    <iterator Binds="OrdersView1" RangeSize="25" DataControl="AppModuleDataControl" id="OrdersView1Iterator"
+              ChangeEventPolicy="ppr"/>
     <iterator Binds="KontragentsView1" RangeSize="25" DataControl="AppModuleDataControl" id="KontragentsView1Iterator"
               ChangeEventPolicy="ppr"/>
     <iterator Binds="ContactDetailsView2" RangeSize="25" DataControl="AppModuleDataControl"
@@ -17,6 +22,9 @@
               id="OrdersTpRashodyView4Iterator"/>
     <iterator Binds="OrdersTpNachisleniaView2" RangeSize="5" DataControl="AppModuleDataControl"
               id="OrdersTpNachisleniaView2Iterator"/>
+    <iterator Binds="ZatratyView1" RangeSize="10" DataControl="AppModuleDataControl" id="ZatratyView1Iterator"/>
+    <iterator Binds="VwOrdersMoves2" RangeSize="25" DataControl="AppModuleDataControl" id="VwOrdersMoves2Iterator"
+              ChangeEventPolicy="ppr"/>
   </executables>
   <bindings>
     <listOfValues IterBinding="OrdersView1Iterator" StaticList="false" Uses="LOV_KontragId" id="KontragId"/>
@@ -286,6 +294,7 @@
           <Item Value="Percent"/>
           <Item Value="Summ"/>
           <Item Value="OtpnEditable"/>
+          <Item Value="Description"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -298,5 +307,48 @@
     </attributeValues>
     <action IterBinding="OrdersTpNachisleniaView2Iterator" id="CreateInsert4" RequiresUpdateModel="true"
             Action="createInsertRow"/>
+    <action IterBinding="KontragentsView1Iterator" id="CreateInsert5"
+            InstanceName="AppModuleDataControl.KontragentsView1" DataControl="AppModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <methodAction id="retrieveCustomersFirstParentId" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="retrieveCustomersFirstParentId" IsViewObjectMethod="true"
+                  DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.KontragentsView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.retrieveCustomersFirstParentId_AppModuleDataControl_KontragentsView1_retrieveCustomersFirstParentId_result"/>
+    <action id="Commit" DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <methodAction id="retrieveSupplierFirstParentId" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="retrieveSupplierFirstParentId" IsViewObjectMethod="true"
+                  DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.KontragentsView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.retrieveSupplierFirstParentId_AppModuleDataControl_KontragentsView1_retrieveSupplierFirstParentId_result"/>
+    <action id="Rollback" DataControl="AppModuleDataControl" RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <attributeValues IterBinding="variables" id="KonName1">
+      <AttrNames>
+        <Item Value="KonName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="ProrabName1">
+      <AttrNames>
+        <Item Value="ProrabName"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="ZatratyView1Iterator" id="CreateInsert6" InstanceName="AppModuleDataControl.ZatratyView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <attributeValues IterBinding="variables" id="ZatratyName1">
+      <AttrNames>
+        <Item Value="ZatratyName"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="VwOrdersMoves2Iterator" id="VwOrdersMoves2">
+      <nodeDefinition DefName="ua.divas.view.VwOrdersMoves" Name="VwOrdersMoves20">
+        <AttrNames>
+          <Item Value="Deb"/>
+          <Item Value="SumDeb"/>
+          <Item Value="Kred"/>
+          <Item Value="SumKred"/>
+          <Item Value="Subconto1Deb"/>
+          <Item Value="Subconto1Kred"/>
+          <Item Value="Subconto2Kred"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>
