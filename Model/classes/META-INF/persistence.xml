@@ -9,6 +9,8 @@
     <class>ua.divas.ejb.entity.QuartzProperty</class>
     <class>ua.divas.ejb.entity.Users</class>
     <class>ua.divas.ejb.entity.UserSettings</class>
+    <class>ua.divas.ejb.entity.Orders</class>
+    <class>ua.divas.ejb.entity.Kontragents</class>
     <properties>
       <property name="eclipselink.target-server" value="WebLogic_10"/>
       <property name="eclipselink.target-database" value="Oracle11"/>

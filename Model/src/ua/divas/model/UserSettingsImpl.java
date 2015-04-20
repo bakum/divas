@@ -342,12 +342,9 @@ public class UserSettingsImpl extends DivasEntityNoDelete {
     /**
      * Validation method for UserSettings.
      */
-    public boolean validateUserSettings() {
-        String uId = getUserId();
+    public boolean validateUserSettings1() {
         String zkId = getZamerkontragId();
-        Users u = DataQuery.getZamerUser(uId);
-        Integer isZamer = u.getIsZamer();
-        if (zkId == null && isZamer.intValue() == 1) {
+        if (DataQuery.zamerInUseUser(zkId)) {
             return false;
         }
         return true;
@@ -360,6 +357,20 @@ public class UserSettingsImpl extends DivasEntityNoDelete {
      */
     public static Key createPrimaryKey(String id) {
         return new Key(new Object[] { id });
+    }
+
+    /**
+     * Validation method for UserSettings.
+     */
+    public boolean validateUserSettings() {
+        String uId = getUserId();
+        String zkId = getZamerkontragId();
+        Users u = DataQuery.getZamerUser(uId);
+        Integer isZamer = u.getIsZamer();
+        if (zkId == null && isZamer.intValue() == 1) {
+            return false;
+        }
+        return true;
     }
 
 

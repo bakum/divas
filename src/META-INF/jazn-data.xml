@@ -314,6 +314,21 @@
                 <name>ua.divas.model.Orders.ZamerId</name>
                 <actions>update</actions>
               </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
+                <name>ua.divas.model.Orders.ActivitiesId</name>
+                <actions>update</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
+                <name>ua.divas.model.Orders.FirmId</name>
+                <actions>update</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
+                <name>ua.divas.model.OtherZatraty.ActivitiesId</name>
+                <actions>update</actions>
+              </permission>
             </permissions>
           </grant>
           <grant>
@@ -452,11 +467,6 @@
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/newPko.xml#newPko</name>
                 <actions>view</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
-                <name>ua.divas.model.Orders.ZamerId</name>
-                <actions>update</actions>
               </permission>
             </permissions>
           </grant>
@@ -638,6 +648,21 @@
               <permission>
                 <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
                 <name>ua.divas.model.Orders.ZamerId</name>
+                <actions>update</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
+                <name>ua.divas.model.Orders.ActivitiesId</name>
+                <actions>update</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
+                <name>ua.divas.model.Orders.FirmId</name>
+                <actions>update</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
+                <name>ua.divas.model.OtherZatraty.ActivitiesId</name>
                 <actions>update</actions>
               </permission>
             </permissions>

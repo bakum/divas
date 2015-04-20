@@ -12,7 +12,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "UserSettings.findAll", query = "select o from UserSettings o") })
+@NamedQueries({ 
+    @NamedQuery(name = "UserSettings.findAll", query = "select o from UserSettings o"),
+    @NamedQuery(name = "UserSettings.findByZamer", query = "select o from UserSettings o where o.zamerkontragId = :zamerId")
+})
 @Table(name = "USER_SETTINGS")
 public class UserSettings implements Serializable {
     private static final long serialVersionUID = 2140392193059182501L;

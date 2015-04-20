@@ -357,6 +357,10 @@
     Name="UserSettingsRule0"
     ResId="ua.divas.model.UserSettings_Rule_0"
     MethodName="validateUserSettings"/>
+  <validation:MethodValidationBean
+    Name="UserSettingsRule1"
+    ResId="ua.divas.model.UserSettings_Rule_1"
+    MethodName="validateUserSettings1"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

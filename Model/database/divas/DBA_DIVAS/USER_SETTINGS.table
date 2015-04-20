@@ -554,18 +554,14 @@
           </value>
         </entry>
       </properties>
-      <referenceID class="oracle.javatools.db.ReferenceID">
+      <referenceID class="oracle.javatools.db.NameBasedID">
         <name>KONTRAGENTS_PK</name>
-        <childObjectNames>
-          <childObjectName>ID</childObjectName>
-        </childObjectNames>
-        <parent class="oracle.javatools.db.ReferenceID">
+        <parent class="oracle.javatools.db.NameBasedID">
           <name>KONTRAGENTS</name>
-          <identifier class="java.math.BigDecimal">73471</identifier>
           <schemaName>DBA_DIVAS</schemaName>
           <type>TABLE</type>
         </parent>
-        <subType>PKConstraint</subType>
+        <schemaName>DBA_DIVAS</schemaName>
         <type>CONSTRAINT</type>
       </referenceID>
     </constraint>

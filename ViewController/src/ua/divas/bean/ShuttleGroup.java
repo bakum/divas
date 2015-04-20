@@ -5,6 +5,8 @@ import java.util.List;
 
 import java.util.UUID;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
@@ -14,6 +16,7 @@ import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCDataControl;
 import oracle.adf.model.binding.DCIteratorBinding;
 
+import oracle.adf.view.rich.component.rich.input.RichInputListOfValues;
 import oracle.adf.view.rich.component.rich.input.RichInputText;
 import oracle.adf.view.rich.component.rich.input.RichSelectOneChoice;
 import oracle.adf.view.rich.event.DialogEvent;
@@ -30,6 +33,7 @@ import oracle.binding.OperationBinding;
 import oracle.jbo.NameValuePairs;
 import oracle.jbo.Row;
 
+import ua.divas.ejb.entity.DataQuery;
 import ua.divas.module.AppModuleImpl;
 
 public class ShuttleGroup {
@@ -38,10 +42,20 @@ public class ShuttleGroup {
     private RichSelectOneChoice division;
     private RichSelectOneChoice currency;
     private RichInputText konName;
+    private RichInputListOfValues zamerId;
+    private RichInputListOfValues zamerName;
 
     public ShuttleGroup() {
     }
-    
+
+    public void setZamerId(RichInputListOfValues zamerId) {
+        this.zamerId = zamerId;
+    }
+
+    public RichInputListOfValues getZamerId() {
+        return zamerId;
+    }
+
     public void setKonName(RichInputText konName) {
         this.konName = konName;
     }
@@ -50,6 +64,14 @@ public class ShuttleGroup {
         return konName;
     }
     
+    public void setZamerName(RichInputListOfValues zamerName) {
+        this.zamerName = zamerName;
+    }
+
+    public RichInputListOfValues getZamerName() {
+        return zamerName;
+    }
+
     private List union(List set1, List set2) {
         set1.addAll(set2);
         return set1;
@@ -261,7 +283,7 @@ public class ShuttleGroup {
             }
         }
     }
-    
+
     public void onNomenklaturaDialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
@@ -285,7 +307,7 @@ public class ShuttleGroup {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("CreateInsert2");
         ob.execute();
-        
+
     }
 
     public void onPopupNomenklatura(PopupFetchEvent popupFetchEvent) {
@@ -306,7 +328,7 @@ public class ShuttleGroup {
             OperationBinding oper = (OperationBinding) binding.getOperationBinding("resetUserPwdToWls");
             oper.execute();
         } else if (dialogEvent.getOutcome().name().equals("cancel")) {
-           
+
         }
     }
 
@@ -317,10 +339,10 @@ public class ShuttleGroup {
             oper.execute();
             this.refresh();
         } else if (dialogEvent.getOutcome().name().equals("cancel")) {
-           
+
         }
     }
-    
+
     private void setIsMeasurer() {
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
@@ -328,7 +350,7 @@ public class ShuttleGroup {
 
         currRow.setAttribute("IsMeasurer", new Integer(1));
     }
-    
+
     private void setZamerParentId() {
 
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
@@ -340,7 +362,7 @@ public class ShuttleGroup {
         currRow.setAttribute("ParentId", res);
 
     }
-    
+
     protected void refreshKontrag() {
         BindingContext bindingContext = BindingContext.getCurrent();
         DCDataControl dc =
@@ -348,7 +370,7 @@ public class ShuttleGroup {
         AppModuleImpl am = (AppModuleImpl) dc.getDataProvider();
         am.getKontragentsView1().executeQuery();
     }
-    
+
     private void setFullName() {
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
@@ -356,7 +378,7 @@ public class ShuttleGroup {
 
         currRow.setAttribute("Fullname", getKonName().getValue().toString());
     }
-    
+
     public void onPopupCreateZamer(PopupFetchEvent popupFetchEvent) {
         try {
             getKonName().setValue("");
@@ -365,7 +387,7 @@ public class ShuttleGroup {
             e.printStackTrace();
         }
     }
-    
+
     public void onNewZamerDialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
@@ -385,5 +407,31 @@ public class ShuttleGroup {
             } */
         }
     }
-    
+
+    public boolean getZamerInUse() {
+        String zid;
+        try {
+            zid = getZamerId().getValue().toString();
+        } catch (Exception e) {
+            zid = "";
+            e.printStackTrace();
+        }
+        if (zid == null || zid == "") {
+            return false;
+        }
+        return DataQuery.zamerInUse(zid);
+    }
+
+    public void onZamerChange(ValueChangeEvent vce) {
+        if (vce.getNewValue() != vce.getOldValue()){            
+            if (DataQuery.zamernameInUse((String)vce.getNewValue())) {
+                getZamerId().setValue("");
+                getZamerName().setValue("");
+                FacesContext ctx = FacesContext.getCurrentInstance();
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка",
+                                                    "Контрагент уже используется. Выбор невозможен!");
+                ctx.addMessage(null, msg);
+            }
+        }
+    }
 }

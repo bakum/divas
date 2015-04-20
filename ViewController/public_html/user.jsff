@@ -392,7 +392,8 @@
                                                                           required="#{bindings.ZamerkontragId.hints.mandatory}"
                                                                           columns="#{bindings.ZamerkontragId.hints.displayWidth}"
                                                                           shortDesc="#{bindings.ZamerkontragId.hints.tooltip}"
-                                                                          visible="false">
+                                                                          visible="false"
+                                                                          binding="#{shuttle_group.zamerId}">
                                                         <f:validator binding="#{bindings.ZamerkontragId.validator}"/>
                                                     </af:inputListOfValues>
                                                     <af:inputListOfValues id="zamerkontragNameId"
@@ -403,7 +404,9 @@
                                                                           required="#{bindings.ZamerkontragName.hints.mandatory}"
                                                                           columns="#{bindings.ZamerkontragName.hints.displayWidth}"
                                                                           shortDesc="#{bindings.ZamerkontragName.hints.tooltip}"
-                                                                          autoSubmit="true" createPopupId="pZamer">
+                                                                          autoSubmit="true" createPopupId="pZamer"
+                                                                          disabled="#{shuttle_group.zamerInUse}"
+                                                                          binding="#{shuttle_group.zamerName}">
                                                         <f:validator binding="#{bindings.ZamerkontragName.validator}"/>
                                                     </af:inputListOfValues>
                                                     <af:spacer width="10" height="10" id="s2"/>
