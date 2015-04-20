@@ -93,5 +93,21 @@ public class RkoViewImpl extends DivasView implements RkoView {
     public void removeEntry(String _id) {
         callStoredProcedure("RKO_ENTRY.rko_remove_plan_acc(?)", new Object[] { _id });
     }
+
+    /**
+     * Returns the bind variable value for u_name.
+     * @return bind variable value for u_name
+     */
+    public String getu_name() {
+        return (String) getNamedWhereClauseParam("u_name");
+    }
+
+    /**
+     * Sets <code>value</code> for bind variable u_name.
+     * @param value value to bind as u_name
+     */
+    public void setu_name(String value) {
+        setNamedWhereClauseParam("u_name", value);
+    }
 }
 

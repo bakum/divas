@@ -18,8 +18,9 @@ import ua.divas.model.PkoImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class PkoViewRowImpl extends ViewRowImpl {
+
     public static final int ENTITY_PKO = 0;
-    
+
     @Override
     public boolean isAttributeUpdateable(int i) {
         BigDecimal editable = this.getPEditable();
@@ -66,7 +67,8 @@ public class PkoViewRowImpl extends ViewRowImpl {
         TypeOfActivitiesView1,
         OperationPkoView1,
         KontragentsView1;
-        private static AttributesEnum[] vals = null;
+        static AttributesEnum[] vals = null;
+        ;
         private static final int firstIndex = 0;
 
         public int index() {
@@ -88,6 +90,7 @@ public class PkoViewRowImpl extends ViewRowImpl {
             return vals;
         }
     }
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int DAT = AttributesEnum.Dat.index();
     public static final int NUM = AttributesEnum.Num.index();

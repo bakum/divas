@@ -6,14 +6,12 @@
   Name="DivisionSotrView"
   Version="12.1.2.66.68"
   InheritPersonalization="merge"
-  SelectList="DivisionSotr.ID, 
-       DivisionSotr.DIV_ID, 
-       DivisionSotr.USER_ID, 
-       DivisionSotr.DESCRIPTION"
-  FromList="DIVISION_SOTR DivisionSotr"
   BindingStyle="OracleName"
-  CustomQuery="false"
+  CustomQuery="true"
   PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
   <ViewAccessor
     Name="DivisionsView1"
     ViewObjectName="ua.divas.view.DivisionsView"
@@ -60,6 +58,11 @@
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
+  <SQLQuery><![CDATA[SELECT DivisionSotr.ID, 
+       DivisionSotr.DIV_ID, 
+       DivisionSotr.USER_ID, 
+       DivisionSotr.DESCRIPTION
+FROM  DIVISION_SOTR DivisionSotr]]></SQLQuery>
   <EntityUsage
     Name="DivisionSotr"
     Entity="ua.divas.model.DivisionSotr"/>

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import oracle.jbo.server.ViewObjectImpl;
 
+import ua.divas.classes.DivasView;
 import ua.divas.classes.WLS_Utility;
 import ua.divas.view.common.UsersView;
 // ---------------------------------------------------------------------
@@ -12,7 +13,7 @@ import ua.divas.view.common.UsersView;
 // ---    Custom code may be added to this class.
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
-public class UsersViewImpl extends ViewObjectImpl implements UsersView {
+public class UsersViewImpl extends DivasView implements UsersView {
     /**
      * This is the default constructor (do not remove).
      */
@@ -37,6 +38,22 @@ public class UsersViewImpl extends ViewObjectImpl implements UsersView {
 
     public void resetUserPwdToWls(String username, String newPassword) {
         WLS_Utility.resetUserPassword(username, newPassword);
+    }
+
+    /**
+     * Returns the bind variable value for u_name.
+     * @return bind variable value for u_name
+     */
+    public String getu_name() {
+        return (String) getNamedWhereClauseParam("u_name");
+    }
+
+    /**
+     * Sets <code>value</code> for bind variable u_name.
+     * @param value value to bind as u_name
+     */
+    public void setu_name(String value) {
+        setNamedWhereClauseParam("u_name", value);
     }
 }
 

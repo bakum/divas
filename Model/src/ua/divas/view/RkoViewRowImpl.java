@@ -18,8 +18,9 @@ import ua.divas.model.RkoImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class RkoViewRowImpl extends ViewRowImpl {
+
     public static final int ENTITY_RKO = 0;
-    
+
     @Override
     public boolean isAttributeUpdateable(int i) {
         BigDecimal editable = this.getREditable();
@@ -66,7 +67,8 @@ public class RkoViewRowImpl extends ViewRowImpl {
         TypeOfActivitiesView1,
         OperationRkoView1,
         KontragentsView1;
-        private static AttributesEnum[] vals = null;
+        static AttributesEnum[] vals = null;
+        ;
         private static final int firstIndex = 0;
 
         public int index() {
@@ -88,6 +90,7 @@ public class RkoViewRowImpl extends ViewRowImpl {
             return vals;
         }
     }
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int DAT = AttributesEnum.Dat.index();
     public static final int NUM = AttributesEnum.Num.index();

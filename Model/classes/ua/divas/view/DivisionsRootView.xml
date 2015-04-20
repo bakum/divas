@@ -8,9 +8,11 @@
   InheritPersonalization="merge"
   BindingStyle="OracleName"
   CustomQuery="true"
-  PageIterMode="Full">
+  PageIterMode="Full"
+  ComponentClass="ua.divas.view.DivisionsRootViewImpl">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
   <Properties>
     <SchemaBasedProperties>
@@ -61,7 +63,7 @@ where is_group = 1 and parent_id is null]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="DELETED"
     Expression="DELETED"
-    SQLType="NUMERIC"/>
+    SQLType="INTEGER"/>
   <ViewAttribute
     Name="IsGroup"
     IsUpdateable="false"
@@ -73,7 +75,7 @@ where is_group = 1 and parent_id is null]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="IS_GROUP"
     Expression="IS_GROUP"
-    SQLType="NUMERIC"/>
+    SQLType="INTEGER"/>
   <ViewAttribute
     Name="ParentId"
     IsUpdateable="false"
@@ -98,7 +100,7 @@ where is_group = 1 and parent_id is null]]></SQLQuery>
     ColumnType="TIMESTAMP"
     AliasName="VERSION"
     Expression="VERSION"
-    SQLType="TIMESTAMP"/>
+    SQLType="DATE"/>
   <ViewAttribute
     Name="Predefined"
     IsUpdateable="false"
@@ -110,7 +112,22 @@ where is_group = 1 and parent_id is null]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="PREDEFINED"
     Expression="PREDEFINED"
-    SQLType="NUMERIC"/>
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="MainUser"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="MAIN_USER"
+    Expression="MAIN_USER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewLinkAccessor
     Name="DivisionsView"
     ViewLink="ua.divas.view.DivRootDivisionsFkLink"

@@ -18,6 +18,18 @@
     <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
+  <Variable
+    Name="u_name"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression><![CDATA[viewObject.getSessionUser()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
   <SQLQuery><![CDATA[SELECT Users.ID, 
        Users.FIRST_NAME, 
        Users.LAST_NAME, 
@@ -30,7 +42,9 @@
        (select 0 from dual) U_Editable,
        Users.U_Description,
        Users.IS_ZAMER
-FROM  USERS Users]]></SQLQuery>
+FROM  USERS Users
+where
+upper(Users.ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))]]></SQLQuery>
   <EntityUsage
     Name="Users"
     Entity="ua.divas.model.Users"/>

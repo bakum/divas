@@ -18,6 +18,18 @@
     <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
+  <Variable
+    Name="u_name"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression><![CDATA[viewObject.getSessionUser()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
   <ViewAccessor
     Name="DivisionsView1"
     ViewObjectName="ua.divas.view.DivisionsView"
@@ -247,7 +259,9 @@
         ID = KONTRAG_ID) KontragName,
        Rko.SUMMA,
        (select 0 from dual) R_Editable
-FROM  RKO Rko]]></SQLQuery>
+FROM  RKO Rko
+where deleted = 0 and
+upper(Rko.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))]]></SQLQuery>
   <EntityUsage
     Name="Rko"
     Entity="ua.divas.model.Rko"/>

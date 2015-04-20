@@ -18,6 +18,18 @@
     <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
+  <Variable
+    Name="u_name"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression><![CDATA[viewObject.getSessionUser()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
   <ViewAccessor
     Name="DivisionsView1"
     ViewObjectName="ua.divas.view.DivisionsView"
@@ -158,7 +170,9 @@
         dual) oth_editable,
         OtherZatraty.ACTIVITIES_ID,
         'Прочие затраты' ObjName
-FROM  OTHER_ZATRATY OtherZatraty]]></SQLQuery>
+FROM  OTHER_ZATRATY OtherZatraty
+where deleted = 0 and
+upper(OtherZatraty.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))]]></SQLQuery>
   <EntityUsage
     Name="OtherZatraty"
     Entity="ua.divas.model.OtherZatraty"/>

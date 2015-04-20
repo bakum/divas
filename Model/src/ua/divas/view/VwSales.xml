@@ -32,6 +32,18 @@
     Type="oracle.jbo.domain.Date">
     <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
   </Variable>
+  <Variable
+    Name="u_name"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression><![CDATA[viewObject.getSessionUser()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
   <ViewAccessor
     Name="OrdersView1"
     ViewObjectName="ua.divas.view.OrdersView"
@@ -112,7 +124,9 @@
     VW_SALES.FACT_SEBEST_SUMMA FACT_SEBEST_SUMMA, 
     VW_SALES.PLAN_SEBEST_SUMMA PLAN_SEBEST_SUMMA
 FROM 
-table(cast(REPORT_PKG.GETSALES(:f_dat, :l_dat) as tbl_sales)) VW_SALES]]></SQLQuery>
+table(cast(REPORT_PKG.GETSALES(:f_dat, :l_dat) as tbl_sales)) VW_SALES
+where
+ upper(VW_SALES.DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))]]></SQLQuery>
   <ViewAttribute
     Name="OrderId"
     IsUpdateable="false"

@@ -16,6 +16,18 @@
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
     <Attr Name="_isExpertMode" Value="true"/>
   </DesignTime>
+  <Variable
+    Name="u_name"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression><![CDATA[viewObject.getSessionUser()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
   <ViewAccessor
     Name="DivisionsView1"
     ViewObjectName="ua.divas.view.DivisionsView"
@@ -75,7 +87,8 @@
        Divisions.PREDEFINED,
        Divisions.MAIN_USER
 FROM  DIVISIONS Divisions
-where deleted = 0]]></SQLQuery>
+where deleted = 0 and
+upper(Divisions.ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))]]></SQLQuery>
   <EntityUsage
     Name="Divisions"
     Entity="ua.divas.model.Divisions"/>

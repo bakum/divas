@@ -86,6 +86,18 @@
     Name="kname"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <Variable
+    Name="u_name"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression><![CDATA[viewObject.getSessionUser()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
   <ViewAccessor
     Name="TypeOfActivitiesView1"
     ViewObjectName="ua.divas.view.TypeOfActivitiesView"
@@ -383,7 +395,8 @@
        (select adress from contact_details where kontrag_id = Orders.KONTRAG_ID and rownum = 1) adress
 FROM  ORDERS Orders
 where deleted = 0 and
-status_id in (:name1,:name2,:name3,:name4,:name5)]]></SQLQuery>
+status_id in (:name1,:name2,:name3,:name4,:name5) and
+upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))]]></SQLQuery>
   <EntityUsage
     Name="Orders"
     Entity="ua.divas.model.Orders"/>

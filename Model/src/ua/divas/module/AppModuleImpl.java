@@ -17,6 +17,7 @@ import ua.divas.view.CallLogViewImpl;
 import ua.divas.view.CompaignsViewImpl;
 import ua.divas.view.ContactDetailsViewImpl;
 import ua.divas.view.CurrencyViewImpl;
+import ua.divas.view.DivisionsRootViewImpl;
 import ua.divas.view.DivisionsViewImpl;
 import ua.divas.view.FirmsViewImpl;
 import ua.divas.view.GroupmembersViewImpl;
@@ -35,9 +36,12 @@ import ua.divas.view.RkoViewImpl;
 import ua.divas.view.UserSettingsViewImpl;
 import ua.divas.view.UsersViewImpl;
 import ua.divas.view.VwBallansApImpl;
+import ua.divas.view.VwKontragZamerImpl;
+import ua.divas.view.VwNotificationCalendarViewImpl;
 import ua.divas.view.VwSalesImpl;
 import ua.divas.view.VwZatratyImpl;
 import ua.divas.view.ZatratyViewImpl;
+import ua.divas.view.ro.DivisionsView1Impl;
 import ua.divas.view.ro.KontragentsItemsLookupVOImpl;
 import ua.divas.view.ro.UsersItemsLookupVOImpl;
 // ---------------------------------------------------------------------
@@ -369,8 +373,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for DivisionsView1_1.
      * @return DivisionsView1_1
      */
-    public ViewObjectImpl getDivisionsView1_1() {
-        return (ViewObjectImpl) findViewObject("DivisionsView1_1");
+    public DivisionsView1Impl getDivisionsView1_1() {
+        return (DivisionsView1Impl) findViewObject("DivisionsView1_1");
     }
 
     /**
@@ -1057,8 +1061,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for DivisionsView1_2.
      * @return DivisionsView1_2
      */
-    public ViewObjectImpl getDivisionsView1_2() {
-        return (ViewObjectImpl) findViewObject("DivisionsView1_2");
+    public DivisionsView1Impl getDivisionsView1_2() {
+        return (DivisionsView1Impl) findViewObject("DivisionsView1_2");
     }
 
     /**
@@ -2187,8 +2191,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for DivisionsRootView2.
      * @return DivisionsRootView2
      */
-    public ViewObjectImpl getDivisionsRootView2() {
-        return (ViewObjectImpl) findViewObject("DivisionsRootView2");
+    public DivisionsRootViewImpl getDivisionsRootView2() {
+        return (DivisionsRootViewImpl) findViewObject("DivisionsRootView2");
     }
 
     /**
@@ -2940,8 +2944,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for VwKontragZamer1.
      * @return VwKontragZamer1
      */
-    public ViewObjectImpl getVwKontragZamer1() {
-        return (ViewObjectImpl) findViewObject("VwKontragZamer1");
+    public VwKontragZamerImpl getVwKontragZamer1() {
+        return (VwKontragZamerImpl) findViewObject("VwKontragZamer1");
     }
 
     /**
@@ -3383,8 +3387,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for VwNotificationCalendarView1.
      * @return VwNotificationCalendarView1
      */
-    public ViewObjectImpl getVwNotificationCalendarView1() {
-        return (ViewObjectImpl) findViewObject("VwNotificationCalendarView1");
+    public VwNotificationCalendarViewImpl getVwNotificationCalendarView1() {
+        return (VwNotificationCalendarViewImpl) findViewObject("VwNotificationCalendarView1");
     }
 }
 
