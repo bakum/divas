@@ -8,9 +8,11 @@
   InheritPersonalization="merge"
   BindingStyle="OracleName"
   CustomQuery="true"
-  PageIterMode="Full">
+  PageIterMode="Full"
+  ComponentClass="ua.divas.view.VwZamerMovesImpl">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
   <Properties>
     <SchemaBasedProperties>
@@ -18,9 +20,22 @@
         ResId="ua.divas.view.VwZamerMoves_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
+  <Variable
+    Name="u_name"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression><![CDATA[viewObject.getSessionUser()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
   <SQLQuery><![CDATA[SELECT MOVE_KONTRAG.ID,
   MOVE_KONTRAG.KONTRAG_ID,
   MOVE_KONTRAG.KONTRAG,
+  MOVE_KONTRAG.DIVISION_ID DIVISION_ID,
   MOVE_KONTRAG.CODE,
   MOVE_KONTRAG.SUMM,
   case 
@@ -37,7 +52,9 @@
 FROM MOVE_KONTRAG
 INNER JOIN KONTRAGENTS
 ON MOVE_KONTRAG.KONTRAG_ID    = KONTRAGENTS.ID
-WHERE KONTRAGENTS.IS_MEASURER = 1 and MOVE_KONTRAG.CODE='5091']]></SQLQuery>
+WHERE KONTRAGENTS.IS_MEASURER = 1 and MOVE_KONTRAG.CODE='5091'
+and
+upper(MOVE_KONTRAG.DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))]]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"
@@ -106,6 +123,21 @@ WHERE KONTRAGENTS.IS_MEASURER = 1 and MOVE_KONTRAG.CODE='5091']]></SQLQuery>
           ResId="ua.divas.view.VwZamerMoves.Kontrag_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DivisionId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DIVISION_ID"
+    Expression="DIVISION_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
   </ViewAttribute>
   <ViewAttribute
     Name="Code"

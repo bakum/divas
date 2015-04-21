@@ -36,9 +36,11 @@ import ua.divas.view.RkoViewImpl;
 import ua.divas.view.UserSettingsViewImpl;
 import ua.divas.view.UsersViewImpl;
 import ua.divas.view.VwBallansApImpl;
+import ua.divas.view.VwBuyerMovesImpl;
 import ua.divas.view.VwKontragZamerImpl;
 import ua.divas.view.VwNotificationCalendarViewImpl;
 import ua.divas.view.VwSalesImpl;
+import ua.divas.view.VwZamerMovesImpl;
 import ua.divas.view.VwZatratyImpl;
 import ua.divas.view.ZatratyViewImpl;
 import ua.divas.view.ro.DivisionsView1Impl;
@@ -2911,24 +2913,24 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for VwZamerMoves1.
      * @return VwZamerMoves1
      */
-    public ViewObjectImpl getVwZamerMoves1() {
-        return (ViewObjectImpl) findViewObject("VwZamerMoves1");
+    public VwZamerMovesImpl getVwZamerMoves1() {
+        return (VwZamerMovesImpl) findViewObject("VwZamerMoves1");
     }
 
     /**
      * Container's getter for VwBuyerMoves1.
      * @return VwBuyerMoves1
      */
-    public ViewObjectImpl getVwBuyerMoves1() {
-        return (ViewObjectImpl) findViewObject("VwBuyerMoves1");
+    public VwBuyerMovesImpl getVwBuyerMoves1() {
+        return (VwBuyerMovesImpl) findViewObject("VwBuyerMoves1");
     }
 
     /**
      * Container's getter for VwBuyerMoves2.
      * @return VwBuyerMoves2
      */
-    public ViewObjectImpl getVwBuyerMoves2() {
-        return (ViewObjectImpl) findViewObject("VwBuyerMoves2");
+    public VwBuyerMovesImpl getVwBuyerMoves2() {
+        return (VwBuyerMovesImpl) findViewObject("VwBuyerMoves2");
     }
 
     /**
@@ -2952,8 +2954,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for VwZamerMoves2.
      * @return VwZamerMoves2
      */
-    public ViewObjectImpl getVwZamerMoves2() {
-        return (ViewObjectImpl) findViewObject("VwZamerMoves2");
+    public VwZamerMovesImpl getVwZamerMoves2() {
+        return (VwZamerMovesImpl) findViewObject("VwZamerMoves2");
     }
 
     /**

@@ -9,9 +9,11 @@
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
-  OrderBy='"PERIOD" DESC'>
+  OrderBy='"PERIOD" DESC'
+  ComponentClass="ua.divas.view.VwKassaMovesImpl">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
   <Properties>
     <SchemaBasedProperties>
@@ -19,6 +21,18 @@
         ResId="ua.divas.view.VwKassaMoves_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
+  <Variable
+    Name="u_name"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression><![CDATA[viewObject.getSessionUser()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
   <ViewAccessor
     Name="KassaView1"
     ViewObjectName="ua.divas.view.KassaView"
@@ -69,7 +83,8 @@
   <SQLQuery><![CDATA[SELECT 
     MOVE_KASSA.ID, 
     MOVE_KASSA.KASSA_ID KASSA_ID, 
-    MOVE_KASSA.KASSA KASSA, 
+    MOVE_KASSA.KASSA KASSA,
+    MOVE_KASSA.DIVISION_ID DIVISION_ID,
     MOVE_KASSA.CODE CODE, 
     MOVE_KASSA.SUMM, 
     CASE 
@@ -82,7 +97,9 @@
     MOVE_KASSA.PERIOD PERIOD, 
     MOVE_KASSA.TABLE_NAME TABLE_NAME 
 FROM 
-    MOVE_KASSA]]></SQLQuery>
+    MOVE_KASSA
+where
+upper(MOVE_KASSA.DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))]]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"
@@ -147,6 +164,21 @@ FROM
           ResId="ua.divas.view.VwKassaMoves.Kassa_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DivisionId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DIVISION_ID"
+    Expression="DIVISION_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
   </ViewAttribute>
   <ViewAttribute
     Name="Code"
