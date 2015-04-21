@@ -31,11 +31,7 @@
   <ViewAccessor
     Name="DivisionsView1"
     ViewObjectName="ua.divas.view.DivisionsView"
-    RowLevelBinds="true">
-    <ViewCriteriaUsage
-      Name="DivisionsViewGroup"
-      FullName="ua.divas.view.DivisionsView.DivisionsViewGroup"/>
-  </ViewAccessor>
+    RowLevelBinds="true"/>
   <ViewAccessor
     Name="UsersView1"
     ViewObjectName="ua.divas.view.UsersView"

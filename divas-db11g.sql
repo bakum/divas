@@ -7,6 +7,14 @@
 
 /
 --------------------------------------------------------
+--  DDL for Type DIVISIONTABLE
+--------------------------------------------------------
+
+  CREATE OR REPLACE TYPE "DIVISIONTABLE" 
+AS TABLE OF divisiontype;
+
+/
+--------------------------------------------------------
 --  DDL for Type ROW_BALLANS
 --------------------------------------------------------
 
@@ -28,15 +36,6 @@
 )
 
 /
---------------------------------------------------------
---  DDL for Type DIVISIONTABLE
---------------------------------------------------------
-
-  CREATE OR REPLACE TYPE "DIVISIONTABLE" 
-AS TABLE OF divisiontype;
-
-/
-
 --------------------------------------------------------
 --  DDL for Type ROW_SALES
 --------------------------------------------------------
@@ -108,7 +107,6 @@ AS TABLE OF row_zatraty;
 AS TABLE OF usertype;
 
 /
-
 --------------------------------------------------------
 --  DDL for Sequence ORDERS_NUM_SEQ
 --------------------------------------------------------
@@ -128,7 +126,7 @@ AS TABLE OF usertype;
 --  DDL for Sequence PS_TXN_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 158251 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 160551 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence RKO_NUM_SEQ
 --------------------------------------------------------
@@ -4929,7 +4927,7 @@ begin
     select id, is_admin into p_iduser, p_idrole from users where upper(login) like upper(p_u_name);
     
     if p_idrole=1 then
-    for i in (select id, upper(fullname) fullname from divisions where deleted = 0 and is_group = 0) loop
+    for i in (select id, upper(fullname) fullname from divisions where deleted = 0 and parent_id is not null) loop
     p_counter:=p_counter+1;
     l_data.extend;
     l_data(p_counter) := divisionType(i.id, i.fullname );
