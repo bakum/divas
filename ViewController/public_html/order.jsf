@@ -325,13 +325,14 @@
                                                                   fetchSize="#{bindings.VwOrdersMoves2.rangeSize}"
                                                                   id="t16">
                                                             <af:column headerText="#{bindings.VwOrdersMoves2.hints.Deb.label}"
-                                                                       id="c41">
+                                                                       id="c41" inlineStyle="font-weight:bold;">
                                                                 <af:outputText value="#{row.Deb}"
                                                                                shortDesc="#{bindings.VwOrdersMoves2.hints.Deb.tooltip}"
                                                                                id="ot2"/>
                                                             </af:column>
                                                             <af:column headerText="#{bindings.VwOrdersMoves2.hints.SumDeb.label}"
-                                                                       id="c42">
+                                                                       id="c42"
+                                                                       inlineStyle="#{row.SumDeb &lt; 0 ? 'color: Red' : 'color: Black'}">
                                                                 <af:outputText value="#{row.SumDeb}"
                                                                                shortDesc="#{bindings.VwOrdersMoves2.hints.SumDeb.tooltip}"
                                                                                id="ot3">
@@ -340,13 +341,14 @@
                                                                 </af:outputText>
                                                             </af:column>
                                                             <af:column headerText="#{bindings.VwOrdersMoves2.hints.Kred.label}"
-                                                                       id="c43">
+                                                                       id="c43" inlineStyle="font-weight:bold;">
                                                                 <af:outputText value="#{row.Kred}"
                                                                                shortDesc="#{bindings.VwOrdersMoves2.hints.Kred.tooltip}"
                                                                                id="ot4"/>
                                                             </af:column>
                                                             <af:column headerText="#{bindings.VwOrdersMoves2.hints.SumKred.label}"
-                                                                       id="c44">
+                                                                       id="c44"
+                                                                       inlineStyle="#{row.SumKred &lt; 0 ? 'color: Red' : 'color: Black'}">
                                                                 <af:outputText value="#{row.SumKred}"
                                                                                shortDesc="#{bindings.VwOrdersMoves2.hints.SumKred.tooltip}"
                                                                                id="ot5">
@@ -532,7 +534,7 @@
                                     <f:facet name="toolbar"/>
                                     <af:table value="#{bindings.OrdersTpUslugiView2.collectionModel}" var="row"
                                               rows="#{bindings.OrdersTpUslugiView2.rangeSize}"
-                                              emptyText="#{bindings.OrdersTpUslugiView2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              emptyText="#{bindings.OrdersTpUslugiView2.viewable ? 'Нет данных.' : 'В доступе отказано.'}"
                                               rowBandingInterval="0"
                                               selectedRowKeys="#{bindings.OrdersTpUslugiView2.collectionModel.selectedRow}"
                                               selectionListener="#{bindings.OrdersTpUslugiView2.collectionModel.makeCurrent}"
@@ -755,7 +757,7 @@
                                     <f:facet name="toolbar"/>
                                     <af:table value="#{bindings.OrdersTpOplatyView1.collectionModel}" var="row"
                                               rows="#{bindings.OrdersTpOplatyView1.rangeSize}"
-                                              emptyText="#{bindings.OrdersTpOplatyView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              emptyText="#{bindings.OrdersTpOplatyView1.viewable ? 'Нет данных.' : 'В доступе отказано.'}"
                                               rowBandingInterval="0"
                                               selectedRowKeys="#{bindings.OrdersTpOplatyView1.collectionModel.selectedRow}"
                                               selectionListener="#{bindings.OrdersTpOplatyView1.collectionModel.makeCurrent}"
@@ -907,7 +909,7 @@
                                     </f:facet>
                                     <af:table value="#{bindings.OrdersTpRashodyView4.collectionModel}" var="row"
                                               rows="#{bindings.OrdersTpRashodyView4.rangeSize}"
-                                              emptyText="#{bindings.OrdersTpRashodyView4.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              emptyText="#{bindings.OrdersTpRashodyView4.viewable ? 'Нет данных.' : 'В доступе отказано.'}"
                                               rowBandingInterval="0"
                                               selectedRowKeys="#{bindings.OrdersTpRashodyView4.collectionModel.selectedRow}"
                                               selectionListener="#{bindings.OrdersTpRashodyView4.collectionModel.makeCurrent}"
@@ -1106,7 +1108,7 @@
                                     </f:facet>
                                     <af:table value="#{bindings.OrdersTpNachisleniaView2.collectionModel}" var="row"
                                               rows="#{bindings.OrdersTpNachisleniaView2.rangeSize}"
-                                              emptyText="#{bindings.OrdersTpNachisleniaView2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              emptyText="#{bindings.OrdersTpNachisleniaView2.viewable ? 'Нет данных.' : 'В доступе отказано.'}"
                                               rowBandingInterval="0"
                                               selectedRowKeys="#{bindings.OrdersTpNachisleniaView2.collectionModel.selectedRow}"
                                               selectionListener="#{bindings.OrdersTpNachisleniaView2.collectionModel.makeCurrent}"

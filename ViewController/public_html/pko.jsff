@@ -33,7 +33,7 @@
                                     </f:facet>
                                     <af:table value="#{bindings.PkoView1.collectionModel}" var="row"
                                               rows="#{bindings.PkoView1.rangeSize}"
-                                              emptyText="#{bindings.PkoView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              emptyText="#{bindings.PkoView1.viewable ? 'Нет данных.' : 'В доступе отказано.'}"
                                               rowBandingInterval="0"
                                               selectedRowKeys="#{bindings.PkoView1.collectionModel.selectedRow}"
                                               selectionListener="#{bindings.PkoView1.collectionModel.makeCurrent}"

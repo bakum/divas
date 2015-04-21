@@ -22,17 +22,17 @@
    <TaskFlowReturn
       id="TaskFlowReturn3">
       <property
-         name="activityId">Return</property>
+         name="activityId">ok</property>
       <property
          name="finish">true</property>
       <property
-         name="description">&lt;html>&lt;p>&lt;b>Return&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  Return&lt;/p></property>
+         name="description">&lt;html>&lt;p>&lt;b>ok&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  ok&lt;/p></property>
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">129.10938</property>
+         name="y">76.203125</property>
       <property
-         name="x">338.0</property>
+         name="x">333.0</property>
    </TaskFlowReturn>
    <ControlFlowCase
       islink="true"
@@ -40,8 +40,33 @@
       from="View2"
       to="TaskFlowReturn3">
       <property
-         name="fromOutcome">close</property>
+         name="fromOutcome">ok</property>
       <property
-         name="sdm:polyPoints">R50,211.0,129.0625,297.0,129.10938,L50</property>
+         name="sdm:polyPoints">R50,211.0,129.0625,292.0,76.21875,L50</property>
+   </ControlFlowCase>
+   <TaskFlowReturn
+      id="TaskFlowReturn5">
+      <property
+         name="activityId">cancel</property>
+      <property
+         name="finish">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>cancel&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  cancel&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">245.04688</property>
+      <property
+         name="x">340.0</property>
+   </TaskFlowReturn>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="View2"
+      to="TaskFlowReturn5">
+      <property
+         name="fromOutcome">cancel</property>
+      <property
+         name="sdm:polyPoints">B50,170.0,183.0625,299.0,245.0625,L50</property>
    </ControlFlowCase>
 </SDM>

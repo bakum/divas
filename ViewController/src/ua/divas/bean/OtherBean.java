@@ -7,6 +7,8 @@ import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.share.ADFContext;
 
+import oracle.adf.view.rich.component.rich.data.RichTable;
+import oracle.adf.view.rich.context.AdfFacesContext;
 import oracle.adf.view.rich.event.DialogEvent;
 import oracle.adf.view.rich.event.PopupCanceledEvent;
 import oracle.adf.view.rich.event.PopupFetchEvent;
@@ -16,8 +18,20 @@ import oracle.binding.OperationBinding;
 
 import oracle.jbo.Row;
 
+import org.apache.myfaces.trinidad.event.ReturnEvent;
+
 public class OtherBean {
+    private RichTable otherTable;
+
     public OtherBean() {
+    }
+    
+    public void setOtherTable(RichTable otherTable) {
+        this.otherTable = otherTable;
+    }
+
+    public RichTable getOtherTable() {
+        return otherTable;
     }
     
     public void refresh() {
@@ -39,6 +53,7 @@ public class OtherBean {
                 }
             }
         }
+        AdfFacesContext.getCurrentInstance().addPartialTarget(getOtherTable());
     }
     
     public String commitChange() {
@@ -112,5 +127,10 @@ public class OtherBean {
             ob.execute();
             refresh();
         }
+    }
+    
+    public void onReturn(ReturnEvent re) {
+        //System.out.println(re.getReturnParameters().get("PkoId")+" Return listener called ");
+        refresh();
     }
 }

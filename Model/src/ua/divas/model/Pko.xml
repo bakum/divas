@@ -323,11 +323,10 @@
   <Attribute
     Name="Summa"
     IsNotNull="true"
-    Precision="50"
     ColumnName="SUMMA"
     SQLType="VARCHAR"
-    Type="java.lang.String"
-    ColumnType="VARCHAR2"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
     TableName="PKO">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>

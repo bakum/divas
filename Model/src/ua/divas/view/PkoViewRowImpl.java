@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import oracle.jbo.AttributeList;
 import oracle.jbo.RowIterator;
 import oracle.jbo.RowSet;
+import oracle.jbo.domain.BFileDomain;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.ViewRowImpl;
 
@@ -375,15 +376,15 @@ public class PkoViewRowImpl extends ViewRowImpl {
      * Gets the attribute value for SUMMA using the alias name Summa.
      * @return the SUMMA
      */
-    public String getSumma() {
-        return (String) getAttributeInternal(SUMMA);
+    public BigDecimal getSumma() {
+        return (BigDecimal) getAttributeInternal(SUMMA);
     }
 
     /**
      * Sets <code>value</code> as attribute value for SUMMA using the alias name Summa.
      * @param value value to set the SUMMA
      */
-    public void setSumma(String value) {
+    public void setSumma(BigDecimal value) {
         setAttributeInternal(SUMMA, value);
     }
 

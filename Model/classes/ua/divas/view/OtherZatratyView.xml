@@ -189,13 +189,15 @@ upper(OtherZatraty.USER_ID) in (select upper(N) from table(cast(get_users(:u_nam
     PrecisionRule="true"
     EntityAttrName="Dat"
     EntityUsage="OtherZatraty"
-    AliasName="DAT"/>
+    AliasName="DAT"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Num"
     PrecisionRule="true"
     EntityAttrName="Num"
     EntityUsage="OtherZatraty"
-    AliasName="NUM"/>
+    AliasName="NUM"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Deleted"
     IsNotNull="true"
@@ -265,7 +267,8 @@ upper(OtherZatraty.USER_ID) in (select upper(N) from table(cast(get_users(:u_nam
     EntityAttrName="CurrId"
     EntityUsage="OtherZatraty"
     AliasName="CURR_ID"
-    LOVName="LOV_CurrId">
+    LOVName="LOV_CurrId"
+    IsQueriable="false">
     <TransientExpression><![CDATA[viewObject.retrieveCurrencyId()]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
@@ -281,7 +284,8 @@ upper(OtherZatraty.USER_ID) in (select upper(N) from table(cast(get_users(:u_nam
     EntityAttrName="KassaId"
     EntityUsage="OtherZatraty"
     AliasName="KASSA_ID"
-    LOVName="LOV_KassaId">
+    LOVName="LOV_KassaId"
+    IsQueriable="false">
     <TransientExpression><![CDATA[viewObject.retrieveKassaId()]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
@@ -313,7 +317,8 @@ upper(OtherZatraty.USER_ID) in (select upper(N) from table(cast(get_users(:u_nam
     EntityAttrName="ActivitiesId"
     EntityUsage="OtherZatraty"
     AliasName="ACTIVITIES_ID"
-    LOVName="LOV_ActivitiesId">
+    LOVName="LOV_ActivitiesId"
+    IsQueriable="false">
     <TransientExpression><![CDATA[viewObject.retrieveActivitiesId()]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
@@ -332,7 +337,8 @@ upper(OtherZatraty.USER_ID) in (select upper(N) from table(cast(get_users(:u_nam
     ColumnType="CHAR"
     AliasName="OBJNAME"
     Expression="OBJNAME"
-    SQLType="VARCHAR">
+    SQLType="VARCHAR"
+    IsQueriable="false">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="14"/>
     </DesignTime>
@@ -346,7 +352,8 @@ upper(OtherZatraty.USER_ID) in (select upper(N) from table(cast(get_users(:u_nam
     Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
-    SQLType="NUMERIC">
+    SQLType="NUMERIC"
+    IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[OtherZatratyTabPartZatratyView.sum("Summa != null ? Summa : 0")]]></TransientExpression>
     <Properties>

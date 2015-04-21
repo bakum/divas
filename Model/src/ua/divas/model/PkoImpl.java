@@ -1,10 +1,13 @@
 package ua.divas.model;
 
+import java.math.BigDecimal;
+
 import java.sql.Timestamp;
 
 import java.util.UUID;
 
 import oracle.jbo.Key;
+import oracle.jbo.domain.BFileDomain;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.EntityDefImpl;
 import oracle.jbo.server.EntityImpl;
@@ -345,16 +348,26 @@ public class PkoImpl extends DivasEntity {
      * Gets the attribute value for Summa, using the alias name Summa.
      * @return the value of Summa
      */
-    public String getSumma() {
-        return (String) getAttributeInternal(SUMMA);
+    public BigDecimal getSumma() {
+        return (BigDecimal) getAttributeInternal(SUMMA);
     }
 
     /**
      * Sets <code>value</code> as the attribute value for Summa.
      * @param value value to set the Summa
      */
-    public void setSumma(String value) {
+    public void setSumma(BigDecimal value) {
         setAttributeInternal(SUMMA, value);
+    }
+
+
+    /**
+     * @param id key constituent
+
+     * @return a Key object based on given key constituents.
+     */
+    public static Key createPrimaryKey(String id) {
+        return new Key(new Object[] { id });
     }
 
     /**
@@ -368,15 +381,6 @@ public class PkoImpl extends DivasEntity {
             return false;
         }
         return true;
-    }
-
-    /**
-     * @param id key constituent
-
-     * @return a Key object based on given key constituents.
-     */
-    public static Key createPrimaryKey(String id) {
-        return new Key(new Object[] { id });
     }
 
 
