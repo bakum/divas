@@ -4,11 +4,17 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="KontragentsView1" RangeSize="25" DataControl="AppModuleDataControl" id="KontragentsView1Iterator"/>
+    <iterator Binds="VwKontragAllItems1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="VwKontragAllItems1Iterator">
+      <sortCriteria>
+        <sort attribute="Fullname" ascending="true"/>
+      </sortCriteria>
+    </iterator>
   </executables>
   <bindings>
-    <tree IterBinding="KontragentsView1Iterator" id="KontragentsView1">
-      <nodeDefinition DefName="ua.divas.view.KontragentsView" Name="KontragentsView10">
+    <tree IterBinding="VwKontragAllItems1Iterator" id="VwKontragAllItems1">
+      <nodeDefinition DefName="ua.divas.view.VwKontragAllItems" Name="VwKontragAllItems10" DiscrName="Code"
+                      DiscrValue="20711">
         <AttrNames>
           <Item Value="Id"/>
           <Item Value="Fullname"/>
@@ -18,15 +24,16 @@
           <Item Value="VwBuyerMoves"/>
         </Accessors>
       </nodeDefinition>
-      <nodeDefinition DefName="ua.divas.view.VwBuyerMoves" Name="KontragentsView11">
+      <nodeDefinition DefName="ua.divas.view.VwBuyerMoves" Name="VwKontragAllItems11">
         <AttrNames>
-          <Item Value="Id"/>
           <Item Value="Code"/>
           <Item Value="Period"/>
           <Item Value="RegistratorId"/>
-          <Item Value="Summ"/>
-          <Item Value="SummPrihod"/>
-          <Item Value="SummRashod"/>
+          <Item Value="RegString"/>
+          <Item Value="SumSumm"/>
+          <Item Value="SumSummPrihod"/>
+          <Item Value="SumSummRashod"/>
+          <Item Value="TableName"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

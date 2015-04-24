@@ -27,6 +27,7 @@
           <Item Value="Code"/>
           <Item Value="SummPrihod"/>
           <Item Value="SummRashod"/>
+          <Item Value="RegString"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

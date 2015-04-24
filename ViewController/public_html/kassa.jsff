@@ -19,11 +19,11 @@
                         <f:facet name="pathStamp">
                             <af:outputText value="#{node}" id="ot2"/>
                         </f:facet>
-                        <af:column id="c3" width="200" headerText="Период">
-                            <af:outputText value="#{node.bindings.Period}" id="ot4"/>
-                        </af:column>
-                        <af:column id="c6">
+                        <af:column id="c6" visible="false">
                             <af:outputText value="#{node.bindings.TableName}" id="ot10"/>
+                        </af:column>
+                        <af:column id="c3" width="200" headerText="Регистратор">
+                            <af:outputText value="#{node.bindings.RegString}" id="ot4"/>
                         </af:column>
                         <af:column id="c4" headerText="Приход">
                             <af:outputText value="#{node.TotalPrihod}" id="ot8" inlineStyle="font-weight:bold;"/>

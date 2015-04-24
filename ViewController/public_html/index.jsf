@@ -65,7 +65,7 @@
                                                         <af:region value="#{bindings.zamer_debtconfig1.regionModel}"
                                                                    id="r10"/>
                                                     </af:showDetailItem>
-                                                    <af:showDetailItem text="Клиенты" id="sdi13" stretchChildren="first"
+                                                    <af:showDetailItem text="Дебеторская задолженность" id="sdi13" stretchChildren="first"
                                                                        rendered="#{securityContext.taskflowViewable['/WEB-INF/buyer_debt-config.xml#buyer_debt-config']}">
                                                         <af:region value="#{bindings.buyer_debtconfig1.regionModel}"
                                                                    id="r11"/>

@@ -19,8 +19,11 @@
                         <f:facet name="pathStamp">
                             <af:outputText value="#{node}" id="ot2"/>
                         </f:facet>
-                        <af:column id="c2" width="200" headerText="Счет">
+                        <af:column id="c2" width="200" headerText="Счет" visible="false">
                             <af:outputText value="#{node.bindings.Code}" id="ot3"/>
+                        </af:column>
+                        <af:column id="c6" headerText="Регистратор" width="200">
+                            <af:outputText value="#{node.bindings.RegString}" id="ot4"/>
                         </af:column>
                         <af:column id="c4" headerText="Приход">
                             <af:outputText value="#{node.bindings.SummPrihod}" id="ot6"/>

@@ -81,6 +81,7 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         VwBuyerMoves,
         VwSales,
         CallLogView,
+        VwSupplierMoves,
         KontragentsView1,
         UsersView1;
         static AttributesEnum[] vals = null;
@@ -145,6 +146,7 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
     public static final int VWBUYERMOVES = AttributesEnum.VwBuyerMoves.index();
     public static final int VWSALES = AttributesEnum.VwSales.index();
     public static final int CALLLOGVIEW = AttributesEnum.CallLogView.index();
+    public static final int VWSUPPLIERMOVES = AttributesEnum.VwSupplierMoves.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
 
@@ -583,6 +585,13 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getCallLogView() {
         return (RowIterator) getAttributeInternal(CALLLOGVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link VwSupplierMoves.
+     */
+    public RowIterator getVwSupplierMoves() {
+        return (RowIterator) getAttributeInternal(VWSUPPLIERMOVES);
     }
 
     /**

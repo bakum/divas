@@ -331,7 +331,7 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     AliasName="VIEW_ATTR"
     SQLType="NUMERIC">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[VwBuyerMoves.sum("Summ != null ? Summ : 0")]]></TransientExpression>
+    <TransientExpression><![CDATA[VwBuyerMoves.sum("SumSumm != null ? SumSumm : 0")]]></TransientExpression>
   </ViewAttribute>
   <ViewAttribute
     Name="CountContacts"
@@ -800,6 +800,11 @@ order by Kontragents.FULLNAME]]></SQLQuery>
   <ViewLinkAccessor
     Name="CallLogView"
     ViewLink="ua.divas.view.CallLogKontragentFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="VwSupplierMoves"
+    ViewLink="ua.divas.view.VwSupplierMovesKontragFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <ClientInterface

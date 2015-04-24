@@ -37,9 +37,12 @@ import ua.divas.view.UserSettingsViewImpl;
 import ua.divas.view.UsersViewImpl;
 import ua.divas.view.VwBallansApImpl;
 import ua.divas.view.VwBuyerMovesImpl;
+import ua.divas.view.VwKassaMovesImpl;
+import ua.divas.view.VwKontragAllItemsImpl;
 import ua.divas.view.VwKontragZamerImpl;
 import ua.divas.view.VwNotificationCalendarViewImpl;
 import ua.divas.view.VwSalesImpl;
+import ua.divas.view.VwSupplierMovesImpl;
 import ua.divas.view.VwZamerMovesImpl;
 import ua.divas.view.VwZatratyImpl;
 import ua.divas.view.ZatratyViewImpl;
@@ -2873,8 +2876,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for VwKassaMoves1.
      * @return VwKassaMoves1
      */
-    public ViewObjectImpl getVwKassaMoves1() {
-        return (ViewObjectImpl) findViewObject("VwKassaMoves1");
+    public VwKassaMovesImpl getVwKassaMoves1() {
+        return (VwKassaMovesImpl) findViewObject("VwKassaMoves1");
     }
 
     /**
@@ -3391,6 +3394,55 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public VwNotificationCalendarViewImpl getVwNotificationCalendarView1() {
         return (VwNotificationCalendarViewImpl) findViewObject("VwNotificationCalendarView1");
+    }
+
+    /**
+     * Container's getter for VwSupplierMoves1.
+     * @return VwSupplierMoves1
+     */
+    public VwSupplierMovesImpl getVwSupplierMoves1() {
+        return (VwSupplierMovesImpl) findViewObject("VwSupplierMoves1");
+    }
+
+
+    /**
+     * Container's getter for VwKontragAllItems1.
+     * @return VwKontragAllItems1
+     */
+    public VwKontragAllItemsImpl getVwKontragAllItems1() {
+        return (VwKontragAllItemsImpl) findViewObject("VwKontragAllItems1");
+    }
+
+    /**
+     * Container's getter for VwBuyerMoves3.
+     * @return VwBuyerMoves3
+     */
+    public VwBuyerMovesImpl getVwBuyerMoves3() {
+        return (VwBuyerMovesImpl) findViewObject("VwBuyerMoves3");
+    }
+
+    /**
+     * Container's getter for VwBuyerMovesVwKontragAllFkLink1.
+     * @return VwBuyerMovesVwKontragAllFkLink1
+     */
+    public ViewLinkImpl getVwBuyerMovesVwKontragAllFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwBuyerMovesVwKontragAllFkLink1");
+    }
+
+    /**
+     * Container's getter for VwSupplierMoves2.
+     * @return VwSupplierMoves2
+     */
+    public VwSupplierMovesImpl getVwSupplierMoves2() {
+        return (VwSupplierMovesImpl) findViewObject("VwSupplierMoves2");
+    }
+
+    /**
+     * Container's getter for VwSupplierMovesVwKontragAllFkLink1.
+     * @return VwSupplierMovesVwKontragAllFkLink1
+     */
+    public ViewLinkImpl getVwSupplierMovesVwKontragAllFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwSupplierMovesVwKontragAllFkLink1");
     }
 }
 

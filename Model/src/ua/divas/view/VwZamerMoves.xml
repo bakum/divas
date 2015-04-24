@@ -36,6 +36,7 @@
   MOVE_KONTRAG.KONTRAG_ID,
   MOVE_KONTRAG.KONTRAG,
   MOVE_KONTRAG.DIVISION_ID DIVISION_ID,
+  MOVE_KONTRAG.TABLE_NAME TABLE_NAME,  
   MOVE_KONTRAG.CODE,
   MOVE_KONTRAG.SUMM,
   case 
@@ -48,11 +49,25 @@
     end as summ_prihod,
   MOVE_KONTRAG.REGISTRATOR_ID,
   MOVE_KONTRAG.PERIOD,
-  KONTRAGENTS.IS_MEASURER
+  KONTRAGENTS.IS_MEASURER,
+  CASE
+        WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('orders')
+            THEN 'Заказ №'||(select num from orders where id = MOVE_KONTRAG.REGISTRATOR_ID)||' от '||to_char(
+            (select dat from orders where id = MOVE_KONTRAG.REGISTRATOR_ID),'DD-MM-YYYY')
+        WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('pko')
+            THEN 'ПКО №'||(select num from pko where id = MOVE_KONTRAG.REGISTRATOR_ID)||' от '||to_char(
+            (select dat from pko where id = MOVE_KONTRAG.REGISTRATOR_ID),'DD-MM-YYYY')  
+        WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('rko')
+            THEN 'РКО №'||(select num from rko where id = MOVE_KONTRAG.REGISTRATOR_ID)||' от '||to_char(
+            (select dat from rko where id = MOVE_KONTRAG.REGISTRATOR_ID),'DD-MM-YYYY')  
+        WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('other_zatraty')
+            THEN 'Админ. затраты №'||(select num from other_zatraty where id = MOVE_KONTRAG.REGISTRATOR_ID)||' от '||to_char(
+            (select dat from other_zatraty where id = MOVE_KONTRAG.REGISTRATOR_ID),'DD-MM-YYYY')     
+    END AS REG_STRING  
 FROM MOVE_KONTRAG
 INNER JOIN KONTRAGENTS
 ON MOVE_KONTRAG.KONTRAG_ID    = KONTRAGENTS.ID
-WHERE KONTRAGENTS.IS_MEASURER = 1 and MOVE_KONTRAG.CODE='5091'
+WHERE KONTRAGENTS.IS_MEASURER = 1
 and
 upper(MOVE_KONTRAG.DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))]]></SQLQuery>
   <ViewAttribute
@@ -137,6 +152,21 @@ upper(MOVE_KONTRAG.DIVISION_ID) in (select upper(N) from table(cast(get_division
     SQLType="VARCHAR">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TableName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TABLE_NAME"
+    Expression="TABLE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
     </DesignTime>
   </ViewAttribute>
   <ViewAttribute
@@ -261,6 +291,21 @@ upper(MOVE_KONTRAG.DIVISION_ID) in (select upper(N) from table(cast(get_division
           ResId="ua.divas.view.VwZamerMoves.IsMeasurer_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RegString"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="80"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REG_STRING"
+    Expression="REG_STRING"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
   </ViewAttribute>
   <AttrArray Name="KeyAttributes">
     <Item Value="Id"/>

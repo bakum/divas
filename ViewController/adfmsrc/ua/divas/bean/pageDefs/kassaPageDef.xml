@@ -38,6 +38,7 @@
           <Item Value="SummPrihod"/>
           <Item Value="SummRashod"/>
           <Item Value="TableName"/>
+          <Item Value="RegString"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

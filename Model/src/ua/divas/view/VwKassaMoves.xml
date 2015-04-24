@@ -95,7 +95,21 @@
     END AS summ_rashod, 
     MOVE_KASSA.REGISTRATOR_ID REGISTRATOR_ID, 
     MOVE_KASSA.PERIOD PERIOD, 
-    MOVE_KASSA.TABLE_NAME TABLE_NAME 
+    MOVE_KASSA.TABLE_NAME TABLE_NAME,
+    CASE
+        WHEN upper(MOVE_KASSA.TABLE_NAME) LIKE upper('orders')
+            THEN 'Заказ №'||(select num from orders where id = MOVE_KASSA.REGISTRATOR_ID)||' от '||to_char(
+            (select dat from orders where id = MOVE_KASSA.REGISTRATOR_ID),'DD-MM-YYYY')
+        WHEN upper(MOVE_KASSA.TABLE_NAME) LIKE upper('pko')
+            THEN 'ПКО №'||(select num from pko where id = MOVE_KASSA.REGISTRATOR_ID)||' от '||to_char(
+            (select dat from pko where id = MOVE_KASSA.REGISTRATOR_ID),'DD-MM-YYYY')  
+        WHEN upper(MOVE_KASSA.TABLE_NAME) LIKE upper('rko')
+            THEN 'РКО №'||(select num from rko where id = MOVE_KASSA.REGISTRATOR_ID)||' от '||to_char(
+            (select dat from rko where id = MOVE_KASSA.REGISTRATOR_ID),'DD-MM-YYYY')  
+        WHEN upper(MOVE_KASSA.TABLE_NAME) LIKE upper('other_zatraty')
+            THEN 'Админ. затраты №'||(select num from other_zatraty where id = MOVE_KASSA.REGISTRATOR_ID)||' от '||to_char(
+            (select dat from other_zatraty where id = MOVE_KASSA.REGISTRATOR_ID),'DD-MM-YYYY')     
+    END AS REG_STRING        
 FROM 
     MOVE_KASSA
 where
@@ -291,6 +305,21 @@ upper(MOVE_KASSA.DIVISION_ID) in (select upper(N) from table(cast(get_divisions(
     SQLType="VARCHAR">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RegString"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="80"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REG_STRING"
+    Expression="REG_STRING"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
     </DesignTime>
   </ViewAttribute>
   <AttrArray Name="KeyAttributes">

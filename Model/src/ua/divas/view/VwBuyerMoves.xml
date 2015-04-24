@@ -32,51 +32,99 @@
       </SchemaBasedProperties>
     </Properties>
   </Variable>
-  <SQLQuery><![CDATA[SELECT MOVE_KONTRAG.ID,
-  MOVE_KONTRAG.KONTRAG_ID,
-  MOVE_KONTRAG.KONTRAG,
-  MOVE_KONTRAG.DIVISION_ID DIVISION_ID,
-  MOVE_KONTRAG.CODE,
-  MOVE_KONTRAG.SUMM,
-  case 
-        when MOVE_KONTRAG.SUMM >=0
-        then MOVE_KONTRAG.SUMM
-    end as summ_prihod,
-    case 
-        when MOVE_KONTRAG.SUMM < 0
-        then (-1)*MOVE_KONTRAG.SUMM
-    end as summ_rashod,
-  MOVE_KONTRAG.REGISTRATOR_ID,
-  MOVE_KONTRAG.PERIOD
-FROM MOVE_KONTRAG
-INNER JOIN KONTRAGENTS
-ON MOVE_KONTRAG.KONTRAG_ID    = KONTRAGENTS.ID
-WHERE KONTRAGENTS.IS_BUYER = 1 and MOVE_KONTRAG.CODE='20711'
-and
-upper(MOVE_KONTRAG.DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))]]></SQLQuery>
-  <ViewAttribute
-    Name="Id"
-    IsUpdateable="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Precision="255"
-    Type="java.lang.String"
-    ColumnType="VARCHAR2"
-    AliasName="ID"
-    Expression="ID"
-    SQLType="VARCHAR">
-    <DesignTime>
-      <Attr Name="_DisplaySize" Value="50"/>
-    </DesignTime>
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.VwBuyerMoves.Id_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.VwBuyerMoves.Id_TOOLTIP"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
+  <SQLQuery><![CDATA[SELECT KONTRAG_ID,
+  KONTRAG,
+  DIVISION_ID,
+  TABLE_NAME,
+  CODE,
+  SUM(SUMM),
+  SUM(summ_prihod),
+  SUM(summ_rashod),
+  REGISTRATOR_ID,
+  PERIOD,
+  REG_STRING
+FROM
+  (SELECT MOVE_KONTRAG.ID,
+    MOVE_KONTRAG.KONTRAG_ID,
+    MOVE_KONTRAG.KONTRAG,
+    MOVE_KONTRAG.DIVISION_ID DIVISION_ID,
+    MOVE_KONTRAG.TABLE_NAME TABLE_NAME,
+    MOVE_KONTRAG.CODE,
+    MOVE_KONTRAG.SUMM,
+    CASE
+      WHEN MOVE_KONTRAG.SUMM >= 0
+      THEN MOVE_KONTRAG.SUMM
+    END AS summ_prihod,
+    CASE
+      WHEN MOVE_KONTRAG.SUMM < 0
+      THEN ( -1) * MOVE_KONTRAG.SUMM
+    END AS summ_rashod,
+    MOVE_KONTRAG.REGISTRATOR_ID,
+    MOVE_KONTRAG.PERIOD,
+    CASE
+      WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('orders')
+      THEN 'Заказ №'
+        ||
+        (SELECT orders.NUM
+        FROM orders
+        WHERE orders.ID = MOVE_KONTRAG.REGISTRATOR_ID
+        )
+        || ' от '
+        || TO_CHAR(
+        (SELECT orders.DAT FROM orders WHERE orders.ID = MOVE_KONTRAG.REGISTRATOR_ID
+        ), 'DD-MM-YYYY')
+      WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('pko')
+      THEN 'ПКО №'
+        ||
+        (SELECT pko.NUM
+        FROM pko
+        WHERE pko.ID = MOVE_KONTRAG.REGISTRATOR_ID
+        )
+        || ' от '
+        || TO_CHAR(
+        (SELECT pko.DAT FROM pko WHERE pko.ID = MOVE_KONTRAG.REGISTRATOR_ID
+        ), 'DD-MM-YYYY')
+      WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('rko')
+      THEN 'РКО №'
+        ||
+        (SELECT rko.NUM
+        FROM rko
+        WHERE rko.ID = MOVE_KONTRAG.REGISTRATOR_ID
+        )
+        || ' от '
+        || TO_CHAR(
+        (SELECT rko.DAT FROM rko WHERE rko.ID = MOVE_KONTRAG.REGISTRATOR_ID
+        ), 'DD-MM-YYYY')
+      WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('other_zatraty')
+      THEN 'Админ. затраты №'
+        ||
+        (SELECT other_zatraty.NUM
+        FROM other_zatraty
+        WHERE other_zatraty.ID = MOVE_KONTRAG.REGISTRATOR_ID
+        )
+        || ' от '
+        || TO_CHAR(
+        (SELECT other_zatraty.DAT
+        FROM other_zatraty
+        WHERE other_zatraty.ID = MOVE_KONTRAG.REGISTRATOR_ID
+        ), 'DD-MM-YYYY')
+    END AS REG_STRING
+  FROM MOVE_KONTRAG
+  INNER JOIN KONTRAGENTS
+  ON MOVE_KONTRAG.KONTRAG_ID = KONTRAGENTS.ID
+  WHERE MOVE_KONTRAG.CODE    = '20711'
+  AND KONTRAGENTS.IS_MEASURER   = 0
+  )
+where  
+upper(DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))  
+GROUP BY KONTRAG_ID,
+  KONTRAG,
+  DIVISION_ID,
+  TABLE_NAME,
+  CODE,
+  REGISTRATOR_ID,
+  PERIOD,
+  REG_STRING]]></SQLQuery>
   <ViewAttribute
     Name="KontragId"
     IsUpdateable="false"
@@ -139,6 +187,21 @@ upper(MOVE_KONTRAG.DIVISION_ID) in (select upper(N) from table(cast(get_division
     </DesignTime>
   </ViewAttribute>
   <ViewAttribute
+    Name="TableName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TABLE_NAME"
+    Expression="TABLE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
     Name="Code"
     IsUpdateable="false"
     IsPersistent="false"
@@ -162,43 +225,34 @@ upper(MOVE_KONTRAG.DIVISION_ID) in (select upper(N) from table(cast(get_division
     </Properties>
   </ViewAttribute>
   <ViewAttribute
-    Name="Summ"
+    Name="SumSumm"
     IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
     Type="java.math.BigDecimal"
     ColumnType="NUMBER"
-    AliasName="SUMM"
-    Expression="SUMM"
-    SQLType="NUMERIC">
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.VwBuyerMoves.Summ_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.VwBuyerMoves.Summ_TOOLTIP"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="SummPrihod"
-    IsUpdateable="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Type="java.math.BigDecimal"
-    ColumnType="NUMBER"
-    AliasName="SUMM_PRIHOD"
-    Expression="SUMM_PRIHOD"
+    AliasName='"SUM(SUMM)"'
+    Expression='"SUM(SUMM)"'
     SQLType="NUMERIC"/>
   <ViewAttribute
-    Name="SummRashod"
+    Name="SumSummPrihod"
     IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
     Type="java.math.BigDecimal"
     ColumnType="NUMBER"
-    AliasName="SUMM_RASHOD"
-    Expression="SUMM_RASHOD"
+    AliasName='"SUM(SUMM_PRIHOD)"'
+    Expression='"SUM(SUMM_PRIHOD)"'
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SumSummRashod"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName='"SUM(SUMM_RASHOD)"'
+    Expression='"SUM(SUMM_RASHOD)"'
     SQLType="NUMERIC"/>
   <ViewAttribute
     Name="RegistratorId"
@@ -242,9 +296,21 @@ upper(MOVE_KONTRAG.DIVISION_ID) in (select upper(N) from table(cast(get_division
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
-  <AttrArray Name="KeyAttributes">
-    <Item Value="Id"/>
-  </AttrArray>
+  <ViewAttribute
+    Name="RegString"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="80"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REG_STRING"
+    Expression="REG_STRING"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
+  </ViewAttribute>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

@@ -8,8 +8,8 @@
                 <af:panelCollection id="pc1">
                     <f:facet name="menus"/>
                     <f:facet name="toolbar"/>
-                    <af:treeTable value="#{bindings.KontragentsView1.treeModel}" var="node"
-                                  selectionListener="#{bindings.KontragentsView1.treeModel.makeCurrent}"
+                    <af:treeTable value="#{bindings.VwKontragAllItems1.treeModel}" var="node"
+                                  selectionListener="#{bindings.VwKontragAllItems1.treeModel.makeCurrent}"
                                   rowSelection="single" id="tt1">
                         <f:facet name="nodeStamp">
                             <af:column id="c1" headerText="Наименование" width="250" inlineStyle="font-weight:bold;">
@@ -19,14 +19,17 @@
                         <f:facet name="pathStamp">
                             <af:outputText value="#{node}" id="ot2"/>
                         </f:facet>
-                        <af:column id="c2" headerText="Счет">
+                        <af:column id="c2" headerText="Счет" visible="false">
                             <af:outputText value="#{node.bindings.Code}" id="ot3"/>
                         </af:column>
+                        <af:column id="c6" headerText="Регистратор" width="200">
+                            <af:outputText value="#{node.bindings.RegString}" id="ot7"/>
+                        </af:column>
                         <af:column id="c3" headerText="Приход">
-                            <af:outputText value="#{node.bindings.SummPrihod}" id="ot4"/>
+                            <af:outputText value="#{node.bindings.SumSummPrihod}" id="ot4"/>
                         </af:column>
                         <af:column id="c4" headerText="Расход">
-                            <af:outputText value="#{node.bindings.SummRashod}" id="ot5"/>
+                            <af:outputText value="#{node.bindings.SumSummRashod}" id="ot5"/>
                         </af:column>
                         <af:column id="c5" headerText="Задолженность">
                             <af:outputText value="#{node.DebtBuyer}" id="ot6"
