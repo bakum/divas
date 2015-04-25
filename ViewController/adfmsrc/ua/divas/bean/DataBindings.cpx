@@ -45,6 +45,7 @@
     <page path="/calendar.jsff" usageId="ua_divas_bean_calendarPageDef"/>
     <page path="/WEB-INF/newOther.xml#newOther@CreateInsert"
           usageId="ua_divas_bean_newOther_newOther_CreateInsertPageDef"/>
+    <page path="/supplier_debt.jsff" usageId="ua_divas_bean_supplier_debtPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="ua_divas_view_indexPageDef" path="ua.divas.bean.pageDefs.indexPageDef"/>
@@ -84,6 +85,7 @@
     <page id="ua_divas_bean_calendarPageDef" path="ua.divas.bean.pageDefs.calendarPageDef"/>
     <page id="ua_divas_bean_newOther_newOther_CreateInsertPageDef"
           path="ua.divas.bean.pageDefs.newOther_newOther_CreateInsertPageDef"/>
+    <page id="ua_divas_bean_supplier_debtPageDef" path="ua.divas.bean.pageDefs.supplier_debtPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <dc id="DataPackage" path="ua.divas.bean.DataPackage"/>

@@ -334,6 +334,21 @@
                 <name>/WEB-INF/newOther.xml#newOther</name>
                 <actions>view</actions>
               </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/supplier_debt-config.xml#supplier_debt-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpUslugi</name>
+                <actions>delete,read,update</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpOplaty</name>
+                <actions>delete,read,update</actions>
+              </permission>
             </permissions>
           </grant>
           <grant>
@@ -482,6 +497,21 @@
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/newOther.xml#newOther</name>
                 <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/supplier_debt-config.xml#supplier_debt-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpUslugi</name>
+                <actions>read,update</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpOplaty</name>
+                <actions>read,update</actions>
               </permission>
             </permissions>
           </grant>
@@ -685,6 +715,21 @@
                 <name>/WEB-INF/newOther.xml#newOther</name>
                 <actions>view</actions>
               </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/supplier_debt-config.xml#supplier_debt-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpUslugi</name>
+                <actions>delete,read,update</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpOplaty</name>
+                <actions>delete,read,update</actions>
+              </permission>
             </permissions>
           </grant>
           <grant>
@@ -742,6 +787,16 @@
                 <name>/WEB-INF/addOrder.xml#addOrder</name>
                 <actions>view</actions>
               </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpUslugi</name>
+                <actions>read</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpOplaty</name>
+                <actions>read</actions>
+              </permission>
             </permissions>
           </grant>
           <grant>
@@ -773,6 +828,43 @@
                 <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
                 <name>ua.divas.model.Orders.ZamerId</name>
                 <actions>update</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpUslugi</name>
+                <actions>read</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpOplaty</name>
+                <actions>read</actions>
+              </permission>
+            </permissions>
+          </grant>
+          <grant>
+            <grantee>
+              <principals>
+                <principal>
+                  <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
+                  <name>z_manager</name>
+                </principal>
+              </principals>
+            </grantee>
+            <permissions>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/calendar-config.xml#calendar-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpUslugi</name>
+                <actions>delete,read,update</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpOplaty</name>
+                <actions>delete,read,update</actions>
               </permission>
             </permissions>
           </grant>

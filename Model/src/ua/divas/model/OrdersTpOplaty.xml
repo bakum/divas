@@ -220,6 +220,19 @@
       <Item Value="ua.divas.model.OrdersTpOplaty.ZamerId"/>
     </AttrArray>
   </Key>
+  <Permission
+    target="ua.divas.model.OrdersTpOplaty"
+    permissionClass="oracle.adf.share.security.authorization.EntityPermission">
+    <privilege-map
+      operation="read"
+      privilege="read"/>
+    <privilege-map
+      operation="update"
+      privilege="update"/>
+    <privilege-map
+      operation="removeCurrentRow"
+      privilege="delete"/>
+  </Permission>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

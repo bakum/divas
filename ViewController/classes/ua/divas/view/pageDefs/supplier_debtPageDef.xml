@@ -1,30 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.2.66.68" id="buyer_debtPageDef"
-                Package="ua.divas.bean.pageDefs">
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.2.66.68" id="supplier_debtPageDef"
+                Package="ua.divas.view.pageDefs">
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
     <iterator Binds="VwKontragAllItems1" RangeSize="25" DataControl="AppModuleDataControl"
-              id="VwKontragAllItems1Iterator">
-      <sortCriteria>
-        <sort attribute="Fullname" ascending="true"/>
-      </sortCriteria>
-    </iterator>
-    <iterator id="VwBuyerMoves1Iterator" Binds="VwBuyerMoves1" DataControl="AppModuleDataControl" RangeSize="25"/>
+              id="VwKontragAllItems1Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="VwKontragAllItems1Iterator" id="VwKontragAllItems1">
-      <nodeDefinition DefName="ua.divas.view.VwKontragAllItems" Name="VwKontragAllItems10">
+      <nodeDefinition DefName="ua.divas.view.VwKontragAllItems" Name="VwKontragAllItems10" DiscrName="Code"
+                      DiscrValue="5091">
         <AttrNames>
           <Item Value="Id"/>
           <Item Value="Fullname"/>
-          <Item Value="DebtBuyer"/>
+          <Item Value="DebtSupplier"/>
         </AttrNames>
         <Accessors>
-          <Item Value="VwBuyerMoves"/>
+          <Item Value="VwSupplierMoves"/>
         </Accessors>
       </nodeDefinition>
-      <nodeDefinition DefName="ua.divas.view.VwBuyerMoves" Name="VwKontragAllItems11">
+      <nodeDefinition DefName="ua.divas.view.VwSupplierMoves" Name="VwKontragAllItems11">
         <AttrNames>
           <Item Value="Code"/>
           <Item Value="Period"/>

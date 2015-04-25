@@ -50,7 +50,8 @@
                                         </af:region>
                                     </af:showDetailItem>
                                     <af:showDetailItem text="Аналитика" id="sdi5" stretchChildren="first"
-                                                       icon="/img/analytics.png">
+                                                       icon="/img/analytics.png"
+                                                       rendered="#{securityContext.taskflowViewable['/WEB-INF/supplier_debt-config.xml#supplier_debt-config']}">
                                         <af:panelTabbed id="pt2">
                                             <af:showDetailItem text="Денежные средства" id="sdi11"
                                                                stretchChildren="first"
@@ -69,6 +70,12 @@
                                                                        rendered="#{securityContext.taskflowViewable['/WEB-INF/buyer_debt-config.xml#buyer_debt-config']}">
                                                         <af:region value="#{bindings.buyer_debtconfig1.regionModel}"
                                                                    id="r11"/>
+                                                    </af:showDetailItem>
+                                                    <af:showDetailItem text="Кредиторская задолженность" id="sdi21"
+                                                                       stretchChildren="first"
+                                                                       rendered="#{securityContext.taskflowViewable['/WEB-INF/supplier_debt-config.xml#supplier_debt-config']}">
+                                                        <af:region value="#{bindings.supplier_debtconfig1.regionModel}"
+                                                                   id="r18"/>
                                                     </af:showDetailItem>
                                                 </af:panelTabbed>
                                             </af:showDetailItem>

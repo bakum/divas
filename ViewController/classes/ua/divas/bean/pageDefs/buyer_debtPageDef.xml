@@ -10,11 +10,11 @@
         <sort attribute="Fullname" ascending="true"/>
       </sortCriteria>
     </iterator>
+    <iterator id="VwBuyerMoves1Iterator" Binds="VwBuyerMoves1" DataControl="AppModuleDataControl" RangeSize="25"/>
   </executables>
   <bindings>
     <tree IterBinding="VwKontragAllItems1Iterator" id="VwKontragAllItems1">
-      <nodeDefinition DefName="ua.divas.view.VwKontragAllItems" Name="VwKontragAllItems10" DiscrName="Code"
-                      DiscrValue="20711">
+      <nodeDefinition DefName="ua.divas.view.VwKontragAllItems" Name="VwKontragAllItems10">
         <AttrNames>
           <Item Value="Id"/>
           <Item Value="Fullname"/>

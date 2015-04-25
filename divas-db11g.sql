@@ -126,7 +126,7 @@ AS TABLE OF usertype;
 --  DDL for Sequence PS_TXN_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 162651 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 166951 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence RKO_NUM_SEQ
 --------------------------------------------------------
@@ -1573,13 +1573,13 @@ ON QRTZ_TRIGGERS.TRIGGER_NAME = NOTIFICATION.TRG_NAME;
 where trunc(period) >= trunc(ORDERS_ENTRY.get_startdatmoves())
 and trunc(period) <= trunc(ORDERS_ENTRY.get_enddatmoves())),
 sebest as
-(select registrator_id, period, summa, summ_plan, VW_SEBEST_ORDERS.SUBCONTO1_DEB division_id from VW_SEBEST_ORDERS
+(select registrator_id, period, summa, VW_SEBEST_ORDERS.SUBCONTO1_DEB division_id from VW_SEBEST_ORDERS
 where trunc(period) >= trunc(ORDERS_ENTRY.get_startdatmoves())
 and trunc(period) <= trunc(ORDERS_ENTRY.get_enddatmoves()))
 select o.id order_id, o.kontrag_id, o.dat period, o.division_id,
 (select sales.summa from sales where sales.registrator_id =o.id) sales_summa,
 (select sebest.summa from sebest where sebest.registrator_id =o.id) fact_sebest_summa,
-(select sebest.summ_plan from sebest where sebest.registrator_id =o.id) plan_sebest_summa
+o.summ_plan plan_sebest_summa
 from orders o where o.deleted = 0
 and trunc(o.dat) >= trunc(ORDERS_ENTRY.get_startdatmoves())
 and trunc(o.dat) <= trunc(ORDERS_ENTRY.get_enddatmoves());
