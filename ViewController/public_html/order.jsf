@@ -995,8 +995,7 @@
                                                                           model="#{row.bindings.Kontname.listOfValuesModel}"
                                                                           required="#{bindings.OrdersTpRashodyView4.hints.Kontname.mandatory}"
                                                                           columns="#{bindings.OrdersTpRashodyView4.hints.Kontname.displayWidth}"
-                                                                          shortDesc="#{bindings.OrdersTpRashodyView4.hints.Kontname.tooltip}"
-                                                                          createPopupId="::pSuppl">
+                                                                          shortDesc="#{bindings.OrdersTpRashodyView4.hints.Kontname.tooltip}">
                                                 <f:validator binding="#{row.bindings.Kontname.validator}"/>
                                             </af:inputComboboxListOfValues>
                                         </af:column>
@@ -1022,7 +1021,6 @@
                                                                           popupTitle="Search and Select: #{bindings.OrdersTpRashodyView4.hints.Zatrname.label}"
                                                                           value="#{row.bindings.Zatrname.inputValue}"
                                                                           model="#{row.bindings.Zatrname.listOfValuesModel}"
-                                                                          required="#{bindings.OrdersTpRashodyView4.hints.Zatrname.mandatory}"
                                                                           columns="#{bindings.OrdersTpRashodyView4.hints.Zatrname.displayWidth}"
                                                                           shortDesc="#{bindings.OrdersTpRashodyView4.hints.Zatrname.tooltip}"
                                                                           createPopupId="::pZatr">
@@ -1035,7 +1033,6 @@
                                                    id="c26">
                                             <af:inputNumberSpinbox value="#{row.bindings.Summ.inputValue}"
                                                                    label="#{bindings.OrdersTpRashodyView4.hints.Summ.label}"
-                                                                   required="#{bindings.OrdersTpRashodyView4.hints.Summ.mandatory}"
                                                                    columns="#{bindings.OrdersTpRashodyView4.hints.Summ.displayWidth}"
                                                                    shortDesc="#{bindings.OrdersTpRashodyView4.hints.Summ.tooltip}"
                                                                    id="it27">
@@ -1280,7 +1277,7 @@
                                              inlineStyle="background-color:#e7e7e7;">
                             <af:toolbar id="t2">
                                 <af:button text="Ok" id="b2" action="ok"/>
-                                <af:button text="Отмена" id="b3" action="cancel"/>
+                                <af:button text="Отмена" id="b3" action="cancel" immediate="true"/>
                             </af:toolbar>
                         </af:panelGroupLayout>
                     </af:gridCell>

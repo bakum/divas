@@ -155,7 +155,7 @@
                                                 <af:setPropertyListener from="#{bindings.Id.inputValue}"
                                                                         to="#{pageFlowScope.RkoId}" type="action"/>
                                             </af:button>
-                                            <af:button text="Отмена" id="b2" action="cancel"/>
+                                            <af:button text="Отмена" id="b2" action="cancel" immediate="true"/>
                                         </af:toolbar>
                                     </af:panelGroupLayout>
                                 </f:facet>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="prorab-config">
+    <default-activity>prorab</default-activity>
+    <managed-bean id="__1">
+      <managed-bean-name>prorab</managed-bean-name>
+      <managed-bean-class>ua.divas.bean.ProrabBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <view id="prorab">
+      <page>/prorab.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

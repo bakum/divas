@@ -111,7 +111,7 @@ AS TABLE OF usertype;
 --  DDL for Sequence ORDERS_NUM_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "ORDERS_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 601 CACHE 20 NOORDER  CYCLE ;
+   CREATE SEQUENCE  "ORDERS_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 621 CACHE 20 NOORDER  CYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence OTHER_ZATR_NUM_SEQ
 --------------------------------------------------------
@@ -126,7 +126,7 @@ AS TABLE OF usertype;
 --  DDL for Sequence PS_TXN_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 166951 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 168001 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence RKO_NUM_SEQ
 --------------------------------------------------------
@@ -1399,8 +1399,8 @@ SELECT VW_MOVES.REGISTRATOR_ID,
   VW_MOVES.SUM_DEB,
   VW_MOVES.KRED,
   VW_MOVES.SUM_KRED,
-  ZATRATY.FULLNAME AS Subconto1_Deb,
-  KASSA.FULLNAME   AS Subconto1_Kred,
+  ZATRATY.FULLNAME      AS Subconto1_Deb,
+  KASSA.FULLNAME        AS Subconto1_Kred,
   NOMENKLATURA.FULLNAME AS Subconto2_Kred
 FROM VW_MOVES
 INNER JOIN ZATRATY
@@ -1455,6 +1455,22 @@ INNER JOIN DIVISIONS
 ON VW_MOVES.SUBCONTO1_DEB = DIVISIONS.ID
 INNER JOIN DIVISIONS DIVISIONS1
 ON VW_MOVES.SUBCONTO1_KRED = DIVISIONS1.ID
+LEFT JOIN NOMENKLATURA
+ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID
+UNION
+SELECT VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.DEB,
+  VW_MOVES.SUM_DEB,
+  VW_MOVES.KRED,
+  VW_MOVES.SUM_KRED,
+  ZATRATY.FULLNAME      AS Subconto1_Deb,
+  KONTRAGENTS.FULLNAME        AS Subconto1_Kred,
+  NOMENKLATURA.FULLNAME AS Subconto2_Kred
+FROM VW_MOVES
+INNER JOIN ZATRATY
+ON VW_MOVES.SUBCONTO1_DEB = ZATRATY.ID
+INNER JOIN KONTRAGENTS
+ON VW_MOVES.SUBCONTO1_KRED = KONTRAGENTS.ID
 LEFT JOIN NOMENKLATURA
 ON VW_MOVES.SUBCONTO2_KRED = NOMENKLATURA.ID;
 --------------------------------------------------------
@@ -6888,6 +6904,9 @@ END KONTRAG;
   end if;
   
   --Субконто кредита
+  if i.kontr_id is not null then
+      select id into p_ret_rec.plan_acc_kred_id from plan_acc where code = '5091';
+  end if;
   select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id;
   if p_sub_count > 0 then
   p_counter:=0;
@@ -6908,13 +6927,13 @@ END KONTRAG;
         
         if upper(p_sub_name) = 'КОНТРАГЕНТЫ' then
         if p_counter = 1 then
-            p_ret_rec.subconto1_kred:=p_order.kontrag_id;
+            p_ret_rec.subconto1_kred:=i.kontr_id;
         end if; 
         if p_counter = 2 then
-            p_ret_rec.subconto2_kred:=p_order.kontrag_id;
+            p_ret_rec.subconto2_kred:=i.kontr_id;
         end if;
         if p_counter = 3 then
-            p_ret_rec.subconto3_kred:=p_order.kontrag_id;
+            p_ret_rec.subconto3_kred:=i.kontr_id;
         end if;
         end if;
         if upper(p_sub_name) = 'ЦФО' then

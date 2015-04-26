@@ -25,7 +25,7 @@
                                     <af:setPropertyListener from="#{bindings.KontragId.inputValue}"
                                                             to="#{pageFlowScope.KontragId}" type="action"/>
                                 </af:button>
-                                <af:button text="Отменить" id="b2" action="cancel"/>
+                                <af:button text="Отменить" id="b2" action="cancel" immediate="true"/>
                             </af:toolbar>
                         </f:facet>
                         <f:facet name="legend">

@@ -13,6 +13,7 @@
                   Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="OrderZamerView1Query"/>
     <searchRegion Criteria="OrderZamerViewCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   Binds="OrderZamerView1Iterator" id="OrderZamerViewCriteriaQuery"/>
+    <iterator id="OrdersView1Iterator" Binds="OrdersView1" DataControl="AppModuleDataControl" RangeSize="25"/>
   </executables>
   <bindings>
     <tree IterBinding="OrderZamerView1Iterator" id="OrderZamerView1">
@@ -35,6 +36,7 @@
           <Item Value="ZamerId"/>
           <Item Value="Zamername"/>
           <Item Value="Adress"/>
+          <Item Value="StatusName"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

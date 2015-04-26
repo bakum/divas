@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.2.66.68" id="orderPageDef"
-                Package="ua.divas.bean.pageDefs">
+                Package="ua.divas.bean.pageDefs" SkipValidation="true">
   <parameters/>
   <executables>
     <variableIterator id="variables">
@@ -19,7 +19,7 @@
     <iterator Binds="OrdersTpOplatyView1" RangeSize="5" DataControl="AppModuleDataControl"
               id="OrdersTpOplatyView1Iterator"/>
     <iterator Binds="OrdersTpRashodyView4" RangeSize="5" DataControl="AppModuleDataControl"
-              id="OrdersTpRashodyView4Iterator"/>
+              id="OrdersTpRashodyView4Iterator" StateValidation="false"/>
     <iterator Binds="OrdersTpNachisleniaView2" RangeSize="5" DataControl="AppModuleDataControl"
               id="OrdersTpNachisleniaView2Iterator"/>
     <iterator Binds="ZatratyView1" RangeSize="10" DataControl="AppModuleDataControl" id="ZatratyView1Iterator"/>

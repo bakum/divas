@@ -33,7 +33,7 @@
       </SchemaBasedProperties>
     </Properties>
   </Variable>
-  <SQLQuery><![CDATA[SELECT ID,
+  <SQLQuery><![CDATA[SELECT DISTINCT ID,
   IS_GROUP,
   PARENT_ID,
   FULLNAME,
@@ -48,9 +48,7 @@
   IS_SUPPLIER,
   IS_BUYER,
   IS_MEASURER,
-  USER_ID,
-  SUM(SUMM) Summa,
-  DEB Code
+  USER_ID
 FROM
   (SELECT KONTRAGENTS.ID ID,
     KONTRAGENTS.IS_GROUP IS_GROUP,
@@ -181,7 +179,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="IS_GROUP"
     Expression="IS_GROUP"
-    SQLType="NUMERIC"/>
+    SQLType="INTEGER"/>
   <ViewAttribute
     Name="ParentId"
     IsUpdateable="false"
@@ -223,7 +221,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="DELETED"
     Expression="DELETED"
-    SQLType="NUMERIC"/>
+    SQLType="INTEGER"/>
   <ViewAttribute
     Name="Inn"
     IsUpdateable="false"
@@ -295,7 +293,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="UR_FIZ"
     Expression="UR_FIZ"
-    SQLType="NUMERIC"/>
+    SQLType="INTEGER"/>
   <ViewAttribute
     Name="Version"
     IsUpdateable="false"
@@ -305,7 +303,7 @@ GROUP BY ID,
     ColumnType="TIMESTAMP"
     AliasName="VERSION"
     Expression="VERSION"
-    SQLType="TIMESTAMP"/>
+    SQLType="DATE"/>
   <ViewAttribute
     Name="Predefined"
     IsUpdateable="false"
@@ -317,7 +315,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="PREDEFINED"
     Expression="PREDEFINED"
-    SQLType="NUMERIC"/>
+    SQLType="INTEGER"/>
   <ViewAttribute
     Name="IsSupplier"
     IsUpdateable="false"
@@ -329,7 +327,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="IS_SUPPLIER"
     Expression="IS_SUPPLIER"
-    SQLType="NUMERIC"/>
+    SQLType="INTEGER"/>
   <ViewAttribute
     Name="IsBuyer"
     IsUpdateable="false"
@@ -341,7 +339,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="IS_BUYER"
     Expression="IS_BUYER"
-    SQLType="NUMERIC"/>
+    SQLType="INTEGER"/>
   <ViewAttribute
     Name="IsMeasurer"
     IsUpdateable="false"
@@ -353,7 +351,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="IS_MEASURER"
     Expression="IS_MEASURER"
-    SQLType="NUMERIC"/>
+    SQLType="INTEGER"/>
   <ViewAttribute
     Name="UserId"
     IsUpdateable="false"
@@ -367,31 +365,6 @@ GROUP BY ID,
     SQLType="VARCHAR">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
-    </DesignTime>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="Summa"
-    IsUpdateable="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Type="java.math.BigDecimal"
-    ColumnType="NUMBER"
-    AliasName="SUMMA"
-    Expression="SUMMA"
-    SQLType="NUMERIC"/>
-  <ViewAttribute
-    Name="Code"
-    IsUpdateable="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Precision="6"
-    Type="java.lang.String"
-    ColumnType="VARCHAR2"
-    AliasName="CODE"
-    Expression="CODE"
-    SQLType="VARCHAR">
-    <DesignTime>
-      <Attr Name="_DisplaySize" Value="6"/>
     </DesignTime>
   </ViewAttribute>
   <ViewAttribute

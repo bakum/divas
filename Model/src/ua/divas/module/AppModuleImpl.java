@@ -32,6 +32,7 @@ import ua.divas.view.OrdersTpUslugiViewImpl;
 import ua.divas.view.OrdersViewImpl;
 import ua.divas.view.OtherZatratyViewImpl;
 import ua.divas.view.PkoViewImpl;
+import ua.divas.view.ProrabViewImpl;
 import ua.divas.view.RkoViewImpl;
 import ua.divas.view.UserSettingsViewImpl;
 import ua.divas.view.UsersViewImpl;
@@ -3443,6 +3444,14 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getVwSupplierMovesVwKontragAllFkLink1() {
         return (ViewLinkImpl) findViewLink("VwSupplierMovesVwKontragAllFkLink1");
+    }
+
+    /**
+     * Container's getter for ProrabView1.
+     * @return ProrabView1
+     */
+    public ProrabViewImpl getProrabView1() {
+        return (ProrabViewImpl) findViewObject("ProrabView1");
     }
 }
 

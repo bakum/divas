@@ -22,7 +22,7 @@
                                     <af:trainButtonBar value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}"
                                                        id="tbb1"/>
                                 </af:group>
-                                <af:button text="Отменить" id="b1" action="cancel1"/>
+                                <af:button text="Отменить" id="b1" action="cancel1" immediate="true"/>
                             </af:toolbar>
                         </f:facet>
                         <f:facet name="legend">

@@ -101,6 +101,10 @@
                                     <af:showDetailItem text="Настройки" id="sdi7" stretchChildren="first"
                                                        icon="/img/options.png">
                                         <af:panelTabbed id="pt1">
+                                            <af:showDetailItem text="Прорабы" id="sdi22" stretchChildren="first"
+                                                               rendered="#{securityContext.taskflowViewable['/WEB-INF/prorab-config.xml#prorab-config']}">
+                                                <af:region value="#{bindings.prorabconfig1.regionModel}" id="r19"/>
+                                            </af:showDetailItem>
                                             <af:showDetailItem text="Прайс-лист" id="sdi8" stretchChildren="first"
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/import-price-config.xml#import-price-config']}">
                                                 <af:region value="#{bindings.importpriceconfig1.regionModel}" id="r6"/>
@@ -123,7 +127,7 @@
                             </f:facet>
                             <f:facet name="top">
                                 <af:panelGroupLayout id="pgl2" layout="horizontal">
-                                    <af:spacer width="50" height="10" id="s3"/>
+                                    <af:spacer width="30" height="10" id="s3"/>
                                     <af:link text="Войти" id="l1" icon="/img/glbl_login_msg.gif"
                                              rendered="#{!securityContext.authenticated}">
                                         <af:showPopupBehavior popupId="pLogin" triggerType="action" align="endBefore"
@@ -142,6 +146,9 @@
                                              inlineStyle="#{bindings.CountUnread.inputValue != null ? 'color:Lime;' : ''}">
                                         <af:showPopupBehavior popupId="p1"/>
                                     </af:link>
+                                    <af:spacer width="10" height="10" id="s7"/>
+                                    <af:link text="Copyright by BMExpert 2015 v0.1.2" id="l4" targetFrame="_blank"
+                                             destination="http://bmexp.com"/>
                                     <af:popup childCreation="deferred" autoCancel="disabled" id="pLogin">
                                         <af:dialog id="d2" title="Авторизация" dialogListener="#{login.OnLoginAction}">
                                             <f:facet name="buttonBar"/>
@@ -163,7 +170,7 @@
                                                    resize="on">
                                             <f:facet name="buttonBar">
                                                 <af:button text="Тест уведомления" id="b1"
-                                                           actionListener="#{reminder.onReminder}"/>
+                                                           actionListener="#{reminder.onReminder}" visible="false"/>
                                                 <af:button text="Обновить" id="b2"
                                                            actionListener="#{notification.onRefresh}"/>
                                             </f:facet>

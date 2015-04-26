@@ -256,7 +256,7 @@
                                              inlineStyle="background-color:#e7e7e7;">
                             <af:toolbar id="t4">
                                 <af:button text="Ok" id="b3" action="ok"/>
-                                <af:button text="Отмена" id="b4" action="cancel"/>
+                                <af:button text="Отмена" id="b4" action="cancel" immediate="true"/>
                             </af:toolbar>
                         </af:panelGroupLayout>
                     </af:gridCell>

@@ -386,7 +386,8 @@
        Orders.KURS, 
        Orders.NUM, 
        Orders.POSTED, 
-       Orders.STATUS_ID, 
+       Orders.STATUS_ID,
+       (select name from order_status where id = Orders.STATUS_ID) Status_Name,
        (select 0 from dual) o_editable,
        Orders.USER_ID, 
        Orders.VERSION, 
@@ -596,6 +597,21 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
           Value="choice"/>
       </SchemaBasedProperties>
     </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="StatusName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="STATUS_NAME"
+    Expression="STATUS_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
   </ViewAttribute>
   <ViewAttribute
     Name="OEditable"

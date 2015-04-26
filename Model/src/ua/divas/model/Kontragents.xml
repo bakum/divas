@@ -200,6 +200,8 @@
     Type="java.lang.String"
     ColumnType="VARCHAR2"
     TableName="KONTRAGENTS">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[(Fullname)]]></TransientExpression>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="150"/>
     </DesignTime>

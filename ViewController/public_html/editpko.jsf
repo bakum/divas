@@ -150,7 +150,7 @@
                                                          inlineStyle="background-color:#e7e7e7;">
                                         <af:toolbar id="t1">
                                             <af:button text="Ok" id="b1" action="ok"/>
-                                            <af:button text="Отмена" id="b2" action="cancel"/>
+                                            <af:button text="Отмена" id="b2" action="cancel" immediate="true"/>
                                         </af:toolbar>
                                     </af:panelGroupLayout>
                                 </f:facet>

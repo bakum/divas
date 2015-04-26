@@ -188,8 +188,9 @@ public class OrdersBean {
                 }
             }
         }
-        
+
         AdfFacesContext.getCurrentInstance().addPartialTarget(getMainTable());
+        refreshZamer();
     }
 
     public String commitChange() {
@@ -661,7 +662,7 @@ public class OrdersBean {
         DCIteratorBinding it = binding.findIteratorBinding("OrdersView1Iterator");
         it.executeQuery();
     }
-    
+
     private String getSessionUser() {
         ADFContext adfCtx = ADFContext.getCurrent();
         SecurityContext secCntx = adfCtx.getSecurityContext();
@@ -677,32 +678,32 @@ public class OrdersBean {
                 String cutid = UUID.randomUUID().toString().substring(0, 7);
                 JobDetail job =
                     JobBuilder.newJob(Notice.class).withDescription("trigger" + cutid).withIdentity("job" + cutid,
-                                                                                                             "group").build();
-                Date runDate = (Date)getDat().getValue();
+                                                                                                    "group").build();
+                Date runDate = (Date) getDat().getValue();
                 Trigger trigger =
-                    TriggerBuilder.newTrigger().startAt(runDate).withDescription(getSessionUser()).withIdentity("trigger" +                                                                                                                cutid,
+                    TriggerBuilder.newTrigger().startAt(runDate).withDescription(getSessionUser()).withIdentity("trigger" +
+                                                                                                                cutid,
                                                                                                                 "group").build();
                 job.getJobDataMap().put("UserName", getSessionUser());
-                
+
                 ob.getParamsMap().put("cutid", cutid);
                 ob.getParamsMap().put("dat", runDate);
-                ob.getParamsMap().put("desc", (String)getDesc().getValue());
+                ob.getParamsMap().put("desc", (String) getDesc().getValue());
                 ob.getParamsMap().put("ContId", null);
                 if (StartSchedulerQuartz.sched != null) {
                     StartSchedulerQuartz.sched.scheduleJob(job, trigger);
                     System.out.println("------- Новое напоминание! ----------------");
                     ob.execute();
                     FacesContext context = FacesContext.getCurrentInstance();
-                    ExtendedRenderKitService erks = Service.getService(context.getRenderKit(), ExtendedRenderKitService.class);
-                    erks.addScript(context,
-                                   "Growl('Внимание'," +
-                        "'Сообщение поставлено в расписание!','warning')");
+                    ExtendedRenderKitService erks =
+                        Service.getService(context.getRenderKit(), ExtendedRenderKitService.class);
+                    erks.addScript(context, "Growl('Внимание'," + "'Сообщение поставлено в расписание!','warning')");
                 }
-                
+
             }
         }
     }
-    
+
     public void afterListener() {
         System.out.println("After listener called ");
         BindingContext bindingContext = BindingContext.getCurrent();
@@ -712,7 +713,16 @@ public class OrdersBean {
         am.getKontragentsView1().executeQuery();
         am.getOrdersView1().executeQuery();
     }
-    
+
+    public void refreshZamer() {
+        BindingContext bindingContext = BindingContext.getCurrent();
+        DCDataControl dc =
+            bindingContext.findDataControl("AppModuleDataControl"); // Name of application module in datacontrolBinding.cpx
+        AppModuleImpl am = (AppModuleImpl) dc.getDataProvider();
+        am.getKontragentsView1().executeQuery();
+        am.getOrderZamerView1().executeQuery();
+    }
+
 
     public void setDat(RichInputDate dat) {
         this.dat = dat;

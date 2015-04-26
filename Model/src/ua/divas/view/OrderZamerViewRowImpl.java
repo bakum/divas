@@ -59,6 +59,7 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
         Num,
         Posted,
         StatusId,
+        StatusName,
         OEditable,
         UserId,
         Version,
@@ -116,6 +117,7 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
     public static final int NUM = AttributesEnum.Num.index();
     public static final int POSTED = AttributesEnum.Posted.index();
     public static final int STATUSID = AttributesEnum.StatusId.index();
+    public static final int STATUSNAME = AttributesEnum.StatusName.index();
     public static final int OEDITABLE = AttributesEnum.OEditable.index();
     public static final int USERID = AttributesEnum.UserId.index();
     public static final int VERSION = AttributesEnum.Version.index();
@@ -401,6 +403,14 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
      */
     public void setStatusId(String value) {
         setAttributeInternal(STATUSID, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute StatusName.
+     * @return the StatusName
+     */
+    public String getStatusName() {
+        return (String) getAttributeInternal(STATUSNAME);
     }
 
     /**

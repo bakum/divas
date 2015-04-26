@@ -329,7 +329,7 @@ public class OrderjsfBean {
             //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
             ob = binding.getOperationBinding("Commit");
             ob.execute();
-            refreshKontrag();
+            //refreshKontrag();
             /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
             DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
             if (it != null) {
@@ -350,7 +350,7 @@ public class OrderjsfBean {
             //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
             ob = binding.getOperationBinding("Commit");
             ob.execute();
-            refreshZatraty();
+            //refreshZatraty();
             /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
             DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
             if (it != null) {
