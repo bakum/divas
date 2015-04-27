@@ -6849,9 +6849,12 @@ END KONTRAG;
     p_upr_val currency.id%type;
     p_code_plan plan_acc.code%type;
     p_usluga nomenklatura.usluga%type;
+    p_status order_status.id%type;
   begin
   select * into p_order from orders where id = p_move_rec.registrator_id;
   select id into p_upr_val from currency where predefined=1;
+  
+  select id into p_status from order_status where upper(name) = upper('Закрыт');
   
   for i in (select * from ORDERS_TP_RASHODY where order_id = p_order.id) loop
   p_ret_rec:=p_move_rec;
@@ -6905,7 +6908,9 @@ END KONTRAG;
   
   --Субконто кредита
   if i.kontr_id is not null then
-      select id into p_ret_rec.plan_acc_kred_id from plan_acc where code = '5091';
+      if p_order.status_id = p_status then
+        select id into p_ret_rec.plan_acc_kred_id from plan_acc where code = '5091';
+      end if;
   end if;
   select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id;
   if p_sub_count > 0 then
@@ -7513,8 +7518,10 @@ END KONTRAG;
         
         --Проводка ТЧ Услуги - Выполнили работы
         if p_counter = 1 then
-            p_move_rec.description:='Проводка ТЧ Услуги - Выполнили работы';
-            set_subconto_tp_uslugi(p_move_rec);
+            if p_orders_rec.status_id = p_status then
+              p_move_rec.description:='Проводка ТЧ Услуги - Выполнили работы';
+              set_subconto_tp_uslugi(p_move_rec);
+            end if;
         end if; 
         --Проводка ТЧ Оплаты - Получили предоплату
         if p_counter = 2 then
