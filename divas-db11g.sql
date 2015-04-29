@@ -7000,7 +7000,7 @@ END KONTRAG;
   select * into p_order from orders where id = p_move_rec.registrator_id;
   select id into p_upr_val from currency where predefined=1;
   
-  select id into p_status from order_status where upper(name) = upper('Закрыт');
+  select id into p_status from order_status where upper(name) = upper('Выполнен');
   
   for i in (select * from ORDERS_TP_RASHODY where order_id = p_order.id) loop
   p_ret_rec:=p_move_rec;
@@ -7660,7 +7660,7 @@ END KONTRAG;
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from orders
       where id = p_id;
       
-    select id into p_status from order_status where upper(name) = upper('Закрыт');
+    select id into p_status from order_status where upper(name) = upper('Выполнен');
       
     p_move_rec.period:=p_orders_rec.dat;
     p_counter:=0;
