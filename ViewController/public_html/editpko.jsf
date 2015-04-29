@@ -85,8 +85,8 @@
                                         <af:selectOneChoice value="#{bindings.CurrId.inputValue}"
                                                             required="#{bindings.CurrId.hints.mandatory}"
                                                             shortDesc="#{bindings.CurrId.hints.tooltip}" id="soc3"
-                                                            autoSubmit="true"
-                                                            readOnly="#{bindings.PEditable.inputValue == 1 ? false : true}">
+                                                            readOnly="#{bindings.PEditable.inputValue == 1 ? false : true}"
+                                                            autoSubmit="true">
                                             <f:selectItems value="#{bindings.CurrId.items}" id="si3"/>
                                             <f:validator binding="#{bindings.CurrId.validator}"/>
                                         </af:selectOneChoice>
@@ -122,7 +122,6 @@
                                         <af:selectOneChoice value="#{bindings.DivisionId.inputValue}"
                                                             required="#{bindings.DivisionId.hints.mandatory}"
                                                             shortDesc="#{bindings.DivisionId.hints.tooltip}" id="soc1"
-                                                            autoSubmit="true"
                                                             readOnly="#{bindings.PEditable.inputValue == 1 ? false : true}">
                                             <f:selectItems value="#{bindings.DivisionId.items}" id="si1"/>
                                             <f:validator binding="#{bindings.DivisionId.validator}"/>

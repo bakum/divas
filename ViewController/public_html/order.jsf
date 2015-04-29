@@ -388,7 +388,8 @@
                                                                 required="#{bindings.CurrId.hints.mandatory}"
                                                                 shortDesc="#{bindings.CurrId.hints.tooltip}" id="soc2"
                                                                 labelStyle="font-weight: bold;"
-                                                                readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
+                                                                readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
+                                                                autoSubmit="true">
                                                 <f:selectItems value="#{bindings.CurrId.items}" id="si2"/>
                                                 <f:validator binding="#{bindings.CurrId.validator}"/>
                                             </af:selectOneChoice>
@@ -821,6 +822,17 @@
                                                 <af:convertDateTime pattern="#{bindings.OrdersTpOplatyView1.hints.Dat.format}"/>
                                             </af:inputDate>
                                         </af:column>
+                                        <af:column headerText="#{bindings.OrdersTpOplatyView1.hints.KassaId.label}"
+                                                   id="c48" width="150">
+                                            <af:selectOneChoice value="#{row.bindings.KassaId.inputValue}"
+                                                                label="#{row.bindings.KassaId.label}"
+                                                                required="#{bindings.OrdersTpOplatyView1.hints.KassaId.mandatory}"
+                                                                shortDesc="#{bindings.OrdersTpOplatyView1.hints.KassaId.tooltip}"
+                                                                id="soc16">
+                                                <f:selectItems value="#{row.bindings.KassaId.items}" id="si16"/>
+                                                <f:validator binding="#{row.bindings.KassaId.validator}"/>
+                                            </af:selectOneChoice>
+                                        </af:column>
                                         <af:column sortProperty="#{bindings.OrdersTpOplatyView1.hints.Sum1.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.OrdersTpOplatyView1.hints.Sum1.label}"
@@ -1029,6 +1041,17 @@
                                                                           createPopupId="::pZatr">
                                                 <f:validator binding="#{row.bindings.Zatrname.validator}"/>
                                             </af:inputComboboxListOfValues>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.OrdersTpRashodyView4.hints.KassaId.label}"
+                                                   id="c49" width="150">
+                                            <af:selectOneChoice value="#{row.bindings.KassaId.inputValue}"
+                                                                label="#{row.bindings.KassaId.label}"
+                                                                required="#{bindings.OrdersTpRashodyView4.hints.KassaId.mandatory}"
+                                                                shortDesc="#{bindings.OrdersTpRashodyView4.hints.KassaId.tooltip}"
+                                                                id="soc17">
+                                                <f:selectItems value="#{row.bindings.KassaId.items}" id="si17"/>
+                                                <f:validator binding="#{row.bindings.KassaId.validator}"/>
+                                            </af:selectOneChoice>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.OrdersTpRashodyView4.hints.Summ.name}"
                                                    sortable="true"

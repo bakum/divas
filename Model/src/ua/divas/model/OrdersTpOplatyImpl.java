@@ -44,9 +44,11 @@ public class OrdersTpOplatyImpl extends DivasEntityNoDelete {
         UserId,
         Comments,
         ZamerId,
+        KassaId,
         Users,
         Orders,
-        Kontragents;
+        Kontragents,
+        Kassa;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -78,9 +80,11 @@ public class OrdersTpOplatyImpl extends DivasEntityNoDelete {
     public static final int USERID = AttributesEnum.UserId.index();
     public static final int COMMENTS = AttributesEnum.Comments.index();
     public static final int ZAMERID = AttributesEnum.ZamerId.index();
+    public static final int KASSAID = AttributesEnum.KassaId.index();
     public static final int USERS = AttributesEnum.Users.index();
     public static final int ORDERS = AttributesEnum.Orders.index();
     public static final int KONTRAGENTS = AttributesEnum.Kontragents.index();
+    public static final int KASSA = AttributesEnum.Kassa.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -209,6 +213,22 @@ public class OrdersTpOplatyImpl extends DivasEntityNoDelete {
     }
 
     /**
+     * Gets the attribute value for KassaId, using the alias name KassaId.
+     * @return the value of KassaId
+     */
+    public String getKassaId() {
+        return (String) getAttributeInternal(KASSAID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for KassaId.
+     * @param value value to set the KassaId
+     */
+    public void setKassaId(String value) {
+        setAttributeInternal(KASSAID, value);
+    }
+
+    /**
      * @return the associated entity UsersImpl.
      */
     public UsersImpl getUsers() {
@@ -248,6 +268,20 @@ public class OrdersTpOplatyImpl extends DivasEntityNoDelete {
      */
     public void setKontragents(KontragentsImpl value) {
         setAttributeInternal(KONTRAGENTS, value);
+    }
+
+    /**
+     * @return the associated entity KassaImpl.
+     */
+    public KassaImpl getKassa() {
+        return (KassaImpl) getAttributeInternal(KASSA);
+    }
+
+    /**
+     * Sets <code>value</code> as the associated entity KassaImpl.
+     */
+    public void setKassa(KassaImpl value) {
+        setAttributeInternal(KASSA, value);
     }
 
     /**

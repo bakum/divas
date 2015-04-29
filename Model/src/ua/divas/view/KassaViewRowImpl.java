@@ -64,6 +64,7 @@ public class KassaViewRowImpl extends ViewRowImpl {
         VwKassaMoves,
         OtherZatratyView,
         KassaSettingsView,
+        OrdersTpOplatyView,
         CurrencyView1,
         DivisionsView1;
         static AttributesEnum[] vals = null;
@@ -112,6 +113,7 @@ public class KassaViewRowImpl extends ViewRowImpl {
     public static final int VWKASSAMOVES = AttributesEnum.VwKassaMoves.index();
     public static final int OTHERZATRATYVIEW = AttributesEnum.OtherZatratyView.index();
     public static final int KASSASETTINGSVIEW = AttributesEnum.KassaSettingsView.index();
+    public static final int ORDERSTPOPLATYVIEW = AttributesEnum.OrdersTpOplatyView.index();
     public static final int CURRENCYVIEW1 = AttributesEnum.CurrencyView1.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
 
@@ -376,6 +378,13 @@ public class KassaViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getKassaSettingsView() {
         return (RowIterator) getAttributeInternal(KASSASETTINGSVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link OrdersTpOplatyView.
+     */
+    public RowIterator getOrdersTpOplatyView() {
+        return (RowIterator) getAttributeInternal(ORDERSTPOPLATYVIEW);
     }
 
     /**

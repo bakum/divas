@@ -9,10 +9,11 @@
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
-  RowClass="ua.divas.view.OrdersTpRashodyViewRowImpl">
+  RowClass="ua.divas.view.OrdersTpRashodyViewRowImpl"
+  ComponentClass="ua.divas.view.OrdersTpRashodyViewImpl">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
-    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
   <ViewAccessor
@@ -27,6 +28,14 @@
     Name="ZatratyView1"
     ViewObjectName="ua.divas.view.ZatratyView"
     RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="KassaSettingsView1"
+    ViewObjectName="ua.divas.view.KassaSettingsView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="KassaSettingsByUser"
+      FullName="ua.divas.view.KassaSettingsView.KassaSettingsByUser"/>
+  </ViewAccessor>
   <ListBinding
     Name="LOV_OrderId"
     ListVOName="OrdersView1"
@@ -160,6 +169,25 @@
       Name="ZatratyViewCriteria"
       FullName="ua.divas.view.ZatratyView.ZatratyViewCriteria"/>
   </ListBinding>
+  <ListBinding
+    Name="LOV_KassaId"
+    ListVOName="KassaSettingsView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="KassaId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="KassaId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="KassaName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <SQLQuery><![CDATA[SELECT OrdersTpRashody.ID, 
        OrdersTpRashody.ORDER_ID, 
        OrdersTpRashody.DAT_RASH, 
@@ -173,6 +201,7 @@
        OrdersTpRashody.SUMM, 
        OrdersTpRashody.DESCRIPTION, 
        OrdersTpRashody.ZATRATY_ID,
+       OrdersTpRashody.KASSA_ID,
        (select fullname from zatraty where id = ZATRATY_ID) ZatrName,
        (select 0 from dual) OtpR_Editable
 FROM  ORDERS_TP_RASHODY OrdersTpRashody]]></SQLQuery>
@@ -329,6 +358,21 @@ FROM  ORDERS_TP_RASHODY OrdersTpRashody]]></SQLQuery>
       <Item
         Value="Zatrname"/>
     </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="KassaId"
+    PrecisionRule="true"
+    EntityAttrName="KassaId"
+    EntityUsage="OrdersTpRashody"
+    AliasName="KASSA_ID"
+    LOVName="LOV_KassaId">
+    <TransientExpression><![CDATA[viewObject.retrieveKassaId()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="Zatrname"

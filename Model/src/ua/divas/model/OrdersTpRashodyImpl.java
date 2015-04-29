@@ -45,6 +45,7 @@ public class OrdersTpRashodyImpl extends DivasEntityNoDelete {
         Summ,
         Description,
         ZatratyId,
+        KassaId,
         Kontragents,
         Orders,
         Zatraty,
@@ -71,6 +72,7 @@ public class OrdersTpRashodyImpl extends DivasEntityNoDelete {
             return vals;
         }
     }
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int ORDERID = AttributesEnum.OrderId.index();
     public static final int DATRASH = AttributesEnum.DatRash.index();
@@ -78,6 +80,7 @@ public class OrdersTpRashodyImpl extends DivasEntityNoDelete {
     public static final int SUMM = AttributesEnum.Summ.index();
     public static final int DESCRIPTION = AttributesEnum.Description.index();
     public static final int ZATRATYID = AttributesEnum.ZatratyId.index();
+    public static final int KASSAID = AttributesEnum.KassaId.index();
     public static final int KONTRAGENTS = AttributesEnum.Kontragents.index();
     public static final int ORDERS = AttributesEnum.Orders.index();
     public static final int ZATRATY = AttributesEnum.Zatraty.index();
@@ -87,6 +90,13 @@ public class OrdersTpRashodyImpl extends DivasEntityNoDelete {
      * This is the default constructor (do not remove).
      */
     public OrdersTpRashodyImpl() {
+    }
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("ua.divas.model.OrdersTpRashody");
     }
 
     /**
@@ -202,6 +212,22 @@ public class OrdersTpRashodyImpl extends DivasEntityNoDelete {
     }
 
     /**
+     * Gets the attribute value for KassaId, using the alias name KassaId.
+     * @return the value of KassaId
+     */
+    public String getKassaId() {
+        return (String) getAttributeInternal(KASSAID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for KassaId.
+     * @param value value to set the KassaId
+     */
+    public void setKassaId(String value) {
+        setAttributeInternal(KASSAID, value);
+    }
+
+    /**
      * @return the associated entity KontragentsImpl.
      */
     public KontragentsImpl getKontragents() {
@@ -232,14 +258,14 @@ public class OrdersTpRashodyImpl extends DivasEntityNoDelete {
     /**
      * @return the associated entity oracle.jbo.server.EntityImpl.
      */
-    public EntityImpl getZatraty() {
-        return (EntityImpl) getAttributeInternal(ZATRATY);
+    public ZatratyImpl getZatraty() {
+        return (ZatratyImpl) getAttributeInternal(ZATRATY);
     }
 
     /**
      * Sets <code>value</code> as the associated entity oracle.jbo.server.EntityImpl.
      */
-    public void setZatraty(EntityImpl value) {
+    public void setZatraty(ZatratyImpl value) {
         setAttributeInternal(ZATRATY, value);
     }
 
@@ -266,11 +292,6 @@ public class OrdersTpRashodyImpl extends DivasEntityNoDelete {
         return new Key(new Object[] { id });
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("ua.divas.model.OrdersTpRashody");
-    }
+
 }
 

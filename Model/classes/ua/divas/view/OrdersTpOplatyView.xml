@@ -32,6 +32,14 @@
             Name="KontragentsZamerCriteria"
             FullName="ua.divas.view.KontragentsView.KontragentsZamerCriteria"/>
     </ViewAccessor>
+    <ViewAccessor
+        Name="KassaSettingsView1"
+        ViewObjectName="ua.divas.view.KassaSettingsView"
+        RowLevelBinds="true">
+        <ViewCriteriaUsage
+            Name="KassaSettingsByUser"
+            FullName="ua.divas.view.KassaSettingsView.KassaSettingsByUser"/>
+    </ViewAccessor>
     <ListBinding
       Name="LOV_OrderId"
       ListVOName="OrdersView1"
@@ -90,6 +98,25 @@
         </AttrArray>
         <DisplayCriteria/>
     </ListBinding>
+    <ListBinding
+        Name="LOV_KassaId"
+        ListVOName="KassaSettingsView1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="KassaId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="KassaId"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="KassaName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
     <SQLQuery><![CDATA[SELECT OrdersTpOplaty.ID, 
        OrdersTpOplaty.ORDER_ID, 
        OrdersTpOplaty.DAT, 
@@ -97,7 +124,8 @@
        OrdersTpOplaty.USER_ID, 
        OrdersTpOplaty.COMMENTS,
        (select 0 from dual) otpo_editable,
-       OrdersTpOplaty.ZAMER_ID
+       OrdersTpOplaty.ZAMER_ID,
+       OrdersTpOplaty.KASSA_ID
 FROM  ORDERS_TP_OPLATY OrdersTpOplaty]]></SQLQuery>
     <EntityUsage
       Name="OrdersTpOplaty"
@@ -177,6 +205,21 @@ FROM  ORDERS_TP_OPLATY OrdersTpOplaty]]></SQLQuery>
         EntityUsage="OrdersTpOplaty"
         AliasName="ZAMER_ID"
         LOVName="LOV_ZamerId">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="KassaId"
+        PrecisionRule="true"
+        EntityAttrName="KassaId"
+        EntityUsage="OrdersTpOplaty"
+        AliasName="KASSA_ID"
+        LOVName="LOV_KassaId">
+        <TransientExpression><![CDATA[viewObject.retrieveKassaId()]]></TransientExpression>
         <Properties>
             <SchemaBasedProperties>
                 <CONTROLTYPE

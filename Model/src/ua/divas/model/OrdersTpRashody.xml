@@ -104,6 +104,26 @@
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
   </Attribute>
+  <Attribute
+    Name="KassaId"
+    Precision="50"
+    ColumnName="KASSA_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="ORDERS_TP_RASHODY">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.OrdersTpRashody.KassaId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.OrdersTpRashody.KassaId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="Kontragents"
     Association="ua.divas.model.OrdersTpRashodyFk2Assoc"
@@ -200,4 +220,8 @@
       operation="removeCurrentRow"
       privilege="delete"/>
   </Permission>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>

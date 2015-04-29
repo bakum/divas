@@ -35,8 +35,6 @@
     </attributeValues>
     <list IterBinding="PkoView1Iterator" StaticList="false" Uses="LOV_CurrId" id="CurrId" DTSupportsMRU="false"
           SelectItemValueMode="ListObject"/>
-    <list IterBinding="PkoView1Iterator" StaticList="false" Uses="LOV_KassaId" id="KassaId" DTSupportsMRU="false"
-          SelectItemValueMode="ListObject"/>
     <list IterBinding="PkoView1Iterator" StaticList="false" Uses="LOV_ActivitiesId" id="ActivitiesId"
           DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
     <list IterBinding="PkoView1Iterator" StaticList="false" Uses="LOV_OperationId" id="OperationId"
@@ -51,5 +49,7 @@
         <Item Value="PEditable"/>
       </AttrNames>
     </attributeValues>
+    <list IterBinding="PkoView1Iterator" StaticList="false" Uses="LOV_KassaId" id="KassaId" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
   </bindings>
 </pageDefinition>

@@ -29,6 +29,7 @@ import ua.divas.view.NomenklaturaViewImpl;
 import ua.divas.view.NotificationViewImpl;
 import ua.divas.view.OrderZamerViewImpl;
 import ua.divas.view.OrdersTpOplatyViewImpl;
+import ua.divas.view.OrdersTpRashodyViewImpl;
 import ua.divas.view.OrdersTpUslugiViewImpl;
 import ua.divas.view.OrdersViewImpl;
 import ua.divas.view.OtherZatratyViewImpl;
@@ -2691,16 +2692,16 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrdersTpRashodyView1.
      * @return OrdersTpRashodyView1
      */
-    public ViewObjectImpl getOrdersTpRashodyView1() {
-        return (ViewObjectImpl) findViewObject("OrdersTpRashodyView1");
+    public OrdersTpRashodyViewImpl getOrdersTpRashodyView1() {
+        return (OrdersTpRashodyViewImpl) findViewObject("OrdersTpRashodyView1");
     }
 
     /**
      * Container's getter for OrdersTpRashodyView2.
      * @return OrdersTpRashodyView2
      */
-    public ViewObjectImpl getOrdersTpRashodyView2() {
-        return (ViewObjectImpl) findViewObject("OrdersTpRashodyView2");
+    public OrdersTpRashodyViewImpl getOrdersTpRashodyView2() {
+        return (OrdersTpRashodyViewImpl) findViewObject("OrdersTpRashodyView2");
     }
 
     /**
@@ -2715,8 +2716,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrdersTpRashodyView3.
      * @return OrdersTpRashodyView3
      */
-    public ViewObjectImpl getOrdersTpRashodyView3() {
-        return (ViewObjectImpl) findViewObject("OrdersTpRashodyView3");
+    public OrdersTpRashodyViewImpl getOrdersTpRashodyView3() {
+        return (OrdersTpRashodyViewImpl) findViewObject("OrdersTpRashodyView3");
     }
 
     /**
@@ -2731,8 +2732,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrdersTpRashodyView4.
      * @return OrdersTpRashodyView4
      */
-    public ViewObjectImpl getOrdersTpRashodyView4() {
-        return (ViewObjectImpl) findViewObject("OrdersTpRashodyView4");
+    public OrdersTpRashodyViewImpl getOrdersTpRashodyView4() {
+        return (OrdersTpRashodyViewImpl) findViewObject("OrdersTpRashodyView4");
     }
 
     /**
@@ -3493,6 +3494,22 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getKassaSettingsFk2Link1() {
         return (ViewLinkImpl) findViewLink("KassaSettingsFk2Link1");
+    }
+
+    /**
+     * Container's getter for OrdersTpOplatyView4.
+     * @return OrdersTpOplatyView4
+     */
+    public OrdersTpOplatyViewImpl getOrdersTpOplatyView4() {
+        return (OrdersTpOplatyViewImpl) findViewObject("OrdersTpOplatyView4");
+    }
+
+    /**
+     * Container's getter for OrderTpOplatyKassaFkLink1.
+     * @return OrderTpOplatyKassaFkLink1
+     */
+    public ViewLinkImpl getOrderTpOplatyKassaFkLink1() {
+        return (ViewLinkImpl) findViewLink("OrderTpOplatyKassaFkLink1");
     }
 }
 

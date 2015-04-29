@@ -26,9 +26,22 @@
       </SchemaBasedProperties>
     </Properties>
   </Variable>
+  <Variable
+    Name="Curr"
+    Kind="viewcriteria"
+    Type="java.lang.String">
+    <TransientExpression><![CDATA[viewObject.retrieveCurrencyId()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
   <SQLQuery><![CDATA[SELECT KassaSettings.ID, 
        KassaSettings.USER_ID, 
        KassaSettings.KASSA_ID,
+       (select Kassa.CURR_ID from kassa Kassa where Kassa.ID = KassaSettings.KASSA_ID) Curr_Id,
        (select fullname from kassa where id = KassaSettings.KASSA_ID) Kassa_Name
 FROM  KASSA_SETTINGS KassaSettings]]></SQLQuery>
   <EntityUsage
@@ -55,6 +68,21 @@ FROM  KASSA_SETTINGS KassaSettings]]></SQLQuery>
     EntityAttrName="KassaId"
     EntityUsage="KassaSettings"
     AliasName="KASSA_ID"/>
+  <ViewAttribute
+    Name="CurrId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CURR_ID"
+    Expression="CURR_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewAttribute
     Name="KassaName"
     IsUpdateable="false"
@@ -102,6 +130,15 @@ FROM  KASSA_SETTINGS KassaSettings]]></SQLQuery>
         Operator="="
         Conjunction="AND"
         Value=":user_id"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="KassaSettingsByUser_KassaSettingsViewCriteria_row_0_CurrId"
+        ViewAttribute="CurrId"
+        Operator="="
+        Conjunction="AND"
+        Value=":Curr"
         GenerateIsNullClauseForBindVars="false"
         IsBindVarValue="true"
         Required="Optional"/>

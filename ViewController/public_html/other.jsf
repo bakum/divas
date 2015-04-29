@@ -56,7 +56,7 @@
                                             <af:selectOneChoice value="#{bindings.DivisionId.inputValue}"
                                                                 required="#{bindings.DivisionId.hints.mandatory}"
                                                                 shortDesc="#{bindings.DivisionId.hints.tooltip}"
-                                                                id="soc1" autoSubmit="true"
+                                                                id="soc1"
                                                                 readOnly="#{bindings.OthEditable.inputValue == 1 ? false : true}">
                                                 <f:selectItems value="#{bindings.DivisionId.items}" id="si1"/>
                                                 <f:validator binding="#{bindings.DivisionId.validator}"/>

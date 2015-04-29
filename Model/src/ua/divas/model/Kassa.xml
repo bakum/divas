@@ -278,6 +278,13 @@
     AssociationOtherEnd="ua.divas.model.KassaSettingsFk2Assoc.Kassa"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="OrdersTpOplaty"
+    Association="ua.divas.model.OrderTpOplatyKassaFkAssoc"
+    AssociationEnd="ua.divas.model.OrderTpOplatyKassaFkAssoc.OrdersTpOplaty"
+    AssociationOtherEnd="ua.divas.model.OrderTpOplatyKassaFkAssoc.Kassa"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="KassaDivisionIdCheck">
     <DesignTime>

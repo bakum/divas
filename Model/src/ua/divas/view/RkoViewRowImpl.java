@@ -19,6 +19,7 @@ import ua.divas.model.RkoImpl;
 // ---------------------------------------------------------------------
 public class RkoViewRowImpl extends ViewRowImpl {
 
+
     public static final int ENTITY_RKO = 0;
 
     @Override
@@ -66,7 +67,8 @@ public class RkoViewRowImpl extends ViewRowImpl {
         KassaView1,
         TypeOfActivitiesView1,
         OperationRkoView1,
-        KontragentsView1;
+        KontragentsView1,
+        KassaSettingsView1;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -90,6 +92,7 @@ public class RkoViewRowImpl extends ViewRowImpl {
             return vals;
         }
     }
+
 
     public static final int ID = AttributesEnum.Id.index();
     public static final int DAT = AttributesEnum.Dat.index();
@@ -116,6 +119,7 @@ public class RkoViewRowImpl extends ViewRowImpl {
     public static final int TYPEOFACTIVITIESVIEW1 = AttributesEnum.TypeOfActivitiesView1.index();
     public static final int OPERATIONRKOVIEW1 = AttributesEnum.OperationRkoView1.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
+    public static final int KASSASETTINGSVIEW1 = AttributesEnum.KassaSettingsView1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -457,6 +461,13 @@ public class RkoViewRowImpl extends ViewRowImpl {
      */
     public RowSet getKontragentsView1() {
         return (RowSet) getAttributeInternal(KONTRAGENTSVIEW1);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> KassaSettingsView1.
+     */
+    public RowSet getKassaSettingsView1() {
+        return (RowSet) getAttributeInternal(KASSASETTINGSVIEW1);
     }
 }
 

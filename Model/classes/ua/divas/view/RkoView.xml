@@ -74,6 +74,19 @@
       Name="KontragentsAllItems"
       FullName="ua.divas.view.KontragentsView.KontragentsAllItems"/>
   </ViewAccessor>
+   <ViewAccessor
+      Name="KassaSettingsView1"
+      ViewObjectName="ua.divas.view.KassaSettingsView"
+      RowLevelBinds="true">
+        <ViewCriteriaUsage
+          Name="KassaSettingsByUser"
+          FullName="ua.divas.view.KassaSettingsView.KassaSettingsByUser"/>
+          <ParameterMap>
+            <PIMap Variable="Curr">
+                <TransientExpression><![CDATA[CurrId]]></TransientExpression>
+            </PIMap>
+        </ParameterMap>
+    </ViewAccessor>
   <ListBinding
     Name="LOV_DivisionId"
     ListVOName="DivisionsView1"
@@ -133,7 +146,7 @@
   </ListBinding>
   <ListBinding
     Name="LOV_KassaId"
-    ListVOName="KassaView1"
+    ListVOName="KassaSettingsView1"
     ListRangeSize="-1"
     NullValueFlag="start"
     NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
@@ -143,10 +156,10 @@
     </AttrArray>
     <AttrArray Name="AttrExpressions"/>
     <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
+      <Item Value="KassaId"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="Fullname"/>
+      <Item Value="KassaName"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -393,8 +406,6 @@ upper(Rko.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as use
     <Dependencies>
       <Item
         Value="CurrId"/>
-      <Item
-        Value="DivisionId"/>
     </Dependencies>
   </ViewAttribute>
   <ViewAttribute

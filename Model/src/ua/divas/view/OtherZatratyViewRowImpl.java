@@ -66,7 +66,8 @@ public class OtherZatratyViewRowImpl extends ViewRowImpl {
         UsersView1,
         CurrencyView1,
         KassaVO1,
-        TypeOfActivitiesView1;
+        TypeOfActivitiesView1,
+        KassaSettingsView1;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -115,6 +116,7 @@ public class OtherZatratyViewRowImpl extends ViewRowImpl {
     public static final int CURRENCYVIEW1 = AttributesEnum.CurrencyView1.index();
     public static final int KASSAVO1 = AttributesEnum.KassaVO1.index();
     public static final int TYPEOFACTIVITIESVIEW1 = AttributesEnum.TypeOfActivitiesView1.index();
+    public static final int KASSASETTINGSVIEW1 = AttributesEnum.KassaSettingsView1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -408,6 +410,13 @@ public class OtherZatratyViewRowImpl extends ViewRowImpl {
      */
     public RowSet getTypeOfActivitiesView1() {
         return (RowSet) getAttributeInternal(TYPEOFACTIVITIESVIEW1);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> KassaSettingsView1.
+     */
+    public RowSet getKassaSettingsView1() {
+        return (RowSet) getAttributeInternal(KASSASETTINGSVIEW1);
     }
 
 

@@ -1,6 +1,11 @@
 package ua.divas.view;
 
+import oracle.jbo.Row;
+import oracle.jbo.Variable;
+import oracle.jbo.common.VariableImpl;
 import oracle.jbo.server.ViewObjectImpl;
+
+import oracle.jbo.server.ViewRowSetImpl;
 
 import ua.divas.classes.DivasView;
 // ---------------------------------------------------------------------
@@ -14,6 +19,27 @@ public class KassaSettingsViewImpl extends DivasView {
      * This is the default constructor (do not remove).
      */
     public KassaSettingsViewImpl() {
+    }
+    
+    private ViewRowSetImpl getSettingsRowSet() {
+        VariableImpl z = new VariableImpl();
+        z.setName("UserKey");
+        ViewObjectImpl vo = (ViewObjectImpl) this.getRootApplicationModule().findViewObject("UserSettingsView1");
+        ViewRowSetImpl rs =
+            (ViewRowSetImpl) vo.findByViewCriteriaWithBindVars(vo.getViewCriteria("FilterSettingsByUser"), -1,
+                                                               vo.QUERY_MODE_SCAN_DATABASE_TABLES, new Variable[] { z }, new Object[] {
+                                                               this.getSessionUserId() });
+        return rs;
+    }
+
+    public String retrieveCurrencyId() {
+        ViewRowSetImpl rs = this.getSettingsRowSet();
+        Row row = rs.first();
+        if (row != null) {
+            String rv = (String) row.getAttribute("CurrencyId");
+            return rv;
+        }
+        return null;
     }
 
 
@@ -31,6 +57,22 @@ public class KassaSettingsViewImpl extends DivasView {
      */
     public void setuser_id(String value) {
         ensureVariableManager().setVariableValue("user_id", value);
+    }
+
+    /**
+     * Returns the variable value for Curr.
+     * @return variable value for Curr
+     */
+    public String getCurr() {
+        return (String) ensureVariableManager().getVariableValue("Curr");
+    }
+
+    /**
+     * Sets <code>value</code> for variable Curr.
+     * @param value value to bind as Curr
+     */
+    public void setCurr(String value) {
+        ensureVariableManager().setVariableValue("Curr", value);
     }
 }
 

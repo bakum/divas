@@ -49,9 +49,11 @@ public class OrdersTpOplatyViewRowImpl extends ViewRowImpl {
         Comments,
         OtpoEditable,
         ZamerId,
+        KassaId,
         OrdersView1,
         UsersView1,
-        KontragentsView1;
+        KontragentsView1,
+        KassaSettingsView1;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -85,9 +87,11 @@ public class OrdersTpOplatyViewRowImpl extends ViewRowImpl {
     public static final int COMMENTS = AttributesEnum.Comments.index();
     public static final int OTPOEDITABLE = AttributesEnum.OtpoEditable.index();
     public static final int ZAMERID = AttributesEnum.ZamerId.index();
+    public static final int KASSAID = AttributesEnum.KassaId.index();
     public static final int ORDERSVIEW1 = AttributesEnum.OrdersView1.index();
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
+    public static final int KASSASETTINGSVIEW1 = AttributesEnum.KassaSettingsView1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -151,9 +155,10 @@ public class OrdersTpOplatyViewRowImpl extends ViewRowImpl {
         setAttributeInternal(DAT, value);
     }
 
+
     /**
-     * Gets the attribute value for SUM using the alias name Sum1.
-     * @return the SUM
+     * Gets the attribute value for the calculated attribute Sum1.
+     * @return the Sum1
      */
     public BigDecimal getSum1() {
         return (BigDecimal) getAttributeInternal(SUM1);
@@ -231,6 +236,24 @@ public class OrdersTpOplatyViewRowImpl extends ViewRowImpl {
         setAttributeInternal(ZAMERID, value);
     }
 
+
+    /**
+     * Gets the attribute value for KASSA_ID using the alias name KassaId.
+     * @return the KASSA_ID
+     */
+    public String getKassaId() {
+        return (String) getAttributeInternal(KASSAID);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for KASSA_ID using the alias name KassaId.
+     * @param value value to set the KASSA_ID
+     */
+    public void setKassaId(String value) {
+        setAttributeInternal(KASSAID, value);
+    }
+
+
     /**
      * Gets the view accessor <code>RowSet</code> OrdersView1.
      */
@@ -250,6 +273,13 @@ public class OrdersTpOplatyViewRowImpl extends ViewRowImpl {
      */
     public RowSet getKontragentsView1() {
         return (RowSet) getAttributeInternal(KONTRAGENTSVIEW1);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> KassaSettingsView1.
+     */
+    public RowSet getKassaSettingsView1() {
+        return (RowSet) getAttributeInternal(KASSASETTINGSVIEW1);
     }
 }
 

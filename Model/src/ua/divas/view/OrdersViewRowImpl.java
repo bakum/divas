@@ -91,7 +91,8 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         OrderStatusView1,
         FirmsView1,
         KassaVO1,
-        KontragentsView2;
+        KontragentsView2,
+        KassaSettingsView1;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -164,6 +165,7 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     public static final int FIRMSVIEW1 = AttributesEnum.FirmsView1.index();
     public static final int KASSAVO1 = AttributesEnum.KassaVO1.index();
     public static final int KONTRAGENTSVIEW2 = AttributesEnum.KontragentsView2.index();
+    public static final int KASSASETTINGSVIEW1 = AttributesEnum.KassaSettingsView1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -731,6 +733,13 @@ public class OrdersViewRowImpl extends ViewRowImpl {
      */
     public RowSet getKontragentsView2() {
         return (RowSet) getAttributeInternal(KONTRAGENTSVIEW2);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> KassaSettingsView1.
+     */
+    public RowSet getKassaSettingsView1() {
+        return (RowSet) getAttributeInternal(KASSASETTINGSVIEW1);
     }
 }
 

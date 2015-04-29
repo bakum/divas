@@ -243,6 +243,7 @@
           <Item Value="Comments"/>
           <Item Value="OtpoEditable"/>
           <Item Value="ZamerId"/>
+          <Item Value="KassaId"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -266,6 +267,7 @@
           <Item Value="ZatratyId"/>
           <Item Value="Zatrname"/>
           <Item Value="OtprEditable"/>
+          <Item Value="KassaId"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
