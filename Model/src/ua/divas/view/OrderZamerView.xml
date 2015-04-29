@@ -397,7 +397,7 @@
 FROM  ORDERS Orders
 where deleted = 0 and
 status_id in (:name1,:name2,:name3,:name4,:name5) and
-upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))]]></SQLQuery>
+upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users_for_zamer(:u_name) as userTable)))]]></SQLQuery>
   <EntityUsage
     Name="Orders"
     Entity="ua.divas.model.Orders"/>

@@ -111,7 +111,7 @@ AS TABLE OF usertype;
 --  DDL for Sequence ORDERS_NUM_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "ORDERS_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 621 CACHE 20 NOORDER  CYCLE ;
+   CREATE SEQUENCE  "ORDERS_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 642 CACHE 20 NOORDER  CYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence OTHER_ZATR_NUM_SEQ
 --------------------------------------------------------
@@ -126,7 +126,7 @@ AS TABLE OF usertype;
 --  DDL for Sequence PS_TXN_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 168001 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 173351 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence RKO_NUM_SEQ
 --------------------------------------------------------
@@ -417,6 +417,15 @@ AS TABLE OF usertype;
 	"FIRMA_ID" VARCHAR2(50 CHAR)
    ) ;
 --------------------------------------------------------
+--  DDL for Table KASSA_SETTINGS
+--------------------------------------------------------
+
+  CREATE TABLE "KASSA_SETTINGS" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"USER_ID" VARCHAR2(50 CHAR), 
+	"KASSA_ID" VARCHAR2(50 CHAR)
+   ) ;
+--------------------------------------------------------
 --  DDL for Table KONTRAGENTS
 --------------------------------------------------------
 
@@ -594,7 +603,8 @@ AS TABLE OF usertype;
 	"SUM" NUMBER(10,2), 
 	"USER_ID" VARCHAR2(50 CHAR), 
 	"COMMENTS" VARCHAR2(1000 CHAR), 
-	"ZAMER_ID" VARCHAR2(50 CHAR)
+	"ZAMER_ID" VARCHAR2(50 CHAR), 
+	"KASSA_ID" VARCHAR2(50 CHAR)
    ) ;
 --------------------------------------------------------
 --  DDL for Table ORDERS_TP_RASHODY
@@ -607,7 +617,8 @@ AS TABLE OF usertype;
 	"KONTR_ID" VARCHAR2(50 CHAR), 
 	"SUMM" NUMBER(10,2), 
 	"DESCRIPTION" VARCHAR2(1000 CHAR), 
-	"ZATRATY_ID" VARCHAR2(50 CHAR)
+	"ZATRATY_ID" VARCHAR2(50 CHAR), 
+	"KASSA_ID" VARCHAR2(50 CHAR)
    ) ;
 --------------------------------------------------------
 --  DDL for Table ORDERS_TP_USLUGI
@@ -1280,19 +1291,20 @@ OR (oborot_movies.END_OST    <> 0);
 
   CREATE OR REPLACE FORCE VIEW "VW_BALLANS_AP" ("ID", "CODE", "FULLNAME", "ACTIVE_START", "ACTIVE_DEB", "ACTIVE_KRED", "ACTIVE_OBOROT", "ACTIVE_END", "PASSIVE_START", "PASSIVE_DEB", "PASSIVE_KRED", "PASSIVE_OBOROT", "PASSIVE_END", "DIVISION_ID") AS 
   with act as
-(select code,start_ost, sum_deb, sum_kred, end_ost, end_ost-start_ost oborot from vw_ballans where upper(ACTIVE_PASSIVE)=upper('Активный')),
+(select code,start_ost, sum_deb, sum_kred, end_ost, division_id, end_ost-start_ost oborot from vw_ballans where upper(ACTIVE_PASSIVE)=upper('Активный')),
 pass as
-(select code,start_ost, sum_deb, sum_kred, end_ost, end_ost-start_ost oborot from vw_ballans where upper(ACTIVE_PASSIVE)=upper('Пассивный'))
-select b.id, b.code, b.fullname, nvl((select start_ost from act where code = b.code),0) Active_Start,
-nvl((select sum_deb from act where code = b.code),0) Active_Deb,
-nvl((select sum_kred from act where code = b.code),0) Active_Kred,
-nvl((select oborot from act where code = b.code),0) Active_Oborot,
-nvl((select end_ost from act where code = b.code),0) Active_end,
-nvl((select start_ost from pass where code = b.code),0) Passive_Start,
-nvl((select sum_deb from pass where code = b.code),0) Passive_Deb,
-nvl((select sum_kred from pass where code = b.code),0) Passive_Kred,
-nvl((select oborot from pass where code = b.code),0) Passive_Oborot,
-nvl((select end_ost from pass where code = b.code),0) Passive_End,
+(select code,start_ost, sum_deb, sum_kred, end_ost, division_id, end_ost-start_ost oborot from vw_ballans where upper(ACTIVE_PASSIVE)=upper('Пассивный'))
+select b.id, b.code, b.fullname, 
+nvl((select start_ost from act where code = b.code and division_id = b.division_id),0) Active_Start,
+nvl((select sum_deb from act where code = b.code and division_id = b.division_id),0) Active_Deb,
+nvl((select sum_kred from act where code = b.code and division_id = b.division_id),0) Active_Kred,
+nvl((select oborot from act where code = b.code and division_id = b.division_id),0) Active_Oborot,
+nvl((select end_ost from act where code = b.code and division_id = b.division_id),0) Active_end,
+nvl((select start_ost from pass where code = b.code and division_id = b.division_id),0) Passive_Start,
+nvl((select sum_deb from pass where code = b.code and division_id = b.division_id),0) Passive_Deb,
+nvl((select sum_kred from pass where code = b.code and division_id = b.division_id),0) Passive_Kred,
+nvl((select oborot from pass where code = b.code and division_id = b.division_id),0) Passive_Oborot,
+nvl((select end_ost from pass where code = b.code and division_id = b.division_id),0) Passive_End,
 b.division_id from vw_ballans b;
 --------------------------------------------------------
 --  DDL for View VW_MOVES
@@ -1950,6 +1962,12 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   CREATE UNIQUE INDEX "KASSA_PK" ON "KASSA" ("ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index KASSA_SETTINGS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "KASSA_SETTINGS_PK" ON "KASSA_SETTINGS" ("ID") 
+  ;
+--------------------------------------------------------
 --  DDL for Index KONTRAGENTS_PK
 --------------------------------------------------------
 
@@ -2601,6 +2619,17 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   ALTER TABLE "KASSA" MODIFY ("VERSION" NOT NULL ENABLE);
  
   ALTER TABLE "KASSA" MODIFY ("PREDEFINED" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table KASSA_SETTINGS
+--------------------------------------------------------
+
+  ALTER TABLE "KASSA_SETTINGS" ADD CONSTRAINT "KASSA_SETTINGS_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "KASSA_SETTINGS" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "KASSA_SETTINGS" MODIFY ("USER_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "KASSA_SETTINGS" MODIFY ("KASSA_ID" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table KONTRAGENTS
 --------------------------------------------------------
@@ -3317,8 +3346,6 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
  
   ALTER TABLE "USER_SETTINGS" MODIFY ("KASSA_ID" NOT NULL ENABLE);
  
-  ALTER TABLE "USER_SETTINGS" MODIFY ("MAIN_USLUGA" NOT NULL ENABLE);
- 
   ALTER TABLE "USER_SETTINGS" MODIFY ("ACTIVITIES_ID" NOT NULL ENABLE);
  
   ALTER TABLE "USER_SETTINGS" ADD CONSTRAINT "USER_SETTINGS_PK" PRIMARY KEY ("ID") ENABLE;
@@ -3489,6 +3516,15 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   ALTER TABLE "KASSA" ADD CONSTRAINT "KASSA_KASSA_FK1" FOREIGN KEY ("PARENT_ID")
 	  REFERENCES "KASSA" ("ID") ENABLE;
 --------------------------------------------------------
+--  Ref Constraints for Table KASSA_SETTINGS
+--------------------------------------------------------
+
+  ALTER TABLE "KASSA_SETTINGS" ADD CONSTRAINT "KASSA_SETTINGS_FK1" FOREIGN KEY ("USER_ID")
+	  REFERENCES "USERS" ("ID") ON DELETE CASCADE ENABLE;
+ 
+  ALTER TABLE "KASSA_SETTINGS" ADD CONSTRAINT "KASSA_SETTINGS_FK2" FOREIGN KEY ("KASSA_ID")
+	  REFERENCES "KASSA" ("ID") ON DELETE CASCADE ENABLE;
+--------------------------------------------------------
 --  Ref Constraints for Table KONTRAGENTS
 --------------------------------------------------------
 
@@ -3593,6 +3629,9 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
  
   ALTER TABLE "ORDERS_TP_OPLATY" ADD CONSTRAINT "ORDERS_TP_OPLATY_FK3" FOREIGN KEY ("ZAMER_ID")
 	  REFERENCES "KONTRAGENTS" ("ID") ON DELETE SET NULL ENABLE;
+ 
+  ALTER TABLE "ORDERS_TP_OPLATY" ADD CONSTRAINT "ORDERS_TP_OPLATY_FK4" FOREIGN KEY ("KASSA_ID")
+	  REFERENCES "KASSA" ("ID") ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table ORDERS_TP_RASHODY
 --------------------------------------------------------
@@ -3605,6 +3644,9 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
  
   ALTER TABLE "ORDERS_TP_RASHODY" ADD CONSTRAINT "ORDERS_TP_RASHODY_FK3" FOREIGN KEY ("ZATRATY_ID")
 	  REFERENCES "ZATRATY" ("ID") ENABLE;
+ 
+  ALTER TABLE "ORDERS_TP_RASHODY" ADD CONSTRAINT "ORDERS_TP_RASHODY_FK4" FOREIGN KEY ("KASSA_ID")
+	  REFERENCES "KASSA" ("ID") ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table ORDERS_TP_USLUGI
 --------------------------------------------------------
@@ -4218,6 +4260,22 @@ ALTER TRIGGER "IMPORTED_PRICE_TRG" ENABLE;
 END;
 /
 ALTER TRIGGER "JOB_END_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger KASSA_SETTINGS_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "KASSA_SETTINGS_TRG" 
+  BEFORE INSERT OR UPDATE ON "KASSA_SETTINGS"
+  REFERENCING FOR EACH ROW
+  begin  
+   if inserting then 
+      if :NEW."ID" is null then 
+         select utility.uuid() into :new."ID" from dual;
+      end if; 
+   end if;
+end;
+/
+ALTER TRIGGER "KASSA_SETTINGS_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger KASSA_TRG
 --------------------------------------------------------
@@ -4964,7 +5022,7 @@ begin
         (select s.id, s.fullname from (select id, upper(fullname) fullname from divisions d
             where d.deleted = 0
             connect by prior d.id=d.parent_id
-            start with d.id = (select id from divisions where main_user = p_iduser)
+            start with d.id = (select id from divisions where main_user = p_iduser and rownum = 1)
             union
             select d.id, upper(d.fullname) from divisions d
             inner join division_sotr s on d.id  = s.div_id
@@ -5006,7 +5064,71 @@ begin
         inner join division_sotr s on s.div_id = d.id
         where d.deleted = 0
         connect by prior d.id=d.parent_id
-        start with d.id = (select id from divisions where main_user = p_iduser)
+        start with d.id = (select id from divisions where main_user = p_iduser and rownum = 1)
+        union
+        select id, upper(login) from users where id = p_iduser) s) loop
+        p_counter:=p_counter+1;
+        l_data.extend;
+        l_data(p_counter) := userType(i.id, i.use_r );
+        end loop;
+        return l_data;
+end;
+
+/
+--------------------------------------------------------
+--  DDL for Function GET_USERS_FOR_ZAMER
+--------------------------------------------------------
+
+  CREATE OR REPLACE FUNCTION "GET_USERS_FOR_ZAMER" (p_u_name in varchar2) 
+return userTable
+is
+    l_data userTable := userTable();
+    p_idrole number;
+    p_iduser varchar2(50);
+    p_counter number := 0;
+begin
+    select id, is_admin into p_iduser, p_idrole from users where upper(login) like upper(p_u_name);
+    
+    if p_idrole=1 then
+    for i in (select id, upper(login) login from users) loop
+    p_counter:=p_counter+1;
+    l_data.extend;
+    l_data(p_counter) := userType(i.id, i.login );
+    end loop;
+    return l_data;
+    end if;
+    
+    select nvl(count(*),0) into p_counter from divisions where main_user = p_iduser;
+    if p_counter > 0 then
+      p_idrole:=2; --Директор
+    else
+      p_idrole:=3; --Диспетчер замеров
+    end if;
+    
+    if p_idrole=2 then
+    p_counter:=0;
+    for i in
+        (select id, s.use_r from (select (select id from users where id = s.user_id) as id, (select upper(login) from users where id = s.user_id) as use_r from divisions d
+        inner join division_sotr s on s.div_id = d.id
+        where d.deleted = 0
+        connect by prior d.id=d.parent_id
+        start with d.id = (select id from divisions where main_user = p_iduser and rownum = 1)
+        union
+        select id, upper(login) from users where id = p_iduser) s) loop
+        p_counter:=p_counter+1;
+        l_data.extend;
+        l_data(p_counter) := userType(i.id, i.use_r );
+        end loop;
+        return l_data;
+     end if; 
+     
+     p_counter:=0;
+    for i in
+        (select id, s.use_r from (select (select id from users where id = s.user_id) as id, (select upper(login) from users where id = s.user_id) as use_r from divisions d
+        inner join division_sotr s on s.div_id = d.id
+        where d.deleted = 0
+        connect by prior d.id=d.parent_id
+        start with d.id = (select div_id from division_sotr where user_id = p_iduser and rownum = 1)
         union
         select id, upper(login) from users where id = p_iduser) s) loop
         p_counter:=p_counter+1;
@@ -6614,13 +6736,25 @@ END KONTRAG;
         select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
         if upper(p_sub_name) = 'КАССА' then
         if p_counter = 1 then
+          if i.kassa_id is not null then
+            p_ret_rec.subconto1_deb:=i.kassa_id;
+          else
             p_ret_rec.subconto1_deb:=p_order.kassa_id;
+          end if;
         end if; 
         if p_counter = 2 then
+          if i.kassa_id is not null then
+            p_ret_rec.subconto2_deb:=i.kassa_id;
+          else
             p_ret_rec.subconto2_deb:=p_order.kassa_id;
+          end if;
         end if;
         if p_counter = 3 then
+          if i.kassa_id is not null then
+            p_ret_rec.subconto3_deb:=i.kassa_id;
+          else
             p_ret_rec.subconto3_deb:=p_order.kassa_id;
+          end if;
         end if;
         end if;
         if upper(p_sub_name) = 'КОНТРАГЕНТЫ' then
@@ -6786,13 +6920,25 @@ END KONTRAG;
         select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
         if upper(p_sub_name) = 'КАССА' then
         if p_counter = 1 then
+          if i.kassa_id is not null then
+            p_ret_rec.subconto1_kred:=i.kassa_id;
+          else
             p_ret_rec.subconto1_kred:=p_order.kassa_id;
+          end if;
         end if; 
         if p_counter = 2 then
+          if i.kassa_id is not null then
+            p_ret_rec.subconto2_kred:=i.kassa_id;
+          else
             p_ret_rec.subconto2_kred:=p_order.kassa_id;
+          end if;
         end if;
         if p_counter = 3 then
+          if i.kassa_id is not null then
+            p_ret_rec.subconto3_kred:=i.kassa_id;
+          else
             p_ret_rec.subconto3_kred:=p_order.kassa_id;
+          end if;
         end if;
         end if;
         
@@ -6920,13 +7066,25 @@ END KONTRAG;
         select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
         if upper(p_sub_name) = 'КАССА' then
         if p_counter = 1 then
+          if i.kassa_id is not null then
+            p_ret_rec.subconto1_kred:=i.kassa_id;
+          else
             p_ret_rec.subconto1_kred:=p_order.kassa_id;
+          end if;
         end if; 
         if p_counter = 2 then
+          if i.kassa_id is not null then
+            p_ret_rec.subconto2_kred:=i.kassa_id;
+          else
             p_ret_rec.subconto2_kred:=p_order.kassa_id;
+          end if;
         end if;
         if p_counter = 3 then
+          if i.kassa_id is not null then
+            p_ret_rec.subconto3_kred:=i.kassa_id;
+          else
             p_ret_rec.subconto3_kred:=p_order.kassa_id;
+          end if;
         end if;
         end if;
         
