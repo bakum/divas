@@ -354,6 +354,16 @@
                 <name>/WEB-INF/prorab-config.xml#prorab-config</name>
                 <actions>view</actions>
               </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpNachislenia</name>
+                <actions>delete,read,update</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpRashody</name>
+                <actions>delete,read,update</actions>
+              </permission>
             </permissions>
           </grant>
           <grant>
@@ -522,6 +532,16 @@
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/prorab-config.xml#prorab-config</name>
                 <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpNachislenia</name>
+                <actions>read,update</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpRashody</name>
+                <actions>read,update</actions>
               </permission>
             </permissions>
           </grant>
@@ -745,6 +765,16 @@
                 <name>/WEB-INF/prorab-config.xml#prorab-config</name>
                 <actions>view</actions>
               </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpNachislenia</name>
+                <actions>delete,read,update</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpRashody</name>
+                <actions>delete,read,update</actions>
+              </permission>
             </permissions>
           </grant>
           <grant>
@@ -802,16 +832,6 @@
                 <name>/WEB-INF/addOrder.xml#addOrder</name>
                 <actions>view</actions>
               </permission>
-              <permission>
-                <class>oracle.adf.share.security.authorization.EntityPermission</class>
-                <name>ua.divas.model.OrdersTpUslugi</name>
-                <actions>read</actions>
-              </permission>
-              <permission>
-                <class>oracle.adf.share.security.authorization.EntityPermission</class>
-                <name>ua.divas.model.OrdersTpOplaty</name>
-                <actions>read</actions>
-              </permission>
             </permissions>
           </grant>
           <grant>
@@ -858,6 +878,16 @@
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/order-dialog-flow.xml#order-dialog-flow</name>
                 <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpNachislenia</name>
+                <actions>read</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpRashody</name>
+                <actions>read</actions>
               </permission>
             </permissions>
           </grant>

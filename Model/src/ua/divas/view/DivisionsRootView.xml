@@ -21,7 +21,7 @@
     </SchemaBasedProperties>
   </Properties>
   <SQLQuery><![CDATA[select * from divisions
-where is_group = 1 and parent_id is null]]></SQLQuery>
+where parent_id is null]]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"

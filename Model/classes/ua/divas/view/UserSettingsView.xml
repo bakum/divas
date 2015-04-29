@@ -399,7 +399,6 @@ FROM  USER_SETTINGS UserSettings]]></SQLQuery>
   </ViewAttribute>
   <ViewAttribute
     Name="MainUsluga"
-    IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="MainUsluga"
     EntityUsage="UserSettings"
@@ -422,8 +421,7 @@ FROM  USER_SETTINGS UserSettings]]></SQLQuery>
     AliasName="MUSLUGANAME"
     Expression="MUSLUGANAME"
     SQLType="VARCHAR"
-    LOVName="LOV_Musluganame"
-    IsNotNull="true">
+    LOVName="LOV_Musluganame">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="150"/>
     </DesignTime>
@@ -450,7 +448,6 @@ FROM  USER_SETTINGS UserSettings]]></SQLQuery>
     AliasName="ACTIVITIES_NAME"
     Expression="ACTIVITIES_NAME"
     SQLType="VARCHAR"
-    IsNotNull="true"
     LOVName="LOV_ActivitiesName">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="150"/>

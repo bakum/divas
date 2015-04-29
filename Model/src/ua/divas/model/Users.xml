@@ -312,6 +312,13 @@
     AssociationOtherEnd="ua.divas.model.OtherZatratyFk2Assoc.Users"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="KassaSettings"
+    Association="ua.divas.model.KassaSettingsFk1Assoc"
+    AssociationEnd="ua.divas.model.KassaSettingsFk1Assoc.KassaSettings"
+    AssociationOtherEnd="ua.divas.model.KassaSettingsFk1Assoc.Users"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="UsersPk"
     PrimaryKey="true">

@@ -45,6 +45,9 @@
       <variable Name="KonName" Type="java.lang.String"/>
     </variableIterator>
     <iterator Binds="KontragentsView1" RangeSize="10" DataControl="AppModuleDataControl" id="KontragentsView1Iterator"/>
+    <iterator Binds="KassaView1" RangeSize="25" DataControl="AppModuleDataControl" id="KassaView1Iterator"/>
+    <iterator id="KassaSettingsView2Iterator" Binds="KassaSettingsView2" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="UsersView1Iterator" id="Login">
@@ -88,6 +91,7 @@
           <Item Value="IsAdmin" Binds="IsAdmin"/>
           <Item Value="UEditable"/>
           <Item Value="IsZamer"/>
+          <Item Value="UDescription"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -260,5 +264,14 @@
                   MethodName="retrieveZamerFirstParentId" IsViewObjectMethod="true" DataControl="AppModuleDataControl"
                   InstanceName="data.AppModuleDataControl.KontragentsView1"
                   ReturnName="data.AppModuleDataControl.methodResults.retrieveZamerFirstParentId_AppModuleDataControl_KontragentsView1_retrieveZamerFirstParentId_result"/>
+    <list IterBinding="KassaView1Iterator" ListOperMode="multiSelect" ListIter="KassaView1Iterator" id="KassaView1"
+          SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Fullname"/>
+      </ListDisplayAttrNames>
+    </list>
   </bindings>
 </pageDefinition>

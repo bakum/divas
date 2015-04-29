@@ -53,38 +53,44 @@ upper(Users.ID) in (select upper(N) from table(cast(get_users(:u_name) as userTa
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="Users"
-    AliasName="ID"/>
+    AliasName="ID"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="FirstName"
     PrecisionRule="true"
     EntityAttrName="FirstName"
     EntityUsage="Users"
-    AliasName="FIRST_NAME"/>
+    AliasName="FIRST_NAME"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="LastName"
     PrecisionRule="true"
     EntityAttrName="LastName"
     EntityUsage="Users"
-    AliasName="LAST_NAME"/>
+    AliasName="LAST_NAME"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Email"
     PrecisionRule="true"
     EntityAttrName="Email"
     EntityUsage="Users"
-    AliasName="EMAIL"/>
+    AliasName="EMAIL"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="IsAdmin"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="IsAdmin"
     EntityUsage="Users"
-    AliasName="IS_ADMIN"/>
+    AliasName="IS_ADMIN"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="PassWd"
     PrecisionRule="true"
     EntityAttrName="PassWd"
     EntityUsage="Users"
-    AliasName="PASS_WD"/>
+    AliasName="PASS_WD"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Login"
     IsUnique="true"
@@ -98,14 +104,16 @@ upper(Users.ID) in (select upper(N) from table(cast(get_users(:u_name) as userTa
     PrecisionRule="true"
     EntityAttrName="Version"
     EntityUsage="Users"
-    AliasName="VERSION"/>
+    AliasName="VERSION"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Predefined"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Predefined"
     EntityUsage="Users"
-    AliasName="PREDEFINED"/>
+    AliasName="PREDEFINED"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="UEditable"
     IsPersistent="false"
@@ -114,19 +122,22 @@ upper(Users.ID) in (select upper(N) from table(cast(get_users(:u_name) as userTa
     ColumnType="NUMBER"
     AliasName="U_EDITABLE"
     Expression="U_EDITABLE"
-    SQLType="NUMERIC"/>
+    SQLType="NUMERIC"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="UDescription"
     PrecisionRule="true"
     EntityAttrName="UDescription"
     EntityUsage="Users"
-    AliasName="U_DESCRIPTION"/>
+    AliasName="U_DESCRIPTION"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="IsZamer"
     PrecisionRule="true"
     EntityAttrName="IsZamer"
     EntityUsage="Users"
-    AliasName="IS_ZAMER"/>
+    AliasName="IS_ZAMER"
+    IsQueriable="false"/>
   <ViewLinkAccessor
     Name="OrdersView"
     ViewLink="ua.divas.view.OrdersUsersFk1Link"
@@ -175,6 +186,11 @@ upper(Users.ID) in (select upper(N) from table(cast(get_users(:u_name) as userTa
   <ViewLinkAccessor
     Name="OtherZatratyView"
     ViewLink="ua.divas.view.OtherZatratyFk2Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="KassaSettingsView"
+    ViewLink="ua.divas.view.KassaSettingsFk1Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <ClientInterface

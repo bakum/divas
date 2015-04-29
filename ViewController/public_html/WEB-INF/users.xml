@@ -17,6 +17,11 @@
       <managed-bean-class>ua.divas.bean.UsersBean</managed-bean-class>
       <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean id="__4">
+      <managed-bean-name>shuttle_kassa</managed-bean-name>
+      <managed-bean-class>ua.divas.bean.ShuttleKassa</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
     <view id="user">
       <page>/user.jsff</page>
     </view>

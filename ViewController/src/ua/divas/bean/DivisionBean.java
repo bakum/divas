@@ -10,6 +10,8 @@ import javax.el.MethodExpression;
 import javax.faces.application.Application;
 import javax.faces.context.FacesContext;
 
+import javax.faces.event.ActionEvent;
+
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
@@ -24,6 +26,7 @@ import oracle.binding.BindingContainer;
 
 import oracle.binding.OperationBinding;
 
+import oracle.jbo.Row;
 import oracle.jbo.RowNotFoundException;
 import oracle.jbo.uicli.binding.JUCtrlHierBinding;
 import oracle.jbo.uicli.binding.JUCtrlHierNodeBinding;
@@ -53,11 +56,11 @@ public class DivisionBean {
 
     public String refresh() {
 
-        DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        /* DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = binding.findIteratorBinding("DivisionsView1Iterator");
         if (it != null) {
             it.executeQuery();
-        }
+        } */
         AdfFacesContext.getCurrentInstance().addPartialTarget(getTreeTable());
         return null;
     }
@@ -83,11 +86,19 @@ public class DivisionBean {
             JUCtrlHierBinding treeBinding = null;
             treeBinding = (JUCtrlHierBinding) ((CollectionModel) tree1.getValue()).getWrappedData();
             JUCtrlHierNodeBinding nodeBinding = treeBinding.findNodeByKeyPath(key);
+
+            Row rw = nodeBinding.getRow();
+            //print first row attribute. Note that in a tree you have to
+            //determine the node type if you want to select node attributes
+            //by name and not index
+            String rowType = rw.getStructureDef().getDefName();
+            System.out.println(rowType);
+
             DCIteratorBinding _treeIteratorBinding = null;
             _treeIteratorBinding = treeBinding.getDCIteratorBinding();
             JUIteratorBinding iterator = nodeBinding.getIteratorBinding();
             String keyStr = nodeBinding.getRowKey().toStringFormat(true);
-            if (keyStr != null) {
+            if (keyStr != null && rowType.matches("DivisionsView")) {
                 DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("DivisionsView1Iterator");
                 try {
                     iter.setCurrentRowWithKey(keyStr);
@@ -118,6 +129,24 @@ public class DivisionBean {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("Rollback");
         ob.execute();
+        String rks;
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("DivisionsView1Iterator");
+        if (it != null) {
+            try {
+                rks = it.getCurrentRow().getKey().toStringFormat(true);
+            } catch (Exception e) {
+                rks = null;
+                e.printStackTrace();
+            }
+            it.executeQuery();
+            if (rks != null) {
+                it.setCurrentRowWithKey(rks);
+            }
+        }
+        AdfFacesContext.getCurrentInstance().addPartialTarget(getTreeTable());
+        /* ResetActionListener ral = new ResetActionListener();
+        ral.processAction(null); */
     }
 
     public void dialogListener(DialogEvent dialogEvent) {
@@ -131,5 +160,37 @@ public class DivisionBean {
             OperationBinding ob = binding.getOperationBinding("Rollback");
             ob.execute();
         }
+    }
+
+    public void onRefresh(ActionEvent actionEvent) {
+        refresh();
+    }
+
+    public void onRollbackAction(ActionEvent actionEvent) {
+        String rks;
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("DivisionsView1Iterator");
+
+        if (it != null) {
+            try {
+                rks = it.getCurrentRow().getKey().toStringFormat(true);
+            } catch (Exception e) {
+                rks = null;
+                e.printStackTrace();
+            }
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding ob = binding.getOperationBinding("Rollback");
+            ob.execute();
+            it.executeQuery();
+            if (rks != null) {
+                it.setCurrentRowWithKey(rks);
+            }
+        } else {
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding ob = binding.getOperationBinding("Rollback");
+            ob.execute();
+        }
+
+        AdfFacesContext.getCurrentInstance().addPartialTarget(getTreeTable());
     }
 }

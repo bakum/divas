@@ -802,6 +802,15 @@
   <ViewUsage
     Name="ProrabView1"
     ViewObjectName="ua.divas.view.ProrabView"/>
+  <ViewUsage
+    Name="KassaSettingsView1"
+    ViewObjectName="ua.divas.view.KassaSettingsView"/>
+  <ViewUsage
+    Name="KassaSettingsView2"
+    ViewObjectName="ua.divas.view.KassaSettingsView"/>
+  <ViewUsage
+    Name="KassaSettingsView3"
+    ViewObjectName="ua.divas.view.KassaSettingsView"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -1731,6 +1740,18 @@
     ViewLinkObjectName="ua.divas.view.VwSupplierMovesVwKontragAllFkLink"
     SrcViewUsageName="ua.divas.module.AppModule.VwKontragAllItems1"
     DstViewUsageName="ua.divas.module.AppModule.VwSupplierMoves2"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="KassaSettingsFk1Link1"
+    ViewLinkObjectName="ua.divas.view.KassaSettingsFk1Link"
+    SrcViewUsageName="ua.divas.module.AppModule.UsersView1"
+    DstViewUsageName="ua.divas.module.AppModule.KassaSettingsView2"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="KassaSettingsFk2Link1"
+    ViewLinkObjectName="ua.divas.view.KassaSettingsFk2Link"
+    SrcViewUsageName="ua.divas.module.AppModule.KassaView1"
+    DstViewUsageName="ua.divas.module.AppModule.KassaSettingsView3"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">

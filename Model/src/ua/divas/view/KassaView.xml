@@ -289,4 +289,9 @@ where deleted = 0]]></SQLQuery>
     ViewLink="ua.divas.view.OtherZatratyFk4Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="KassaSettingsView"
+    ViewLink="ua.divas.view.KassaSettingsFk2Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
 </ViewObject>

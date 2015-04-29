@@ -13,8 +13,6 @@
     <iterator Binds="KassaView4" RangeSize="5" DataControl="AppModuleDataControl" id="KassaView4Iterator"/>
     <iterator Binds="DivisionsRootView2" RangeSize="25" DataControl="AppModuleDataControl"
               id="DivisionsRootView2Iterator"/>
-    <iterator Binds="DivisionSotrView2" RangeSize="25" DataControl="AppModuleDataControl"
-              id="DivisionSotrView2Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="CurrencyView1Iterator" id="CurrencyView1">
@@ -121,7 +119,7 @@
       </AttrNames>
     </attributeValues>
     <list IterBinding="DivisionsView1Iterator" StaticList="false" Uses="LOV_ParentId" id="ParentId1"
-          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
     <methodAction id="changeParentInDivisions" RequiresUpdateModel="true" Action="invokeMethod"
                   MethodName="changeParentInDivisions" IsViewObjectMethod="true" DataControl="AppModuleDataControl"
                   InstanceName="data.AppModuleDataControl.DivisionsView1">
@@ -147,7 +145,7 @@
       </AttrNames>
     </attributeValues>
     <list IterBinding="DivisionsView1Iterator" StaticList="false" Uses="LOV_MainUser" id="MainUser"
-          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
     <tree IterBinding="DivisionsRootView2Iterator" id="DivisionsRootView2">
       <nodeDefinition DefName="ua.divas.view.DivisionsRootView" Name="DivisionsRootView20">
         <AttrNames>
@@ -173,9 +171,15 @@
     </tree>
     <action IterBinding="DivisionsView1Iterator" id="CreateInsert2" RequiresUpdateModel="true"
             Action="createInsertRow"/>
+    <attributeValues IterBinding="DivisionsView1Iterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
     <tree IterBinding="KassaView4Iterator" id="KassaView41">
       <nodeDefinition DefName="ua.divas.view.KassaView" Name="KassaView410">
         <AttrNames>
+          <Item Value="Id"/>
           <Item Value="Fullname"/>
           <Item Value="CurrId"/>
           <Item Value="DivisionId"/>
@@ -183,13 +187,16 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <attributeValues IterBinding="DivisionsView1Iterator" id="DEditable">
+      <AttrNames>
+        <Item Value="DEditable"/>
+      </AttrNames>
+    </attributeValues>
     <action IterBinding="KassaView4Iterator" id="CreateInsert3" RequiresUpdateModel="true" Action="createInsertRow"/>
-    <tree IterBinding="DivisionSotrView2Iterator" id="DivisionSotrView2">
-      <nodeDefinition DefName="ua.divas.view.DivisionSotrView" Name="DivisionSotrView20">
-        <AttrNames>
-          <Item Value="UserId"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
+    <attributeValues IterBinding="DivisionsView1Iterator" id="IsGroup">
+      <AttrNames>
+        <Item Value="IsGroup"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

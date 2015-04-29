@@ -529,7 +529,8 @@
                                     </af:toolbar>
                                 </f:facet>
                             </af:showDetailItem>
-                            <af:showDetailItem text="Услуги" id="sdi2" stretchChildren="first">
+                            <af:showDetailItem text="Услуги" id="sdi2" stretchChildren="first"
+                                               rendered="#{!securityContext.userInRole['manager']}">
                                 <af:panelBox text="Перечень работ" id="pb1" type="flow">
                                     <f:facet name="toolbar"/>
                                     <af:table value="#{bindings.OrdersTpUslugiView2.collectionModel}" var="row"
@@ -752,7 +753,8 @@
                                                disabled="#{!bindings.CreateInsert1.enabled}" id="b10"/>
                                 </f:facet>
                             </af:showDetailItem>
-                            <af:showDetailItem text="Оплаты" id="sdi5">
+                            <af:showDetailItem text="Оплаты" id="sdi5"
+                                               rendered="#{!securityContext.userInRole['manager']}">
                                 <af:panelBox text="Перечень оплат" id="pb2" type="flow">
                                     <f:facet name="toolbar"/>
                                     <af:table value="#{bindings.OrdersTpOplatyView1.collectionModel}" var="row"
@@ -898,7 +900,8 @@
                                     </af:toolbar>
                                 </f:facet>
                             </af:showDetailItem>
-                            <af:showDetailItem text="Расходы" id="sdi6" stretchChildren="first">
+                            <af:showDetailItem text="Расходы" id="sdi6" stretchChildren="first"
+                                               rendered="#{!securityContext.userInRole['manager']}">
                                 <af:panelBox text="Затраты" id="pb3" type="flow">
                                     <f:facet name="toolbar">
                                         <af:toolbar id="t11">
@@ -1094,7 +1097,8 @@
                                     </af:popup>
                                 </af:panelBox>
                             </af:showDetailItem>
-                            <af:showDetailItem text="Начисления" id="sdi7" stretchChildren="first">
+                            <af:showDetailItem text="Начисления" id="sdi7" stretchChildren="first"
+                                               rendered="#{!securityContext.userInRole['manager']}">
                                 <af:panelBox text="Начисления" id="pb4" type="flow">
                                     <f:facet name="toolbar">
                                         <af:toolbar id="t15">

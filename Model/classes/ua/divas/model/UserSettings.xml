@@ -145,7 +145,6 @@
   </Attribute>
   <Attribute
     Name="MainUsluga"
-    IsNotNull="true"
     Precision="50"
     ColumnName="MAIN_USLUGA"
     SQLType="VARCHAR"
@@ -166,13 +165,13 @@
   </Attribute>
   <Attribute
     Name="ActivitiesId"
-    IsNotNull="true"
     Precision="50"
     ColumnName="ACTIVITIES_ID"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="USER_SETTINGS">
+    TableName="USER_SETTINGS"
+    IsNotNull="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
@@ -256,6 +255,18 @@
     AssociationOtherEnd="ua.divas.model.UserSettingsUsersFk1Assoc.UserSettings"
     Type="oracle.jbo.server.EntityImpl"
     IsUpdateable="true"/>
+  <Key
+    Name="UserSettingsActivitiesIdCheck">
+    <DesignTime>
+      <Attr Name="_isNotNull" Value="true"/>
+      <Attr Name="_DBObjectName" Value="USER_SETTINGS_ACTIVITIES_ID_CH"/>
+      <Attr Name="_checkCondition" Value='"ACTIVITIES_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="ua.divas.model.UserSettings.ActivitiesId"/>
+    </AttrArray>
+  </Key>
   <Key
     Name="UserSettingsPk"
     PrimaryKey="true">

@@ -44,6 +44,10 @@ public class ShuttleGroup {
     private RichInputText konName;
     private RichInputListOfValues zamerId;
     private RichInputListOfValues zamerName;
+    private RichInputText login;
+    private RichInputText passwd;
+    private RichInputText desc;
+    private RichInputText newPasswd;
 
     public ShuttleGroup() {
     }
@@ -432,6 +436,62 @@ public class ShuttleGroup {
                                                     "Контрагент уже используется. Выбор невозможен!");
                 ctx.addMessage(null, msg);
             }
+        }
+    }
+
+    public void onRefresh(ActionEvent actionEvent) {
+        refresh();
+    }
+
+    public void setLogin(RichInputText login) {
+        this.login = login;
+    }
+
+    public RichInputText getLogin() {
+        return login;
+    }
+
+    public void setPasswd(RichInputText passwd) {
+        this.passwd = passwd;
+    }
+
+    public RichInputText getPasswd() {
+        return passwd;
+    }
+
+    public void setDesc(RichInputText desc) {
+        this.desc = desc;
+    }
+
+    public RichInputText getDesc() {
+        return desc;
+    }
+
+    public void onNewUserPopup(PopupFetchEvent popupFetchEvent) {
+        try {
+            getLogin().setValue("");
+            getPasswd().setValue("");
+            getDesc().setValue("");
+        } catch (Exception e) {
+            // TODO: Add catch code
+            e.printStackTrace();
+        }
+    }
+
+    public void setNewPasswd(RichInputText newPasswd) {
+        this.newPasswd = newPasswd;
+    }
+
+    public RichInputText getNewPasswd() {
+        return newPasswd;
+    }
+
+    public void onResetPasswdPopup(PopupFetchEvent popupFetchEvent) {
+        try {
+            getNewPasswd().setValue("");
+        } catch (Exception e) {
+            // TODO: Add catch code
+            e.printStackTrace();
         }
     }
 }

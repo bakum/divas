@@ -21,6 +21,7 @@ import ua.divas.view.DivisionsRootViewImpl;
 import ua.divas.view.DivisionsViewImpl;
 import ua.divas.view.FirmsViewImpl;
 import ua.divas.view.GroupmembersViewImpl;
+import ua.divas.view.KassaSettingsViewImpl;
 import ua.divas.view.KassaVOImpl;
 import ua.divas.view.KontragentsViewImpl;
 import ua.divas.view.LastPriceVOImpl;
@@ -3452,6 +3453,46 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ProrabViewImpl getProrabView1() {
         return (ProrabViewImpl) findViewObject("ProrabView1");
+    }
+
+    /**
+     * Container's getter for KassaSettingsView1.
+     * @return KassaSettingsView1
+     */
+    public KassaSettingsViewImpl getKassaSettingsView1() {
+        return (KassaSettingsViewImpl) findViewObject("KassaSettingsView1");
+    }
+
+    /**
+     * Container's getter for KassaSettingsView2.
+     * @return KassaSettingsView2
+     */
+    public KassaSettingsViewImpl getKassaSettingsView2() {
+        return (KassaSettingsViewImpl) findViewObject("KassaSettingsView2");
+    }
+
+    /**
+     * Container's getter for KassaSettingsFk1Link1.
+     * @return KassaSettingsFk1Link1
+     */
+    public ViewLinkImpl getKassaSettingsFk1Link1() {
+        return (ViewLinkImpl) findViewLink("KassaSettingsFk1Link1");
+    }
+
+    /**
+     * Container's getter for KassaSettingsView3.
+     * @return KassaSettingsView3
+     */
+    public KassaSettingsViewImpl getKassaSettingsView3() {
+        return (KassaSettingsViewImpl) findViewObject("KassaSettingsView3");
+    }
+
+    /**
+     * Container's getter for KassaSettingsFk2Link1.
+     * @return KassaSettingsFk2Link1
+     */
+    public ViewLinkImpl getKassaSettingsFk2Link1() {
+        return (ViewLinkImpl) findViewLink("KassaSettingsFk2Link1");
     }
 }
 

@@ -11,10 +11,12 @@
   PageIterMode="Full"
   ComponentClass="ua.divas.view.DivisionsViewImpl"
   ComponentInterface="ua.divas.view.common.DivisionsView"
-  ClientProxyName="ua.divas.view.client.DivisionsViewClient">
+  ClientProxyName="ua.divas.view.client.DivisionsViewClient"
+  RowClass="ua.divas.view.DivisionsViewRowImpl">
   <DesignTime>
-    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
   <Variable
     Name="u_name"
@@ -81,10 +83,12 @@
        Divisions.PARENT_ID, 
        Divisions.VERSION, 
        Divisions.PREDEFINED,
+       (select 0 from dual) D_Editable,
        Divisions.MAIN_USER
 FROM  DIVISIONS Divisions
 where deleted = 0 and
-upper(Divisions.ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))]]></SQLQuery>
+upper(Divisions.ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))
+order by Divisions.IS_GROUP DESC]]></SQLQuery>
   <EntityUsage
     Name="Divisions"
     Entity="ua.divas.model.Divisions"/>
@@ -145,6 +149,15 @@ upper(Divisions.ID) in (select upper(N) from table(cast(get_divisions(:u_name) a
     EntityAttrName="Predefined"
     EntityUsage="Divisions"
     AliasName="PREDEFINED"/>
+  <ViewAttribute
+    Name="DEditable"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="D_EDITABLE"
+    Expression="D_EDITABLE"
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="MainUser"
     PrecisionRule="true"

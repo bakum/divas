@@ -43,11 +43,7 @@
                                                        icon="/img/tSystCmp_picture_52.png"
                                                        rendered="#{securityContext.taskflowViewable['/WEB-INF/directories.xml#direct']}">
                                         <af:region value="#{bindings.direct1.regionModel}" id="r2"
-                                                   uncommittedDataWarning="on">
-                                            <af:checkRegionUncommittedDataBehavior regionIds="::r2"
-                                                                                   message="Есть изменённые данные. Оставить страницу?"
-                                                                                   triggerType="click"/>
-                                        </af:region>
+                                                   uncommittedDataWarning="on"/>
                                     </af:showDetailItem>
                                     <af:showDetailItem text="Аналитика" id="sdi5" stretchChildren="first"
                                                        icon="/img/analytics.png"

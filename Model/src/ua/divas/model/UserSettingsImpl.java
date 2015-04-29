@@ -340,6 +340,15 @@ public class UserSettingsImpl extends DivasEntityNoDelete {
     }
 
     /**
+     * @param id key constituent
+
+     * @return a Key object based on given key constituents.
+     */
+    public static Key createPrimaryKey(String id) {
+        return new Key(new Object[] { id });
+    }
+
+    /**
      * Validation method for UserSettings.
      */
     public boolean validateUserSettings1() {
@@ -350,14 +359,6 @@ public class UserSettingsImpl extends DivasEntityNoDelete {
         return true;
     }
 
-    /**
-     * @param id key constituent
-
-     * @return a Key object based on given key constituents.
-     */
-    public static Key createPrimaryKey(String id) {
-        return new Key(new Object[] { id });
-    }
 
     /**
      * Validation method for UserSettings.
