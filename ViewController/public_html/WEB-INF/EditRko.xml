@@ -13,6 +13,11 @@
       <value>#{pageFlowScope.RkoId}</value>
       <class>java.lang.String</class>
     </return-value-definition>
+    <managed-bean id="__4">
+      <managed-bean-name>edit_rko</managed-bean-name>
+      <managed-bean-class>ua.divas.bean.EditRkoBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
     <view id="editrko">
       <page>/editrko.jsf</page>
     </view>

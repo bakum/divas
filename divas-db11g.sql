@@ -126,12 +126,12 @@ AS TABLE OF usertype;
 --  DDL for Sequence PS_TXN_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 173351 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 174401 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence RKO_NUM_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "RKO_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 145 CACHE 20 NOORDER  CYCLE ;
+   CREATE SEQUENCE  "RKO_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 165 CACHE 20 NOORDER  CYCLE ;
 --------------------------------------------------------
 --  DDL for Table ASTER_SETTINGS
 --------------------------------------------------------
@@ -955,7 +955,8 @@ AS TABLE OF usertype;
 	"ACTIVITIES_ID" VARCHAR2(50 CHAR), 
 	"OPERATION_ID" VARCHAR2(50 CHAR), 
 	"KONTRAG_ID" VARCHAR2(50 CHAR), 
-	"SUMMA" NUMBER
+	"SUMMA" NUMBER, 
+	"DEST_KASSA_ID" VARCHAR2(50 CHAR)
    ) ;
 --------------------------------------------------------
 --  DDL for Table TYPE_DEF
@@ -1544,14 +1545,18 @@ UPPER(VW_MOVES.TABLE_NAME) = UPPER('PKO');
   VW_MOVES.SUM_DEB,
   VW_MOVES.KRED,
   VW_MOVES.SUM_KRED,
-  KONTRAGENTS.FULLNAME AS Subconto_Deb1,
+  case
+    when KONTRAGENTS.FULLNAME is null
+      then (select fullname from kassa where id = VW_MOVES.SUBCONTO1_DEB)
+    else KONTRAGENTS.FULLNAME
+  end AS Subconto_Deb1,   
   KASSA.FULLNAME       AS Subconto_Kred1
 FROM VW_MOVES
 LEFT JOIN KONTRAGENTS
 ON VW_MOVES.SUBCONTO1_DEB = KONTRAGENTS.ID
 LEFT JOIN KASSA
 ON VW_MOVES.SUBCONTO1_KRED     = KASSA.ID
-WHERE VW_MOVES.KRED            = '2081'
+WHERE (VW_MOVES.KRED            = '2081')
 AND UPPER(VW_MOVES.TABLE_NAME) = UPPER('RKO');
 --------------------------------------------------------
 --  DDL for View VW_NOTIFICATION_CALENDAR
@@ -3809,6 +3814,9 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
  
   ALTER TABLE "RKO" ADD CONSTRAINT "RKO_FK7" FOREIGN KEY ("KONTRAG_ID")
 	  REFERENCES "KONTRAGENTS" ("ID") ENABLE;
+ 
+  ALTER TABLE "RKO" ADD CONSTRAINT "RKO_FK8" FOREIGN KEY ("DEST_KASSA_ID")
+	  REFERENCES "KASSA" ("ID") ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table USER_SETTINGS
 --------------------------------------------------------
@@ -8696,8 +8704,82 @@ procedure set_subconto_other(p_move_rec moves%rowtype) as
 
   exception
         when others then 
-        RAISE_APPLICATION_ERROR (-20001,'Error pko move for plan accounting! '||SQLERRM, TRUE) ;
+        RAISE_APPLICATION_ERROR (-20001,'Error rko move for plan accounting! '||SQLERRM, TRUE) ;
   end set_subconto_buyer;
+  
+  procedure set_subconto_kassa(p_move_rec moves%rowtype) as
+    p_ret_rec moves%rowtype;
+    p_sub_count number(10);
+    p_counter number(10);
+    p_sub_name plan_type_subconto.fullname%type;
+    p_rko rko%rowtype;
+    p_plan_acc plan_acc%rowtype;
+    p_upr_val currency.id%type;
+  begin
+  select * into p_rko from RKO where id = p_move_rec.registrator_id;
+  select id into p_upr_val from currency where predefined=1;
+  
+  p_ret_rec:=p_move_rec;
+  
+  --Субконто дебета
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'КАССА' then 
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_rko.dest_kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_rko.dest_kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_rko.dest_kassa_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  --Субконто кредита
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'КАССА' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=p_rko.kassa_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=p_rko.kassa_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=p_rko.kassa_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  p_ret_rec.curr_deb := p_rko.curr_id;
+  p_ret_rec.summ_val_deb:=entry.sign_of_summ(p_ret_rec.plan_acc_deb_id, p_rko.summa, 1);
+  
+  p_ret_rec.curr_kred := p_rko.curr_id;
+  p_ret_rec.summ_val_kredit:=entry.sign_of_summ(p_ret_rec.plan_acc_kred_id, p_rko.summa, 0);
+  
+  p_ret_rec.summ_upr_deb:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_deb, p_upr_val, p_ret_rec.period, p_ret_rec.summ_val_deb);
+  p_ret_rec.summ_upr_kred:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_kred, p_upr_val, p_ret_rec.period,p_ret_rec.summ_val_kredit);
+  
+  p_ret_rec.version:=systimestamp;
+  
+  insert into moves values p_ret_rec;
+
+  exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error rko move for plan accounting! '||SQLERRM, TRUE) ;
+  end set_subconto_kassa;
 
   procedure rko_move_plan_acc(p_id in varchar2) AS
     p_rko_rec rko%rowtype;
@@ -8707,6 +8789,7 @@ procedure set_subconto_other(p_move_rec moves%rowtype) as
     p_id_other_operation operation_rko.id%type;
     p_id_buyer_operation operation_rko.id%type;
     p_id_supplier_operation operation_rko.id%type;
+    p_id_kassa_operation operation_rko.id%type;
     p_counter number(10);
     pragma exception_init(in_use, -54);
   begin
@@ -8723,6 +8806,9 @@ procedure set_subconto_other(p_move_rec moves%rowtype) as
         and rownum = 1;   
     select id into p_id_buyer_operation from operation_rko 
         where upper(name)=upper('RETURN_BUYER')
+        and rownum = 1;
+    select id into p_id_kassa_operation from operation_rko 
+        where upper(name)=upper('MOVE_KASSA')
         and rownum = 1;    
     p_move_rec.period:=p_rko_rec.dat;
     p_counter:=0;
@@ -8755,6 +8841,14 @@ procedure set_subconto_other(p_move_rec moves%rowtype) as
         if p_counter = 3 then
           if p_rko_rec.operation_id = p_id_buyer_operation then
             set_subconto_buyer(p_move_rec);
+          end if; 
+        end if; 
+        
+        --РКО - Перемещение между кассами
+        if p_counter = 4 then
+          if p_rko_rec.operation_id = p_id_kassa_operation then
+              null;
+            set_subconto_kassa(p_move_rec);
           end if; 
         end if; 
     end loop;
@@ -9261,6 +9355,8 @@ end usr_sett;
       values ('PAYMENT_SUPPLIER','Оплата поставщику');
     Insert into OPERATION_RKO (NAME,FULLNAME)
       values ('RETURN_BUYER','Возврат покупателю');
+    Insert into OPERATION_RKO (NAME,FULLNAME)
+      values ('MOVE_KASSA','Перемещение между кассами');  
         
         
      --Кампании (колл-листы) по-умолчанию
@@ -9355,7 +9451,12 @@ end usr_sett;
         values((select id from type_def where upper(type_def.table_name)=upper('RKO')),
                (select id from plan_acc where code = '20711'),
                (select id from plan_acc where code = '2081'),3,
-               'РКО - Возврат покупателю');           
+               'РКО - Возврат покупателю');
+    insert into entry_settings(typedef_id,plan_acc_deb_id,plan_acc_kred_id,chain,description)
+        values((select id from type_def where upper(type_def.table_name)=upper('RKO')),
+               (select id from plan_acc where code = '2081'),
+               (select id from plan_acc where code = '2081'),4,
+               'РКО - Перемещение между кассами');           
       
     
     EXCEPTION

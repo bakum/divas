@@ -440,7 +440,8 @@
                                                                    text="Добавить"
                                                                    id="b4"
                                                                    disabled="#{!bindings.CreateInsert1.enabled}"
-                                                                   rendered="#{bindings.UserId.inputValue == null ? true : false}"/>
+                                                                   rendered="#{bindings.UserId.inputValue == null ? true : false}"
+                                                                   immediate="true"/>
                                                         <af:button text="Редактировать" id="b5"
                                                                    icon="/img/edit-16.gif" rendered="false">
                                                             <af:setPropertyListener from="#{1}"

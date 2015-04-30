@@ -55,7 +55,8 @@
                                     <f:selectItems value="#{bindings.OperationId.items}" id="si6"/>
                                     <f:validator binding="#{bindings.OperationId.validator}"/>
                                 </af:selectOneChoice>
-                                <af:panelLabelAndMessage label="#{bindings.Kontragname.hints.label}" id="plam4">
+                                <af:panelLabelAndMessage label="#{bindings.Kontragname.hints.label}" id="plam4"
+                                                         visible="#{edit_rko.visibleKontrag}">
                                     <af:panelGroupLayout id="pgl5" layout="horizontal">
                                         <af:inputListOfValues id="kontragIdId"
                                                               popupTitle="Search and Select: #{bindings.KontragId.hints.label}"
@@ -81,23 +82,33 @@
                                         </af:inputListOfValues>
                                     </af:panelGroupLayout>
                                 </af:panelLabelAndMessage>
-                                <af:panelLabelAndMessage label="#{bindings.CurrId.label}" id="plam3">
-                                    <af:panelGroupLayout id="pgl4" layout="horizontal">
+                                <af:panelLabelAndMessage id="plam3">
+                                    <af:panelGroupLayout id="pgl4" layout="vertical">
                                         <af:selectOneChoice value="#{bindings.CurrId.inputValue}"
                                                             required="#{bindings.CurrId.hints.mandatory}"
                                                             shortDesc="#{bindings.CurrId.hints.tooltip}" id="soc3"
                                                             autoSubmit="true"
-                                                            readOnly="#{bindings.REditable.inputValue == 1 ? false : true}">
+                                                            readOnly="#{bindings.REditable.inputValue == 1 ? false : true}"
+                                                            label="#{bindings.CurrId.label}">
                                             <f:selectItems value="#{bindings.CurrId.items}" id="si3"/>
                                             <f:validator binding="#{bindings.CurrId.validator}"/>
                                         </af:selectOneChoice>
                                         <af:selectOneChoice value="#{bindings.KassaId.inputValue}"
-                                                            label="#{bindings.KassaId.label}"
+                                                            label="#{edit_rko.kassaLabel}"
                                                             required="#{bindings.KassaId.hints.mandatory}"
                                                             shortDesc="#{bindings.KassaId.hints.tooltip}" id="soc4"
                                                             readOnly="#{bindings.REditable.inputValue == 1 ? false : true}">
                                             <f:selectItems value="#{bindings.KassaId.items}" id="si4"/>
                                             <f:validator binding="#{bindings.KassaId.validator}"/>
+                                        </af:selectOneChoice>
+                                        <af:selectOneChoice value="#{bindings.DestKassaId.inputValue}"
+                                                            label="#{bindings.DestKassaId.label}"
+                                                            required="#{bindings.DestKassaId.hints.mandatory}"
+                                                            shortDesc="#{bindings.DestKassaId.hints.tooltip}" id="soc7"
+                                                            readOnly="#{bindings.REditable.inputValue == 1 ? false : true}"
+                                                            visible="#{edit_rko.visibleKassa}">
+                                            <f:selectItems value="#{bindings.DestKassaId.items}" id="si7"/>
+                                            <f:validator binding="#{bindings.DestKassaId.validator}"/>
                                         </af:selectOneChoice>
                                     </af:panelGroupLayout>
                                 </af:panelLabelAndMessage>

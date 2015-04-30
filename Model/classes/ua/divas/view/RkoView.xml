@@ -250,6 +250,25 @@
       Hint="showAndExecute"
       Name="KontragentsAllItems"/>
   </ListBinding>
+  <ListBinding
+    Name="LOV_DestKassaId"
+    ListVOName="KassaSettingsView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DestKassaId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="KassaId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="KassaName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <SQLQuery><![CDATA[SELECT Rko.ID, 
        Rko.DAT, 
        Rko.NUM, 
@@ -260,7 +279,8 @@
        Rko.COMMENTS, 
        Rko.VERSION, 
        Rko.CURR_ID, 
-       Rko.KASSA_ID, 
+       Rko.KASSA_ID,
+       Rko.DEST_KASSA_ID,
        Rko.ACTIVITIES_ID, 
        Rko.OPERATION_ID, 
        Rko.KONTRAG_ID,
@@ -409,6 +429,24 @@ upper(Rko.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as use
     </Dependencies>
   </ViewAttribute>
   <ViewAttribute
+    Name="DestKassaId"
+    PrecisionRule="true"
+    EntityAttrName="DestKassaId"
+    EntityUsage="Rko"
+    AliasName="DEST_KASSA_ID"
+    LOVName="LOV_DestKassaId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+    <Dependencies>
+      <Item
+        Value="CurrId"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
     Name="ActivitiesId"
     IsNotNull="true"
     PrecisionRule="true"
@@ -528,6 +566,16 @@ upper(Rko.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as use
         Type="void"/>
       <Parameter
         Name="_id"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="getOperationName"
+      MethodName="getOperationName">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="Id"
         Type="java.lang.String"/>
     </Method>
   </ClientInterface>

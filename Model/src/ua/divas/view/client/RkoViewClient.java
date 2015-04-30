@@ -16,10 +16,17 @@ public class RkoViewClient extends ViewUsageImpl implements RkoView {
     public RkoViewClient() {
     }
 
+
     public void addEntry(String _id) {
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "addEntry", new String[] {
                                                                          "java.lang.String" }, new Object[] { _id });
         return;
+    }
+
+    public String getOperationName(String Id) {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "getOperationName", new String[] {
+                                                                         "java.lang.String" }, new Object[] { Id });
+        return (String) _ret;
     }
 
     public void removeEntry(String _id) {

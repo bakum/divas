@@ -54,6 +54,7 @@ public class RkoViewRowImpl extends ViewRowImpl {
         Version,
         CurrId,
         KassaId,
+        DestKassaId,
         ActivitiesId,
         OperationId,
         KontragId,
@@ -105,6 +106,7 @@ public class RkoViewRowImpl extends ViewRowImpl {
     public static final int VERSION = AttributesEnum.Version.index();
     public static final int CURRID = AttributesEnum.CurrId.index();
     public static final int KASSAID = AttributesEnum.KassaId.index();
+    public static final int DESTKASSAID = AttributesEnum.DestKassaId.index();
     public static final int ACTIVITIESID = AttributesEnum.ActivitiesId.index();
     public static final int OPERATIONID = AttributesEnum.OperationId.index();
     public static final int KONTRAGID = AttributesEnum.KontragId.index();
@@ -405,6 +407,22 @@ public class RkoViewRowImpl extends ViewRowImpl {
      */
     public void setREditable(BigDecimal value) {
         setAttributeInternal(REDITABLE, value);
+    }
+
+    /**
+     * Gets the attribute value for DEST_KASSA_ID using the alias name DestKassaId.
+     * @return the DEST_KASSA_ID
+     */
+    public String getDestKassaId() {
+        return (String) getAttributeInternal(DESTKASSAID);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for DEST_KASSA_ID using the alias name DestKassaId.
+     * @param value value to set the DEST_KASSA_ID
+     */
+    public void setDestKassaId(String value) {
+        setAttributeInternal(DESTKASSAID, value);
     }
 
     /**

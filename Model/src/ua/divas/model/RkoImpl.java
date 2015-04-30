@@ -69,7 +69,8 @@ public class RkoImpl extends DivasEntity {
         ActivitiesId,
         OperationId,
         KontragId,
-        Summa;
+        Summa,
+        DestKassaId;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -109,6 +110,7 @@ public class RkoImpl extends DivasEntity {
     public static final int OPERATIONID = AttributesEnum.OperationId.index();
     public static final int KONTRAGID = AttributesEnum.KontragId.index();
     public static final int SUMMA = AttributesEnum.Summa.index();
+    public static final int DESTKASSAID = AttributesEnum.DestKassaId.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -365,13 +367,29 @@ public class RkoImpl extends DivasEntity {
     }
 
     /**
+     * Gets the attribute value for DestKassaId, using the alias name DestKassaId.
+     * @return the value of DestKassaId
+     */
+    public String getDestKassaId() {
+        return (String) getAttributeInternal(DESTKASSAID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for DestKassaId.
+     * @param value value to set the DestKassaId
+     */
+    public void setDestKassaId(String value) {
+        setAttributeInternal(DESTKASSAID, value);
+    }
+
+    /**
      * Validation method for Rko.
      */
-    public boolean validateRko() {
-        String konId = getKontragId();
+    public boolean validateRko1() {
+        String DestKassaId = getDestKassaId();
         String opId = getOperationId();
         String opName = getOperationName(opId);
-        if (konId == null && !opName.equalsIgnoreCase("OTHER_PAYMENT")) {
+        if (DestKassaId == null && opName.equalsIgnoreCase("MOVE_KASSA")) {
             return false;
         }
         return true;
@@ -384,6 +402,21 @@ public class RkoImpl extends DivasEntity {
      */
     public static Key createPrimaryKey(String id) {
         return new Key(new Object[] { id });
+    }
+
+    /**
+     * Validation method for Rko.
+     */
+    public boolean validateRko() {
+        String konId = getKontragId();        
+        String opId = getOperationId();
+        String opName = getOperationName(opId);
+        if (konId == null && !opName.equalsIgnoreCase("OTHER_PAYMENT")) {
+            if (!opName.equalsIgnoreCase("MOVE_KASSA")) {
+                return false;
+            }
+        }       
+        return true;
     }
 
 

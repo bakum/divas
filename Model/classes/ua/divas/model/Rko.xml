@@ -337,6 +337,26 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="DestKassaId"
+    Precision="50"
+    ColumnName="DEST_KASSA_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="RKO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Rko.DestKassaId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Rko.DestKassaId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Key
     Name="RkoPk"
     PrimaryKey="true">
@@ -417,6 +437,10 @@
     Name="RkoRule0"
     ResId="ua.divas.model.Rko_Rule_0"
     MethodName="validateRko"/>
+  <validation:MethodValidationBean
+    Name="RkoRule1"
+    ResId="ua.divas.model.Rko_Rule_1"
+    MethodName="validateRko1"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>
