@@ -42,7 +42,8 @@
   SUM(summ_rashod),
   REGISTRATOR_ID,
   PERIOD,
-  REG_STRING
+  REG_STRING,
+  (select sum(debt) from orders_calc where id = REGISTRATOR_ID) Sum_Calc
 FROM
   (SELECT MOVE_KONTRAG.ID,
     MOVE_KONTRAG.KONTRAG_ID,
@@ -311,6 +312,21 @@ GROUP BY KONTRAG_ID,
       <Attr Name="_DisplaySize" Value="80"/>
     </DesignTime>
   </ViewAttribute>
+  <ViewAttribute
+    Name="SumCalc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SUM_CALC"
+    Expression="SUM_CALC"
+    SQLType="NUMERIC"/>
+  <ViewLinkAccessor
+    Name="OrdersCalcView"
+    ViewLink="ua.divas.view.VwBuyerMovesOrdersCalcFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

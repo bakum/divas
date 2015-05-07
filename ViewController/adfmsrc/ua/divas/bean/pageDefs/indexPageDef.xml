@@ -44,6 +44,8 @@
               activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
     <taskFlow id="prorabconfig1" taskFlowId="/WEB-INF/prorab-config.xml#prorab-config" activation="deferred"
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="kontrag_calcconfig1" taskFlowId="/WEB-INF/kontrag_calc-config.xml#kontrag_calc-config"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="NotificationView1Iterator" id="CountUnread">

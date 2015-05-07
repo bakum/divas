@@ -23,11 +23,13 @@ import ua.divas.view.FirmsViewImpl;
 import ua.divas.view.GroupmembersViewImpl;
 import ua.divas.view.KassaSettingsViewImpl;
 import ua.divas.view.KassaVOImpl;
+import ua.divas.view.KontragentsInOrdersViewImpl;
 import ua.divas.view.KontragentsViewImpl;
 import ua.divas.view.LastPriceVOImpl;
 import ua.divas.view.NomenklaturaViewImpl;
 import ua.divas.view.NotificationViewImpl;
 import ua.divas.view.OrderZamerViewImpl;
+import ua.divas.view.OrdersCalcViewImpl;
 import ua.divas.view.OrdersTpOplatyViewImpl;
 import ua.divas.view.OrdersTpRashodyViewImpl;
 import ua.divas.view.OrdersTpUslugiViewImpl;
@@ -3510,6 +3512,54 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getOrderTpOplatyKassaFkLink1() {
         return (ViewLinkImpl) findViewLink("OrderTpOplatyKassaFkLink1");
+    }
+
+    /**
+     * Container's getter for KontragentsInOrdersView1.
+     * @return KontragentsInOrdersView1
+     */
+    public KontragentsInOrdersViewImpl getKontragentsInOrdersView1() {
+        return (KontragentsInOrdersViewImpl) findViewObject("KontragentsInOrdersView1");
+    }
+
+    /**
+     * Container's getter for OrdersCalcView1.
+     * @return OrdersCalcView1
+     */
+    public OrdersCalcViewImpl getOrdersCalcView1() {
+        return (OrdersCalcViewImpl) findViewObject("OrdersCalcView1");
+    }
+
+    /**
+     * Container's getter for KontragentsInOrderOrderCalcFkLink1.
+     * @return KontragentsInOrderOrderCalcFkLink1
+     */
+    public ViewLinkImpl getKontragentsInOrderOrderCalcFkLink1() {
+        return (ViewLinkImpl) findViewLink("KontragentsInOrderOrderCalcFkLink1");
+    }
+
+    /**
+     * Container's getter for OrdersCalcView2.
+     * @return OrdersCalcView2
+     */
+    public OrdersCalcViewImpl getOrdersCalcView2() {
+        return (OrdersCalcViewImpl) findViewObject("OrdersCalcView2");
+    }
+
+    /**
+     * Container's getter for OrdersCalcView3.
+     * @return OrdersCalcView3
+     */
+    public OrdersCalcViewImpl getOrdersCalcView3() {
+        return (OrdersCalcViewImpl) findViewObject("OrdersCalcView3");
+    }
+
+    /**
+     * Container's getter for VwBuyerMovesOrdersCalcFkLink1.
+     * @return VwBuyerMovesOrdersCalcFkLink1
+     */
+    public ViewLinkImpl getVwBuyerMovesOrdersCalcFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwBuyerMovesOrdersCalcFkLink1");
     }
 }
 

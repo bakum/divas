@@ -819,6 +819,12 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
                   ResId="ua.divas.view.OrdersView.TotalSumm_TOOLTIP"/>
             </SchemaBasedProperties>
         </Properties>
+        <Dependencies>
+            <Item
+                Value="TotalSumUslugi"/>
+            <Item
+                Value="TotalSummUslugiAdd"/>
+        </Dependencies>
     </ViewAttribute>
     <ViewCriteria
       Name="OrdersViewCriteria"

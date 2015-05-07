@@ -3,14 +3,13 @@
 <!---->
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
-  Name="VwKontragAllItems"
+  Name="KontragentsInOrdersView"
   Version="12.1.2.66.68"
   InheritPersonalization="merge"
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
-  ComponentClass="ua.divas.view.VwKontragAllItemsImpl"
-  OrderBy='"FULLNAME"'>
+  ComponentClass="ua.divas.view.KontragentsInOrdersViewImpl">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
@@ -18,7 +17,7 @@
   <Properties>
     <SchemaBasedProperties>
       <LABEL
-        ResId="ua.divas.view.VwKontragAllItems_LABEL"/>
+        ResId="ua.divas.view.KontragentsInOrdersView_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
   <Variable
@@ -33,126 +32,28 @@
       </SchemaBasedProperties>
     </Properties>
   </Variable>
-  <SQLQuery><![CDATA[SELECT DISTINCT ID,
-  IS_GROUP,
-  PARENT_ID,
-  FULLNAME,
-  DELETED,
-  INN,
-  OKPO,
-  KPP,
-  NAMEFULL,
-  UR_FIZ,
-  VERSION,
-  PREDEFINED,
-  IS_SUPPLIER,
-  IS_BUYER,
-  IS_MEASURER,
-  USER_ID
-FROM
-  (SELECT KONTRAGENTS.ID ID,
-    KONTRAGENTS.IS_GROUP IS_GROUP,
-    KONTRAGENTS.PARENT_ID PARENT_ID,
-    KONTRAGENTS.FULLNAME FULLNAME,
-    KONTRAGENTS.DELETED DELETED,
-    KONTRAGENTS.INN INN,
-    KONTRAGENTS.OKPO OKPO,
-    KONTRAGENTS.KPP KPP,
-    KONTRAGENTS.NAMEFULL NAMEFULL,
-    KONTRAGENTS.UR_FIZ UR_FIZ,
-    KONTRAGENTS.VERSION VERSION,
-    KONTRAGENTS.PREDEFINED PREDEFINED,
-    KONTRAGENTS.IS_SUPPLIER IS_SUPPLIER,
-    KONTRAGENTS.IS_BUYER IS_BUYER,
-    KONTRAGENTS.IS_MEASURER IS_MEASURER,
-    KONTRAGENTS.USER_ID USER_ID,
-    SUM(VW_MOVES.SUM_DEB) SUMM,
-    VW_MOVES.DEB
-  FROM KONTRAGENTS
-  INNER JOIN VW_MOVES
-  ON KONTRAGENTS.ID           = VW_MOVES.SUBCONTO1_DEB
-  WHERE KONTRAGENTS.IS_GROUP  = 0
-  AND KONTRAGENTS.DELETED     = 0
-  AND KONTRAGENTS.IS_MEASURER = 0
-  GROUP BY KONTRAGENTS.ID,
-    KONTRAGENTS.IS_GROUP,
-    KONTRAGENTS.PARENT_ID,
-    KONTRAGENTS.FULLNAME,
-    KONTRAGENTS.DELETED,
-    KONTRAGENTS.INN,
-    KONTRAGENTS.OKPO,
-    KONTRAGENTS.KPP,
-    KONTRAGENTS.NAMEFULL,
-    KONTRAGENTS.UR_FIZ,
-    KONTRAGENTS.VERSION,
-    KONTRAGENTS.PREDEFINED,
-    KONTRAGENTS.IS_SUPPLIER,
-    KONTRAGENTS.IS_BUYER,
-    KONTRAGENTS.IS_MEASURER,
-    KONTRAGENTS.USER_ID,
-    VW_MOVES.DEB
-  UNION
-  SELECT KONTRAGENTS.ID ID,
-    KONTRAGENTS.IS_GROUP IS_GROUP,
-    KONTRAGENTS.PARENT_ID PARENT_ID,
-    KONTRAGENTS.FULLNAME FULLNAME,
-    KONTRAGENTS.DELETED DELETED,
-    KONTRAGENTS.INN INN,
-    KONTRAGENTS.OKPO OKPO,
-    KONTRAGENTS.KPP KPP,
-    KONTRAGENTS.NAMEFULL NAMEFULL,
-    KONTRAGENTS.UR_FIZ UR_FIZ,
-    KONTRAGENTS.VERSION VERSION,
-    KONTRAGENTS.PREDEFINED PREDEFINED,
-    KONTRAGENTS.IS_SUPPLIER IS_SUPPLIER,
-    KONTRAGENTS.IS_BUYER IS_BUYER,
-    KONTRAGENTS.IS_MEASURER IS_MEASURER,
-    KONTRAGENTS.USER_ID USER_ID,
-    SUM(VW_MOVES.SUM_KRED),
-    VW_MOVES.KRED
-  FROM KONTRAGENTS
-  INNER JOIN VW_MOVES
-  ON KONTRAGENTS.ID           = VW_MOVES.SUBCONTO1_KRED
-  WHERE KONTRAGENTS.IS_GROUP  = 0
-  AND KONTRAGENTS.DELETED     = 0
-  AND KONTRAGENTS.IS_MEASURER = 0
-  GROUP BY KONTRAGENTS.ID,
-    KONTRAGENTS.IS_GROUP,
-    KONTRAGENTS.PARENT_ID,
-    KONTRAGENTS.FULLNAME,
-    KONTRAGENTS.DELETED,
-    KONTRAGENTS.INN,
-    KONTRAGENTS.OKPO,
-    KONTRAGENTS.KPP,
-    KONTRAGENTS.NAMEFULL,
-    KONTRAGENTS.UR_FIZ,
-    KONTRAGENTS.VERSION,
-    KONTRAGENTS.PREDEFINED,
-    KONTRAGENTS.IS_SUPPLIER,
-    KONTRAGENTS.IS_BUYER,
-    KONTRAGENTS.IS_MEASURER,
-    KONTRAGENTS.USER_ID,
-    VW_MOVES.KRED
-  )
-where
-upper(USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))  
-GROUP BY ID,
-  IS_GROUP,
-  PARENT_ID,
-  FULLNAME,
-  DELETED,
-  INN,
-  OKPO,
-  KPP,
-  NAMEFULL,
-  UR_FIZ,
-  VERSION,
-  PREDEFINED,
-  IS_SUPPLIER,
-  IS_BUYER,
-  IS_MEASURER,
-  USER_ID,
-  DEB]]></SQLQuery>
+  <SQLQuery><![CDATA[SELECT 
+    KONTRAGENTS.ID ID, 
+    KONTRAGENTS.IS_GROUP IS_GROUP, 
+    KONTRAGENTS.PARENT_ID PARENT_ID, 
+    KONTRAGENTS.FULLNAME FULLNAME, 
+    KONTRAGENTS.DELETED DELETED, 
+    KONTRAGENTS.INN INN, 
+    KONTRAGENTS.OKPO OKPO, 
+    KONTRAGENTS.KPP KPP, 
+    KONTRAGENTS.NAMEFULL NAMEFULL, 
+    KONTRAGENTS.UR_FIZ UR_FIZ, 
+    KONTRAGENTS.VERSION VERSION, 
+    KONTRAGENTS.PREDEFINED PREDEFINED, 
+    KONTRAGENTS.IS_SUPPLIER IS_SUPPLIER, 
+    KONTRAGENTS.IS_BUYER IS_BUYER, 
+    KONTRAGENTS.IS_MEASURER IS_MEASURER, 
+    KONTRAGENTS.USER_ID USER_ID 
+FROM 
+    KONTRAGENTS
+where KONTRAGENTS.ID IN (select distinct kontrag_id from orders_calc where debt <> 0)
+and
+upper(KONTRAGENTS.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))]]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"
@@ -179,7 +80,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="IS_GROUP"
     Expression="IS_GROUP"
-    SQLType="INTEGER"/>
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="ParentId"
     IsUpdateable="false"
@@ -221,7 +122,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="DELETED"
     Expression="DELETED"
-    SQLType="INTEGER"/>
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="Inn"
     IsUpdateable="false"
@@ -293,7 +194,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="UR_FIZ"
     Expression="UR_FIZ"
-    SQLType="INTEGER"/>
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="Version"
     IsUpdateable="false"
@@ -303,7 +204,7 @@ GROUP BY ID,
     ColumnType="TIMESTAMP"
     AliasName="VERSION"
     Expression="VERSION"
-    SQLType="DATE"/>
+    SQLType="TIMESTAMP"/>
   <ViewAttribute
     Name="Predefined"
     IsUpdateable="false"
@@ -315,7 +216,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="PREDEFINED"
     Expression="PREDEFINED"
-    SQLType="INTEGER"/>
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="IsSupplier"
     IsUpdateable="false"
@@ -327,7 +228,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="IS_SUPPLIER"
     Expression="IS_SUPPLIER"
-    SQLType="INTEGER"/>
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="IsBuyer"
     IsUpdateable="false"
@@ -339,7 +240,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="IS_BUYER"
     Expression="IS_BUYER"
-    SQLType="INTEGER"/>
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="IsMeasurer"
     IsUpdateable="false"
@@ -351,7 +252,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="IS_MEASURER"
     Expression="IS_MEASURER"
-    SQLType="INTEGER"/>
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="UserId"
     IsUpdateable="false"
@@ -368,7 +269,7 @@ GROUP BY ID,
     </DesignTime>
   </ViewAttribute>
   <ViewAttribute
-    Name="DebtBuyer"
+    Name="SumDebt"
     IsUpdateable="false"
     IsSelected="false"
     IsPersistent="false"
@@ -378,42 +279,11 @@ GROUP BY ID,
     AliasName="VIEW_ATTR"
     SQLType="NUMERIC">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[VwBuyerMoves.sum("SumSumm != null ? SumSumm : 0")]]></TransientExpression>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="DebtSupplier"
-    IsUpdateable="false"
-    IsSelected="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Type="oracle.jbo.domain.Number"
-    ColumnType="NUMBER"
-    AliasName="VIEW_ATTR"
-    SQLType="NUMERIC">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[VwSupplierMoves.sum("SumSumm != null ? (-1)*SumSumm : 0")]]></TransientExpression>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="SumCalcAdd"
-    IsUpdateable="false"
-    IsSelected="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Type="oracle.jbo.domain.Number"
-    ColumnType="NUMBER"
-    AliasName="VIEW_ATTR"
-    SQLType="NUMERIC">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[VwBuyerMoves.sum("SumCalc != null ? SumCalc : 0")]]></TransientExpression>
+    <TransientExpression><![CDATA[OrdersCalcView.sum("Debt != null ? Debt : 0")]]></TransientExpression>
   </ViewAttribute>
   <ViewLinkAccessor
-    Name="VwSupplierMoves"
-    ViewLink="ua.divas.view.VwSupplierMovesVwKontragAllFkLink"
-    Type="oracle.jbo.RowIterator"
-    IsUpdateable="false"/>
-  <ViewLinkAccessor
-    Name="VwBuyerMoves"
-    ViewLink="ua.divas.view.VwBuyerMovesVwKontragAllFkLink"
+    Name="OrdersCalcView"
+    ViewLink="ua.divas.view.KontragentsInOrderOrderCalcFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <ResourceBundle>

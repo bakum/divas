@@ -19,6 +19,7 @@
           <Item Value="Id"/>
           <Item Value="Fullname"/>
           <Item Value="DebtBuyer"/>
+          <Item Value="SumCalcAdd"/>
         </AttrNames>
         <Accessors>
           <Item Value="VwBuyerMoves"/>
@@ -34,6 +35,7 @@
           <Item Value="SumSummPrihod"/>
           <Item Value="SumSummRashod"/>
           <Item Value="TableName"/>
+          <Item Value="SumCalc"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

@@ -34,6 +34,12 @@
                             <af:outputText value="#{node.DebtBuyer}" id="ot6"
                                            inlineStyle="#{node.DebtBuyer &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}"/>
                         </af:column>
+                        <af:column id="c7" headerText="Доплатить" align="right">
+                            <af:outputText value="#{node.bindings.SumCalc}" id="ot8"
+                                           inlineStyle="#{node.bindings.SumCalc &lt; '0' ? 'color:Red' : ''}"/>
+                            <af:outputText value="#{node.SumCalcAdd}" id="ot9"
+                                           inlineStyle="#{node.SumCalcAdd &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}"/>
+                        </af:column>
                     </af:treeTable>
                     <f:facet name="statusbar"/>
                 </af:panelCollection>

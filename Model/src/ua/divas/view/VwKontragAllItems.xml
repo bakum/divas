@@ -393,6 +393,19 @@ GROUP BY ID,
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[VwSupplierMoves.sum("SumSumm != null ? (-1)*SumSumm : 0")]]></TransientExpression>
   </ViewAttribute>
+  <ViewAttribute
+    Name="SumCalcAdd"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[VwBuyerMoves.sum("SumCalc != null ? SumCalc : 0")]]></TransientExpression>
+  </ViewAttribute>
   <ViewLinkAccessor
     Name="VwSupplierMoves"
     ViewLink="ua.divas.view.VwSupplierMovesVwKontragAllFkLink"
