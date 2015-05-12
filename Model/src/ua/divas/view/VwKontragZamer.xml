@@ -9,7 +9,9 @@
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
-  ComponentClass="ua.divas.view.VwKontragZamerImpl">
+  ComponentClass="ua.divas.view.VwKontragZamerImpl"
+  ComponentInterface="ua.divas.view.common.VwKontragZamer"
+  ClientProxyName="ua.divas.view.client.VwKontragZamerClient">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
@@ -352,11 +354,40 @@ GROUP BY ID,
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[VwZamerMoves.sum("Summ != null ? (-1)*Summ : 0")]]></TransientExpression>
   </ViewAttribute>
+  <ViewAttribute
+    Name="MarkedForPaymant"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Boolean"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="BIT">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="check_box"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
   <ViewLinkAccessor
     Name="VwZamerMoves"
     ViewLink="ua.divas.view.VwKontragZamerZamerMovesFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="paySelectedRows"
+      MethodName="paySelectedRows">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+    </Method>
+  </ClientInterface>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

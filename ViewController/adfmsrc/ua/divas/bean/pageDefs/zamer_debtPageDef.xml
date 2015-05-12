@@ -13,6 +13,7 @@
           <Item Value="Id"/>
           <Item Value="Fullname"/>
           <Item Value="DebtZamer"/>
+          <Item Value="MarkedForPaymant"/>
         </AttrNames>
         <Accessors>
           <Item Value="VwZamerMoves"/>

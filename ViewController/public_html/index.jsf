@@ -180,7 +180,7 @@
                                                 <f:facet name="toolbar"/>
                                                 <af:table value="#{bindings.NotificationView1.collectionModel}"
                                                           var="row" rows="#{bindings.NotificationView1.rangeSize}"
-                                                          emptyText="#{bindings.NotificationView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                          emptyText="#{bindings.NotificationView1.viewable ? 'Нет данных.' : 'В доступе отказано.'}"
                                                           rowBandingInterval="0"
                                                           selectedRowKeys="#{bindings.NotificationView1.collectionModel.selectedRow}"
                                                           selectionListener="#{bindings.NotificationView1.collectionModel.makeCurrent}"

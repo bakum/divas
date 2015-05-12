@@ -53,8 +53,8 @@
     ViewObjectName="ua.divas.view.KontragentsView"
     RowLevelBinds="true"/>
   <ViewAccessor
-    Name="DivisionsView1"
-    ViewObjectName="ua.divas.view.DivisionsView"
+    Name="DivisionsView1_1"
+    ViewObjectName="ua.divas.view.ro.DivisionsView1"
     RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_OrderId"
@@ -98,7 +98,7 @@
   </ListBinding>
   <ListBinding
     Name="LOV_DivisionId"
-    ListVOName="DivisionsView1"
+    ListVOName="DivisionsView1_1"
     ListRangeSize="-1"
     NullValueFlag="start"
     NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
@@ -279,6 +279,93 @@ where
           ResId="ua.divas.view.VwSales.PlanSebestSumma_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DeltaSebest"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[((PlanSebestSumma == null ? 0 : PlanSebestSumma)-(FactSebestSumma == null ? 0 : FactSebestSumma))]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="FactSebestSumma"/>
+      <Item
+        Value="PlanSebestSumma"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.VwSales.DeltaSebest_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.VwSales.DeltaSebest_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MargaAbs"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[((SalesSumma == null ? 0 : SalesSumma)-(FactSebestSumma == null ? 0 : FactSebestSumma))]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="FactSebestSumma"/>
+      <Item
+        Value="SalesSumma"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.VwSales.MargaAbs_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.VwSales.MargaAbs_TOOLTIP"/>
+        <FMT_FORMATTER
+          ResId="ua.divas.view.VwSales.MargaAbs_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="ua.divas.view.VwSales.MargaAbs_FMT_FORMAT"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Rentabel"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[(FactSebestSumma == null ? 100 : (MargaAbs*100/FactSebestSumma))]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.VwSales.Rentabel_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.VwSales.Rentabel_TOOLTIP"/>
+        <FMT_FORMAT
+          ResId="ua.divas.view.VwSales.Rentabel_FMT_FORMAT"/>
+        <FMT_FORMATTER
+          ResId="ua.divas.view.VwSales.Rentabel_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+    <Dependencies>
+      <Item
+        Value="FactSebestSumma"/>
+    </Dependencies>
   </ViewAttribute>
   <AttrArray Name="KeyAttributes">
     <Item Value="OrderId"/>

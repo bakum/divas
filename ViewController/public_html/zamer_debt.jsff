@@ -35,6 +35,10 @@
                             <af:outputText value="#{node.DebtZamer}" id="ot5"
                                            inlineStyle="#{node.DebtZamer &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}"/>
                         </af:column>
+                        <af:column id="c7" headerText="Оплатить">
+                            <af:selectBooleanCheckbox id="sbc1"
+                                                      value="#{node.MarkedForPaymant}"/>
+                        </af:column>
                     </af:treeTable>
                     <f:facet name="statusbar"/>
                 </af:panelCollection>

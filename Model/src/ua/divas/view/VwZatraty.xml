@@ -53,8 +53,8 @@
     ViewObjectName="ua.divas.view.ZatratyView"
     RowLevelBinds="true"/>
   <ViewAccessor
-    Name="DivisionsView1"
-    ViewObjectName="ua.divas.view.DivisionsView"
+    Name="DivisionsView1_1"
+    ViewObjectName="ua.divas.view.ro.DivisionsView1"
     RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_RegistratorId"
@@ -98,7 +98,7 @@
   </ListBinding>
   <ListBinding
     Name="LOV_DivisionId"
-    ListVOName="DivisionsView1"
+    ListVOName="DivisionsView1_1"
     ListRangeSize="-1"
     NullValueFlag="start"
     NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"

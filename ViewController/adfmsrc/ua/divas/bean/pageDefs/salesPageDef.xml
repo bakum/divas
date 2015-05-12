@@ -10,11 +10,6 @@
     </iterator>
     <searchRegion Binds="VwSales1Iterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   id="VwSales1Query"/>
-    <iterator id="DivisionsView1_1Iterator" Binds="DivisionsView1_1" DataControl="AppModuleDataControl" RangeSize="-1">
-      <sortCriteria>
-        <sort attribute="Fullname" ascending="true"/>
-      </sortCriteria>
-    </iterator>
     <variableIterator id="variables">
       <variableUsage DataControl="AppModuleDataControl" Binds="VwSales1.variablesMap.f_dat"
                      Name="ExecuteWithParams_f_dat" IsQueriable="false"/>
@@ -33,21 +28,17 @@
           <Item Value="SalesSumma"/>
           <Item Value="FactSebestSumma"/>
           <Item Value="PlanSebestSumma"/>
+          <Item Value="DeltaSebest"/>
+          <Item Value="Rentabel"/>
+          <Item Value="MargaAbs"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <list StaticList="false" IterBinding="VwSales1Iterator" ListIter="DivisionsView1_1Iterator" id="DivisionId"
-          NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
-          NullValueFlag="start">
+    <list StaticList="false" IterBinding="VwSales1Iterator" id="DivisionId"
+          NullValueFlag="start" Uses="LOV_DivisionId">
       <AttrNames>
         <Item Value="DivisionId"/>
       </AttrNames>
-      <ListAttrNames>
-        <Item Value="Id"/>
-      </ListAttrNames>
-      <ListDisplayAttrNames>
-        <Item Value="Fullname"/>
-      </ListDisplayAttrNames>
     </list>
     <action IterBinding="VwSales1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true" Action="executeWithParams">
       <NamedData NDName="f_dat" NDType="oracle.jbo.domain.Date" NDValue="${bindings.ExecuteWithParams_f_dat}"/>

@@ -105,16 +105,11 @@
                                                 label="#{row.bindings.DivisionId.label}"
                                                 required="#{bindings.VwZatraty1.hints.DivisionId.mandatory}"
                                                 shortDesc="#{bindings.VwZatraty1.hints.DivisionId.tooltip}"
-                                                readOnly="true" id="soc3">
+                                                readOnly="true" id="soc3" autoSubmit="true">
                                 <f:selectItems value="#{row.bindings.DivisionId.items}" id="si3"/>
                                 <f:validator binding="#{row.bindings.DivisionId.validator}"/>
                             </af:selectOneChoice>
-                            <f:facet name="filter">
-                                <af:selectOneChoice label="Label 1" id="soc4" value="#{vs.filterCriteria.DivisionId}"
-                                                    autoSubmit="true">
-                                    <f:selectItems value="#{bindings.DivisionId.items}" id="si4"/>
-                                </af:selectOneChoice>
-                            </f:facet>
+                            <f:facet name="filter"/>
                         </af:column>
                         <f:facet name="footer"/>
                     </af:table>
