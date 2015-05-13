@@ -804,7 +804,11 @@
     ViewObjectName="ua.divas.view.ProrabView"/>
   <ViewUsage
     Name="KassaSettingsView1"
-    ViewObjectName="ua.divas.view.KassaSettingsView"/>
+    ViewObjectName="ua.divas.view.KassaSettingsView">
+    <ViewCriteriaUsage
+      Name="KassaSettingsByUser"
+      FullName="ua.divas.view.KassaSettingsView.KassaSettingsByUser"/>
+  </ViewUsage>
   <ViewUsage
     Name="KassaSettingsView2"
     ViewObjectName="ua.divas.view.KassaSettingsView"/>
@@ -1848,6 +1852,22 @@
       <Parameter
         Name="ContId"
         Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="addPkoFromZamer"
+      MethodName="addPkoFromZamer">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="kassaId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="kontragId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="Summa"
+        Type="java.math.BigDecimal"/>
     </Method>
   </ClientInterface>
 </AppModule>

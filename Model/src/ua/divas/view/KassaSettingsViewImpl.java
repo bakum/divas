@@ -74,5 +74,7 @@ public class KassaSettingsViewImpl extends DivasView {
     public void setCurr(String value) {
         ensureVariableManager().setVariableValue("Curr", value);
     }
+
+
 }
 

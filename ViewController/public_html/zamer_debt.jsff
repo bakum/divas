@@ -7,7 +7,14 @@
                 <!-- Content -->
                 <af:panelCollection id="pc1">
                     <f:facet name="menus"/>
-                    <f:facet name="toolbar"/>
+                    <f:facet name="toolbar">
+                        <af:toolbar id="t1">
+                            <af:button text="Сформировать ПКО" id="b2" icon="/img/coins.png"
+                                       disabled="#{!bindings.MarkedForPaymant.inputValue}">
+                                <af:showPopupBehavior popupId="p1"/>
+                            </af:button>
+                        </af:toolbar>
+                    </f:facet>
                     <af:treeTable value="#{bindings.VwKontragZamer1.treeModel}" var="node"
                                   selectionListener="#{bindings.VwKontragZamer1.treeModel.makeCurrent}"
                                   rowSelection="single" id="tt1">
@@ -37,10 +44,30 @@
                         </af:column>
                         <af:column id="c7" headerText="Оплатить">
                             <af:selectBooleanCheckbox id="sbc1"
-                                                      value="#{node.MarkedForPaymant}"/>
+                                                      value="#{node.bindings.MarkedForPaymant.inputValue}"
+                                                      autoSubmit="true" rendered="#{node.Fullname != null}"/>
                         </af:column>
                     </af:treeTable>
                     <f:facet name="statusbar"/>
+                    <af:popup childCreation="deferred" autoCancel="disabled" id="p1" contentDelivery="lazyUncached"
+                              popupFetchListener="#{zamer_debt.onPopupPay}">
+                        <af:dialog id="d1" title="Выберите кассу для оплаты" closeIconVisible="false"
+                                   dialogListener="#{zamer_debt.onDialogPay}">
+                            <f:facet name="buttonBar"/>
+                            <af:panelFormLayout id="pfl1">
+                                <af:button actionListener="#{bindings.paySelectedRows.execute}" text="paySelectedRows"
+                                           disabled="#{!bindings.paySelectedRows.enabled}" id="b1" visible="false"/>
+                                <af:selectOneChoice label="Касса для оплаты" id="soc1"
+                                                    value="#{bindings.paySelectedRows_kassaId1.inputValue}"
+                                                    required="true" binding="#{zamer_debt.kassaId}">
+                                    <f:selectItems id="si1" value="#{bindings.paySelectedRows_kassaId1.items}"/>
+                                </af:selectOneChoice>
+                                <af:inputNumberSpinbox label="Сумма оплаты" id="it1" required="true"
+                                                       value="#{bindings.paySelectedRows_Summ1.inputValue}"
+                                                       autoSubmit="true" binding="#{zamer_debt.summa}"/>
+                            </af:panelFormLayout>
+                        </af:dialog>
+                    </af:popup>
                 </af:panelCollection>
             </af:gridCell>
         </af:gridRow>

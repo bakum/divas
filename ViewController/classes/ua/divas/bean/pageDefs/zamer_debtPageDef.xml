@@ -3,8 +3,15 @@
                 Package="ua.divas.bean.pageDefs">
   <parameters/>
   <executables>
-    <variableIterator id="variables"/>
+    <variableIterator id="variables">
+      <variable Type="void" Name="paySelectedRows_return" IsQueriable="false" IsUpdateable="0"
+                DefaultValue="${bindings.paySelectedRows.result}"/>
+      <variable Type="java.lang.String" Name="paySelectedRows_kassaId" IsQueriable="false"/>
+      <variable Name="paySelectedRows_Summ" Type="java.math.BigDecimal"/>
+    </variableIterator>
     <iterator Binds="VwKontragZamer1" RangeSize="25" DataControl="AppModuleDataControl" id="VwKontragZamer1Iterator"/>
+    <iterator Binds="KassaSettingsView1" RangeSize="-1" DataControl="AppModuleDataControl"
+              id="KassaSettingsView1Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="VwKontragZamer1Iterator" id="VwKontragZamer1">
@@ -32,5 +39,40 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <button IterBinding="VwKontragZamer1Iterator" StaticList="true" id="MarkedForPaymant">
+      <AttrNames>
+        <Item Value="MarkedForPaymant"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <methodAction id="paySelectedRows" RequiresUpdateModel="true" Action="invokeMethod" MethodName="paySelectedRows"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.VwKontragZamer1"
+                  ReturnName="data.AppModuleDataControl.methodResults.paySelectedRows_AppModuleDataControl_VwKontragZamer1_paySelectedRows_result">
+      <NamedData NDName="kassaId" NDType="java.lang.String" NDValue="${bindings.paySelectedRows_kassaId}"/>
+      <NamedData NDName="Summ" NDType="java.math.BigDecimal" NDValue="#{bindings.paySelectedRows_Summ}"/>
+    </methodAction>
+    <list StaticList="false" IterBinding="variables" ListIter="KassaSettingsView1Iterator"
+          id="paySelectedRows_kassaId1"
+          NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+          NullValueFlag="start">
+      <AttrNames>
+        <Item Value="paySelectedRows_kassaId"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="KassaId"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="KassaName"/>
+      </ListDisplayAttrNames>
+    </list>
+    <attributeValues IterBinding="variables" id="paySelectedRows_Summ1">
+      <AttrNames>
+        <Item Value="paySelectedRows_Summ"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

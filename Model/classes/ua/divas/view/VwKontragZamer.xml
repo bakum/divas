@@ -386,6 +386,12 @@ GROUP BY ID,
       <Return
         Name="_return_type_"
         Type="void"/>
+      <Parameter
+        Name="kassaId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="Summ"
+        Type="java.math.BigDecimal"/>
     </Method>
   </ClientInterface>
   <ResourceBundle>

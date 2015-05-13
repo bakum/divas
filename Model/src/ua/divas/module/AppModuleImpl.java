@@ -1,5 +1,7 @@
 package ua.divas.module;
 
+import java.math.BigDecimal;
+
 import java.util.Date;
 
 import oracle.jbo.Key;
@@ -11,6 +13,8 @@ import oracle.jbo.server.ViewLinkImpl;
 
 
 import oracle.jbo.server.ViewObjectImpl;
+
+import oracle.jbo.server.ViewRowSetImpl;
 
 import ua.divas.module.common.AppModule;
 import ua.divas.view.CallLogViewImpl;
@@ -3290,6 +3294,39 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
             not.insertRow(r2); //Insert that row in ViewObject
             getDBTransaction().commit(); //Commit the changes
             not.executeQuery();
+        } catch (Exception e) {
+            getDBTransaction().rollback(); //Commit the changes
+            e.printStackTrace();
+        }
+
+    }
+    
+    public void addPkoFromZamer(String kassaId, String kontragId, BigDecimal Summa) {
+        
+        ViewObjectImpl pko = getPkoView1();
+        Row r2 = pko.createRow();
+        
+        r2.setAttribute("KassaId", kassaId);
+        r2.setAttribute("KontragId", kontragId);
+        r2.setAttribute("Summa", Summa);
+        
+        ViewObjectImpl opVO = getOperationPkoView1();
+        ViewRowSetImpl rs =
+            (ViewRowSetImpl) opVO.findByViewCriteria(opVO.getViewCriteria("OperationPkoFromSupplier"), -1,
+                                                   opVO.QUERY_MODE_SCAN_DATABASE_TABLES);
+        Row row = rs.first();
+        String op = null;
+        if (row != null) {
+            op = (String) row.getAttribute("Id");
+        }
+        
+        r2.setAttribute("OperationId", op);
+       
+        
+        try {
+            pko.insertRow(r2); //Insert that row in ViewObject
+            getDBTransaction().commit(); //Commit the changes
+            pko.executeQuery();
         } catch (Exception e) {
             getDBTransaction().rollback(); //Commit the changes
             e.printStackTrace();

@@ -1,5 +1,7 @@
 package ua.divas.module.client;
 
+import java.math.BigDecimal;
+
 import java.util.Date;
 
 import oracle.jbo.Key;
@@ -20,11 +22,19 @@ public class AppModuleClient extends ApplicationModuleImpl implements AppModule 
     public AppModuleClient() {
     }
 
+
     public void addNotification(String cutid, String desc, Date dat, String ObjId, String ContId) {
         Object _ret = this.riInvokeExportedMethod(this, "addNotification", new String[] {
                                                   "java.lang.String", "java.lang.String", "java.util.Date",
                                                   "java.lang.String", "java.lang.String"
         }, new Object[] { cutid, desc, dat, ObjId, ContId });
+        return;
+    }
+
+    public void addPkoFromZamer(String kassaId, String kontragId, BigDecimal Summa) {
+        Object _ret = this.riInvokeExportedMethod(this, "addPkoFromZamer", new String[] {
+                                                  "java.lang.String", "java.lang.String", "java.math.BigDecimal"
+        }, new Object[] { kassaId, kontragId, Summa });
         return;
     }
 

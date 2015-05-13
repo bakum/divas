@@ -1,7 +1,25 @@
-var wsUri = "ws://" + "127.0.0.1:7101/div_app-ViewController-context-root"+ "/ws";
-var websocket = new WebSocket(wsUri);
+var wsUri = "ws://",
+    wssUri = "wss://",
+    socketendpoint = "/ws",
+    wsconn = getWSUri(),
+    websocket = new WebSocket(wsconn);
 
 websocket.onerror = function(evt) { onError(evt) };
+
+function getWSUri() {
+    var url = window.location.href;
+    //console.log(url);
+    var arr = url.split("/");
+    //console.log(arr[0]);
+    //console.log(arr[2]);
+    if (arr[0].indexOf("https") == 0) {
+        url = wssUri + arr[2] + "/" + arr[3] + socketendpoint;
+    } else {
+        url = wsUri + arr[2] + "/" + arr[3] + socketendpoint;
+    }
+    //console.log('Uri ' + url);
+    return url;
+}
 
 function onError(evt) {
     writeToScreen('ERROR:  ' + evt.data);
@@ -16,7 +34,7 @@ function writeToScreen(message) {
 }
 
 function onOpen() {
-    writeToScreen("Connected to " + wsUri);
+    writeToScreen("Connected to " + wsconn);
 }
 
 websocket.onmessage = function(evt) { onMessage(evt) };
