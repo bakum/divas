@@ -1,6 +1,6 @@
 var wsUri = "ws://",
     wssUri = "wss://",
-    socketendpoint = "/ws",
+    socketendpoint = "/service",
     wsconn = getWSUri(),
     websocket = new WebSocket(wsconn);
 
@@ -14,8 +14,10 @@ function getWSUri() {
     //console.log(arr[2]);
     if (arr[0].indexOf("https") == 0) {
         url = wssUri + arr[2] + "/" + arr[3] + socketendpoint;
+        //url = wssUri + "127.0.0.1/" + arr[3] + socketendpoint;
     } else {
         url = wsUri + arr[2] + "/" + arr[3] + socketendpoint;
+        //url = wsUri + "127.0.0.1/" + arr[3] + socketendpoint;
     }
     //console.log('Uri ' + url);
     return url;

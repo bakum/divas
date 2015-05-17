@@ -61,6 +61,7 @@ public class RkoViewRowImpl extends ViewRowImpl {
         Kontragname,
         Summa,
         REditable,
+        OrderId,
         VwRkoMoves,
         DivisionsView1,
         UsersView1,
@@ -69,7 +70,8 @@ public class RkoViewRowImpl extends ViewRowImpl {
         TypeOfActivitiesView1,
         OperationRkoView1,
         KontragentsView1,
-        KassaSettingsView1;
+        KassaSettingsView1,
+        OrdersView1;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -113,6 +115,7 @@ public class RkoViewRowImpl extends ViewRowImpl {
     public static final int KONTRAGNAME = AttributesEnum.Kontragname.index();
     public static final int SUMMA = AttributesEnum.Summa.index();
     public static final int REDITABLE = AttributesEnum.REditable.index();
+    public static final int ORDERID = AttributesEnum.OrderId.index();
     public static final int VWRKOMOVES = AttributesEnum.VwRkoMoves.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
@@ -122,6 +125,7 @@ public class RkoViewRowImpl extends ViewRowImpl {
     public static final int OPERATIONRKOVIEW1 = AttributesEnum.OperationRkoView1.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
     public static final int KASSASETTINGSVIEW1 = AttributesEnum.KassaSettingsView1.index();
+    public static final int ORDERSVIEW1 = AttributesEnum.OrdersView1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -410,6 +414,22 @@ public class RkoViewRowImpl extends ViewRowImpl {
     }
 
     /**
+     * Gets the attribute value for ORDER_ID using the alias name OrderId.
+     * @return the ORDER_ID
+     */
+    public String getOrderId() {
+        return (String) getAttributeInternal(ORDERID);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for ORDER_ID using the alias name OrderId.
+     * @param value value to set the ORDER_ID
+     */
+    public void setOrderId(String value) {
+        setAttributeInternal(ORDERID, value);
+    }
+
+    /**
      * Gets the attribute value for DEST_KASSA_ID using the alias name DestKassaId.
      * @return the DEST_KASSA_ID
      */
@@ -486,6 +506,13 @@ public class RkoViewRowImpl extends ViewRowImpl {
      */
     public RowSet getKassaSettingsView1() {
         return (RowSet) getAttributeInternal(KASSASETTINGSVIEW1);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> OrdersView1.
+     */
+    public RowSet getOrdersView1() {
+        return (RowSet) getAttributeInternal(ORDERSVIEW1);
     }
 }
 

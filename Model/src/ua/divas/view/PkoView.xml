@@ -91,6 +91,10 @@
             </PIMap>
         </ParameterMap>
     </ViewAccessor>
+    <ViewAccessor
+        Name="OrdersView1"
+        ViewObjectName="ua.divas.view.OrdersView"
+        RowLevelBinds="true"/>
     <ListBinding
       Name="LOV_DivisionId"
       ListVOName="DivisionsView1"
@@ -255,6 +259,26 @@
         </AttrArray>
         <DisplayCriteria/>
     </ListBinding>
+    <ListBinding
+        Name="LOV_OrderId"
+        ListVOName="OrdersView1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="OrderId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Num"/>
+            <Item Value="Dat"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
     <SQLQuery><![CDATA[SELECT Pko.ID, 
        Pko.DAT, 
        Pko.NUM, 
@@ -276,7 +300,8 @@
     WHERE 
         ID = KONTRAG_ID) KontragName,
        Pko.SUMMA,
-       (select 0 from dual) P_Editable
+       (select 0 from dual) P_Editable,
+       Pko.ORDER_ID
 FROM  PKO Pko where deleted = 0 and
 upper(Pko.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))]]></SQLQuery>
     <EntityUsage
@@ -507,6 +532,20 @@ upper(Pko.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as use
       AliasName="P_EDITABLE"
       Expression="P_EDITABLE"
       SQLType="NUMERIC"/>
+    <ViewAttribute
+        Name="OrderId"
+        PrecisionRule="true"
+        EntityAttrName="OrderId"
+        EntityUsage="Pko"
+        AliasName="ORDER_ID"
+        LOVName="LOV_OrderId">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
     <ViewLinkAccessor
       Name="VwPkoMoves"
       ViewLink="ua.divas.view.VwPkoPkoFkLink"

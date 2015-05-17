@@ -3598,5 +3598,37 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getVwBuyerMovesOrdersCalcFkLink1() {
         return (ViewLinkImpl) findViewLink("VwBuyerMovesOrdersCalcFkLink1");
     }
+
+    /**
+     * Container's getter for RkoView2.
+     * @return RkoView2
+     */
+    public RkoViewImpl getRkoView2() {
+        return (RkoViewImpl) findViewObject("RkoView2");
+    }
+
+    /**
+     * Container's getter for RkoOrderFkLink1.
+     * @return RkoOrderFkLink1
+     */
+    public ViewLinkImpl getRkoOrderFkLink1() {
+        return (ViewLinkImpl) findViewLink("RkoOrderFkLink1");
+    }
+
+    /**
+     * Container's getter for PkoView2.
+     * @return PkoView2
+     */
+    public PkoViewImpl getPkoView2() {
+        return (PkoViewImpl) findViewObject("PkoView2");
+    }
+
+    /**
+     * Container's getter for PkoOrderFkLink1.
+     * @return PkoOrderFkLink1
+     */
+    public ViewLinkImpl getPkoOrderFkLink1() {
+        return (ViewLinkImpl) findViewLink("PkoOrderFkLink1");
+    }
 }
 

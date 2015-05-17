@@ -70,7 +70,9 @@ public class RkoImpl extends DivasEntity {
         OperationId,
         KontragId,
         Summa,
-        DestKassaId;
+        DestKassaId,
+        OrderId,
+        Orders;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -111,6 +113,8 @@ public class RkoImpl extends DivasEntity {
     public static final int KONTRAGID = AttributesEnum.KontragId.index();
     public static final int SUMMA = AttributesEnum.Summa.index();
     public static final int DESTKASSAID = AttributesEnum.DestKassaId.index();
+    public static final int ORDERID = AttributesEnum.OrderId.index();
+    public static final int ORDERS = AttributesEnum.Orders.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -383,6 +387,46 @@ public class RkoImpl extends DivasEntity {
     }
 
     /**
+     * Gets the attribute value for OrderId, using the alias name OrderId.
+     * @return the value of OrderId
+     */
+    public String getOrderId() {
+        return (String) getAttributeInternal(ORDERID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for OrderId.
+     * @param value value to set the OrderId
+     */
+    public void setOrderId(String value) {
+        setAttributeInternal(ORDERID, value);
+    }
+
+    /**
+     * @return the associated entity OrdersImpl.
+     */
+    public OrdersImpl getOrders() {
+        return (OrdersImpl) getAttributeInternal(ORDERS);
+    }
+
+    /**
+     * Sets <code>value</code> as the associated entity OrdersImpl.
+     */
+    public void setOrders(OrdersImpl value) {
+        setAttributeInternal(ORDERS, value);
+    }
+
+
+    /**
+     * @param id key constituent
+
+     * @return a Key object based on given key constituents.
+     */
+    public static Key createPrimaryKey(String id) {
+        return new Key(new Object[] { id });
+    }
+
+    /**
      * Validation method for Rko.
      */
     public boolean validateRko1() {
@@ -395,14 +439,6 @@ public class RkoImpl extends DivasEntity {
         return true;
     }
 
-    /**
-     * @param id key constituent
-
-     * @return a Key object based on given key constituents.
-     */
-    public static Key createPrimaryKey(String id) {
-        return new Key(new Object[] { id });
-    }
 
     /**
      * Validation method for Rko.

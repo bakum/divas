@@ -901,6 +901,16 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
       ViewLink="ua.divas.view.VwSalesOrdersFkLink"
       Type="oracle.jbo.RowIterator"
       IsUpdateable="false"/>
+    <ViewLinkAccessor
+        Name="RkoView"
+        ViewLink="ua.divas.view.RkoOrderFkLink"
+        Type="oracle.jbo.RowIterator"
+        IsUpdateable="false"/>
+    <ViewLinkAccessor
+        Name="PkoView"
+        ViewLink="ua.divas.view.PkoOrderFkLink"
+        Type="oracle.jbo.RowIterator"
+        IsUpdateable="false"/>
     <ClientInterface
       Name="__clientInterface">
         <Method

@@ -62,14 +62,14 @@ public class StartSchedulerQuartz extends GenericServlet {
                 SchedulerFactory sf = new StdSchedulerFactory(prop);
                 sched = sf.getScheduler();
                 sched.start();
-                System.out.println("Шедулер стартовал");
+                System.out.println("Scheduler was started");
 
             } catch (SchedulerException e) {
-                System.out.println("Ошибка " + e);
+                System.out.println("Error: " + e);
             }
 
         } else {
-            System.out.println("В базе данных нет настроек Quartz!");
+            System.out.println("Have not Quartz settings in the database!");
         }
 
     }
@@ -78,7 +78,7 @@ public class StartSchedulerQuartz extends GenericServlet {
 
         try {
             sched.shutdown();
-            System.out.println("Шедулер остановлен");
+            System.out.println("Scheduler was stopped");
         } catch (SchedulerException ex) {
             Logger.getLogger(StartSchedulerQuartz.class.getName()).log(Level.SEVERE, null, ex);
         }

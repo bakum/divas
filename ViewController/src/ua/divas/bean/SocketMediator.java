@@ -4,14 +4,19 @@ import java.io.IOException;
 
 import java.util.Date;
 
+import java.util.Queue;
+
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 import weblogic.websocket.ClosingMessage;
 import weblogic.websocket.WebSocketAdapter;
 import weblogic.websocket.WebSocketConnection;
 import weblogic.websocket.annotation.WebSocket;
 
-@WebSocket(timeout = -1, pathPatterns = { "/ws/*" })
+@WebSocket(timeout = -1, pathPatterns = { "/service/*" })
 public class SocketMediator extends WebSocketAdapter {
-
+    final static Queue<WebSocketConnection> queue = new ConcurrentLinkedQueue<>();
+    
     private static SocketMediator sm;
 
     public static SocketMediator getSm() {
@@ -26,7 +31,20 @@ public class SocketMediator extends WebSocketAdapter {
     @Override
     public void onOpen(WebSocketConnection webSocketConnection) {
         System.out.println("New connection was created from a client " + webSocketConnection.getRemoteAddress());
-        super.onOpen(webSocketConnection);
+        //super.onOpen(webSocketConnection);
+        queue.add(webSocketConnection);
+    }
+
+    @Override
+    public void onClose(WebSocketConnection webSocketConnection, ClosingMessage closingMessage) {
+        queue.remove(webSocketConnection);
+        //super.onClose(webSocketConnection, closingMessage);
+    }
+
+    @Override
+    public void onError(WebSocketConnection webSocketConnection, Throwable throwable) {
+        queue.remove(webSocketConnection);
+        //super.onError(webSocketConnection, throwable);
     }
 
     @Override
@@ -48,9 +66,11 @@ public class SocketMediator extends WebSocketAdapter {
 
 
     public void broadcast(String message) {
-        for (WebSocketConnection conn : getWebSocketContext().getWebSocketConnections()) {
+        for (WebSocketConnection conn : SocketMediator.queue) {
             try {
                 conn.send(message);
+                System.out.println("Message was sent to client: " + message);
+                System.out.println("Client: " + conn.getRemoteAddress());
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             }

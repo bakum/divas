@@ -82,6 +82,8 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         OrdersTpNachisleniaView,
         VwKassaMoves,
         VwSales,
+        RkoView,
+        PkoView,
         KontragentsView1,
         CurrencyView1,
         KassaView1,
@@ -155,6 +157,8 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     public static final int ORDERSTPNACHISLENIAVIEW = AttributesEnum.OrdersTpNachisleniaView.index();
     public static final int VWKASSAMOVES = AttributesEnum.VwKassaMoves.index();
     public static final int VWSALES = AttributesEnum.VwSales.index();
+    public static final int RKOVIEW = AttributesEnum.RkoView.index();
+    public static final int PKOVIEW = AttributesEnum.PkoView.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
     public static final int CURRENCYVIEW1 = AttributesEnum.CurrencyView1.index();
     public static final int KASSAVIEW1 = AttributesEnum.KassaView1.index();
@@ -663,6 +667,20 @@ public class OrdersViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getVwSales() {
         return (RowIterator) getAttributeInternal(VWSALES);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link RkoView.
+     */
+    public RowIterator getRkoView() {
+        return (RowIterator) getAttributeInternal(RKOVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link PkoView.
+     */
+    public RowIterator getPkoView() {
+        return (RowIterator) getAttributeInternal(PKOVIEW);
     }
 
     /**

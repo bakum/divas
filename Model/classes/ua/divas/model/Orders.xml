@@ -575,6 +575,20 @@
     AssociationOtherEnd="ua.divas.model.OrdersOrdersTpRashodyFkAssoc.Orders1"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="Rko"
+    Association="ua.divas.model.RkoOrderFkAssoc"
+    AssociationEnd="ua.divas.model.RkoOrderFkAssoc.Rko"
+    AssociationOtherEnd="ua.divas.model.RkoOrderFkAssoc.Orders"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="Pko"
+    Association="ua.divas.model.PkoOrderFkAssoc"
+    AssociationEnd="ua.divas.model.PkoOrderFkAssoc.Pko"
+    AssociationOtherEnd="ua.divas.model.PkoOrderFkAssoc.Orders"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="OrdersChk1">
     <DesignTime>

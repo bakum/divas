@@ -357,6 +357,33 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="OrderId"
+    Precision="50"
+    ColumnName="ORDER_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="RKO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Rko.OrderId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Rko.OrderId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <AccessorAttribute
+    Name="Orders"
+    Association="ua.divas.model.RkoOrderFkAssoc"
+    AssociationEnd="ua.divas.model.RkoOrderFkAssoc.Orders"
+    AssociationOtherEnd="ua.divas.model.RkoOrderFkAssoc.Rko"
+    Type="ua.divas.model.OrdersImpl"
+    IsUpdateable="true"/>
   <Key
     Name="RkoPk"
     PrimaryKey="true">
@@ -431,6 +458,17 @@
     </DesignTime>
     <AttrArray Name="Attributes">
       <Item Value="ua.divas.model.Rko.OperationId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_Rko">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="ORDERS_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_RKO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="ua.divas.model.Rko.OrderId"/>
     </AttrArray>
   </Key>
   <validation:MethodValidationBean

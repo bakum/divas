@@ -692,7 +692,7 @@ public class OrdersBean {
                 ob.getParamsMap().put("ContId", null);
                 if (StartSchedulerQuartz.sched != null) {
                     StartSchedulerQuartz.sched.scheduleJob(job, trigger);
-                    System.out.println("------- Новое напоминание! ----------------");
+                    System.out.println("------- New notification! ----------------");
                     ob.execute();
                     FacesContext context = FacesContext.getCurrentInstance();
                     ExtendedRenderKitService erks =

@@ -61,6 +61,7 @@ public class PkoViewRowImpl extends ViewRowImpl {
         Kontragname,
         Summa,
         PEditable,
+        OrderId,
         VwPkoMoves,
         DivisionsView1,
         UsersView1,
@@ -69,7 +70,8 @@ public class PkoViewRowImpl extends ViewRowImpl {
         TypeOfActivitiesView1,
         OperationPkoView1,
         KontragentsView1,
-        KassaSettingsView1;
+        KassaSettingsView1,
+        OrdersView1;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -112,6 +114,7 @@ public class PkoViewRowImpl extends ViewRowImpl {
     public static final int KONTRAGNAME = AttributesEnum.Kontragname.index();
     public static final int SUMMA = AttributesEnum.Summa.index();
     public static final int PEDITABLE = AttributesEnum.PEditable.index();
+    public static final int ORDERID = AttributesEnum.OrderId.index();
     public static final int VWPKOMOVES = AttributesEnum.VwPkoMoves.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
@@ -121,6 +124,7 @@ public class PkoViewRowImpl extends ViewRowImpl {
     public static final int OPERATIONPKOVIEW1 = AttributesEnum.OperationPkoView1.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
     public static final int KASSASETTINGSVIEW1 = AttributesEnum.KassaSettingsView1.index();
+    public static final int ORDERSVIEW1 = AttributesEnum.OrdersView1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -409,6 +413,22 @@ public class PkoViewRowImpl extends ViewRowImpl {
     }
 
     /**
+     * Gets the attribute value for ORDER_ID using the alias name OrderId.
+     * @return the ORDER_ID
+     */
+    public String getOrderId() {
+        return (String) getAttributeInternal(ORDERID);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for ORDER_ID using the alias name OrderId.
+     * @param value value to set the ORDER_ID
+     */
+    public void setOrderId(String value) {
+        setAttributeInternal(ORDERID, value);
+    }
+
+    /**
      * Gets the associated <code>RowIterator</code> using master-detail link VwPkoMoves.
      */
     public RowIterator getVwPkoMoves() {
@@ -469,6 +489,13 @@ public class PkoViewRowImpl extends ViewRowImpl {
      */
     public RowSet getKassaSettingsView1() {
         return (RowSet) getAttributeInternal(KASSASETTINGSVIEW1);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> OrdersView1.
+     */
+    public RowSet getOrdersView1() {
+        return (RowSet) getAttributeInternal(ORDERSVIEW1);
     }
 }
 
