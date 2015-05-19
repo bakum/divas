@@ -48,6 +48,7 @@ public class ShuttleGroup {
     private RichInputText passwd;
     private RichInputText desc;
     private RichInputText newPasswd;
+    private RichInputText kontragName;
 
     public ShuttleGroup() {
     }
@@ -366,6 +367,18 @@ public class ShuttleGroup {
         currRow.setAttribute("ParentId", res);
 
     }
+    
+    private void setOtherParentId() {
+
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+        Row currRow = it.getCurrentRow();
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding oper = (OperationBinding) binding.getOperationBinding("retrieveOtherParentId");
+        String res = (String) oper.execute();
+        currRow.setAttribute("ParentId", res);
+
+    }
 
     protected void refreshKontrag() {
         BindingContext bindingContext = BindingContext.getCurrent();
@@ -382,6 +395,14 @@ public class ShuttleGroup {
 
         currRow.setAttribute("Fullname", getKonName().getValue().toString());
     }
+    
+    private void setKontragFullName() {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+        Row currRow = it.getCurrentRow();
+
+        currRow.setAttribute("Fullname", getKontragName().getValue().toString());
+    }
 
     public void onPopupCreateZamer(PopupFetchEvent popupFetchEvent) {
         try {
@@ -389,6 +410,34 @@ public class ShuttleGroup {
         } catch (Exception e) {
             // TODO: Add catch code
             e.printStackTrace();
+        }
+    }
+    
+    public void onPopupCreateKontrag(PopupFetchEvent popupFetchEvent) {
+        try {
+            getKontragName().setValue("");
+        } catch (Exception e) {
+            // TODO: Add catch code
+            e.printStackTrace();
+        }
+    }
+    
+    public void onNewKontragDialogListener(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding ob = binding.getOperationBinding("CreateInsert4");
+            ob.execute();
+            setKontragFullName();
+            setOtherParentId();
+            //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            ob = binding.getOperationBinding("Commit");
+            ob.execute();
+            refreshKontrag();
+            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+            if (it != null) {
+                it.executeQuery();
+            } */
         }
     }
 
@@ -493,5 +542,13 @@ public class ShuttleGroup {
             // TODO: Add catch code
             e.printStackTrace();
         }
+    }
+
+    public void setKontragName(RichInputText kontragName) {
+        this.kontragName = kontragName;
+    }
+
+    public RichInputText getKontragName() {
+        return kontragName;
     }
 }

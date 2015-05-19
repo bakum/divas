@@ -49,6 +49,11 @@ public class KontragentsViewClient extends ViewUsageImpl implements KontragentsV
         return (String) _ret;
     }
 
+    public String retrieveOtherParentId() {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "retrieveOtherParentId", null, null);
+        return (String) _ret;
+    }
+
     public String retrieveSupplierFirstParentId() {
         Object _ret =
             getApplicationModuleProxy().riInvokeExportedMethod(this, "retrieveSupplierFirstParentId", null, null);

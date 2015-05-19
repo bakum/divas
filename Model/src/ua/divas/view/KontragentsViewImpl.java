@@ -55,6 +55,14 @@ public class KontragentsViewImpl extends DivasView implements KontragentsView {
         return null; 
     }
     
+    public String retrieveOtherParentId() {
+        String rv = getOtherParentId();
+        if (rv != null) {
+            return rv;
+        };
+        return null; 
+    }
+    
     public String retrieveSupplierFirstParentId() {
         String rv = getSupplierParentId();
         if (rv != null) {
@@ -275,6 +283,22 @@ public class KontragentsViewImpl extends DivasView implements KontragentsView {
      */
     public void setu_name(String value) {
         setNamedWhereClauseParam("u_name", value);
+    }
+
+    /**
+     * Returns the variable value for OtherName.
+     * @return variable value for OtherName
+     */
+    public String getOtherName() {
+        return (String) ensureVariableManager().getVariableValue("OtherName");
+    }
+
+    /**
+     * Sets <code>value</code> for variable OtherName.
+     * @param value value to bind as OtherName
+     */
+    public void setOtherName(String value) {
+        ensureVariableManager().setVariableValue("OtherName", value);
     }
 }
 

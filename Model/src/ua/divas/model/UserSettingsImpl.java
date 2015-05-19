@@ -35,6 +35,7 @@ public class UserSettingsImpl extends DivasEntityNoDelete {
         MainUsluga,
         ActivitiesId,
         ZamerkontragId,
+        KontragId,
         Currency,
         Divisions,
         Firms,
@@ -75,6 +76,7 @@ public class UserSettingsImpl extends DivasEntityNoDelete {
     public static final int MAINUSLUGA = AttributesEnum.MainUsluga.index();
     public static final int ACTIVITIESID = AttributesEnum.ActivitiesId.index();
     public static final int ZAMERKONTRAGID = AttributesEnum.ZamerkontragId.index();
+    public static final int KONTRAGID = AttributesEnum.KontragId.index();
     public static final int CURRENCY = AttributesEnum.Currency.index();
     public static final int DIVISIONS = AttributesEnum.Divisions.index();
     public static final int FIRMS = AttributesEnum.Firms.index();
@@ -242,6 +244,22 @@ public class UserSettingsImpl extends DivasEntityNoDelete {
     }
 
     /**
+     * Gets the attribute value for KontragId, using the alias name KontragId.
+     * @return the value of KontragId
+     */
+    public String getKontragId() {
+        return (String) getAttributeInternal(KONTRAGID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for KontragId.
+     * @param value value to set the KontragId
+     */
+    public void setKontragId(String value) {
+        setAttributeInternal(KONTRAGID, value);
+    }
+
+    /**
      * @return the associated entity CurrencyImpl.
      */
     public CurrencyImpl getCurrency() {
@@ -337,6 +355,22 @@ public class UserSettingsImpl extends DivasEntityNoDelete {
      */
     public void setUsers(UsersImpl value) {
         setAttributeInternal(USERS, value);
+    }
+
+
+    /**
+     * Validation method for UserSettings.
+     */
+    public boolean validateUserSettings2() {
+        String uId = getUserId();
+        //String zkId = getZamerkontragId();
+        String kId = getKontragId();
+        Users u = DataQuery.getZamerUser(uId);
+        Integer isZamer = u.getIsZamer();
+        if (kId == null && isZamer.intValue() == 0) {
+            return false;
+        }
+        return true;
     }
 
     /**

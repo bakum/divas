@@ -3630,5 +3630,13 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getPkoOrderFkLink1() {
         return (ViewLinkImpl) findViewLink("PkoOrderFkLink1");
     }
+
+    /**
+     * Container's getter for PaySettingsView1.
+     * @return PaySettingsView1
+     */
+    public ViewObjectImpl getPaySettingsView1() {
+        return (ViewObjectImpl) findViewObject("PaySettingsView1");
+    }
 }
 

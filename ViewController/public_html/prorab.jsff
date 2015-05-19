@@ -16,7 +16,8 @@
                                        disabled="#{!bindings.Rollback.enabled}" immediate="true" id="b4">
                                 <af:resetActionListener/>
                             </af:button>
-                            <af:button text="Обновить" id="b5" actionListener="#{prorab.onRefresh}"/>
+                            <af:button text="Обновить" id="b5" actionListener="#{prorab.onRefresh}"
+                                       disabled="#{bindings.Commit.enabled}"/>
                         </af:toolbar>
                     </f:facet>
                     <af:table value="#{bindings.ProrabView1.collectionModel}" var="row"
@@ -34,7 +35,7 @@
                                    inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
                                    filterable="true">
                             <af:toolbar id="t2">
-                                <af:button id="b1" icon="/img/edit-16.gif">
+                                <af:button id="b1" icon="/img/edit-16.gif" disabled="#{bindings.Commit.enabled}">
                                     <af:setPropertyListener from="#{1}" to="#{bindings.Editable.inputValue}"
                                                             type="action"/>
                                 </af:button>

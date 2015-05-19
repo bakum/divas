@@ -409,7 +409,7 @@
                                                         <f:validator binding="#{bindings.ZamerkontragId.validator}"/>
                                                     </af:inputListOfValues>
                                                     <af:inputListOfValues id="zamerkontragNameId"
-                                                                          popupTitle="Search and Select: #{bindings.ZamerkontragName.hints.label}"
+                                                                          popupTitle="Найти и выбрать: #{bindings.ZamerkontragName.hints.label}"
                                                                           value="#{bindings.ZamerkontragName.inputValue}"
                                                                           label="#{bindings.ZamerkontragName.hints.label}"
                                                                           model="#{bindings.ZamerkontragName.listOfValuesModel}"
@@ -418,8 +418,32 @@
                                                                           shortDesc="#{bindings.ZamerkontragName.hints.tooltip}"
                                                                           autoSubmit="true" createPopupId="pZamer"
                                                                           disabled="#{shuttle_group.zamerInUse}"
-                                                                          binding="#{shuttle_group.zamerName}">
+                                                                          binding="#{shuttle_group.zamerName}"
+                                                                          rendered="#{bindings.IsZamer.inputValue == '1' ? false: true}">
                                                         <f:validator binding="#{bindings.ZamerkontragName.validator}"/>
+                                                    </af:inputListOfValues>
+                                                    <af:inputListOfValues id="kontragNameId"
+                                                                          popupTitle="Search and Select: #{bindings.KontragName.hints.label}"
+                                                                          value="#{bindings.KontragName.inputValue}"
+                                                                          label="#{bindings.KontragName.hints.label}"
+                                                                          model="#{bindings.KontragName.listOfValuesModel}"
+                                                                          required="#{bindings.KontragName.hints.mandatory}"
+                                                                          columns="#{bindings.KontragName.hints.displayWidth}"
+                                                                          shortDesc="#{bindings.KontragName.hints.tooltip}"
+                                                                          autoSubmit="true" createPopupId="pKontrag"
+                                                                          rendered="#{bindings.IsZamer.inputValue == '1' ? true: false}">
+                                                        <f:validator binding="#{bindings.KontragName.validator}"/>
+                                                    </af:inputListOfValues>
+                                                    <af:inputListOfValues id="kontragIdId"
+                                                                          popupTitle="Search and Select: #{bindings.KontragId.hints.label}"
+                                                                          value="#{bindings.KontragId.inputValue}"
+                                                                          label="#{bindings.KontragId.hints.label}"
+                                                                          model="#{bindings.KontragId.listOfValuesModel}"
+                                                                          required="#{bindings.KontragId.hints.mandatory}"
+                                                                          columns="#{bindings.KontragId.hints.displayWidth}"
+                                                                          shortDesc="#{bindings.KontragId.hints.tooltip}"
+                                                                          visible="false">
+                                                        <f:validator binding="#{bindings.KontragId.validator}"/>
                                                     </af:inputListOfValues>
                                                     <af:group id="g1"
                                                               title="Предоставлен доступ к использованию следующих касс">
@@ -451,6 +475,7 @@
                                                     </af:toolbar>
                                                 </f:facet>
                                             </af:showDetailItem>
+                                            <af:showDetailItem text="Начисления" id="sdi6" stretchChildren="first"/>
                                         </af:panelAccordion>
                                     </af:dialog>
                                 </af:popup>
@@ -613,6 +638,17 @@
                                         <af:inputText label="Наименование" id="it24"
                                                       value="#{bindings.KonName1.inputValue}" columns="30"
                                                       binding="#{shuttle_group.konName}"/>
+                                    </af:dialog>
+                                </af:popup>
+                                <af:popup childCreation="deferred" autoCancel="disabled" id="pKontrag"
+                                          contentDelivery="lazyUncached"
+                                          popupFetchListener="#{shuttle_group.onPopupCreateKontrag}">
+                                    <af:dialog id="d7" title="Новый контрагент для расчетов"
+                                               dialogListener="#{shuttle_group.onNewKontragDialogListener}">
+                                        <f:facet name="buttonBar"/>
+                                        <af:inputText label="Имя" id="it25" required="true"
+                                                      value="#{bindings.KontragName1.inputValue}" columns="30"
+                                                      binding="#{shuttle_group.kontragName}"/>
                                     </af:dialog>
                                 </af:popup>
                             </af:showDetailItem>

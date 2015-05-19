@@ -24,5 +24,7 @@ public interface KontragentsView extends ViewObject {
     String retrieveZamerFirstParentId();
 
     String retrieveSupplierFirstParentId();
+
+    String retrieveOtherParentId();
 }
 
