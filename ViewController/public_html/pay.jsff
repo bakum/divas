@@ -95,7 +95,8 @@
                             <af:selectOneChoice value="#{row.bindings.BaseId.inputValue}"
                                                 label="#{row.bindings.BaseId.label}"
                                                 required="#{bindings.PaySettingsView1.hints.BaseId.mandatory}"
-                                                shortDesc="#{bindings.PaySettingsView1.hints.BaseId.tooltip}" id="soc1">
+                                                shortDesc="#{bindings.PaySettingsView1.hints.BaseId.tooltip}" id="soc1"
+                                                autoSubmit="true">
                                 <f:selectItems value="#{row.bindings.BaseId.items}" id="si1"/>
                                 <f:validator binding="#{row.bindings.BaseId.validator}"/>
                             </af:selectOneChoice>

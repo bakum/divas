@@ -246,9 +246,10 @@ public class PaySettingsImpl extends DivasEntityNoDelete {
      * Validation method for PaySettings.
      */
     public boolean validatePaySettings1() {
-        String bName = getBaseName(getBaseId());
+        String bId = getBaseId();
+        String bName = getBaseName(bId);
         BigDecimal sm = getSumma();
-        if (!bName.equals("Процент") && sm == null) {
+        if (!bName.equals("Процент") && (sm == null || sm.floatValue() == 0)) {
             return false;
         }
         return true;
@@ -261,7 +262,7 @@ public class PaySettingsImpl extends DivasEntityNoDelete {
     public boolean validatePaySettings() {
         String bName = getBaseName(getBaseId());
         BigDecimal st = getStavka();
-        if (bName.equals("Процент") && st == null) {
+        if (bName.equals("Процент") && (st == null || st.floatValue() == 0)) {
             return false;
         }
         return true;
