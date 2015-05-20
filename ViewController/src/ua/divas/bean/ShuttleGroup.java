@@ -1,10 +1,17 @@
 package ua.divas.bean;
 
+import java.math.BigDecimal;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import java.util.UUID;
 
+import javax.el.ELContext;
+import javax.el.ExpressionFactory;
+import javax.el.ValueExpression;
+
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -550,5 +557,40 @@ public class ShuttleGroup {
 
     public RichInputText getKontragName() {
         return kontragName;
+    }
+    
+    public String getValueFrmExpression(String data) {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        Application app = fc.getApplication();
+        ExpressionFactory elFactory = app.getExpressionFactory();
+        ELContext elContext = fc.getELContext();
+        ValueExpression valueExp = elFactory.createValueExpression(elContext, data, Object.class);
+        String Message = null;
+        Object obj = valueExp.getValue(elContext);
+        if (obj != null) {
+            Message = obj.toString();
+        }
+        return Message;
+    }
+
+    public void onPaySettChange(ValueChangeEvent valueChangeEvent) {
+        valueChangeEvent.getComponent().processUpdates(FacesContext.getCurrentInstance());
+        //System.out.println(vce.getNewValue());
+        String pId = getValueFrmExpression("#{row.bindings.PayId.attributeValue}");
+        System.out.println(pId);
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("NachislSettingsView2Iterator");
+        Row currRow = it.getCurrentRow();
+        currRow.setAttribute("Summa", null);
+
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("retrieveSumm");
+
+        if (ob != null) {
+            ob.getParamsMap().put("pId", pId);
+            BigDecimal summa = (BigDecimal) ob.execute();
+            System.out.println(summa);
+            currRow.setAttribute("Summa", summa);
+        }
     }
 }

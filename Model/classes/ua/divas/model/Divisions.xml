@@ -245,6 +245,13 @@
     AssociationOtherEnd="ua.divas.model.OtherZatratyFk1Assoc.Divisions"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="NachislSettings"
+    Association="ua.divas.model.NachislSettingsFk4Assoc"
+    AssociationEnd="ua.divas.model.NachislSettingsFk4Assoc.NachislSettings"
+    AssociationOtherEnd="ua.divas.model.NachislSettingsFk4Assoc.Divisions"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="DivisionsPk"
     PrimaryKey="true">

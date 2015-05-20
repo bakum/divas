@@ -64,7 +64,8 @@ public class UsersViewRowImpl extends ViewRowImpl {
         OrdersTpOplatyView,
         DivisionsView,
         OtherZatratyView,
-        KassaSettingsView;
+        KassaSettingsView,
+        NachislSettingsView;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -113,6 +114,7 @@ public class UsersViewRowImpl extends ViewRowImpl {
     public static final int DIVISIONSVIEW = AttributesEnum.DivisionsView.index();
     public static final int OTHERZATRATYVIEW = AttributesEnum.OtherZatratyView.index();
     public static final int KASSASETTINGSVIEW = AttributesEnum.KassaSettingsView.index();
+    public static final int NACHISLSETTINGSVIEW = AttributesEnum.NachislSettingsView.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -402,6 +404,13 @@ public class UsersViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getKassaSettingsView() {
         return (RowIterator) getAttributeInternal(KASSASETTINGSVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link NachislSettingsView.
+     */
+    public RowIterator getNachislSettingsView() {
+        return (RowIterator) getAttributeInternal(NACHISLSETTINGSVIEW);
     }
 }
 

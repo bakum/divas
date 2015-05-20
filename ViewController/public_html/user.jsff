@@ -475,7 +475,160 @@
                                                     </af:toolbar>
                                                 </f:facet>
                                             </af:showDetailItem>
-                                            <af:showDetailItem text="Начисления" id="sdi6" stretchChildren="first"/>
+                                            <af:showDetailItem text="Начисления" id="sdi6" stretchChildren="first">
+                                                <af:panelBox text="Настройки начислений" id="pb4" type="flow">
+                                                    <f:facet name="toolbar">
+                                                        <af:toolbar id="t6">
+                                                            <af:button actionListener="#{bindings.CreateInsert5.execute}"
+                                                                       text="Добавить"
+                                                                       disabled="#{bindings.Editable.inputValue == '1' ? true : false}"
+                                                                       id="b14"/>
+                                                        </af:toolbar>
+                                                    </f:facet>
+                                                    <af:table value="#{bindings.NachislSettingsView2.collectionModel}"
+                                                              var="row"
+                                                              rows="#{bindings.NachislSettingsView2.rangeSize}"
+                                                              emptyText="#{bindings.NachislSettingsView2.viewable ? 'Нет данных.' : 'В доступе отказано.'}"
+                                                              rowBandingInterval="0"
+                                                              selectedRowKeys="#{bindings.NachislSettingsView2.collectionModel.selectedRow}"
+                                                              selectionListener="#{bindings.NachislSettingsView2.collectionModel.makeCurrent}"
+                                                              rowSelection="#{bindings.Editable.inputValue == 1 ? 'none' : 'single'}"
+                                                              fetchSize="#{bindings.NachislSettingsView2.rangeSize}"
+                                                              id="t4" scrollPolicy="page" editingMode="clickToEdit"
+                                                              partialTriggers="::b14 b15">
+                                                        <af:column id="c18" width="80"
+                                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                            <af:toolbar id="t5">
+                                                                <af:button id="b13" icon="/img/edit-16.gif"
+                                                                           disabled="#{bindings.Editable.inputValue == '1' ? true : false}">
+                                                                    <af:setPropertyListener from="#{1}"
+                                                                                            to="#{bindings.Editable.inputValue}"
+                                                                                            type="action"/>
+                                                                </af:button>
+                                                                <af:button id="b16" icon="/img/icon_save.png"
+                                                                           disabled="#{bindings.Editable.inputValue == '1' ? false : true}">
+                                                                    <af:setPropertyListener from="#{0}"
+                                                                                            to="#{bindings.Editable.inputValue}"
+                                                                                            type="action"/>
+                                                                </af:button>
+                                                                <af:button actionListener="#{bindings.Delete.execute}"
+                                                                           disabled="#{bindings.Editable.inputValue == '1' ? true : false}"
+                                                                           id="b15" icon="/img/delete.png"/>
+                                                            </af:toolbar>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.NachislSettingsView2.hints.Id.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.NachislSettingsView2.hints.Id.label}"
+                                                                   id="c11" visible="false"
+                                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                            <af:inputText value="#{row.bindings.Id.inputValue}"
+                                                                          label="#{bindings.NachislSettingsView2.hints.Id.label}"
+                                                                          required="#{bindings.NachislSettingsView2.hints.Id.mandatory}"
+                                                                          columns="#{bindings.NachislSettingsView2.hints.Id.displayWidth}"
+                                                                          maximumLength="#{bindings.NachislSettingsView2.hints.Id.precision}"
+                                                                          shortDesc="#{bindings.NachislSettingsView2.hints.Id.tooltip}"
+                                                                          id="it26">
+                                                                <f:validator binding="#{row.bindings.Id.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.NachislSettingsView2.hints.UserId.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.NachislSettingsView2.hints.UserId.label}"
+                                                                   id="c12" visible="false"
+                                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                            <af:selectOneChoice value="#{row.bindings.UserId.inputValue}"
+                                                                                label="#{row.bindings.UserId.label}"
+                                                                                required="#{bindings.NachislSettingsView2.hints.UserId.mandatory}"
+                                                                                shortDesc="#{bindings.NachislSettingsView2.hints.UserId.tooltip}"
+                                                                                id="soc4">
+                                                                <f:selectItems value="#{row.bindings.UserId.items}"
+                                                                               id="si10"/>
+                                                                <f:validator binding="#{row.bindings.UserId.validator}"/>
+                                                            </af:selectOneChoice>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.NachislSettingsView2.hints.PayId.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.NachislSettingsView2.hints.PayId.label}"
+                                                                   id="c13" width="150"
+                                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                            <af:selectOneChoice value="#{row.bindings.PayId.inputValue}"
+                                                                                label="#{row.bindings.PayId.label}"
+                                                                                required="#{bindings.NachislSettingsView2.hints.PayId.mandatory}"
+                                                                                shortDesc="#{bindings.NachislSettingsView2.hints.PayId.tooltip}"
+                                                                                id="soc6"
+                                                                                valueChangeListener="#{shuttle_group.onPaySettChange}"
+                                                                                autoSubmit="true">
+                                                                <f:selectItems value="#{row.bindings.PayId.items}"
+                                                                               id="si11"/>
+                                                                <f:validator binding="#{row.bindings.PayId.validator}"/>
+                                                            </af:selectOneChoice>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.NachislSettingsView2.hints.BaseId.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.NachislSettingsView2.hints.BaseId.label}"
+                                                                   id="c14" width="150"
+                                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                            <af:selectOneChoice value="#{row.bindings.BaseId.inputValue}"
+                                                                                label="#{row.bindings.BaseId.label}"
+                                                                                required="#{bindings.NachislSettingsView2.hints.BaseId.mandatory}"
+                                                                                shortDesc="#{bindings.NachislSettingsView2.hints.BaseId.tooltip}"
+                                                                                id="soc7">
+                                                                <f:selectItems value="#{row.bindings.BaseId.items}"
+                                                                               id="si12"/>
+                                                                <f:validator binding="#{row.bindings.BaseId.validator}"/>
+                                                            </af:selectOneChoice>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.NachislSettingsView2.hints.Summa.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.NachislSettingsView2.hints.Summa.label}"
+                                                                   id="c15"
+                                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                            <af:inputNumberSpinbox value="#{row.bindings.Summa.inputValue}"
+                                                                                   label="#{bindings.NachislSettingsView2.hints.Summa.label}"
+                                                                                   required="#{bindings.NachislSettingsView2.hints.Summa.mandatory}"
+                                                                                   columns="#{bindings.NachislSettingsView2.hints.Summa.displayWidth}"
+                                                                                   shortDesc="#{bindings.NachislSettingsView2.hints.Summa.tooltip}"
+                                                                                   id="it27">
+                                                                <f:validator binding="#{row.bindings.Summa.validator}"/>
+                                                                <af:convertNumber groupingUsed="false"
+                                                                                  pattern="#{bindings.NachislSettingsView2.hints.Summa.format}"/>
+                                                            </af:inputNumberSpinbox>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.NachislSettingsView2.hints.DivisionId.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.NachislSettingsView2.hints.DivisionId.label}"
+                                                                   id="c16"
+                                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                            <af:selectOneChoice value="#{row.bindings.DivisionId.inputValue}"
+                                                                                label="#{row.bindings.DivisionId.label}"
+                                                                                required="#{bindings.NachislSettingsView2.hints.DivisionId.mandatory}"
+                                                                                shortDesc="#{bindings.NachislSettingsView2.hints.DivisionId.tooltip}"
+                                                                                id="soc8">
+                                                                <f:selectItems value="#{row.bindings.DivisionId.items}"
+                                                                               id="si13"/>
+                                                                <f:validator binding="#{row.bindings.DivisionId.validator}"/>
+                                                            </af:selectOneChoice>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.NachislSettingsView2.hints.Editable.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.NachislSettingsView2.hints.Editable.label}"
+                                                                   id="c17" visible="false"
+                                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                            <af:inputText value="#{row.bindings.Editable.inputValue}"
+                                                                          label="#{bindings.NachislSettingsView2.hints.Editable.label}"
+                                                                          required="#{bindings.NachislSettingsView2.hints.Editable.mandatory}"
+                                                                          columns="#{bindings.NachislSettingsView2.hints.Editable.displayWidth}"
+                                                                          maximumLength="#{bindings.NachislSettingsView2.hints.Editable.precision}"
+                                                                          shortDesc="#{bindings.NachislSettingsView2.hints.Editable.tooltip}"
+                                                                          id="it28">
+                                                                <f:validator binding="#{row.bindings.Editable.validator}"/>
+                                                                <af:convertNumber groupingUsed="false"
+                                                                                  pattern="#{bindings.NachislSettingsView2.hints.Editable.format}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                    </af:table>
+                                                </af:panelBox>
+                                            </af:showDetailItem>
                                         </af:panelAccordion>
                                     </af:dialog>
                                 </af:popup>

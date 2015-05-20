@@ -162,6 +162,13 @@
     AssociationOtherEnd="ua.divas.model.PaySettingsFk1Assoc.PaySettings"
     Type="oracle.jbo.server.EntityImpl"
     IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="NachislSettings"
+    Association="ua.divas.model.NachislSettingsFk2Assoc"
+    AssociationEnd="ua.divas.model.NachislSettingsFk2Assoc.NachislSettings"
+    AssociationOtherEnd="ua.divas.model.NachislSettingsFk2Assoc.PaySettings"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="PaySettingsPk"
     PrimaryKey="true">

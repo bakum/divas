@@ -20,6 +20,7 @@ import ua.divas.model.DivisionsImpl;
 // ---------------------------------------------------------------------
 public class DivisionsViewRowImpl extends ViewRowImpl {
 
+
     public static final int ENTITY_DIVISIONS = 0;
 
     @Override
@@ -63,6 +64,7 @@ public class DivisionsViewRowImpl extends ViewRowImpl {
         VwBallansAp,
         VwSales,
         VwZatraty,
+        NachislSettingsView,
         DivisionsView1,
         UsersView1;
         static AttributesEnum[] vals = null;
@@ -89,6 +91,7 @@ public class DivisionsViewRowImpl extends ViewRowImpl {
         }
     }
 
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int FULLNAME = AttributesEnum.Fullname.index();
     public static final int DELETED = AttributesEnum.Deleted.index();
@@ -110,6 +113,7 @@ public class DivisionsViewRowImpl extends ViewRowImpl {
     public static final int VWBALLANSAP = AttributesEnum.VwBallansAp.index();
     public static final int VWSALES = AttributesEnum.VwSales.index();
     public static final int VWZATRATY = AttributesEnum.VwZatraty.index();
+    public static final int NACHISLSETTINGSVIEW = AttributesEnum.NachislSettingsView.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
 
@@ -355,6 +359,13 @@ public class DivisionsViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getVwZatraty() {
         return (RowIterator) getAttributeInternal(VWZATRATY);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link NachislSettingsView.
+     */
+    public RowIterator getNachislSettingsView() {
+        return (RowIterator) getAttributeInternal(NACHISLSETTINGSVIEW);
     }
 
     /**

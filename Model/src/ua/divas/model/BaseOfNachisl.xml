@@ -50,6 +50,13 @@
       <Attr Name="_DisplaySize" Value="100"/>
     </DesignTime>
   </Attribute>
+  <AccessorAttribute
+    Name="NachislSettings"
+    Association="ua.divas.model.NachislSettingsFk3Assoc"
+    AssociationEnd="ua.divas.model.NachislSettingsFk3Assoc.NachislSettings"
+    AssociationOtherEnd="ua.divas.model.NachislSettingsFk3Assoc.BaseOfNachisl"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="BaseOfNachislPk"
     PrimaryKey="true">

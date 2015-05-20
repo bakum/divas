@@ -47,7 +47,8 @@ public class UsersImpl extends DivasEntityNoDelete {
         OrdersTpOplaty,
         Divisions,
         OtherZatraty,
-        KassaSettings;
+        KassaSettings,
+        NachislSettings;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -93,6 +94,7 @@ public class UsersImpl extends DivasEntityNoDelete {
     public static final int DIVISIONS = AttributesEnum.Divisions.index();
     public static final int OTHERZATRATY = AttributesEnum.OtherZatraty.index();
     public static final int KASSASETTINGS = AttributesEnum.KassaSettings.index();
+    public static final int NACHISLSETTINGS = AttributesEnum.NachislSettings.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -359,6 +361,13 @@ public class UsersImpl extends DivasEntityNoDelete {
      */
     public RowIterator getKassaSettings() {
         return (RowIterator) getAttributeInternal(KASSASETTINGS);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getNachislSettings() {
+        return (RowIterator) getAttributeInternal(NACHISLSETTINGS);
     }
 
     /**

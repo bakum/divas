@@ -37,4 +37,9 @@
     EntityAttrName="Fullname"
     EntityUsage="BaseOfNachisl"
     AliasName="FULLNAME"/>
+  <ViewLinkAccessor
+    Name="NachislSettingsView"
+    ViewLink="ua.divas.view.NachislSettingsFk3Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
 </ViewObject>

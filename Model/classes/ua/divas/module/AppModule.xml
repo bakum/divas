@@ -839,6 +839,12 @@
   <ViewUsage
     Name="PaySettingsView1"
     ViewObjectName="ua.divas.view.PaySettingsView"/>
+  <ViewUsage
+    Name="NachislSettingsView1"
+    ViewObjectName="ua.divas.view.NachislSettingsView"/>
+  <ViewUsage
+    Name="NachislSettingsView2"
+    ViewObjectName="ua.divas.view.NachislSettingsView"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -1810,6 +1816,12 @@
     ViewLinkObjectName="ua.divas.view.PkoOrderFkLink"
     SrcViewUsageName="ua.divas.module.AppModule.OrdersView1"
     DstViewUsageName="ua.divas.module.AppModule.PkoView2"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="NachislSettingsFk1Link1"
+    ViewLinkObjectName="ua.divas.view.NachislSettingsFk1Link"
+    SrcViewUsageName="ua.divas.module.AppModule.UsersView1"
+    DstViewUsageName="ua.divas.module.AppModule.NachislSettingsView2"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">

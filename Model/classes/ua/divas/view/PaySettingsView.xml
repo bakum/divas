@@ -9,12 +9,29 @@
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
-  RowClass="ua.divas.view.PaySettingsViewRowImpl">
+  RowClass="ua.divas.view.PaySettingsViewRowImpl"
+  ComponentClass="ua.divas.view.PaySettingsViewImpl">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
-    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
+  <Variable
+    Name="pId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bId"
+    Kind="viewcriteria"
+    Type="java.lang.String">
+    <TransientExpression><![CDATA[viewObject.getBaseIdFix()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
   <ViewAccessor
     Name="BaseOfCalcView1"
     ViewObjectName="ua.divas.view.BaseOfCalcView"
@@ -125,4 +142,55 @@ FROM  PAY_SETTINGS PaySettings]]></SQLQuery>
     AliasName="EDITABLE"
     Expression="EDITABLE"
     SQLType="NUMERIC"/>
+  <ViewCriteria
+    Name="FindByIdFix"
+    ViewObjectName="ua.divas.view.PaySettingsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PaySettingsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Id"
+        ViewAttribute="Id"
+        Operator="="
+        Conjunction="AND"
+        Value=":pId"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="PaySettingsViewCriteria_PaySettingsViewCriteria_row_0_BaseId"
+        ViewAttribute="BaseId"
+        Operator="="
+        Conjunction="AND"
+        Value=":bId"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewLinkAccessor
+    Name="NachislSettingsView"
+    ViewLink="ua.divas.view.NachislSettingsFk2Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
 </ViewObject>

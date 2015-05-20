@@ -30,6 +30,7 @@ import ua.divas.view.KassaVOImpl;
 import ua.divas.view.KontragentsInOrdersViewImpl;
 import ua.divas.view.KontragentsViewImpl;
 import ua.divas.view.LastPriceVOImpl;
+import ua.divas.view.NachislSettingsViewImpl;
 import ua.divas.view.NomenklaturaViewImpl;
 import ua.divas.view.NotificationViewImpl;
 import ua.divas.view.OrderZamerViewImpl;
@@ -39,6 +40,7 @@ import ua.divas.view.OrdersTpRashodyViewImpl;
 import ua.divas.view.OrdersTpUslugiViewImpl;
 import ua.divas.view.OrdersViewImpl;
 import ua.divas.view.OtherZatratyViewImpl;
+import ua.divas.view.PaySettingsViewImpl;
 import ua.divas.view.PkoViewImpl;
 import ua.divas.view.ProrabViewImpl;
 import ua.divas.view.RkoViewImpl;
@@ -3635,8 +3637,32 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for PaySettingsView1.
      * @return PaySettingsView1
      */
-    public ViewObjectImpl getPaySettingsView1() {
-        return (ViewObjectImpl) findViewObject("PaySettingsView1");
+    public PaySettingsViewImpl getPaySettingsView1() {
+        return (PaySettingsViewImpl) findViewObject("PaySettingsView1");
+    }
+
+    /**
+     * Container's getter for NachislSettingsView1.
+     * @return NachislSettingsView1
+     */
+    public NachislSettingsViewImpl getNachislSettingsView1() {
+        return (NachislSettingsViewImpl) findViewObject("NachislSettingsView1");
+    }
+
+    /**
+     * Container's getter for NachislSettingsView2.
+     * @return NachislSettingsView2
+     */
+    public NachislSettingsViewImpl getNachislSettingsView2() {
+        return (NachislSettingsViewImpl) findViewObject("NachislSettingsView2");
+    }
+
+    /**
+     * Container's getter for NachislSettingsFk1Link1.
+     * @return NachislSettingsFk1Link1
+     */
+    public ViewLinkImpl getNachislSettingsFk1Link1() {
+        return (ViewLinkImpl) findViewLink("NachislSettingsFk1Link1");
     }
 }
 

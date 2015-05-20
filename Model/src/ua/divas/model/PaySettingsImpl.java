@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 import oracle.jbo.Key;
+import oracle.jbo.RowIterator;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.EntityDefImpl;
 import oracle.jbo.server.EntityImpl;
@@ -37,7 +38,8 @@ public class PaySettingsImpl extends DivasEntityNoDelete {
         Version,
         BaseId,
         Summa,
-        BaseOfCalc;
+        BaseOfCalc,
+        NachislSettings;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -71,6 +73,7 @@ public class PaySettingsImpl extends DivasEntityNoDelete {
     public static final int BASEID = AttributesEnum.BaseId.index();
     public static final int SUMMA = AttributesEnum.Summa.index();
     public static final int BASEOFCALC = AttributesEnum.BaseOfCalc.index();
+    public static final int NACHISLSETTINGS = AttributesEnum.NachislSettings.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -232,6 +235,14 @@ public class PaySettingsImpl extends DivasEntityNoDelete {
     public void setBaseOfCalc(EntityImpl value) {
         setAttributeInternal(BASEOFCALC, value);
     }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getNachislSettings() {
+        return (RowIterator) getAttributeInternal(NACHISLSETTINGS);
+    }
+
 
     /**
      * @param id key constituent
