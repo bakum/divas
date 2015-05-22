@@ -2,6 +2,8 @@ package ua.divas.bean;
 
 import java.math.BigDecimal;
 
+import java.sql.SQLException;
+
 import javax.el.ELContext;
 import javax.el.ExpressionFactory;
 import javax.el.ValueExpression;
@@ -40,7 +42,7 @@ public class OrderjsfBean {
 
     public OrderjsfBean() {
     }
-    
+
     public void setKonName(RichInputText konName) {
         this.konName = konName;
     }
@@ -56,7 +58,7 @@ public class OrderjsfBean {
     public RichInputText getProrName() {
         return prorName;
     }
-    
+
     public void setPrice(RichInputText price) {
         this.price = price;
     }
@@ -72,7 +74,7 @@ public class OrderjsfBean {
     public RichInputText getQtt() {
         return qtt;
     }
-    
+
     public void setZatrName(RichInputText zatrName) {
         this.zatrName = zatrName;
     }
@@ -80,7 +82,7 @@ public class OrderjsfBean {
     public RichInputText getZatrName() {
         return zatrName;
     }
-    
+
     protected void refreshKontrag() {
         BindingContext bindingContext = BindingContext.getCurrent();
         DCDataControl dc =
@@ -88,7 +90,7 @@ public class OrderjsfBean {
         AppModuleImpl am = (AppModuleImpl) dc.getDataProvider();
         am.getKontragentsView1().executeQuery();
     }
-    
+
     protected void refreshZatraty() {
         BindingContext bindingContext = BindingContext.getCurrent();
         DCDataControl dc =
@@ -118,14 +120,14 @@ public class OrderjsfBean {
         }
         //applyBuyerCriteria();
     }
-    
+
     public void onPopupFetch(PopupFetchEvent popupFetchEvent) {
-        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();        
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("findKontragentById");
         ob.execute();
 
     }
-    
+
     public void onOrderCancel(PopupCanceledEvent popupCanceledEvent) {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("removeAllViewCriteria");
@@ -133,16 +135,16 @@ public class OrderjsfBean {
             ob.execute();
         }
     }
-    
+
     public void dialogListener(DialogEvent dialogEvent) {
-        
+
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("removeAllViewCriteria");
         if (ob != null) {
             ob.execute();
         }
     }
-    
+
     public String getValueFrmExpression(String data) {
         FacesContext fc = FacesContext.getCurrentInstance();
         Application app = fc.getApplication();
@@ -156,7 +158,7 @@ public class OrderjsfBean {
         }
         return Message;
     }
-    
+
     public void onNomChanged(ValueChangeEvent vce) {
         vce.getComponent().processUpdates(FacesContext.getCurrentInstance());
         //System.out.println(vce.getNewValue());
@@ -206,7 +208,7 @@ public class OrderjsfBean {
             currRow.setAttribute("Summ", s);
         }
     }
-    
+
     private void setIsBuyer() {
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
@@ -215,7 +217,7 @@ public class OrderjsfBean {
         currRow.setAttribute("IsBuyer", new Integer(1));
 
     }
-    
+
     private void setIsSupplier() {
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
@@ -223,7 +225,7 @@ public class OrderjsfBean {
 
         currRow.setAttribute("IsSupplier", new Integer(1));
     }
-    
+
     private void setFullName() {
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
@@ -231,7 +233,7 @@ public class OrderjsfBean {
 
         currRow.setAttribute("Fullname", getKonName().getValue().toString());
     }
-    
+
     private void setProrName() {
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
@@ -239,7 +241,7 @@ public class OrderjsfBean {
 
         currRow.setAttribute("Fullname", getProrName().getValue().toString());
     }
-    
+
     private void setZatrName() {
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = bd.findIteratorBinding("ZatratyView1Iterator");
@@ -247,7 +249,7 @@ public class OrderjsfBean {
 
         currRow.setAttribute("Fullname", getZatrName().getValue().toString());
     }
-    
+
     private void setParentId() {
 
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
@@ -258,7 +260,7 @@ public class OrderjsfBean {
         String res = (String) oper.execute();
         currRow.setAttribute("ParentId", res);
     }
-    
+
     private void setSupplierParentId() {
 
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
@@ -270,7 +272,7 @@ public class OrderjsfBean {
         currRow.setAttribute("ParentId", res);
 
     }
-    
+
     public void onPopupCreateKontrag(PopupFetchEvent popupFetchEvent) {
         try {
             getKonName().setValue("");
@@ -279,7 +281,7 @@ public class OrderjsfBean {
             e.printStackTrace();
         }
     }
-    
+
     public void onPopupCreatePror(PopupFetchEvent popupFetchEvent) {
         try {
             getProrName().setValue("");
@@ -288,7 +290,7 @@ public class OrderjsfBean {
             e.printStackTrace();
         }
     }
-    
+
     public void onPopupCreateZatraty(PopupFetchEvent popupFetchEvent) {
         try {
             getZatrName().setValue("");
@@ -297,7 +299,7 @@ public class OrderjsfBean {
             e.printStackTrace();
         }
     }
-    
+
     public void onNewKontragentDialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
@@ -317,7 +319,7 @@ public class OrderjsfBean {
             } */
         }
     }
-    
+
     public void onNewSupplierDialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
@@ -337,7 +339,7 @@ public class OrderjsfBean {
             } */
         }
     }
-    
+
     public void onNewZatratyDialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
@@ -357,5 +359,79 @@ public class OrderjsfBean {
                 it.executeQuery();
             } */
         }
+    }
+
+    public void onPayChange(ValueChangeEvent valueChangeEvent) {
+        valueChangeEvent.getComponent().processUpdates(FacesContext.getCurrentInstance());
+        //System.out.println(vce.getNewValue());
+        String pId = getValueFrmExpression("#{row.bindings.PayId.attributeValue}");
+        System.out.println(pId);
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("OrdersTpNachisleniaView2Iterator");
+        Row currRow = it.getCurrentRow();
+        currRow.setAttribute("Summ", null);
+        currRow.setAttribute("CalcId", null);
+        currRow.setAttribute("Percent", null);
+
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("retrieveSumma");
+
+        if (ob != null) {
+            ob.getParamsMap().put("pId", pId);
+            BigDecimal summa = (BigDecimal) ob.execute();
+            System.out.println(summa);
+            currRow.setAttribute("Summ", summa);
+        }
+
+        ob = binding.getOperationBinding("retrieveCalcId");
+        if (ob != null) {
+            ob.getParamsMap().put("pId", pId);
+            String cid = (String) ob.execute();
+            System.out.println(cid);
+            currRow.setAttribute("CalcId", cid);
+        }
+
+        ob = binding.getOperationBinding("retrieveStavka");
+        if (ob != null) {
+            ob.getParamsMap().put("pId", pId);
+            BigDecimal summa = (BigDecimal) ob.execute();
+            System.out.println(summa);
+            currRow.setAttribute("Percent", summa);
+            if (summa.intValue() != 0) {
+                String TotalStr = getValueFrmExpression("#{bindings.TotalSumm.attributeValue}");
+                //System.out.println(TotalStr);
+                BigDecimal TotalSumm = new BigDecimal(TotalStr);
+                BigDecimal res = summa.divide(new BigDecimal(100)).multiply(TotalSumm).setScale(2, BigDecimal.ROUND_HALF_UP);
+                currRow.setAttribute("Summ", res);
+            }
+        }
+    }
+
+    public void onCalcChange(ValueChangeEvent valueChangeEvent) {
+        valueChangeEvent.getComponent().processUpdates(FacesContext.getCurrentInstance());
+        //System.out.println(vce.getNewValue());
+        //String pId = getValueFrmExpression("#{row.bindings.CalcId.attributeValue}");
+        //System.out.println(pId);
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("OrdersTpNachisleniaView2Iterator");
+        Row currRow = it.getCurrentRow();
+        currRow.setAttribute("Summ", 0);
+        currRow.setAttribute("Percent", 0);
+    }
+
+    public void onPercentChange(ValueChangeEvent valueChangeEvent) {
+        valueChangeEvent.getComponent().processUpdates(FacesContext.getCurrentInstance());
+        //System.out.println(vce.getNewValue());
+        String TotalStr = getValueFrmExpression("#{bindings.TotalSumm.attributeValue}");
+        System.out.println(TotalStr);
+        BigDecimal TotalSumm = new BigDecimal(TotalStr);
+        BigDecimal perc = (BigDecimal) valueChangeEvent.getNewValue();
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("OrdersTpNachisleniaView2Iterator");
+
+        BigDecimal res = perc.divide(new BigDecimal(100)).multiply(TotalSumm).setScale(2, BigDecimal.ROUND_HALF_UP);
+
+        Row currRow = it.getCurrentRow();
+        currRow.setAttribute("Summ", res);
     }
 }

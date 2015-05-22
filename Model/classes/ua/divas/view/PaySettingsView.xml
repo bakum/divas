@@ -188,6 +188,43 @@ FROM  PAY_SETTINGS PaySettings]]></SQLQuery>
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ViewCriteria
+    Name="FindById"
+    ViewObjectName="ua.divas.view.PaySettingsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PaySettingsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Id"
+        ViewAttribute="Id"
+        Operator="="
+        Conjunction="AND"
+        Value=":pId"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="NachislSettingsView"
     ViewLink="ua.divas.view.NachislSettingsFk2Link"

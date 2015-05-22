@@ -297,6 +297,8 @@
           <Item Value="Summ"/>
           <Item Value="OtpnEditable"/>
           <Item Value="Description"/>
+          <Item Value="PayId"/>
+          <Item Value="Manual"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -352,5 +354,28 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <methodAction id="retrieveCalcId" RequiresUpdateModel="true" Action="invokeMethod" MethodName="retrieveCalcId"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.OrdersTpNachisleniaView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.retrieveCalcId_AppModuleDataControl_OrdersTpNachisleniaView1_retrieveCalcId_result">
+      <NamedData NDName="pId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="retrieveStavka" RequiresUpdateModel="true" Action="invokeMethod" MethodName="retrieveStavka"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.OrdersTpNachisleniaView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.retrieveStavka_AppModuleDataControl_OrdersTpNachisleniaView1_retrieveStavka_result">
+      <NamedData NDName="pId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="retrieveSumma" RequiresUpdateModel="true" Action="invokeMethod" MethodName="retrieveSumma"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.OrdersTpNachisleniaView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.retrieveSumma_AppModuleDataControl_OrdersTpNachisleniaView1_retrieveSumma_result">
+      <NamedData NDName="pId" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="OrdersView1Iterator" id="TotalSumm">
+      <AttrNames>
+        <Item Value="TotalSumm"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

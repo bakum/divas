@@ -1139,7 +1139,7 @@
                                               rowSelection="single"
                                               fetchSize="#{bindings.OrdersTpNachisleniaView2.rangeSize}" id="t13"
                                               scrollPolicy="page" editingMode="clickToEdit" partialTriggers="b20 ::b21">
-                                        <af:column id="c40" width="60">
+                                        <af:column id="c40" width="80">
                                             <af:toolbar id="t14">
                                                 <af:button id="b19" icon="/img/edit-16.gif"
                                                            disabled="#{row.OtpnEditable == '1' ? true: false}"
@@ -1151,6 +1151,12 @@
                                                 <af:button actionListener="#{bindings.Delete3.execute}"
                                                            disabled="#{row.OtpnEditable == '1' ? true: false}" id="b20"
                                                            icon="/img/delete.png" shortDesc="Удалить строку"/>
+                                                <af:button id="b22" icon="/img/icon_save.png"
+                                                           disabled="#{row.OtpnEditable == '1' ? false: true}">
+                                                    <af:setPropertyListener from="#{0}"
+                                                                            to="#{bindings.OtpnEditable.inputValue}"
+                                                                            type="action"/>
+                                                </af:button>
                                             </af:toolbar>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.OrdersTpNachisleniaView2.hints.Id.name}"
@@ -1198,7 +1204,7 @@
                                         <af:column sortProperty="#{bindings.OrdersTpNachisleniaView2.hints.Kontname.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.OrdersTpNachisleniaView2.hints.Kontname.label}"
-                                                   id="c33" width="200">
+                                                   id="c33" width="150">
                                             <af:inputComboboxListOfValues id="iclov2"
                                                                           popupTitle="Search and Select: #{bindings.OrdersTpNachisleniaView2.hints.Kontname.label}"
                                                                           value="#{row.bindings.Kontname.inputValue}"
@@ -1209,6 +1215,18 @@
                                                 <f:validator binding="#{row.bindings.Kontname.validator}"/>
                                             </af:inputComboboxListOfValues>
                                         </af:column>
+                                        <af:column headerText="#{bindings.OrdersTpNachisleniaView2.hints.PayId.label}"
+                                                   id="c50">
+                                            <af:selectOneChoice value="#{row.bindings.PayId.inputValue}"
+                                                                label="#{row.bindings.PayId.label}"
+                                                                required="#{bindings.OrdersTpNachisleniaView2.hints.PayId.mandatory}"
+                                                                shortDesc="#{bindings.OrdersTpNachisleniaView2.hints.PayId.tooltip}"
+                                                                id="soc18" autoSubmit="true"
+                                                                valueChangeListener="#{order_jsf.onPayChange}">
+                                                <f:selectItems value="#{row.bindings.PayId.items}" id="si18"/>
+                                                <f:validator binding="#{row.bindings.PayId.validator}"/>
+                                            </af:selectOneChoice>
+                                        </af:column>
                                         <af:column sortProperty="#{bindings.OrdersTpNachisleniaView2.hints.CalcId.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.OrdersTpNachisleniaView2.hints.CalcId.label}"
@@ -1217,7 +1235,9 @@
                                                                 label="#{row.bindings.CalcId.label}"
                                                                 required="#{bindings.OrdersTpNachisleniaView2.hints.CalcId.mandatory}"
                                                                 shortDesc="#{bindings.OrdersTpNachisleniaView2.hints.CalcId.tooltip}"
-                                                                id="soc15">
+                                                                id="soc15"
+                                                                valueChangeListener="#{order_jsf.onCalcChange}"
+                                                                autoSubmit="true">
                                                 <f:selectItems value="#{row.bindings.CalcId.items}" id="si15"/>
                                                 <f:validator binding="#{row.bindings.CalcId.validator}"/>
                                             </af:selectOneChoice>
@@ -1239,14 +1259,15 @@
                                         <af:column sortProperty="#{bindings.OrdersTpNachisleniaView2.hints.Percent.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.OrdersTpNachisleniaView2.hints.Percent.label}"
-                                                   id="c37">
+                                                   id="c37" width="50">
                                             <af:inputText value="#{row.bindings.Percent.inputValue}"
                                                           label="#{bindings.OrdersTpNachisleniaView2.hints.Percent.label}"
                                                           required="#{bindings.OrdersTpNachisleniaView2.hints.Percent.mandatory}"
                                                           columns="#{bindings.OrdersTpNachisleniaView2.hints.Percent.displayWidth}"
                                                           maximumLength="#{bindings.OrdersTpNachisleniaView2.hints.Percent.precision}"
                                                           shortDesc="#{bindings.OrdersTpNachisleniaView2.hints.Percent.tooltip}"
-                                                          id="it32">
+                                                          id="it32" autoSubmit="true"
+                                                          valueChangeListener="#{order_jsf.onPercentChange}">
                                                 <f:validator binding="#{row.bindings.Percent.validator}"/>
                                                 <af:convertNumber groupingUsed="false"
                                                                   pattern="#{bindings.OrdersTpNachisleniaView2.hints.Percent.format}"/>
@@ -1255,7 +1276,7 @@
                                         <af:column sortProperty="#{bindings.OrdersTpNachisleniaView2.hints.Summ.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.OrdersTpNachisleniaView2.hints.Summ.label}"
-                                                   id="c38">
+                                                   id="c38" width="100">
                                             <af:inputNumberSpinbox value="#{row.bindings.Summ.inputValue}"
                                                                    label="#{bindings.OrdersTpNachisleniaView2.hints.Summ.label}"
                                                                    required="#{bindings.OrdersTpNachisleniaView2.hints.Summ.mandatory}"
@@ -1295,6 +1316,20 @@
                                                 </af:inputText>
                                             </af:panelLabelAndMessage>
                                         </f:facet>
+                                        <af:column headerText="#{bindings.OrdersTpNachisleniaView2.hints.Manual.label}"
+                                                   id="c51" visible="false">
+                                            <af:inputText value="#{row.bindings.Manual.inputValue}"
+                                                          label="#{bindings.OrdersTpNachisleniaView2.hints.Manual.label}"
+                                                          required="#{bindings.OrdersTpNachisleniaView2.hints.Manual.mandatory}"
+                                                          columns="#{bindings.OrdersTpNachisleniaView2.hints.Manual.displayWidth}"
+                                                          maximumLength="#{bindings.OrdersTpNachisleniaView2.hints.Manual.precision}"
+                                                          shortDesc="#{bindings.OrdersTpNachisleniaView2.hints.Manual.tooltip}"
+                                                          id="it39">
+                                                <f:validator binding="#{row.bindings.Manual.validator}"/>
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.OrdersTpNachisleniaView2.hints.Manual.format}"/>
+                                            </af:inputText>
+                                        </af:column>
                                     </af:table>
                                 </af:panelBox>
                             </af:showDetailItem>

@@ -21,18 +21,27 @@ import ua.divas.classes.DivasEntityNoDelete;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class OrdersTpNachisleniaImpl extends DivasEntityNoDelete {
-    
+
     @Override
     protected void callId() {
         this.setId(UUID.randomUUID().toString());
     }
-    
+
     @Override
     protected void doDML(int i, TransactionEvent transactionEvent) {
         super.doDML(i, transactionEvent);
         String _id = this.getOrderId();
         callStoredProcedure("ORDERS_ENTRY.orders_move_plan_acc(?)", new Object[] { _id });
     }
+
+    private String getBaseName(String id) {
+        return (String) callStoredFunction(VARCHAR2, "UTILITY.retrieve_name_baseofcalc(?)", new Object[] { id });
+    }
+
+    private String getIdFromAlgorythm(String id) {
+        return (String) callStoredFunction(VARCHAR2, "UTILITY.retrieve_idfromalgorythm(?)", new Object[] { id });
+    }
+
     /**
      * AttributesEnum: generated enum for identifying attributes and accessors. DO NOT MODIFY.
      */
@@ -45,6 +54,8 @@ public class OrdersTpNachisleniaImpl extends DivasEntityNoDelete {
         Description,
         CalcId,
         Percent,
+        Manual,
+        PayId,
         BaseOfCalc,
         Kontragents;
         private static AttributesEnum[] vals = null;
@@ -79,6 +90,8 @@ public class OrdersTpNachisleniaImpl extends DivasEntityNoDelete {
     public static final int DESCRIPTION = AttributesEnum.Description.index();
     public static final int CALCID = AttributesEnum.CalcId.index();
     public static final int PERCENT = AttributesEnum.Percent.index();
+    public static final int MANUAL = AttributesEnum.Manual.index();
+    public static final int PAYID = AttributesEnum.PayId.index();
     public static final int BASEOFCALC = AttributesEnum.BaseOfCalc.index();
     public static final int KONTRAGENTS = AttributesEnum.Kontragents.index();
 
@@ -225,6 +238,38 @@ public class OrdersTpNachisleniaImpl extends DivasEntityNoDelete {
     }
 
     /**
+     * Gets the attribute value for Manual, using the alias name Manual.
+     * @return the value of Manual
+     */
+    public Integer getManual() {
+        return (Integer) getAttributeInternal(MANUAL);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for Manual.
+     * @param value value to set the Manual
+     */
+    public void setManual(Integer value) {
+        setAttributeInternal(MANUAL, value);
+    }
+
+    /**
+     * Gets the attribute value for PayId, using the alias name PayId.
+     * @return the value of PayId
+     */
+    public String getPayId() {
+        return (String) getAttributeInternal(PAYID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for PayId.
+     * @param value value to set the PayId
+     */
+    public void setPayId(String value) {
+        setAttributeInternal(PAYID, value);
+    }
+
+    /**
      * @return the associated entity oracle.jbo.server.EntityImpl.
      */
     public EntityImpl getBaseOfCalc() {
@@ -253,12 +298,50 @@ public class OrdersTpNachisleniaImpl extends DivasEntityNoDelete {
     }
 
     /**
+     * Validation method for OrdersTpNachislenia.
+     */
+    public boolean validateOrdersTpNachislenia2() {
+        BigDecimal s = getSumm();
+        if (s == null || s.floatValue() == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * @param id key constituent
 
      * @return a Key object based on given key constituents.
      */
     public static Key createPrimaryKey(String id) {
         return new Key(new Object[] { id });
+    }
+
+    /**
+     * Validation method for OrdersTpNachislenia.
+     */
+    public boolean validateOrdersTpNachislenia1() {
+        String bName = getBaseName(getCalcId());
+        String alId = getPayId();
+        String bId = getIdFromAlgorythm(alId);
+        String baName = getBaseName(bId);
+        if (!bName.equalsIgnoreCase(baName)) {
+            return false;
+        }
+        return true;
+    }
+
+
+    /**
+     * Validation method for OrdersTpNachislenia.
+     */
+    public boolean validateOrdersTpNachislenia() {
+        BigDecimal percent = getPercent();
+        String bName = getBaseName(getCalcId());
+        if (bName.equals("Процент") && (percent == null || percent.floatValue() == 0)) {
+            return false;
+        }
+        return true;
     }
 
 

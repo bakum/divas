@@ -17,8 +17,10 @@ import ua.divas.model.OrdersTpNachisleniaImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class OrdersTpNachisleniaViewRowImpl extends ViewRowImpl {
+
+
     public static final int ENTITY_ORDERSTPNACHISLENIA = 0;
-    
+
     @Override
     public boolean isAttributeUpdateable(int i) {
         BigDecimal editable = this.getOtpnEditable();
@@ -50,9 +52,13 @@ public class OrdersTpNachisleniaViewRowImpl extends ViewRowImpl {
         Percent,
         Summ,
         OtpnEditable,
+        Manual,
+        PayId,
         BaseOfCalcView1,
-        KontragentsView1;
-        private static AttributesEnum[] vals = null;
+        KontragentsView1,
+        PaySettingsView1;
+        static AttributesEnum[] vals = null;
+        ;
         private static final int firstIndex = 0;
 
         public int index() {
@@ -74,6 +80,8 @@ public class OrdersTpNachisleniaViewRowImpl extends ViewRowImpl {
             return vals;
         }
     }
+
+
     public static final int CALCID = AttributesEnum.CalcId.index();
     public static final int DATNACH = AttributesEnum.DatNach.index();
     public static final int DESCRIPTION = AttributesEnum.Description.index();
@@ -84,8 +92,11 @@ public class OrdersTpNachisleniaViewRowImpl extends ViewRowImpl {
     public static final int PERCENT = AttributesEnum.Percent.index();
     public static final int SUMM = AttributesEnum.Summ.index();
     public static final int OTPNEDITABLE = AttributesEnum.OtpnEditable.index();
+    public static final int MANUAL = AttributesEnum.Manual.index();
+    public static final int PAYID = AttributesEnum.PayId.index();
     public static final int BASEOFCALCVIEW1 = AttributesEnum.BaseOfCalcView1.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
+    public static final int PAYSETTINGSVIEW1 = AttributesEnum.PaySettingsView1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -262,6 +273,38 @@ public class OrdersTpNachisleniaViewRowImpl extends ViewRowImpl {
     }
 
     /**
+     * Gets the attribute value for MANUAL using the alias name Manual.
+     * @return the MANUAL
+     */
+    public Integer getManual() {
+        return (Integer) getAttributeInternal(MANUAL);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for MANUAL using the alias name Manual.
+     * @param value value to set the MANUAL
+     */
+    public void setManual(Integer value) {
+        setAttributeInternal(MANUAL, value);
+    }
+
+    /**
+     * Gets the attribute value for PAY_ID using the alias name PayId.
+     * @return the PAY_ID
+     */
+    public String getPayId() {
+        return (String) getAttributeInternal(PAYID);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for PAY_ID using the alias name PayId.
+     * @param value value to set the PAY_ID
+     */
+    public void setPayId(String value) {
+        setAttributeInternal(PAYID, value);
+    }
+
+    /**
      * Gets the view accessor <code>RowSet</code> BaseOfCalcView1.
      */
     public RowSet getBaseOfCalcView1() {
@@ -273,6 +316,13 @@ public class OrdersTpNachisleniaViewRowImpl extends ViewRowImpl {
      */
     public RowSet getKontragentsView1() {
         return (RowSet) getAttributeInternal(KONTRAGENTSVIEW1);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> PaySettingsView1.
+     */
+    public RowSet getPaySettingsView1() {
+        return (RowSet) getAttributeInternal(PAYSETTINGSVIEW1);
     }
 }
 

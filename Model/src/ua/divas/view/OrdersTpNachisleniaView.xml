@@ -9,10 +9,13 @@
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
-  RowClass="ua.divas.view.OrdersTpNachisleniaViewRowImpl">
+  RowClass="ua.divas.view.OrdersTpNachisleniaViewRowImpl"
+  ComponentClass="ua.divas.view.OrdersTpNachisleniaViewImpl"
+  ComponentInterface="ua.divas.view.common.OrdersTpNachisleniaView"
+  ClientProxyName="ua.divas.view.client.OrdersTpNachisleniaViewClient">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
-    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
   <Properties>
@@ -28,6 +31,10 @@
   <ViewAccessor
     Name="KontragentsView1"
     ViewObjectName="ua.divas.view.KontragentsView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="PaySettingsView1"
+    ViewObjectName="ua.divas.view.PaySettingsView"
     RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_CalcId"
@@ -106,6 +113,25 @@
       Name="KontragentsFilterItemsByName"
       FullName="ua.divas.view.KontragentsView.KontragentsFilterItemsByName"/>
   </ListBinding>
+  <ListBinding
+    Name="LOV_PayId"
+    ListVOName="PaySettingsView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PayId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <SQLQuery><![CDATA[SELECT OrdersTpNachislenia.CALC_ID, 
        OrdersTpNachislenia.DAT_NACH, 
        OrdersTpNachislenia.DESCRIPTION, 
@@ -120,7 +146,9 @@
        OrdersTpNachislenia.ORDER_ID, 
        OrdersTpNachislenia.PERCENT, 
        OrdersTpNachislenia.SUMM,
-       (select 0 from dual) otpn_editable
+       (select 0 from dual) otpn_editable,
+       OrdersTpNachislenia.MANUAL,
+       OrdersTpNachislenia.PAY_ID
 FROM  ORDERS_TP_NACHISL OrdersTpNachislenia]]></SQLQuery>
   <EntityUsage
     Name="OrdersTpNachislenia"
@@ -236,6 +264,59 @@ FROM  ORDERS_TP_NACHISL OrdersTpNachislenia]]></SQLQuery>
     AliasName="OTPN_EDITABLE"
     Expression="OTPN_EDITABLE"
     SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Manual"
+    PrecisionRule="true"
+    EntityAttrName="Manual"
+    EntityUsage="OrdersTpNachislenia"
+    AliasName="MANUAL"/>
+  <ViewAttribute
+    Name="PayId"
+    PrecisionRule="true"
+    EntityAttrName="PayId"
+    EntityUsage="OrdersTpNachislenia"
+    AliasName="PAY_ID"
+    LOVName="LOV_PayId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="retrieveCalcId"
+      MethodName="retrieveCalcId">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="retrieveStavka"
+      MethodName="retrieveStavka">
+      <Return
+        Name="_return_type_"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="pId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="retrieveSumma"
+      MethodName="retrieveSumma">
+      <Return
+        Name="_return_type_"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="pId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

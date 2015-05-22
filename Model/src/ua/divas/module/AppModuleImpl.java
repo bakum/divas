@@ -35,6 +35,7 @@ import ua.divas.view.NomenklaturaViewImpl;
 import ua.divas.view.NotificationViewImpl;
 import ua.divas.view.OrderZamerViewImpl;
 import ua.divas.view.OrdersCalcViewImpl;
+import ua.divas.view.OrdersTpNachisleniaViewImpl;
 import ua.divas.view.OrdersTpOplatyViewImpl;
 import ua.divas.view.OrdersTpRashodyViewImpl;
 import ua.divas.view.OrdersTpUslugiViewImpl;
@@ -2814,16 +2815,16 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrdersTpNachisleniaView1.
      * @return OrdersTpNachisleniaView1
      */
-    public ViewObjectImpl getOrdersTpNachisleniaView1() {
-        return (ViewObjectImpl) findViewObject("OrdersTpNachisleniaView1");
+    public OrdersTpNachisleniaViewImpl getOrdersTpNachisleniaView1() {
+        return (OrdersTpNachisleniaViewImpl) findViewObject("OrdersTpNachisleniaView1");
     }
 
     /**
      * Container's getter for OrdersTpNachisleniaView2.
      * @return OrdersTpNachisleniaView2
      */
-    public ViewObjectImpl getOrdersTpNachisleniaView2() {
-        return (ViewObjectImpl) findViewObject("OrdersTpNachisleniaView2");
+    public OrdersTpNachisleniaViewImpl getOrdersTpNachisleniaView2() {
+        return (OrdersTpNachisleniaViewImpl) findViewObject("OrdersTpNachisleniaView2");
     }
 
     /**
@@ -2838,8 +2839,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrdersTpNachisleniaView3.
      * @return OrdersTpNachisleniaView3
      */
-    public ViewObjectImpl getOrdersTpNachisleniaView3() {
-        return (ViewObjectImpl) findViewObject("OrdersTpNachisleniaView3");
+    public OrdersTpNachisleniaViewImpl getOrdersTpNachisleniaView3() {
+        return (OrdersTpNachisleniaViewImpl) findViewObject("OrdersTpNachisleniaView3");
     }
 
     /**
@@ -2854,8 +2855,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for OrdersTpNachisleniaView4.
      * @return OrdersTpNachisleniaView4
      */
-    public ViewObjectImpl getOrdersTpNachisleniaView4() {
-        return (ViewObjectImpl) findViewObject("OrdersTpNachisleniaView4");
+    public OrdersTpNachisleniaViewImpl getOrdersTpNachisleniaView4() {
+        return (OrdersTpNachisleniaViewImpl) findViewObject("OrdersTpNachisleniaView4");
     }
 
     /**
