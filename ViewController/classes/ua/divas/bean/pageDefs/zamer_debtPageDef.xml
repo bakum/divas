@@ -39,21 +39,12 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <button IterBinding="VwKontragZamer1Iterator" StaticList="true" id="MarkedForPaymant">
-      <AttrNames>
-        <Item Value="MarkedForPaymant"/>
-      </AttrNames>
-      <ValueList>
-        <Item Value="true"/>
-        <Item Value="false"/>
-      </ValueList>
-    </button>
     <methodAction id="paySelectedRows" RequiresUpdateModel="true" Action="invokeMethod" MethodName="paySelectedRows"
                   IsViewObjectMethod="true" DataControl="AppModuleDataControl"
                   InstanceName="data.AppModuleDataControl.VwKontragZamer1"
                   ReturnName="data.AppModuleDataControl.methodResults.paySelectedRows_AppModuleDataControl_VwKontragZamer1_paySelectedRows_result">
-      <NamedData NDName="kassaId" NDType="java.lang.String" NDValue="${bindings.paySelectedRows_kassaId}"/>
-      <NamedData NDName="Summ" NDType="java.math.BigDecimal" NDValue="#{bindings.paySelectedRows_Summ}"/>
+      <NamedData NDName="kassaId" NDValue="#{bindings.paySelectedRows_kassaId}" NDType="java.lang.String"/>
+      <NamedData NDName="Summ" NDValue="#{bindings.paySelectedRows_Summ}" NDType="java.math.BigDecimal"/>
     </methodAction>
     <list StaticList="false" IterBinding="variables" ListIter="KassaSettingsView1Iterator"
           id="paySelectedRows_kassaId1"
@@ -74,5 +65,12 @@
         <Item Value="paySelectedRows_Summ"/>
       </AttrNames>
     </attributeValues>
+    <methodAction id="paySelRow" RequiresUpdateModel="true" Action="invokeMethod" MethodName="paySelRow"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.VwKontragZamer1">
+      <NamedData NDName="rw" NDType="oracle.jbo.Row" NDValue="#{bindings.VwKontragZamer1Iterator.currentRow}"/>
+      <NamedData NDName="kassaId" NDType="java.lang.String" NDValue="#{bindings.paySelectedRows_kassaId}"/>
+      <NamedData NDName="Summ" NDType="java.math.BigDecimal" NDValue="#{bindings.paySelectedRows_Summ}"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

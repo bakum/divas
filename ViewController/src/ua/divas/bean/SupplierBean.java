@@ -77,8 +77,8 @@ public class SupplierBean {
             _treeIteratorBinding = treeBinding.getDCIteratorBinding();
             JUIteratorBinding iterator = nodeBinding.getIteratorBinding();
             String keyStr = nodeBinding.getRowKey().toStringFormat(true);
-            if (keyStr != null && rowType.matches("DivisionsView")) {
-                DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("DivisionsView1Iterator");
+            if (keyStr != null && rowType.matches("VwSupplierMoves")) {
+                DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("VwSupplierMoves1Iterator");
                 try {
                     iter.setCurrentRowWithKey(keyStr);
                 } catch (RowNotFoundException e) {

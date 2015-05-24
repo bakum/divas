@@ -393,6 +393,22 @@ GROUP BY ID,
         Name="Summ"
         Type="java.math.BigDecimal"/>
     </Method>
+    <Method
+      Name="paySelRow"
+      MethodName="paySelRow">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="rw"
+        Type="oracle.jbo.Row"/>
+      <Parameter
+        Name="kassaId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="Summ"
+        Type="java.math.BigDecimal"/>
+    </Method>
   </ClientInterface>
   <ResourceBundle>
     <PropertiesBundle

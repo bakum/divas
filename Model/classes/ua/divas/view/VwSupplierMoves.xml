@@ -279,4 +279,7 @@ GROUP BY KONTRAG_ID,
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>
   </ResourceBundle>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="RegistratorId"/>
+  </AttrArray>
 </ViewObject>

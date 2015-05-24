@@ -149,6 +149,7 @@
        (select 0 from dual) otpn_editable,
        OrdersTpNachislenia.MANUAL,
        OrdersTpNachislenia.PAY_ID,
+       (select fullname from pay_settings where id = pay_id) Pay_Name,
        ('ORDERS') Table_Name
 FROM  ORDERS_TP_NACHISL OrdersTpNachislenia]]></SQLQuery>
   <EntityUsage
@@ -286,6 +287,21 @@ FROM  ORDERS_TP_NACHISL OrdersTpNachislenia]]></SQLQuery>
     </Properties>
   </ViewAttribute>
   <ViewAttribute
+    Name="PayName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PAY_NAME"
+    Expression="PAY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
     Name="TableName"
     IsUpdateable="false"
     IsPersistent="false"
@@ -295,7 +311,7 @@ FROM  ORDERS_TP_NACHISL OrdersTpNachislenia]]></SQLQuery>
     ColumnType="CHAR"
     AliasName="TABLE_NAME"
     Expression="TABLE_NAME"
-    SQLType="CHAR">
+    SQLType="VARCHAR">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="6"/>
     </DesignTime>

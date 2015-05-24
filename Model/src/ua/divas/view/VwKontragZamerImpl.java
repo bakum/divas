@@ -49,6 +49,18 @@ public class VwKontragZamerImpl extends DivasView implements VwKontragZamer {
         }
         duplicateRowSet.closeRowSet();
     }
+    
+    public void paySelRow(Row rw, String kassaId, BigDecimal Summ) {
+            String kontragId = (String)rw.getAttribute("Id");
+            //System.out.println("kontragId "+kontragId);
+            //oracle.jbo.domain.Number Summ = (oracle.jbo.domain.Number)rw.getAttribute("DebtZamer");
+            //System.out.println("Summ "+Summ.bigDecimalValue().toString());
+            
+            BindingContext bindingContext = BindingContext.getCurrent();
+            DCDataControl dc  = bindingContext.findDataControl("AppModuleDataControl"); // Name of application module in datacontrolBinding.cpx
+            AppModuleImpl am = (AppModuleImpl)dc.getDataProvider();
+            am.addPkoFromZamer(kassaId, kontragId, Summ);
+        }
 
     /**
      * This is the default constructor (do not remove).

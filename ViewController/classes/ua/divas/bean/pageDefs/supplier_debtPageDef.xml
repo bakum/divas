@@ -6,6 +6,7 @@
     <variableIterator id="variables"/>
     <iterator Binds="VwKontragAllItems1" RangeSize="-1" DataControl="AppModuleDataControl"
               id="VwKontragAllItems1Iterator"/>
+    <iterator Binds="VwSupplierMoves1" RangeSize="10" DataControl="AppModuleDataControl" id="VwSupplierMoves1Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="VwKontragAllItems1Iterator" id="VwKontragAllItems1">
@@ -30,6 +31,17 @@
           <Item Value="SumSummRashod"/>
           <Item Value="TableName"/>
         </AttrNames>
+        <Accessors>
+          <Item Value="OrdersTpNachisleniaView"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="ua.divas.view.OrdersTpNachisleniaView" Name="VwKontragAllItems12">
+        <AttrNames>
+          <Item Value="CalcId"/>
+          <Item Value="Summ"/>
+          <Item Value="Percent"/>
+          <Item Value="PayName"/>
+        </AttrNames>
       </nodeDefinition>
     </tree>
     <graph IterBinding="VwKontragAllItems1Iterator" id="VwKontragAllItems11" xmlns="http://xmlns.oracle.com/adfm/dvt"
@@ -37,13 +49,30 @@
       <graphDataMap convert="false" leafOnly="true">
         <series>
           <data>
-            <item value="DebtSupplier"/>
+            <item value="DebtSupplier" label="Задолженность"/>
           </data>
         </series>
         <groups>
-          <item value="Fullname"/>
+          <item value="Fullname" label="Наименование"/>
         </groups>
       </graphDataMap>
     </graph>
+    <tree IterBinding="VwSupplierMoves1Iterator" id="VwSupplierMoves1">
+      <nodeDefinition DefName="ua.divas.view.VwSupplierMoves" Name="VwSupplierMoves10">
+        <AttrNames>
+          <Item Value="KontragId"/>
+          <Item Value="Code"/>
+          <Item Value="DivisionId"/>
+          <Item Value="Kontrag"/>
+          <Item Value="Period"/>
+          <Item Value="RegistratorId"/>
+          <Item Value="RegString"/>
+          <Item Value="SumSumm"/>
+          <Item Value="SumSummPrihod"/>
+          <Item Value="SumSummRashod"/>
+          <Item Value="TableName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>

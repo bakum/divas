@@ -2,6 +2,7 @@ package ua.divas.view.client;
 
 import java.math.BigDecimal;
 
+import oracle.jbo.Row;
 import oracle.jbo.client.remote.ViewUsageImpl;
 
 import ua.divas.view.common.VwKontragZamer;
@@ -22,6 +23,14 @@ public class VwKontragZamerClient extends ViewUsageImpl implements VwKontragZame
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "paySelectedRows", new String[] {
                                                                          "java.lang.String" }, new Object[] {
                                                                          kassaId });
+        return;
+    }
+
+    public void paySelRow(Row rw, String kassaId, BigDecimal Summ) {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "paySelRow", new String[] {
+                                                                         "oracle.jbo.Row", "java.lang.String",
+                                                                         "java.math.BigDecimal"
+        }, new Object[] { rw, kassaId, Summ });
         return;
     }
 

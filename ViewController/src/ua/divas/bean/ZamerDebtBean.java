@@ -1,8 +1,12 @@
 package ua.divas.bean;
 
+import javax.faces.event.ActionEvent;
+
 import oracle.adf.model.BindingContext;
+import oracle.adf.view.rich.component.rich.data.RichTreeTable;
 import oracle.adf.view.rich.component.rich.input.RichInputNumberSpinbox;
 import oracle.adf.view.rich.component.rich.input.RichSelectOneChoice;
+import oracle.adf.view.rich.context.AdfFacesContext;
 import oracle.adf.view.rich.event.DialogEvent;
 
 import oracle.adf.view.rich.event.PopupFetchEvent;
@@ -13,6 +17,7 @@ import oracle.binding.OperationBinding;
 public class ZamerDebtBean {
     private RichSelectOneChoice kassaId;
     private RichInputNumberSpinbox summa;
+    private RichTreeTable treeTable;
 
     public ZamerDebtBean() {
     }
@@ -32,12 +37,18 @@ public class ZamerDebtBean {
     public RichInputNumberSpinbox getSumma() {
         return summa;
     }
+    
+    public void refresh() {
+        AdfFacesContext.getCurrentInstance().addPartialTarget(getTreeTable());
+    }
 
     public void onDialogPay(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-            OperationBinding oper = (OperationBinding) binding.getOperationBinding("paySelectedRows");
+            OperationBinding oper = (OperationBinding) binding.getOperationBinding("paySelRow");
             oper.execute();
+            
+            refresh();
         }
     }
 
@@ -55,5 +66,17 @@ public class ZamerDebtBean {
             // TODO: Add catch code
             e.printStackTrace();
         }
+    }
+
+    public void setTreeTable(RichTreeTable treeTable) {
+        this.treeTable = treeTable;
+    }
+
+    public RichTreeTable getTreeTable() {
+        return treeTable;
+    }
+
+    public void onRefresh(ActionEvent actionEvent) {
+        refresh();
     }
 }

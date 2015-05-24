@@ -23,14 +23,20 @@
                                 <f:facet name="pathStamp">
                                     <af:outputText value="#{node}" id="ot2"/>
                                 </f:facet>
-                                <af:column id="c2" width="200" headerText="Регистратор">
+                                <af:column id="c2" width="200" headerText="Регистратор"
+                                           align="#{node.bindings.PayName == null ? 'left' : 'right'}">
                                     <af:outputText value="#{node.bindings.RegString}" id="ot3"/>
+                                    <af:outputText value="#{node.bindings.PayName}" id="ot8"
+                                                   inlineStyle="font-style:italic;"/>
                                 </af:column>
                                 <af:column id="c3" headerText="Приход">
                                     <af:outputText value="#{node.bindings.SumSummPrihod}" id="ot4"/>
                                 </af:column>
-                                <af:column id="c4" headerText="Расход">
+                                <af:column id="c4" headerText="Расход"
+                                           align="#{node.bindings.PayName == null ? 'left' : 'right'}">
                                     <af:outputText value="#{node.bindings.SumSummRashod}" id="ot5"/>
+                                    <af:outputText value="#{node.bindings.Summ}" id="ot7"
+                                                   inlineStyle="font-style:italic;"/>
                                 </af:column>
                                 <af:column id="c5" headerText="Задолженность">
                                     <af:outputText value="#{node.DebtSupplier}" id="ot6"

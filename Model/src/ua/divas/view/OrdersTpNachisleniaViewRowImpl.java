@@ -54,6 +54,7 @@ public class OrdersTpNachisleniaViewRowImpl extends ViewRowImpl {
         OtpnEditable,
         Manual,
         PayId,
+        PayName,
         TableName,
         BaseOfCalcView1,
         KontragentsView1,
@@ -95,6 +96,7 @@ public class OrdersTpNachisleniaViewRowImpl extends ViewRowImpl {
     public static final int OTPNEDITABLE = AttributesEnum.OtpnEditable.index();
     public static final int MANUAL = AttributesEnum.Manual.index();
     public static final int PAYID = AttributesEnum.PayId.index();
+    public static final int PAYNAME = AttributesEnum.PayName.index();
     public static final int TABLENAME = AttributesEnum.TableName.index();
     public static final int BASEOFCALCVIEW1 = AttributesEnum.BaseOfCalcView1.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
@@ -306,6 +308,14 @@ public class OrdersTpNachisleniaViewRowImpl extends ViewRowImpl {
         setAttributeInternal(PAYID, value);
     }
 
+
+    /**
+     * Gets the attribute value for the calculated attribute PayName.
+     * @return the PayName
+     */
+    public String getPayName() {
+        return (String) getAttributeInternal(PAYNAME);
+    }
 
     /**
      * Gets the attribute value for the calculated attribute TableName.
