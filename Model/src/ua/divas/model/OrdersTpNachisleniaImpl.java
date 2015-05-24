@@ -298,6 +298,15 @@ public class OrdersTpNachisleniaImpl extends DivasEntityNoDelete {
     }
 
     /**
+     * @param id key constituent
+
+     * @return a Key object based on given key constituents.
+     */
+    public static Key createPrimaryKey(String id) {
+        return new Key(new Object[] { id });
+    }
+
+    /**
      * Validation method for OrdersTpNachislenia.
      */
     public boolean validateOrdersTpNachislenia2() {
@@ -308,14 +317,6 @@ public class OrdersTpNachisleniaImpl extends DivasEntityNoDelete {
         return true;
     }
 
-    /**
-     * @param id key constituent
-
-     * @return a Key object based on given key constituents.
-     */
-    public static Key createPrimaryKey(String id) {
-        return new Key(new Object[] { id });
-    }
 
     /**
      * Validation method for OrdersTpNachislenia.

@@ -15,6 +15,22 @@ AS TABLE OF divisiontype;
 
 /
 --------------------------------------------------------
+--  DDL for Type KONTRAGTYPE
+--------------------------------------------------------
+
+  CREATE OR REPLACE TYPE "KONTRAGTYPE" as object 
+(n varchar2(50), u_name varchar2(1000), root number)
+
+/
+--------------------------------------------------------
+--  DDL for Type KONTRAGTABLE
+--------------------------------------------------------
+
+  CREATE OR REPLACE TYPE "KONTRAGTABLE" 
+AS TABLE OF kontragtype;
+
+/
+--------------------------------------------------------
 --  DDL for Type ROW_BALLANS
 --------------------------------------------------------
 
@@ -121,12 +137,12 @@ AS TABLE OF usertype;
 --  DDL for Sequence PKO_NUM_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PKO_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 121 CACHE 20 NOORDER  CYCLE ;
+   CREATE SEQUENCE  "PKO_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 143 CACHE 20 NOORDER  CYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence PS_TXN_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 174401 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 185501 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence RKO_NUM_SEQ
 --------------------------------------------------------
@@ -153,6 +169,15 @@ AS TABLE OF usertype;
   CREATE TABLE "BASE_OF_CALC" 
    (	"ID" VARCHAR2(50 CHAR), 
 	"NAME" VARCHAR2(100 CHAR), 
+	"FULLNAME" VARCHAR2(100 CHAR)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table BASE_OF_NACHISL
+--------------------------------------------------------
+
+  CREATE TABLE "BASE_OF_NACHISL" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"NAME" VARCHAR2(20 CHAR), 
 	"FULLNAME" VARCHAR2(100 CHAR)
    ) ;
 --------------------------------------------------------
@@ -489,6 +514,19 @@ AS TABLE OF usertype;
 	"DIVISION_ID" VARCHAR2(50 CHAR)
    ) ;
 --------------------------------------------------------
+--  DDL for Table NACHISL_SETTINGS
+--------------------------------------------------------
+
+  CREATE TABLE "NACHISL_SETTINGS" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"USER_ID" VARCHAR2(50 CHAR), 
+	"PAY_ID" VARCHAR2(50 CHAR), 
+	"VERSION" TIMESTAMP (6) DEFAULT systimestamp, 
+	"BASE_ID" VARCHAR2(50 CHAR), 
+	"DIVISION_ID" VARCHAR2(50 CHAR), 
+	"SUMMA" NUMBER
+   ) ;
+--------------------------------------------------------
 --  DDL for Table NOMENKLATURA
 --------------------------------------------------------
 
@@ -590,7 +628,9 @@ AS TABLE OF usertype;
 	"SUMM" NUMBER(10,2), 
 	"DESCRIPTION" VARCHAR2(1000 CHAR), 
 	"CALC_ID" VARCHAR2(50 CHAR), 
-	"PERCENT" NUMBER(10,2)
+	"PERCENT" NUMBER(10,2), 
+	"PAY_ID" VARCHAR2(50 CHAR), 
+	"MANUAL" NUMBER(1,0)
    ) ;
 --------------------------------------------------------
 --  DDL for Table ORDERS_TP_OPLATY
@@ -678,6 +718,20 @@ AS TABLE OF usertype;
 	"SUMMA" NUMBER(38,2)
    ) ;
 --------------------------------------------------------
+--  DDL for Table PAY_SETTINGS
+--------------------------------------------------------
+
+  CREATE TABLE "PAY_SETTINGS" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"NAME" VARCHAR2(50 CHAR), 
+	"FULLNAME" VARCHAR2(100 CHAR), 
+	"STAVKA" NUMBER, 
+	"DESCRIPTION" VARCHAR2(500 BYTE), 
+	"VERSION" TIMESTAMP (6) DEFAULT systimestamp, 
+	"BASE_ID" VARCHAR2(50 CHAR), 
+	"SUMMA" NUMBER DEFAULT 0
+   ) ;
+--------------------------------------------------------
 --  DDL for Table PKO
 --------------------------------------------------------
 
@@ -696,7 +750,8 @@ AS TABLE OF usertype;
 	"ACTIVITIES_ID" VARCHAR2(50 CHAR), 
 	"OPERATION_ID" VARCHAR2(50 CHAR), 
 	"SUMMA" NUMBER, 
-	"KONTRAG_ID" VARCHAR2(50 CHAR)
+	"KONTRAG_ID" VARCHAR2(50 CHAR), 
+	"ORDER_ID" VARCHAR2(50 CHAR)
    ) ;
 --------------------------------------------------------
 --  DDL for Table PLAN_ACC
@@ -956,7 +1011,8 @@ AS TABLE OF usertype;
 	"OPERATION_ID" VARCHAR2(50 CHAR), 
 	"KONTRAG_ID" VARCHAR2(50 CHAR), 
 	"SUMMA" NUMBER, 
-	"DEST_KASSA_ID" VARCHAR2(50 CHAR)
+	"DEST_KASSA_ID" VARCHAR2(50 CHAR), 
+	"ORDER_ID" VARCHAR2(50 CHAR)
    ) ;
 --------------------------------------------------------
 --  DDL for Table TYPE_DEF
@@ -1015,7 +1071,8 @@ AS TABLE OF usertype;
 	"KASSA_ID" VARCHAR2(50 CHAR), 
 	"MAIN_USLUGA" VARCHAR2(50 CHAR), 
 	"ACTIVITIES_ID" VARCHAR2(50 CHAR), 
-	"ZAMERKONTRAG_ID" VARCHAR2(50 CHAR)
+	"ZAMERKONTRAG_ID" VARCHAR2(50 CHAR), 
+	"KONTRAG_ID" VARCHAR2(50 CHAR)
    ) ;
 --------------------------------------------------------
 --  DDL for Table VOUCHER
@@ -1263,6 +1320,38 @@ GROUP BY PLAN_ACC.ID,
   VW_MOVES.PERIOD,
   VW_MOVES.DIVISION_ID
 ORDER BY Kred;
+--------------------------------------------------------
+--  DDL for View ORDERS_CALC
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "ORDERS_CALC" ("ID", "KONTRAG_ID", "KONTRAGNAME", "DIVISION_ID", "OPLATY", "USLUGIALL", "DEBT") AS 
+  SELECT ID,
+  KONTRAG_ID,
+  FULLNAME AS KontragName,
+  DIVISION_ID,
+  Oplaty,
+  (Uslugi + UslugiAdd) UslugiAll,
+  (Uslugi + UslugiAdd - Oplaty) Debt
+FROM
+  (SELECT ORDERS.ID,
+    ORDERS.KONTRAG_ID,
+    ORDERS.DIVISION_ID,
+    NVL(SUM(DISTINCT ORDERS_TP_OPLATY.SUM), 0)       AS Oplaty,
+    NVL(SUM(DISTINCT ORDERS_TP_USLUGI.SUMM), 0)      AS Uslugi,
+    NVL(SUM(DISTINCT ORDERS_TP_USLUGI.PRICE_ADD), 0) AS UslugiAdd,
+    KONTRAGENTS.FULLNAME
+  FROM ORDERS
+  LEFT JOIN ORDERS_TP_OPLATY
+  ON ORDERS.ID = ORDERS_TP_OPLATY.ORDER_ID
+  LEFT JOIN ORDERS_TP_USLUGI
+  ON ORDERS.ID = ORDERS_TP_USLUGI.ORDER_ID
+  INNER JOIN KONTRAGENTS
+  ON KONTRAGENTS.ID = ORDERS.KONTRAG_ID
+  GROUP BY ORDERS.ID,
+    ORDERS.KONTRAG_ID,
+    ORDERS.DIVISION_ID,
+    KONTRAGENTS.FULLNAME
+  );
 --------------------------------------------------------
 --  DDL for View VW_BALLANS
 --------------------------------------------------------
@@ -1703,6 +1792,12 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   CREATE UNIQUE INDEX "BASE_OF_CALC_PK" ON "BASE_OF_CALC" ("ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index BASE_OF_NACHISL_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "BASE_OF_NACHISL_PK" ON "BASE_OF_NACHISL" ("ID") 
+  ;
+--------------------------------------------------------
 --  DDL for Index CALENDAR_PK
 --------------------------------------------------------
 
@@ -1991,6 +2086,12 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   CREATE UNIQUE INDEX "MOVES_PK" ON "MOVES" ("ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index NACHISL_SETTINGS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NACHISL_SETTINGS_PK" ON "NACHISL_SETTINGS" ("ID") 
+  ;
+--------------------------------------------------------
 --  DDL for Index NOMENKLATURA_PK
 --------------------------------------------------------
 
@@ -2067,6 +2168,12 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
 --------------------------------------------------------
 
   CREATE UNIQUE INDEX "OTHER_ZATRATY_TAB_PART_ZAT_PK" ON "OTHER_ZATRATY_TAB_PART_ZATRATY" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PAY_SETTINGS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PAY_SETTINGS_PK" ON "PAY_SETTINGS" ("ID") 
   ;
 --------------------------------------------------------
 --  DDL for Index PKO_PK
@@ -2298,6 +2405,17 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   ALTER TABLE "BASE_OF_CALC" MODIFY ("NAME" NOT NULL ENABLE);
  
   ALTER TABLE "BASE_OF_CALC" MODIFY ("FULLNAME" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table BASE_OF_NACHISL
+--------------------------------------------------------
+
+  ALTER TABLE "BASE_OF_NACHISL" ADD CONSTRAINT "BASE_OF_NACHISL_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "BASE_OF_NACHISL" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "BASE_OF_NACHISL" MODIFY ("NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "BASE_OF_NACHISL" MODIFY ("FULLNAME" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table CALENDAR
 --------------------------------------------------------
@@ -2705,6 +2823,21 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
  
   ALTER TABLE "MOVES" MODIFY ("DIVISION_ID" NOT NULL ENABLE);
 --------------------------------------------------------
+--  Constraints for Table NACHISL_SETTINGS
+--------------------------------------------------------
+
+  ALTER TABLE "NACHISL_SETTINGS" ADD CONSTRAINT "NACHISL_SETTINGS_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "NACHISL_SETTINGS" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "NACHISL_SETTINGS" MODIFY ("USER_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "NACHISL_SETTINGS" MODIFY ("PAY_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "NACHISL_SETTINGS" MODIFY ("VERSION" NOT NULL ENABLE);
+ 
+  ALTER TABLE "NACHISL_SETTINGS" MODIFY ("BASE_ID" NOT NULL ENABLE);
+--------------------------------------------------------
 --  Constraints for Table NOMENKLATURA
 --------------------------------------------------------
 
@@ -2947,6 +3080,25 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   ALTER TABLE "OTHER_ZATRATY_TAB_PART_ZATRATY" MODIFY ("ZATR_ID" NOT NULL ENABLE);
  
   ALTER TABLE "OTHER_ZATRATY_TAB_PART_ZATRATY" MODIFY ("SUMMA" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table PAY_SETTINGS
+--------------------------------------------------------
+
+  ALTER TABLE "PAY_SETTINGS" ADD CONSTRAINT "PAY_SETTINGS_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "PAY_SETTINGS" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PAY_SETTINGS" MODIFY ("NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PAY_SETTINGS" MODIFY ("FULLNAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PAY_SETTINGS" MODIFY ("STAVKA" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PAY_SETTINGS" MODIFY ("VERSION" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PAY_SETTINGS" MODIFY ("BASE_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PAY_SETTINGS" MODIFY ("SUMMA" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table PKO
 --------------------------------------------------------
@@ -3563,6 +3715,21 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   ALTER TABLE "MOVES" ADD CONSTRAINT "MOVES_TYPE_DEF_FK1" FOREIGN KEY ("REGISTRATOR_TYPE")
 	  REFERENCES "TYPE_DEF" ("ID") ENABLE;
 --------------------------------------------------------
+--  Ref Constraints for Table NACHISL_SETTINGS
+--------------------------------------------------------
+
+  ALTER TABLE "NACHISL_SETTINGS" ADD CONSTRAINT "NACHISL_SETTINGS_FK1" FOREIGN KEY ("USER_ID")
+	  REFERENCES "USERS" ("ID") ON DELETE CASCADE ENABLE;
+ 
+  ALTER TABLE "NACHISL_SETTINGS" ADD CONSTRAINT "NACHISL_SETTINGS_FK2" FOREIGN KEY ("PAY_ID")
+	  REFERENCES "PAY_SETTINGS" ("ID") ON DELETE CASCADE ENABLE;
+ 
+  ALTER TABLE "NACHISL_SETTINGS" ADD CONSTRAINT "NACHISL_SETTINGS_FK3" FOREIGN KEY ("BASE_ID")
+	  REFERENCES "BASE_OF_NACHISL" ("ID") ON DELETE CASCADE ENABLE;
+ 
+  ALTER TABLE "NACHISL_SETTINGS" ADD CONSTRAINT "NACHISL_SETTINGS_FK4" FOREIGN KEY ("DIVISION_ID")
+	  REFERENCES "DIVISIONS" ("ID") ENABLE;
+--------------------------------------------------------
 --  Ref Constraints for Table NOMENKLATURA
 --------------------------------------------------------
 
@@ -3622,6 +3789,9 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
  
   ALTER TABLE "ORDERS_TP_NACHISL" ADD CONSTRAINT "ORDERS_TP_NACHISL_FK3" FOREIGN KEY ("CALC_ID")
 	  REFERENCES "BASE_OF_CALC" ("ID") ON DELETE SET NULL ENABLE;
+ 
+  ALTER TABLE "ORDERS_TP_NACHISL" ADD CONSTRAINT "ORDERS_TP_NACHISL_FK4" FOREIGN KEY ("PAY_ID")
+	  REFERENCES "PAY_SETTINGS" ("ID") ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table ORDERS_TP_OPLATY
 --------------------------------------------------------
@@ -3698,6 +3868,12 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   ALTER TABLE "OTHER_ZATRATY_TAB_PART_ZATRATY" ADD CONSTRAINT "OTHER_ZATRATY_TAB_PART_ZA_FK2" FOREIGN KEY ("ZATR_ID")
 	  REFERENCES "ZATRATY" ("ID") ON DELETE SET NULL ENABLE;
 --------------------------------------------------------
+--  Ref Constraints for Table PAY_SETTINGS
+--------------------------------------------------------
+
+  ALTER TABLE "PAY_SETTINGS" ADD CONSTRAINT "PAY_SETTINGS_FK1" FOREIGN KEY ("BASE_ID")
+	  REFERENCES "BASE_OF_CALC" ("ID") ENABLE;
+--------------------------------------------------------
 --  Ref Constraints for Table PKO
 --------------------------------------------------------
 
@@ -3721,6 +3897,9 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
  
   ALTER TABLE "PKO" ADD CONSTRAINT "PKO_FK7" FOREIGN KEY ("KONTRAG_ID")
 	  REFERENCES "KONTRAGENTS" ("ID") ENABLE;
+ 
+  ALTER TABLE "PKO" ADD CONSTRAINT "PKO_FK8" FOREIGN KEY ("ORDER_ID")
+	  REFERENCES "ORDERS" ("ID") ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table PLAN_ACC
 --------------------------------------------------------
@@ -3817,6 +3996,9 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
  
   ALTER TABLE "RKO" ADD CONSTRAINT "RKO_FK8" FOREIGN KEY ("DEST_KASSA_ID")
 	  REFERENCES "KASSA" ("ID") ENABLE;
+ 
+  ALTER TABLE "RKO" ADD CONSTRAINT "RKO_FK9" FOREIGN KEY ("ORDER_ID")
+	  REFERENCES "ORDERS" ("ID") ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table USER_SETTINGS
 --------------------------------------------------------
@@ -3834,6 +4016,9 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
 	  REFERENCES "TYPE_OF_ACTIVITIES" ("ID") ENABLE;
  
   ALTER TABLE "USER_SETTINGS" ADD CONSTRAINT "USER_SETTINGS_FK2" FOREIGN KEY ("ZAMERKONTRAG_ID")
+	  REFERENCES "KONTRAGENTS" ("ID") ENABLE;
+ 
+  ALTER TABLE "USER_SETTINGS" ADD CONSTRAINT "USER_SETTINGS_FK3" FOREIGN KEY ("KONTRAG_ID")
 	  REFERENCES "KONTRAGENTS" ("ID") ENABLE;
  
   ALTER TABLE "USER_SETTINGS" ADD CONSTRAINT "USER_SETTINGS_KASSA_FK1" FOREIGN KEY ("KASSA_ID")
@@ -3882,6 +4067,22 @@ ALTER TRIGGER "ASTER_SETTINGS_TRG" ENABLE;
 end;
 /
 ALTER TRIGGER "BASE_OF_CALC_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger BASE_OF_NACHISL_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "BASE_OF_NACHISL_TRG" 
+  BEFORE INSERT OR UPDATE ON "BASE_OF_NACHISL"
+  REFERENCING FOR EACH ROW
+  begin  
+   if inserting then 
+      if :NEW."ID" is null then 
+         select utility.uuid() into :new."ID" from dual;
+      end if; 
+   end if;
+end;
+/
+ALTER TRIGGER "BASE_OF_NACHISL_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger CALL_LISTS_TRG
 --------------------------------------------------------
@@ -4361,6 +4562,25 @@ end;
 /
 ALTER TRIGGER "MOVES_TGR" ENABLE;
 --------------------------------------------------------
+--  DDL for Trigger NACHISL_SETTINGS_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "NACHISL_SETTINGS_TRG" 
+  BEFORE INSERT OR UPDATE ON "NACHISL_SETTINGS"
+  REFERENCING FOR EACH ROW
+  begin  
+   if inserting then 
+      if :NEW."ID" is null then 
+         select utility.uuid() into :NEW."ID" from dual;
+      end if; 
+   end if;
+   if updating then
+      select systimestamp into :new."VERSION" from dual;
+   end if;
+end;
+/
+ALTER TRIGGER "NACHISL_SETTINGS_TRG" ENABLE;
+--------------------------------------------------------
 --  DDL for Trigger NOMENKLATURA_TRG
 --------------------------------------------------------
 
@@ -4620,6 +4840,25 @@ begin
 end;
 /
 ALTER TRIGGER "OTHER_ZATR_TP_ZATRATY_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger PAY_SETTINGS_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "PAY_SETTINGS_TRG" 
+  BEFORE INSERT OR UPDATE ON "PAY_SETTINGS"
+  REFERENCING FOR EACH ROW
+  begin  
+   if inserting then 
+      if :NEW."ID" is null then 
+        select utility.uuid() into :new."ID" from dual; 
+      end if; 
+   end if;
+    if updating then
+      select systimestamp into :new."VERSION" from dual;
+   end if;   
+end;
+/
+ALTER TRIGGER "PAY_SETTINGS_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger PKO_TRG
 --------------------------------------------------------
@@ -5399,6 +5638,22 @@ end other_entry;
 
 /
 --------------------------------------------------------
+--  DDL for Package PAYCALC
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "PAYCALC" AS 
+
+  function get_kontrag_by_order(p_order in varchar2) return kontragtable;
+  function get_kontrag_by_division(p_order in varchar2) return kontragtable;
+  function get_kontrag_by_ierarchia(p_order in varchar2) return kontragtable;
+  procedure calc_money(p_order in varchar2);
+  function getSummOrder(p_order in varchar2) return number;
+  function getKoeffByLevel(p_order in varchar2, p_level number) return number;
+
+END PAYCALC;
+
+/
+--------------------------------------------------------
 --  DDL for Package PKO_ENTRY
 --------------------------------------------------------
 
@@ -5509,6 +5764,11 @@ end usr_sett;
   procedure add_user_to_group(p_user in varchar2, p_group in varchar2);
   function retrieve_zamer_parentid return varchar2;
   function retrieve_supplier_parentid return varchar2;
+  function retrieve_other_parentid return varchar2;
+  function retrieve_name_baseofcalc (p_id in varchar2) return varchar2;
+  function retrieve_idfix_baseofcalc return varchar2;
+  function retrieve_idfromalgorythm (p_id in varchar2) return varchar2;
+  function retrieve_name_basenachisl (p_id in varchar2) return varchar2;
 
 end utility;
 
@@ -7664,6 +7924,7 @@ END KONTRAG;
   pragma exception_init(in_use, -54);
   begin
     orders_remove_plan_acc(p_id);
+    paycalc.calc_money(p_id);
     select * into p_orders_rec from orders where id = p_id for update nowait;
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from orders
       where id = p_id;
@@ -8093,6 +8354,213 @@ procedure other_remove_all as
   end other_remove_all;
 
 end other_entry;
+
+/
+--------------------------------------------------------
+--  DDL for Package Body PAYCALC
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "PAYCALC" AS
+  
+  function get_kontrag_by_order(p_order in varchar2) return kontragtable AS
+  l_data kontragTable := kontragTable();
+  p_counter number := 0;
+  order_rec orders%rowtype;
+  p_kontragname kontragents.fullname%type;
+  sett_rec user_settings%rowtype;
+  BEGIN
+    select o.* into order_rec from orders o where upper(o.id) = upper(p_order);
+    for i in (select * from nachisl_settings where base_id = (select b.id from base_of_nachisl b where b.name = 'ORDER' and rownum = 1)) loop
+      for y in (select u.* from users u where upper(u.id) = upper(i.user_id)) loop
+      select s.* into sett_rec from user_settings s where s.user_id = y.id and rownum = 1;
+      p_counter:=p_counter+1;
+      if y.id = order_rec.user_id then 
+        select fullname into p_kontragname from kontragents where id = sett_rec.kontrag_id;
+        l_data.extend;
+        l_data(p_counter) := kontragType(nvl(sett_rec.kontrag_id,'none'), nvl(p_kontragname,'none'),1);
+      end if;
+      if sett_rec.zamerkontrag_id = order_rec.zamer_id then
+        select fullname into p_kontragname from kontragents where id = sett_rec.zamerkontrag_id;
+        l_data.extend;
+        l_data(p_counter) := kontragType(nvl(sett_rec.zamerkontrag_id,'none'), nvl(p_kontragname,'none'),1);
+      end if;
+      end loop;
+    end loop;
+    return l_data;
+  END get_kontrag_by_order;
+
+  function get_kontrag_by_division(p_order in varchar2) return kontragtable AS
+  l_data kontragTable := kontragTable();
+  p_counter number := 0;
+  order_rec orders%rowtype;
+  p_kontragname kontragents.fullname%type;
+  sett_rec user_settings%rowtype;
+  BEGIN
+     select o.* into order_rec from orders o where upper(o.id) = upper(p_order);
+     for i in (select * from nachisl_settings where base_id = (select b.id from base_of_nachisl b where b.name = 'DIV' and rownum = 1)) loop
+      select s.* into sett_rec from user_settings s where s.user_id = i.user_id and rownum = 1;
+      p_counter:=p_counter+1;
+      if i.division_id = order_rec.division_id then
+        select fullname into p_kontragname from kontragents where id = sett_rec.kontrag_id;
+        l_data.extend;
+        l_data(p_counter) := kontragType(nvl(sett_rec.kontrag_id,'none'), nvl(p_kontragname,'none'),1);
+      end if;
+     end loop;
+     return l_data;
+  END get_kontrag_by_division;
+
+  function get_kontrag_by_ierarchia(p_order in varchar2) return kontragtable AS
+  l_data kontragTable := kontragTable();
+  p_counter number := 0;
+  order_rec orders%rowtype;
+  p_kontragname kontragents.fullname%type;
+  sett_rec user_settings%rowtype;
+  BEGIN
+    select o.* into order_rec from orders o where upper(o.id) = upper(p_order);
+    for i in (select * from nachisl_settings where base_id = (select b.id from base_of_nachisl b where b.name = 'IERARHIA' and rownum = 1)) loop
+      select s.* into sett_rec from user_settings s where s.user_id = i.user_id and rownum = 1;
+      for y in (select root, s.id from (select level root, id from divisions d
+            where d.deleted = 0
+            connect by prior d.id=d.parent_id
+            start with d.id = i.division_id) s) loop    
+        if y.id = order_rec.division_id  then  
+          p_counter:=p_counter+1;
+          select fullname into p_kontragname from kontragents where id = sett_rec.kontrag_id;
+          l_data.extend;
+          l_data(p_counter) := kontragType(nvl(sett_rec.kontrag_id,'none'), nvl(p_kontragname,'none'), y.root);
+        end if;
+      end loop;
+    end loop; 
+    return l_data;
+  END get_kontrag_by_ierarchia;
+  
+  function getSummOrder(p_order in varchar2) return number as
+  res number;
+  addwork number;
+  begin
+  select sum(summ) into res from orders_tp_uslugi where order_id = p_order;
+  select sum(price_add) into addwork from orders_tp_uslugi where order_id = p_order;
+  return nvl(res,0)+nvl(addwork,0);
+  end getSummOrder;
+  
+  function getBaseName(p_id in varchar2) return varchar as
+  nachisl_rec nachisl_settings%rowtype;
+  base_rec base_of_nachisl%rowtype;
+  begin
+    select * into nachisl_rec from nachisl_settings
+        where id = p_id;
+    select * into base_rec from base_of_nachisl where id = nachisl_rec.base_id;
+    return base_rec.name;
+  end getBaseName;
+  
+  function summkoeff(p_n in number) return number as
+  sm number:=0;
+  begin
+    FOR i IN 1..p_n LOOP
+      sm:=sm+(1/power(2,i));
+    END LOOP;
+    return sm;
+  end summkoeff;
+  
+  function getKoeffByLevel(p_order in varchar2, p_level number) return number as
+  cnt number:=0;
+  p_counter number := 0;
+  res number:=0;
+  begin
+    if p_level = 1 then
+      return res;
+    end if;  
+    SELECT count(*) into cnt
+      FROM TABLE(CAST(get_kontrag_by_ierarchia(p_order) AS kontragTable)) where root > 1;
+    for i in (SELECT n,u_name,root
+        FROM TABLE(CAST(get_kontrag_by_ierarchia(p_order) AS kontragTable))
+        where root > 1
+        order by root) loop
+    p_counter:=p_counter+1;
+    if i.root = p_level then
+      res:=1/power(2,p_counter);
+      if p_counter = cnt then
+        res:=(1-summkoeff(p_counter-1));
+      end if;
+    end if;
+    end loop;
+    return res;
+  end getKoeffByLevel;
+  
+  procedure calc_money(p_order in varchar2) as
+  nachisl_rec orders_tp_nachisl%rowtype;
+  sum_order number(10,2):=0;
+  begin
+  sum_order:= getSummOrder(p_order);
+  if sum_order = 0 then return;
+  end if;
+  delete from ORDERS_TP_NACHISL where order_id = p_order and manual = 0;
+  
+  for i in (select * from pay_settings) loop
+    for y in (select u.id, 
+          nvl((select s.kontrag_id from user_settings s where s.user_id = u.id and rownum = 1),
+          (select s.zamerkontrag_id from user_settings s where s.user_id = u.id and rownum = 1)) kon_id 
+          from users u where u.id in (select n.user_id from nachisl_settings n where n.pay_id = i.id)) loop
+      for x in (select * from nachisl_settings where user_id = y.id and pay_id = i.id) loop
+        if getBaseName(x.id) = 'ORDER' then
+          for g in (select * from table(cast(get_kontrag_by_order(p_order) as kontragTable)) where n = y.kon_id and rownum = 1) loop
+            nachisl_rec.order_id:= p_order;
+            nachisl_rec.dat_nach:=sysdate;
+            nachisl_rec.kontr_id:= g.n;
+            nachisl_rec.pay_id:= i.id;
+            nachisl_rec.calc_id:= i.base_id;
+            nachisl_rec.percent:= i.stavka;
+            nachisl_rec.manual:= 0;
+            if x.summa is not null then
+              nachisl_rec.summ:= x.summa;
+            else
+              nachisl_rec.summ:= (i.stavka/100)*sum_order;
+            end if;
+            insert into orders_tp_nachisl values nachisl_rec;
+          end loop;
+        else if getBaseName(x.id) = 'DIV' then
+                for g in (select * from table(cast(get_kontrag_by_division(p_order) as kontragTable)) where n = y.kon_id and rownum = 1) loop
+                  nachisl_rec.order_id:= p_order;
+                  nachisl_rec.dat_nach:=sysdate;
+                  nachisl_rec.kontr_id:= g.n;
+                  nachisl_rec.pay_id:= i.id;
+                  nachisl_rec.calc_id:= i.base_id;
+                  nachisl_rec.percent:= i.stavka;
+                  nachisl_rec.manual:= 0;
+                  if x.summa is not null then
+                    nachisl_rec.summ:= x.summa;
+                  else
+                    nachisl_rec.summ:= (i.stavka/100)*sum_order;
+                  end if;
+                  insert into orders_tp_nachisl values nachisl_rec;
+                end loop;
+             else 
+                for g in (select n, root,
+                  getKoeffByLevel(p_order,root) koef
+                  from table(cast(get_kontrag_by_ierarchia(p_order) as kontragTable))
+                        where n = y.kon_id and root > 1) loop
+                  nachisl_rec.order_id:= p_order;
+                  nachisl_rec.dat_nach:=sysdate;
+                  nachisl_rec.kontr_id:= g.n;
+                  nachisl_rec.pay_id:= i.id;
+                  nachisl_rec.calc_id:= i.base_id;
+                  nachisl_rec.percent:= i.stavka*g.koef;
+                  nachisl_rec.manual:= 0;
+                  if x.summa is not null then
+                    nachisl_rec.summ:= x.summa;
+                  else
+                    nachisl_rec.summ:= (i.stavka*g.koef/100)*sum_order;
+                  end if;
+                  insert into orders_tp_nachisl values nachisl_rec;
+                end loop;  
+             end if;   
+        end if;
+      end loop;  
+    end loop;
+  end loop;
+  end calc_money;
+
+END PAYCALC;
 
 /
 --------------------------------------------------------
@@ -9263,6 +9731,8 @@ end usr_sett;
       values('Замерщики',1,(select id from kontragents where fullname = 'Контрагенты'),1); 
     insert into kontragents(fullname,is_group,parent_id,predefined)
       values('Прорабы',1,(select id from kontragents where fullname = 'Контрагенты'),1);
+    insert into kontragents(fullname,is_group,parent_id,predefined)
+      values('Прочие',1,(select id from kontragents where fullname = 'Контрагенты'),1);  
     
     --Перечисление базы расчетов  
     insert into BASE_OF_CALC(name, fullname)
@@ -9363,7 +9833,23 @@ end usr_sett;
      insert into COMPAIGNS(name, PREDEFINED)
         values('hot',1);
      insert into COMPAIGNS(name, PREDEFINED)
-        values('cold',1);   
+        values('cold',1);
+     
+     --Настройки начислений по-умолчанию   
+     insert into PAY_SETTINGS (name,fullname,stavka,base_id) 
+      values ('NET','Сетевые',2.68,(select id from BASE_OF_CALC where upper(name) like upper('Процент')));
+     insert into PAY_SETTINGS (name,fullname,stavka,base_id) 
+      values ('ZAMER','Комиссия земерщику',3,(select id from BASE_OF_CALC where upper(name) like upper('Процент')));
+     insert into PAY_SETTINGS (name,fullname,stavka,base_id) 
+      values ('OFFICE','Офисные',14,(select id from BASE_OF_CALC where upper(name) like upper('Процент')));
+     
+     --База расчетов для начислений 
+     Insert into DBA_DIVAS.BASE_OF_NACHISL (NAME,FULLNAME)
+      values ('IERARHIA','В иерархии');
+     Insert into DBA_DIVAS.BASE_OF_NACHISL (NAME,FULLNAME)
+      values ('ORDER','По заказу');
+     Insert into DBA_DIVAS.BASE_OF_NACHISL (NAME,FULLNAME)
+      values ('DIV','По подразделению'); 
     
     --Проводки для заказа
     insert into entry_settings(typedef_id,plan_acc_deb_id,plan_acc_kred_id,chain,description)
@@ -9584,6 +10070,56 @@ end usr_sett;
   begin
     select id into v_return from kontragents where upper(fullname) = upper('Прорабы');
     return v_return;
+  exception
+  when others then
+    return null;
+  end;
+  
+  function retrieve_other_parentid return varchar2
+  as v_return VARCHAR2(36);
+  begin
+    select id into v_return from kontragents where upper(fullname) = upper('Прочие');
+    return v_return;
+  exception
+  when others then
+    return null;
+  end;
+  
+  function retrieve_name_baseofcalc(p_id in varchar2) return varchar2
+  as v_return VARCHAR2(100);
+  begin
+    select b.name into v_return from BASE_OF_CALC b where upper(b.id) = upper(p_id);
+    return v_return;
+  exception
+  when others then
+    return null;
+  end;
+  
+  function retrieve_idfix_baseofcalc return varchar2
+  as v_return VARCHAR2(50);
+  begin
+    select b.id into v_return from BASE_OF_CALC b where upper(b.name) like upper('ФиксированнойСуммой');
+    return v_return;
+  exception
+  when others then
+    return null;
+  end;
+  
+  function retrieve_idfromalgorythm(p_id in varchar2) return varchar2
+  as v_return VARCHAR2(100);
+  begin
+    select b.base_id into v_return from PAY_SETTINGS b where upper(b.id) = upper(p_id);
+    return v_return;
+  exception
+  when others then
+    return null;
+  end;
+  
+  function retrieve_name_basenachisl(p_id in varchar2) return varchar2
+  as v_return VARCHAR2(100);
+  begin
+    select b.name into v_return from BASE_OF_NACHISL b where upper(b.id) = upper(p_id);
+    return upper(v_return);
   exception
   when others then
     return null;

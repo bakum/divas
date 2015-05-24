@@ -3665,5 +3665,21 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getNachislSettingsFk1Link1() {
         return (ViewLinkImpl) findViewLink("NachislSettingsFk1Link1");
     }
+
+    /**
+     * Container's getter for OrdersTpNachisleniaView5.
+     * @return OrdersTpNachisleniaView5
+     */
+    public OrdersTpNachisleniaViewImpl getOrdersTpNachisleniaView5() {
+        return (OrdersTpNachisleniaViewImpl) findViewObject("OrdersTpNachisleniaView5");
+    }
+
+    /**
+     * Container's getter for VwSuppMoveNachislKontragFkLink1.
+     * @return VwSuppMoveNachislKontragFkLink1
+     */
+    public ViewLinkImpl getVwSuppMoveNachislKontragFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwSuppMoveNachislKontragFkLink1");
+    }
 }
 

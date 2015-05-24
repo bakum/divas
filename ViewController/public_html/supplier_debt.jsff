@@ -1,39 +1,64 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
-                xmlns:f="http://java.sun.com/jsf/core">
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
     <af:panelGridLayout id="pgl1">
         <af:gridRow height="100%" id="gr1">
             <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
                 <!-- Content -->
-                <af:panelCollection id="pc1">
-                    <f:facet name="menus"/>
-                    <f:facet name="toolbar"/>
-                    <f:facet name="statusbar"/>
-                    <af:treeTable value="#{bindings.VwKontragAllItems1.treeModel}" var="node"
-                                  rowSelection="single" id="tt1">
-                        <f:facet name="nodeStamp">
-                            <af:column id="c1" inlineStyle="font-weight:bold;" headerText="Наименование" width="250">
-                                <af:outputText value="#{node.Fullname}" id="ot1"/>
-                            </af:column>
-                        </f:facet>
-                        <f:facet name="pathStamp">
-                            <af:outputText value="#{node}" id="ot2"/>
-                        </f:facet>
-                        <af:column id="c2" width="200" headerText="Регистратор">
-                            <af:outputText value="#{node.bindings.RegString}" id="ot3"/>
-                        </af:column>
-                        <af:column id="c3" headerText="Приход">
-                            <af:outputText value="#{node.bindings.SumSummPrihod}" id="ot4"/>
-                        </af:column>
-                        <af:column id="c4" headerText="Расход">
-                            <af:outputText value="#{node.bindings.SumSummRashod}" id="ot5"/>
-                        </af:column>
-                        <af:column id="c5" headerText="Задолженность">
-                            <af:outputText value="#{node.DebtSupplier}" id="ot6"
-                                           inlineStyle="#{node.DebtSupplier &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}"/>
-                        </af:column>
-                    </af:treeTable>
-                </af:panelCollection>
+                <af:panelSplitter id="ps1" positionedFromEnd="true" splitterPosition="400">
+                    <f:facet name="first">
+                        <af:panelCollection id="pc1">
+                            <f:facet name="menus"/>
+                            <f:facet name="toolbar"/>
+                            <f:facet name="statusbar"/>
+                            <af:treeTable value="#{bindings.VwKontragAllItems1.treeModel}" var="node"
+                                          rowSelection="single" id="tt1" selectionListener="#{supplier.onTreeSelect}"
+                                          binding="#{supplier.treeTable}">
+                                <f:facet name="nodeStamp">
+                                    <af:column id="c1" inlineStyle="font-weight:bold;" headerText="Наименование"
+                                               width="250">
+                                        <af:outputText value="#{node.Fullname}" id="ot1"/>
+                                    </af:column>
+                                </f:facet>
+                                <f:facet name="pathStamp">
+                                    <af:outputText value="#{node}" id="ot2"/>
+                                </f:facet>
+                                <af:column id="c2" width="200" headerText="Регистратор">
+                                    <af:outputText value="#{node.bindings.RegString}" id="ot3"/>
+                                </af:column>
+                                <af:column id="c3" headerText="Приход">
+                                    <af:outputText value="#{node.bindings.SumSummPrihod}" id="ot4"/>
+                                </af:column>
+                                <af:column id="c4" headerText="Расход">
+                                    <af:outputText value="#{node.bindings.SumSummRashod}" id="ot5"/>
+                                </af:column>
+                                <af:column id="c5" headerText="Задолженность">
+                                    <af:outputText value="#{node.DebtSupplier}" id="ot6"
+                                                   inlineStyle="#{node.DebtSupplier &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}"/>
+                                </af:column>
+                            </af:treeTable>
+                        </af:panelCollection>
+                    </f:facet>
+                    <f:facet name="second">
+                        <dvt:barGraph id="graph1" value="#{bindings.VwKontragAllItems11.graphModel}"
+                                      subType="BAR_VERT_CLUST">
+                            <dvt:background>
+                                <dvt:specialEffects/>
+                            </dvt:background>
+                            <dvt:graphPlotArea/>
+                            <dvt:seriesSet>
+                                <dvt:series/>
+                            </dvt:seriesSet>
+                            <dvt:o1Axis/>
+                            <dvt:y1Axis/>
+                            <dvt:legendArea automaticPlacement="AP_NEVER" rendered="false"/>
+                            <dvt:attributeFormat name="DebtSupplier" id="af1">
+                                <af:convertNumber pattern="#{bindings.VwKontragAllItems11.hints.DebtSupplier.format}"
+                                                  groupingUsed="false"/>
+                            </dvt:attributeFormat>
+                        </dvt:barGraph>
+                    </f:facet>
+                </af:panelSplitter>
             </af:gridCell>
         </af:gridRow>
     </af:panelGridLayout>
