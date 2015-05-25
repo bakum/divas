@@ -39,7 +39,8 @@
                             <af:toolbar id="t1">
                                 <af:button text="#{node.DebtZamer}" id="b2"
                                            rendered="#{node.DebtZamer != null ? true : false}" icon="/img/coins.png"
-                                           inlineStyle="font-weight:bold;">
+                                           inlineStyle="font-weight:bold;"
+                                           disabled="#{node.DebtZamer > '0' ? false : true}">
                                     <af:showPopupBehavior popupId="::p1"/>
                                 </af:button>
                             </af:toolbar>
