@@ -5,21 +5,21 @@
    <View
       id="View2">
       <property
-         name="activityId">order</property>
+         name="activityId">orders</property>
       <property
          name="page">/orders.jsff</property>
       <property
          name="start">true</property>
       <property
-         name="description">&lt;html>&lt;p>&lt;b>order&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+         name="description">&lt;html>&lt;p>&lt;b>orders&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
       <property
          name="exceptionHandler">false</property>
       <property
          name="y">154.04688</property>
       <property
-         name="x">226.0</property>
-      <property
          name="pageFragment">true</property>
+      <property
+         name="x">226.0</property>
    </View>
    <TaskFlowCall
       id="TaskFlowCall5">
@@ -102,6 +102,6 @@
       <property
          name="fromOutcome">viewOrder</property>
       <property
-         name="sdm:polyPoints">B50,226.0,208.0625,124.09082,255.625,T50</property>
+         name="sdm:polyPoints">B50,226.0,208.0625,124.09082,255.64062,T50</property>
    </ControlFlowCase>
 </SDM>

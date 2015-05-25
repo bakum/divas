@@ -1144,6 +1144,25 @@ order by Kontragents.FULLNAME]]></SQLQuery>
         Name="_return_type_"
         Type="java.lang.String"/>
     </Method>
+    <Method
+      Name="createKontrag"
+      MethodName="createKontrag">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="p_name"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="isSupp"
+        Type="int"/>
+      <Parameter
+        Name="isMeasr"
+        Type="int"/>
+      <Parameter
+        Name="isByer"
+        Type="int"/>
+    </Method>
   </ClientInterface>
   <ResourceBundle>
     <PropertiesBundle

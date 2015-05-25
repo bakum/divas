@@ -34,12 +34,8 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <list StaticList="false" IterBinding="VwSales1Iterator" id="DivisionId"
-          NullValueFlag="start" Uses="LOV_DivisionId">
-      <AttrNames>
-        <Item Value="DivisionId"/>
-      </AttrNames>
-    </list>
+    <list StaticList="false" IterBinding="VwSales1Iterator" id="DivisionId" NullValueFlag="start"
+          Uses="LOV_DivisionId"/>
     <action IterBinding="VwSales1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true" Action="executeWithParams">
       <NamedData NDName="f_dat" NDType="oracle.jbo.domain.Date" NDValue="${bindings.ExecuteWithParams_f_dat}"/>
       <NamedData NDName="l_dat" NDType="oracle.jbo.domain.Date" NDValue="${bindings.ExecuteWithParams_l_dat}"/>

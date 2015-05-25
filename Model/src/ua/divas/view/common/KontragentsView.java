@@ -26,5 +26,7 @@ public interface KontragentsView extends ViewObject {
     String retrieveSupplierFirstParentId();
 
     String retrieveOtherParentId();
+
+    void createKontrag(String p_name, int isSupp, int isMeasr, int isByer);
 }
 

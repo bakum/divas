@@ -391,8 +391,7 @@
                                                                           required="#{bindings.ActivitiesName.hints.mandatory}"
                                                                           columns="#{bindings.ActivitiesName.hints.displayWidth}"
                                                                           shortDesc="#{bindings.ActivitiesName.hints.tooltip}"
-                                                                          partialTriggers="activitiesIdId"
-                                                                          createPopupId="pCreateActiv">
+                                                                          partialTriggers="activitiesIdId">
                                                         <f:validator binding="#{bindings.ActivitiesName.validator}"/>
                                                         <af:autoSuggestBehavior suggestedItems="#{bindings.ActivitiesName.suggestedItems}"/>
                                                     </af:inputListOfValues>
@@ -790,18 +789,19 @@
                                         <f:facet name="buttonBar"/>
                                         <af:inputText label="Наименование" id="it24"
                                                       value="#{bindings.KonName1.inputValue}" columns="30"
-                                                      binding="#{shuttle_group.konName}"/>
+                                                      binding="#{shuttle_group.konName}" required="true"/>
                                     </af:dialog>
                                 </af:popup>
                                 <af:popup childCreation="deferred" autoCancel="disabled" id="pKontrag"
                                           contentDelivery="lazyUncached"
-                                          popupFetchListener="#{shuttle_group.onPopupCreateKontrag}">
+                                          popupFetchListener="#{shuttle_group.onPopupCreateKontrag}"
+                                          binding="#{shuttle_group.newKontragPopup}">
                                     <af:dialog id="d7" title="Новый контрагент для расчетов"
                                                dialogListener="#{shuttle_group.onNewKontragDialogListener}">
                                         <f:facet name="buttonBar"/>
                                         <af:inputText label="Имя" id="it25" required="true"
                                                       value="#{bindings.KontragName1.inputValue}" columns="30"
-                                                      binding="#{shuttle_group.kontragName}"/>
+                                                      binding="#{shuttle_group.kontragName}" autoSubmit="true"/>
                                     </af:dialog>
                                 </af:popup>
                             </af:showDetailItem>

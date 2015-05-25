@@ -21,6 +21,13 @@ public class KontragentsViewClient extends ViewUsageImpl implements KontragentsV
     }
 
 
+    public void createKontrag(String p_name, int isSupp, int isMeasr, int isByer) {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "createKontrag", new String[] {
+                                                                         "java.lang.String", "int", "int", "int"
+        }, new Object[] { p_name, new Integer(isSupp), new Integer(isMeasr), new Integer(isByer) });
+        return;
+    }
+
     public void findKontragentById(String Id) {
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "findKontragentById", new String[] {
                                                                          "java.lang.String" }, new Object[] { Id });

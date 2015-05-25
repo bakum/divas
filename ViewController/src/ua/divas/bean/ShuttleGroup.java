@@ -23,6 +23,7 @@ import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCDataControl;
 import oracle.adf.model.binding.DCIteratorBinding;
 
+import oracle.adf.view.rich.component.rich.RichPopup;
 import oracle.adf.view.rich.component.rich.input.RichInputListOfValues;
 import oracle.adf.view.rich.component.rich.input.RichInputText;
 import oracle.adf.view.rich.component.rich.input.RichSelectOneChoice;
@@ -40,6 +41,10 @@ import oracle.binding.OperationBinding;
 import oracle.jbo.NameValuePairs;
 import oracle.jbo.Row;
 
+import org.apache.myfaces.trinidad.render.ExtendedRenderKitService;
+
+import org.apache.myfaces.trinidad.util.Service;
+
 import ua.divas.ejb.entity.DataQuery;
 import ua.divas.module.AppModuleImpl;
 
@@ -56,6 +61,7 @@ public class ShuttleGroup {
     private RichInputText desc;
     private RichInputText newPasswd;
     private RichInputText kontragName;
+    private RichPopup newKontragPopup;
 
     public ShuttleGroup() {
     }
@@ -75,7 +81,7 @@ public class ShuttleGroup {
     public RichInputText getKonName() {
         return konName;
     }
-    
+
     public void setZamerName(RichInputListOfValues zamerName) {
         this.zamerName = zamerName;
     }
@@ -374,7 +380,7 @@ public class ShuttleGroup {
         currRow.setAttribute("ParentId", res);
 
     }
-    
+
     private void setOtherParentId() {
 
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
@@ -402,7 +408,7 @@ public class ShuttleGroup {
 
         currRow.setAttribute("Fullname", getKonName().getValue().toString());
     }
-    
+
     private void setKontragFullName() {
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
@@ -419,7 +425,7 @@ public class ShuttleGroup {
             e.printStackTrace();
         }
     }
-    
+
     public void onPopupCreateKontrag(PopupFetchEvent popupFetchEvent) {
         try {
             getKontragName().setValue("");
@@ -428,43 +434,44 @@ public class ShuttleGroup {
             e.printStackTrace();
         }
     }
-    
+
     public void onNewKontragDialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-            OperationBinding ob = binding.getOperationBinding("CreateInsert4");
-            ob.execute();
-            setKontragFullName();
-            setOtherParentId();
+            OperationBinding ob = binding.getOperationBinding("createKontrag");
+            if (ob != null) {
+                ob.getParamsMap().put("p_name", getKontragName().getValue().toString());
+                ob.getParamsMap().put("isSupp", 0);
+                ob.getParamsMap().put("isMeasr", 0);
+                ob.getParamsMap().put("isByer", 0);
+                ob.execute();
+            }
+            //setKontragFullName();
+            //setOtherParentId();
             //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-            ob = binding.getOperationBinding("Commit");
-            ob.execute();
-            refreshKontrag();
-            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
-            DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
-            if (it != null) {
-                it.executeQuery();
-            } */
+            //ob = binding.getOperationBinding("Commit");
+            //ob.execute();
+            refreshKontrag();           
         }
     }
 
     public void onNewZamerDialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-            OperationBinding ob = binding.getOperationBinding("CreateInsert4");
-            ob.execute();
-            setFullName();
-            setIsMeasurer();
-            setZamerParentId();
+            OperationBinding ob = binding.getOperationBinding("createKontrag");
+            if (ob != null) {
+                ob.getParamsMap().put("p_name", getKonName().getValue().toString());
+                ob.getParamsMap().put("isSupp", 0);
+                ob.getParamsMap().put("isMeasr", 1);
+                ob.getParamsMap().put("isByer", 0);
+                ob.execute();
+            }      
+            //setKontragFullName();
+            //setOtherParentId();
             //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-            ob = binding.getOperationBinding("Commit");
-            ob.execute();
+            //ob = binding.getOperationBinding("Commit");
+            //ob.execute();
             refreshKontrag();
-            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
-            DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
-            if (it != null) {
-                it.executeQuery();
-            } */
         }
     }
 
@@ -483,13 +490,14 @@ public class ShuttleGroup {
     }
 
     public void onZamerChange(ValueChangeEvent vce) {
-        if (vce.getNewValue() != vce.getOldValue()){            
-            if (DataQuery.zamernameInUse((String)vce.getNewValue())) {
+        if (vce.getNewValue() != vce.getOldValue()) {
+            if (DataQuery.zamernameInUse((String) vce.getNewValue())) {
                 getZamerId().setValue("");
                 getZamerName().setValue("");
                 FacesContext ctx = FacesContext.getCurrentInstance();
-                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка",
-                                                    "Контрагент уже используется. Выбор невозможен!");
+                FacesMessage msg =
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка",
+                                     "Контрагент уже используется. Выбор невозможен!");
                 ctx.addMessage(null, msg);
             }
         }
@@ -558,7 +566,7 @@ public class ShuttleGroup {
     public RichInputText getKontragName() {
         return kontragName;
     }
-    
+
     public String getValueFrmExpression(String data) {
         FacesContext fc = FacesContext.getCurrentInstance();
         Application app = fc.getApplication();
@@ -591,6 +599,57 @@ public class ShuttleGroup {
             BigDecimal summa = (BigDecimal) ob.execute();
             System.out.println(summa);
             currRow.setAttribute("Summa", summa);
+        }
+    }
+
+    public void setNewKontragPopup(RichPopup newKontragPopup) {
+        this.newKontragPopup = newKontragPopup;
+    }
+
+    public RichPopup getNewKontragPopup() {
+        return newKontragPopup;
+    }
+
+    public void hidePopup(RichPopup popup) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExtendedRenderKitService service = Service.getRenderKitService(facesContext, ExtendedRenderKitService.class);
+        service.addScript(facesContext,
+                          "AdfPage.PAGE.findComponent('" + popup.getClientId(facesContext) + "').hide();");
+    }
+
+    public void onSaveKontrag(ActionEvent actionEvent) {
+        if (actionEvent.getComponent().getId().equals("bNewKontrag")) {
+            try {
+                getKontragName().getValue().toString();
+                BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+                OperationBinding ob = binding.getOperationBinding("createKontrag");
+                if (ob != null) {
+                    ob.getParamsMap().put("p_name", getKontragName().getValue().toString());
+                    ob.getParamsMap().put("isSupp", 0);
+                    ob.getParamsMap().put("isMeasr", 0);
+                    ob.getParamsMap().put("isByer", 0);
+                    ob.execute();
+                }
+                //setKontragFullName();
+                //setOtherParentId();
+                //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+                //ob = binding.getOperationBinding("Commit");
+                //ob.execute();
+                refreshKontrag();
+                hidePopup(getNewKontragPopup());
+            } catch (Exception e) {
+                FacesMessage msg =
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка валидации",
+                                     "Контрагент не может быть пустым");
+                FacesContext ctx = FacesContext.getCurrentInstance();
+                ctx.addMessage(null, msg);
+                e.printStackTrace();
+            }
+            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+            if (it != null) {
+                it.executeQuery();
+            } */
         }
     }
 }

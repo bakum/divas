@@ -8,8 +8,6 @@
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
     <taskFlow id="direct1" taskFlowId="/WEB-INF/directories.xml#direct" activation="deferred"
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
-    <taskFlow id="orders1" taskFlowId="/WEB-INF/orders.xml#orders" activation="deferred"
-              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
     <taskFlow id="users1" taskFlowId="/WEB-INF/users.xml#users" activation="deferred"
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
     <taskFlow id="zamerconfig1" taskFlowId="/WEB-INF/zamer-config.xml#zamer-config" activation="deferred"
@@ -47,6 +45,8 @@
     <taskFlow id="kontrag_calcconfig1" taskFlowId="/WEB-INF/kontrag_calc-config.xml#kontrag_calc-config"
               activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
     <taskFlow id="payconfig1" taskFlowId="/WEB-INF/pay-config.xml#pay-config" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="ordersconfig1" taskFlowId="/WEB-INF/orders.xml#orders" activation="deferred"
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
   </executables>
   <bindings>

@@ -29,6 +29,11 @@ public class KontragentsViewImpl extends DivasView implements KontragentsView {
      */
     public KontragentsViewImpl() {
     }
+    
+    public void createKontrag(String p_name, int isSupp, int isMeasr, int isByer) {
+        String u_id = getSessionUserId();
+        callStoredProcedure("UTILITY.createKontrag(?,?,?,?,?)", new Object[] {p_name,u_id,isSupp,isMeasr,isByer});
+    }
 
     public String retrieveCustomersFirstParentId() {
         String rv = getCustomerParentId();

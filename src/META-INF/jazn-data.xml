@@ -374,6 +374,11 @@
                 <name>/WEB-INF/pay-config.xml#pay-config</name>
                 <actions>view</actions>
               </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/orders-config.xml#orders</name>
+                <actions>view</actions>
+              </permission>
             </permissions>
           </grant>
           <grant>
@@ -556,6 +561,11 @@
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/kontrag_calc-config.xml#kontrag_calc-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/orders-config.xml#orders</name>
                 <actions>view</actions>
               </permission>
             </permissions>
@@ -800,6 +810,11 @@
                 <name>/WEB-INF/pay-config.xml#pay-config</name>
                 <actions>view</actions>
               </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/orders-config.xml#orders</name>
+                <actions>view</actions>
+              </permission>
             </permissions>
           </grant>
           <grant>
@@ -855,6 +870,11 @@
               <permission>
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/addOrder.xml#addOrder</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/orders-config.xml#orders</name>
                 <actions>view</actions>
               </permission>
             </permissions>
