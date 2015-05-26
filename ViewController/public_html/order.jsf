@@ -296,12 +296,11 @@
                                                     <af:panelFormLayout id="pfl4" labelAlignment="start">
                                                         <af:inputText value="#{bindings.KonName1.inputValue}"
                                                                       label="Наименование"
-                                                                      required="#{bindings.Fullname.hints.mandatory}"
                                                                       columns="#{bindings.Fullname.hints.displayWidth}"
                                                                       maximumLength="#{bindings.Fullname.hints.precision}"
                                                                       shortDesc="#{bindings.Fullname.hints.tooltip}"
                                                                       id="it37" autoSubmit="true"
-                                                                      binding="#{order_jsf.konName}">
+                                                                      binding="#{order_jsf.konName}" required="true">
                                                             <f:validator binding="#{bindings.Fullname.validator}"/>
                                                         </af:inputText>
                                                     </af:panelFormLayout>

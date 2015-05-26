@@ -21,6 +21,14 @@ public class PkoViewImpl extends DivasView implements PkoView {
     public PkoViewImpl() {
     }
     
+    public String getOperationName(String Id) {
+        String _id = (String) callStoredFunction(VARCHAR2, "PKO_ENTRY.get_operationname(?)", new Object[] { Id });
+        if (_id.equals("none"))
+            return null;
+        else
+            return _id;
+    }
+    
     private ViewRowSetImpl getSettingsRowSet() {
         VariableImpl z = new VariableImpl();
         z.setName("UserKey");

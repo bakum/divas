@@ -573,6 +573,16 @@ upper(Pko.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as use
               Name="_id"
               Type="java.lang.String"/>
         </Method>
+        <Method
+            Name="getOperationName"
+            MethodName="getOperationName">
+            <Return
+                Name="_return_type_"
+                Type="java.lang.String"/>
+            <Parameter
+                Name="Id"
+                Type="java.lang.String"/>
+        </Method>
     </ClientInterface>
     <ResourceBundle>
         <PropertiesBundle

@@ -10,6 +10,11 @@
       <value>#{pageFlowScope.PkoId}</value>
       <class>java.lang.String</class>
     </return-value-definition>
+    <managed-bean id="__5">
+      <managed-bean-name>edit_pko</managed-bean-name>
+      <managed-bean-class>ua.divas.bean.EditPkoBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
     <view id="editpko">
       <page>/editpko.jsf</page>
     </view>

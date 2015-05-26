@@ -50,11 +50,13 @@
                                                     label="#{bindings.OperationId.label}"
                                                     required="#{bindings.OperationId.hints.mandatory}"
                                                     shortDesc="#{bindings.OperationId.hints.tooltip}" id="soc6"
-                                                    readOnly="#{bindings.PEditable.inputValue == 1 ? false : true}">
+                                                    readOnly="#{bindings.PEditable.inputValue == 1 ? false : true}"
+                                                    autoSubmit="true">
                                     <f:selectItems value="#{bindings.OperationId.items}" id="si6"/>
                                     <f:validator binding="#{bindings.OperationId.validator}"/>
                                 </af:selectOneChoice>
-                                <af:panelLabelAndMessage label="#{bindings.Kontragname.hints.label}" id="plam4">
+                                <af:panelLabelAndMessage label="#{bindings.Kontragname.hints.label}" id="plam4"
+                                                         visible="#{edit_pko.visibleKontrag}">
                                     <af:panelGroupLayout id="pgl5" layout="horizontal">
                                         <af:inputListOfValues id="kontragIdId"
                                                               popupTitle="Search and Select: #{bindings.KontragId.hints.label}"
