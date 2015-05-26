@@ -54,6 +54,7 @@ public class PaySettingsViewRowImpl extends ViewRowImpl {
         Summa,
         Editable,
         NachislSettingsView,
+        KontragSettingsView,
         BaseOfCalcView1;
         static AttributesEnum[] vals = null;
         ;
@@ -90,6 +91,7 @@ public class PaySettingsViewRowImpl extends ViewRowImpl {
     public static final int SUMMA = AttributesEnum.Summa.index();
     public static final int EDITABLE = AttributesEnum.Editable.index();
     public static final int NACHISLSETTINGSVIEW = AttributesEnum.NachislSettingsView.index();
+    public static final int KONTRAGSETTINGSVIEW = AttributesEnum.KontragSettingsView.index();
     public static final int BASEOFCALCVIEW1 = AttributesEnum.BaseOfCalcView1.index();
 
     /**
@@ -255,6 +257,13 @@ public class PaySettingsViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getNachislSettingsView() {
         return (RowIterator) getAttributeInternal(NACHISLSETTINGSVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link KontragSettingsView.
+     */
+    public RowIterator getKontragSettingsView() {
+        return (RowIterator) getAttributeInternal(KONTRAGSETTINGSVIEW);
     }
 
     /**

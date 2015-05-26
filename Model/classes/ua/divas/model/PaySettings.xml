@@ -169,6 +169,13 @@
     AssociationOtherEnd="ua.divas.model.NachislSettingsFk2Assoc.PaySettings"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="KontragSettings"
+    Association="ua.divas.model.KontragSettingsFk2Assoc"
+    AssociationEnd="ua.divas.model.KontragSettingsFk2Assoc.KontragSettings"
+    AssociationOtherEnd="ua.divas.model.KontragSettingsFk2Assoc.PaySettings"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="PaySettingsPk"
     PrimaryKey="true">

@@ -16,6 +16,8 @@
                                         <af:panelBox id="pb1" type="flow" text="Абоненты">
                                             <f:facet name="toolbar">
                                                 <af:toolbar id="t2">
+                                                    <af:link text="Контрагенты" id="l2" action="toother"
+                                                             icon="/img/glbl_login_msg.gif"/>
                                                     <af:button text="Добавить" id="b19" action="addKontrag"
                                                                returnListener="#{filter.onAddReturn}"
                                                                disabled="#{bindings.Commit.enabled}"/>

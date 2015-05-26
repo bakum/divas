@@ -200,11 +200,11 @@
     Type="java.lang.String"
     ColumnType="VARCHAR2"
     TableName="KONTRAGENTS">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[(Fullname)]]></TransientExpression>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="150"/>
     </DesignTime>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[(Fullname)]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -448,6 +448,13 @@
     Association="ua.divas.model.CallLogKontragentFkAssoc"
     AssociationEnd="ua.divas.model.CallLogKontragentFkAssoc.CallLog"
     AssociationOtherEnd="ua.divas.model.CallLogKontragentFkAssoc.Kontragents"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="KontragSettings"
+    Association="ua.divas.model.KontragSettingsFk1Assoc"
+    AssociationEnd="ua.divas.model.KontragSettingsFk1Assoc.KontragSettings"
+    AssociationOtherEnd="ua.divas.model.KontragSettingsFk1Assoc.Kontragents"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <Key

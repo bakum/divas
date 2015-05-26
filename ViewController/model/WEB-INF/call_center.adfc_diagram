@@ -17,9 +17,9 @@
       <property
          name="y">151.04688</property>
       <property
-         name="x">110.0</property>
-      <property
          name="pageFragment">true</property>
+      <property
+         name="x">110.0</property>
    </View>
    <TaskFlowCall
       id="TaskFlowCall4">
@@ -78,5 +78,42 @@
          name="fromOutcome">viewOrder</property>
       <property
          name="sdm:polyPoints">B50,110.0,205.0625,240.09082,293.54688,L50</property>
+   </ControlFlowCase>
+   <View
+      id="View7">
+      <property
+         name="activityId">other_kontrag</property>
+      <property
+         name="page">/other_kontrag.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>other_kontrag&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">149.09375</property>
+      <property
+         name="x">-68.0</property>
+      <property
+         name="pageFragment">true</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase8"
+      from="View2"
+      to="View7">
+      <property
+         name="fromOutcome">toother</property>
+      <property
+         name="sdm:polyPoints">L50,69.0,151.0625,-27.0,149.10938,R50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase9"
+      from="View7"
+      to="View2">
+      <property
+         name="fromOutcome">toccenter</property>
+      <property
+         name="sdm:polyPoints">R54,-27.0,152.60938,68.9288,154.5625,L54</property>
    </ControlFlowCase>
 </SDM>

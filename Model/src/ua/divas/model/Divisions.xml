@@ -252,6 +252,13 @@
     AssociationOtherEnd="ua.divas.model.NachislSettingsFk4Assoc.Divisions"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="KontragSettings"
+    Association="ua.divas.model.KontragSettingsFk4Assoc"
+    AssociationEnd="ua.divas.model.KontragSettingsFk4Assoc.KontragSettings"
+    AssociationOtherEnd="ua.divas.model.KontragSettingsFk4Assoc.Divisions"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="DivisionsPk"
     PrimaryKey="true">

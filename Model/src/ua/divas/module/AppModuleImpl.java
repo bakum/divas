@@ -27,6 +27,7 @@ import ua.divas.view.FirmsViewImpl;
 import ua.divas.view.GroupmembersViewImpl;
 import ua.divas.view.KassaSettingsViewImpl;
 import ua.divas.view.KassaVOImpl;
+import ua.divas.view.KontragOtherViewImpl;
 import ua.divas.view.KontragentsInOrdersViewImpl;
 import ua.divas.view.KontragentsViewImpl;
 import ua.divas.view.LastPriceVOImpl;
@@ -3680,6 +3681,30 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getVwSuppMoveNachislKontragFkLink1() {
         return (ViewLinkImpl) findViewLink("VwSuppMoveNachislKontragFkLink1");
+    }
+
+    /**
+     * Container's getter for KontragOtherView1.
+     * @return KontragOtherView1
+     */
+    public KontragOtherViewImpl getKontragOtherView1() {
+        return (KontragOtherViewImpl) findViewObject("KontragOtherView1");
+    }
+
+    /**
+     * Container's getter for KontragSettingsView1.
+     * @return KontragSettingsView1
+     */
+    public ViewObjectImpl getKontragSettingsView1() {
+        return (ViewObjectImpl) findViewObject("KontragSettingsView1");
+    }
+
+    /**
+     * Container's getter for KontrOtherSettFkLink1.
+     * @return KontrOtherSettFkLink1
+     */
+    public ViewLinkImpl getKontrOtherSettFkLink1() {
+        return (ViewLinkImpl) findViewLink("KontrOtherSettFkLink1");
     }
 }
 

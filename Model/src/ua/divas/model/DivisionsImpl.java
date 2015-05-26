@@ -48,7 +48,8 @@ public class DivisionsImpl extends DivasEntity {
         DivisionSotr,
         Users,
         OtherZatraty,
-        NachislSettings;
+        NachislSettings,
+        KontragSettings;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -90,6 +91,7 @@ public class DivisionsImpl extends DivasEntity {
     public static final int USERS = AttributesEnum.Users.index();
     public static final int OTHERZATRATY = AttributesEnum.OtherZatraty.index();
     public static final int NACHISLSETTINGS = AttributesEnum.NachislSettings.index();
+    public static final int KONTRAGSETTINGS = AttributesEnum.KontragSettings.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -308,6 +310,13 @@ public class DivisionsImpl extends DivasEntity {
      */
     public RowIterator getNachislSettings() {
         return (RowIterator) getAttributeInternal(NACHISLSETTINGS);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getKontragSettings() {
+        return (RowIterator) getAttributeInternal(KONTRAGSETTINGS);
     }
 
     /**

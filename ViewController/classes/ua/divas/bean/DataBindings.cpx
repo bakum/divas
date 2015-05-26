@@ -49,6 +49,7 @@
     <page path="/prorab.jsff" usageId="ua_divas_bean_prorabPageDef"/>
     <page path="/kontrag_calc.jsff" usageId="ua_divas_bean_kontrag_calcPageDef"/>
     <page path="/pay.jsff" usageId="ua_divas_bean_payPageDef"/>
+    <page path="/other_kontrag.jsff" usageId="ua_divas_bean_other_kontragPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="ua_divas_view_indexPageDef" path="ua.divas.bean.pageDefs.indexPageDef"/>
@@ -92,6 +93,7 @@
     <page id="ua_divas_bean_prorabPageDef" path="ua.divas.bean.pageDefs.prorabPageDef"/>
     <page id="ua_divas_bean_kontrag_calcPageDef" path="ua.divas.bean.pageDefs.kontrag_calcPageDef"/>
     <page id="ua_divas_bean_payPageDef" path="ua.divas.bean.pageDefs.payPageDef"/>
+    <page id="ua_divas_bean_other_kontragPageDef" path="ua.divas.bean.pageDefs.other_kontragPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <dc id="DataPackage" path="ua.divas.bean.DataPackage"/>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.2.66.68" id="other_kontragPageDef"
+                Package="ua.divas.bean.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="KontragOtherView1" RangeSize="12" DataControl="AppModuleDataControl"
+              id="KontragOtherView1Iterator"/>
+    <searchRegion Binds="KontragOtherView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="KontragOtherView1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="KontragOtherView1Iterator" id="KontragOtherView1">
+      <nodeDefinition DefName="ua.divas.view.KontragOtherView" Name="KontragOtherView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Fullname"/>
+          <Item Value="Inn"/>
+          <Item Value="Kpp"/>
+          <Item Value="Okpo"/>
+          <Item Value="UserId"/>
+          <Item Value="Version"/>
+          <Item Value="KEditable"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="KontragOtherView1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

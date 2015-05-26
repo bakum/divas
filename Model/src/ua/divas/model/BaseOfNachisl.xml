@@ -57,6 +57,13 @@
     AssociationOtherEnd="ua.divas.model.NachislSettingsFk3Assoc.BaseOfNachisl"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="KontragSettings"
+    Association="ua.divas.model.KontragSettingsFk3Assoc"
+    AssociationEnd="ua.divas.model.KontragSettingsFk3Assoc.KontragSettings"
+    AssociationOtherEnd="ua.divas.model.KontragSettingsFk3Assoc.BaseOfNachisl"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="BaseOfNachislPk"
     PrimaryKey="true">
