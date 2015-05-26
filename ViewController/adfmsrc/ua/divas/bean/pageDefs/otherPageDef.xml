@@ -76,5 +76,10 @@
         <Item Value="TotalZatr"/>
       </AttrNames>
     </attributeValues>
+    <methodAction id="createZatraty" RequiresUpdateModel="true" Action="invokeMethod" MethodName="createZatraty"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.ZatratyView1">
+      <NamedData NDName="p_name" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

@@ -303,61 +303,51 @@ public class OrderjsfBean {
     public void onNewKontragentDialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-            OperationBinding ob = binding.getOperationBinding("CreateInsert5");
-            ob.execute();
-            this.setFullName();
-            this.setIsBuyer();
-            this.setParentId();
+            OperationBinding ob = binding.getOperationBinding("createKontrag");
+            if (ob != null) {
+                ob.getParamsMap().put("p_name", getKonName().getValue().toString());
+                ob.getParamsMap().put("isSupp", 0);
+                ob.getParamsMap().put("isMeasr", 0);
+                ob.getParamsMap().put("isByer", 1);
+                ob.execute();
+            }
+            //setKontragFullName();
+            //setOtherParentId();
             //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-            ob = binding.getOperationBinding("Commit");
-            ob.execute();
-            refreshKontrag();
-            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
-            DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
-            if (it != null) {
-                it.executeQuery();
-            } */
+            //ob = binding.getOperationBinding("Commit");
+            //ob.execute();
+            refreshKontrag();  
         }
     }
 
     public void onNewSupplierDialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-            OperationBinding ob = binding.getOperationBinding("CreateInsert5");
-            ob.execute();
-            this.setProrName();
-            this.setIsSupplier();
-            this.setSupplierParentId();
+            OperationBinding ob = binding.getOperationBinding("createKontrag");
+            if (ob != null) {
+                ob.getParamsMap().put("p_name", getProrName().getValue().toString());
+                ob.getParamsMap().put("isSupp", 1);
+                ob.getParamsMap().put("isMeasr", 0);
+                ob.getParamsMap().put("isByer", 0);
+                ob.execute();
+            }
+            //setKontragFullName();
+            //setOtherParentId();
             //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-            ob = binding.getOperationBinding("Commit");
-            ob.execute();
-            //refreshKontrag();
-            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
-            DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
-            if (it != null) {
-                it.executeQuery();
-            } */
+            //ob = binding.getOperationBinding("Commit");
+            //ob.execute();
+            refreshKontrag(); 
         }
     }
 
     public void onNewZatratyDialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-            OperationBinding ob = binding.getOperationBinding("CreateInsert6");
-            ob.execute();
-            setZatrName();
-            /* this.setFullName();
-            this.setIsBuyer();
-            this.setParentId(); */
-            //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-            ob = binding.getOperationBinding("Commit");
-            ob.execute();
-            //refreshZatraty();
-            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
-            DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
-            if (it != null) {
-                it.executeQuery();
-            } */
+            OperationBinding ob = binding.getOperationBinding("createZatraty");
+            if (ob != null) {
+                ob.getParamsMap().put("p_name", getZatrName().getValue().toString());
+                ob.execute();
+            }
         }
     }
 

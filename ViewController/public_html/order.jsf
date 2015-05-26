@@ -1010,7 +1010,8 @@
                                                                           model="#{row.bindings.Kontname.listOfValuesModel}"
                                                                           required="#{bindings.OrdersTpRashodyView4.hints.Kontname.mandatory}"
                                                                           columns="#{bindings.OrdersTpRashodyView4.hints.Kontname.displayWidth}"
-                                                                          shortDesc="#{bindings.OrdersTpRashodyView4.hints.Kontname.tooltip}">
+                                                                          shortDesc="#{bindings.OrdersTpRashodyView4.hints.Kontname.tooltip}"
+                                                                          createPopupId="::pSuppl">
                                                 <f:validator binding="#{row.bindings.Kontname.validator}"/>
                                             </af:inputComboboxListOfValues>
                                         </af:column>
@@ -1104,7 +1105,7 @@
                                             <f:facet name="buttonBar"/>
                                             <af:inputText label="Наименование" id="it36"
                                                           value="#{bindings.ProrabName1.inputValue}"
-                                                          binding="#{order_jsf.prorName}" columns="40"/>
+                                                          binding="#{order_jsf.prorName}" columns="40" required="true"/>
                                         </af:dialog>
                                     </af:popup>
                                     <af:popup childCreation="deferred" autoCancel="disabled" id="pZatr"
@@ -1115,7 +1116,7 @@
                                             <f:facet name="buttonBar"/>
                                             <af:inputText label="Наименование" id="it38" columns="50"
                                                           value="#{bindings.ZatratyName1.inputValue}"
-                                                          binding="#{order_jsf.zatrName}"/>
+                                                          binding="#{order_jsf.zatrName}" required="true"/>
                                         </af:dialog>
                                     </af:popup>
                                 </af:panelBox>

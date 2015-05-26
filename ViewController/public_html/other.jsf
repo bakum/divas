@@ -246,7 +246,8 @@
                                                dialogListener="#{other_jsf.onNewZatratyDialogListener}">
                                         <f:facet name="buttonBar"/>
                                         <af:inputText label="Наименование" id="it8" columns="50"
-                                                      binding="#{other_jsf.zatrName}"/>
+                                                      binding="#{other_jsf.zatrName}" required="true"
+                                                      value="#{bindings.ZatrName1.inputValue}"/>
                                     </af:dialog>
                                 </af:popup>
                             </af:showDetailItem>

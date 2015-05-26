@@ -57,20 +57,11 @@ public class OtherJsfBean {
     public void onNewZatratyDialogListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-            OperationBinding ob = binding.getOperationBinding("CreateInsert1");
-            ob.execute();
-            setFullName();
-            /* setIsMeasurer();
-            setZamerParentId(); */
-            //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-            ob = binding.getOperationBinding("Commit");
-            ob.execute();
-            refreshZatr();
-            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
-            DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
-            if (it != null) {
-                it.executeQuery();
-            } */
+            OperationBinding ob = binding.getOperationBinding("createZatraty");
+            if (ob != null) {
+                ob.getParamsMap().put("p_name", getZatrName().getValue().toString());
+                ob.execute();
+            }
         }
     }
 }
