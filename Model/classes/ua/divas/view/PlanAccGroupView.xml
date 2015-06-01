@@ -140,6 +140,16 @@ where PlanAcc.PARENT_ID is null]]></SQLQuery>
     ViewLink="ua.divas.view.PlanAccGroupParentIdFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="StartOstTpView"
+    ViewLink="ua.divas.view.StartOstTpFk2Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="StartOstTpView1"
+    ViewLink="ua.divas.view.StartOstTpFk1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

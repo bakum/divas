@@ -62,4 +62,9 @@
     ViewLink="ua.divas.view.OtherZatratyActivitiesFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="StartOstView"
+    ViewLink="ua.divas.view.StartOstFk4Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
 </ViewObject>

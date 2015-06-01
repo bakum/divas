@@ -61,7 +61,8 @@ public class CurrencyViewRowImpl extends ViewRowImpl {
         RegRatesView,
         UserSettingsView,
         OrderZamerView,
-        OtherZatratyView;
+        OtherZatratyView,
+        StartOstView;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -107,6 +108,7 @@ public class CurrencyViewRowImpl extends ViewRowImpl {
     public static final int USERSETTINGSVIEW = AttributesEnum.UserSettingsView.index();
     public static final int ORDERZAMERVIEW = AttributesEnum.OrderZamerView.index();
     public static final int OTHERZATRATYVIEW = AttributesEnum.OtherZatratyView.index();
+    public static final int STARTOSTVIEW = AttributesEnum.StartOstView.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -366,6 +368,13 @@ public class CurrencyViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getOtherZatratyView() {
         return (RowIterator) getAttributeInternal(OTHERZATRATYVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link StartOstView.
+     */
+    public RowIterator getStartOstView() {
+        return (RowIterator) getAttributeInternal(STARTOSTVIEW);
     }
 }
 

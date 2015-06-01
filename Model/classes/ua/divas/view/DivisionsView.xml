@@ -346,8 +346,26 @@ order by Divisions.IS_GROUP DESC]]></SQLQuery>
     ViewLink="ua.divas.view.KontragSettingsFk4Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="StartOstView"
+    ViewLink="ua.divas.view.StartOstFk1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ClientInterface
     Name="__clientInterface">
+    <Method
+      Name="changeParentInDivisions"
+      MethodName="changeParentInDivisions">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="Id"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="ParentId"
+        Type="java.lang.String"/>
+    </Method>
     <Method
       Name="changeParentInDivisions"
       MethodName="changeParentInDivisions">

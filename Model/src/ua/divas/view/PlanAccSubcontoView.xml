@@ -16,6 +16,10 @@
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full">
+  <Variable
+    Name="PlanId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="PlanAccView1"
     ViewObjectName="ua.divas.view.PlanAccView"
@@ -123,4 +127,41 @@
     EntityAttrName="Version"
     EntityUsage="PlanAccSubconto"
     AliasName="VERSION"/>
+  <ViewCriteria
+    Name="PlanAccSubcontoByPlanId"
+    ViewObjectName="ua.divas.view.PlanAccSubcontoView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PlanAccSubcontoViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="PlanAccId"
+        ViewAttribute="PlanAccId"
+        Operator="="
+        Conjunction="AND"
+        Value=":PlanId"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
 </ViewObject>

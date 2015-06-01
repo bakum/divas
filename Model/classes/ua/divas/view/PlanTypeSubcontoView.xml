@@ -14,6 +14,10 @@
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full">
+  <Variable
+    Name="PlanTypeId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <EntityUsage
     Name="PlanTypeSubconto"
     Entity="ua.divas.model.PlanTypeSubconto"/>
@@ -45,6 +49,43 @@
     EntityAttrName="Fullname"
     EntityUsage="PlanTypeSubconto"
     AliasName="FULLNAME"/>
+  <ViewCriteria
+    Name="PlanTypeSubcontoById"
+    ViewObjectName="ua.divas.view.PlanTypeSubcontoView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PlanTypeSubcontoViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Id"
+        ViewAttribute="Id"
+        Operator="="
+        Conjunction="AND"
+        Value=":PlanTypeId"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="PlanAccSubcontoView"
     ViewLink="ua.divas.view.PlanAccSubcontoFk2Link"

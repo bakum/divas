@@ -259,6 +259,13 @@
     AssociationOtherEnd="ua.divas.model.KontragSettingsFk4Assoc.Divisions"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="StartOst"
+    Association="ua.divas.model.StartOstFk1Assoc"
+    AssociationEnd="ua.divas.model.StartOstFk1Assoc.StartOst"
+    AssociationOtherEnd="ua.divas.model.StartOstFk1Assoc.Divisions"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="DivisionsPk"
     PrimaryKey="true">

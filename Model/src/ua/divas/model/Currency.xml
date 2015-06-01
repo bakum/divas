@@ -278,6 +278,13 @@
     AssociationOtherEnd="ua.divas.model.OtherZatratyFk3Assoc.Currency"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="StartOst"
+    Association="ua.divas.model.StartOstFk3Assoc"
+    AssociationEnd="ua.divas.model.StartOstFk3Assoc.StartOst"
+    AssociationOtherEnd="ua.divas.model.StartOstFk3Assoc.Currency"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="CurrencyChk1">
     <DesignTime>

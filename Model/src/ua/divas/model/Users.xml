@@ -326,6 +326,13 @@
     AssociationOtherEnd="ua.divas.model.NachislSettingsFk1Assoc.Users"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="StartOst"
+    Association="ua.divas.model.StartOstFk2Assoc"
+    AssociationEnd="ua.divas.model.StartOstFk2Assoc.StartOst"
+    AssociationOtherEnd="ua.divas.model.StartOstFk2Assoc.Users"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="UsersPk"
     PrimaryKey="true">

@@ -288,16 +288,15 @@
       <nodeDefinition DefName="ua.divas.view.OrdersTpNachisleniaView" Name="OrdersTpNachisleniaView20">
         <AttrNames>
           <Item Value="Id"/>
+          <Item Value="DatNach"/>
           <Item Value="KontrId"/>
           <Item Value="Kontname"/>
-          <Item Value="DatNach"/>
+          <Item Value="PayId"/>
           <Item Value="CalcId"/>
           <Item Value="OrderId"/>
           <Item Value="Percent"/>
           <Item Value="Summ"/>
           <Item Value="OtpnEditable"/>
-          <Item Value="Description"/>
-          <Item Value="PayId"/>
           <Item Value="Manual"/>
         </AttrNames>
       </nodeDefinition>

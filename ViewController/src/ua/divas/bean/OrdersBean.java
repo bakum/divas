@@ -170,7 +170,7 @@ public class OrdersBean {
     }
 
     public void refresh() {
-        /* DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+         DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = binding.findIteratorBinding("OrdersView1Iterator");
         String rks;
         if (it != null) {
@@ -187,7 +187,7 @@ public class OrdersBean {
                     e.getMessage();
                 }
             }
-        } */
+        } 
 
         AdfFacesContext.getCurrentInstance().addPartialTarget(getMainTable());
         refreshZamer();

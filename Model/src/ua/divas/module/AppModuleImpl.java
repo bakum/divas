@@ -46,6 +46,8 @@ import ua.divas.view.PaySettingsViewImpl;
 import ua.divas.view.PkoViewImpl;
 import ua.divas.view.ProrabViewImpl;
 import ua.divas.view.RkoViewImpl;
+import ua.divas.view.StartOstTpViewImpl;
+import ua.divas.view.StartOstViewImpl;
 import ua.divas.view.UserSettingsViewImpl;
 import ua.divas.view.UsersViewImpl;
 import ua.divas.view.VwBallansApImpl;
@@ -3705,6 +3707,38 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getKontrOtherSettFkLink1() {
         return (ViewLinkImpl) findViewLink("KontrOtherSettFkLink1");
+    }
+
+    /**
+     * Container's getter for StartOstView1.
+     * @return StartOstView1
+     */
+    public StartOstViewImpl getStartOstView1() {
+        return (StartOstViewImpl) findViewObject("StartOstView1");
+    }
+
+    /**
+     * Container's getter for StartOstTpView1.
+     * @return StartOstTpView1
+     */
+    public StartOstTpViewImpl getStartOstTpView1() {
+        return (StartOstTpViewImpl) findViewObject("StartOstTpView1");
+    }
+
+    /**
+     * Container's getter for StartOstTpView2.
+     * @return StartOstTpView2
+     */
+    public StartOstTpViewImpl getStartOstTpView2() {
+        return (StartOstTpViewImpl) findViewObject("StartOstTpView2");
+    }
+
+    /**
+     * Container's getter for StartOstTpFk3Link1.
+     * @return StartOstTpFk3Link1
+     */
+    public ViewLinkImpl getStartOstTpFk3Link1() {
+        return (ViewLinkImpl) findViewLink("StartOstTpFk3Link1");
     }
 }
 
