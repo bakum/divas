@@ -10,7 +10,8 @@
   DBObjectName="KONTRAG_SETTINGS"
   AliasName="KontragSettings"
   BindingStyle="OracleName"
-  RowClass="ua.divas.model.KontragSettingsImpl">
+  RowClass="ua.divas.model.KontragSettingsImpl"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Access"/>
     <Attr Name="_isCodegen" Value="true"/>
@@ -217,6 +218,18 @@
       <Item Value="ua.divas.model.KontragSettings.DivisionId"/>
     </AttrArray>
   </Key>
+  <validation:MethodValidationBean
+    Name="KontragSettingsRule0"
+    ResId="ua.divas.model.KontragSettings_Rule_0"
+    MethodName="validateKontragSettings"/>
+  <validation:MethodValidationBean
+    Name="KontragSettingsRule1"
+    ResId="ua.divas.model.KontragSettings_Rule_1"
+    MethodName="validateKontragSettings1"/>
+  <validation:MethodValidationBean
+    Name="KontragSettingsRule2"
+    ResId="ua.divas.model.KontragSettings_Rule_2"
+    MethodName="validateKontragSettings2"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

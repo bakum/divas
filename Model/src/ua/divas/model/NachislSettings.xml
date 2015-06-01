@@ -227,6 +227,10 @@
     Name="NachislSettingsRule1"
     ResId="ua.divas.model.NachislSettings_Rule_1"
     MethodName="validateNachislSettings1"/>
+  <validation:MethodValidationBean
+    Name="NachislSettingsRule2"
+    ResId="ua.divas.model.NachislSettings_Rule_2"
+    MethodName="validateNachislSettings2"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

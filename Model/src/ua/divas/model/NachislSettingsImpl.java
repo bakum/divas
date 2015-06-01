@@ -260,11 +260,10 @@ public class NachislSettingsImpl extends DivasEntityNoDelete {
     /**
      * Validation method for NachislSettings.
      */
-    public boolean validateNachislSettings1() {
+    public boolean validateNachislSettings2() {
         String bId = getBaseId();
         String bName = getBaseNachislName(bId);
-        String div = getDivisionId();
-        if (!bName.equals("ORDER") && div == null) {
+        if (bName.equals("IERARHIA")) {
             return false;
         }
         return true;
@@ -278,6 +277,20 @@ public class NachislSettingsImpl extends DivasEntityNoDelete {
     public static Key createPrimaryKey(String id) {
         return new Key(new Object[] { id });
     }
+
+    /**
+     * Validation method for NachislSettings.
+     */
+    public boolean validateNachislSettings1() {
+        String bId = getBaseId();
+        String bName = getBaseNachislName(bId);
+        String div = getDivisionId();
+        if (!bName.equals("ORDER") && div == null) {
+            return false;
+        }
+        return true;
+    }
+
 
     public String getBaseName(String id) {
         return (String) callStoredFunction(VARCHAR2, "UTILITY.retrieve_name_baseofcalc(?)", new Object[] { id });

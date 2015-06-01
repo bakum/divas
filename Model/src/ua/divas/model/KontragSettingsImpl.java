@@ -62,6 +62,7 @@ public class KontragSettingsImpl extends DivasEntityNoDelete {
         }
     }
 
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int KONTRAGID = AttributesEnum.KontragId.index();
     public static final int PAYID = AttributesEnum.PayId.index();
@@ -86,6 +87,7 @@ public class KontragSettingsImpl extends DivasEntityNoDelete {
     public static synchronized EntityDefImpl getDefinitionObject() {
         return EntityDefImpl.findDefObject("ua.divas.model.KontragSettings");
     }
+
 
     /**
      * Gets the attribute value for Id, using the alias name Id.
@@ -256,12 +258,62 @@ public class KontragSettingsImpl extends DivasEntityNoDelete {
     }
 
     /**
+     * Validation method for KontragSettings.
+     */
+    public boolean validateKontragSettings2() {
+        String bId = getBaseId();
+        String bName = getBaseNachislName(bId);
+        if (!bName.equals("IERARHIA")) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * @param id key constituent
 
      * @return a Key object based on given key constituents.
      */
     public static Key createPrimaryKey(String id) {
         return new Key(new Object[] { id });
+    }
+
+    /**
+     * Validation method for KontragSettings.
+     */
+    public boolean validateKontragSettings1() {
+        String bId = getBaseId();
+        String bName = getBaseNachislName(bId);
+        String div = getDivisionId();
+        if (!bName.equals("ORDER") && div == null) {
+            return false;
+        }
+        return true;
+    }
+
+
+    public String getIdFromAlgorythm(String id) {
+        return (String) callStoredFunction(VARCHAR2, "UTILITY.retrieve_idfromalgorythm(?)", new Object[] { id });
+    }
+    public String getBaseName(String id) {
+        return (String) callStoredFunction(VARCHAR2, "UTILITY.retrieve_name_baseofcalc(?)", new Object[] { id });
+    }
+    public String getBaseNachislName(String id) {
+        return (String) callStoredFunction(VARCHAR2, "UTILITY.retrieve_name_basenachisl(?)", new Object[] { id });
+    }
+
+    /**
+     * Validation method for KontragSettings.
+     */
+    public boolean validateKontragSettings() {
+        String alId = getPayId();
+        String bId = getIdFromAlgorythm(alId);
+        String bName = getBaseName(bId);
+        BigDecimal sm = getSumma();
+        if (!bName.equals("Процент") && (sm == null || sm.floatValue() == 0)) {
+            return false;
+        }
+        return true;
     }
 
 
