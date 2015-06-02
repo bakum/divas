@@ -11,6 +11,7 @@
               RangeSize="25"/>
     <iterator id="PkoView1Iterator" Binds="PkoView1" DataControl="AppModuleDataControl" RangeSize="25"/>
     <iterator id="RkoView1Iterator" Binds="RkoView1" DataControl="AppModuleDataControl" RangeSize="25"/>
+    <iterator id="StartOstView1Iterator" Binds="StartOstView1" DataControl="AppModuleDataControl" RangeSize="25"/>
   </executables>
   <bindings>
     <tree IterBinding="KassaView1Iterator" id="KassaView1">

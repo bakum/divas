@@ -154,7 +154,16 @@ public class KassaBean {
                         //row.setAttribute("OEditable", new BigDecimal(1));
                         rsi.setCurrentRow(row);
                         RequestContext.getCurrentInstance().getPageFlowScope().put("case", "rko");
+                    } else if (regType.equalsIgnoreCase("START_OST")) {
+                        Key k = new Key(new Object[] { regId });
+                        DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("StartOstView1Iterator");
+                        RowSetIterator rsi = iter.getRowSetIterator();
+                        Row row = rsi.findByKey(k, 1)[0];
+                        //row.setAttribute("OEditable", new BigDecimal(1));
+                        rsi.setCurrentRow(row);
+                        RequestContext.getCurrentInstance().getPageFlowScope().put("case", "start");
                     }
+
                 }
             } catch (Exception e) {
                 // TODO: Add catch code
@@ -162,7 +171,7 @@ public class KassaBean {
             }
         }
     }
-    
+
     public void afterListener() {
         System.out.println("After listener called ");
         BindingContext bindingContext = BindingContext.getCurrent();

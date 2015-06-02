@@ -109,6 +109,9 @@ FROM
         FROM other_zatraty
         WHERE other_zatraty.ID = MOVE_KONTRAG.REGISTRATOR_ID
         ), 'DD-MM-YYYY')
+        WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('start_ost')
+            THEN 'Нач. остатки №'||(select num from start_ost where id = MOVE_KONTRAG.REGISTRATOR_ID)||' от '||to_char(
+            (select dat from start_ost where id = MOVE_KONTRAG.REGISTRATOR_ID),'DD-MM-YYYY')          
     END AS REG_STRING
   FROM MOVE_KONTRAG
   INNER JOIN KONTRAGENTS

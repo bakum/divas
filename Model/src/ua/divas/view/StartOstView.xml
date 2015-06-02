@@ -10,7 +10,9 @@
   CustomQuery="true"
   PageIterMode="Full"
   ComponentClass="ua.divas.view.StartOstViewImpl"
-  RowClass="ua.divas.view.StartOstViewRowImpl">
+  RowClass="ua.divas.view.StartOstViewRowImpl"
+  ComponentInterface="ua.divas.view.common.StartOstView"
+  ClientProxyName="ua.divas.view.client.StartOstViewClient">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isExpertMode" Value="true"/>
@@ -269,6 +271,34 @@ FROM  START_OST StartOst]]></SQLQuery>
     ViewLink="ua.divas.view.StartOstTpFk3Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="VwStartOstMovesVO"
+    ViewLink="ua.divas.view.StartOstVwMovesFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="addEntry"
+      MethodName="addEntry">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="_id"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="removeEntry"
+      MethodName="removeEntry">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="_id"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

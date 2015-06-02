@@ -39,6 +39,10 @@
         <expression>#{pageFlowScope.case == 'rko'}</expression>
         <outcome>onRko</outcome>
       </case>
+      <case id="__17">
+        <expression>#{pageFlowScope.case == 'start'}</expression>
+        <outcome>onStart</outcome>
+      </case>
       <default-outcome>onOrder</default-outcome>
     </router>
     <task-flow-call id="other-dialod-flow">
@@ -84,6 +88,17 @@
         <dialog-return-value>#{pageFlowScope.RkoId}</dialog-return-value>
       </run-as-dialog>
     </task-flow-call>
+    <task-flow-call id="editStart">
+      <task-flow-reference>
+        <document>/WEB-INF/editStart.xml</document>
+        <id>editStart</id>
+      </task-flow-reference>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
     <control-flow-rule id="__1">
       <from-activity-id>kassa</from-activity-id>
       <control-flow-case id="__2">
@@ -108,6 +123,10 @@
       <control-flow-case id="__13">
         <from-outcome>onRko</from-outcome>
         <to-activity-id>EditRko</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__16">
+        <from-outcome>onStart</from-outcome>
+        <to-activity-id>editStart</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>

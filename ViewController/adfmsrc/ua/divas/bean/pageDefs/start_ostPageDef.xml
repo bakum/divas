@@ -9,6 +9,8 @@
         <sort attribute="Dat" ascending="true"/>
       </sortCriteria>
     </iterator>
+    <iterator Binds="VwStartOstMovesVO1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="VwStartOstMovesVO1Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="StartOstView1Iterator" id="StartOstView1">
@@ -30,5 +32,30 @@
     </tree>
     <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
     <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
+    <methodAction id="addEntry" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addEntry"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.StartOstView1">
+      <NamedData NDName="_id" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="removeEntry" RequiresUpdateModel="true" Action="invokeMethod" MethodName="removeEntry"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.StartOstView1">
+      <NamedData NDName="_id" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="VwStartOstMovesVO1Iterator" id="VwStartOstMovesVO1">
+      <nodeDefinition DefName="ua.divas.view.VwStartOstMovesVO" Name="VwStartOstMovesVO10">
+        <AttrNames>
+          <Item Value="RegistratorId"/>
+          <Item Value="Deb"/>
+          <Item Value="SumDeb"/>
+          <Item Value="Subconto1Deb"/>
+          <Item Value="Subconto2Deb"/>
+          <Item Value="Kred"/>
+          <Item Value="SumKred"/>
+          <Item Value="Subconto1Kred"/>
+          <Item Value="Subconto2Kred"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>

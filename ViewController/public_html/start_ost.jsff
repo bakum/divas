@@ -174,11 +174,82 @@
                                                             icon="/img/icon_rollback.png"
                                                             actionListener="#{start_ost.onRemoveEntry}"/>
                                     </af:group>
-                                    <af:commandMenuItem text="Проводки" id="cmi3"/>
+                                    <af:commandMenuItem text="Проводки" id="cmi3">
+                                        <af:showPopupBehavior popupId="::pEntry"/>
+                                    </af:commandMenuItem>
                                 </af:menu>
                             </af:popup>
                         </f:facet>
                     </af:table>
+                    <af:popup childCreation="deferred" autoCancel="disabled" id="pEntry"
+                              contentDelivery="lazyUncached">
+                        <af:dialog id="d1" title="Проводки">
+                            <f:facet name="buttonBar"/>
+                            <af:table value="#{bindings.VwStartOstMovesVO1.collectionModel}" var="row"
+                                      rows="#{bindings.VwStartOstMovesVO1.rangeSize}"
+                                      emptyText="#{bindings.VwStartOstMovesVO1.viewable ? 'Нет данных.' : 'В доступе отказано.'}"
+                                      rowBandingInterval="0"
+                                      selectedRowKeys="#{bindings.VwStartOstMovesVO1.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.VwStartOstMovesVO1.collectionModel.makeCurrent}"
+                                      rowSelection="single" fetchSize="#{bindings.VwStartOstMovesVO1.rangeSize}"
+                                      id="t4">
+                                <af:column headerText="#{bindings.VwStartOstMovesVO1.hints.RegistratorId.label}"
+                                           id="c13" visible="false">
+                                    <af:outputText value="#{row.RegistratorId}"
+                                                   shortDesc="#{bindings.VwStartOstMovesVO1.hints.RegistratorId.tooltip}"
+                                                   id="ot1"/>
+                                </af:column>
+                                <af:column headerText="#{bindings.VwStartOstMovesVO1.hints.Deb.label}" id="c14"
+                                           inlineStyle="font-weight:bold;">
+                                    <af:outputText value="#{row.Deb}"
+                                                   shortDesc="#{bindings.VwStartOstMovesVO1.hints.Deb.tooltip}"
+                                                   id="ot2"/>
+                                </af:column>
+                                <af:column headerText="#{bindings.VwStartOstMovesVO1.hints.SumDeb.label}" id="c15"
+                                           inlineStyle="#{row.SumDeb &lt; 0 ? 'color: Red' : 'color: Black'}">
+                                    <af:outputText value="#{row.SumDeb}"
+                                                   shortDesc="#{bindings.VwStartOstMovesVO1.hints.SumDeb.tooltip}"
+                                                   id="ot3">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.VwStartOstMovesVO1.hints.SumDeb.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column headerText="Субконто Дт"
+                                           id="c16">
+                                    <af:outputText value="#{row.Subconto1Deb}"
+                                                   shortDesc="#{bindings.VwStartOstMovesVO1.hints.Subconto1Deb.tooltip}"
+                                                   id="ot4"/>
+                                    <af:outputText value="#{row.Subconto2Deb}"
+                                                   shortDesc="#{bindings.VwStartOstMovesVO1.hints.Subconto2Deb.tooltip}"
+                                                   id="ot5"/>
+                                </af:column>
+                                <af:column headerText="#{bindings.VwStartOstMovesVO1.hints.Kred.label}" id="c18"
+                                           inlineStyle="font-weight:bold;">
+                                    <af:outputText value="#{row.Kred}"
+                                                   shortDesc="#{bindings.VwStartOstMovesVO1.hints.Kred.tooltip}"
+                                                   id="ot6"/>
+                                </af:column>
+                                <af:column headerText="#{bindings.VwStartOstMovesVO1.hints.SumKred.label}" id="c19"
+                                           inlineStyle="#{row.SumKred &lt; 0 ? 'color: Red' : 'color: Black'}">
+                                    <af:outputText value="#{row.SumKred}"
+                                                   shortDesc="#{bindings.VwStartOstMovesVO1.hints.SumKred.tooltip}"
+                                                   id="ot7">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.VwStartOstMovesVO1.hints.SumKred.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column headerText="Субконто Кт"
+                                           id="c20">
+                                    <af:outputText value="#{row.Subconto1Kred}"
+                                                   shortDesc="#{bindings.VwStartOstMovesVO1.hints.Subconto1Kred.tooltip}"
+                                                   id="ot8"/>
+                                    <af:outputText value="#{row.Subconto2Kred}"
+                                                   shortDesc="#{bindings.VwStartOstMovesVO1.hints.Subconto2Kred.tooltip}"
+                                                   id="ot9"/>
+                                </af:column>
+                            </af:table>
+                        </af:dialog>
+                    </af:popup>
                 </af:panelBox>
             </af:gridCell>
         </af:gridRow>

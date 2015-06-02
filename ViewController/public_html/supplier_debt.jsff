@@ -45,25 +45,7 @@
                             </af:treeTable>
                         </af:panelCollection>
                     </f:facet>
-                    <f:facet name="second">
-                        <dvt:barGraph id="graph1" value="#{bindings.VwKontragAllItems11.graphModel}"
-                                      subType="BAR_VERT_CLUST">
-                            <dvt:background>
-                                <dvt:specialEffects/>
-                            </dvt:background>
-                            <dvt:graphPlotArea/>
-                            <dvt:seriesSet>
-                                <dvt:series/>
-                            </dvt:seriesSet>
-                            <dvt:o1Axis/>
-                            <dvt:y1Axis/>
-                            <dvt:legendArea automaticPlacement="AP_NEVER" rendered="false"/>
-                            <dvt:attributeFormat name="DebtSupplier" id="af1">
-                                <af:convertNumber pattern="#{bindings.VwKontragAllItems11.hints.DebtSupplier.format}"
-                                                  groupingUsed="false"/>
-                            </dvt:attributeFormat>
-                        </dvt:barGraph>
-                    </f:facet>
+                    <f:facet name="second"/>
                 </af:panelSplitter>
             </af:gridCell>
         </af:gridRow>

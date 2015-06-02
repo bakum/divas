@@ -3740,5 +3740,21 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getStartOstTpFk3Link1() {
         return (ViewLinkImpl) findViewLink("StartOstTpFk3Link1");
     }
+
+    /**
+     * Container's getter for VwStartOstMovesVO1.
+     * @return VwStartOstMovesVO1
+     */
+    public ViewObjectImpl getVwStartOstMovesVO1() {
+        return (ViewObjectImpl) findViewObject("VwStartOstMovesVO1");
+    }
+
+    /**
+     * Container's getter for StartOstVwMovesFkLink1.
+     * @return StartOstVwMovesFkLink1
+     */
+    public ViewLinkImpl getStartOstVwMovesFkLink1() {
+        return (ViewLinkImpl) findViewLink("StartOstVwMovesFkLink1");
+    }
 }
 

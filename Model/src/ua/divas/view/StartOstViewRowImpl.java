@@ -59,6 +59,7 @@ public class StartOstViewRowImpl extends ViewRowImpl {
         Editable,
         TotalSumm,
         StartOstTpView,
+        VwStartOstMovesVO,
         DivisionsView1,
         UsersView1,
         CurrencyView1,
@@ -102,6 +103,7 @@ public class StartOstViewRowImpl extends ViewRowImpl {
     public static final int EDITABLE = AttributesEnum.Editable.index();
     public static final int TOTALSUMM = AttributesEnum.TotalSumm.index();
     public static final int STARTOSTTPVIEW = AttributesEnum.StartOstTpView.index();
+    public static final int VWSTARTOSTMOVESVO = AttributesEnum.VwStartOstMovesVO.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
     public static final int CURRENCYVIEW1 = AttributesEnum.CurrencyView1.index();
@@ -326,6 +328,13 @@ public class StartOstViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getStartOstTpView() {
         return (RowIterator) getAttributeInternal(STARTOSTTPVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link VwStartOstMovesVO.
+     */
+    public RowIterator getVwStartOstMovesVO() {
+        return (RowIterator) getAttributeInternal(VWSTARTOSTMOVESVO);
     }
 
     /**

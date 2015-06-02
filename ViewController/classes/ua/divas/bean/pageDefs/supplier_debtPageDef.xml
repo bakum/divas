@@ -44,19 +44,6 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <graph IterBinding="VwKontragAllItems1Iterator" id="VwKontragAllItems11" xmlns="http://xmlns.oracle.com/adfm/dvt"
-           type="BAR_VERT_CLUST">
-      <graphDataMap convert="false" leafOnly="true">
-        <series>
-          <data>
-            <item value="DebtSupplier" label="Задолженность"/>
-          </data>
-        </series>
-        <groups>
-          <item value="Fullname" label="Наименование"/>
-        </groups>
-      </graphDataMap>
-    </graph>
     <tree IterBinding="VwSupplierMoves1Iterator" id="VwSupplierMoves1">
       <nodeDefinition DefName="ua.divas.view.VwSupplierMoves" Name="VwSupplierMoves10">
         <AttrNames>
