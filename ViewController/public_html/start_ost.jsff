@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelGridLayout id="pgl1">
+        <af:gridRow height="100%" id="gr1">
+            <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
+                <!-- Content -->
+                <af:panelBox text="Ввод начальных остатков" id="pb1" type="flow">
+                    <f:facet name="toolbar">
+                        <af:toolbar id="t2">
+                            <af:button text="Добавить" id="b1" action="newStart" useWindow="true" windowHeight="500"
+                                       windowWidth="750" returnListener="#{start_ost.onReturn}"
+                                       disabled="#{bindings.Commit.enabled}"/>
+                            <af:button actionListener="#{bindings.Commit.execute}" text="Сохранить"
+                                       disabled="#{!bindings.Commit.enabled}" id="b5"/>
+                            <af:button actionListener="#{bindings.Rollback.execute}" text="Отменить"
+                                       disabled="#{!bindings.Rollback.enabled}" immediate="true" id="b3">
+                                <af:resetActionListener/>
+                            </af:button>
+                            <af:button text="Обновить" id="b4" action="#{start_ost.refresh}"
+                                       disabled="#{bindings.Commit.enabled}"/>
+                        </af:toolbar>
+                    </f:facet>
+                    <af:table value="#{bindings.StartOstView1.collectionModel}" var="row"
+                              rows="#{bindings.StartOstView1.rangeSize}"
+                              emptyText="#{bindings.StartOstView1.viewable ? 'Нет данных.' : 'В доступе отказано.'}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.StartOstView1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.StartOstView1.collectionModel.makeCurrent}"
+                              rowSelection="single" fetchSize="#{bindings.StartOstView1.rangeSize}" id="t1"
+                              scrollPolicy="page" editingMode="clickToEdit" binding="#{start_ost.table}">
+                        <af:column id="c9" width="60" rowHeader="true">
+                            <af:toolbar id="t3">
+                                <af:button id="b2" icon="/img/edit-16.gif" shortDesc="Редактировать"
+                                           action="editStart" useWindow="true" windowHeight="500" windowWidth="750"
+                                           returnListener="#{start_ost.onReturn}"
+                                           disabled="#{bindings.Commit.enabled}"/>
+                            </af:toolbar>
+                        </af:column>
+                        <af:column id="c11" width="30">
+                            <af:image id="i1"
+                                      source="#{row.Posted==1 ? '/img/icon_commit.png' :  '/img/document.png'}"
+                                      shortDesc="Проведено"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.StartOstView1.hints.Id.name}" sortable="true"
+                                   headerText="#{bindings.StartOstView1.hints.Id.label}" id="c1" visible="false">
+                            <af:inputText value="#{row.bindings.Id.inputValue}"
+                                          label="#{bindings.StartOstView1.hints.Id.label}"
+                                          required="#{bindings.StartOstView1.hints.Id.mandatory}"
+                                          columns="#{bindings.StartOstView1.hints.Id.displayWidth}"
+                                          maximumLength="#{bindings.StartOstView1.hints.Id.precision}"
+                                          shortDesc="#{bindings.StartOstView1.hints.Id.tooltip}" id="it1">
+                                <f:validator binding="#{row.bindings.Id.validator}"/>
+                            </af:inputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.StartOstView1.hints.Dat.name}" sortable="true"
+                                   headerText="#{bindings.StartOstView1.hints.Dat.label}" id="c2">
+                            <af:inputDate value="#{row.bindings.Dat.inputValue}"
+                                          label="#{bindings.StartOstView1.hints.Dat.label}"
+                                          required="#{bindings.StartOstView1.hints.Dat.mandatory}"
+                                          columns="#{bindings.StartOstView1.hints.Dat.displayWidth}"
+                                          shortDesc="#{bindings.StartOstView1.hints.Dat.tooltip}" id="id1">
+                                <f:validator binding="#{row.bindings.Dat.validator}"/>
+                                <af:convertDateTime pattern="#{bindings.StartOstView1.hints.Dat.format}"/>
+                            </af:inputDate>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.StartOstView1.hints.Num.name}" sortable="true"
+                                   headerText="#{bindings.StartOstView1.hints.Num.label}" id="c3">
+                            <af:inputText value="#{row.bindings.Num.inputValue}"
+                                          label="#{bindings.StartOstView1.hints.Num.label}"
+                                          required="#{bindings.StartOstView1.hints.Num.mandatory}"
+                                          columns="#{bindings.StartOstView1.hints.Num.displayWidth}"
+                                          maximumLength="#{bindings.StartOstView1.hints.Num.precision}"
+                                          shortDesc="#{bindings.StartOstView1.hints.Num.tooltip}" id="it2">
+                                <f:validator binding="#{row.bindings.Num.validator}"/>
+                            </af:inputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.StartOstView1.hints.CurrId.name}" sortable="true"
+                                   headerText="#{bindings.StartOstView1.hints.CurrId.label}" id="c6">
+                            <af:selectOneChoice value="#{row.bindings.CurrId.inputValue}"
+                                                label="#{row.bindings.CurrId.label}"
+                                                required="#{bindings.StartOstView1.hints.CurrId.mandatory}"
+                                                shortDesc="#{bindings.StartOstView1.hints.CurrId.tooltip}" id="soc3">
+                                <f:selectItems value="#{row.bindings.CurrId.items}" id="si3"/>
+                                <f:validator binding="#{row.bindings.CurrId.validator}"/>
+                            </af:selectOneChoice>
+                        </af:column>
+                        <af:column headerText="#{bindings.StartOstView1.hints.TotalSumm.label}" id="c10" align="right">
+                            <af:inputText value="#{row.bindings.TotalSumm.inputValue}"
+                                          label="#{bindings.StartOstView1.hints.TotalSumm.label}"
+                                          required="#{bindings.StartOstView1.hints.TotalSumm.mandatory}"
+                                          columns="#{bindings.StartOstView1.hints.TotalSumm.displayWidth}"
+                                          maximumLength="#{bindings.StartOstView1.hints.TotalSumm.precision}"
+                                          shortDesc="#{bindings.StartOstView1.hints.TotalSumm.tooltip}" id="it4"
+                                          contentStyle="font-weight: bold;">
+                                <f:validator binding="#{row.bindings.TotalSumm.validator}"/>
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.StartOstView1.hints.TotalSumm.format}"/>
+                            </af:inputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.StartOstView1.hints.UserId.name}" sortable="true"
+                                   headerText="#{bindings.StartOstView1.hints.UserId.label}" id="c5" width="150"
+                                   align="center">
+                            <af:selectOneChoice value="#{row.bindings.UserId.inputValue}"
+                                                label="#{row.bindings.UserId.label}"
+                                                required="#{bindings.StartOstView1.hints.UserId.mandatory}"
+                                                shortDesc="#{bindings.StartOstView1.hints.UserId.tooltip}" id="soc2">
+                                <f:selectItems value="#{row.bindings.UserId.items}" id="si2"/>
+                                <f:validator binding="#{row.bindings.UserId.validator}"/>
+                            </af:selectOneChoice>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.StartOstView1.hints.DivisionId.name}" sortable="true"
+                                   headerText="#{bindings.StartOstView1.hints.DivisionId.label}" id="c4" width="150"
+                                   align="center">
+                            <af:selectOneChoice value="#{row.bindings.DivisionId.inputValue}"
+                                                label="#{row.bindings.DivisionId.label}"
+                                                required="#{bindings.StartOstView1.hints.DivisionId.mandatory}"
+                                                shortDesc="#{bindings.StartOstView1.hints.DivisionId.tooltip}"
+                                                id="soc1">
+                                <f:selectItems value="#{row.bindings.DivisionId.items}" id="si1"/>
+                                <f:validator binding="#{row.bindings.DivisionId.validator}"/>
+                            </af:selectOneChoice>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.StartOstView1.hints.ActivitiesId.name}" sortable="true"
+                                   headerText="#{bindings.StartOstView1.hints.ActivitiesId.label}" id="c7"
+                                   visible="false">
+                            <af:selectOneChoice value="#{row.bindings.ActivitiesId.inputValue}"
+                                                label="#{row.bindings.ActivitiesId.label}"
+                                                required="#{bindings.StartOstView1.hints.ActivitiesId.mandatory}"
+                                                shortDesc="#{bindings.StartOstView1.hints.ActivitiesId.tooltip}"
+                                                id="soc4">
+                                <f:selectItems value="#{row.bindings.ActivitiesId.items}" id="si4"/>
+                                <f:validator binding="#{row.bindings.ActivitiesId.validator}"/>
+                            </af:selectOneChoice>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.StartOstView1.hints.Editable.name}" sortable="true"
+                                   headerText="#{bindings.StartOstView1.hints.Editable.label}" id="c8" visible="false">
+                            <af:inputText value="#{row.bindings.Editable.inputValue}"
+                                          label="#{bindings.StartOstView1.hints.Editable.label}"
+                                          required="#{bindings.StartOstView1.hints.Editable.mandatory}"
+                                          columns="#{bindings.StartOstView1.hints.Editable.displayWidth}"
+                                          maximumLength="#{bindings.StartOstView1.hints.Editable.precision}"
+                                          shortDesc="#{bindings.StartOstView1.hints.Editable.tooltip}" id="it3">
+                                <f:validator binding="#{row.bindings.Editable.validator}"/>
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.StartOstView1.hints.Editable.format}"/>
+                            </af:inputText>
+                        </af:column>
+                        <f:facet name="detailStamp">
+                            <af:panelLabelAndMessage label="#{bindings.StartOstView1.hints.Comments.label}" id="plam1">
+                                <af:outputFormatted value="#{row.bindings.Comments.inputValue}" id="of1"/>
+                            </af:panelLabelAndMessage>
+                        </f:facet>
+                        <af:column headerText="#{bindings.StartOstView1.hints.Posted.label}" id="c12" visible="false">
+                            <af:inputText value="#{row.bindings.Posted.inputValue}"
+                                          label="#{bindings.StartOstView1.hints.Posted.label}"
+                                          required="#{bindings.StartOstView1.hints.Posted.mandatory}"
+                                          columns="#{bindings.StartOstView1.hints.Posted.displayWidth}"
+                                          maximumLength="#{bindings.StartOstView1.hints.Posted.precision}"
+                                          shortDesc="#{bindings.StartOstView1.hints.Posted.tooltip}" id="it5">
+                                <f:validator binding="#{row.bindings.Posted.validator}"/>
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.StartOstView1.hints.Posted.format}"/>
+                            </af:inputText>
+                        </af:column>
+                        <f:facet name="contextMenu">
+                            <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                                      contentDelivery="lazyUncached">
+                                <af:menu text="menu 1" id="m1">
+                                    <af:group id="g1">
+                                        <af:commandMenuItem text="Провести" id="cmi1" icon="/img/icon_commit.png"
+                                                            actionListener="#{start_ost.onAddEntry}"/>
+                                        <af:commandMenuItem text="Отменить проведение" id="cmi2"
+                                                            icon="/img/icon_rollback.png"
+                                                            actionListener="#{start_ost.onRemoveEntry}"/>
+                                    </af:group>
+                                    <af:commandMenuItem text="Проводки" id="cmi3"/>
+                                </af:menu>
+                            </af:popup>
+                        </f:facet>
+                    </af:table>
+                </af:panelBox>
+            </af:gridCell>
+        </af:gridRow>
+    </af:panelGridLayout>
+</ui:composition>

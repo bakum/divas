@@ -17,9 +17,9 @@
       <property
          name="y">-7.5625</property>
       <property
-         name="x">119.0</property>
-      <property
          name="pageFragment">true</property>
+      <property
+         name="x">119.0</property>
    </View>
    <View
       id="View3">
@@ -34,9 +34,9 @@
       <property
          name="y">-9.78125</property>
       <property
-         name="x">382.0</property>
-      <property
          name="pageFragment">true</property>
+      <property
+         name="x">382.0</property>
    </View>
    <ControlFlowCase
       islink="true"
@@ -143,7 +143,7 @@
       <property
          name="fromOutcome">addRko</property>
       <property
-         name="sdm:polyPoints">B56,122.5,46.453125,244.5,101.546875,T50</property>
+         name="sdm:polyPoints">B56,122.5,46.453125,244.5,101.5625,T50</property>
    </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall13">

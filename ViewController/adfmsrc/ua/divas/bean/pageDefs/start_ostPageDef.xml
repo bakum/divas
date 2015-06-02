@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.2.66.68" id="start_ostPageDef"
+                Package="ua.divas.bean.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="StartOstView1" RangeSize="25" DataControl="AppModuleDataControl" id="StartOstView1Iterator">
+      <sortCriteria>
+        <sort attribute="Dat" ascending="true"/>
+      </sortCriteria>
+    </iterator>
+  </executables>
+  <bindings>
+    <tree IterBinding="StartOstView1Iterator" id="StartOstView1">
+      <nodeDefinition DefName="ua.divas.view.StartOstView" Name="StartOstView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Dat"/>
+          <Item Value="Num"/>
+          <Item Value="DivisionId"/>
+          <Item Value="UserId"/>
+          <Item Value="CurrId"/>
+          <Item Value="ActivitiesId"/>
+          <Item Value="Editable"/>
+          <Item Value="Comments"/>
+          <Item Value="TotalSumm"/>
+          <Item Value="Posted"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

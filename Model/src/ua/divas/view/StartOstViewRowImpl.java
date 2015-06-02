@@ -7,6 +7,8 @@ import java.sql.Timestamp;
 import oracle.jbo.AttributeList;
 import oracle.jbo.RowIterator;
 import oracle.jbo.RowSet;
+import oracle.jbo.domain.NClobDomain;
+import oracle.jbo.domain.Number;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.ViewRowImpl;
 
@@ -18,8 +20,10 @@ import ua.divas.model.StartOstImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class StartOstViewRowImpl extends ViewRowImpl {
+
+
     public static final int ENTITY_STARTOST = 0;
-    
+
     @Override
     public boolean isAttributeUpdateable(int i) {
         BigDecimal editable = this.getEditable();
@@ -53,12 +57,14 @@ public class StartOstViewRowImpl extends ViewRowImpl {
         CurrId,
         ActivitiesId,
         Editable,
+        TotalSumm,
         StartOstTpView,
         DivisionsView1,
         UsersView1,
         CurrencyView1,
         TypeOfActivitiesView1;
-        private static AttributesEnum[] vals = null;
+        static AttributesEnum[] vals = null;
+        ;
         private static final int firstIndex = 0;
 
         public int index() {
@@ -80,6 +86,8 @@ public class StartOstViewRowImpl extends ViewRowImpl {
             return vals;
         }
     }
+
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int DAT = AttributesEnum.Dat.index();
     public static final int NUM = AttributesEnum.Num.index();
@@ -92,6 +100,7 @@ public class StartOstViewRowImpl extends ViewRowImpl {
     public static final int CURRID = AttributesEnum.CurrId.index();
     public static final int ACTIVITIESID = AttributesEnum.ActivitiesId.index();
     public static final int EDITABLE = AttributesEnum.Editable.index();
+    public static final int TOTALSUMM = AttributesEnum.TotalSumm.index();
     public static final int STARTOSTTPVIEW = AttributesEnum.StartOstTpView.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
@@ -302,6 +311,14 @@ public class StartOstViewRowImpl extends ViewRowImpl {
      */
     public void setEditable(BigDecimal value) {
         setAttributeInternal(EDITABLE, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute TotalSumm.
+     * @return the TotalSumm
+     */
+    public oracle.jbo.domain.Number getTotalSumm() {
+        return (oracle.jbo.domain.Number) getAttributeInternal(TOTALSUMM);
     }
 
     /**

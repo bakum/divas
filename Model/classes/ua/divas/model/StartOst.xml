@@ -37,7 +37,6 @@
     Type="java.sql.Timestamp"
     ColumnType="DATE"
     TableName="START_OST">
-    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -64,6 +63,8 @@
           ResId="ua.divas.model.StartOst.Num_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.model.StartOst.Num_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="20"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -148,6 +149,8 @@
           ResId="ua.divas.model.StartOst.Comments_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.model.StartOst.Comments_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="40"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -191,6 +194,14 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.StartOst.ActivitiesId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.StartOst.ActivitiesId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <AccessorAttribute
     Name="Users"

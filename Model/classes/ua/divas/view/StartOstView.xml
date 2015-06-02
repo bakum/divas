@@ -243,9 +243,34 @@ FROM  START_OST StartOst]]></SQLQuery>
     AliasName="EDITABLE"
     Expression="EDITABLE"
     SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TotalSumm"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[StartOstTpView.sum("Summ != null ? Summ : 0")]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.StartOstView.TotalSumm_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.StartOstView.TotalSumm_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewLinkAccessor
     Name="StartOstTpView"
     ViewLink="ua.divas.view.StartOstTpFk3Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>

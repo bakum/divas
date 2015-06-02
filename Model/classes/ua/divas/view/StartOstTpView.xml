@@ -154,6 +154,9 @@
     <AttrArray Name="ListAttrNames">
       <Item Value="Id"/>
     </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
   <ListBinding
@@ -169,6 +172,9 @@
     <AttrArray Name="AttrExpressions"/>
     <AttrArray Name="ListAttrNames">
       <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -186,6 +192,9 @@
     <AttrArray Name="ListAttrNames">
       <Item Value="Id"/>
     </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
   <ListBinding
@@ -201,6 +210,9 @@
     <AttrArray Name="AttrExpressions"/>
     <AttrArray Name="ListAttrNames">
       <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -237,6 +249,9 @@
     <AttrArray Name="ListAttrNames">
       <Item Value="Id"/>
     </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
   <ListBinding
@@ -252,6 +267,9 @@
     <AttrArray Name="AttrExpressions"/>
     <AttrArray Name="ListAttrNames">
       <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -269,6 +287,9 @@
     <AttrArray Name="ListAttrNames">
       <Item Value="Id"/>
     </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
   <ListBinding
@@ -284,6 +305,9 @@
     <AttrArray Name="AttrExpressions"/>
     <AttrArray Name="ListAttrNames">
       <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -320,6 +344,9 @@
     <AttrArray Name="ListAttrNames">
       <Item Value="Id"/>
     </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
   <ListBinding
@@ -335,6 +362,9 @@
     <AttrArray Name="AttrExpressions"/>
     <AttrArray Name="ListAttrNames">
       <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -352,6 +382,9 @@
     <AttrArray Name="ListAttrNames">
       <Item Value="Id"/>
     </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
   <ListBinding
@@ -367,6 +400,9 @@
     <AttrArray Name="AttrExpressions"/>
     <AttrArray Name="ListAttrNames">
       <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -403,6 +439,9 @@
     <AttrArray Name="ListAttrNames">
       <Item Value="Id"/>
     </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
   <ListBinding
@@ -418,6 +457,9 @@
     <AttrArray Name="AttrExpressions"/>
     <AttrArray Name="ListAttrNames">
       <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -435,6 +477,9 @@
     <AttrArray Name="ListAttrNames">
       <Item Value="Id"/>
     </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
   <ListBinding
@@ -450,6 +495,9 @@
     <AttrArray Name="AttrExpressions"/>
     <AttrArray Name="ListAttrNames">
       <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -506,7 +554,6 @@ FROM  START_OST_TP StartOstTp]]></SQLQuery>
   </ViewAttribute>
   <ViewAttribute
     Name="PlanaccDebName"
-    IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
     Precision="6"
@@ -515,7 +562,8 @@ FROM  START_OST_TP StartOstTp]]></SQLQuery>
     AliasName="PLANACC_DEB_NAME"
     Expression="PLANACC_DEB_NAME"
     SQLType="VARCHAR"
-    LOVName="LOV_PlanaccDebName">
+    LOVName="LOV_PlanaccDebName"
+    IsNotNull="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="6"/>
     </DesignTime>
@@ -523,6 +571,10 @@ FROM  START_OST_TP StartOstTp]]></SQLQuery>
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="input_text_lov"/>
+        <LABEL
+          ResId="ua.divas.view.StartOstTpView.PlanaccDebName_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.StartOstTpView.PlanaccDebName_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -570,7 +622,6 @@ FROM  START_OST_TP StartOstTp]]></SQLQuery>
   </ViewAttribute>
   <ViewAttribute
     Name="PlanaccKredName"
-    IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
     Precision="6"
@@ -579,7 +630,8 @@ FROM  START_OST_TP StartOstTp]]></SQLQuery>
     AliasName="PLANACC_KRED_NAME"
     Expression="PLANACC_KRED_NAME"
     SQLType="VARCHAR"
-    LOVName="LOV_PlanaccKredName">
+    LOVName="LOV_PlanaccKredName"
+    IsNotNull="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="6"/>
     </DesignTime>
@@ -587,6 +639,10 @@ FROM  START_OST_TP StartOstTp]]></SQLQuery>
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="input_text_lov"/>
+        <LABEL
+          ResId="ua.divas.view.StartOstTpView.PlanaccKredName_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.StartOstTpView.PlanaccKredName_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -697,7 +753,8 @@ FROM  START_OST_TP StartOstTp]]></SQLQuery>
     IsPersistent="false"
     PrecisionRule="true"
     Type="java.lang.String"
-    ColumnType="$none$">
+    ColumnType="$none$"
+    SQLType="VARCHAR">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[viewObject.retrieveTypeSubc2Kred(PlanAccKredId)]]></TransientExpression>
     <Dependencies>
@@ -705,4 +762,42 @@ FROM  START_OST_TP StartOstTp]]></SQLQuery>
         Value="PlanAccKredId"/>
     </Dependencies>
   </ViewAttribute>
+  <ViewAttribute
+    Name="DebSubcCount"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Long"
+    ColumnType="LONGINT"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[viewObject.retrieveCountAccPlan(PlanAccDebId)]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="PlanAccDebId"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="KredSubcCount"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Long"
+    ColumnType="LONGINT"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[viewObject.retrieveCountAccPlan(PlanAccKredId)]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="PlanAccKredId"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>

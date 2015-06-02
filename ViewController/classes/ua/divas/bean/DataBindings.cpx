@@ -50,6 +50,10 @@
     <page path="/kontrag_calc.jsff" usageId="ua_divas_bean_kontrag_calcPageDef"/>
     <page path="/pay.jsff" usageId="ua_divas_bean_payPageDef"/>
     <page path="/other_kontrag.jsff" usageId="ua_divas_bean_other_kontragPageDef"/>
+    <page path="/WEB-INF/newStart.xml#newStart@CreateInsert"
+          usageId="ua_divas_bean_newStart_newStart_CreateInsertPageDef"/>
+    <page path="/start_ost.jsff" usageId="ua_divas_bean_start_ostPageDef"/>
+    <page path="/editstart.jsf" usageId="ua_divas_bean_editstartPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="ua_divas_view_indexPageDef" path="ua.divas.bean.pageDefs.indexPageDef"/>
@@ -94,6 +98,10 @@
     <page id="ua_divas_bean_kontrag_calcPageDef" path="ua.divas.bean.pageDefs.kontrag_calcPageDef"/>
     <page id="ua_divas_bean_payPageDef" path="ua.divas.bean.pageDefs.payPageDef"/>
     <page id="ua_divas_bean_other_kontragPageDef" path="ua.divas.bean.pageDefs.other_kontragPageDef"/>
+    <page id="ua_divas_bean_newStart_newStart_CreateInsertPageDef"
+          path="ua.divas.bean.pageDefs.newStart_newStart_CreateInsertPageDef"/>
+    <page id="ua_divas_bean_start_ostPageDef" path="ua.divas.bean.pageDefs.start_ostPageDef"/>
+    <page id="ua_divas_bean_editstartPageDef" path="ua.divas.bean.pageDefs.editstartPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <dc id="DataPackage" path="ua.divas.bean.DataPackage"/>

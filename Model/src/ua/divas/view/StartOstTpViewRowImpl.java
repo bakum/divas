@@ -57,6 +57,8 @@ public class StartOstTpViewRowImpl extends ViewRowImpl {
         SwitcherSubcKred1,
         SwitcherSubcDeb2,
         SwitcherSubcKred2,
+        DebSubcCount,
+        KredSubcCount,
         StartOstView1,
         PlanAccView1,
         DivisionsView1,
@@ -106,6 +108,8 @@ public class StartOstTpViewRowImpl extends ViewRowImpl {
     public static final int SWITCHERSUBCKRED1 = AttributesEnum.SwitcherSubcKred1.index();
     public static final int SWITCHERSUBCDEB2 = AttributesEnum.SwitcherSubcDeb2.index();
     public static final int SWITCHERSUBCKRED2 = AttributesEnum.SwitcherSubcKred2.index();
+    public static final int DEBSUBCCOUNT = AttributesEnum.DebSubcCount.index();
+    public static final int KREDSUBCCOUNT = AttributesEnum.KredSubcCount.index();
     public static final int STARTOSTVIEW1 = AttributesEnum.StartOstView1.index();
     public static final int PLANACCVIEW1 = AttributesEnum.PlanAccView1.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
@@ -185,6 +189,14 @@ public class StartOstTpViewRowImpl extends ViewRowImpl {
     }
 
     /**
+     * Sets <code>value</code> as the attribute value for the calculated attribute PlanaccDebName.
+     * @param value value to set the  PlanaccDebName
+     */
+    public void setPlanaccDebName(String value) {
+        setAttributeInternal(PLANACCDEBNAME, value);
+    }
+
+    /**
      * Gets the attribute value for SUBCONTO1_DEB using the alias name Subconto1Deb.
      * @return the SUBCONTO1_DEB
      */
@@ -238,6 +250,14 @@ public class StartOstTpViewRowImpl extends ViewRowImpl {
      */
     public String getPlanaccKredName() {
         return (String) getAttributeInternal(PLANACCKREDNAME);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for the calculated attribute PlanaccKredName.
+     * @param value value to set the  PlanaccKredName
+     */
+    public void setPlanaccKredName(String value) {
+        setAttributeInternal(PLANACCKREDNAME, value);
     }
 
     /**
@@ -350,6 +370,22 @@ public class StartOstTpViewRowImpl extends ViewRowImpl {
      */
     public String getSwitcherSubcKred2() {
         return (String) getAttributeInternal(SWITCHERSUBCKRED2);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute DebSubcCount.
+     * @return the DebSubcCount
+     */
+    public Long getDebSubcCount() {
+        return (Long) getAttributeInternal(DEBSUBCCOUNT);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute KredSubcCount.
+     * @return the KredSubcCount
+     */
+    public Long getKredSubcCount() {
+        return (Long) getAttributeInternal(KREDSUBCCOUNT);
     }
 
     /**

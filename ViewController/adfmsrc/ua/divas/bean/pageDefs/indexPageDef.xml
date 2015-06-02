@@ -48,6 +48,8 @@
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
     <taskFlow id="ordersconfig1" taskFlowId="/WEB-INF/orders.xml#orders" activation="deferred"
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="start_ostconfig1" taskFlowId="/WEB-INF/start_ost-config.xml#start_ost-config" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="NotificationView1Iterator" id="CountUnread">

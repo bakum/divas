@@ -39,6 +39,13 @@ public class StartOstTpViewImpl extends ViewObjectImpl {
                                                                PlanTypeId });
         return rs;
     }
+    
+    public Long retrieveCountAccPlan(String PlanId) {
+        ViewRowSetImpl rs = this.getPlanAccRowSet(PlanId);
+        //rs.getEstimatedRowCount();
+        
+        return new Long(rs.getEstimatedRowCount());
+    }
 
     public String retrieveTypeSubc1Deb(String PlanId) {
         ViewRowSetImpl rs = this.getPlanAccRowSet(PlanId);
@@ -46,6 +53,7 @@ public class StartOstTpViewImpl extends ViewObjectImpl {
         if (row != null) {
             String pts = (String) row.getAttribute("PlanTypeSubc");
             rs = this.getPlanTypeSubcontoRowSet(pts);
+            row = rs.first();
             if (row != null) {
                 String rv = (String) row.getAttribute("Fullname");
                 if (rv.equals("ЦФО")) {
@@ -74,6 +82,7 @@ public class StartOstTpViewImpl extends ViewObjectImpl {
             if (row != null) {
                 String pts = (String) row.getAttribute("PlanTypeSubc");
                 rs = this.getPlanTypeSubcontoRowSet(pts);
+                row = rs.first();
                 if (row != null) {
                     String rv = (String) row.getAttribute("Fullname");
                     if (rv.equals("ЦФО")) {
@@ -101,6 +110,7 @@ public class StartOstTpViewImpl extends ViewObjectImpl {
         if (row != null) {
             String pts = (String) row.getAttribute("PlanTypeSubc");
             rs = this.getPlanTypeSubcontoRowSet(pts);
+            row = rs.first();
             if (row != null) {
                 String rv = (String) row.getAttribute("Fullname");
                 if (rv.equals("ЦФО")) {
@@ -129,6 +139,7 @@ public class StartOstTpViewImpl extends ViewObjectImpl {
             if (row != null) {
                 String pts = (String) row.getAttribute("PlanTypeSubc");
                 rs = this.getPlanTypeSubcontoRowSet(pts);
+                row = rs.first();
                 if (row != null) {
                     String rv = (String) row.getAttribute("Fullname");
                     if (rv.equals("ЦФО")) {
