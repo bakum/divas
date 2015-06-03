@@ -132,22 +132,27 @@ AS TABLE OF usertype;
 --  DDL for Sequence OTHER_ZATR_NUM_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "OTHER_ZATR_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 141 CACHE 20 NOORDER  CYCLE ;
+   CREATE SEQUENCE  "OTHER_ZATR_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 161 CACHE 20 NOORDER  CYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence PKO_NUM_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PKO_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 143 CACHE 20 NOORDER  CYCLE ;
+   CREATE SEQUENCE  "PKO_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 164 CACHE 20 NOORDER  CYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence PS_TXN_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 185501 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 190951 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence RKO_NUM_SEQ
 --------------------------------------------------------
 
    CREATE SEQUENCE  "RKO_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 165 CACHE 20 NOORDER  CYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence START_OST_NUM_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "START_OST_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  CYCLE ;
 --------------------------------------------------------
 --  DDL for Table ASTER_SETTINGS
 --------------------------------------------------------
@@ -471,6 +476,19 @@ AS TABLE OF usertype;
 	"IS_BUYER" NUMBER(1,0) DEFAULT 0, 
 	"IS_MEASURER" NUMBER(1,0) DEFAULT 0, 
 	"USER_ID" VARCHAR2(50 CHAR)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table KONTRAG_SETTINGS
+--------------------------------------------------------
+
+  CREATE TABLE "KONTRAG_SETTINGS" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"KONTRAG_ID" VARCHAR2(50 CHAR), 
+	"PAY_ID" VARCHAR2(50 CHAR), 
+	"VERSION" TIMESTAMP (6) DEFAULT systimestamp, 
+	"BASE_ID" VARCHAR2(50 CHAR), 
+	"DIVISION_ID" VARCHAR2(50 CHAR), 
+	"SUMMA" NUMBER
    ) ;
 --------------------------------------------------------
 --  DDL for Table MEASURE_UNIT
@@ -1013,6 +1031,39 @@ AS TABLE OF usertype;
 	"SUMMA" NUMBER, 
 	"DEST_KASSA_ID" VARCHAR2(50 CHAR), 
 	"ORDER_ID" VARCHAR2(50 CHAR)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table START_OST
+--------------------------------------------------------
+
+  CREATE TABLE "START_OST" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"DAT" DATE DEFAULT sysdate, 
+	"NUM" VARCHAR2(50 CHAR), 
+	"DELETED" NUMBER(1,0) DEFAULT 0, 
+	"POSTED" NUMBER(1,0) DEFAULT 0, 
+	"DIVISION_ID" VARCHAR2(50 CHAR), 
+	"USER_ID" VARCHAR2(50 CHAR), 
+	"COMMENTS" VARCHAR2(255 CHAR), 
+	"VERSION" TIMESTAMP (6) DEFAULT systimestamp, 
+	"CURR_ID" VARCHAR2(50 CHAR), 
+	"ACTIVITIES_ID" VARCHAR2(50 CHAR)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table START_OST_TP
+--------------------------------------------------------
+
+  CREATE TABLE "START_OST_TP" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"PLAN_ACC_DEB_ID" VARCHAR2(50 CHAR), 
+	"SUBCONTO1_DEB" VARCHAR2(50 CHAR), 
+	"SUBCONTO2_DEB" VARCHAR2(50 CHAR), 
+	"PLAN_ACC_KRED_ID" VARCHAR2(50 CHAR), 
+	"SUBCONTO1_KRED" VARCHAR2(50 CHAR), 
+	"SUBCONTO2_KRED" VARCHAR2(50 CHAR), 
+	"SUMM" NUMBER(10,2), 
+	"DESCRIPTION" VARCHAR2(1000 CHAR), 
+	"START_OST_ID" VARCHAR2(50 CHAR)
    ) ;
 --------------------------------------------------------
 --  DDL for Table TYPE_DEF
@@ -1648,6 +1699,22 @@ ON VW_MOVES.SUBCONTO1_KRED     = KASSA.ID
 WHERE (VW_MOVES.KRED            = '2081')
 AND UPPER(VW_MOVES.TABLE_NAME) = UPPER('RKO');
 --------------------------------------------------------
+--  DDL for View VW_MOVE_START_OST
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "VW_MOVE_START_OST" ("REGISTRATOR_ID", "DEB", "SUM_DEB", "SUBCONTO1_DEB", "SUBCONTO2_DEB", "KRED", "SUM_KRED", "SUBCONTO1_KRED", "SUBCONTO2_KRED") AS 
+  SELECT VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.DEB,
+  VW_MOVES.SUM_DEB,
+  VW_MOVES.SUBCONTO1_DEB,
+  VW_MOVES.SUBCONTO2_DEB,
+  VW_MOVES.KRED,
+  VW_MOVES.SUM_KRED,
+  VW_MOVES.SUBCONTO1_KRED,
+  VW_MOVES.SUBCONTO2_KRED
+FROM VW_MOVES
+WHERE UPPER(VW_MOVES.TABLE_NAME) = UPPER('start_ost');
+--------------------------------------------------------
 --  DDL for View VW_NOTIFICATION_CALENDAR
 --------------------------------------------------------
 
@@ -2074,6 +2141,12 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   CREATE UNIQUE INDEX "KONTRAGENTS_PK" ON "KONTRAGENTS" ("ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index KONTRAG_SETTINGS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "KONTRAG_SETTINGS_PK" ON "KONTRAG_SETTINGS" ("ID") 
+  ;
+--------------------------------------------------------
 --  DDL for Index MEASURE_UNIT_PK
 --------------------------------------------------------
 
@@ -2306,6 +2379,18 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
 --------------------------------------------------------
 
   CREATE UNIQUE INDEX "RKO_PK" ON "RKO" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index START_OST_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "START_OST_PK" ON "START_OST" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index START_OST_TP_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "START_OST_TP_PK" ON "START_OST_TP" ("ID") 
   ;
 --------------------------------------------------------
 --  DDL for Index TYPE_DEF_PK
@@ -2778,6 +2863,21 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   ALTER TABLE "KONTRAGENTS" MODIFY ("IS_BUYER" NOT NULL ENABLE);
  
   ALTER TABLE "KONTRAGENTS" MODIFY ("IS_MEASURER" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table KONTRAG_SETTINGS
+--------------------------------------------------------
+
+  ALTER TABLE "KONTRAG_SETTINGS" ADD CONSTRAINT "KONTRAG_SETTINGS_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "KONTRAG_SETTINGS" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "KONTRAG_SETTINGS" MODIFY ("KONTRAG_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "KONTRAG_SETTINGS" MODIFY ("PAY_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "KONTRAG_SETTINGS" MODIFY ("VERSION" NOT NULL ENABLE);
+ 
+  ALTER TABLE "KONTRAG_SETTINGS" MODIFY ("BASE_ID" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table MEASURE_UNIT
 --------------------------------------------------------
@@ -3430,6 +3530,46 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
  
   ALTER TABLE "RKO" MODIFY ("SUMMA" NOT NULL ENABLE);
 --------------------------------------------------------
+--  Constraints for Table START_OST
+--------------------------------------------------------
+
+  ALTER TABLE "START_OST" ADD CONSTRAINT "START_OST_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "START_OST" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "START_OST" MODIFY ("DAT" NOT NULL ENABLE);
+ 
+  ALTER TABLE "START_OST" MODIFY ("NUM" NOT NULL ENABLE);
+ 
+  ALTER TABLE "START_OST" MODIFY ("DELETED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "START_OST" MODIFY ("POSTED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "START_OST" MODIFY ("DIVISION_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "START_OST" MODIFY ("USER_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "START_OST" MODIFY ("VERSION" NOT NULL ENABLE);
+ 
+  ALTER TABLE "START_OST" MODIFY ("CURR_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "START_OST" MODIFY ("ACTIVITIES_ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table START_OST_TP
+--------------------------------------------------------
+
+  ALTER TABLE "START_OST_TP" ADD CONSTRAINT "START_OST_TP_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "START_OST_TP" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "START_OST_TP" MODIFY ("PLAN_ACC_DEB_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "START_OST_TP" MODIFY ("PLAN_ACC_KRED_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "START_OST_TP" MODIFY ("SUMM" NOT NULL ENABLE);
+ 
+  ALTER TABLE "START_OST_TP" MODIFY ("START_OST_ID" NOT NULL ENABLE);
+--------------------------------------------------------
 --  Constraints for Table TYPE_DEF
 --------------------------------------------------------
 
@@ -3690,6 +3830,21 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
  
   ALTER TABLE "KONTRAGENTS" ADD CONSTRAINT "KONTRAGENTS_KONTRAGENTS_FK1" FOREIGN KEY ("PARENT_ID")
 	  REFERENCES "KONTRAGENTS" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table KONTRAG_SETTINGS
+--------------------------------------------------------
+
+  ALTER TABLE "KONTRAG_SETTINGS" ADD CONSTRAINT "KONTRAG_SETTINGS_FK1" FOREIGN KEY ("KONTRAG_ID")
+	  REFERENCES "KONTRAGENTS" ("ID") ON DELETE CASCADE ENABLE;
+ 
+  ALTER TABLE "KONTRAG_SETTINGS" ADD CONSTRAINT "KONTRAG_SETTINGS_FK2" FOREIGN KEY ("PAY_ID")
+	  REFERENCES "PAY_SETTINGS" ("ID") ENABLE;
+ 
+  ALTER TABLE "KONTRAG_SETTINGS" ADD CONSTRAINT "KONTRAG_SETTINGS_FK3" FOREIGN KEY ("BASE_ID")
+	  REFERENCES "BASE_OF_NACHISL" ("ID") ENABLE;
+ 
+  ALTER TABLE "KONTRAG_SETTINGS" ADD CONSTRAINT "KONTRAG_SETTINGS_FK4" FOREIGN KEY ("DIVISION_ID")
+	  REFERENCES "DIVISIONS" ("ID") ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table MOVES
 --------------------------------------------------------
@@ -3999,6 +4154,33 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
  
   ALTER TABLE "RKO" ADD CONSTRAINT "RKO_FK9" FOREIGN KEY ("ORDER_ID")
 	  REFERENCES "ORDERS" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table START_OST
+--------------------------------------------------------
+
+  ALTER TABLE "START_OST" ADD CONSTRAINT "START_OST_FK1" FOREIGN KEY ("DIVISION_ID")
+	  REFERENCES "DIVISIONS" ("ID") ENABLE;
+ 
+  ALTER TABLE "START_OST" ADD CONSTRAINT "START_OST_FK2" FOREIGN KEY ("USER_ID")
+	  REFERENCES "USERS" ("ID") ENABLE;
+ 
+  ALTER TABLE "START_OST" ADD CONSTRAINT "START_OST_FK3" FOREIGN KEY ("CURR_ID")
+	  REFERENCES "CURRENCY" ("ID") ENABLE;
+ 
+  ALTER TABLE "START_OST" ADD CONSTRAINT "START_OST_FK4" FOREIGN KEY ("ACTIVITIES_ID")
+	  REFERENCES "TYPE_OF_ACTIVITIES" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table START_OST_TP
+--------------------------------------------------------
+
+  ALTER TABLE "START_OST_TP" ADD CONSTRAINT "START_OST_TP_FK1" FOREIGN KEY ("PLAN_ACC_DEB_ID")
+	  REFERENCES "PLAN_ACC" ("ID") ENABLE;
+ 
+  ALTER TABLE "START_OST_TP" ADD CONSTRAINT "START_OST_TP_FK2" FOREIGN KEY ("PLAN_ACC_KRED_ID")
+	  REFERENCES "PLAN_ACC" ("ID") ENABLE;
+ 
+  ALTER TABLE "START_OST_TP" ADD CONSTRAINT "START_OST_TP_FK3" FOREIGN KEY ("START_OST_ID")
+	  REFERENCES "START_OST" ("ID") ON DELETE CASCADE ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table USER_SETTINGS
 --------------------------------------------------------
@@ -4524,6 +4706,25 @@ end;
 /
 ALTER TRIGGER "KONTRAGENTS_TRG" ENABLE;
 --------------------------------------------------------
+--  DDL for Trigger KONTRAG_SETTINGS_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "KONTRAG_SETTINGS_TRG" 
+  BEFORE INSERT OR UPDATE ON "KONTRAG_SETTINGS"
+  REFERENCING FOR EACH ROW
+  begin  
+   if inserting then 
+      if :NEW."ID" is null then 
+         select utility.uuid() into :NEW."ID" from dual;
+      end if; 
+   end if;
+   if updating then
+      select systimestamp into :new."VERSION" from dual;
+   end if;
+end;
+/
+ALTER TRIGGER "KONTRAG_SETTINGS_TRG" ENABLE;
+--------------------------------------------------------
 --  DDL for Trigger MEASURE_UNIT_TGR
 --------------------------------------------------------
 
@@ -5035,6 +5236,56 @@ begin
 end;
 /
 ALTER TRIGGER "RKO_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger START_OST_TP_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "START_OST_TP_TRG" 
+  BEFORE INSERT OR UPDATE ON "START_OST_TP"
+  REFERENCING FOR EACH ROW
+begin  
+   if inserting then            
+      if :NEW."ID" is null then 
+         select utility.uuid() into :NEW."ID" from dual;
+      end if;
+   end if;
+end;
+/
+ALTER TRIGGER "START_OST_TP_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger START_OST_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "START_OST_TRG" 
+  BEFORE INSERT OR UPDATE ON "START_OST"
+  REFERENCING FOR EACH ROW
+  declare
+  l_rec type_def%rowtype;
+  l_num numerator.prefix%type;
+begin  
+   if inserting then
+      select * into l_rec from type_def where upper(table_name) = 'START_OST';
+      if l_rec.id is not null then
+          select prefix into l_num from numerator where typedef_id = l_rec.id;
+      end if;
+      
+      if :NEW."ID" is null then 
+         select utility.uuid() into :NEW."ID" from dual;
+      end if;
+      if :new."NUM" is null then
+          if l_num is null then
+            select START_OST_NUM_SEQ.nextval into :new."NUM" from dual;
+          else
+            select l_num||START_OST_NUM_SEQ.nextval into :new."NUM" from dual;
+          end if;  
+      end if;
+   end if;
+   if updating then
+      select systimestamp into :new."VERSION" from dual;
+   end if;
+end;
+/
+ALTER TRIGGER "START_OST_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger TYPE_DEF_TRG
 --------------------------------------------------------
@@ -5646,9 +5897,12 @@ end other_entry;
   function get_kontrag_by_order(p_order in varchar2) return kontragtable;
   function get_kontrag_by_division(p_order in varchar2) return kontragtable;
   function get_kontrag_by_ierarchia(p_order in varchar2) return kontragtable;
+  function get_kont_by_division(p_order in varchar2) return kontragtable;
+  function get_kont_by_ierarchia(p_order in varchar2) return kontragtable;
   procedure calc_money(p_order in varchar2);
   function getSummOrder(p_order in varchar2) return number;
   function getKoeffByLevel(p_order in varchar2, p_level number) return number;
+  procedure calc_money_by_kontr(p_order in varchar2);
 
 END PAYCALC;
 
@@ -5725,6 +5979,20 @@ END RKO_ENTRY;
 
 /
 --------------------------------------------------------
+--  DDL for Package START_PKG
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "START_PKG" AS 
+
+  procedure start_move_plan_acc(p_id in varchar2);
+  procedure start_remove_plan_acc(p_id in varchar2, p_del in number default 0);
+  procedure start_move_all;
+  procedure start_remove_all;
+
+END START_PKG;
+
+/
+--------------------------------------------------------
 --  DDL for Package USR_SETT
 --------------------------------------------------------
 
@@ -5769,6 +6037,9 @@ end usr_sett;
   function retrieve_idfix_baseofcalc return varchar2;
   function retrieve_idfromalgorythm (p_id in varchar2) return varchar2;
   function retrieve_name_basenachisl (p_id in varchar2) return varchar2;
+  procedure createKontrag(p_name in varchar2, p_user_id in varchar2,
+            p_isSupp in number, p_isMeasr in number , p_isByer in number);
+  procedure createZatraty(p_name in varchar2);          
 
 end utility;
 
@@ -5897,6 +6168,7 @@ end currency_pkg;
       else
         p_out_summ:=-p_summ;
       end if;
+      return p_out_summ;
     end if;      
     if (upper(p_acc_type)=upper('Пассивный')) then 
       if (p_type=1) then
@@ -5904,7 +6176,14 @@ end currency_pkg;
       else
         p_out_summ:=p_summ;
       end if;
-    end if; 
+      return p_out_summ;
+    end if;
+    
+    if (p_type=1) then
+        p_out_summ:=p_summ;
+      else
+        p_out_summ:=-p_summ;
+    end if;
     return p_out_summ;
   end sign_of_summ;
   
@@ -7924,7 +8203,11 @@ END KONTRAG;
   pragma exception_init(in_use, -54);
   begin
     orders_remove_plan_acc(p_id);
+    
+    delete from ORDERS_TP_NACHISL where order_id = p_id and manual = 0;
     paycalc.calc_money(p_id);
+    PAYCALC.CALC_MONEY_BY_KONTR(p_id);
+    
     select * into p_orders_rec from orders where id = p_id for update nowait;
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from orders
       where id = p_id;
@@ -8408,6 +8691,24 @@ end other_entry;
      end loop;
      return l_data;
   END get_kontrag_by_division;
+  
+  function get_kont_by_division(p_order in varchar2) return kontragtable AS
+  l_data kontragTable := kontragTable();
+  p_counter number := 0;
+  order_rec orders%rowtype;
+  p_kontragname kontragents.fullname%type;
+  BEGIN
+     select o.* into order_rec from orders o where upper(o.id) = upper(p_order);
+     for i in (select * from kontrag_settings where base_id = (select b.id from base_of_nachisl b where b.name = 'DIV' and rownum = 1)) loop
+      p_counter:=p_counter+1;
+      if i.division_id = order_rec.division_id then
+        select fullname into p_kontragname from kontragents where id = i.kontrag_id;
+        l_data.extend;
+        l_data(p_counter) := kontragType(nvl(i.kontrag_id,'none'), nvl(p_kontragname,'none'),1);
+      end if;
+     end loop;
+     return l_data;
+  END get_kont_by_division;
 
   function get_kontrag_by_ierarchia(p_order in varchar2) return kontragtable AS
   l_data kontragTable := kontragTable();
@@ -8434,6 +8735,31 @@ end other_entry;
     return l_data;
   END get_kontrag_by_ierarchia;
   
+  function get_kont_by_ierarchia(p_order in varchar2) return kontragtable AS
+  l_data kontragTable := kontragTable();
+  p_counter number := 0;
+  order_rec orders%rowtype;
+  p_kontragname kontragents.fullname%type;
+  --sett_rec user_settings%rowtype;
+  BEGIN
+    select o.* into order_rec from orders o where upper(o.id) = upper(p_order);
+    for i in (select * from kontrag_settings where base_id = (select b.id from base_of_nachisl b where b.name = 'IERARHIA' and rownum = 1)) loop
+      --select s.* into sett_rec from user_settings s where s.user_id = i.user_id and rownum = 1;
+      for y in (select root, s.id from (select level root, id from divisions d
+            where d.deleted = 0
+            connect by prior d.id=d.parent_id
+            start with d.id = i.division_id) s) loop    
+        if y.id = order_rec.division_id  then  
+          p_counter:=p_counter+1;
+          select fullname into p_kontragname from kontragents where id = i.kontrag_id;
+          l_data.extend;
+          l_data(p_counter) := kontragType(nvl(i.kontrag_id,'none'), nvl(p_kontragname,'none'), y.root);
+        end if;
+      end loop;
+    end loop; 
+    return l_data;
+  END get_kont_by_ierarchia;
+  
   function getSummOrder(p_order in varchar2) return number as
   res number;
   addwork number;
@@ -8452,6 +8778,16 @@ end other_entry;
     select * into base_rec from base_of_nachisl where id = nachisl_rec.base_id;
     return base_rec.name;
   end getBaseName;
+  
+  function getBaseNameKontr(p_id in varchar2) return varchar as
+  nachisl_rec kontrag_settings%rowtype;
+  base_rec base_of_nachisl%rowtype;
+  begin
+    select * into nachisl_rec from kontrag_settings
+        where id = p_id;
+    select * into base_rec from base_of_nachisl where id = nachisl_rec.base_id;
+    return base_rec.name;
+  end getBaseNameKontr;
   
   function summkoeff(p_n in number) return number as
   sm number:=0;
@@ -8494,7 +8830,7 @@ end other_entry;
   sum_order:= getSummOrder(p_order);
   if sum_order = 0 then return;
   end if;
-  delete from ORDERS_TP_NACHISL where order_id = p_order and manual = 0;
+  --delete from ORDERS_TP_NACHISL where order_id = p_order and manual = 0;
   
   for i in (select * from pay_settings) loop
     for y in (select u.id, 
@@ -8534,11 +8870,67 @@ end other_entry;
                   end if;
                   insert into orders_tp_nachisl values nachisl_rec;
                 end loop;
-             else 
+             --else 
+             --   for g in (select n, root,
+             --     getKoeffByLevel(p_order,root) koef
+             --     from table(cast(get_kontrag_by_ierarchia(p_order) as kontragTable))
+             --           where n = y.kon_id and root > 1) loop
+             --     nachisl_rec.order_id:= p_order;
+             --     nachisl_rec.dat_nach:=sysdate;
+             --     nachisl_rec.kontr_id:= g.n;
+             --     nachisl_rec.pay_id:= i.id;
+             --     nachisl_rec.calc_id:= i.base_id;
+             --     nachisl_rec.percent:= i.stavka*g.koef;
+             --     nachisl_rec.manual:= 0;
+             --     if x.summa is not null then
+             --       nachisl_rec.summ:= x.summa;
+             --     else
+             --       nachisl_rec.summ:= (i.stavka*g.koef/100)*sum_order;
+             --     end if;
+             --     insert into orders_tp_nachisl values nachisl_rec;
+             --   end loop;  
+             end if;   
+        end if;
+      end loop;  
+    end loop;
+  end loop;
+  end calc_money;
+  
+  procedure calc_money_by_kontr(p_order in varchar2) as
+  nachisl_rec orders_tp_nachisl%rowtype;
+  sum_order number(10,2):=0;
+  begin
+  sum_order:= getSummOrder(p_order);
+  if sum_order = 0 then return;
+  end if;
+  --delete from ORDERS_TP_NACHISL where order_id = p_order and manual = 0;
+  
+  for i in (select * from pay_settings) loop
+    for y in (select u.id
+          from kontragents u where u.id in (select n.kontrag_id from kontrag_settings n where n.pay_id = i.id)) loop
+      for x in (select * from kontrag_settings where kontrag_id = y.id and pay_id = i.id) loop
+      
+        if getBaseNameKontr(x.id) = 'DIV' then
+                for g in (select * from table(cast(get_kont_by_division(p_order) as kontragTable)) where n = y.id and rownum = 1) loop
+                  nachisl_rec.order_id:= p_order;
+                  nachisl_rec.dat_nach:=sysdate;
+                  nachisl_rec.kontr_id:= g.n;
+                  nachisl_rec.pay_id:= i.id;
+                  nachisl_rec.calc_id:= i.base_id;
+                  nachisl_rec.percent:= i.stavka;
+                  nachisl_rec.manual:= 0;
+                  if x.summa is not null then
+                    nachisl_rec.summ:= x.summa;
+                  else
+                    nachisl_rec.summ:= (i.stavka/100)*sum_order;
+                  end if;
+                  insert into orders_tp_nachisl values nachisl_rec;
+                end loop;
+        else if getBaseNameKontr(x.id) = 'IERARHIA' then
                 for g in (select n, root,
                   getKoeffByLevel(p_order,root) koef
-                  from table(cast(get_kontrag_by_ierarchia(p_order) as kontragTable))
-                        where n = y.kon_id and root > 1) loop
+                  from table(cast(get_kont_by_ierarchia(p_order) as kontragTable))
+                        where n = y.id and root > 1) loop
                   nachisl_rec.order_id:= p_order;
                   nachisl_rec.dat_nach:=sysdate;
                   nachisl_rec.kontr_id:= g.n;
@@ -8552,13 +8944,13 @@ end other_entry;
                     nachisl_rec.summ:= (i.stavka*g.koef/100)*sum_order;
                   end if;
                   insert into orders_tp_nachisl values nachisl_rec;
-                end loop;  
+                end loop; 
              end if;   
-        end if;
+        end if;   
       end loop;  
     end loop;
   end loop;
-  end calc_money;
+  end calc_money_by_kontr;
 
 END PAYCALC;
 
@@ -9396,6 +9788,123 @@ END RKO_ENTRY;
 
 /
 --------------------------------------------------------
+--  DDL for Package Body START_PKG
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "START_PKG" AS
+
+  procedure start_move_plan_acc(p_id in varchar2) AS
+    p_start_rec start_ost%rowtype;
+    p_move_rec moves%rowtype;
+    p_version varchar2(1000);
+    p_typedef_id varchar2(100);
+    in_use exception;
+    p_upr_val currency.id%type;
+    pragma exception_init(in_use, -54);
+  BEGIN
+    start_remove_plan_acc(p_id);
+    select * into p_start_rec from START_OST where id = p_id for update nowait;
+    select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from START_OST
+      where id = p_id;
+    
+    select id into p_upr_val from currency where predefined=1;  
+    select id into p_typedef_id from type_def where upper(type_def.table_name)=upper('start_ost');
+    for i in (select * from start_ost_tp where start_ost_id = p_id) loop
+      p_move_rec.period:=p_start_rec.dat;
+      p_move_rec.registrator_type:=p_typedef_id;
+      p_move_rec.registrator_id:=p_id;
+      p_move_rec.plan_acc_deb_id:=i.plan_acc_deb_id;
+      p_move_rec.activities_id:=p_start_rec.activities_id;
+      p_move_rec.division_id:=p_start_rec.division_id;
+      
+      p_move_rec.subconto1_deb:=i.subconto1_deb;
+      p_move_rec.subconto2_deb:=i.subconto2_deb;
+        
+      p_move_rec.plan_acc_kred_id:=i.plan_acc_kred_id;
+      
+      p_move_rec.subconto1_kred:=i.subconto1_kred;
+      p_move_rec.subconto2_kred:=i.subconto2_kred;
+      
+      p_move_rec.description:=i.description;
+      
+      p_move_rec.curr_deb := p_start_rec.curr_id;
+      p_move_rec.summ_val_deb:=entry.sign_of_summ(p_move_rec.plan_acc_deb_id, i.summ, 1);
+  
+      p_move_rec.curr_kred := p_start_rec.curr_id;
+      p_move_rec.summ_val_kredit:=entry.sign_of_summ(p_move_rec.plan_acc_kred_id, i.summ, 0);
+  
+      p_move_rec.summ_upr_deb:=currency_pkg.calculate_from_curr_to_curr(p_move_rec.curr_deb, p_upr_val, p_move_rec.period, p_move_rec.summ_val_deb);
+      p_move_rec.summ_upr_kred:=currency_pkg.calculate_from_curr_to_curr(p_move_rec.curr_kred, p_upr_val, p_move_rec.period,p_move_rec.summ_val_kredit);
+  
+      p_move_rec.version:=systimestamp;
+      
+      insert into moves values p_move_rec;
+    end loop;
+    
+    p_start_rec.posted:=1;
+    update START_OST set row = p_start_rec
+      where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF'); 
+    
+    exception
+        WHEN IN_USE THEN
+        RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error start_ost move for plan accounting! '||SQLERRM, TRUE) ;
+  END start_move_plan_acc;
+
+  procedure start_remove_plan_acc(p_id in varchar2, p_del in number default 0) AS
+    p_start_rec start_ost%rowtype;
+    p_move_count number;
+    p_version varchar2(1000);
+    in_use exception;
+    pragma exception_init(in_use, -54);
+  BEGIN
+    select * into p_start_rec from START_OST where id = p_id for update nowait;
+    select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from START_OST
+      where id = p_id;
+    select count(*) into p_move_count from moves where registrator_id = p_id;
+    if p_move_count > 0 then
+      execute immediate ('select * from moves where registrator_id='''||p_id||''' for update nowait');  
+      delete from moves where registrator_id = p_id;
+    end if;
+    
+    if p_del <> 0 then
+      p_start_rec.deleted:=1;
+    end if;
+    p_start_rec.posted:=0;
+    update START_OST set row = p_start_rec
+      where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF');
+  exception
+        WHEN IN_USE THEN
+        RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
+        when others then 
+        raise_application_error (-20001,'Error start_ost move for plan accounting! '||sqlerrm, true) ;
+  END start_remove_plan_acc;
+
+  procedure start_move_all AS
+  BEGIN
+    for i in (select * from START_OST) loop
+    start_move_plan_acc(i.id);
+    end loop;
+     exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error start_ost move  all for plan accounting! '||SQLERRM, TRUE) ;
+  END start_move_all;
+
+  procedure start_remove_all AS
+  BEGIN
+    for i in (select * from START_OST) loop
+    start_remove_plan_acc(i.id);
+    end loop;
+     exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error start_ost remove all for plan accounting! '||SQLERRM, TRUE) ;
+  END start_remove_all;
+
+END START_PKG;
+
+/
+--------------------------------------------------------
 --  DDL for Package Body USR_SETT
 --------------------------------------------------------
 
@@ -10124,7 +10633,37 @@ end usr_sett;
   when others then
     return null;
   end;
+  
+  procedure createKontrag(p_name in varchar2, p_user_id in varchar2,
+            p_isSupp in number, p_isMeasr in number , p_isByer in number) as
+  p_parent varchar2(100);
+  begin
+    if p_isSupp = 1 then
+      p_parent:=retrieve_supplier_parentid();
+    end if;
+    if p_isMeasr = 1 then
+      p_parent:=retrieve_zamer_parentid();
+    end if;
+    if p_isByer = 1 then
+      p_parent:=retrieve_customer_parentid();
+    else
+      p_parent:=retrieve_other_parentid();
+    end if;
+    insert into kontragents(is_group,parent_id,fullname,deleted,is_supplier,
+      is_buyer,is_measurer, user_id) values
+      (0,p_parent,p_name,0,p_isSupp,p_isByer,p_isMeasr,p_user_id); 
+  end;
 
+  procedure createZatraty(p_name in varchar2) as
+  p_zrecord zatraty%rowtype;
+  begin
+   p_zrecord.is_Group:=0;
+   p_zrecord.deleted:=0;
+   p_zrecord.fullname:=p_name;
+   p_zrecord.version:=systimestamp;
+   p_zrecord.predefined:=0;
+   insert into zatraty values p_zrecord;
+  end;
 
 end utility;
 
