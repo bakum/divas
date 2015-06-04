@@ -127,32 +127,32 @@ AS TABLE OF usertype;
 --  DDL for Sequence ORDERS_NUM_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "ORDERS_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 642 CACHE 20 NOORDER  CYCLE ;
+   CREATE SEQUENCE  "ORDERS_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  CYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence OTHER_ZATR_NUM_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "OTHER_ZATR_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 161 CACHE 20 NOORDER  CYCLE ;
+   CREATE SEQUENCE  "OTHER_ZATR_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  CYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence PKO_NUM_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PKO_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 164 CACHE 20 NOORDER  CYCLE ;
+   CREATE SEQUENCE  "PKO_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  CYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence PS_TXN_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 190951 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 192001 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence RKO_NUM_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "RKO_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 165 CACHE 20 NOORDER  CYCLE ;
+   CREATE SEQUENCE  "RKO_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  CYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence START_OST_NUM_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "START_OST_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  CYCLE ;
+   CREATE SEQUENCE  "START_OST_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  CYCLE ;
 --------------------------------------------------------
 --  DDL for Table ASTER_SETTINGS
 --------------------------------------------------------
@@ -1432,7 +1432,8 @@ OR (oborot_movies.END_OST    <> 0);
 
   CREATE OR REPLACE FORCE VIEW "VW_BALLANS_AP" ("ID", "CODE", "FULLNAME", "ACTIVE_START", "ACTIVE_DEB", "ACTIVE_KRED", "ACTIVE_OBOROT", "ACTIVE_END", "PASSIVE_START", "PASSIVE_DEB", "PASSIVE_KRED", "PASSIVE_OBOROT", "PASSIVE_END", "DIVISION_ID") AS 
   with act as
-(select code,start_ost, sum_deb, sum_kred, end_ost, division_id, end_ost-start_ost oborot from vw_ballans where upper(ACTIVE_PASSIVE)=upper('Активный')),
+(select code,start_ost, sum_deb, sum_kred, end_ost, division_id, end_ost-start_ost oborot from vw_ballans where upper(ACTIVE_PASSIVE)=upper('Активный')
+or upper(ACTIVE_PASSIVE)=upper('Активный/Пассивный')),
 pass as
 (select code,start_ost, sum_deb, sum_kred, end_ost, division_id, end_ost-start_ost oborot from vw_ballans where upper(ACTIVE_PASSIVE)=upper('Пассивный'))
 select b.id, b.code, b.fullname, 
@@ -5902,6 +5903,7 @@ end other_entry;
   procedure calc_money(p_order in varchar2);
   function getSummOrder(p_order in varchar2) return number;
   function getKoeffByLevel(p_order in varchar2, p_level number) return number;
+  function getKoeffByLevelKontr(p_order in varchar2, p_level number) return number;
   procedure calc_money_by_kontr(p_order in varchar2);
 
 END PAYCALC;
@@ -8823,6 +8825,31 @@ end other_entry;
     return res;
   end getKoeffByLevel;
   
+  function getKoeffByLevelKontr(p_order in varchar2, p_level number) return number as
+  cnt number:=0;
+  p_counter number := 0;
+  res number:=0;
+  begin
+    if p_level = 1 then
+      return res;
+    end if;  
+    SELECT count(*) into cnt
+      FROM TABLE(CAST(get_kont_by_ierarchia(p_order) AS kontragTable)) where root > 1;
+    for i in (SELECT n,u_name,root
+        FROM TABLE(CAST(get_kont_by_ierarchia(p_order) AS kontragTable))
+        where root > 1
+        order by root) loop
+    p_counter:=p_counter+1;
+    if i.root = p_level then
+      res:=1/power(2,p_counter);
+      if p_counter = cnt then
+        res:=(1-summkoeff(p_counter-1));
+      end if;
+    end if;
+    end loop;
+    return res;
+  end getKoeffByLevelKontr;
+  
   procedure calc_money(p_order in varchar2) as
   nachisl_rec orders_tp_nachisl%rowtype;
   sum_order number(10,2):=0;
@@ -8928,7 +8955,7 @@ end other_entry;
                 end loop;
         else if getBaseNameKontr(x.id) = 'IERARHIA' then
                 for g in (select n, root,
-                  getKoeffByLevel(p_order,root) koef
+                  getKoeffByLevelKontr(p_order,root) koef
                   from table(cast(get_kont_by_ierarchia(p_order) as kontragTable))
                         where n = y.id and root > 1) loop
                   nachisl_rec.order_id:= p_order;
