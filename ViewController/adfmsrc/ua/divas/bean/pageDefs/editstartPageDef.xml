@@ -73,5 +73,10 @@
       </AttrNames>
     </attributeValues>
     <action IterBinding="StartOstTpView2Iterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="StartOstView1Iterator" id="Enbl">
+      <AttrNames>
+        <Item Value="Enbl"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

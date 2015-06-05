@@ -59,5 +59,10 @@
                   ReturnName="data.AppModuleDataControl.methodResults.getOperationName_AppModuleDataControl_RkoView1_getOperationName_result">
       <NamedData NDName="Id" NDType="java.lang.String" NDValue="#{bindings.OperationId.inputValue}"/>
     </methodAction>
+    <attributeValues IterBinding="RkoView1Iterator" id="Enbl">
+      <AttrNames>
+        <Item Value="Enbl"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

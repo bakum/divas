@@ -6,7 +6,7 @@
     <variableIterator id="variables"/>
     <iterator Binds="StartOstView1" RangeSize="25" DataControl="AppModuleDataControl" id="StartOstView1Iterator">
       <sortCriteria>
-        <sort attribute="Dat" ascending="true"/>
+        <sort attribute="Dat" ascending="false"/>
       </sortCriteria>
     </iterator>
     <iterator Binds="VwStartOstMovesVO1" RangeSize="25" DataControl="AppModuleDataControl"

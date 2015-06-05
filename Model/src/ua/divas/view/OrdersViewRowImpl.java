@@ -70,6 +70,7 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         DatZam,
         SummPlan,
         Objname,
+        Enbl,
         TotalSumUslugi,
         CountUslug,
         TotalSumOplaty,
@@ -145,6 +146,7 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     public static final int DATZAM = AttributesEnum.DatZam.index();
     public static final int SUMMPLAN = AttributesEnum.SummPlan.index();
     public static final int OBJNAME = AttributesEnum.Objname.index();
+    public static final int ENBL = AttributesEnum.Enbl.index();
     public static final int TOTALSUMUSLUGI = AttributesEnum.TotalSumUslugi.index();
     public static final int COUNTUSLUG = AttributesEnum.CountUslug.index();
     public static final int TOTALSUMOPLATY = AttributesEnum.TotalSumOplaty.index();
@@ -617,6 +619,14 @@ public class OrdersViewRowImpl extends ViewRowImpl {
      */
     public String getObjname() {
         return (String) getAttributeInternal(OBJNAME);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute Enbl.
+     * @return the Enbl
+     */
+    public BigDecimal getEnbl() {
+        return (BigDecimal) getAttributeInternal(ENBL);
     }
 
     /**

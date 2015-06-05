@@ -301,7 +301,8 @@
         ID = KONTRAG_ID) KontragName,
        Pko.SUMMA,
        (select 0 from dual) P_Editable,
-       Pko.ORDER_ID
+       Pko.ORDER_ID,
+       UTILITY.enable_edit(Pko.DAT) enbl
 FROM  PKO Pko where deleted = 0 and
 upper(Pko.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))]]></SQLQuery>
     <EntityUsage
@@ -546,6 +547,16 @@ upper(Pko.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as use
             </SchemaBasedProperties>
         </Properties>
     </ViewAttribute>
+    <ViewAttribute
+        Name="Enbl"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="ENBL"
+        Expression="ENBL"
+        SQLType="NUMERIC"/>
     <ViewLinkAccessor
       Name="VwPkoMoves"
       ViewLink="ua.divas.view.VwPkoPkoFkLink"

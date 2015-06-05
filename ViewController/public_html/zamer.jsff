@@ -40,7 +40,7 @@
                                                    inlineStyle="#{row.bindings.OEditable.inputValue == 1 ? 'background-color:#DCF0AB;' : row.StatusName == 'Новый' ? 'background-color:#ffbc3c;' : row.StatusName == 'Контроль' ? 'background-color:Red;' : ''}">
                                             <af:toolbar id="t3">
                                                 <af:button id="b3" icon="/img/edit-16.gif"
-                                                           disabled="#{bindings.Commit.enabled}">
+                                                           disabled="#{bindings.Enbl.inputValue == 0 ? true : bindings.Commit.enabled}">
                                                     <af:setPropertyListener from="#{1}"
                                                                             to="#{bindings.OEditable.inputValue}"
                                                                             type="action"/>

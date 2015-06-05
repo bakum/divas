@@ -12,7 +12,7 @@
                             <f:facet name="toolbar">
                                 <af:toolbar id="t2">
                                     <af:button text="Редактировать" id="b3" icon="/img/edit-16.gif"
-                                               disabled="#{bindings.REditable.inputValue == '1' ? true : false}">
+                                               disabled="#{bindings.Enbl.inputValue == 0 ? true : bindings.REditable.inputValue == '1' ? true : false}">
                                         <af:setPropertyListener from="#{1}" to="#{bindings.REditable.inputValue}"
                                                                 type="action"/>
                                     </af:button>

@@ -62,6 +62,7 @@ public class PkoViewRowImpl extends ViewRowImpl {
         Summa,
         PEditable,
         OrderId,
+        Enbl,
         VwPkoMoves,
         DivisionsView1,
         UsersView1,
@@ -115,6 +116,7 @@ public class PkoViewRowImpl extends ViewRowImpl {
     public static final int SUMMA = AttributesEnum.Summa.index();
     public static final int PEDITABLE = AttributesEnum.PEditable.index();
     public static final int ORDERID = AttributesEnum.OrderId.index();
+    public static final int ENBL = AttributesEnum.Enbl.index();
     public static final int VWPKOMOVES = AttributesEnum.VwPkoMoves.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
@@ -426,6 +428,14 @@ public class PkoViewRowImpl extends ViewRowImpl {
      */
     public void setOrderId(String value) {
         setAttributeInternal(ORDERID, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute Enbl.
+     * @return the Enbl
+     */
+    public BigDecimal getEnbl() {
+        return (BigDecimal) getAttributeInternal(ENBL);
     }
 
     /**

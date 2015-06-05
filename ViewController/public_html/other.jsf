@@ -113,7 +113,7 @@
                                 <f:facet name="toolbar">
                                     <af:toolbar id="t5">
                                         <af:button text="Редактировать" id="b5" icon="/img/edit-16.gif"
-                                                   disabled="#{bindings.OthEditable.inputValue == '1' ? true : false}">
+                                                   disabled="#{bindings.Enbl.inputValue == 0 ? true : bindings.OthEditable.inputValue == '1' ? true : false}">
                                             <af:setPropertyListener from="#{1}" to="#{bindings.OthEditable.inputValue}"
                                                                     type="action"/>
                                         </af:button>
@@ -126,7 +126,8 @@
                                     <f:facet name="toolbar">
                                         <af:toolbar id="t3">
                                             <af:button actionListener="#{bindings.CreateInsert.execute}"
-                                                       text="Добавить" disabled="#{!bindings.CreateInsert.enabled}"
+                                                       text="Добавить"
+                                                       disabled="#{bindings.Enbl.inputValue == 0 ? true : !bindings.CreateInsert.enabled}"
                                                        id="b2" icon="/img/Symbol_Add.png"/>
                                         </af:toolbar>
                                     </f:facet>
@@ -141,7 +142,8 @@
                                               scrollPolicy="page" editingMode="clickToEdit" partialTriggers="::b2">
                                         <af:column id="c7" width="60">
                                             <af:toolbar id="t2">
-                                                <af:button id="b1" icon="/img/edit-16.gif">
+                                                <af:button id="b1" icon="/img/edit-16.gif"
+                                                           disabled="#{bindings.Enbl.inputValue == 0 ? true : false}">
                                                     <af:setPropertyListener from="#{1}"
                                                                             to="#{bindings.OthtpEditable.inputValue}"
                                                                             type="action"/>

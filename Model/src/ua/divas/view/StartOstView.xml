@@ -121,7 +121,8 @@
        StartOst.VERSION, 
        StartOst.CURR_ID, 
        StartOst.ACTIVITIES_ID,
-       (select 0 from dual) Editable
+       (select 0 from dual) Editable,
+       UTILITY.enable_edit(StartOst.DAT) enbl
 FROM  START_OST StartOst]]></SQLQuery>
   <EntityUsage
     Name="StartOst"
@@ -244,6 +245,16 @@ FROM  START_OST StartOst]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="EDITABLE"
     Expression="EDITABLE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Enbl"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ENBL"
+    Expression="ENBL"
     SQLType="NUMERIC"/>
   <ViewAttribute
     Name="TotalSumm"

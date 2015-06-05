@@ -14,7 +14,7 @@
                             <f:facet name="toolbar">
                                 <af:toolbar id="t5">
                                     <af:button text="Редактировать" id="b5" icon="/img/edit-16.gif"
-                                               disabled="#{bindings.Editable.inputValue == '1' ? true : false}">
+                                               disabled="#{bindings.Enbl.inputValue == 0 ? true : bindings.Editable.inputValue == '1' ? true : false}">
                                         <af:setPropertyListener from="#{1}" to="#{bindings.Editable.inputValue}"
                                                                 type="action"/>
                                     </af:button>
@@ -113,7 +113,7 @@
                                 <af:toolbar id="t3">
                                     <af:button actionListener="#{bindings.CreateInsert.execute}"
                                                text="Добавить проводку"
-                                               disabled="#{!bindings.CreateInsert.enabled}" id="b3"/>
+                                               disabled="#{bindings.Enbl.inputValue == 0 ? true : !bindings.CreateInsert.enabled}" id="b3"/>
                                 </af:toolbar>
                             </f:facet>
                             <f:facet name="legend"/>
@@ -128,12 +128,13 @@
                                       scrollPolicy="page" editingMode="clickToEdit" partialTriggers="::b3 b6">
                                 <af:column id="c6" width="80">
                                     <af:toolbar id="t4">
-                                        <af:button id="b4" icon="/img/edit-16.gif">
+                                        <af:button id="b4" icon="/img/edit-16.gif"
+                                                   disabled="#{bindings.Enbl.inputValue == 0 ? true : false}">
                                             <af:setPropertyListener from="#{1}" to="#{bindings.SoEditable.inputValue}"
                                                                     type="action"/>
                                         </af:button>
                                         <af:button actionListener="#{bindings.Delete.execute}"
-                                                   disabled="#{!bindings.Delete.enabled}" id="b6"
+                                                   disabled="#{bindings.Enbl.inputValue == 0 ? true : !bindings.Delete.enabled}" id="b6"
                                                    icon="/img/delete.png" shortDesc="Удалить"/>
                                     </af:toolbar>
                                 </af:column>

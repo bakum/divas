@@ -47,5 +47,10 @@
         <Item Value="OEditable"/>
       </AttrNames>
     </attributeValues>
+    <attributeValues IterBinding="OrderZamerView1Iterator" id="Enbl">
+      <AttrNames>
+        <Item Value="Enbl"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

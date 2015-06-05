@@ -57,6 +57,7 @@ public class StartOstViewRowImpl extends ViewRowImpl {
         CurrId,
         ActivitiesId,
         Editable,
+        Enbl,
         TotalSumm,
         StartOstTpView,
         VwStartOstMovesVO,
@@ -101,6 +102,7 @@ public class StartOstViewRowImpl extends ViewRowImpl {
     public static final int CURRID = AttributesEnum.CurrId.index();
     public static final int ACTIVITIESID = AttributesEnum.ActivitiesId.index();
     public static final int EDITABLE = AttributesEnum.Editable.index();
+    public static final int ENBL = AttributesEnum.Enbl.index();
     public static final int TOTALSUMM = AttributesEnum.TotalSumm.index();
     public static final int STARTOSTTPVIEW = AttributesEnum.StartOstTpView.index();
     public static final int VWSTARTOSTMOVESVO = AttributesEnum.VwStartOstMovesVO.index();
@@ -313,6 +315,14 @@ public class StartOstViewRowImpl extends ViewRowImpl {
      */
     public void setEditable(BigDecimal value) {
         setAttributeInternal(EDITABLE, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute Enbl.
+     * @return the Enbl
+     */
+    public BigDecimal getEnbl() {
+        return (BigDecimal) getAttributeInternal(ENBL);
     }
 
     /**

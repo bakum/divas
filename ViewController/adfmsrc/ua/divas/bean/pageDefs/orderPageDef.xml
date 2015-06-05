@@ -390,5 +390,10 @@
                   InstanceName="data.AppModuleDataControl.ZatratyView1">
       <NamedData NDName="p_name" NDType="java.lang.String"/>
     </methodAction>
+    <attributeValues IterBinding="OrdersView1Iterator" id="Enbl">
+      <AttrNames>
+        <Item Value="Enbl"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

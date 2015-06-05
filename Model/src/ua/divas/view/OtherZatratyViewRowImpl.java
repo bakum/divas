@@ -58,6 +58,7 @@ public class OtherZatratyViewRowImpl extends ViewRowImpl {
         OthEditable,
         ActivitiesId,
         Objname,
+        Enbl,
         TotalZatr,
         OtherZatratyTabPartZatratyView,
         VwOtherMoves,
@@ -107,6 +108,7 @@ public class OtherZatratyViewRowImpl extends ViewRowImpl {
     public static final int OTHEDITABLE = AttributesEnum.OthEditable.index();
     public static final int ACTIVITIESID = AttributesEnum.ActivitiesId.index();
     public static final int OBJNAME = AttributesEnum.Objname.index();
+    public static final int ENBL = AttributesEnum.Enbl.index();
     public static final int TOTALZATR = AttributesEnum.TotalZatr.index();
     public static final int OTHERZATRATYTABPARTZATRATYVIEW = AttributesEnum.OtherZatratyTabPartZatratyView.index();
     public static final int VWOTHERMOVES = AttributesEnum.VwOtherMoves.index();
@@ -354,6 +356,14 @@ public class OtherZatratyViewRowImpl extends ViewRowImpl {
      */
     public String getObjname() {
         return (String) getAttributeInternal(OBJNAME);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute Enbl.
+     * @return the Enbl
+     */
+    public BigDecimal getEnbl() {
+        return (BigDecimal) getAttributeInternal(ENBL);
     }
 
     /**

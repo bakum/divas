@@ -521,7 +521,7 @@
                                             </f:facet>
                                         </af:outputText>
                                         <af:button text="Редактировать" id="b1" icon="/img/edit-16.gif"
-                                                   disabled="#{bindings.OEditable.inputValue == '1' ? true: false}"
+                                                   disabled="#{bindings.Enbl.inputValue == 0 ? true : bindings.OEditable.inputValue == '1' ? true: false}"
                                                    shortDesc="Редактировать данные">
                                             <af:setPropertyListener from="#{1}" to="#{bindings.OEditable.inputValue}"
                                                                     type="action"/>
@@ -546,14 +546,14 @@
                                         <af:column id="c12" width="60">
                                             <af:toolbar id="t6">
                                                 <af:button id="b11" icon="/img/edit-16.gif"
-                                                           disabled="#{row.OtpuEditable == '1' ? true: false}"
+                                                           disabled="#{bindings.Enbl.inputValue == 0 ? true : row.OtpuEditable == '1' ? true: false}"
                                                            shortDesc="Редактировать данные">
                                                     <af:setPropertyListener from="#{1}"
                                                                             to="#{bindings.OtpuEditable.inputValue}"
                                                                             type="action"/>
                                                 </af:button>
                                                 <af:button actionListener="#{bindings.Delete.execute}"
-                                                           disabled="#{row.OtpuEditable == '1' ? true: false}" id="b16"
+                                                           disabled="#{bindings.Enbl.inputValue == 0 ? true : row.OtpuEditable == '1' ? true: false}" id="b16"
                                                            icon="/img/delete.png" shortDesc="Удалить строку"/>
                                             </af:toolbar>
                                         </af:column>
@@ -750,7 +750,7 @@
                                 </af:panelBox>
                                 <f:facet name="toolbar">
                                     <af:button actionListener="#{bindings.CreateInsert1.execute}" text="Добавить"
-                                               disabled="#{!bindings.CreateInsert1.enabled}" id="b10"/>
+                                               disabled="#{bindings.Enbl.inputValue == 0 ? true: !bindings.CreateInsert1.enabled}" id="b10"/>
                                 </f:facet>
                             </af:showDetailItem>
                             <af:showDetailItem text="Оплаты" id="sdi5"
@@ -769,14 +769,14 @@
                                         <af:column id="c21" width="60">
                                             <af:toolbar id="t8">
                                                 <af:button id="b12" icon="/img/edit-16.gif"
-                                                           disabled="#{row.OtpoEditable == '1' ? true: false}"
+                                                           disabled="#{bindings.Enbl.inputValue == 0 ? true : row.OtpoEditable == '1' ? true: false}"
                                                            shortDesc="Редактировать данные">
                                                     <af:setPropertyListener from="#{1}"
                                                                             to="#{bindings.OtpoEditable.inputValue}"
                                                                             type="action"/>
                                                 </af:button>
                                                 <af:button actionListener="#{bindings.Delete1.execute}"
-                                                           disabled="#{row.OtpoEditable == '1' ? true: false}" id="b17"
+                                                           disabled="#{bindings.Enbl.inputValue == 0 ? true : row.OtpoEditable == '1' ? true: false}" id="b17"
                                                            icon="/img/delete.png" shortDesc="Удалить строку"/>
                                             </af:toolbar>
                                         </af:column>
@@ -906,7 +906,8 @@
                                 <f:facet name="toolbar">
                                     <af:toolbar id="t9">
                                         <af:button actionListener="#{bindings.CreateInsert2.execute}"
-                                                   text="Добавить" disabled="#{!bindings.CreateInsert2.enabled}"
+                                                   text="Добавить"
+                                                   disabled="#{bindings.Enbl.inputValue == 0 ? true : !bindings.CreateInsert2.enabled}"
                                                    id="b13"/>
                                     </af:toolbar>
                                 </f:facet>
@@ -918,7 +919,7 @@
                                         <af:toolbar id="t11">
                                             <af:button actionListener="#{bindings.CreateInsert3.execute}"
                                                        text="Добавить"
-                                                       disabled="#{!bindings.CreateInsert3.enabled}" id="b14"/>
+                                                       disabled="#{bindings.Enbl.inputValue == 0 ? true : !bindings.CreateInsert3.enabled}" id="b14"/>
                                         </af:toolbar>
                                     </f:facet>
                                     <af:table value="#{bindings.OrdersTpRashodyView4.collectionModel}" var="row"
@@ -933,14 +934,14 @@
                                         <af:column id="c31" width="60">
                                             <af:toolbar id="t12">
                                                 <af:button id="b15" icon="/img/edit-16.gif"
-                                                           disabled="#{row.OtprEditable == '1' ? true: false}"
+                                                           disabled="#{bindings.Enbl.inputValue == 0 ? true : row.OtprEditable == '1' ? true: false}"
                                                            shortDesc="Редактировать данные">
                                                     <af:setPropertyListener from="#{1}"
                                                                             to="#{bindings.OtprEditable.inputValue}"
                                                                             type="action"/>
                                                 </af:button>
                                                 <af:button actionListener="#{bindings.Delete2.execute}"
-                                                           disabled="#{row.OtprEditable == '1' ? true: false}" id="b18"
+                                                           disabled="#{bindings.Enbl.inputValue == 0 ? true : row.OtprEditable == '1' ? true: false}" id="b18"
                                                            icon="/img/delete.png" shortDesc="Удалить строку"/>
                                             </af:toolbar>
                                         </af:column>
@@ -1127,7 +1128,7 @@
                                         <af:toolbar id="t15">
                                             <af:button actionListener="#{bindings.CreateInsert4.execute}"
                                                        text="Добавить"
-                                                       disabled="#{!bindings.CreateInsert4.enabled}" id="b21"/>
+                                                       disabled="#{bindings.Enbl.inputValue == 0 ? true : !bindings.CreateInsert4.enabled}" id="b21"/>
                                         </af:toolbar>
                                     </f:facet>
                                     <af:table value="#{bindings.OrdersTpNachisleniaView2.collectionModel}" var="row"
@@ -1142,17 +1143,17 @@
                                         <af:column id="c40" width="80">
                                             <af:toolbar id="t14">
                                                 <af:button id="b19" icon="/img/edit-16.gif"
-                                                           disabled="#{row.OtpnEditable == '1' ? true: false}"
+                                                           disabled="#{bindings.Enbl.inputValue == 0 ? true : row.OtpnEditable == '1' ? true: false}"
                                                            shortDesc="Редактировать данные">
                                                     <af:setPropertyListener from="#{1}"
                                                                             to="#{bindings.OtpnEditable.inputValue}"
                                                                             type="action"/>
                                                 </af:button>
                                                 <af:button actionListener="#{bindings.Delete3.execute}"
-                                                           disabled="#{row.OtpnEditable == '1' ? true: false}" id="b20"
+                                                           disabled="#{bindings.Enbl.inputValue == 0 ? true : row.OtpnEditable == '1' ? true: false}" id="b20"
                                                            icon="/img/delete.png" shortDesc="Удалить строку"/>
                                                 <af:button id="b22" icon="/img/icon_save.png"
-                                                           disabled="#{row.OtpnEditable == '1' ? false: true}">
+                                                           disabled="#{bindings.Enbl.inputValue == 0 ? true : row.OtpnEditable == '1' ? false: true}">
                                                     <af:setPropertyListener from="#{0}"
                                                                             to="#{bindings.OtpnEditable.inputValue}"
                                                                             type="action"/>

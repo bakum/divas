@@ -183,7 +183,8 @@
     FROM 
         dual) oth_editable,
         OtherZatraty.ACTIVITIES_ID,
-        'Прочие затраты' ObjName
+        'Прочие затраты' ObjName,
+        UTILITY.enable_edit(OtherZatraty.DAT) enbl
 FROM  OTHER_ZATRATY OtherZatraty
 where deleted = 0 and
 upper(OtherZatraty.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))]]></SQLQuery>
@@ -355,6 +356,16 @@ upper(OtherZatraty.USER_ID) in (select upper(N) from table(cast(get_users(:u_nam
             <Attr Name="_DisplaySize" Value="14"/>
         </DesignTime>
     </ViewAttribute>
+    <ViewAttribute
+        Name="Enbl"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="ENBL"
+        Expression="ENBL"
+        SQLType="NUMERIC"/>
     <ViewAttribute
       Name="TotalZatr"
       IsUpdateable="false"

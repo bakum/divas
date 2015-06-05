@@ -316,7 +316,8 @@
         ID = KONTRAG_ID) KontragName,
        Rko.SUMMA,
        (select 0 from dual) R_Editable,
-       Rko.ORDER_ID
+       Rko.ORDER_ID,
+       UTILITY.enable_edit(Rko.DAT) enbl
 FROM  RKO Rko
 where deleted = 0 and
 upper(Rko.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))]]></SQLQuery>
@@ -580,6 +581,16 @@ upper(Rko.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as use
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="Enbl"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ENBL"
+    Expression="ENBL"
+    SQLType="NUMERIC"/>
   <ViewLinkAccessor
     Name="VwRkoMoves"
     ViewLink="ua.divas.view.VwRkoRkoFkLink"

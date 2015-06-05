@@ -373,7 +373,8 @@
     Orders.DAT_COMPLETE DAT_COMPLETE, 
     Orders.DAT_ZAM DAT_ZAM, 
     Orders.SUMM_PLAN SUMM_PLAN,
-    'Заказ' ObjName
+    'Заказ' ObjName,
+    UTILITY.enable_edit(Orders.DAT) enbl
 FROM 
     ORDERS Orders 
 WHERE 
@@ -710,6 +711,16 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
             <Attr Name="_DisplaySize" Value="5"/>
         </DesignTime>
     </ViewAttribute>
+    <ViewAttribute
+        Name="Enbl"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="ENBL"
+        Expression="ENBL"
+        SQLType="NUMERIC"/>
     <ViewAttribute
       Name="TotalSumUslugi"
       IsUpdateable="false"

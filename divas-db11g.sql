@@ -142,7 +142,7 @@ AS TABLE OF usertype;
 --  DDL for Sequence PS_TXN_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 192001 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 193051 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence RKO_NUM_SEQ
 --------------------------------------------------------
@@ -808,6 +808,14 @@ AS TABLE OF usertype;
 	"TYPE_OF_OBJ" VARCHAR2(50 BYTE), 
 	"VERSION" TIMESTAMP (6) DEFAULT systimestamp, 
 	"FULLNAME" VARCHAR2(100 CHAR)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table PROG_SETTINGS
+--------------------------------------------------------
+
+  CREATE TABLE "PROG_SETTINGS" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"DATE_AFTER" DATE
    ) ;
 --------------------------------------------------------
 --  DDL for Table PS_TXN
@@ -2286,6 +2294,12 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   CREATE UNIQUE INDEX "PLAN_TYPE_SUBCONTO_UK1" ON "PLAN_TYPE_SUBCONTO" ("TYPE_OF_OBJ") 
   ;
 --------------------------------------------------------
+--  DDL for Index PROG_SETTINGS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PROG_SETTINGS_PK" ON "PROG_SETTINGS" ("ID") 
+  ;
+--------------------------------------------------------
 --  DDL for Index PS_TXN_IDX
 --------------------------------------------------------
 
@@ -3298,6 +3312,13 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   ALTER TABLE "PLAN_TYPE_SUBCONTO" MODIFY ("TYPE_OF_OBJ" NOT NULL ENABLE);
  
   ALTER TABLE "PLAN_TYPE_SUBCONTO" MODIFY ("VERSION" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table PROG_SETTINGS
+--------------------------------------------------------
+
+  ALTER TABLE "PROG_SETTINGS" ADD CONSTRAINT "PROG_SETTINGS_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "PROG_SETTINGS" MODIFY ("ID" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table PS_TXN
 --------------------------------------------------------
@@ -5153,6 +5174,22 @@ end;
 /
 ALTER TRIGGER "PLAN_TYPE_SUBCONTO_TRG" ENABLE;
 --------------------------------------------------------
+--  DDL for Trigger PROG_SETTINGS_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "PROG_SETTINGS_TRG" 
+  BEFORE INSERT OR UPDATE ON "PROG_SETTINGS"
+  REFERENCING FOR EACH ROW
+  begin  
+   if inserting then 
+      if :NEW."ID" is null then 
+         select utility.uuid() into :new."ID" from dual;
+      end if; 
+   end if;
+end;
+/
+ALTER TRIGGER "PROG_SETTINGS_TRG" ENABLE;
+--------------------------------------------------------
 --  DDL for Trigger QUARTZ_PROPERTY_TRG
 --------------------------------------------------------
 
@@ -6041,7 +6078,8 @@ end usr_sett;
   function retrieve_name_basenachisl (p_id in varchar2) return varchar2;
   procedure createKontrag(p_name in varchar2, p_user_id in varchar2,
             p_isSupp in number, p_isMeasr in number , p_isByer in number);
-  procedure createZatraty(p_name in varchar2);          
+  procedure createZatraty(p_name in varchar2); 
+  function enable_edit(p_date in date) return number;
 
 end utility;
 
@@ -7075,6 +7113,10 @@ END KONTRAG;
   pragma exception_init(in_use, -54);
   begin
     select * into p_orders_rec from orders where id = p_id for update nowait;
+    if utility.enable_edit(p_orders_rec.dat) = 0 then
+      return;
+    end if ;
+    
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from orders
       where id = p_id;
     select count(*) into p_move_count from moves where registrator_id = p_id;
@@ -8204,13 +8246,18 @@ END KONTRAG;
     p_status order_status.id%type;
   pragma exception_init(in_use, -54);
   begin
+    select * into p_orders_rec from orders where id = p_id for update nowait;
+    if utility.enable_edit(p_orders_rec.dat) = 0 then
+      return;
+    end if ;
+    
     orders_remove_plan_acc(p_id);
     
     delete from ORDERS_TP_NACHISL where order_id = p_id and manual = 0;
     paycalc.calc_money(p_id);
     PAYCALC.CALC_MONEY_BY_KONTR(p_id);
     
-    select * into p_orders_rec from orders where id = p_id for update nowait;
+    
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from orders
       where id = p_id;
       
@@ -8548,8 +8595,13 @@ procedure other_move_plan_acc(p_id in varchar2) as
     p_counter number(10);
     pragma exception_init(in_use, -54);
   begin
-    other_remove_plan_acc(p_id);
     select * into p_other_rec from OTHER_ZATRATY where id = p_id for update nowait;
+    if utility.enable_edit(p_other_rec.dat) = 0 then
+      return;
+    end if ;
+    
+    other_remove_plan_acc(p_id);
+    
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from OTHER_ZATRATY
       where id = p_id;
       
@@ -8597,6 +8649,10 @@ procedure other_remove_plan_acc(p_id in varchar2, p_del in number default 0) as
   pragma exception_init(in_use, -54);
   begin
     select * into p_other_rec from OTHER_ZATRATY where id = p_id for update nowait;
+    if utility.enable_edit(p_other_rec.dat) = 0 then
+      return;
+    end if ;
+    
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from OTHER_ZATRATY
       where id = p_id;
     select count(*) into p_move_count from moves where registrator_id = p_id;
@@ -9126,8 +9182,12 @@ procedure pko_move_plan_acc(p_id in varchar2) as
     p_counter number(10);
     pragma exception_init(in_use, -54);
   begin
-    pko_remove_plan_acc(p_id);
     select * into p_pko_rec from PKO where id = p_id for update nowait;
+    if utility.enable_edit(p_pko_rec.dat) = 0 then
+      return;
+    end if ;
+    pko_remove_plan_acc(p_id);
+    
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from PKO
       where id = p_id;
     
@@ -9194,6 +9254,9 @@ procedure pko_remove_plan_acc(p_id in varchar2, p_del in number default 0) as
   pragma exception_init(in_use, -54);
   begin
     select * into p_pko_rec from PKO where id = p_id for update nowait;
+    if utility.enable_edit(p_pko_rec.dat) = 0 then
+      return;
+    end if ;
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from PKO
       where id = p_id;
     select count(*) into p_move_count from moves where registrator_id = p_id;
@@ -9680,8 +9743,12 @@ procedure set_subconto_other(p_move_rec moves%rowtype) as
     p_counter number(10);
     pragma exception_init(in_use, -54);
   begin
-    rko_remove_plan_acc(p_id);
     select * into p_rko_rec from RKO where id = p_id for update nowait;
+    if utility.enable_edit(p_rko_rec.dat) = 0 then
+      return;
+    end if ;
+    rko_remove_plan_acc(p_id);
+    
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from RKO
       where id = p_id;
     
@@ -9759,6 +9826,9 @@ procedure set_subconto_other(p_move_rec moves%rowtype) as
   pragma exception_init(in_use, -54);
   begin
     select * into p_rko_rec from RKO where id = p_id for update nowait;
+    if utility.enable_edit(p_rko_rec.dat) = 0 then
+      return;
+    end if ;
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from RKO
       where id = p_id;
     select count(*) into p_move_count from moves where registrator_id = p_id;
@@ -9829,8 +9899,12 @@ END RKO_ENTRY;
     p_upr_val currency.id%type;
     pragma exception_init(in_use, -54);
   BEGIN
-    start_remove_plan_acc(p_id);
     select * into p_start_rec from START_OST where id = p_id for update nowait;
+    if utility.enable_edit(p_start_rec.dat) = 0 then
+      return;
+    end if ;
+    start_remove_plan_acc(p_id);
+    
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from START_OST
       where id = p_id;
     
@@ -9887,6 +9961,10 @@ END RKO_ENTRY;
     pragma exception_init(in_use, -54);
   BEGIN
     select * into p_start_rec from START_OST where id = p_id for update nowait;
+    if utility.enable_edit(p_start_rec.dat) = 0 then
+      return;
+    end if ;
+    
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from START_OST
       where id = p_id;
     select count(*) into p_move_count from moves where registrator_id = p_id;
@@ -10691,6 +10769,22 @@ end usr_sett;
    p_zrecord.predefined:=0;
    insert into zatraty values p_zrecord;
   end;
+
+  --'1' - разрешено редактирование; '0' - не разрешено
+  function enable_edit(p_date in date) return number as
+  p_dat_sett date;
+  begin
+    select DATE_AFTER into p_dat_sett from PROG_SETTINGS where rownum=1;
+    if trunc(p_dat_sett) > trunc(p_date) then
+      return 0;
+    else
+      return 1;
+    end if;
+    
+    exception
+    when others then
+      return 1;
+  end enable_edit;
 
 end utility;
 

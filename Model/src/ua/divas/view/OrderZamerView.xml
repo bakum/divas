@@ -393,7 +393,8 @@
        Orders.VERSION, 
        Orders.ZAMER_ID,
        (select fullname from kontragents where id = ZAMER_ID and rownum = 1) ZamerName,
-       (select adress from contact_details where kontrag_id = Orders.KONTRAG_ID and rownum = 1) adress
+       (select adress from contact_details where kontrag_id = Orders.KONTRAG_ID and rownum = 1) adress,
+       UTILITY.enable_edit(Orders.DAT) enbl
 FROM  ORDERS Orders
 where deleted = 0 and
 status_id in (:name1,:name2,:name3,:name4,:name5) and
@@ -711,6 +712,16 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users_for_zamer(:u
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="Enbl"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ENBL"
+    Expression="ENBL"
+    SQLType="NUMERIC"/>
   <ViewCriteria
     Name="OrderZamerViewCriteria"
     ViewObjectName="ua.divas.view.OrderZamerView"
