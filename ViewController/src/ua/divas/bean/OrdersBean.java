@@ -14,11 +14,13 @@ import javax.el.ExpressionFactory;
 import javax.el.ValueExpression;
 
 import javax.faces.application.Application;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
+import oracle.adf.controller.ControllerContext;
 import oracle.adf.model.AttributeBinding;
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
@@ -742,5 +744,19 @@ public class OrdersBean {
 
     public void onReturnValue(ReturnEvent returnEvent) {
         refresh();
+    }
+    
+    public void handleExceptionShowMessageInPopupDialog() {
+        ControllerContext cc = ControllerContext.getInstance();
+        Exception ex = cc.getCurrentViewPort().getExceptionData();
+        String message = ex.getMessage();
+        
+        FacesContext fc = FacesContext.getCurrentInstance();
+        FacesMessage facesMessage =
+              new FacesMessage(FacesMessage.SEVERITY_ERROR, "UTF: " + message, null);
+            fc.addMessage(null, facesMessage);
+
+            cc.getCurrentRootViewPort().clearException();
+            fc.renderResponse();
     }
 }

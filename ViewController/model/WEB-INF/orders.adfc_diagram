@@ -2,25 +2,6 @@
 <SDM>
    <OverallProperties
       id="OverallProperties1"/>
-   <View
-      id="View2">
-      <property
-         name="activityId">orders</property>
-      <property
-         name="page">/orders.jsff</property>
-      <property
-         name="start">true</property>
-      <property
-         name="description">&lt;html>&lt;p>&lt;b>orders&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
-      <property
-         name="exceptionHandler">false</property>
-      <property
-         name="y">154.04688</property>
-      <property
-         name="pageFragment">true</property>
-      <property
-         name="x">226.0</property>
-   </View>
    <TaskFlowCall
       id="TaskFlowCall5">
       <property
@@ -38,16 +19,6 @@
       <property
          name="x">375.00684</property>
    </TaskFlowCall>
-   <ControlFlowCase
-      islink="true"
-      id="ControlFlowCase6"
-      from="View2"
-      to="TaskFlowCall5">
-      <property
-         name="fromOutcome">addKontrag</property>
-      <property
-         name="sdm:polyPoints">R46,267.0,150.5625,334.00684,64.59375,L50</property>
-   </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall6">
       <property
@@ -65,16 +36,6 @@
       <property
          name="x">387.0</property>
    </TaskFlowCall>
-   <ControlFlowCase
-      islink="true"
-      id="ControlFlowCase7"
-      from="View2"
-      to="TaskFlowCall6">
-      <property
-         name="fromOutcome">addOrder</property>
-      <property
-         name="sdm:polyPoints">R54,267.0,157.5625,346.0,213.15625,L50</property>
-   </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall8">
       <property
@@ -94,14 +55,53 @@
       <property
          name="x">124.09082</property>
    </TaskFlowCall>
+   <View
+      id="View10">
+      <property
+         name="activityId">order</property>
+      <property
+         name="page">/orders.jsff</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>order&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">61.609375</property>
+      <property
+         name="x">44.5</property>
+      <property
+         name="pageFragment">true</property>
+   </View>
    <ControlFlowCase
       islink="true"
-      id="ControlFlowCase9"
-      from="View2"
+      id="ControlFlowCase11"
+      from="View10"
+      to="TaskFlowCall6">
+      <property
+         name="fromOutcome">addOrder</property>
+      <property
+         name="sdm:polyPoints">R54,85.5,65.125,346.0,213.15625,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase12"
+      from="View10"
       to="TaskFlowCall8">
       <property
          name="fromOutcome">viewOrder</property>
       <property
-         name="sdm:polyPoints">B50,226.0,208.0625,124.09082,255.64062,T50</property>
+         name="sdm:polyPoints">B50,44.5,115.609375,124.09082,255.64062,T50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase13"
+      from="View10"
+      to="TaskFlowCall5">
+      <property
+         name="fromOutcome">addKontrag</property>
+      <property
+         name="sdm:polyPoints">R46,86.470535,58.125,334.00684,64.59375,L50</property>
    </ControlFlowCase>
 </SDM>

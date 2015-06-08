@@ -55,10 +55,5 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <attributeValues IterBinding="RkoView1Iterator" id="Enbl">
-      <AttrNames>
-        <Item Value="Enbl"/>
-      </AttrNames>
-    </attributeValues>
   </bindings>
 </pageDefinition>
