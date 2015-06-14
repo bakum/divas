@@ -86,5 +86,7 @@
         <Item Value="Enbl"/>
       </AttrNames>
     </attributeValues>
+    <action IterBinding="OtherZatratyTabPartZatratyView2Iterator" id="Delete" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
   </bindings>
 </pageDefinition>

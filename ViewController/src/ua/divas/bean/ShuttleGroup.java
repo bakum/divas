@@ -212,7 +212,10 @@ public class ShuttleGroup {
         DCIteratorBinding it = binding.findIteratorBinding("UsersView1Iterator");
         if (it != null) {
             String rks = it.getCurrentRow().getKey().toStringFormat(true);
+            BindingContainer bindings = BindingContext.getCurrent().getCurrentBindingsEntry(); 
+            bindings.refresh();
             it.executeQuery();
+            it.refresh(DCIteratorBinding.RANGESIZE_UNLIMITED);
             if (rks != null) {
                 it.setCurrentRowWithKey(rks);
             }
@@ -503,6 +506,7 @@ public class ShuttleGroup {
     }
 
     public void onZamerChange(ValueChangeEvent vce) {
+        vce.getComponent().processUpdates(FacesContext.getCurrentInstance());
         if (vce.getNewValue() != vce.getOldValue()) {
             if (DataQuery.zamernameInUse((String) vce.getNewValue())) {
                 getZamerId().setValue("");
@@ -545,6 +549,9 @@ public class ShuttleGroup {
     }
 
     public void onNewUserPopup(PopupFetchEvent popupFetchEvent) {
+        resetBindingValue("#{bindings.username1.inputValue}",null);
+        resetBindingValue("#{bindings.psw.inputValue}",null);
+        resetBindingValue("#{bindings.desc.inputValue}",null);
         try {
             getLogin().resetValue();
             getPasswd().resetValue();
@@ -564,6 +571,7 @@ public class ShuttleGroup {
     }
 
     public void onResetPasswdPopup(PopupFetchEvent popupFetchEvent) {
+        resetBindingValue("#{bindings.newPassword.inputValue}",null);
         try {
             getNewPasswd().resetValue();
         } catch (Exception e) {

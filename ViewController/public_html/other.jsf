@@ -127,27 +127,30 @@
                                         <af:toolbar id="t3">
                                             <af:button actionListener="#{bindings.CreateInsert.execute}"
                                                        text="Добавить"
-                                                       disabled="#{bindings.Enbl.inputValue == 0 ? true : !bindings.CreateInsert.enabled}"
+                                                       disabled="#{bindings.OthtpEditable.inputValue == 0 ? false : !bindings.CreateInsert.enabled}"
                                                        id="b2" icon="/img/Symbol_Add.png"/>
                                         </af:toolbar>
                                     </f:facet>
                                     <af:table value="#{bindings.OtherZatratyTabPartZatratyView2.collectionModel}"
                                               var="row" rows="#{bindings.OtherZatratyTabPartZatratyView2.rangeSize}"
-                                              emptyText="#{bindings.OtherZatratyTabPartZatratyView2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              emptyText="#{bindings.OtherZatratyTabPartZatratyView2.viewable ? 'Нет данных.' : 'В доступе отказано.'}"
                                               rowBandingInterval="0"
                                               selectedRowKeys="#{bindings.OtherZatratyTabPartZatratyView2.collectionModel.selectedRow}"
                                               selectionListener="#{bindings.OtherZatratyTabPartZatratyView2.collectionModel.makeCurrent}"
                                               rowSelection="single"
                                               fetchSize="#{bindings.OtherZatratyTabPartZatratyView2.rangeSize}" id="t1"
-                                              scrollPolicy="page" editingMode="clickToEdit" partialTriggers="::b2">
+                                              scrollPolicy="page" editingMode="clickToEdit" partialTriggers="::b2 b6">
                                         <af:column id="c7" width="60">
                                             <af:toolbar id="t2">
                                                 <af:button id="b1" icon="/img/edit-16.gif"
-                                                           disabled="#{bindings.Enbl.inputValue == 0 ? true : false}">
+                                                           disabled="#{row.OthtpEditable == 0 ? false : true}">
                                                     <af:setPropertyListener from="#{1}"
                                                                             to="#{bindings.OthtpEditable.inputValue}"
                                                                             type="action"/>
                                                 </af:button>
+                                                <af:button actionListener="#{bindings.Delete.execute}"
+                                                           disabled="#{row.OthtpEditable == 0 ? false : true}" id="b6"
+                                                           icon="/img/delete.png"/>
                                             </af:toolbar>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.OtherZatratyTabPartZatratyView2.hints.Id.name}"
@@ -210,18 +213,17 @@
                                         <af:column sortProperty="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.label}"
-                                                   id="c5">
-                                            <af:inputText value="#{row.bindings.Summa.inputValue}"
-                                                          label="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.label}"
-                                                          required="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.mandatory}"
-                                                          columns="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.displayWidth}"
-                                                          maximumLength="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.precision}"
-                                                          shortDesc="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.tooltip}"
-                                                          id="it6">
+                                                   id="c5" width="300">
+                                            <af:inputNumberSpinbox value="#{row.bindings.Summa.inputValue}"
+                                                                   label="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.label}"
+                                                                   required="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.mandatory}"
+                                                                   columns="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.displayWidth}"
+                                                                   shortDesc="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.tooltip}"
+                                                                   id="it6">
                                                 <f:validator binding="#{row.bindings.Summa.validator}"/>
                                                 <af:convertNumber groupingUsed="false"
                                                                   pattern="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.format}"/>
-                                            </af:inputText>
+                                            </af:inputNumberSpinbox>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.OtherZatratyTabPartZatratyView2.hints.OthtpEditable.name}"
                                                    sortable="true"
@@ -243,13 +245,23 @@
                                 </af:panelBox>
                                 <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateZatraty"
                                           contentDelivery="lazyUncached"
-                                          popupFetchListener="#{other_jsf.onPopupCreateZatraty}">
+                                          popupFetchListener="#{other_jsf.onPopupCreateZatraty}"
+                                          binding="#{other_jsf.zatrPopup}">
                                     <af:dialog id="d2" closeIconVisible="false" title="Новая статья затрат"
-                                               dialogListener="#{other_jsf.onNewZatratyDialogListener}">
-                                        <f:facet name="buttonBar"/>
+                                               dialogListener="#{other_jsf.onNewZatratyDialogListener}" type="none">
+                                        <f:facet name="buttonBar">
+                                            <af:panelGroupLayout id="pgl5" layout="horizontal" halign="right">
+                                                <af:toolbar id="t6">
+                                                    <af:button text="Ok" id="bNewZatraty" immediate="true"
+                                                               actionListener="#{other_jsf.onSaveZatraty}"/>
+                                                    <af:button text="Отмена" id="b7" immediate="true"
+                                                               actionListener="#{other_jsf.onCancelZatrat}"/>
+                                                </af:toolbar>
+                                            </af:panelGroupLayout>
+                                        </f:facet>
                                         <af:inputText label="Наименование" id="it8" columns="50"
                                                       binding="#{other_jsf.zatrName}" required="true"
-                                                      value="#{bindings.ZatrName1.inputValue}"/>
+                                                      value="#{bindings.ZatrName1.inputValue}" autoSubmit="true"/>
                                     </af:dialog>
                                 </af:popup>
                             </af:showDetailItem>
