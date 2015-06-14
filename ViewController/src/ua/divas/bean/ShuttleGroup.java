@@ -62,8 +62,19 @@ public class ShuttleGroup {
     private RichInputText newPasswd;
     private RichInputText kontragName;
     private RichPopup newKontragPopup;
+    private RichPopup newZamerPopup;
 
     public ShuttleGroup() {
+    }
+
+    public void resetBindingValue(String expression, Object newValue) {
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        Application app = ctx.getApplication();
+        ExpressionFactory elFactory = app.getExpressionFactory();
+        ELContext elContext = ctx.getELContext();
+        ValueExpression valueExp = elFactory.createValueExpression(elContext, expression, Object.class);
+        Class bindClass = valueExp.getType(elContext);
+        valueExp.setValue(elContext, newValue);
     }
 
     public void setZamerId(RichInputListOfValues zamerId) {
@@ -418,21 +429,23 @@ public class ShuttleGroup {
     }
 
     public void onPopupCreateZamer(PopupFetchEvent popupFetchEvent) {
-        try {
-            getKonName().setValue("");
+        resetBindingValue("#{bindings.KonName1.inputValue}",null);
+         try {
+            getKonName().resetValue();
         } catch (Exception e) {
             // TODO: Add catch code
             e.printStackTrace();
-        }
+        } 
     }
 
     public void onPopupCreateKontrag(PopupFetchEvent popupFetchEvent) {
-        try {
-            getKontragName().setValue("");
+        resetBindingValue("#{bindings.KontragName1.inputValue}",null);
+         try {
+            getKontragName().resetValue();
         } catch (Exception e) {
             // TODO: Add catch code
             e.printStackTrace();
-        }
+        } 
     }
 
     public void onNewKontragDialogListener(DialogEvent dialogEvent) {
@@ -451,7 +464,7 @@ public class ShuttleGroup {
             //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
             //ob = binding.getOperationBinding("Commit");
             //ob.execute();
-            refreshKontrag();           
+            refreshKontrag();
         }
     }
 
@@ -465,7 +478,7 @@ public class ShuttleGroup {
                 ob.getParamsMap().put("isMeasr", 1);
                 ob.getParamsMap().put("isByer", 0);
                 ob.execute();
-            }      
+            }
             //setKontragFullName();
             //setOtherParentId();
             //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
@@ -533,9 +546,9 @@ public class ShuttleGroup {
 
     public void onNewUserPopup(PopupFetchEvent popupFetchEvent) {
         try {
-            getLogin().setValue("");
-            getPasswd().setValue("");
-            getDesc().setValue("");
+            getLogin().resetValue();
+            getPasswd().resetValue();
+            getDesc().resetValue();
         } catch (Exception e) {
             // TODO: Add catch code
             e.printStackTrace();
@@ -552,7 +565,7 @@ public class ShuttleGroup {
 
     public void onResetPasswdPopup(PopupFetchEvent popupFetchEvent) {
         try {
-            getNewPasswd().setValue("");
+            getNewPasswd().resetValue();
         } catch (Exception e) {
             // TODO: Add catch code
             e.printStackTrace();
@@ -636,6 +649,7 @@ public class ShuttleGroup {
                 //ob = binding.getOperationBinding("Commit");
                 //ob.execute();
                 refreshKontrag();
+                //resetBindingValue("#{bindings.KontragName1.inputValue}",null);
                 hidePopup(getNewKontragPopup());
             } catch (Exception e) {
                 FacesMessage msg =
@@ -643,7 +657,7 @@ public class ShuttleGroup {
                                      "Контрагент не может быть пустым");
                 FacesContext ctx = FacesContext.getCurrentInstance();
                 ctx.addMessage(null, msg);
-                e.printStackTrace();
+                //e.printStackTrace();
             }
             /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
             DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
@@ -651,5 +665,56 @@ public class ShuttleGroup {
                 it.executeQuery();
             } */
         }
+    }
+
+    public void onCancelKontrag(ActionEvent actionEvent) {
+        hidePopup(getNewKontragPopup());
+    }
+
+    public void onSaveZamer(ActionEvent actionEvent) {
+        if (actionEvent.getComponent().getId().equals("bNewZamer")) {
+            try {
+                getKonName().getValue().toString();
+                BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+                OperationBinding ob = binding.getOperationBinding("createKontrag");
+                if (ob != null) {
+                    ob.getParamsMap().put("p_name", getKonName().getValue().toString());
+                    ob.getParamsMap().put("isSupp", 0);
+                    ob.getParamsMap().put("isMeasr", 1);
+                    ob.getParamsMap().put("isByer", 0);
+                    ob.execute();
+                }
+                //setKontragFullName();
+                //setOtherParentId();
+                //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+                //ob = binding.getOperationBinding("Commit");
+                //ob.execute();
+                refreshKontrag();
+                hidePopup(getNewZamerPopup());
+            } catch (Exception e) {
+                FacesMessage msg =
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка валидации", "Замерщик не может быть пустым");
+                FacesContext ctx = FacesContext.getCurrentInstance();
+                ctx.addMessage(null, msg);
+                //e.printStackTrace();
+            }
+            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+            if (it != null) {
+                it.executeQuery();
+            } */
+        }
+    }
+
+    public void setNewZamerPopup(RichPopup newZamerPopup) {
+        this.newZamerPopup = newZamerPopup;
+    }
+
+    public RichPopup getNewZamerPopup() {
+        return newZamerPopup;
+    }
+
+    public void onCancelZamer(ActionEvent actionEvent) {
+        hidePopup(getNewZamerPopup());
     }
 }

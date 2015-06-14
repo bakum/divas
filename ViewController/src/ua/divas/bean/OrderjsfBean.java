@@ -9,13 +9,16 @@ import javax.el.ExpressionFactory;
 import javax.el.ValueExpression;
 
 import javax.faces.application.Application;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCDataControl;
 import oracle.adf.model.binding.DCIteratorBinding;
+import oracle.adf.view.rich.component.rich.RichPopup;
 import oracle.adf.view.rich.component.rich.input.RichInputListOfValues;
 import oracle.adf.view.rich.component.rich.input.RichInputText;
 import oracle.adf.view.rich.event.DialogEvent;
@@ -31,6 +34,9 @@ import oracle.binding.OperationBinding;
 
 import oracle.jbo.Row;
 
+import org.apache.myfaces.trinidad.render.ExtendedRenderKitService;
+import org.apache.myfaces.trinidad.util.Service;
+
 import ua.divas.module.AppModuleImpl;
 
 public class OrderjsfBean {
@@ -39,8 +45,21 @@ public class OrderjsfBean {
     private RichInputText konName;
     private RichInputText prorName;
     private RichInputText zatrName;
+    private RichPopup kontragPopup;
+    private RichPopup prorabPopup;
+    private RichPopup zatratPopup;
 
     public OrderjsfBean() {
+    }
+
+    public void resetBindingValue(String expression, Object newValue) {
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        Application app = ctx.getApplication();
+        ExpressionFactory elFactory = app.getExpressionFactory();
+        ELContext elContext = ctx.getELContext();
+        ValueExpression valueExp = elFactory.createValueExpression(elContext, expression, Object.class);
+        Class bindClass = valueExp.getType(elContext);
+        valueExp.setValue(elContext, newValue);
     }
 
     public void setKonName(RichInputText konName) {
@@ -274,8 +293,9 @@ public class OrderjsfBean {
     }
 
     public void onPopupCreateKontrag(PopupFetchEvent popupFetchEvent) {
+        resetBindingValue("#{bindings.KonName1.inputValue}",null);
         try {
-            getKonName().setValue("");
+            getKonName().resetValue();
         } catch (Exception e) {
             // TODO: Add catch code
             e.printStackTrace();
@@ -283,8 +303,9 @@ public class OrderjsfBean {
     }
 
     public void onPopupCreatePror(PopupFetchEvent popupFetchEvent) {
+        resetBindingValue("#{bindings.ProrabName1.inputValue}",null);
         try {
-            getProrName().setValue("");
+            getProrName().resetValue();
         } catch (Exception e) {
             // TODO: Add catch code
             e.printStackTrace();
@@ -292,8 +313,9 @@ public class OrderjsfBean {
     }
 
     public void onPopupCreateZatraty(PopupFetchEvent popupFetchEvent) {
+        resetBindingValue("#{bindings.ZatratyName1.inputValue}",null);
         try {
-            getZatrName().setValue("");
+            getZatrName().resetValue();
         } catch (Exception e) {
             // TODO: Add catch code
             e.printStackTrace();
@@ -316,7 +338,7 @@ public class OrderjsfBean {
             //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
             //ob = binding.getOperationBinding("Commit");
             //ob.execute();
-            refreshKontrag();  
+            refreshKontrag();
         }
     }
 
@@ -336,7 +358,7 @@ public class OrderjsfBean {
             //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
             //ob = binding.getOperationBinding("Commit");
             //ob.execute();
-            refreshKontrag(); 
+            refreshKontrag();
         }
     }
 
@@ -391,7 +413,8 @@ public class OrderjsfBean {
                 String TotalStr = getValueFrmExpression("#{bindings.TotalSumm.attributeValue}");
                 //System.out.println(TotalStr);
                 BigDecimal TotalSumm = new BigDecimal(TotalStr);
-                BigDecimal res = summa.divide(new BigDecimal(100)).multiply(TotalSumm).setScale(2, BigDecimal.ROUND_HALF_UP);
+                BigDecimal res =
+                    summa.divide(new BigDecimal(100)).multiply(TotalSumm).setScale(2, BigDecimal.ROUND_HALF_UP);
                 currRow.setAttribute("Summ", res);
             }
         }
@@ -423,5 +446,143 @@ public class OrderjsfBean {
 
         Row currRow = it.getCurrentRow();
         currRow.setAttribute("Summ", res);
+    }
+
+    public void hidePopup(RichPopup popup) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExtendedRenderKitService service = Service.getRenderKitService(facesContext, ExtendedRenderKitService.class);
+        service.addScript(facesContext,
+                          "AdfPage.PAGE.findComponent('" + popup.getClientId(facesContext) + "').hide();");
+    }
+
+    public void onSaveKontrag(ActionEvent actionEvent) {
+        if (actionEvent.getComponent().getId().equals("bKontrag")) {
+            try {
+                getKonName().getValue().toString();
+                BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+                OperationBinding ob = binding.getOperationBinding("createKontrag");
+                if (ob != null) {
+                    ob.getParamsMap().put("p_name", getKonName().getValue().toString());
+                    ob.getParamsMap().put("isSupp", 0);
+                    ob.getParamsMap().put("isMeasr", 0);
+                    ob.getParamsMap().put("isByer", 1);
+                    ob.execute();
+                }
+                //setKontragFullName();
+                //setOtherParentId();
+                //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+                //ob = binding.getOperationBinding("Commit");
+                //ob.execute();
+                refreshKontrag();
+                //resetBindingValue("#{bindings.KonName1.inputValue}",null);
+                hidePopup(getKontragPopup());
+            } catch (Exception e) {
+                FacesMessage msg =
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка валидации",
+                                     "Контрагент не может быть пустым");
+                FacesContext ctx = FacesContext.getCurrentInstance();
+                ctx.addMessage(null, msg);
+                //e.printStackTrace();
+            }
+            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+            if (it != null) {
+                it.executeQuery();
+            } */
+        }
+    }
+    
+    public void onSaveProrab(ActionEvent actionEvent) {
+        if (actionEvent.getComponent().getId().equals("bProrab")) {
+            try {
+                getProrName().getValue().toString();
+                BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+                OperationBinding ob = binding.getOperationBinding("createKontrag");
+                if (ob != null) {
+                    ob.getParamsMap().put("p_name", getProrName().getValue().toString());
+                    ob.getParamsMap().put("isSupp", 1);
+                    ob.getParamsMap().put("isMeasr", 0);
+                    ob.getParamsMap().put("isByer", 0);
+                    ob.execute();
+                }
+                //setKontragFullName();
+                //setOtherParentId();
+                //BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+                //ob = binding.getOperationBinding("Commit");
+                //ob.execute();
+                refreshKontrag();
+                //resetBindingValue("#{bindings.KonName1.inputValue}",null);
+                hidePopup(getProrabPopup());
+            } catch (Exception e) {
+                FacesMessage msg =
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка валидации",
+                                     "Контрагент не может быть пустым");
+                FacesContext ctx = FacesContext.getCurrentInstance();
+                ctx.addMessage(null, msg);
+                //e.printStackTrace();
+            }
+            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("KontragentsView1Iterator");
+            if (it != null) {
+                it.executeQuery();
+            } */
+        }
+    }
+    
+    public void onSaveZatraty(ActionEvent actionEvent) {
+        if (actionEvent.getComponent().getId().equals("bNewZatraty")) {
+            try {
+                getZatrName().getValue().toString();
+                BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+                OperationBinding ob = binding.getOperationBinding("createZatraty");
+                if (ob != null) {
+                    ob.getParamsMap().put("p_name", getZatrName().getValue().toString());
+                    ob.execute();
+                }
+                hidePopup(getZatratPopup());
+            } catch (Exception e) {
+                FacesMessage msg =
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка валидации",
+                                     "Статья затрат не может быть пустой!");
+                FacesContext ctx = FacesContext.getCurrentInstance();
+                ctx.addMessage(null, msg);
+            }
+        }
+    }
+
+    public void setKontragPopup(RichPopup kontragPopup) {
+        this.kontragPopup = kontragPopup;
+    }
+
+    public RichPopup getKontragPopup() {
+        return kontragPopup;
+    }
+
+    public void onCancelKontrag(ActionEvent actionEvent) {
+        hidePopup(getKontragPopup());
+    }
+    
+    public void onCancelProrab(ActionEvent actionEvent) {
+        hidePopup(getProrabPopup());
+    }
+    
+    public void onCancelZatrat(ActionEvent actionEvent) {
+        hidePopup(getZatratPopup());
+    }
+
+    public void setProrabPopup(RichPopup prorabPopup) {
+        this.prorabPopup = prorabPopup;
+    }
+
+    public RichPopup getProrabPopup() {
+        return prorabPopup;
+    }
+
+    public void setZatratPopup(RichPopup zatratPopup) {
+        this.zatratPopup = zatratPopup;
+    }
+
+    public RichPopup getZatratPopup() {
+        return zatratPopup;
     }
 }

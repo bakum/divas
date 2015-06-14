@@ -783,22 +783,45 @@
                                 </af:popup>
                                 <af:popup childCreation="deferred" autoCancel="disabled" id="pZamer"
                                           contentDelivery="lazyUncached"
-                                          popupFetchListener="#{shuttle_group.onPopupCreateZamer}">
+                                          popupFetchListener="#{shuttle_group.onPopupCreateZamer}"
+                                          binding="#{shuttle_group.newZamerPopup}" resetEditableValues="whenCanceled">
                                     <af:dialog id="d6" title="Новый контрагент для замеров"
-                                               dialogListener="#{shuttle_group.onNewZamerDialogListener}">
-                                        <f:facet name="buttonBar"/>
+                                               dialogListener="#{shuttle_group.onNewZamerDialogListener}"
+                                               closeIconVisible="false" type="none">
+                                        <f:facet name="buttonBar">
+                                            <af:panelGroupLayout id="pgl4" layout="horizontal" halign="right">
+                                                <af:toolbar id="t9">
+                                                    <af:button text="Ok" id="bNewZamer" immediate="true"
+                                                               actionListener="#{shuttle_group.onSaveZamer}"/>
+                                                    <af:button text="Отмена" id="b19" immediate="true"
+                                                               actionListener="#{shuttle_group.onCancelZamer}"/>
+                                                </af:toolbar>
+                                            </af:panelGroupLayout>
+                                        </f:facet>
                                         <af:inputText label="Наименование" id="it24"
                                                       value="#{bindings.KonName1.inputValue}" columns="30"
-                                                      binding="#{shuttle_group.konName}" required="true"/>
+                                                      binding="#{shuttle_group.konName}" required="true"
+                                                      autoSubmit="true"/>
                                     </af:dialog>
+                                    <af:resetListener type="popupCanceled"/>
                                 </af:popup>
                                 <af:popup childCreation="deferred" autoCancel="disabled" id="pKontrag"
                                           contentDelivery="lazyUncached"
                                           popupFetchListener="#{shuttle_group.onPopupCreateKontrag}"
                                           binding="#{shuttle_group.newKontragPopup}">
                                     <af:dialog id="d7" title="Новый контрагент для расчетов"
-                                               dialogListener="#{shuttle_group.onNewKontragDialogListener}">
-                                        <f:facet name="buttonBar"/>
+                                               dialogListener="#{shuttle_group.onNewKontragDialogListener}" type="none"
+                                               closeIconVisible="false">
+                                        <f:facet name="buttonBar">
+                                            <af:panelGroupLayout id="pgl3" layout="horizontal" halign="right">
+                                                <af:toolbar id="t8">
+                                                    <af:button text="Ok" id="bNewKontrag" immediate="true"
+                                                               actionListener="#{shuttle_group.onSaveKontrag}"/>
+                                                    <af:button text="Отмена" id="b18" immediate="true"
+                                                               actionListener="#{shuttle_group.onCancelKontrag}"/>
+                                                </af:toolbar>
+                                            </af:panelGroupLayout>
+                                        </f:facet>
                                         <af:inputText label="Имя" id="it25" required="true"
                                                       value="#{bindings.KontragName1.inputValue}" columns="30"
                                                       binding="#{shuttle_group.kontragName}" autoSubmit="true"/>

@@ -290,9 +290,11 @@
                                             </af:popup>
                                             <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateKon"
                                                       contentDelivery="lazyUncached"
-                                                      popupFetchListener="#{order_jsf.onPopupCreateKontrag}">
-                                                <af:dialog id="d3" title="Новый контрагент" closeIconVisible="false"
-                                                           dialogListener="#{order_jsf.onNewKontragentDialogListener}">
+                                                      popupFetchListener="#{order_jsf.onPopupCreateKontrag}"
+                                                      binding="#{order_jsf.kontragPopup}">
+                                                <af:dialog id="d3" title="Новый контрагент" closeIconVisible="true"
+                                                           dialogListener="#{order_jsf.onNewKontragentDialogListener}"
+                                                           type="none">
                                                     <af:panelFormLayout id="pfl4" labelAlignment="start">
                                                         <af:inputText value="#{bindings.KonName1.inputValue}"
                                                                       label="Наименование"
@@ -304,7 +306,17 @@
                                                             <f:validator binding="#{bindings.Fullname.validator}"/>
                                                         </af:inputText>
                                                     </af:panelFormLayout>
-                                                    <f:facet name="buttonBar"/>
+                                                    <f:facet name="buttonBar">
+                                                        <af:panelGroupLayout id="pgl14" layout="horizontal"
+                                                                             halign="right">
+                                                            <af:toolbar id="t17">
+                                                                <af:button text="Ok" id="bKontrag" immediate="true"
+                                                                           actionListener="#{order_jsf.onSaveKontrag}"/>
+                                                                <af:button text="Отмена" id="b24" immediate="true"
+                                                                           actionListener="#{order_jsf.onCancelKontrag}"/>
+                                                            </af:toolbar>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
                                                 </af:dialog>
                                             </af:popup>
                                             <af:popup childCreation="deferred" autoCancel="disabled" id="pMoves"
@@ -449,7 +461,8 @@
                                                   required="#{bindings.Discription.hints.mandatory}"
                                                   columns="#{bindings.Discription.hints.displayWidth}"
                                                   maximumLength="#{bindings.Discription.hints.precision}"
-                                                  shortDesc="#{bindings.Discription.hints.tooltip}" id="it4" rows="4">
+                                                  shortDesc="#{bindings.Discription.hints.tooltip}" id="it4" rows="4"
+                                                  readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
                                         <f:validator binding="#{bindings.Discription.validator}"/>
                                     </af:inputText>
                                     <af:separator id="s3"/>
@@ -1099,24 +1112,50 @@
                                     </af:table>
                                     <af:popup childCreation="deferred" autoCancel="disabled" id="pSuppl"
                                               contentDelivery="lazyUncached"
-                                              popupFetchListener="#{order_jsf.onPopupCreatePror}">
+                                              popupFetchListener="#{order_jsf.onPopupCreatePror}"
+                                              binding="#{order_jsf.prorabPopup}">
                                         <af:dialog id="d4" title="Новый прораб"
-                                                   dialogListener="#{order_jsf.onNewSupplierDialogListener}">
-                                            <f:facet name="buttonBar"/>
+                                                   dialogListener="#{order_jsf.onNewSupplierDialogListener}"
+                                                   type="none" closeIconVisible="false">
+                                            <f:facet name="buttonBar">
+                                                <af:panelGroupLayout id="pgl15" layout="horizontal" halign="right">
+                                                    <af:toolbar id="t18">
+                                                        <af:button text="Ok" id="bProrab" immediate="true"
+                                                                   actionListener="#{order_jsf.onSaveProrab}"/>
+                                                        <af:button text="Отмена" id="b25" immediate="true"
+                                                                   actionListener="#{order_jsf.onCancelProrab}"/>
+                                                    </af:toolbar>
+                                                </af:panelGroupLayout>
+                                            </f:facet>
                                             <af:inputText label="Наименование" id="it36"
                                                           value="#{bindings.ProrabName1.inputValue}"
-                                                          binding="#{order_jsf.prorName}" columns="40" required="true"/>
+                                                          binding="#{order_jsf.prorName}" columns="40" required="true"
+                                                          autoSubmit="true"/>
                                         </af:dialog>
                                     </af:popup>
                                     <af:popup childCreation="deferred" autoCancel="disabled" id="pZatr"
                                               contentDelivery="lazyUncached"
-                                              popupFetchListener="#{order_jsf.onPopupCreateZatraty}">
+                                              popupFetchListener="#{order_jsf.onPopupCreateZatraty}"
+                                              binding="#{order_jsf.zatratPopup}">
                                         <af:dialog id="d5" title="Новая статья затрат"
-                                                   dialogListener="#{order_jsf.onNewZatratyDialogListener}">
-                                            <f:facet name="buttonBar"/>
+                                                   dialogListener="#{order_jsf.onNewZatratyDialogListener}" type="none"
+                                                   closeIconVisible="false">
+                                            <f:facet name="buttonBar">
+                                                <af:panelGroupLayout id="pgl16" layout="horizontal" halign="right">
+                                                    <af:toolbar id="t19">
+                                                        <af:button text="Ok" id="bNewZatraty"
+                                                                   actionListener="#{order_jsf.onSaveZatraty}"
+                                                                   immediate="true"/>
+                                                        <af:button text="Отмена" id="b26"
+                                                                   actionListener="#{order_jsf.onCancelZatrat}"
+                                                                   immediate="true"/>
+                                                    </af:toolbar>
+                                                </af:panelGroupLayout>
+                                            </f:facet>
                                             <af:inputText label="Наименование" id="it38" columns="50"
                                                           value="#{bindings.ZatratyName1.inputValue}"
-                                                          binding="#{order_jsf.zatrName}" required="true"/>
+                                                          binding="#{order_jsf.zatrName}" required="true"
+                                                          autoSubmit="true"/>
                                         </af:dialog>
                                     </af:popup>
                                 </af:panelBox>
