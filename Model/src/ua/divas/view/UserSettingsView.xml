@@ -455,6 +455,12 @@ FROM  USER_SETTINGS UserSettings]]></SQLQuery>
           Value="choice"/>
       </SchemaBasedProperties>
     </Properties>
+    <Dependencies>
+      <Item
+        Value="CurrencyId"/>
+      <Item
+        Value="DivisionId"/>
+    </Dependencies>
   </ViewAttribute>
   <ViewAttribute
     Name="MainUsluga"

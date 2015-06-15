@@ -322,11 +322,6 @@ order by Divisions.IS_GROUP DESC]]></SQLQuery>
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <ViewLinkAccessor
-    Name="VwBallansAp"
-    ViewLink="ua.divas.view.VwBallansApDivisionFkLink"
-    Type="oracle.jbo.RowIterator"
-    IsUpdateable="false"/>
-  <ViewLinkAccessor
     Name="VwSales"
     ViewLink="ua.divas.view.VwSalesDivisionFkLink"
     Type="oracle.jbo.RowIterator"
@@ -353,6 +348,19 @@ order by Divisions.IS_GROUP DESC]]></SQLQuery>
     IsUpdateable="false"/>
   <ClientInterface
     Name="__clientInterface">
+    <Method
+      Name="changeParentInDivisions"
+      MethodName="changeParentInDivisions">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="Id"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="ParentId"
+        Type="java.lang.String"/>
+    </Method>
     <Method
       Name="changeParentInDivisions"
       MethodName="changeParentInDivisions">

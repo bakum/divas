@@ -21,18 +21,6 @@
     </SchemaBasedProperties>
   </Properties>
   <Variable
-    Name="div"
-    Kind="where"
-    Type="java.lang.String">
-    <TransientExpression><![CDATA[viewObject.retrieveDivisionId()]]></TransientExpression>
-    <Properties>
-      <SchemaBasedProperties>
-        <DISPLAYHINT
-          Value="Hide"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </Variable>
-  <Variable
     Name="f_dat"
     Kind="where"
     Type="oracle.jbo.domain.Date">
@@ -52,45 +40,26 @@
       Name="DivisionsViewItems"
       FullName="ua.divas.view.DivisionsView.DivisionsViewItems"/>
   </ViewAccessor>
-  <ListBinding
-    Name="LOV_DivisionId"
-    ListVOName="DivisionsView1"
-    ListRangeSize="-1"
-    NullValueFlag="start"
-    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
-    MRUCount="0">
-    <AttrArray Name="AttrNames">
-      <Item Value="DivisionId"/>
-    </AttrArray>
-    <AttrArray Name="AttrExpressions"/>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="Fullname"/>
-    </AttrArray>
-    <DisplayCriteria/>
-  </ListBinding>
   <SQLQuery><![CDATA[SELECT 
     VW_BALLANS_AP.ID ID, 
     VW_BALLANS_AP.CODE CODE, 
     VW_BALLANS_AP.FULLNAME FULLNAME, 
-    VW_BALLANS_AP.ACTIVE_START ACTIVE_START,
-    VW_BALLANS_AP.ACTIVE_DEB ACTIVE_DEB,
-    VW_BALLANS_AP.ACTIVE_KRED ACTIVE_KRED,
-    VW_BALLANS_AP.ACTIVE_OBOROT ACTIVE_OBOROT, 
-    VW_BALLANS_AP.ACTIVE_END ACTIVE_END, 
-    VW_BALLANS_AP.PASSIVE_START PASSIVE_START,
-    VW_BALLANS_AP.PASSIVE_DEB PASSIVE_DEB,
-    VW_BALLANS_AP.PASSIVE_KRED PASSIVE_KRED,
-    VW_BALLANS_AP.PASSIVE_OBOROT PASSIVE_OBOROT, 
-    VW_BALLANS_AP.PASSIVE_END PASSIVE_END, 
-    VW_BALLANS_AP.DIVISION_ID DIVISION_ID,
-    SUM(VW_BALLANS_AP.ACTIVE_OBOROT) over (PARTITION by null order by null) Total_Active_Oborot,
-    SUM(VW_BALLANS_AP.PASSIVE_OBOROT) over (PARTITION by null order by null) Total_Passive_Oborot
+    SUM(VW_BALLANS_AP.ACTIVE_START) ACTIVE_START,
+    SUM(VW_BALLANS_AP.ACTIVE_DEB) ACTIVE_DEB,
+    SUM(VW_BALLANS_AP.ACTIVE_KRED) ACTIVE_KRED,
+    SUM(VW_BALLANS_AP.ACTIVE_OBOROT) ACTIVE_OBOROT, 
+    SUM(VW_BALLANS_AP.ACTIVE_END) ACTIVE_END, 
+    SUM(VW_BALLANS_AP.PASSIVE_START) PASSIVE_START,
+    SUM(VW_BALLANS_AP.PASSIVE_DEB) PASSIVE_DEB,
+    SUM(VW_BALLANS_AP.PASSIVE_KRED) PASSIVE_KRED,
+    SUM(VW_BALLANS_AP.PASSIVE_OBOROT) PASSIVE_OBOROT, 
+    SUM(VW_BALLANS_AP.PASSIVE_END) PASSIVE_END
 FROM 
     table(cast(REPORT_PKG.GETBALLANS(:f_dat, :l_dat) as tbl_ballans)) VW_BALLANS_AP
-Where  UPPER(VW_BALLANS_AP.DIVISION_ID) LIKE UPPER((:div||'%'))]]></SQLQuery>
+GROUP BY VW_BALLANS_AP.ID,
+  VW_BALLANS_AP.CODE,
+  VW_BALLANS_AP.FULLNAME
+ORDER BY CODE]]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"
@@ -342,52 +311,6 @@ Where  UPPER(VW_BALLANS_AP.DIVISION_ID) LIKE UPPER((:div||'%'))]]></SQLQuery>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
-  <ViewAttribute
-    Name="DivisionId"
-    IsUpdateable="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Precision="50"
-    Type="java.lang.String"
-    ColumnType="VARCHAR2"
-    AliasName="DIVISION_ID"
-    Expression="DIVISION_ID"
-    SQLType="VARCHAR"
-    LOVName="LOV_DivisionId">
-    <DesignTime>
-      <Attr Name="_DisplaySize" Value="50"/>
-    </DesignTime>
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.VwBallansAp.DivisionId_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.VwBallansAp.DivisionId_TOOLTIP"/>
-        <CONTROLTYPE
-          Value="choice"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="TotalActiveOborot"
-    IsUpdateable="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Type="java.math.BigDecimal"
-    ColumnType="NUMBER"
-    AliasName="TOTAL_ACTIVE_OBOROT"
-    Expression="TOTAL_ACTIVE_OBOROT"
-    SQLType="NUMERIC"/>
-  <ViewAttribute
-    Name="TotalPassiveOborot"
-    IsUpdateable="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Type="java.math.BigDecimal"
-    ColumnType="NUMBER"
-    AliasName="TOTAL_PASSIVE_OBOROT"
-    Expression="TOTAL_PASSIVE_OBOROT"
-    SQLType="NUMERIC"/>
   <AttrArray Name="KeyAttributes">
     <Item Value="Id"/>
   </AttrArray>

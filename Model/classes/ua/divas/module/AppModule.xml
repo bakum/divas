@@ -728,9 +728,6 @@
     Name="VwBallansAp1"
     ViewObjectName="ua.divas.view.VwBallansAp"/>
   <ViewUsage
-    Name="VwBallansAp2"
-    ViewObjectName="ua.divas.view.VwBallansAp"/>
-  <ViewUsage
     Name="VwSales1"
     ViewObjectName="ua.divas.view.VwSales"/>
   <ViewUsage
@@ -1723,12 +1720,6 @@
     ViewLinkObjectName="ua.divas.view.OtherVwOtherMovesFkLink"
     SrcViewUsageName="ua.divas.module.AppModule.OtherZatratyView1"
     DstViewUsageName="ua.divas.module.AppModule.VwOtherMoves2"
-    Reversed="false"/>
-  <ViewLinkUsage
-    Name="VwBallansApDivisionFkLink1"
-    ViewLinkObjectName="ua.divas.view.VwBallansApDivisionFkLink"
-    SrcViewUsageName="ua.divas.module.AppModule.DivisionsView1"
-    DstViewUsageName="ua.divas.module.AppModule.VwBallansAp2"
     Reversed="false"/>
   <ViewLinkUsage
     Name="VwSalesDivisionFkLink1"

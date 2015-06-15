@@ -62,22 +62,6 @@ public class VwBallansApImpl extends DivasView {
         return null;
     }
 
-    /**
-     * Returns the bind variable value for div.
-     * @return bind variable value for div
-     */
-    public String getdiv() {
-        return retrieveDivisionId();
-        //return (String) getNamedWhereClauseParam("div");
-    }
-
-    /**
-     * Sets <code>value</code> for bind variable div.
-     * @param value value to bind as div
-     */
-    public void setdiv(String value) {
-        setNamedWhereClauseParam("div", value);
-    }
 
     /**
      * Returns the bind variable value for f_dat.

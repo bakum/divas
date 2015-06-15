@@ -339,7 +339,7 @@
                                                                                 label="#{bindings.KassaId.label}"
                                                                                 required="#{bindings.KassaId.hints.mandatory}"
                                                                                 shortDesc="#{bindings.KassaId.hints.tooltip}"
-                                                                                id="soc5" partialTriggers="divId curId">
+                                                                                id="soc5">
                                                                 <f:selectItems value="#{bindings.KassaId.items}"
                                                                                id="si7"/>
                                                                 <f:validator binding="#{bindings.KassaId.validator}"/>

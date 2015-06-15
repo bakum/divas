@@ -61,7 +61,6 @@ public class DivisionsViewRowImpl extends ViewRowImpl {
         DivisionSotrView,
         OrderZamerView,
         OtherZatratyView,
-        VwBallansAp,
         VwSales,
         VwZatraty,
         NachislSettingsView,
@@ -112,7 +111,6 @@ public class DivisionsViewRowImpl extends ViewRowImpl {
     public static final int DIVISIONSOTRVIEW = AttributesEnum.DivisionSotrView.index();
     public static final int ORDERZAMERVIEW = AttributesEnum.OrderZamerView.index();
     public static final int OTHERZATRATYVIEW = AttributesEnum.OtherZatratyView.index();
-    public static final int VWBALLANSAP = AttributesEnum.VwBallansAp.index();
     public static final int VWSALES = AttributesEnum.VwSales.index();
     public static final int VWZATRATY = AttributesEnum.VwZatraty.index();
     public static final int NACHISLSETTINGSVIEW = AttributesEnum.NachislSettingsView.index();
@@ -344,12 +342,6 @@ public class DivisionsViewRowImpl extends ViewRowImpl {
         return (RowIterator) getAttributeInternal(OTHERZATRATYVIEW);
     }
 
-    /**
-     * Gets the associated <code>RowIterator</code> using master-detail link VwBallansAp.
-     */
-    public RowIterator getVwBallansAp() {
-        return (RowIterator) getAttributeInternal(VWBALLANSAP);
-    }
 
     /**
      * Gets the associated <code>RowIterator</code> using master-detail link VwSales.

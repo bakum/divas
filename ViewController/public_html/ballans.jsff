@@ -24,11 +24,6 @@
                                 <af:convertDateTime pattern="#{bindings.l_dat.format}"/>
                             </af:inputDate>
                             <af:spacer width="10" height="10" id="s2"/>
-                            <af:selectOneChoice label="Подразделение" id="soc2" value="#{bindings.div1.inputValue}"
-                                                autoSubmit="true">
-                                <f:selectItems value="#{bindings.div1.items}" id="si2"/>
-                            </af:selectOneChoice>
-                            <af:spacer width="10" height="10" id="s1"/>
                             <af:button actionListener="#{bindings.ExecuteWithParams1.execute}" text="Обновить"
                                        disabled="#{!bindings.ExecuteWithParams1.enabled}" id="b3"/>
                         </af:panelGroupLayout>
@@ -153,17 +148,6 @@
                                                    id="ot15" inlineStyle="font-weight:bold;"/>
                                 </f:facet>
                             </af:column>
-                        </af:column>
-                        <af:column headerText="#{bindings.VwBallansAp1.hints.DivisionId.label}" id="c10"
-                                   visible="false">
-                            <af:selectOneChoice value="#{row.bindings.DivisionId.inputValue}"
-                                                label="#{row.bindings.DivisionId.label}"
-                                                required="#{bindings.VwBallansAp1.hints.DivisionId.mandatory}"
-                                                shortDesc="#{bindings.VwBallansAp1.hints.DivisionId.tooltip}"
-                                                readOnly="true" id="soc1">
-                                <f:selectItems value="#{row.bindings.DivisionId.items}" id="si1"/>
-                                <f:validator binding="#{row.bindings.DivisionId.validator}"/>
-                            </af:selectOneChoice>
                         </af:column>
                         <f:facet name="footer"/>
                     </af:table>

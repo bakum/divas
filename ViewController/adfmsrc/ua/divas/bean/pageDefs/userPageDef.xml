@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.2.66.68" id="userPageDef"
-                Package="ua.divas.bean.pageDefs">
+                Package="ua.divas.bean.pageDefs" SkipValidation="true">
   <parameters/>
   <executables>
     <iterator Binds="UsersView1" RangeSize="10" DataControl="AppModuleDataControl" id="UsersView1Iterator">
@@ -19,7 +19,7 @@
     <iterator id="GroupmembersView2Iterator" Binds="GroupmembersView2" DataControl="AppModuleDataControl"
               RangeSize="25"/>
     <iterator Binds="UserSettingsView8" RangeSize="25" DataControl="AppModuleDataControl"
-              id="UserSettingsView8Iterator"/>
+              id="UserSettingsView8Iterator" StateValidation="false"/>
     <iterator Binds="KassaVO1" RangeSize="-1" DataControl="AppModuleDataControl" id="KassaVO1Iterator"/>
     <iterator Binds="TypeOfActivitiesView1" RangeSize="25" DataControl="AppModuleDataControl"
               id="TypeOfActivitiesView1Iterator">

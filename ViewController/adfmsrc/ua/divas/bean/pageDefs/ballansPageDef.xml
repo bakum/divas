@@ -4,14 +4,12 @@
   <parameters/>
   <executables>
     <variableIterator id="variables">
-      <variable Name="p_div" Type="java.lang.String"/>
       <variableUsage DataControl="AppModuleDataControl" Binds="VwBallansAp1.variablesMap.f_dat"
                      Name="ExecuteWithParams1_f_dat" IsQueriable="false"/>
       <variableUsage DataControl="AppModuleDataControl" Binds="VwBallansAp1.variablesMap.l_dat"
                      Name="ExecuteWithParams1_l_dat" IsQueriable="false"/>
     </variableIterator>
     <iterator Binds="VwBallansAp1" RangeSize="25" DataControl="AppModuleDataControl" id="VwBallansAp1Iterator"/>
-    <iterator id="DivisionsView1_1Iterator" Binds="DivisionsView1_1" DataControl="AppModuleDataControl" RangeSize="-1"/>
   </executables>
   <bindings>
     <tree IterBinding="VwBallansAp1Iterator" id="VwBallansAp1">
@@ -26,9 +24,6 @@
           <Item Value="PassiveStart"/>
           <Item Value="PassiveOborot"/>
           <Item Value="PassiveEnd"/>
-          <Item Value="DivisionId"/>
-          <Item Value="TotalActiveOborot"/>
-          <Item Value="TotalPassiveOborot"/>
           <Item Value="ActiveDeb"/>
           <Item Value="ActiveKred"/>
           <Item Value="PassiveDeb"/>
@@ -36,20 +31,8 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <list StaticList="false" IterBinding="variables" ListIter="DivisionsView1_1Iterator" id="div1">
-      <AttrNames>
-        <Item Value="p_div"/>
-      </AttrNames>
-      <ListAttrNames>
-        <Item Value="Id"/>
-      </ListAttrNames>
-      <ListDisplayAttrNames>
-        <Item Value="Fullname"/>
-      </ListDisplayAttrNames>
-    </list>
     <action IterBinding="VwBallansAp1Iterator" id="ExecuteWithParams1" RequiresUpdateModel="true"
             Action="executeWithParams">
-      <NamedData NDName="div" NDValue="#{bindings.p_div}" NDType="java.lang.String"/>
       <NamedData NDName="f_dat" NDValue="${bindings.ExecuteWithParams1_f_dat}" NDType="oracle.jbo.domain.Date"/>
       <NamedData NDName="l_dat" NDValue="${bindings.ExecuteWithParams1_l_dat}" NDType="oracle.jbo.domain.Date"/>
     </action>

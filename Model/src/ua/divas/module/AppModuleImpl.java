@@ -3144,21 +3144,6 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         return (VwBallansApImpl) findViewObject("VwBallansAp1");
     }
 
-    /**
-     * Container's getter for VwBallansAp2.
-     * @return VwBallansAp2
-     */
-    public VwBallansApImpl getVwBallansAp2() {
-        return (VwBallansApImpl) findViewObject("VwBallansAp2");
-    }
-
-    /**
-     * Container's getter for VwBallansApDivisionFkLink1.
-     * @return VwBallansApDivisionFkLink1
-     */
-    public ViewLinkImpl getVwBallansApDivisionFkLink1() {
-        return (ViewLinkImpl) findViewLink("VwBallansApDivisionFkLink1");
-    }
 
     /**
      * Container's getter for VwSales1.
