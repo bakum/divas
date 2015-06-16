@@ -863,6 +863,12 @@
   <ViewUsage
     Name="VwStartOstMovesVO1"
     ViewObjectName="ua.divas.view.VwStartOstMovesVO"/>
+  <ViewUsage
+    Name="VwBallansApDetail1"
+    ViewObjectName="ua.divas.view.VwBallansApDetail"/>
+  <ViewUsage
+    Name="VwBallansApDetail2"
+    ViewObjectName="ua.divas.view.VwBallansApDetail"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -1858,6 +1864,12 @@
     ViewLinkObjectName="ua.divas.view.StartOstVwMovesFkLink"
     SrcViewUsageName="ua.divas.module.AppModule.StartOstView1"
     DstViewUsageName="ua.divas.module.AppModule.VwStartOstMovesVO1"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="VwBallansDetaiFkLink1"
+    ViewLinkObjectName="ua.divas.view.VwBallansDetaiFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.VwBallansAp1"
+    DstViewUsageName="ua.divas.module.AppModule.VwBallansApDetail1"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">

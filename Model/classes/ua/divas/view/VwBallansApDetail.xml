@@ -3,13 +3,13 @@
 <!---->
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
-  Name="VwBallansAp"
+  Name="VwBallansApDetail"
   Version="12.1.2.66.68"
   InheritPersonalization="merge"
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
-  ComponentClass="ua.divas.view.VwBallansApImpl">
+  ComponentClass="ua.divas.view.VwBallansApDetailImpl">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
@@ -17,7 +17,7 @@
   <Properties>
     <SchemaBasedProperties>
       <LABEL
-        ResId="ua.divas.view.VwBallansAp_LABEL"/>
+        ResId="ua.divas.view.VwBallansApDetail_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
   <Variable
@@ -35,31 +35,44 @@
   <ViewAccessor
     Name="DivisionsView1"
     ViewObjectName="ua.divas.view.DivisionsView"
-    RowLevelBinds="true">
-    <ViewCriteriaUsage
-      Name="DivisionsViewItems"
-      FullName="ua.divas.view.DivisionsView.DivisionsViewItems"/>
-  </ViewAccessor>
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_DivisionId"
+    ListVOName="DivisionsView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DivisionId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <SQLQuery><![CDATA[SELECT 
     VW_BALLANS_AP.ID ID, 
     VW_BALLANS_AP.CODE CODE, 
     VW_BALLANS_AP.FULLNAME FULLNAME, 
-    SUM(VW_BALLANS_AP.ACTIVE_START) ACTIVE_START,
-    SUM(VW_BALLANS_AP.ACTIVE_DEB) ACTIVE_DEB,
-    SUM(VW_BALLANS_AP.ACTIVE_KRED) ACTIVE_KRED,
-    SUM(VW_BALLANS_AP.ACTIVE_OBOROT) ACTIVE_OBOROT, 
-    SUM(VW_BALLANS_AP.ACTIVE_END) ACTIVE_END, 
-    SUM(VW_BALLANS_AP.PASSIVE_START) PASSIVE_START,
-    SUM(VW_BALLANS_AP.PASSIVE_DEB) PASSIVE_DEB,
-    SUM(VW_BALLANS_AP.PASSIVE_KRED) PASSIVE_KRED,
-    SUM(VW_BALLANS_AP.PASSIVE_OBOROT) PASSIVE_OBOROT, 
-    SUM(VW_BALLANS_AP.PASSIVE_END) PASSIVE_END
+    VW_BALLANS_AP.ACTIVE_START ACTIVE_START,
+    VW_BALLANS_AP.ACTIVE_DEB ACTIVE_DEB,
+    VW_BALLANS_AP.ACTIVE_KRED ACTIVE_KRED,
+    VW_BALLANS_AP.ACTIVE_OBOROT ACTIVE_OBOROT, 
+    VW_BALLANS_AP.ACTIVE_END ACTIVE_END, 
+    VW_BALLANS_AP.PASSIVE_START PASSIVE_START,
+    VW_BALLANS_AP.PASSIVE_DEB PASSIVE_DEB,
+    VW_BALLANS_AP.PASSIVE_KRED PASSIVE_KRED,
+    VW_BALLANS_AP.PASSIVE_OBOROT PASSIVE_OBOROT, 
+    VW_BALLANS_AP.PASSIVE_END PASSIVE_END, 
+    VW_BALLANS_AP.DIVISION_ID DIVISION_ID,
+    (select fullname from divisions where id = VW_BALLANS_AP.DIVISION_ID) Div_Name
 FROM 
-    table(cast(REPORT_PKG.GETBALLANS(:f_dat, :l_dat) as tbl_ballans)) VW_BALLANS_AP
-GROUP BY VW_BALLANS_AP.ID,
-  VW_BALLANS_AP.CODE,
-  VW_BALLANS_AP.FULLNAME
-ORDER BY CODE]]></SQLQuery>
+table(cast(REPORT_PKG.GETBALLANS(:f_dat, :l_dat) as tbl_ballans)) VW_BALLANS_AP]]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"
@@ -89,14 +102,6 @@ ORDER BY CODE]]></SQLQuery>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="6"/>
     </DesignTime>
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.VwBallansAp.Code_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.VwBallansAp.Code_TOOLTIP"/>
-      </SchemaBasedProperties>
-    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="Fullname"
@@ -112,14 +117,6 @@ ORDER BY CODE]]></SQLQuery>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="3000"/>
     </DesignTime>
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.VwBallansAp.Fullname_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.VwBallansAp.Fullname_TOOLTIP"/>
-      </SchemaBasedProperties>
-    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="ActiveStart"
@@ -130,16 +127,7 @@ ORDER BY CODE]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="ACTIVE_START"
     Expression="ACTIVE_START"
-    SQLType="NUMERIC">
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.VwBallansAp.ActiveStart_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.VwBallansAp.ActiveStart_TOOLTIP"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="ActiveDeb"
     IsUpdateable="false"
@@ -149,16 +137,7 @@ ORDER BY CODE]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="ACTIVE_DEB"
     Expression="ACTIVE_DEB"
-    SQLType="NUMERIC">
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.VwBallansAp.ActiveDeb_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.VwBallansAp.ActiveDeb_TOOLTIP"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="ActiveKred"
     IsUpdateable="false"
@@ -168,16 +147,7 @@ ORDER BY CODE]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="ACTIVE_KRED"
     Expression="ACTIVE_KRED"
-    SQLType="NUMERIC">
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.VwBallansAp.ActiveKred_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.VwBallansAp.ActiveKred_TOOLTIP"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="ActiveOborot"
     IsUpdateable="false"
@@ -187,16 +157,7 @@ ORDER BY CODE]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="ACTIVE_OBOROT"
     Expression="ACTIVE_OBOROT"
-    SQLType="NUMERIC">
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.VwBallansAp.ActiveOborot_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.VwBallansAp.ActiveOborot_TOOLTIP"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="ActiveEnd"
     IsUpdateable="false"
@@ -206,16 +167,7 @@ ORDER BY CODE]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="ACTIVE_END"
     Expression="ACTIVE_END"
-    SQLType="NUMERIC">
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.VwBallansAp.ActiveEnd_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.VwBallansAp.ActiveEnd_TOOLTIP"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="PassiveStart"
     IsUpdateable="false"
@@ -225,16 +177,7 @@ ORDER BY CODE]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="PASSIVE_START"
     Expression="PASSIVE_START"
-    SQLType="NUMERIC">
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.VwBallansAp.PassiveStart_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.VwBallansAp.PassiveStart_TOOLTIP"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="PassiveDeb"
     IsUpdateable="false"
@@ -244,16 +187,7 @@ ORDER BY CODE]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="PASSIVE_DEB"
     Expression="PASSIVE_DEB"
-    SQLType="NUMERIC">
-    <Properties>
-      <SchemaBasedProperties>
-        <TOOLTIP
-          ResId="ua.divas.view.VwBallansAp.PassiveDeb_TOOLTIP"/>
-        <LABEL
-          ResId="ua.divas.view.VwBallansAp.PassiveDeb_LABEL"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="PassiveKred"
     IsUpdateable="false"
@@ -263,16 +197,7 @@ ORDER BY CODE]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="PASSIVE_KRED"
     Expression="PASSIVE_KRED"
-    SQLType="NUMERIC">
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.VwBallansAp.PassiveKred_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.VwBallansAp.PassiveKred_TOOLTIP"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="PassiveOborot"
     IsUpdateable="false"
@@ -282,16 +207,7 @@ ORDER BY CODE]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="PASSIVE_OBOROT"
     Expression="PASSIVE_OBOROT"
-    SQLType="NUMERIC">
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.VwBallansAp.PassiveOborot_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.VwBallansAp.PassiveOborot_TOOLTIP"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="PassiveEnd"
     IsUpdateable="false"
@@ -301,24 +217,43 @@ ORDER BY CODE]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="PASSIVE_END"
     Expression="PASSIVE_END"
-    SQLType="NUMERIC">
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="DivisionId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DIVISION_ID"
+    Expression="DIVISION_ID"
+    SQLType="VARCHAR"
+    LOVName="LOV_DivisionId">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
     <Properties>
       <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.VwBallansAp.PassiveEnd_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.VwBallansAp.PassiveEnd_TOOLTIP"/>
+        <CONTROLTYPE
+          Value="choice"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="DivName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="Div_Name"
+    SQLType="VARCHAR"
+    Expression="Div_Name"/>
   <AttrArray Name="KeyAttributes">
-    <Item Value="Id"/>
+    <Item Value="DivisionId"/>
   </AttrArray>
-  <ViewLinkAccessor
-    Name="VwBallansApDetail"
-    ViewLink="ua.divas.view.VwBallansDetaiFkLink"
-    Type="oracle.jbo.RowIterator"
-    IsUpdateable="false"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

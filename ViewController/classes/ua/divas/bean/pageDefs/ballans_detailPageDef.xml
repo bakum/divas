@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.2.66.68" id="ballans_detailPageDef"
+                Package="ua.divas.bean.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="VwBallansAp1" RangeSize="25" DataControl="AppModuleDataControl" id="VwBallansAp1Iterator"/>
+    <iterator Binds="VwBallansApDetail1" RangeSize="10" DataControl="AppModuleDataControl"
+              id="VwBallansApDetail1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="VwBallansAp1Iterator" id="VwBallansAp1">
+      <nodeDefinition DefName="ua.divas.view.VwBallansAp" Name="VwBallansAp10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ActiveDeb"/>
+          <Item Value="ActiveEnd"/>
+          <Item Value="ActiveKred"/>
+          <Item Value="ActiveOborot"/>
+          <Item Value="ActiveStart"/>
+          <Item Value="Code"/>
+          <Item Value="Fullname"/>
+          <Item Value="PassiveDeb"/>
+          <Item Value="PassiveEnd"/>
+          <Item Value="PassiveKred"/>
+          <Item Value="PassiveOborot"/>
+          <Item Value="PassiveStart"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="VwBallansApDetail"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="ua.divas.view.VwBallansApDetail" Name="VwBallansAp11">
+        <AttrNames>
+          <Item Value="ActiveDeb"/>
+          <Item Value="ActiveEnd"/>
+          <Item Value="ActiveKred"/>
+          <Item Value="ActiveOborot"/>
+          <Item Value="ActiveStart"/>
+          <Item Value="DivisionId"/>
+          <Item Value="PassiveDeb"/>
+          <Item Value="PassiveEnd"/>
+          <Item Value="PassiveKred"/>
+          <Item Value="PassiveOborot"/>
+          <Item Value="PassiveStart"/>
+          <Item Value="DivName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -50,6 +50,7 @@ import ua.divas.view.StartOstTpViewImpl;
 import ua.divas.view.StartOstViewImpl;
 import ua.divas.view.UserSettingsViewImpl;
 import ua.divas.view.UsersViewImpl;
+import ua.divas.view.VwBallansApDetailImpl;
 import ua.divas.view.VwBallansApImpl;
 import ua.divas.view.VwBuyerMovesImpl;
 import ua.divas.view.VwKassaMovesImpl;
@@ -3740,6 +3741,30 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getStartOstVwMovesFkLink1() {
         return (ViewLinkImpl) findViewLink("StartOstVwMovesFkLink1");
+    }
+
+    /**
+     * Container's getter for VwBallansApDetail1.
+     * @return VwBallansApDetail1
+     */
+    public VwBallansApDetailImpl getVwBallansApDetail1() {
+        return (VwBallansApDetailImpl) findViewObject("VwBallansApDetail1");
+    }
+
+    /**
+     * Container's getter for VwBallansDetaiFkLink1.
+     * @return VwBallansDetaiFkLink1
+     */
+    public ViewLinkImpl getVwBallansDetaiFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwBallansDetaiFkLink1");
+    }
+
+    /**
+     * Container's getter for VwBallansApDetail2.
+     * @return VwBallansApDetail2
+     */
+    public VwBallansApDetailImpl getVwBallansApDetail2() {
+        return (VwBallansApDetailImpl) findViewObject("VwBallansApDetail2");
     }
 }
 

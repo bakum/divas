@@ -314,6 +314,11 @@ ORDER BY CODE]]></SQLQuery>
   <AttrArray Name="KeyAttributes">
     <Item Value="Id"/>
   </AttrArray>
+  <ViewLinkAccessor
+    Name="VwBallansApDetail"
+    ViewLink="ua.divas.view.VwBallansDetaiFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

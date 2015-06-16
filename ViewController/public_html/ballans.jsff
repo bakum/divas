@@ -8,6 +8,7 @@
                 <af:panelBox text="Баланс за период по подразделению" id="pb1" type="flow">
                     <f:facet name="toolbar">
                         <af:panelGroupLayout id="pgl4" layout="horizontal">
+                            <af:link text="Развернутый баланс" id="l1" action="to_detail"/>
                             <af:inputDate value="#{bindings.f_dat.inputValue}" label="От:"
                                           required="#{bindings.f_dat.hints.mandatory}"
                                           columns="#{bindings.f_dat.hints.displayWidth}"

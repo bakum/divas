@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelGridLayout id="pgl1">
+        <af:gridRow height="100%" id="gr1">
+            <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
+                <!-- Content -->
+                <af:panelBox text="Баланс за период" id="pb1" type="flow">
+                    <f:facet name="toolbar">
+                        <af:link text="Свернутый баланс" id="l1" action="to_main"/>
+                    </f:facet>
+                    <af:treeTable value="#{bindings.VwBallansAp1.treeModel}" var="node"
+                                  selectionListener="#{bindings.VwBallansAp1.treeModel.makeCurrent}"
+                                  rowSelection="single" id="tt1">
+                        <f:facet name="nodeStamp">
+                            <af:column id="c1" width="350" headerText="Наименование"
+                                       inlineStyle="#{node.bindings.DivisionId != null ? 'border-right-width:medium; border-right-color:#151515;background-color:#DCF0AB;' : 'border-right-width:medium; border-right-color:#151515;'}">
+                                <af:outputText value="#{node.Fullname}" id="ot1"/>
+                                <af:outputText value="#{node.bindings.DivName}" id="ot3"/>
+                                <f:facet name="footer">
+                                    <af:outputText value="Итого:" id="ot12"/>
+                                </f:facet>
+                            </af:column>
+                        </f:facet>
+                        <f:facet name="pathStamp">
+                            <af:outputText value="#{node}" id="ot2"/>
+                        </f:facet>
+                        <af:column id="c5" headerText="Актив" headerClass="MyHeaderBoldClass" align="center">
+                            <af:column id="c2" headerText="#{bindings.VwBallansAp1.hints.ActiveStart.label}"
+                                       headerClass="MyHeaderItalicClass" align="right"
+                                       inlineStyle="#{node.bindings.DivisionId != null ? 'background-color:#DCF0AB;' : ''}">
+                                <af:outputText value="#{node.ActiveStart}" id="ot4"
+                                               inlineStyle="#{node.ActiveStart &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}"/>
+                                <f:facet name="footer">
+                                    <af:outputText value="#{bindings.VwBallansAp1Iterator.viewObject.sum['ActiveStart']}" id="ot16"
+                                                   inlineStyle="font-weight:bold;"/>
+                                </f:facet>
+                            </af:column>
+                            <af:column id="c3" headerText="#{bindings.VwBallansAp1.hints.ActiveDeb.label}"
+                                       headerClass="MyHeaderItalicClass" align="right"
+                                       inlineStyle="#{node.bindings.DivisionId != null ? 'background-color:#DCF0AB;' : ''}">
+                                <af:outputText value="#{node.ActiveDeb}" id="ot5"
+                                               inlineStyle="#{node.ActiveDeb &lt; '0' ? 'color:Red;' : ''}"/>
+                            </af:column>
+                            <af:column id="c4" headerText="#{bindings.VwBallansAp1.hints.ActiveKred.label}"
+                                       headerClass="MyHeaderItalicClass" align="right"
+                                       inlineStyle="#{node.bindings.DivisionId != null ? 'background-color:#DCF0AB;' : ''}">
+                                <af:outputText value="#{node.ActiveKred}" id="ot6"
+                                               inlineStyle="#{node.ActiveKred &lt; '0' ? 'color:Red;' : ''}"/>
+                            </af:column>
+                            <af:column id="c6" headerText="#{bindings.VwBallansAp1.hints.ActiveEnd.label}"
+                                       headerClass="MyHeaderItalicClass"
+                                       inlineStyle="#{node.bindings.DivisionId != null ? 'border-right-width:medium; border-right-color:#151515;background-color:#DCF0AB;' : 'border-right-width:medium; border-right-color:#151515;'}"
+                                       align="right">
+                                <af:outputText value="#{node.ActiveEnd}" id="ot7"
+                                               inlineStyle="#{node.ActiveEnd &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}"/>
+                                <f:facet name="footer">
+                                    <af:outputText value="#{bindings.VwBallansAp1Iterator.viewObject.sum['ActiveEnd']}" id="ot13"
+                                                   inlineStyle="font-weight:bold;"/>
+                                </f:facet>
+                            </af:column>
+                            <f:facet name="footer"/>
+                        </af:column>
+                        <af:column id="c11" headerText="Пассив" align="center" headerClass="MyHeaderBoldClass">
+                            <af:column id="c7" headerText="#{bindings.VwBallansAp1.hints.PassiveStart.label}"
+                                       headerClass="MyHeaderItalicClass" align="right"
+                                       inlineStyle="#{node.bindings.DivisionId != null ? 'background-color:#DCF0AB;' : ''}">
+                                <af:outputText value="#{node.PassiveStart}" id="ot8"
+                                               inlineStyle="#{node.PassiveStart &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}"/>
+                                <f:facet name="footer">
+                                    <af:outputText id="ot15"
+                                                   value="#{bindings.VwBallansAp1Iterator.viewObject.sum['PassiveStart']}"
+                                                   inlineStyle="font-weight:bold;"/>
+                                </f:facet>
+                            </af:column>
+                            <af:column id="c8" headerText="#{bindings.VwBallansAp1.hints.PassiveDeb.label}"
+                                       headerClass="MyHeaderItalicClass" align="right"
+                                       inlineStyle="#{node.bindings.DivisionId != null ? 'background-color:#DCF0AB;' : ''}">
+                                <af:outputText value="#{node.PassiveDeb}" id="ot9"
+                                               inlineStyle="#{node.PassiveDeb &lt; '0' ? 'color:Red;' : ''}"/>
+                            </af:column>
+                            <af:column id="c9" headerText="#{bindings.VwBallansAp1.hints.PassiveKred.label}"
+                                       headerClass="MyHeaderItalicClass" align="right"
+                                       inlineStyle="#{node.bindings.DivisionId != null ? 'background-color:#DCF0AB;' : ''}">
+                                <af:outputText value="#{node.PassiveKred}" id="ot10"
+                                               inlineStyle="#{node.PassiveKred &lt; '0' ? 'color:Red;' : ''}"/>
+                            </af:column>
+                            <af:column id="c10" headerText="#{bindings.VwBallansAp1.hints.PassiveEnd.label}"
+                                       headerClass="MyHeaderItalicClass"
+                                       inlineStyle="#{node.bindings.DivisionId != null ? 'border-right-width:medium; border-right-color:#151515;background-color:#DCF0AB;' : 'border-right-width:medium; border-right-color:#151515;'}"
+                                       align="right">
+                                <af:outputText value="#{node.PassiveEnd}" id="ot11"
+                                               inlineStyle="#{node.PassiveEnd &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}"/>
+                                <f:facet name="footer">
+                                    <af:outputText value="#{bindings.VwBallansAp1Iterator.viewObject.sum['PassiveEnd']}" id="ot14"
+                                                   inlineStyle="font-weight:bold;"/>
+                                </f:facet>
+                            </af:column>
+                        </af:column>
+                        <f:facet name="footer"/>
+                    </af:treeTable>
+                </af:panelBox>
+            </af:gridCell>
+        </af:gridRow>
+    </af:panelGridLayout>
+</ui:composition>
