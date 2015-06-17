@@ -2,6 +2,11 @@
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
   <task-flow-definition id="ballans-config">
     <default-activity>ballans</default-activity>
+    <managed-bean id="__5">
+      <managed-bean-name>ballans</managed-bean-name>
+      <managed-bean-class>ua.divas.bean.BallansBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
     <view id="ballans">
       <page>/ballans.jsff</page>
     </view>
