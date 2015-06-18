@@ -752,7 +752,8 @@ AS TABLE OF usertype;
 	"DESCRIPTION" VARCHAR2(500 BYTE), 
 	"VERSION" TIMESTAMP (6) DEFAULT systimestamp, 
 	"BASE_ID" VARCHAR2(50 CHAR), 
-	"SUMMA" NUMBER DEFAULT 0
+	"SUMMA" NUMBER DEFAULT 0, 
+	"IN_PROFIT" NUMBER(1,0) DEFAULT 0
    ) ;
 --------------------------------------------------------
 --  DDL for Table PKO
@@ -3265,6 +3266,8 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   ALTER TABLE "PAY_SETTINGS" MODIFY ("BASE_ID" NOT NULL ENABLE);
  
   ALTER TABLE "PAY_SETTINGS" MODIFY ("SUMMA" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PAY_SETTINGS" MODIFY ("IN_PROFIT" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table PKO
 --------------------------------------------------------
@@ -6121,6 +6124,7 @@ end other_entry;
   function getKoeffByLevel(p_order in varchar2, p_level number) return number;
   function getKoeffByLevelKontr(p_order in varchar2, p_level number) return number;
   procedure calc_money_by_kontr(p_order in varchar2);
+  procedure profit_money_by_kontr(p_order in varchar2, p_summ in number);
 
 END PAYCALC;
 
@@ -8904,7 +8908,9 @@ end other_entry;
   sett_rec user_settings%rowtype;
   BEGIN
     select o.* into order_rec from orders o where upper(o.id) = upper(p_order);
-    for i in (select * from nachisl_settings where base_id = (select b.id from base_of_nachisl b where b.name = 'ORDER' and rownum = 1)) loop
+    for i in (select * from nachisl_settings
+      where base_id = (select b.id from base_of_nachisl b where b.name = 'ORDER' and rownum = 1)
+      and pay_id in (select id from pay_settings where in_profit = 0)) loop
       for y in (select u.* from users u where upper(u.id) = upper(i.user_id)) loop
       select s.* into sett_rec from user_settings s where s.user_id = y.id and rownum = 1;
       p_counter:=p_counter+1;
@@ -8931,7 +8937,9 @@ end other_entry;
   sett_rec user_settings%rowtype;
   BEGIN
      select o.* into order_rec from orders o where upper(o.id) = upper(p_order);
-     for i in (select * from nachisl_settings where base_id = (select b.id from base_of_nachisl b where b.name = 'DIV' and rownum = 1)) loop
+     for i in (select * from nachisl_settings
+      where base_id = (select b.id from base_of_nachisl b where b.name = 'DIV' and rownum = 1)
+      and pay_id in (select id from pay_settings where in_profit = 0)) loop
       select s.* into sett_rec from user_settings s where s.user_id = i.user_id and rownum = 1;
       p_counter:=p_counter+1;
       if i.division_id = order_rec.division_id then
@@ -8950,7 +8958,9 @@ end other_entry;
   p_kontragname kontragents.fullname%type;
   BEGIN
      select o.* into order_rec from orders o where upper(o.id) = upper(p_order);
-     for i in (select * from kontrag_settings where base_id = (select b.id from base_of_nachisl b where b.name = 'DIV' and rownum = 1)) loop
+     for i in (select * from kontrag_settings
+      where base_id = (select b.id from base_of_nachisl b where b.name = 'DIV' and rownum = 1)
+      and pay_id in (select id from pay_settings where in_profit = 0)) loop
       p_counter:=p_counter+1;
       if i.division_id = order_rec.division_id then
         select fullname into p_kontragname from kontragents where id = i.kontrag_id;
@@ -8969,7 +8979,9 @@ end other_entry;
   sett_rec user_settings%rowtype;
   BEGIN
     select o.* into order_rec from orders o where upper(o.id) = upper(p_order);
-    for i in (select * from nachisl_settings where base_id = (select b.id from base_of_nachisl b where b.name = 'IERARHIA' and rownum = 1)) loop
+    for i in (select * from nachisl_settings 
+      where base_id = (select b.id from base_of_nachisl b where b.name = 'IERARHIA' and rownum = 1)
+      and pay_id in (select id from pay_settings where in_profit = 0)) loop
       select s.* into sett_rec from user_settings s where s.user_id = i.user_id and rownum = 1;
       for y in (select root, s.id from (select level root, id from divisions d
             where d.deleted = 0
@@ -8994,7 +9006,9 @@ end other_entry;
   --sett_rec user_settings%rowtype;
   BEGIN
     select o.* into order_rec from orders o where upper(o.id) = upper(p_order);
-    for i in (select * from kontrag_settings where base_id = (select b.id from base_of_nachisl b where b.name = 'IERARHIA' and rownum = 1)) loop
+    for i in (select * from kontrag_settings
+      where base_id = (select b.id from base_of_nachisl b where b.name = 'IERARHIA' and rownum = 1)
+      and pay_id in (select id from pay_settings where in_profit = 0)) loop
       --select s.* into sett_rec from user_settings s where s.user_id = i.user_id and rownum = 1;
       for y in (select root, s.id from (select level root, id from divisions d
             where d.deleted = 0
@@ -9108,7 +9122,7 @@ end other_entry;
   end if;
   --delete from ORDERS_TP_NACHISL where order_id = p_order and manual = 0;
   
-  for i in (select * from pay_settings) loop
+  for i in (select * from pay_settings where in_profit = 0) loop
     for y in (select u.id, 
           nvl((select s.kontrag_id from user_settings s where s.user_id = u.id and rownum = 1),
           (select s.zamerkontrag_id from user_settings s where s.user_id = u.id and rownum = 1)) kon_id 
@@ -9181,7 +9195,7 @@ end other_entry;
   end if;
   --delete from ORDERS_TP_NACHISL where order_id = p_order and manual = 0;
   
-  for i in (select * from pay_settings) loop
+  for i in (select * from pay_settings where in_profit = 0) loop
     for y in (select u.id
           from kontragents u where u.id in (select n.kontrag_id from kontrag_settings n where n.pay_id = i.id)) loop
       for x in (select * from kontrag_settings where kontrag_id = y.id and pay_id = i.id) loop
@@ -9228,6 +9242,64 @@ end other_entry;
   end loop;
   end calc_money_by_kontr;
 
+  procedure profit_money_by_kontr(p_order in varchar2, p_summ in number) as
+  nachisl_rec profit_distrib_tp%rowtype;
+  sum_to_profit number(10,2):=0;
+  ex_custom       EXCEPTION;
+  begin
+    if p_summ = 0 then return;
+    end if;
+    sum_to_profit:=p_summ;
+    
+    for i in (select * from pay_settings where in_profit = 1 and base_id in (select id from BASE_OF_CALC where name like 'ФиксированнойСуммой')) loop
+      for y in (select u.id
+          from kontragents u where u.id in (select n.kontrag_id from kontrag_settings n where n.pay_id = i.id)) loop
+        for x in (select * from kontrag_settings where kontrag_id = y.id and pay_id = i.id) loop
+          nachisl_rec.profit_id:= p_order;
+          nachisl_rec.dat_nach:=sysdate;
+          nachisl_rec.kontr_id:= x.kontrag_id;
+          nachisl_rec.pay_id:= i.id;
+          nachisl_rec.calc_id:= i.base_id;
+          nachisl_rec.percent:= i.stavka;
+          nachisl_rec.manual:= 0;
+          nachisl_rec.summ:= x.summa;
+          if nachisl_rec.summ > sum_to_profit then
+            RAISE ex_custom;
+          end if;
+          sum_to_profit:=sum_to_profit-nachisl_rec.summ;
+          
+          insert into profit_distrib_tp values nachisl_rec;
+        end loop;
+      end loop;  
+    end loop;
+    
+    if sum_to_profit <=0 then
+        RAISE ex_custom;
+    end if;
+    
+    for i in (select * from pay_settings where in_profit = 1 and base_id in (select id from BASE_OF_CALC where name like 'Процент')) loop
+      for y in (select u.id
+          from kontragents u where u.id in (select n.kontrag_id from kontrag_settings n where n.pay_id = i.id)) loop
+        for x in (select * from kontrag_settings where kontrag_id = y.id and pay_id = i.id) loop
+          nachisl_rec.profit_id:= p_order;
+          nachisl_rec.dat_nach:=sysdate;
+          nachisl_rec.kontr_id:= x.kontrag_id;
+          nachisl_rec.pay_id:= i.id;
+          nachisl_rec.calc_id:= i.base_id;
+          nachisl_rec.percent:= i.stavka;
+          nachisl_rec.manual:= 0;
+          nachisl_rec.summ:= (i.stavka/100)*sum_to_profit;
+          
+          insert into profit_distrib_tp values nachisl_rec;
+        end loop;
+      end loop;  
+    end loop;
+    
+    EXCEPTION
+    WHEN ex_custom THEN
+        RAISE_APPLICATION_ERROR(-20001,'Сумма начисления больше чем распределяемая!');
+  end profit_money_by_kontr;
+  
 END PAYCALC;
 
 /
@@ -9674,6 +9746,9 @@ END PRICES;
       return;
     end if ;
     profit_remove_plan_acc(p_id);
+    
+    delete from profit_distrib_tp where profit_id = p_id and manual = 0;
+    paycalc.profit_money_by_kontr(p_id, p_profit_rec.summ);
     
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from profit_distrib
       where id = p_id;

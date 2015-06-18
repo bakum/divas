@@ -38,6 +38,7 @@ public class PaySettingsImpl extends DivasEntityNoDelete {
         Version,
         BaseId,
         Summa,
+        InProfit,
         BaseOfCalc,
         NachislSettings,
         KontragSettings,
@@ -74,6 +75,7 @@ public class PaySettingsImpl extends DivasEntityNoDelete {
     public static final int VERSION = AttributesEnum.Version.index();
     public static final int BASEID = AttributesEnum.BaseId.index();
     public static final int SUMMA = AttributesEnum.Summa.index();
+    public static final int INPROFIT = AttributesEnum.InProfit.index();
     public static final int BASEOFCALC = AttributesEnum.BaseOfCalc.index();
     public static final int NACHISLSETTINGS = AttributesEnum.NachislSettings.index();
     public static final int KONTRAGSETTINGS = AttributesEnum.KontragSettings.index();
@@ -224,6 +226,22 @@ public class PaySettingsImpl extends DivasEntityNoDelete {
      */
     public void setSumma(BigDecimal value) {
         setAttributeInternal(SUMMA, value);
+    }
+
+    /**
+     * Gets the attribute value for InProfit, using the alias name InProfit.
+     * @return the value of InProfit
+     */
+    public Integer getInProfit() {
+        return (Integer) getAttributeInternal(INPROFIT);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for InProfit.
+     * @param value value to set the InProfit
+     */
+    public void setInProfit(Integer value) {
+        setAttributeInternal(INPROFIT, value);
     }
 
     /**

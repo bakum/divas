@@ -75,6 +75,12 @@
                                 <f:validator binding="#{row.bindings.Fullname.validator}"/>
                             </af:inputText>
                         </af:column>
+                        <af:column headerText="#{bindings.PaySettingsView1.hints.InProfit.label}" id="c9" align="right">
+                            <af:selectBooleanCheckbox value="#{row.bindings.InProfit.inputValue}"
+                                                      label="#{row.bindings.InProfit.label}"
+                                                      shortDesc="#{bindings.PaySettingsView1.hints.InProfit.tooltip}"
+                                                      id="sbc1"/>
+                        </af:column>
                         <af:column sortProperty="#{bindings.PaySettingsView1.hints.Stavka.name}" sortable="true"
                                    headerText="#{bindings.PaySettingsView1.hints.Stavka.label}" id="c4"
                                    inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">

@@ -144,7 +144,6 @@ FROM  PROFIT_DISTRIB ProfitDistrib]]></SQLQuery>
     AliasName="DAT"/>
   <ViewAttribute
     Name="Num"
-    IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Num"
     EntityUsage="ProfitDistrib"

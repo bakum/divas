@@ -17,6 +17,7 @@
           <Item Value="BaseId"/>
           <Item Value="Summa"/>
           <Item Value="Editable"/>
+          <Item Value="InProfit" Binds="InProfit"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -29,5 +30,14 @@
             Action="createInsertRow"/>
     <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
     <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <button IterBinding="PaySettingsView1Iterator" id="InProfit" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="InProfit"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="1"/>
+        <Item Value="0"/>
+      </ValueList>
+    </button>
   </bindings>
 </pageDefinition>

@@ -53,6 +53,7 @@ public class PaySettingsViewRowImpl extends ViewRowImpl {
         BaseId,
         Summa,
         Editable,
+        InProfit,
         NachislSettingsView,
         KontragSettingsView,
         ProfitDistribTpView,
@@ -91,6 +92,7 @@ public class PaySettingsViewRowImpl extends ViewRowImpl {
     public static final int BASEID = AttributesEnum.BaseId.index();
     public static final int SUMMA = AttributesEnum.Summa.index();
     public static final int EDITABLE = AttributesEnum.Editable.index();
+    public static final int INPROFIT = AttributesEnum.InProfit.index();
     public static final int NACHISLSETTINGSVIEW = AttributesEnum.NachislSettingsView.index();
     public static final int KONTRAGSETTINGSVIEW = AttributesEnum.KontragSettingsView.index();
     public static final int PROFITDISTRIBTPVIEW = AttributesEnum.ProfitDistribTpView.index();
@@ -252,6 +254,22 @@ public class PaySettingsViewRowImpl extends ViewRowImpl {
      */
     public void setEditable(BigDecimal value) {
         setAttributeInternal(EDITABLE, value);
+    }
+
+    /**
+     * Gets the attribute value for IN_PROFIT using the alias name InProfit.
+     * @return the IN_PROFIT
+     */
+    public Integer getInProfit() {
+        return (Integer) getAttributeInternal(INPROFIT);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for IN_PROFIT using the alias name InProfit.
+     * @param value value to set the IN_PROFIT
+     */
+    public void setInProfit(Integer value) {
+        setAttributeInternal(INPROFIT, value);
     }
 
     /**
