@@ -44,6 +44,7 @@ import ua.divas.view.OrdersViewImpl;
 import ua.divas.view.OtherZatratyViewImpl;
 import ua.divas.view.PaySettingsViewImpl;
 import ua.divas.view.PkoViewImpl;
+import ua.divas.view.ProfitDistribViewImpl;
 import ua.divas.view.ProrabViewImpl;
 import ua.divas.view.RkoViewImpl;
 import ua.divas.view.StartOstTpViewImpl;
@@ -3765,6 +3766,102 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public VwBallansApDetailImpl getVwBallansApDetail2() {
         return (VwBallansApDetailImpl) findViewObject("VwBallansApDetail2");
+    }
+
+    /**
+     * Container's getter for ProfitDistribView1.
+     * @return ProfitDistribView1
+     */
+    public ProfitDistribViewImpl getProfitDistribView1() {
+        return (ProfitDistribViewImpl) findViewObject("ProfitDistribView1");
+    }
+
+    /**
+     * Container's getter for ProfitDistribView2.
+     * @return ProfitDistribView2
+     */
+    public ProfitDistribViewImpl getProfitDistribView2() {
+        return (ProfitDistribViewImpl) findViewObject("ProfitDistribView2");
+    }
+
+    /**
+     * Container's getter for ProfitDistribFk1Link1.
+     * @return ProfitDistribFk1Link1
+     */
+    public ViewLinkImpl getProfitDistribFk1Link1() {
+        return (ViewLinkImpl) findViewLink("ProfitDistribFk1Link1");
+    }
+
+    /**
+     * Container's getter for ProfitDistribView3.
+     * @return ProfitDistribView3
+     */
+    public ProfitDistribViewImpl getProfitDistribView3() {
+        return (ProfitDistribViewImpl) findViewObject("ProfitDistribView3");
+    }
+
+    /**
+     * Container's getter for ProfitDistribFk3Link1.
+     * @return ProfitDistribFk3Link1
+     */
+    public ViewLinkImpl getProfitDistribFk3Link1() {
+        return (ViewLinkImpl) findViewLink("ProfitDistribFk3Link1");
+    }
+
+    /**
+     * Container's getter for ProfitDistribView4.
+     * @return ProfitDistribView4
+     */
+    public ProfitDistribViewImpl getProfitDistribView4() {
+        return (ProfitDistribViewImpl) findViewObject("ProfitDistribView4");
+    }
+
+    /**
+     * Container's getter for ProfitDistribFk4Link1.
+     * @return ProfitDistribFk4Link1
+     */
+    public ViewLinkImpl getProfitDistribFk4Link1() {
+        return (ViewLinkImpl) findViewLink("ProfitDistribFk4Link1");
+    }
+
+    /**
+     * Container's getter for ProfitDistribView5.
+     * @return ProfitDistribView5
+     */
+    public ProfitDistribViewImpl getProfitDistribView5() {
+        return (ProfitDistribViewImpl) findViewObject("ProfitDistribView5");
+    }
+
+    /**
+     * Container's getter for ProfitDistribFk2Link1.
+     * @return ProfitDistribFk2Link1
+     */
+    public ViewLinkImpl getProfitDistribFk2Link1() {
+        return (ViewLinkImpl) findViewLink("ProfitDistribFk2Link1");
+    }
+
+    /**
+     * Container's getter for ProfitDistribTpView1.
+     * @return ProfitDistribTpView1
+     */
+    public ViewObjectImpl getProfitDistribTpView1() {
+        return (ViewObjectImpl) findViewObject("ProfitDistribTpView1");
+    }
+
+    /**
+     * Container's getter for ProfitDistribTpView2.
+     * @return ProfitDistribTpView2
+     */
+    public ViewObjectImpl getProfitDistribTpView2() {
+        return (ViewObjectImpl) findViewObject("ProfitDistribTpView2");
+    }
+
+    /**
+     * Container's getter for ProfitDistribTpFk1Link1.
+     * @return ProfitDistribTpFk1Link1
+     */
+    public ViewLinkImpl getProfitDistribTpFk1Link1() {
+        return (ViewLinkImpl) findViewLink("ProfitDistribTpFk1Link1");
     }
 }
 

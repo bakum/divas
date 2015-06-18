@@ -110,6 +110,13 @@
     AssociationOtherEnd="ua.divas.model.StartOstFk4Assoc.TypeOfActivities"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="ProfitDistrib"
+    Association="ua.divas.model.ProfitDistribFk4Assoc"
+    AssociationEnd="ua.divas.model.ProfitDistribFk4Assoc.ProfitDistrib"
+    AssociationOtherEnd="ua.divas.model.ProfitDistribFk4Assoc.TypeOfActivities"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="TypeOfActivitiesPk"
     PrimaryKey="true">

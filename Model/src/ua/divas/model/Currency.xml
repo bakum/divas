@@ -285,6 +285,13 @@
     AssociationOtherEnd="ua.divas.model.StartOstFk3Assoc.Currency"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="ProfitDistrib"
+    Association="ua.divas.model.ProfitDistribFk3Assoc"
+    AssociationEnd="ua.divas.model.ProfitDistribFk3Assoc.ProfitDistrib"
+    AssociationOtherEnd="ua.divas.model.ProfitDistribFk3Assoc.Currency"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="CurrencyChk1">
     <DesignTime>

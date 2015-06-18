@@ -139,10 +139,15 @@ AS TABLE OF usertype;
 
    CREATE SEQUENCE  "PKO_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  CYCLE ;
 --------------------------------------------------------
+--  DDL for Sequence PROFIT_DISTRIB_NUM_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "PROFIT_DISTRIB_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  CYCLE ;
+--------------------------------------------------------
 --  DDL for Sequence PS_TXN_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 193051 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 196501 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence RKO_NUM_SEQ
 --------------------------------------------------------
@@ -808,6 +813,40 @@ AS TABLE OF usertype;
 	"TYPE_OF_OBJ" VARCHAR2(50 BYTE), 
 	"VERSION" TIMESTAMP (6) DEFAULT systimestamp, 
 	"FULLNAME" VARCHAR2(100 CHAR)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table PROFIT_DISTRIB
+--------------------------------------------------------
+
+  CREATE TABLE "PROFIT_DISTRIB" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"DAT" DATE DEFAULT sysdate, 
+	"NUM" VARCHAR2(50 CHAR), 
+	"DELETED" NUMBER(1,0) DEFAULT 0, 
+	"POSTED" NUMBER(1,0) DEFAULT 0, 
+	"DIVISION_ID" VARCHAR2(50 CHAR), 
+	"USER_ID" VARCHAR2(50 CHAR), 
+	"COMMENTS" VARCHAR2(255 CHAR), 
+	"VERSION" TIMESTAMP (6) DEFAULT systimestamp, 
+	"CURR_ID" VARCHAR2(50 CHAR), 
+	"ACTIVITIES_ID" VARCHAR2(50 CHAR), 
+	"SUMM" NUMBER(10,3)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table PROFIT_DISTRIB_TP
+--------------------------------------------------------
+
+  CREATE TABLE "PROFIT_DISTRIB_TP" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"PROFIT_ID" VARCHAR2(50 CHAR), 
+	"DAT_NACH" DATE DEFAULT sysdate, 
+	"KONTR_ID" VARCHAR2(50 CHAR), 
+	"SUMM" NUMBER(10,2), 
+	"DESCRIPTION" VARCHAR2(1000 CHAR), 
+	"CALC_ID" VARCHAR2(50 CHAR), 
+	"PERCENT" NUMBER(10,2), 
+	"PAY_ID" VARCHAR2(50 CHAR), 
+	"MANUAL" NUMBER(1,0)
    ) ;
 --------------------------------------------------------
 --  DDL for Table PROG_SETTINGS
@@ -2294,6 +2333,18 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   CREATE UNIQUE INDEX "PLAN_TYPE_SUBCONTO_UK1" ON "PLAN_TYPE_SUBCONTO" ("TYPE_OF_OBJ") 
   ;
 --------------------------------------------------------
+--  DDL for Index PROFIT_DISTRIB_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PROFIT_DISTRIB_PK" ON "PROFIT_DISTRIB" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PROFIT_DISTRIB_TP_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PROFIT_DISTRIB_TP_PK" ON "PROFIT_DISTRIB_TP" ("ID") 
+  ;
+--------------------------------------------------------
 --  DDL for Index PROG_SETTINGS_PK
 --------------------------------------------------------
 
@@ -3313,6 +3364,54 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
  
   ALTER TABLE "PLAN_TYPE_SUBCONTO" MODIFY ("VERSION" NOT NULL ENABLE);
 --------------------------------------------------------
+--  Constraints for Table PROFIT_DISTRIB
+--------------------------------------------------------
+
+  ALTER TABLE "PROFIT_DISTRIB" ADD CONSTRAINT "PROFIT_DISTRIB_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "PROFIT_DISTRIB" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PROFIT_DISTRIB" MODIFY ("DAT" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PROFIT_DISTRIB" MODIFY ("NUM" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PROFIT_DISTRIB" MODIFY ("DELETED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PROFIT_DISTRIB" MODIFY ("POSTED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PROFIT_DISTRIB" MODIFY ("DIVISION_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PROFIT_DISTRIB" MODIFY ("USER_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PROFIT_DISTRIB" MODIFY ("VERSION" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PROFIT_DISTRIB" MODIFY ("CURR_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PROFIT_DISTRIB" MODIFY ("ACTIVITIES_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PROFIT_DISTRIB" MODIFY ("SUMM" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table PROFIT_DISTRIB_TP
+--------------------------------------------------------
+
+  ALTER TABLE "PROFIT_DISTRIB_TP" ADD CONSTRAINT "PROFIT_DISTRIB_TP_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "PROFIT_DISTRIB_TP" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PROFIT_DISTRIB_TP" MODIFY ("PROFIT_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PROFIT_DISTRIB_TP" MODIFY ("DAT_NACH" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PROFIT_DISTRIB_TP" MODIFY ("KONTR_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PROFIT_DISTRIB_TP" MODIFY ("SUMM" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PROFIT_DISTRIB_TP" MODIFY ("CALC_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PROFIT_DISTRIB_TP" MODIFY ("PERCENT" NOT NULL ENABLE);
+ 
+  ALTER TABLE "PROFIT_DISTRIB_TP" MODIFY ("MANUAL" NOT NULL ENABLE);
+--------------------------------------------------------
 --  Constraints for Table PROG_SETTINGS
 --------------------------------------------------------
 
@@ -4101,6 +4200,36 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
 
   ALTER TABLE "PLAN_TYPE_SUBCONTO" ADD CONSTRAINT "PLAN_TYPE_SUBCONTO_TYPE_D_FK1" FOREIGN KEY ("TYPE_OF_OBJ")
 	  REFERENCES "TYPE_DEF" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table PROFIT_DISTRIB
+--------------------------------------------------------
+
+  ALTER TABLE "PROFIT_DISTRIB" ADD CONSTRAINT "PROFIT_DISTRIB_FK1" FOREIGN KEY ("DIVISION_ID")
+	  REFERENCES "DIVISIONS" ("ID") ENABLE;
+ 
+  ALTER TABLE "PROFIT_DISTRIB" ADD CONSTRAINT "PROFIT_DISTRIB_FK2" FOREIGN KEY ("USER_ID")
+	  REFERENCES "USERS" ("ID") ENABLE;
+ 
+  ALTER TABLE "PROFIT_DISTRIB" ADD CONSTRAINT "PROFIT_DISTRIB_FK3" FOREIGN KEY ("CURR_ID")
+	  REFERENCES "CURRENCY" ("ID") ENABLE;
+ 
+  ALTER TABLE "PROFIT_DISTRIB" ADD CONSTRAINT "PROFIT_DISTRIB_FK4" FOREIGN KEY ("ACTIVITIES_ID")
+	  REFERENCES "TYPE_OF_ACTIVITIES" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table PROFIT_DISTRIB_TP
+--------------------------------------------------------
+
+  ALTER TABLE "PROFIT_DISTRIB_TP" ADD CONSTRAINT "PROFIT_DISTRIB_TP_FK1" FOREIGN KEY ("PROFIT_ID")
+	  REFERENCES "PROFIT_DISTRIB" ("ID") ENABLE;
+ 
+  ALTER TABLE "PROFIT_DISTRIB_TP" ADD CONSTRAINT "PROFIT_DISTRIB_TP_FK2" FOREIGN KEY ("KONTR_ID")
+	  REFERENCES "KONTRAGENTS" ("ID") ENABLE;
+ 
+  ALTER TABLE "PROFIT_DISTRIB_TP" ADD CONSTRAINT "PROFIT_DISTRIB_TP_FK3" FOREIGN KEY ("CALC_ID")
+	  REFERENCES "BASE_OF_CALC" ("ID") ENABLE;
+ 
+  ALTER TABLE "PROFIT_DISTRIB_TP" ADD CONSTRAINT "PROFIT_DISTRIB_TP_FK4" FOREIGN KEY ("PAY_ID")
+	  REFERENCES "PAY_SETTINGS" ("ID") ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table QRTZ_BLOB_TRIGGERS
 --------------------------------------------------------
@@ -5174,6 +5303,56 @@ end;
 /
 ALTER TRIGGER "PLAN_TYPE_SUBCONTO_TRG" ENABLE;
 --------------------------------------------------------
+--  DDL for Trigger PROFIT_DISTRIB_TP_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "PROFIT_DISTRIB_TP_TRG" 
+  BEFORE INSERT OR UPDATE ON "PROFIT_DISTRIB_TP"
+  REFERENCING FOR EACH ROW
+begin  
+   if inserting then      
+      if :NEW."ID" is null then 
+         select utility.uuid() into :NEW."ID" from dual;
+      end if;
+  end if;
+end;
+/
+ALTER TRIGGER "PROFIT_DISTRIB_TP_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger PROFIT_DISTRIB_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "PROFIT_DISTRIB_TRG" 
+  BEFORE INSERT OR UPDATE ON "PROFIT_DISTRIB"
+  REFERENCING FOR EACH ROW
+  declare
+  l_rec type_def%rowtype;
+  l_num numerator.prefix%type;
+begin  
+   if inserting then
+      select * into l_rec from type_def where upper(table_name) = 'PROFIT_DISTRIB';
+      if l_rec.id is not null then
+          select prefix into l_num from numerator where typedef_id = l_rec.id;
+      end if;
+      
+      if :NEW."ID" is null then 
+         select utility.uuid() into :NEW."ID" from dual;
+      end if;
+      if :new."NUM" is null then
+          if l_num is null then
+            select PROFIT_DISTRIB_NUM_SEQ.nextval into :new."NUM" from dual;
+          else
+            select l_num||PROFIT_DISTRIB_NUM_SEQ.nextval into :new."NUM" from dual;
+          end if;  
+      end if;
+   end if;
+   if updating then
+      select systimestamp into :new."VERSION" from dual;
+   end if;
+end;
+/
+ALTER TRIGGER "PROFIT_DISTRIB_TRG" ENABLE;
+--------------------------------------------------------
 --  DDL for Trigger PROG_SETTINGS_TRG
 --------------------------------------------------------
 
@@ -5971,6 +6150,20 @@ end pko_entry;
  procedure importprice(p_dat in date);
 
 END PRICES;
+
+/
+--------------------------------------------------------
+--  DDL for Package PROFIT_ENTRY
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "PROFIT_ENTRY" AS 
+
+  procedure profit_move_plan_acc(p_id in varchar2);
+  procedure profit_remove_plan_acc(p_id in varchar2, p_del in number default 0);
+  procedure profit_move_all;
+  procedure profit_remove_all; 
+
+END PROFIT_ENTRY;
 
 /
 --------------------------------------------------------
@@ -9388,6 +9581,193 @@ END PRICES;
 
 /
 --------------------------------------------------------
+--  DDL for Package Body PROFIT_ENTRY
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "PROFIT_ENTRY" AS
+  
+  procedure set_subconto_profit(p_move_rec moves%rowtype) as
+    p_ret_rec moves%rowtype;
+    p_sub_count number(10);
+    p_counter number(10);
+    p_sub_name plan_type_subconto.fullname%type;
+    p_profit profit_distrib%rowtype;
+    p_plan_acc plan_acc%rowtype;
+    p_upr_val currency.id%type;
+  begin
+    select * into p_profit from profit_distrib where id = p_move_rec.registrator_id;
+    select id into p_upr_val from currency where predefined=1;
+  
+    for i in (select * from profit_distrib_tp where profit_id = p_profit.id) loop
+    p_ret_rec:=p_move_rec;
+    
+    --Субконто дебета
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_deb_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'ЦФО' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_deb:=p_profit.division_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_deb:=p_profit.division_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_deb:=p_profit.division_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  --Субконто кредита
+  select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id;
+  if p_sub_count > 0 then
+  p_counter:=0;
+    for x in (select * from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id) loop
+        p_counter:=p_counter+1;
+        select fullname into p_sub_name from plan_type_subconto where id = x.plan_type_subc;
+        if upper(p_sub_name) = 'КОНТРАГЕНТЫ' then
+        if p_counter = 1 then
+            p_ret_rec.subconto1_kred:=i.kontr_id;
+        end if; 
+        if p_counter = 2 then
+            p_ret_rec.subconto2_kred:=i.kontr_id;
+        end if;
+        if p_counter = 3 then
+            p_ret_rec.subconto3_kred:=i.kontr_id;
+        end if;
+        end if;
+    end loop;
+  end if;
+  
+  p_ret_rec.curr_deb := p_profit.curr_id;
+  p_ret_rec.summ_val_deb:=entry.sign_of_summ(p_ret_rec.plan_acc_deb_id, i.summ, 1);
+  
+  p_ret_rec.curr_kred := p_profit.curr_id;
+  p_ret_rec.summ_val_kredit:=entry.sign_of_summ(p_ret_rec.plan_acc_kred_id, i.summ, 0);
+  
+  p_ret_rec.summ_upr_deb:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_deb, p_upr_val, p_ret_rec.period, p_ret_rec.summ_val_deb);
+  p_ret_rec.summ_upr_kred:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_kred, p_upr_val, p_ret_rec.period,p_ret_rec.summ_val_kredit);
+  
+  p_ret_rec.version:=systimestamp;
+  insert into moves values p_ret_rec;
+  end loop;
+  
+  exception
+    when others then 
+    RAISE_APPLICATION_ERROR (-20001,'Error profit_distrib move for plan accounting! '||SQLERRM, TRUE) ;
+  end set_subconto_profit;
+  
+  procedure profit_move_plan_acc(p_id in varchar2) AS
+    p_profit_rec profit_distrib%rowtype;
+    p_move_rec moves%rowtype;
+    p_version varchar2(1000);
+    in_use exception;
+    p_counter number(10);
+    pragma exception_init(in_use, -54);
+  BEGIN
+    select * into p_profit_rec from profit_distrib where id = p_id for update nowait;
+    if utility.enable_edit(p_profit_rec.dat) = 0 then
+      return;
+    end if ;
+    profit_remove_plan_acc(p_id);
+    
+    select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from profit_distrib
+      where id = p_id;
+    
+    p_move_rec.period:=p_profit_rec.dat;
+    p_counter:=0;
+    
+    for i in (select * from entry_settings where typedef_id=(select id from type_def where upper(type_def.table_name)=upper('profit_distrib')) order by chain) loop
+        p_counter:=p_counter+1;
+        p_move_rec.registrator_type:=i.typedef_id;
+        p_move_rec.registrator_id:=p_id;
+        p_move_rec.plan_acc_deb_id:=i.plan_acc_deb_id;
+        p_move_rec.activities_id:=p_profit_rec.activities_id;
+        p_move_rec.division_id:=p_profit_rec.division_id;
+        
+        p_move_rec.plan_acc_kred_id:=i.plan_acc_kred_id;
+        p_move_rec.description:=i.description;
+        
+        --Распределение прибыли
+        if p_counter = 1 then 
+          set_subconto_profit(p_move_rec); 
+        end if;
+    end loop;
+    
+    p_profit_rec.posted:=1;
+    update profit_distrib set row = p_profit_rec
+    where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF'); 
+    
+    exception
+        WHEN IN_USE THEN
+        RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error profit_distrib move for plan accounting! '||SQLERRM, TRUE) ;
+  END profit_move_plan_acc;
+
+  procedure profit_remove_plan_acc(p_id in varchar2, p_del in number default 0) AS
+    p_profit_rec profit_distrib%rowtype;
+    p_move_count number;
+    p_version varchar2(1000);
+    in_use exception;
+    pragma exception_init(in_use, -54);
+  BEGIN
+    select * into p_profit_rec from profit_distrib where id = p_id for update nowait;
+    if utility.enable_edit(p_profit_rec.dat) = 0 then
+      return;
+    end if ;
+    select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from profit_distrib
+      where id = p_id;
+    select count(*) into p_move_count from moves where registrator_id = p_id;
+    if p_move_count > 0 then
+      execute immediate ('select * from moves where registrator_id='''||p_id||''' for update nowait');  
+      delete from moves where registrator_id = p_id;
+    end if; 
+    
+    if p_del <> 0 then
+      p_profit_rec.deleted:=1;
+    end if;
+    p_profit_rec.posted:=0;
+    update profit_distrib set row = p_profit_rec
+      where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF');
+      
+    exception
+        WHEN IN_USE THEN
+        RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
+        when others then 
+        raise_application_error (-20001,'Error profit_distrib move for plan accounting! '||sqlerrm, true) ;
+  END profit_remove_plan_acc;
+
+  procedure profit_move_all AS
+  BEGIN
+    for i in (select * from profit_distrib) loop
+    profit_move_plan_acc(i.id);
+    end loop;
+    
+    exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error profit_distrib move  all for plan accounting! '||SQLERRM, TRUE) ;
+  END profit_move_all;
+
+  procedure profit_remove_all AS
+  BEGIN
+    for i in (select * from profit_distrib) loop
+    profit_remove_plan_acc(i.id);
+    end loop;
+    
+    exception
+        when others then 
+        RAISE_APPLICATION_ERROR (-20001,'Error profit_distrib remove all for plan accounting! '||SQLERRM, TRUE) ;
+  END profit_remove_all;
+
+END PROFIT_ENTRY;
+
+/
+--------------------------------------------------------
 --  DDL for Package Body P_ENCRYPT
 --------------------------------------------------------
 
@@ -10283,7 +10663,11 @@ end usr_sett;
     insert into numerator(typedef_id,prefix)
         values((select id from type_def where upper(table_name)=upper('pko')),'OR-');
     insert into numerator(typedef_id,prefix)
-        values((select id from type_def where upper(table_name)=upper('rko')),'OR-');    
+        values((select id from type_def where upper(table_name)=upper('rko')),'OR-'); 
+    insert into numerator(typedef_id,prefix)
+        values((select id from type_def where upper(table_name)=upper('start_ost')),'OR-');
+    insert into numerator(typedef_id,prefix)
+        values((select id from type_def where upper(table_name)=upper('profit_distrib')),'OR-');    
     
     --Справочник единиц измерений
     insert into measure_unit(fullname,code) 
@@ -10556,7 +10940,14 @@ end usr_sett;
         values((select id from type_def where upper(type_def.table_name)=upper('RKO')),
                (select id from plan_acc where code = '2081'),
                (select id from plan_acc where code = '2081'),4,
-               'РКО - Перемещение между кассами');           
+               'РКО - Перемещение между кассами');
+    
+    --Проводки для PROFIT_DISTRIB (распределение прибыли)
+    insert into entry_settings(typedef_id,plan_acc_deb_id,plan_acc_kred_id,chain,description)
+        values((select id from type_def where upper(type_def.table_name)=upper('PROFIT_DISTRIB')),
+               (select id from plan_acc where code = '900'),
+               (select id from plan_acc where code = '5091'),1,
+               'PROFIT - Распределение прибыли');            
       
     
     EXCEPTION

@@ -161,8 +161,20 @@ where deleted = 0]]></SQLQuery>
     ViewLink="ua.divas.view.StartOstFk3Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="ProfitDistribView"
+    ViewLink="ua.divas.view.ProfitDistribFk3Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ClientInterface
     Name="__clientInterface">
+    <Method
+      Name="doCurrencyExchange"
+      MethodName="doCurrencyExchange">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+    </Method>
     <Method
       Name="doCurrencyExchange"
       MethodName="doCurrencyExchange">

@@ -66,6 +66,7 @@ public class DivisionsViewRowImpl extends ViewRowImpl {
         NachislSettingsView,
         KontragSettingsView,
         StartOstView,
+        ProfitDistribView,
         DivisionsView1,
         UsersView1;
         static AttributesEnum[] vals = null;
@@ -116,6 +117,7 @@ public class DivisionsViewRowImpl extends ViewRowImpl {
     public static final int NACHISLSETTINGSVIEW = AttributesEnum.NachislSettingsView.index();
     public static final int KONTRAGSETTINGSVIEW = AttributesEnum.KontragSettingsView.index();
     public static final int STARTOSTVIEW = AttributesEnum.StartOstView.index();
+    public static final int PROFITDISTRIBVIEW = AttributesEnum.ProfitDistribView.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
 
@@ -376,6 +378,13 @@ public class DivisionsViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getStartOstView() {
         return (RowIterator) getAttributeInternal(STARTOSTVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link ProfitDistribView.
+     */
+    public RowIterator getProfitDistribView() {
+        return (RowIterator) getAttributeInternal(PROFITDISTRIBVIEW);
     }
 
     /**

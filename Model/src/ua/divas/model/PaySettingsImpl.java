@@ -40,7 +40,8 @@ public class PaySettingsImpl extends DivasEntityNoDelete {
         Summa,
         BaseOfCalc,
         NachislSettings,
-        KontragSettings;
+        KontragSettings,
+        ProfitDistribTp;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -76,6 +77,7 @@ public class PaySettingsImpl extends DivasEntityNoDelete {
     public static final int BASEOFCALC = AttributesEnum.BaseOfCalc.index();
     public static final int NACHISLSETTINGS = AttributesEnum.NachislSettings.index();
     public static final int KONTRAGSETTINGS = AttributesEnum.KontragSettings.index();
+    public static final int PROFITDISTRIBTP = AttributesEnum.ProfitDistribTp.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -251,6 +253,14 @@ public class PaySettingsImpl extends DivasEntityNoDelete {
      */
     public RowIterator getKontragSettings() {
         return (RowIterator) getAttributeInternal(KONTRAGSETTINGS);
+    }
+
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getProfitDistribTp() {
+        return (RowIterator) getAttributeInternal(PROFITDISTRIBTP);
     }
 
 

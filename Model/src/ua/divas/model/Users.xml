@@ -333,6 +333,13 @@
     AssociationOtherEnd="ua.divas.model.StartOstFk2Assoc.Users"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="ProfitDistrib"
+    Association="ua.divas.model.ProfitDistribFk2Assoc"
+    AssociationEnd="ua.divas.model.ProfitDistribFk2Assoc.ProfitDistrib"
+    AssociationOtherEnd="ua.divas.model.ProfitDistribFk2Assoc.Users"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="UsersPk"
     PrimaryKey="true">

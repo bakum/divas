@@ -266,6 +266,13 @@
     AssociationOtherEnd="ua.divas.model.StartOstFk1Assoc.Divisions"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="ProfitDistrib"
+    Association="ua.divas.model.ProfitDistribFk1Assoc"
+    AssociationEnd="ua.divas.model.ProfitDistribFk1Assoc.ProfitDistrib"
+    AssociationOtherEnd="ua.divas.model.ProfitDistribFk1Assoc.Divisions"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="DivisionsPk"
     PrimaryKey="true">

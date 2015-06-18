@@ -869,6 +869,27 @@
   <ViewUsage
     Name="VwBallansApDetail2"
     ViewObjectName="ua.divas.view.VwBallansApDetail"/>
+  <ViewUsage
+    Name="ProfitDistribView1"
+    ViewObjectName="ua.divas.view.ProfitDistribView"/>
+  <ViewUsage
+    Name="ProfitDistribView2"
+    ViewObjectName="ua.divas.view.ProfitDistribView"/>
+  <ViewUsage
+    Name="ProfitDistribView3"
+    ViewObjectName="ua.divas.view.ProfitDistribView"/>
+  <ViewUsage
+    Name="ProfitDistribView4"
+    ViewObjectName="ua.divas.view.ProfitDistribView"/>
+  <ViewUsage
+    Name="ProfitDistribView5"
+    ViewObjectName="ua.divas.view.ProfitDistribView"/>
+  <ViewUsage
+    Name="ProfitDistribTpView1"
+    ViewObjectName="ua.divas.view.ProfitDistribTpView"/>
+  <ViewUsage
+    Name="ProfitDistribTpView2"
+    ViewObjectName="ua.divas.view.ProfitDistribTpView"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -1870,6 +1891,36 @@
     ViewLinkObjectName="ua.divas.view.VwBallansDetaiFkLink"
     SrcViewUsageName="ua.divas.module.AppModule.VwBallansAp1"
     DstViewUsageName="ua.divas.module.AppModule.VwBallansApDetail1"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="ProfitDistribFk1Link1"
+    ViewLinkObjectName="ua.divas.view.ProfitDistribFk1Link"
+    SrcViewUsageName="ua.divas.module.AppModule.DivisionsView1"
+    DstViewUsageName="ua.divas.module.AppModule.ProfitDistribView2"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="ProfitDistribFk3Link1"
+    ViewLinkObjectName="ua.divas.view.ProfitDistribFk3Link"
+    SrcViewUsageName="ua.divas.module.AppModule.CurrencyView1"
+    DstViewUsageName="ua.divas.module.AppModule.ProfitDistribView3"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="ProfitDistribFk4Link1"
+    ViewLinkObjectName="ua.divas.view.ProfitDistribFk4Link"
+    SrcViewUsageName="ua.divas.module.AppModule.TypeOfActivitiesView1"
+    DstViewUsageName="ua.divas.module.AppModule.ProfitDistribView4"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="ProfitDistribFk2Link1"
+    ViewLinkObjectName="ua.divas.view.ProfitDistribFk2Link"
+    SrcViewUsageName="ua.divas.module.AppModule.UsersView1"
+    DstViewUsageName="ua.divas.module.AppModule.ProfitDistribView5"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="ProfitDistribTpFk1Link1"
+    ViewLinkObjectName="ua.divas.view.ProfitDistribTpFk1Link"
+    SrcViewUsageName="ua.divas.module.AppModule.ProfitDistribView1"
+    DstViewUsageName="ua.divas.module.AppModule.ProfitDistribTpView2"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">

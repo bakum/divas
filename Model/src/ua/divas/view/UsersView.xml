@@ -203,6 +203,11 @@ upper(Users.ID) in (select upper(N) from table(cast(get_users(:u_name) as userTa
     ViewLink="ua.divas.view.StartOstFk2Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="ProfitDistribView"
+    ViewLink="ua.divas.view.ProfitDistribFk2Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ClientInterface
     Name="__clientInterface">
     <Method

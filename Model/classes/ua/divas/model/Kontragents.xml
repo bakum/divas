@@ -457,6 +457,13 @@
     AssociationOtherEnd="ua.divas.model.KontragSettingsFk1Assoc.Kontragents"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="ProfitDistribTp"
+    Association="ua.divas.model.ProfitDistribTpFk2Assoc"
+    AssociationEnd="ua.divas.model.ProfitDistribTpFk2Assoc.ProfitDistribTp"
+    AssociationOtherEnd="ua.divas.model.ProfitDistribTpFk2Assoc.Kontragents"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="KontragentsIdCheck">
     <DesignTime>

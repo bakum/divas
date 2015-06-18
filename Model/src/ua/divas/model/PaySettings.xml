@@ -176,6 +176,13 @@
     AssociationOtherEnd="ua.divas.model.KontragSettingsFk2Assoc.PaySettings"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="ProfitDistribTp"
+    Association="ua.divas.model.ProfitDistribTpFk4Assoc"
+    AssociationEnd="ua.divas.model.ProfitDistribTpFk4Assoc.ProfitDistribTp"
+    AssociationOtherEnd="ua.divas.model.ProfitDistribTpFk4Assoc.PaySettings"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="PaySettingsPk"
     PrimaryKey="true">

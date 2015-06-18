@@ -64,6 +64,13 @@
     AssociationOtherEnd="ua.divas.model.PaySettingsFk1Assoc.BaseOfCalc"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="ProfitDistribTp"
+    Association="ua.divas.model.ProfitDistribTpFk3Assoc"
+    AssociationEnd="ua.divas.model.ProfitDistribTpFk3Assoc.ProfitDistribTp"
+    AssociationOtherEnd="ua.divas.model.ProfitDistribTpFk3Assoc.BaseOfCalc"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="BaseOfCalcPk"
     PrimaryKey="true">

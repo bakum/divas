@@ -346,6 +346,11 @@ order by Divisions.IS_GROUP DESC]]></SQLQuery>
     ViewLink="ua.divas.view.StartOstFk1Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="ProfitDistribView"
+    ViewLink="ua.divas.view.ProfitDistribFk1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ClientInterface
     Name="__clientInterface">
     <Method

@@ -61,7 +61,8 @@ public class KontragentsImpl extends DivasEntity {
         OrdersTpNachislenia,
         OrdersTpOplaty,
         CallLog,
-        KontragSettings;
+        KontragSettings,
+        ProfitDistribTp;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -116,6 +117,7 @@ public class KontragentsImpl extends DivasEntity {
     public static final int ORDERSTPOPLATY = AttributesEnum.OrdersTpOplaty.index();
     public static final int CALLLOG = AttributesEnum.CallLog.index();
     public static final int KONTRAGSETTINGS = AttributesEnum.KontragSettings.index();
+    public static final int PROFITDISTRIBTP = AttributesEnum.ProfitDistribTp.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -498,6 +500,13 @@ public class KontragentsImpl extends DivasEntity {
      */
     public RowIterator getKontragSettings() {
         return (RowIterator) getAttributeInternal(KONTRAGSETTINGS);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getProfitDistribTp() {
+        return (RowIterator) getAttributeInternal(PROFITDISTRIBTP);
     }
 
     /**
