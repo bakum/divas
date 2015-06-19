@@ -890,6 +890,9 @@
   <ViewUsage
     Name="ProfitDistribTpView2"
     ViewObjectName="ua.divas.view.ProfitDistribTpView"/>
+  <ViewUsage
+    Name="VwProfitMoveVO1"
+    ViewObjectName="ua.divas.view.VwProfitMoveVO"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -1921,6 +1924,12 @@
     ViewLinkObjectName="ua.divas.view.ProfitDistribTpFk1Link"
     SrcViewUsageName="ua.divas.module.AppModule.ProfitDistribView1"
     DstViewUsageName="ua.divas.module.AppModule.ProfitDistribTpView2"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="ProfitMoveFkLink1"
+    ViewLinkObjectName="ua.divas.view.ProfitMoveFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.ProfitDistribView1"
+    DstViewUsageName="ua.divas.module.AppModule.VwProfitMoveVO1"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">

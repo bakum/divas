@@ -66,13 +66,17 @@
         WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('start_ost')
             THEN 'Нач. остатки №'||(select num from start_ost where id = MOVE_KONTRAG.REGISTRATOR_ID)||' от '||to_char(
             (select dat from start_ost where id = MOVE_KONTRAG.REGISTRATOR_ID),'DD-MM-YYYY')              
+        WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('PROFIT_DISTRIB')
+            THEN 'Распред. прибыли №'||(select num from profit_distrib where id = MOVE_KONTRAG.REGISTRATOR_ID)||' от '||to_char(
+            (select dat from profit_distrib where id = MOVE_KONTRAG.REGISTRATOR_ID),'DD-MM-YYYY')                  
     END AS REG_STRING  
 FROM MOVE_KONTRAG
 INNER JOIN KONTRAGENTS
 ON MOVE_KONTRAG.KONTRAG_ID    = KONTRAGENTS.ID
 WHERE KONTRAGENTS.IS_MEASURER = 1
 and
-upper(MOVE_KONTRAG.DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))]]></SQLQuery>
+upper(MOVE_KONTRAG.DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))
+ORDER BY PERIOD DESC]]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"

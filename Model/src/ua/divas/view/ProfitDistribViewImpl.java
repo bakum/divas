@@ -1,5 +1,7 @@
 package ua.divas.view;
 
+import java.math.BigDecimal;
+
 import oracle.jbo.Row;
 import oracle.jbo.Variable;
 import oracle.jbo.common.VariableImpl;
@@ -20,15 +22,33 @@ public class ProfitDistribViewImpl extends DivasView implements ProfitDistribVie
      */
     public ProfitDistribViewImpl() {
     }
-    
+
     public void addEntry(String _id) {
         callStoredProcedure("PROFIT_ENTRY.profit_move_plan_acc(?)", new Object[] { _id });
     }
-    
+
     public void removeEntry(String _id) {
         callStoredProcedure("PROFIT_ENTRY.profit_remove_plan_acc(?)", new Object[] { _id });
     }
-    
+
+    private ViewRowSetImpl getProfitRowSet() {
+        ViewObjectImpl vo = (ViewObjectImpl) this.getRootApplicationModule().findViewObject("VwBallansAp1");
+        ViewRowSetImpl rs =
+            (ViewRowSetImpl) vo.findByViewCriteria(vo.getViewCriteria("VwBallansApProfitCriteria"), -1,
+                                                   vo.QUERY_MODE_SCAN_DATABASE_TABLES);
+        return rs;
+    }
+
+    public BigDecimal getProfit() {
+        ViewRowSetImpl rs = this.getProfitRowSet();
+        Row row = rs.first();
+        if (row != null) {
+            BigDecimal rv = (BigDecimal) row.getAttribute("PassiveEnd");
+            return rv;
+        }
+        return null;
+    }
+
     private ViewRowSetImpl getSettingsRowSet() {
         VariableImpl z = new VariableImpl();
         z.setName("UserKey");
@@ -39,7 +59,7 @@ public class ProfitDistribViewImpl extends DivasView implements ProfitDistribVie
                                                                this.getSessionUserId() });
         return rs;
     }
-    
+
     public String retrieveCurrencyId() {
         ViewRowSetImpl rs = this.getSettingsRowSet();
         Row row = rs.first();
@@ -49,7 +69,7 @@ public class ProfitDistribViewImpl extends DivasView implements ProfitDistribVie
         }
         return null;
     }
-    
+
     public String retrieveDivisionId() {
         ViewRowSetImpl rs = this.getSettingsRowSet();
         Row row = rs.first();
@@ -59,7 +79,7 @@ public class ProfitDistribViewImpl extends DivasView implements ProfitDistribVie
         }
         return null;
     }
-    
+
     public String retrieveActivitiesId() {
         ViewRowSetImpl rs = this.getSettingsRowSet();
         Row row = rs.first();

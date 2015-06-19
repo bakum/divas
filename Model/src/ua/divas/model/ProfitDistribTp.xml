@@ -158,7 +158,8 @@
     SQLType="NUMERIC"
     Type="java.math.BigDecimal"
     ColumnType="NUMBER"
-    TableName="PROFIT_DISTRIB_TP">
+    TableName="PROFIT_DISTRIB_TP"
+    DefaultValue="0">
     <Properties>
       <SchemaBasedProperties>
         <LABEL

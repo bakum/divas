@@ -22,14 +22,14 @@ import ua.divas.classes.DivasEntity;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class ProfitDistribImpl extends DivasEntity {
-    
+
     @Override
     protected void doDML(int i, TransactionEvent transactionEvent) {
         super.doDML(i, transactionEvent);
         String _id = this.getId();
         callStoredProcedure("PROFIT_ENTRY.profit_move_plan_acc(?)", new Object[] { _id });
     }
-    
+
     @Override
     protected void callDeleted() {
         this.setDeleted(1);
@@ -39,6 +39,7 @@ public class ProfitDistribImpl extends DivasEntity {
     protected void callId() {
         this.setId(UUID.randomUUID().toString());
     }
+
     /**
      * AttributesEnum: generated enum for identifying attributes and accessors. DO NOT MODIFY.
      */
@@ -82,6 +83,8 @@ public class ProfitDistribImpl extends DivasEntity {
             return vals;
         }
     }
+
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int DAT = AttributesEnum.Dat.index();
     public static final int NUM = AttributesEnum.Num.index();
@@ -105,6 +108,14 @@ public class ProfitDistribImpl extends DivasEntity {
      */
     public ProfitDistribImpl() {
     }
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("ua.divas.model.ProfitDistrib");
+    }
+
 
     /**
      * Gets the attribute value for Id, using the alias name Id.
@@ -371,10 +382,16 @@ public class ProfitDistribImpl extends DivasEntity {
     }
 
     /**
-     * @return the definition object for this instance class.
+     * Validation method for ProfitDistrib.
      */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("ua.divas.model.ProfitDistrib");
+    public boolean validateProfitDistrib() {
+        BigDecimal summa = this.getSumm();
+        if (summa.intValue() <= 0) {
+            return false;
+        }
+        return true;
     }
+
+
 }
 

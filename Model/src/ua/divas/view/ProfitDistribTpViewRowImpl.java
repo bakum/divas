@@ -17,8 +17,10 @@ import ua.divas.model.ProfitDistribTpImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class ProfitDistribTpViewRowImpl extends ViewRowImpl {
+
+
     public static final int ENTITY_PROFITDISTRIBTP = 0;
-    
+
     @Override
     public boolean isAttributeUpdateable(int i) {
         BigDecimal editable = this.getTpEditable();
@@ -56,7 +58,8 @@ public class ProfitDistribTpViewRowImpl extends ViewRowImpl {
         KontragOtherView1,
         BaseOfCalcView1,
         PaySettingsView1;
-        private static AttributesEnum[] vals = null;
+        static AttributesEnum[] vals = null;
+        ;
         private static final int firstIndex = 0;
 
         public int index() {
@@ -78,6 +81,8 @@ public class ProfitDistribTpViewRowImpl extends ViewRowImpl {
             return vals;
         }
     }
+
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int PROFITID = AttributesEnum.ProfitId.index();
     public static final int DATNACH = AttributesEnum.DatNach.index();
@@ -179,6 +184,14 @@ public class ProfitDistribTpViewRowImpl extends ViewRowImpl {
      */
     public String getKontname() {
         return (String) getAttributeInternal(KONTNAME);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for the calculated attribute Kontname.
+     * @param value value to set the  Kontname
+     */
+    public void setKontname(String value) {
+        setAttributeInternal(KONTNAME, value);
     }
 
     /**

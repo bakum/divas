@@ -244,7 +244,8 @@ FROM  PROFIT_DISTRIB ProfitDistrib]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Summ"
     EntityUsage="ProfitDistrib"
-    AliasName="SUMM"/>
+    AliasName="SUMM"
+    DefaultValue="0"/>
   <ViewAttribute
     Name="Editable"
     IsPersistent="false"
@@ -269,6 +270,11 @@ FROM  PROFIT_DISTRIB ProfitDistrib]]></SQLQuery>
     ViewLink="ua.divas.view.ProfitDistribTpFk1Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="VwProfitMoveVO"
+    ViewLink="ua.divas.view.ProfitMoveFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ClientInterface
     Name="__clientInterface">
     <Method
@@ -290,6 +296,13 @@ FROM  PROFIT_DISTRIB ProfitDistrib]]></SQLQuery>
       <Parameter
         Name="_id"
         Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="getProfit"
+      MethodName="getProfit">
+      <Return
+        Name="_return_type_"
+        Type="java.math.BigDecimal"/>
     </Method>
   </ClientInterface>
 </ViewObject>

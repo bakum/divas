@@ -111,6 +111,11 @@
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/start_ost-config.xml#start_ost-config']}">
                                                 <af:region value="#{bindings.start_ostconfig1.regionModel}" id="r22"/>
                                             </af:showDetailItem>
+                                            <af:showDetailItem text="Распределение прибыли" id="sdi26"
+                                                               stretchChildren="first"
+                                                               rendered="#{securityContext.taskflowViewable['/WEB-INF/profit-config.xml#profit-config']}">
+                                                <af:region value="#{bindings.profitconfig1.regionModel}" id="r23"/>
+                                            </af:showDetailItem>
                                             <af:showDetailItem text="Прорабы" id="sdi22" stretchChildren="first"
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/prorab-config.xml#prorab-config']}">
                                                 <af:region value="#{bindings.prorabconfig1.regionModel}" id="r19"/>

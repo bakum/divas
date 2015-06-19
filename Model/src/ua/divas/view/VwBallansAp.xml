@@ -311,6 +311,42 @@ ORDER BY CODE]]></SQLQuery>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewCriteria
+    Name="VwBallansApProfitCriteria"
+    ViewObjectName="ua.divas.view.VwBallansAp"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="VwBallansApCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Code"
+        ViewAttribute="Code"
+        Operator="="
+        Conjunction="AND"
+        Value="900"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <AttrArray Name="KeyAttributes">
     <Item Value="Id"/>
   </AttrArray>

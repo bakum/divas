@@ -1,5 +1,7 @@
 package ua.divas.view.client;
 
+import java.math.BigDecimal;
+
 import oracle.jbo.client.remote.ViewUsageImpl;
 
 import ua.divas.view.common.ProfitDistribView;
@@ -16,10 +18,16 @@ public class ProfitDistribViewClient extends ViewUsageImpl implements ProfitDist
     public ProfitDistribViewClient() {
     }
 
+
     public void addEntry(String _id) {
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "addEntry", new String[] {
                                                                          "java.lang.String" }, new Object[] { _id });
         return;
+    }
+
+    public BigDecimal getProfit() {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "getProfit", null, null);
+        return (BigDecimal) _ret;
     }
 
     public void removeEntry(String _id) {

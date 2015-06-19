@@ -9,10 +9,13 @@
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
-  RowClass="ua.divas.view.ProfitDistribTpViewRowImpl">
+  RowClass="ua.divas.view.ProfitDistribTpViewRowImpl"
+  ComponentClass="ua.divas.view.ProfitDistribTpViewImpl"
+  ComponentInterface="ua.divas.view.common.ProfitDistribTpView"
+  ClientProxyName="ua.divas.view.client.ProfitDistribTpViewClient">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
-    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
   <ViewAccessor
@@ -145,7 +148,6 @@ FROM  PROFIT_DISTRIB_TP ProfitDistribTp]]></SQLQuery>
   </ViewAttribute>
   <ViewAttribute
     Name="Kontname"
-    IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
     Precision="150"
@@ -241,6 +243,10 @@ FROM  PROFIT_DISTRIB_TP ProfitDistribTp]]></SQLQuery>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="100"/>
     </DesignTime>
+    <Dependencies>
+      <Item
+        Value="PayId"/>
+    </Dependencies>
   </ViewAttribute>
   <ViewAttribute
     Name="Manual"
@@ -250,6 +256,39 @@ FROM  PROFIT_DISTRIB_TP ProfitDistribTp]]></SQLQuery>
     EntityUsage="ProfitDistribTp"
     AliasName="MANUAL"
     DefaultValue="1"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="retrieveCalcId"
+      MethodName="retrieveCalcId">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="retrieveStavka"
+      MethodName="retrieveStavka">
+      <Return
+        Name="_return_type_"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="pId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="retrieveSumma"
+      MethodName="retrieveSumma">
+      <Return
+        Name="_return_type_"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="pId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

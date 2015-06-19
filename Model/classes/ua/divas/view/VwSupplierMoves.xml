@@ -111,6 +111,9 @@ FROM
        WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('start_ost')
             THEN 'Нач. остатки №'||(select num from start_ost where id = MOVE_KONTRAG.REGISTRATOR_ID)||' от '||to_char(
             (select dat from start_ost where id = MOVE_KONTRAG.REGISTRATOR_ID),'DD-MM-YYYY')          
+       WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('PROFIT_DISTRIB')
+            THEN 'Распред. прибыли №'||(select num from profit_distrib where id = MOVE_KONTRAG.REGISTRATOR_ID)||' от '||to_char(
+            (select dat from profit_distrib where id = MOVE_KONTRAG.REGISTRATOR_ID),'DD-MM-YYYY')                       
     END AS REG_STRING
   FROM MOVE_KONTRAG
   INNER JOIN KONTRAGENTS
@@ -127,7 +130,8 @@ GROUP BY KONTRAG_ID,
   CODE,
   REGISTRATOR_ID,
   PERIOD,
-  REG_STRING]]></SQLQuery>
+  REG_STRING
+ORDER BY PERIOD DESC]]></SQLQuery>
   <ViewAttribute
     Name="KontragId"
     IsUpdateable="false"

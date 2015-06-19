@@ -25,6 +25,9 @@
                         <af:column id="c3" width="200" headerText="Регистратор">
                             <af:outputText value="#{node.bindings.RegString}" id="ot4"/>
                         </af:column>
+                        <af:column id="c7" headerText="Период">
+                            <af:outputText value="#{node.bindings.PeriodName}" id="ot11"/>
+                        </af:column>
                         <af:column id="c4" headerText="Приход">
                             <af:outputText value="#{node.TotalPrihod}" id="ot8" inlineStyle="font-weight:bold;"/>
                             <af:outputText value="#{node.bindings.SummPrihod}" id="ot6"/>

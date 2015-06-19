@@ -55,6 +55,10 @@
     <page path="/start_ost.jsff" usageId="ua_divas_bean_start_ostPageDef"/>
     <page path="/editstart.jsf" usageId="ua_divas_bean_editstartPageDef"/>
     <page path="/ballans_detail.jsff" usageId="ua_divas_bean_ballans_detailPageDef"/>
+    <page path="/WEB-INF/newProfit.xml#newProfit@CreateInsert"
+          usageId="ua_divas_bean_newProfit_newProfit_CreateInsertPageDef"/>
+    <page path="/editProfit.jsf" usageId="ua_divas_bean_editProfitPageDef"/>
+    <page path="/profit.jsff" usageId="ua_divas_bean_profitPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="ua_divas_view_indexPageDef" path="ua.divas.bean.pageDefs.indexPageDef"/>
@@ -104,6 +108,10 @@
     <page id="ua_divas_bean_start_ostPageDef" path="ua.divas.bean.pageDefs.start_ostPageDef"/>
     <page id="ua_divas_bean_editstartPageDef" path="ua.divas.bean.pageDefs.editstartPageDef"/>
     <page id="ua_divas_bean_ballans_detailPageDef" path="ua.divas.bean.pageDefs.ballans_detailPageDef"/>
+    <page id="ua_divas_bean_newProfit_newProfit_CreateInsertPageDef"
+          path="ua.divas.bean.pageDefs.newProfit_newProfit_CreateInsertPageDef"/>
+    <page id="ua_divas_bean_editProfitPageDef" path="ua.divas.bean.pageDefs.editProfitPageDef"/>
+    <page id="ua_divas_bean_profitPageDef" path="ua.divas.bean.pageDefs.profitPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <dc id="DataPackage" path="ua.divas.bean.DataPackage"/>

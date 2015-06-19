@@ -44,6 +44,7 @@ import ua.divas.view.OrdersViewImpl;
 import ua.divas.view.OtherZatratyViewImpl;
 import ua.divas.view.PaySettingsViewImpl;
 import ua.divas.view.PkoViewImpl;
+import ua.divas.view.ProfitDistribTpViewImpl;
 import ua.divas.view.ProfitDistribViewImpl;
 import ua.divas.view.ProrabViewImpl;
 import ua.divas.view.RkoViewImpl;
@@ -3844,16 +3845,16 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for ProfitDistribTpView1.
      * @return ProfitDistribTpView1
      */
-    public ViewObjectImpl getProfitDistribTpView1() {
-        return (ViewObjectImpl) findViewObject("ProfitDistribTpView1");
+    public ProfitDistribTpViewImpl getProfitDistribTpView1() {
+        return (ProfitDistribTpViewImpl) findViewObject("ProfitDistribTpView1");
     }
 
     /**
      * Container's getter for ProfitDistribTpView2.
      * @return ProfitDistribTpView2
      */
-    public ViewObjectImpl getProfitDistribTpView2() {
-        return (ViewObjectImpl) findViewObject("ProfitDistribTpView2");
+    public ProfitDistribTpViewImpl getProfitDistribTpView2() {
+        return (ProfitDistribTpViewImpl) findViewObject("ProfitDistribTpView2");
     }
 
     /**
@@ -3862,6 +3863,22 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getProfitDistribTpFk1Link1() {
         return (ViewLinkImpl) findViewLink("ProfitDistribTpFk1Link1");
+    }
+
+    /**
+     * Container's getter for VwProfitMoveVO1.
+     * @return VwProfitMoveVO1
+     */
+    public ViewObjectImpl getVwProfitMoveVO1() {
+        return (ViewObjectImpl) findViewObject("VwProfitMoveVO1");
+    }
+
+    /**
+     * Container's getter for ProfitMoveFkLink1.
+     * @return ProfitMoveFkLink1
+     */
+    public ViewLinkImpl getProfitMoveFkLink1() {
+        return (ViewLinkImpl) findViewLink("ProfitMoveFkLink1");
     }
 }
 

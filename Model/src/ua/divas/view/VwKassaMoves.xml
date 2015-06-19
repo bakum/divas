@@ -94,7 +94,8 @@
       WHEN MOVE_KASSA.SUMM < 0 THEN -1 * MOVE_KASSA.SUMM 
     END AS summ_rashod, 
     MOVE_KASSA.REGISTRATOR_ID REGISTRATOR_ID, 
-    MOVE_KASSA.PERIOD PERIOD, 
+    MOVE_KASSA.PERIOD PERIOD,
+    to_char(MOVE_KASSA.PERIOD,'DD-MM-YYYY') PERIOD_NAME,
     MOVE_KASSA.TABLE_NAME TABLE_NAME,
     CASE
         WHEN upper(MOVE_KASSA.TABLE_NAME) LIKE upper('orders')
@@ -116,7 +117,8 @@
 FROM 
     MOVE_KASSA
 where
-upper(MOVE_KASSA.DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))]]></SQLQuery>
+upper(MOVE_KASSA.DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))
+ORDER BY PERIOD DESC]]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"
@@ -292,8 +294,27 @@ upper(MOVE_KASSA.DIVISION_ID) in (select upper(N) from table(cast(get_divisions(
           ResId="ua.divas.view.VwKassaMoves.Period_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.view.VwKassaMoves.Period_TOOLTIP"/>
+        <FMT_FORMATTER
+          ResId="ua.divas.view.VwKassaMoves.Period_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="ua.divas.view.VwKassaMoves.Period_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PeriodName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PERIOD_NAME"
+    Expression="PERIOD_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
   </ViewAttribute>
   <ViewAttribute
     Name="TableName"

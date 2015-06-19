@@ -10,7 +10,8 @@
   DBObjectName="PROFIT_DISTRIB"
   AliasName="ProfitDistrib"
   BindingStyle="OracleName"
-  RowClass="ua.divas.model.ProfitDistribImpl">
+  RowClass="ua.divas.model.ProfitDistribImpl"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Access"/>
     <Attr Name="_isCodegen" Value="true"/>
@@ -72,6 +73,8 @@
           ResId="ua.divas.model.ProfitDistrib.Num_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.model.ProfitDistrib.Num_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="20"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -174,6 +177,8 @@
           ResId="ua.divas.model.ProfitDistrib.Comments_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.model.ProfitDistrib.Comments_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="40"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -343,6 +348,10 @@
       <Item Value="ua.divas.model.ProfitDistrib.ActivitiesId"/>
     </AttrArray>
   </Key>
+  <validation:MethodValidationBean
+    Name="ProfitDistribRule0"
+    ResId="ua.divas.model.ProfitDistrib_Rule_0"
+    MethodName="validateProfitDistrib"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

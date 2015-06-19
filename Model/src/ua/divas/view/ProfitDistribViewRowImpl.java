@@ -18,8 +18,9 @@ import ua.divas.model.ProfitDistribImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class ProfitDistribViewRowImpl extends ViewRowImpl {
+
     public static final int ENTITY_PROFITDISTRIB = 0;
-    
+
     @Override
     public boolean isAttributeUpdateable(int i) {
         BigDecimal editable = this.getEditable();
@@ -56,11 +57,13 @@ public class ProfitDistribViewRowImpl extends ViewRowImpl {
         Editable,
         Enbl,
         ProfitDistribTpView,
+        VwProfitMoveVO,
         DivisionsView1,
         UsersView1,
         CurrencyView1,
         TypeOfActivitiesView1;
-        private static AttributesEnum[] vals = null;
+        static AttributesEnum[] vals = null;
+        ;
         private static final int firstIndex = 0;
 
         public int index() {
@@ -82,6 +85,7 @@ public class ProfitDistribViewRowImpl extends ViewRowImpl {
             return vals;
         }
     }
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int DAT = AttributesEnum.Dat.index();
     public static final int NUM = AttributesEnum.Num.index();
@@ -97,6 +101,7 @@ public class ProfitDistribViewRowImpl extends ViewRowImpl {
     public static final int EDITABLE = AttributesEnum.Editable.index();
     public static final int ENBL = AttributesEnum.Enbl.index();
     public static final int PROFITDISTRIBTPVIEW = AttributesEnum.ProfitDistribTpView.index();
+    public static final int VWPROFITMOVEVO = AttributesEnum.VwProfitMoveVO.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
     public static final int CURRENCYVIEW1 = AttributesEnum.CurrencyView1.index();
@@ -337,6 +342,13 @@ public class ProfitDistribViewRowImpl extends ViewRowImpl {
      */
     public RowIterator getProfitDistribTpView() {
         return (RowIterator) getAttributeInternal(PROFITDISTRIBTPVIEW);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link VwProfitMoveVO.
+     */
+    public RowIterator getVwProfitMoveVO() {
+        return (RowIterator) getAttributeInternal(VWPROFITMOVEVO);
     }
 
     /**
