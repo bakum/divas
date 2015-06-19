@@ -147,7 +147,7 @@ AS TABLE OF usertype;
 --  DDL for Sequence PS_TXN_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 196501 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 198801 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence RKO_NUM_SEQ
 --------------------------------------------------------
@@ -1724,6 +1724,25 @@ LEFT JOIN KONTRAGENTS
 ON VW_MOVES.SUBCONTO1_KRED = KONTRAGENTS.ID
 WHERE VW_MOVES.DEB         = '2081' and
 UPPER(VW_MOVES.TABLE_NAME) = UPPER('PKO');
+--------------------------------------------------------
+--  DDL for View VW_MOVE_PROFIT
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "VW_MOVE_PROFIT" ("REGISTRATOR_ID", "DEB", "SUM_DEB", "KRED", "SUM_KRED", "SUBCONTO_DEB1", "SUBCONTO_KRED1") AS 
+  SELECT VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.DEB,
+  VW_MOVES.SUM_DEB,
+  VW_MOVES.KRED,
+  VW_MOVES.SUM_KRED,
+  DIVISIONS.FULLNAME       AS Subconto_Deb1,
+  KONTRAGENTS.FULLNAME AS Subconto_kred1
+FROM VW_MOVES
+LEFT JOIN DIVISIONS
+ON VW_MOVES.SUBCONTO1_DEB = DIVISIONS.ID
+LEFT JOIN KONTRAGENTS
+ON VW_MOVES.SUBCONTO1_KRED = KONTRAGENTS.ID
+WHERE VW_MOVES.DEB         = '900' and
+UPPER(VW_MOVES.TABLE_NAME) = UPPER('PROFIT_DISTRIB');
 --------------------------------------------------------
 --  DDL for View VW_MOVE_RKO
 --------------------------------------------------------
