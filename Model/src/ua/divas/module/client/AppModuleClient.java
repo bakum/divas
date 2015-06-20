@@ -38,6 +38,12 @@ public class AppModuleClient extends ApplicationModuleImpl implements AppModule 
         return;
     }
 
+    public void addProfitDistrib(BigDecimal Summa) {
+        Object _ret = this.riInvokeExportedMethod(this, "addProfitDistrib", new String[] { "java.math.BigDecimal" }, new Object[] {
+                                                  Summa });
+        return;
+    }
+
     public void deleteChildren(RowIterator ri, Key selectedNodeKey) {
         Object _ret = this.riInvokeExportedMethod(this, "deleteChildren", new String[] {
                                                   "oracle.jbo.RowIterator", "oracle.jbo.Key" }, new Object[] {

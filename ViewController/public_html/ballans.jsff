@@ -46,7 +46,8 @@
                             <af:outputText value="#{row.Code}" shortDesc="#{bindings.VwBallansAp1.hints.Code.tooltip}"
                                            id="ot2"/>
                         </af:column>
-                        <af:column headerText="#{bindings.VwBallansAp1.hints.Fullname.label}" id="c3" width="350">
+                        <af:column headerText="#{bindings.VwBallansAp1.hints.Fullname.label}" id="c3" width="350"
+                                   inlineStyle="border-right-width:medium; border-right-color:#151515;">
                             <af:outputText value="#{row.Fullname}"
                                            shortDesc="#{bindings.VwBallansAp1.hints.Fullname.tooltip}" id="ot3"/>
                             <f:facet name="footer">
@@ -138,10 +139,12 @@
                             </af:column>
                             <af:column headerText="#{bindings.VwBallansAp1.hints.PassiveEnd.label}" id="c9"
                                        align="right" headerClass="MyHeaderItalicClass"
-                                       inlineStyle="#{row.Code == '600' or row.Code == '900' ? 'background-color: #B2CA7E;' : ''}">
+                                       inlineStyle="#{row.Code == '600' or row.Code == '900' ? 'border-right-width:medium; border-right-color:#151515;background-color: #B2CA7E;' : 'border-right-width:medium; border-right-color:#151515;'}"
+                                       width="120">
                                 <af:outputText value="#{row.PassiveEnd}"
                                                shortDesc="#{bindings.VwBallansAp1.hints.PassiveEnd.tooltip}" id="ot9"
-                                               inlineStyle="#{row.PassiveEnd &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}">
+                                               inlineStyle="#{row.PassiveEnd &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}"
+                                               rendered="#{row.PassiveEnd &lt;=0 ? true : row.Code == '900' ? false : true}">
                                     <af:convertNumber groupingUsed="false"
                                                       pattern="#{bindings.VwBallansAp1.hints.PassiveEnd.format}"/>
                                 </af:outputText>
@@ -149,6 +152,13 @@
                                     <af:outputText value="#{bindings.VwBallansAp1Iterator.viewObject.sum['PassiveEnd']}"
                                                    id="ot15" inlineStyle="font-weight:bold;"/>
                                 </f:facet>
+                                <af:panelGroupLayout id="pgl2" layout="horizontal" halign="right">
+                                    <af:toolbar id="t2"
+                                                rendered="#{row.PassiveEnd &lt;= 0 ? false : row.Code == '900' ? true : false}">
+                                        <af:button text="#{row.PassiveEnd}" id="b1" icon="/img/coins.png"
+                                                   shortDesc="Распределить сумму" inlineStyle="font-weight:bold;"/>
+                                    </af:toolbar>
+                                </af:panelGroupLayout>
                             </af:column>
                         </af:column>
                         <f:facet name="footer"/>

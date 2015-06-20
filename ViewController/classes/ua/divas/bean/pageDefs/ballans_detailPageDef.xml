@@ -13,6 +13,7 @@
                      Name="ExecuteWithParams1_f_dat" IsQueriable="false"/>
       <variableUsage DataControl="AppModuleDataControl" Binds="VwBallansApDetail1.variablesMap.l_dat"
                      Name="ExecuteWithParams1_l_dat" IsQueriable="false"/>
+      <variable Type="java.math.BigDecimal" Name="addProfitDistrib_Summa" IsQueriable="false"/>
     </variableIterator>
     <iterator Binds="VwBallansApDetail1" RangeSize="25" DataControl="AppModuleDataControl"
               id="VwBallansApDetail1Iterator"/>
@@ -86,5 +87,19 @@
         <Item Value="ExecuteWithParams1_l_dat"/>
       </AttrNames>
     </attributeValues>
+    <methodAction id="addProfitDistrib" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addProfitDistrib"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="Summa" NDType="java.math.BigDecimal" NDValue="${bindings.addProfitDistrib_Summa}"/>
+    </methodAction>
+    <attributeValues IterBinding="variables" id="Summa">
+      <AttrNames>
+        <Item Value="addProfitDistrib_Summa"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="getProfit" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getProfit"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.ProfitDistribView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.getProfit_AppModuleDataControl_ProfitDistribView1_getProfit_result"/>
   </bindings>
 </pageDefinition>

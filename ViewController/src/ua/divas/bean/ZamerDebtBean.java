@@ -1,5 +1,11 @@
 package ua.divas.bean;
 
+import javax.el.ELContext;
+import javax.el.ExpressionFactory;
+import javax.el.ValueExpression;
+
+import javax.faces.application.Application;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import oracle.adf.model.BindingContext;
@@ -41,6 +47,16 @@ public class ZamerDebtBean {
     public void refresh() {
         AdfFacesContext.getCurrentInstance().addPartialTarget(getTreeTable());
     }
+    
+    public void resetBindingValue(String expression, Object newValue) {
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        Application app = ctx.getApplication();
+        ExpressionFactory elFactory = app.getExpressionFactory();
+        ELContext elContext = ctx.getELContext();
+        ValueExpression valueExp = elFactory.createValueExpression(elContext, expression, Object.class);
+        Class bindClass = valueExp.getType(elContext);
+        valueExp.setValue(elContext, newValue);
+    }
 
     public void onDialogPay(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
@@ -53,15 +69,17 @@ public class ZamerDebtBean {
     }
 
     public void onPopupPay(PopupFetchEvent popupFetchEvent) {
+        resetBindingValue("#{bindings.paySelectedRows_kassaId1.inputValue}",null);
         try {
-            getKassaId().setValue("");
+            getKassaId().resetValue();
         } catch (Exception e) {
             // TODO: Add catch code
             e.printStackTrace();
         }
         
+        resetBindingValue("#{bindings.paySelectedRows_Summ1.inputValue}",null);
         try {
-            getSumma().setValue("");
+            getSumma().resetValue();
         } catch (Exception e) {
             // TODO: Add catch code
             e.printStackTrace();

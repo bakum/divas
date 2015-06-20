@@ -12,7 +12,8 @@
   RowClass="ua.divas.view.OtherZatratyViewRowImpl"
   ComponentClass="ua.divas.view.OtherZatratyViewImpl"
   ComponentInterface="ua.divas.view.common.OtherZatratyView"
-  ClientProxyName="ua.divas.view.client.OtherZatratyViewClient">
+  ClientProxyName="ua.divas.view.client.OtherZatratyViewClient"
+    OrderBy="DAT DESC">
     <DesignTime>
         <Attr Name="_isExpertMode" Value="true"/>
         <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>

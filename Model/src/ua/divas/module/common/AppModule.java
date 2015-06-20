@@ -17,5 +17,7 @@ public interface AppModule extends ApplicationModule {
     void addNotification(String cutid, String desc, Date dat, String ObjId, String ContId);
 
     void addPkoFromZamer(String kassaId, String kontragId, BigDecimal Summa);
+
+    void addProfitDistrib(BigDecimal Summa);
 }
 

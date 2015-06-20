@@ -130,17 +130,47 @@
                             <af:column id="c10" headerText="#{bindings.VwBallansAp1.hints.PassiveEnd.label}"
                                        headerClass="MyHeaderItalicClass"
                                        inlineStyle="#{node.bindings.DivisionId != null ? 'border-right-width:medium; border-right-color:#151515;background-color:#DCF0AB;' : node.Code == '600' or node.Code == '900' ? 'border-right-width:medium; border-right-color:#151515;background-color: #B2CA7E;' : 'border-right-width:medium; border-right-color:#151515;'}"
-                                       align="right">
+                                       align="right" width="120">
                                 <af:outputText value="#{node.PassiveEnd}" id="ot11"
-                                               inlineStyle="#{node.PassiveEnd &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}"/>
+                                               inlineStyle="#{node.PassiveEnd &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}"
+                                               rendered="#{node.PassiveEnd &lt;=0 ? true : node.Code == '900' ? false : true}"/>
                                 <f:facet name="footer">
                                     <af:outputText value="#{bindings.VwBallansAp1Iterator.viewObject.sum['PassiveEnd']}" id="ot14"
                                                    inlineStyle="font-weight:bold;"/>
                                 </f:facet>
+                                <af:panelGroupLayout id="pgl3" layout="horizontal" halign="right">
+                                    <af:toolbar id="t1"
+                                                rendered="#{node.PassiveEnd &lt;= 0 ? false : node.Code == '900' ? true : false}">
+                                        <af:button text="#{node.PassiveEnd}" id="b3" icon="/img/coins.png"
+                                                   shortDesc="Распределить сумму" inlineStyle="font-weight:bold;">
+                                            <af:showPopupBehavior popupId="::p1" align="endAfter"/>
+                                        </af:button>
+                                    </af:toolbar>
+                                </af:panelGroupLayout>
                             </af:column>
                         </af:column>
                         <f:facet name="footer"/>
                     </af:treeTable>
+                    <af:popup childCreation="deferred" id="p1" contentDelivery="lazyUncached"
+                              popupFetchListener="#{ballans.onProfitPopup}" resetEditableValues="whenCanceled">
+                        <af:dialog id="d1" title="Распределение прибыли по настройкам"
+                                   dialogListener="#{ballans.onDialogProfit}">
+                            <af:panelFormLayout id="pfl2">
+                                <af:inputNumberSpinbox value="#{bindings.Summa.inputValue}"
+                                                       label="Сумма к распределению"
+                                                       columns="#{bindings.Summa.hints.displayWidth}"
+                                                       shortDesc="#{bindings.Summa.hints.tooltip}" id="it1"
+                                                       required="true" binding="#{ballans.summ}"
+                                                       validator="#{ballans.onValidateSumm}">
+                                    <f:validator binding="#{bindings.Summa.validator}"/>
+                                    <af:convertNumber groupingUsed="false" pattern="#{bindings.Summa.format}"/>
+                                </af:inputNumberSpinbox>
+                                <af:button actionListener="#{bindings.addProfitDistrib.execute}" text="addProfitDistrib"
+                                           disabled="#{!bindings.addProfitDistrib.enabled}" id="b4" visible="false"/>
+                            </af:panelFormLayout>
+                            <f:facet name="buttonBar"/>
+                        </af:dialog>
+                    </af:popup>
                 </af:panelBox>
             </af:gridCell>
         </af:gridRow>

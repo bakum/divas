@@ -2010,5 +2010,15 @@
         Name="Summa"
         Type="java.math.BigDecimal"/>
     </Method>
+    <Method
+      Name="addProfitDistrib"
+      MethodName="addProfitDistrib">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="Summa"
+        Type="java.math.BigDecimal"/>
+    </Method>
   </ClientInterface>
 </AppModule>

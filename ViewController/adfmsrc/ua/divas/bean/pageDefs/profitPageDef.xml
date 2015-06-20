@@ -4,8 +4,12 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="ProfitDistribView1" RangeSize="12" DataControl="AppModuleDataControl"
-              id="ProfitDistribView1Iterator"/>
+    <iterator Binds="ProfitDistribView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="ProfitDistribView1Iterator">
+      <sortCriteria>
+        <sort attribute="Dat" ascending="false"/>
+      </sortCriteria>
+    </iterator>
     <iterator Binds="VwProfitMoveVO1" RangeSize="25" DataControl="AppModuleDataControl" id="VwProfitMoveVO1Iterator"/>
   </executables>
   <bindings>

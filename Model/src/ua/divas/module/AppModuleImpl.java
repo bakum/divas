@@ -3295,6 +3295,21 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
 
     }
     
+    public void addProfitDistrib(BigDecimal Summa) {
+        ViewObjectImpl profit = getProfitDistribView1();
+        Row r2 = profit.createRow();
+        r2.setAttribute("Summ", Summa);
+        
+        try {
+            profit.insertRow(r2); //Insert that row in ViewObject
+            getDBTransaction().commit(); //Commit the changes
+            profit.executeQuery();
+        } catch (Exception e) {
+            getDBTransaction().rollback(); //Commit the changes
+            e.printStackTrace();
+        }
+    }
+    
     public void addPkoFromZamer(String kassaId, String kontragId, BigDecimal Summa) {
         
         ViewObjectImpl pko = getPkoView1();
