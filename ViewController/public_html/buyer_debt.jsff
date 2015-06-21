@@ -7,9 +7,13 @@
                 <!-- Content -->
                 <af:panelCollection id="pc1">
                     <f:facet name="menus"/>
-                    <f:facet name="toolbar"/>
+                    <f:facet name="toolbar">
+                        <af:toolbar id="t1">
+                            <af:button text="Обновить" id="b1" actionListener="#{buyer_debt.onRefresh}"/>
+                        </af:toolbar>
+                    </f:facet>
                     <af:treeTable value="#{bindings.VwKontragAllItems1.treeModel}" var="node"
-                                  rowSelection="single" id="tt1">
+                                  rowSelection="single" id="tt1" binding="#{buyer_debt.treeTable}">
                         <f:facet name="nodeStamp">
                             <af:column id="c1" headerText="Наименование" width="250" inlineStyle="font-weight:bold;">
                                 <af:outputText value="#{node.Fullname}" id="ot1"/>

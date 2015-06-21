@@ -19,5 +19,7 @@ public interface AppModule extends ApplicationModule {
     void addPkoFromZamer(String kassaId, String kontragId, BigDecimal Summa);
 
     void addProfitDistrib(BigDecimal Summa);
+
+    void addRko(String kassaId, String kontragId, BigDecimal Summa);
 }
 

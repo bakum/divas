@@ -8,6 +8,8 @@
                 DefaultValue="${bindings.paySelectedRows.result}"/>
       <variable Type="java.lang.String" Name="paySelectedRows_kassaId" IsQueriable="false"/>
       <variable Name="paySelectedRows_Summ" Type="java.math.BigDecimal"/>
+      <variable Type="java.lang.String" Name="addRko_kassaId" IsQueriable="false"/>
+      <variable Type="java.math.BigDecimal" Name="addRko_Summa" IsQueriable="false"/>
     </variableIterator>
     <iterator Binds="VwKontragZamer1" RangeSize="25" DataControl="AppModuleDataControl" id="VwKontragZamer1Iterator"/>
     <iterator Binds="KassaSettingsView1" RangeSize="-1" DataControl="AppModuleDataControl"
@@ -72,5 +74,28 @@
       <NamedData NDName="kassaId" NDType="java.lang.String" NDValue="#{bindings.paySelectedRows_kassaId}"/>
       <NamedData NDName="Summ" NDType="java.math.BigDecimal" NDValue="#{bindings.paySelectedRows_Summ}"/>
     </methodAction>
+    <methodAction id="addRko" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addRko"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="kassaId" NDType="java.lang.String" NDValue="${bindings.addRko_kassaId}"/>
+      <NamedData NDName="kontragId" NDType="java.lang.String"/>
+      <NamedData NDName="Summa" NDType="java.math.BigDecimal" NDValue="${bindings.addRko_Summa}"/>
+    </methodAction>
+    <attributeValues IterBinding="variables" id="Summa">
+      <AttrNames>
+        <Item Value="addRko_Summa"/>
+      </AttrNames>
+    </attributeValues>
+    <list StaticList="false" IterBinding="variables" ListIter="KassaSettingsView1Iterator" id="addRko_kassaId1">
+      <AttrNames>
+        <Item Value="addRko_kassaId"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="KassaId"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="KassaName"/>
+      </ListDisplayAttrNames>
+    </list>
   </bindings>
 </pageDefinition>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
   <task-flow-definition id="ballans-config">
-    <default-activity>ballans</default-activity>
+    <default-activity>ballans_detail</default-activity>
     <managed-bean id="__5">
       <managed-bean-name>ballans</managed-bean-name>
       <managed-bean-class>ua.divas.bean.BallansBean</managed-bean-class>

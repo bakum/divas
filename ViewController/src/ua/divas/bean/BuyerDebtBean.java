@@ -10,9 +10,13 @@ import javax.el.MethodExpression;
 import javax.faces.application.Application;
 import javax.faces.context.FacesContext;
 
+import javax.faces.event.ActionEvent;
+
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichTreeTable;
+
+import oracle.adf.view.rich.context.AdfFacesContext;
 
 import oracle.binding.BindingContainer;
 
@@ -98,5 +102,13 @@ public class BuyerDebtBean {
                 e.printStackTrace();
             }
         }
+    }
+    
+    public void refresh() {
+        AdfFacesContext.getCurrentInstance().addPartialTarget(getTreeTable());
+    }
+
+    public void onRefresh(ActionEvent actionEvent) {
+        refresh();
     }
 }

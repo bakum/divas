@@ -3310,6 +3310,38 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         }
     }
     
+    public void addRko(String kassaId, String kontragId, BigDecimal Summa){
+        
+        ViewObjectImpl rko = getRkoView1();
+        Row r2 = rko.createRow();
+        
+        r2.setAttribute("KassaId", kassaId);
+        r2.setAttribute("KontragId", kontragId);
+        r2.setAttribute("Summa", Summa);
+        
+        ViewObjectImpl opVO = getOperationRkoView1();
+        ViewRowSetImpl rs =
+            (ViewRowSetImpl) opVO.findByViewCriteria(opVO.getViewCriteria("OperationRkoToSupplier"), -1,
+                                                   opVO.QUERY_MODE_SCAN_DATABASE_TABLES);
+        Row row = rs.first();
+        String op = null;
+        if (row != null) {
+            op = (String) row.getAttribute("Id");
+        }
+        
+        r2.setAttribute("OperationId", op);
+        
+        try {
+            rko.insertRow(r2); //Insert that row in ViewObject
+            getDBTransaction().commit(); //Commit the changes
+            rko.executeQuery();
+        } catch (Exception e) {
+            getDBTransaction().rollback(); //Commit the changes
+            e.printStackTrace();
+        }
+        
+    }
+    
     public void addPkoFromZamer(String kassaId, String kontragId, BigDecimal Summa) {
         
         ViewObjectImpl pko = getPkoView1();

@@ -14,10 +14,14 @@ import javax.el.MethodExpression;
 import javax.faces.application.Application;
 import javax.faces.context.FacesContext;
 
+import javax.faces.event.ActionEvent;
+
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCDataControl;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichTreeTable;
+
+import oracle.adf.view.rich.context.AdfFacesContext;
 
 import oracle.binding.BindingContainer;
 
@@ -38,6 +42,8 @@ import org.apache.myfaces.trinidad.model.TreeModel;
 import ua.divas.module.AppModuleImpl;
 
 public class KassaBean {
+
+    private RichTreeTable treeTable;
 
     public KassaBean() {
     }
@@ -171,6 +177,10 @@ public class KassaBean {
             }
         }
     }
+    
+    public void refresh() {
+        AdfFacesContext.getCurrentInstance().addPartialTarget(getTreeTable());
+    }
 
     public void afterListener() {
         System.out.println("After listener called ");
@@ -180,5 +190,17 @@ public class KassaBean {
         AppModuleImpl am = (AppModuleImpl) dc.getDataProvider();
         am.getKontragentsView1().executeQuery();
         am.getOrdersView1().executeQuery();
+    }
+
+    public void setTreeTable(RichTreeTable treeTable) {
+        this.treeTable = treeTable;
+    }
+
+    public RichTreeTable getTreeTable() {
+        return treeTable;
+    }
+
+    public void onRefresh(ActionEvent actionEvent) {
+        refresh();
     }
 }

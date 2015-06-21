@@ -2020,5 +2020,21 @@
         Name="Summa"
         Type="java.math.BigDecimal"/>
     </Method>
+    <Method
+      Name="addRko"
+      MethodName="addRko">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="kassaId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="kontragId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="Summa"
+        Type="java.math.BigDecimal"/>
+    </Method>
   </ClientInterface>
 </AppModule>

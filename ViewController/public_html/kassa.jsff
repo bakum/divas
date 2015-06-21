@@ -7,10 +7,14 @@
                 <!-- Content -->
                 <af:panelCollection id="pc1">
                     <f:facet name="menus"/>
-                    <f:facet name="toolbar"/>
+                    <f:facet name="toolbar">
+                        <af:toolbar id="t1">
+                            <af:button text="Обновить" id="b1" actionListener="#{kassa.onRefresh}"/>
+                        </af:toolbar>
+                    </f:facet>
                     <af:treeTable value="#{bindings.KassaView1.treeModel}" var="node"
                                   selectionListener="#{kassa.onTreeSelect}" rowSelection="single"
-                                  id="tt1" scrollPolicy="page">
+                                  id="tt1" scrollPolicy="page" binding="#{kassa.treeTable}">
                         <f:facet name="nodeStamp">
                             <af:column id="c1" width="250" inlineStyle="font-weight:bold;">
                                 <af:outputText value="#{node.Fullname}" id="ot1"/>

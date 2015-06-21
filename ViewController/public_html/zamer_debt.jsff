@@ -36,20 +36,32 @@
                             <af:outputText value="#{node.bindings.SummRashod}" id="ot7"/>
                         </af:column>
                         <af:column id="c3" headerText="Задолженность (нам должен)" align="right">
-                            <af:toolbar id="t1">
-                                <af:button text="#{node.DebtZamer}" id="b2"
-                                           rendered="#{node.DebtZamer != null ? true : false}" icon="/img/coins.png"
-                                           inlineStyle="font-weight:bold;"
-                                           disabled="#{node.DebtZamer > '0' ? false : true}">
-                                    <af:showPopupBehavior popupId="::p1"/>
-                                </af:button>
-                            </af:toolbar>
+                            <af:panelGroupLayout id="pgl2" layout="horizontal" halign="right">
+                                <af:toolbar id="t1"
+                                            rendered="#{node.DebtZamer == null ? false : node.DebtZamer > '0' ? true : false}">
+                                    <af:button text="#{node.DebtZamer}" id="b2" icon="/img/coins.png"
+                                               inlineStyle="font-weight:bold;"
+                                               disabled="#{node.DebtZamer > '0' ? false : true}"
+                                               shortDesc="Оформить ПКО">
+                                        <af:showPopupBehavior popupId="::p1"/>
+                                    </af:button>
+                                </af:toolbar>
+                                <af:toolbar id="t3"
+                                            rendered="#{node.DebtZamer == null ? false : node.DebtZamer &lt; '0' ? true : false}">
+                                    <af:button text="#{node.DebtZamer}" id="b4" icon="/img/coins.png"
+                                               shortDesc="Оформить РКО" inlineStyle="font-weight:bold; color:Red;">
+                                        <af:showPopupBehavior popupId="::p2"/>
+                                    </af:button>
+                                </af:toolbar>
+                            </af:panelGroupLayout>
+                            <af:outputText value="#{node.DebtZamer}" id="ot5" inlineStyle="font-weight:bold;"
+                                           rendered="#{node.DebtZamer == '0' ? true : false}"/>
                         </af:column>
                     </af:treeTable>
                     <f:facet name="statusbar"/>
-                    <af:popup childCreation="deferred" autoCancel="disabled" id="p1" contentDelivery="lazyUncached"
-                              popupFetchListener="#{zamer_debt.onPopupPay}">
-                        <af:dialog id="d1" title="Выберите кассу для оплаты" closeIconVisible="false"
+                    <af:popup childCreation="deferred" id="p1" contentDelivery="lazyUncached"
+                              popupFetchListener="#{zamer_debt.onPopupPay}" resetEditableValues="whenCanceled">
+                        <af:dialog id="d1" title="Приход в кассу" closeIconVisible="false"
                                    dialogListener="#{zamer_debt.onDialogPay}">
                             <f:facet name="buttonBar"/>
                             <af:panelFormLayout id="pfl1">
@@ -62,8 +74,30 @@
                                 </af:selectOneChoice>
                                 <af:inputNumberSpinbox label="Сумма оплаты" id="it1" required="true"
                                                        value="#{bindings.paySelectedRows_Summ1.inputValue}"
-                                                       autoSubmit="true" binding="#{zamer_debt.summa}"/>
+                                                       autoSubmit="true" binding="#{zamer_debt.summa}"
+                                                       validator="#{zamer_debt.onValidateSumm}"/>
                             </af:panelFormLayout>
+                        </af:dialog>
+                    </af:popup>
+                    <af:popup childCreation="deferred" id="p2" contentDelivery="lazyUncached"
+                              resetEditableValues="whenCanceled" popupFetchListener="#{zamer_debt.onPopupRko}">
+                        <af:dialog id="d2" title="Расход из кассы" dialogListener="#{zamer_debt.onDialogRko}">
+                            <af:panelFormLayout id="pfl2">
+                                <af:selectOneChoice label="Касса для оплаты" id="soc2"
+                                                    value="#{bindings.addRko_kassaId1.inputValue}" required="true">
+                                    <f:selectItems value="#{bindings.addRko_kassaId1.items}" id="si2"/>
+                                </af:selectOneChoice>
+                                <af:inputNumberSpinbox value="#{bindings.Summa.inputValue}" label="Сумма для оплаты"
+                                                       columns="#{bindings.Summa.hints.displayWidth}"
+                                                       shortDesc="#{bindings.Summa.hints.tooltip}" id="it3"
+                                                       required="true" validator="#{zamer_debt.onValidateSumm}">
+                                    <f:validator binding="#{bindings.Summa.validator}"/>
+                                    <af:convertNumber groupingUsed="false" pattern="#{bindings.Summa.format}"/>
+                                </af:inputNumberSpinbox>
+                                <af:button actionListener="#{bindings.addRko.execute}" text="addRko"
+                                           disabled="#{!bindings.addRko.enabled}" id="b5" rendered="false"/>
+                            </af:panelFormLayout>
+                            <f:facet name="buttonBar"/>
                         </af:dialog>
                     </af:popup>
                 </af:panelCollection>
