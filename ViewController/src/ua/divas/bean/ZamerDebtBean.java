@@ -158,9 +158,9 @@ public class ZamerDebtBean {
 
         if ((object == null) || (object.toString().isEmpty())) {
             fatal = true;
-        } else if (!isDigit(object.toString())) {
-            fatal = true;
-        } else if (Integer.parseInt(object.toString()) <= 0) {
+        /* } else if (!isDigit(object.toString())) {
+            fatal = true; */
+        } else if (Float.parseFloat(object.toString()) <= 0) {
             fatal = true;
         }
 
@@ -171,6 +171,7 @@ public class ZamerDebtBean {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка валидации",
                                                           "Сумма должна быть > 0"));
         }
+
 
     }
 }

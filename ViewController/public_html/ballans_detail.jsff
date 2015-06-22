@@ -58,7 +58,8 @@
                             <af:column id="c1" width="350" headerText="Наименование"
                                        inlineStyle="#{node.bindings.DivisionId != null ? 'border-right-width:medium; border-right-color:#151515;background-color:#DCF0AB;' : 'border-right-width:medium; border-right-color:#151515;'}">
                                 <af:outputText value="#{node.Fullname}" id="ot1"/>
-                                <af:outputText value="#{node.bindings.DivName}" id="ot3"/>
+                                <af:outputText value="#{node.bindings.DivName}" id="ot3"
+                                               inlineStyle="font-style:italic; font-weight:bold;"/>
                                 <f:facet name="footer">
                                     <af:outputText value="Итого:" id="ot12"/>
                                 </f:facet>

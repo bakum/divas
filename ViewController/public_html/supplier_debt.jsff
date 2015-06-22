@@ -99,15 +99,14 @@
                                                             required="true">
                                             <f:selectItems value="#{bindings.addRko_kassaId1.items}" id="si2"/>
                                         </af:selectOneChoice>
-                                        <af:inputText value="#{bindings.Summa1.inputValue}"
-                                                      label="Сумма для оплаты"
-                                                      columns="#{bindings.Summa1.hints.displayWidth}"
-                                                      maximumLength="#{bindings.Summa1.hints.precision}"
-                                                      shortDesc="#{bindings.Summa1.hints.tooltip}" id="it3"
-                                                      required="true" validator="#{supplier.onValidateSumm}">
+                                        <af:inputNumberSpinbox value="#{bindings.Summa1.inputValue}"
+                                                               label="Сумма для оплаты"
+                                                               columns="#{bindings.Summa1.hints.displayWidth}"
+                                                               shortDesc="#{bindings.Summa1.hints.tooltip}" id="it3"
+                                                               required="true" validator="#{supplier.onValidateSumm}">
                                             <f:validator binding="#{bindings.Summa1.validator}"/>
                                             <af:convertNumber groupingUsed="false" pattern="#{bindings.Summa1.format}"/>
-                                        </af:inputText>
+                                        </af:inputNumberSpinbox>
                                         <af:button actionListener="#{bindings.addRko.execute}" text="addRko"
                                                    disabled="#{!bindings.addRko.enabled}" id="b4" rendered="false"/>
                                     </af:panelFormLayout>

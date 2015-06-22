@@ -151,7 +151,7 @@
                                                           columns="#{bindings.PkoView1.hints.Posted.displayWidth}"
                                                           maximumLength="#{bindings.PkoView1.hints.Posted.precision}"
                                                           shortDesc="#{bindings.PkoView1.hints.Posted.tooltip}"
-                                                          id="it1">
+                                                          id="it1" readOnly="true">
                                                 <f:validator binding="#{row.bindings.Posted.validator}"/>
                                                 <af:convertNumber groupingUsed="false"
                                                                   pattern="#{bindings.PkoView1.hints.Posted.format}"/>

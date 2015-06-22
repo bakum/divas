@@ -59,7 +59,7 @@
                                                           columns="#{bindings.OtherZatratyView1.hints.Id.displayWidth}"
                                                           maximumLength="#{bindings.OtherZatratyView1.hints.Id.precision}"
                                                           shortDesc="#{bindings.OtherZatratyView1.hints.Id.tooltip}"
-                                                          id="it1">
+                                                          id="it1" readOnly="true">
                                                 <f:validator binding="#{row.bindings.Id.validator}"/>
                                             </af:inputText>
                                         </af:column>
@@ -71,7 +71,7 @@
                                                           required="#{bindings.OtherZatratyView1.hints.Dat.mandatory}"
                                                           columns="#{bindings.OtherZatratyView1.hints.Dat.displayWidth}"
                                                           shortDesc="#{bindings.OtherZatratyView1.hints.Dat.tooltip}"
-                                                          id="id1">
+                                                          id="id1" readOnly="true">
                                                 <f:validator binding="#{row.bindings.Dat.validator}"/>
                                                 <af:convertDateTime pattern="#{bindings.OtherZatratyView1.hints.Dat.format}"/>
                                             </af:inputDate>
@@ -85,7 +85,7 @@
                                                           columns="#{bindings.OtherZatratyView1.hints.Num.displayWidth}"
                                                           maximumLength="#{bindings.OtherZatratyView1.hints.Num.precision}"
                                                           shortDesc="#{bindings.OtherZatratyView1.hints.Num.tooltip}"
-                                                          id="it2">
+                                                          id="it2" readOnly="true">
                                                 <f:validator binding="#{row.bindings.Num.validator}"/>
                                             </af:inputText>
                                         </af:column>
@@ -99,7 +99,7 @@
                                                           columns="#{bindings.OtherZatratyView1.hints.Posted.displayWidth}"
                                                           maximumLength="#{bindings.OtherZatratyView1.hints.Posted.precision}"
                                                           shortDesc="#{bindings.OtherZatratyView1.hints.Posted.tooltip}"
-                                                          id="it3">
+                                                          id="it3" readOnly="true">
                                                 <f:validator binding="#{row.bindings.Posted.validator}"/>
                                                 <af:convertNumber groupingUsed="false"
                                                                   pattern="#{bindings.OtherZatratyView1.hints.Posted.format}"/>
@@ -128,7 +128,7 @@
                                                                 label="#{row.bindings.DivisionId.label}"
                                                                 required="#{bindings.OtherZatratyView1.hints.DivisionId.mandatory}"
                                                                 shortDesc="#{bindings.OtherZatratyView1.hints.DivisionId.tooltip}"
-                                                                id="soc1">
+                                                                id="soc1" readOnly="true">
                                                 <f:selectItems value="#{row.bindings.DivisionId.items}" id="si1"/>
                                                 <f:validator binding="#{row.bindings.DivisionId.validator}"/>
                                             </af:selectOneChoice>
@@ -141,7 +141,7 @@
                                                                 label="#{row.bindings.UserId.label}"
                                                                 required="#{bindings.OtherZatratyView1.hints.UserId.mandatory}"
                                                                 shortDesc="#{bindings.OtherZatratyView1.hints.UserId.tooltip}"
-                                                                id="soc2">
+                                                                id="soc2" readOnly="true">
                                                 <f:selectItems value="#{row.bindings.UserId.items}" id="si2"/>
                                                 <f:validator binding="#{row.bindings.UserId.validator}"/>
                                             </af:selectOneChoice>
@@ -154,7 +154,7 @@
                                                                 label="#{row.bindings.CurrId.label}"
                                                                 required="#{bindings.OtherZatratyView1.hints.CurrId.mandatory}"
                                                                 shortDesc="#{bindings.OtherZatratyView1.hints.CurrId.tooltip}"
-                                                                id="soc3">
+                                                                id="soc3" readOnly="true">
                                                 <f:selectItems value="#{row.bindings.CurrId.items}" id="si3"/>
                                                 <f:validator binding="#{row.bindings.CurrId.validator}"/>
                                             </af:selectOneChoice>
@@ -169,7 +169,7 @@
                                                           columns="#{bindings.OtherZatratyView1.hints.OthEditable.displayWidth}"
                                                           maximumLength="#{bindings.OtherZatratyView1.hints.OthEditable.precision}"
                                                           shortDesc="#{bindings.OtherZatratyView1.hints.OthEditable.tooltip}"
-                                                          id="it4">
+                                                          id="it4" readOnly="true">
                                                 <f:validator binding="#{row.bindings.OthEditable.validator}"/>
                                                 <af:convertNumber groupingUsed="false"
                                                                   pattern="#{bindings.OtherZatratyView1.hints.OthEditable.format}"/>

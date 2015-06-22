@@ -69,7 +69,8 @@
                                                           required="#{bindings.UsersView1.hints.Id.mandatory}"
                                                           columns="#{bindings.UsersView1.hints.Id.displayWidth}"
                                                           maximumLength="#{bindings.UsersView1.hints.Id.precision}"
-                                                          shortDesc="#{bindings.UsersView1.hints.Id.tooltip}" id="it5">
+                                                          shortDesc="#{bindings.UsersView1.hints.Id.tooltip}" id="it5"
+                                                          readOnly="true">
                                                 <f:validator binding="#{row.bindings.Id.validator}"/>
                                             </af:inputText>
                                         </af:column>
@@ -82,7 +83,7 @@
                                                           columns="#{bindings.UsersView1.hints.Login.displayWidth}"
                                                           maximumLength="#{bindings.UsersView1.hints.Login.precision}"
                                                           shortDesc="#{bindings.UsersView1.hints.Login.tooltip}"
-                                                          id="it6">
+                                                          id="it6" readOnly="true">
                                                 <f:validator binding="#{row.bindings.Login.validator}"/>
                                             </af:inputText>
                                             <f:facet name="filter">
@@ -100,7 +101,7 @@
                                                           columns="#{bindings.UsersView1.hints.LastName.displayWidth}"
                                                           maximumLength="#{bindings.UsersView1.hints.LastName.precision}"
                                                           shortDesc="#{bindings.UsersView1.hints.LastName.tooltip}"
-                                                          id="it7">
+                                                          id="it7" readOnly="true">
                                                 <f:validator binding="#{row.bindings.LastName.validator}"/>
                                             </af:inputText>
                                         </af:column>
@@ -112,7 +113,7 @@
                                                           columns="#{bindings.UsersView1.hints.FirstName.displayWidth}"
                                                           maximumLength="#{bindings.UsersView1.hints.FirstName.precision}"
                                                           shortDesc="#{bindings.UsersView1.hints.FirstName.tooltip}"
-                                                          id="it8">
+                                                          id="it8" readOnly="true">
                                                 <f:validator binding="#{row.bindings.FirstName.validator}"/>
                                             </af:inputText>
                                         </af:column>
@@ -125,7 +126,7 @@
                                                           columns="#{bindings.UsersView1.hints.Email.displayWidth}"
                                                           maximumLength="#{bindings.UsersView1.hints.Email.precision}"
                                                           shortDesc="#{bindings.UsersView1.hints.Email.tooltip}"
-                                                          id="it9">
+                                                          id="it9" readOnly="true">
                                                 <f:validator binding="#{row.bindings.Email.validator}"/>
                                             </af:inputText>
                                         </af:column>
@@ -133,7 +134,7 @@
                                             <af:selectBooleanCheckbox value="#{row.bindings.IsAdmin.inputValue}"
                                                                       label="#{row.bindings.IsAdmin.label}"
                                                                       shortDesc="#{bindings.UsersView1.hints.IsAdmin.tooltip}"
-                                                                      id="sbc2"/>
+                                                                      id="sbc2" readOnly="true"/>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.UsersView1.hints.PassWd.name}" sortable="true"
                                                    headerText="#{bindings.UsersView1.hints.PassWd.label}" id="c6"
@@ -144,7 +145,7 @@
                                                           columns="#{bindings.UsersView1.hints.PassWd.displayWidth}"
                                                           maximumLength="#{bindings.UsersView1.hints.PassWd.precision}"
                                                           shortDesc="#{bindings.UsersView1.hints.PassWd.tooltip}"
-                                                          id="it10">
+                                                          id="it10" readOnly="true">
                                                 <f:validator binding="#{row.bindings.PassWd.validator}"/>
                                             </af:inputText>
                                         </af:column>
@@ -156,7 +157,7 @@
                                                           columns="#{bindings.UsersView1.hints.UEditable.displayWidth}"
                                                           maximumLength="#{bindings.UsersView1.hints.UEditable.precision}"
                                                           shortDesc="#{bindings.UsersView1.hints.UEditable.tooltip}"
-                                                          id="it11">
+                                                          id="it11" readOnly="true">
                                                 <f:validator binding="#{row.bindings.UEditable.validator}"/>
                                                 <af:convertNumber groupingUsed="false"
                                                                   pattern="#{bindings.UsersView1.hints.UEditable.format}"/>
@@ -166,7 +167,7 @@
                                             <af:selectBooleanCheckbox value="#{row.bindings.IsZamer.inputValue}"
                                                                       label="#{row.bindings.IsZamer.label}"
                                                                       shortDesc="#{bindings.UsersView1.hints.IsZamer.tooltip}"
-                                                                      id="sbc5"/>
+                                                                      id="sbc5" readOnly="true"/>
                                         </af:column>
                                         <f:facet name="detailStamp">
                                             <af:panelLabelAndMessage label="#{bindings.UsersView1.hints.UDescription.label}"

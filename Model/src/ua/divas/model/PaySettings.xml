@@ -164,7 +164,8 @@
     SQLType="NUMERIC"
     Type="java.lang.Integer"
     ColumnType="NUMBER"
-    TableName="PAY_SETTINGS">
+    TableName="PAY_SETTINGS"
+    DefaultValue="0">
     <Properties>
       <SchemaBasedProperties>
         <LABEL

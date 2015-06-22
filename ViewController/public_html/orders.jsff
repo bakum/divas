@@ -87,7 +87,7 @@
                                                                   columns="#{bindings.OrdersView1.hints.Id.displayWidth}"
                                                                   maximumLength="#{bindings.OrdersView1.hints.Id.precision}"
                                                                   shortDesc="#{bindings.OrdersView1.hints.Id.tooltip}"
-                                                                  id="it1">
+                                                                  id="it1" readOnly="true">
                                                         <f:validator binding="#{row.bindings.Id.validator}"/>
                                                     </af:inputText>
                                                 </af:column>
@@ -100,7 +100,7 @@
                                                                         label="#{row.bindings.StatusId.label}"
                                                                         required="#{bindings.OrdersView1.hints.StatusId.mandatory}"
                                                                         shortDesc="#{bindings.OrdersView1.hints.StatusId.tooltip}"
-                                                                        id="soc7" autoSubmit="true">
+                                                                        id="soc7" autoSubmit="true" readOnly="true">
                                                         <f:selectItems value="#{row.bindings.StatusId.items}" id="si7"/>
                                                         <f:validator binding="#{row.bindings.StatusId.validator}"/>
                                                     </af:selectOneChoice>
@@ -119,7 +119,7 @@
                                                                   required="#{bindings.OrdersView1.hints.Dat.mandatory}"
                                                                   columns="#{bindings.OrdersView1.hints.Dat.displayWidth}"
                                                                   shortDesc="#{bindings.OrdersView1.hints.Dat.tooltip}"
-                                                                  id="id2">
+                                                                  id="id2" readOnly="true">
                                                         <f:validator binding="#{row.bindings.Dat.validator}"/>
                                                         <af:convertDateTime pattern="#{bindings.OrdersView1.hints.Dat.format}"/>
                                                     </af:inputDate>
@@ -133,7 +133,7 @@
                                                                   columns="#{bindings.OrdersView1.hints.Num.displayWidth}"
                                                                   maximumLength="#{bindings.OrdersView1.hints.Num.precision}"
                                                                   shortDesc="#{bindings.OrdersView1.hints.Num.tooltip}"
-                                                                  id="it2">
+                                                                  id="it2" readOnly="true">
                                                         <f:validator binding="#{row.bindings.Num.validator}"/>
                                                     </af:inputText>
                                                 </af:column>
@@ -147,7 +147,8 @@
                                                                           model="#{row.bindings.KontragId.listOfValuesModel}"
                                                                           required="#{bindings.OrdersView1.hints.KontragId.mandatory}"
                                                                           columns="#{bindings.OrdersView1.hints.KontragId.displayWidth}"
-                                                                          shortDesc="#{bindings.OrdersView1.hints.KontragId.tooltip}">
+                                                                          shortDesc="#{bindings.OrdersView1.hints.KontragId.tooltip}"
+                                                                          readOnly="true">
                                                         <f:validator binding="#{row.bindings.KontragId.validator}"/>
                                                     </af:inputListOfValues>
                                                 </af:column>
@@ -164,7 +165,7 @@
                                                                           shortDesc="#{bindings.OrdersView1.hints.Kontragname.tooltip}"
                                                                           createPopupId="::pCreateKontrag"
                                                                           launchPopupListener="#{orders.onLaunchLov}"
-                                                                          autoSubmit="true">
+                                                                          autoSubmit="true" readOnly="true">
                                                         <f:validator binding="#{row.bindings.Kontragname.validator}"/>
                                                         <af:autoSuggestBehavior suggestedItems="#{bindings.Kontragname.suggestedItems}"
                                                                                 smartList="#{bindings.Kontragname.smartList}"
@@ -179,7 +180,7 @@
                                                                         label="#{row.bindings.CurrId.label}"
                                                                         required="#{bindings.OrdersView1.hints.CurrId.mandatory}"
                                                                         shortDesc="#{bindings.OrdersView1.hints.CurrId.tooltip}"
-                                                                        id="soc1">
+                                                                        id="soc1" readOnly="true">
                                                         <f:selectItems value="#{row.bindings.CurrId.items}" id="si1"/>
                                                         <f:validator binding="#{row.bindings.CurrId.validator}"/>
                                                     </af:selectOneChoice>
@@ -192,7 +193,8 @@
                                                                   columns="#{bindings.OrdersView1.hints.TotalSumOplaty.displayWidth}"
                                                                   maximumLength="#{bindings.OrdersView1.hints.TotalSumOplaty.precision}"
                                                                   shortDesc="#{bindings.OrdersView1.hints.TotalSumOplaty.tooltip}"
-                                                                  id="it30" contentStyle="font-weight: bold;">
+                                                                  id="it30" contentStyle="font-weight: bold;"
+                                                                  readOnly="true">
                                                         <f:validator binding="#{row.bindings.TotalSumOplaty.validator}"/>
                                                         <af:convertNumber groupingUsed="false"
                                                                           pattern="#{bindings.OrdersView1.hints.TotalSumOplaty.format}"/>
@@ -208,7 +210,8 @@
                                                                   columns="#{bindings.OrdersView1.hints.TotalSumUslugi.displayWidth}"
                                                                   maximumLength="#{bindings.OrdersView1.hints.TotalSumUslugi.precision}"
                                                                   shortDesc="#{bindings.OrdersView1.hints.TotalSumUslugi.tooltip}"
-                                                                  id="it7" contentStyle="font-weight: bold;">
+                                                                  id="it7" contentStyle="font-weight: bold;"
+                                                                  readOnly="true">
                                                         <f:validator binding="#{row.bindings.TotalSumUslugi.validator}"/>
                                                         <af:convertNumber groupingUsed="false"
                                                                           pattern="#{bindings.OrdersView1.hints.TotalSumUslugi.format}"/>
@@ -222,7 +225,8 @@
                                                                   columns="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.displayWidth}"
                                                                   maximumLength="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.precision}"
                                                                   shortDesc="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.tooltip}"
-                                                                  id="it46" contentStyle="font-weight: bold;">
+                                                                  id="it46" contentStyle="font-weight: bold;"
+                                                                  readOnly="true">
                                                         <f:validator binding="#{row.bindings.TotalSummUslugiAdd.validator}"/>
                                                         <af:convertNumber groupingUsed="false"
                                                                           pattern="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.format}"/>
@@ -236,7 +240,8 @@
                                                                   columns="#{bindings.OrdersView1.hints.TotalSumm.displayWidth}"
                                                                   maximumLength="#{bindings.OrdersView1.hints.TotalSumm.precision}"
                                                                   shortDesc="#{bindings.OrdersView1.hints.TotalSumm.tooltip}"
-                                                                  id="it52" contentStyle="font-weight: bold;">
+                                                                  id="it52" contentStyle="font-weight: bold;"
+                                                                  readOnly="true">
                                                         <f:validator binding="#{row.bindings.TotalSumm.validator}"/>
                                                         <af:convertNumber groupingUsed="false"
                                                                           pattern="#{bindings.OrdersView1.hints.TotalSumm.format}"/>
@@ -250,7 +255,7 @@
                                                                         label="#{row.bindings.KassaId.label}"
                                                                         required="#{bindings.OrdersView1.hints.KassaId.mandatory}"
                                                                         shortDesc="#{bindings.OrdersView1.hints.KassaId.tooltip}"
-                                                                        id="soc2">
+                                                                        id="soc2" readOnly="true">
                                                         <f:selectItems value="#{row.bindings.KassaId.items}" id="si2"/>
                                                         <f:validator binding="#{row.bindings.KassaId.validator}"/>
                                                     </af:selectOneChoice>
@@ -263,7 +268,7 @@
                                                                         label="#{row.bindings.DivisionId.label}"
                                                                         required="#{bindings.OrdersView1.hints.DivisionId.mandatory}"
                                                                         shortDesc="#{bindings.OrdersView1.hints.DivisionId.tooltip}"
-                                                                        id="soc3" autoSubmit="true">
+                                                                        id="soc3" autoSubmit="true" readOnly="true">
                                                         <f:selectItems value="#{row.bindings.DivisionId.items}"
                                                                        id="si3"/>
                                                         <f:validator binding="#{row.bindings.DivisionId.validator}"/>
@@ -277,7 +282,7 @@
                                                                         label="#{row.bindings.UserId.label}"
                                                                         required="#{bindings.OrdersView1.hints.UserId.mandatory}"
                                                                         shortDesc="#{bindings.OrdersView1.hints.UserId.tooltip}"
-                                                                        id="soc4">
+                                                                        id="soc4" readOnly="true">
                                                         <f:selectItems value="#{row.bindings.UserId.items}" id="si4"/>
                                                         <f:validator binding="#{row.bindings.UserId.validator}"/>
                                                     </af:selectOneChoice>
@@ -292,7 +297,7 @@
                                                                   columns="#{bindings.OrdersView1.hints.Kurs.displayWidth}"
                                                                   maximumLength="#{bindings.OrdersView1.hints.Kurs.precision}"
                                                                   shortDesc="#{bindings.OrdersView1.hints.Kurs.tooltip}"
-                                                                  id="it3">
+                                                                  id="it3" readOnly="true">
                                                         <f:validator binding="#{row.bindings.Kurs.validator}"/>
                                                         <af:convertNumber groupingUsed="false"
                                                                           pattern="#{bindings.OrdersView1.hints.Kurs.format}"/>
@@ -308,7 +313,7 @@
                                                                   columns="#{bindings.OrdersView1.hints.Kratnost.displayWidth}"
                                                                   maximumLength="#{bindings.OrdersView1.hints.Kratnost.precision}"
                                                                   shortDesc="#{bindings.OrdersView1.hints.Kratnost.tooltip}"
-                                                                  id="it4">
+                                                                  id="it4" readOnly="true">
                                                         <f:validator binding="#{row.bindings.Kratnost.validator}"/>
                                                         <af:convertNumber groupingUsed="false"
                                                                           pattern="#{bindings.OrdersView1.hints.Kratnost.format}"/>
@@ -324,7 +329,7 @@
                                                                   columns="#{bindings.OrdersView1.hints.Deleted.displayWidth}"
                                                                   maximumLength="#{bindings.OrdersView1.hints.Deleted.precision}"
                                                                   shortDesc="#{bindings.OrdersView1.hints.Deleted.tooltip}"
-                                                                  id="it5">
+                                                                  id="it5" readOnly="true">
                                                         <f:validator binding="#{row.bindings.Deleted.validator}"/>
                                                         <af:convertNumber groupingUsed="false"
                                                                           pattern="#{bindings.OrdersView1.hints.Deleted.format}"/>
@@ -339,7 +344,7 @@
                                                                   required="#{bindings.OrdersView1.hints.Version.mandatory}"
                                                                   columns="#{bindings.OrdersView1.hints.Version.displayWidth}"
                                                                   shortDesc="#{bindings.OrdersView1.hints.Version.tooltip}"
-                                                                  id="id4">
+                                                                  id="id4" readOnly="true">
                                                         <f:validator binding="#{row.bindings.Version.validator}"/>
                                                         <af:convertDateTime pattern="#{bindings.OrdersView1.hints.Version.format}"/>
                                                     </af:inputDate>
@@ -354,7 +359,7 @@
                                                                   columns="#{bindings.OrdersView1.hints.Posted.displayWidth}"
                                                                   maximumLength="#{bindings.OrdersView1.hints.Posted.precision}"
                                                                   shortDesc="#{bindings.OrdersView1.hints.Posted.tooltip}"
-                                                                  id="it6">
+                                                                  id="it6" readOnly="true">
                                                         <f:validator binding="#{row.bindings.Posted.validator}"/>
                                                         <af:convertNumber groupingUsed="false"
                                                                           pattern="#{bindings.OrdersView1.hints.Posted.format}"/>
@@ -368,7 +373,7 @@
                                                                         label="#{row.bindings.FirmId.label}"
                                                                         required="#{bindings.OrdersView1.hints.FirmId.mandatory}"
                                                                         shortDesc="#{bindings.OrdersView1.hints.FirmId.tooltip}"
-                                                                        id="soc5">
+                                                                        id="soc5" readOnly="true">
                                                         <f:selectItems value="#{row.bindings.FirmId.items}" id="si5"/>
                                                         <f:validator binding="#{row.bindings.FirmId.validator}"/>
                                                     </af:selectOneChoice>
@@ -381,7 +386,7 @@
                                                                         label="#{row.bindings.ActivitiesId.label}"
                                                                         required="#{bindings.OrdersView1.hints.ActivitiesId.mandatory}"
                                                                         shortDesc="#{bindings.OrdersView1.hints.ActivitiesId.tooltip}"
-                                                                        id="soc6">
+                                                                        id="soc6" readOnly="true">
                                                         <f:selectItems value="#{row.bindings.ActivitiesId.items}"
                                                                        id="si6"/>
                                                         <f:validator binding="#{row.bindings.ActivitiesId.validator}"/>
@@ -397,7 +402,7 @@
                                                                   columns="#{bindings.OrdersView1.hints.CountUslug.displayWidth}"
                                                                   maximumLength="#{bindings.OrdersView1.hints.CountUslug.precision}"
                                                                   shortDesc="#{bindings.OrdersView1.hints.CountUslug.tooltip}"
-                                                                  id="it8">
+                                                                  id="it8" readOnly="true">
                                                         <f:validator binding="#{row.bindings.CountUslug.validator}"/>
                                                         <af:convertNumber groupingUsed="false"
                                                                           pattern="#{bindings.OrdersView1.hints.CountUslug.format}"/>
@@ -422,7 +427,7 @@
                                                                   columns="#{bindings.OrdersView1.hints.OEditable.displayWidth}"
                                                                   maximumLength="#{bindings.OrdersView1.hints.OEditable.precision}"
                                                                   shortDesc="#{bindings.OrdersView1.hints.OEditable.tooltip}"
-                                                                  id="it10">
+                                                                  id="it10" readOnly="true">
                                                         <f:validator binding="#{row.bindings.OEditable.validator}"/>
                                                         <af:convertNumber groupingUsed="false"
                                                                           pattern="#{bindings.OrdersView1.hints.OEditable.format}"/>

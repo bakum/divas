@@ -49,7 +49,8 @@
                                           required="#{bindings.StartOstView1.hints.Id.mandatory}"
                                           columns="#{bindings.StartOstView1.hints.Id.displayWidth}"
                                           maximumLength="#{bindings.StartOstView1.hints.Id.precision}"
-                                          shortDesc="#{bindings.StartOstView1.hints.Id.tooltip}" id="it1">
+                                          shortDesc="#{bindings.StartOstView1.hints.Id.tooltip}" id="it1"
+                                          readOnly="true">
                                 <f:validator binding="#{row.bindings.Id.validator}"/>
                             </af:inputText>
                         </af:column>
@@ -59,7 +60,8 @@
                                           label="#{bindings.StartOstView1.hints.Dat.label}"
                                           required="#{bindings.StartOstView1.hints.Dat.mandatory}"
                                           columns="#{bindings.StartOstView1.hints.Dat.displayWidth}"
-                                          shortDesc="#{bindings.StartOstView1.hints.Dat.tooltip}" id="id1">
+                                          shortDesc="#{bindings.StartOstView1.hints.Dat.tooltip}" id="id1"
+                                          readOnly="true">
                                 <f:validator binding="#{row.bindings.Dat.validator}"/>
                                 <af:convertDateTime pattern="#{bindings.StartOstView1.hints.Dat.format}"/>
                             </af:inputDate>
@@ -71,7 +73,8 @@
                                           required="#{bindings.StartOstView1.hints.Num.mandatory}"
                                           columns="#{bindings.StartOstView1.hints.Num.displayWidth}"
                                           maximumLength="#{bindings.StartOstView1.hints.Num.precision}"
-                                          shortDesc="#{bindings.StartOstView1.hints.Num.tooltip}" id="it2">
+                                          shortDesc="#{bindings.StartOstView1.hints.Num.tooltip}" id="it2"
+                                          readOnly="true">
                                 <f:validator binding="#{row.bindings.Num.validator}"/>
                             </af:inputText>
                         </af:column>
@@ -80,7 +83,8 @@
                             <af:selectOneChoice value="#{row.bindings.CurrId.inputValue}"
                                                 label="#{row.bindings.CurrId.label}"
                                                 required="#{bindings.StartOstView1.hints.CurrId.mandatory}"
-                                                shortDesc="#{bindings.StartOstView1.hints.CurrId.tooltip}" id="soc3">
+                                                shortDesc="#{bindings.StartOstView1.hints.CurrId.tooltip}" id="soc3"
+                                                readOnly="true">
                                 <f:selectItems value="#{row.bindings.CurrId.items}" id="si3"/>
                                 <f:validator binding="#{row.bindings.CurrId.validator}"/>
                             </af:selectOneChoice>
@@ -92,7 +96,7 @@
                                           columns="#{bindings.StartOstView1.hints.TotalSumm.displayWidth}"
                                           maximumLength="#{bindings.StartOstView1.hints.TotalSumm.precision}"
                                           shortDesc="#{bindings.StartOstView1.hints.TotalSumm.tooltip}" id="it4"
-                                          contentStyle="font-weight: bold;">
+                                          contentStyle="font-weight: bold;" readOnly="true">
                                 <f:validator binding="#{row.bindings.TotalSumm.validator}"/>
                                 <af:convertNumber groupingUsed="false"
                                                   pattern="#{bindings.StartOstView1.hints.TotalSumm.format}"/>
@@ -104,7 +108,8 @@
                             <af:selectOneChoice value="#{row.bindings.UserId.inputValue}"
                                                 label="#{row.bindings.UserId.label}"
                                                 required="#{bindings.StartOstView1.hints.UserId.mandatory}"
-                                                shortDesc="#{bindings.StartOstView1.hints.UserId.tooltip}" id="soc2">
+                                                shortDesc="#{bindings.StartOstView1.hints.UserId.tooltip}" id="soc2"
+                                                readOnly="true">
                                 <f:selectItems value="#{row.bindings.UserId.items}" id="si2"/>
                                 <f:validator binding="#{row.bindings.UserId.validator}"/>
                             </af:selectOneChoice>
@@ -116,7 +121,7 @@
                                                 label="#{row.bindings.DivisionId.label}"
                                                 required="#{bindings.StartOstView1.hints.DivisionId.mandatory}"
                                                 shortDesc="#{bindings.StartOstView1.hints.DivisionId.tooltip}"
-                                                id="soc1">
+                                                id="soc1" readOnly="true">
                                 <f:selectItems value="#{row.bindings.DivisionId.items}" id="si1"/>
                                 <f:validator binding="#{row.bindings.DivisionId.validator}"/>
                             </af:selectOneChoice>
@@ -128,7 +133,7 @@
                                                 label="#{row.bindings.ActivitiesId.label}"
                                                 required="#{bindings.StartOstView1.hints.ActivitiesId.mandatory}"
                                                 shortDesc="#{bindings.StartOstView1.hints.ActivitiesId.tooltip}"
-                                                id="soc4">
+                                                id="soc4" readOnly="true">
                                 <f:selectItems value="#{row.bindings.ActivitiesId.items}" id="si4"/>
                                 <f:validator binding="#{row.bindings.ActivitiesId.validator}"/>
                             </af:selectOneChoice>
@@ -140,7 +145,8 @@
                                           required="#{bindings.StartOstView1.hints.Editable.mandatory}"
                                           columns="#{bindings.StartOstView1.hints.Editable.displayWidth}"
                                           maximumLength="#{bindings.StartOstView1.hints.Editable.precision}"
-                                          shortDesc="#{bindings.StartOstView1.hints.Editable.tooltip}" id="it3">
+                                          shortDesc="#{bindings.StartOstView1.hints.Editable.tooltip}" id="it3"
+                                          readOnly="true">
                                 <f:validator binding="#{row.bindings.Editable.validator}"/>
                                 <af:convertNumber groupingUsed="false"
                                                   pattern="#{bindings.StartOstView1.hints.Editable.format}"/>
@@ -157,7 +163,8 @@
                                           required="#{bindings.StartOstView1.hints.Posted.mandatory}"
                                           columns="#{bindings.StartOstView1.hints.Posted.displayWidth}"
                                           maximumLength="#{bindings.StartOstView1.hints.Posted.precision}"
-                                          shortDesc="#{bindings.StartOstView1.hints.Posted.tooltip}" id="it5">
+                                          shortDesc="#{bindings.StartOstView1.hints.Posted.tooltip}" id="it5"
+                                          readOnly="true">
                                 <f:validator binding="#{row.bindings.Posted.validator}"/>
                                 <af:convertNumber groupingUsed="false"
                                                   pattern="#{bindings.StartOstView1.hints.Posted.format}"/>
