@@ -263,9 +263,12 @@ public class KontragSettingsImpl extends DivasEntityNoDelete {
     public boolean validateKontragSettings2() {
         String bId = getBaseId();
         String bName = getBaseNachislName(bId);
-        if (!bName.equals("IERARHIA")) {
+        if (bName.equals("DIV")) {
             return false;
         }
+        /* if (!bName.equals("IERARHIA")) {
+            return false;
+        } */
         return true;
     }
 

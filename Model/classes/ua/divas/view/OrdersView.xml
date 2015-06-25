@@ -96,6 +96,14 @@
             </PIMap>
         </ParameterMap>
     </ViewAccessor>
+    <ViewAccessor
+        Name="KontragentsView3"
+        ViewObjectName="ua.divas.view.KontragentsView"
+        RowLevelBinds="true">
+        <ViewCriteriaUsage
+            Name="KontragentsOtherCriteria"
+            FullName="ua.divas.view.KontragentsView.KontragentsOtherCriteria"/>
+    </ViewAccessor>
     <ListBinding
       Name="LOV_CurrId"
       ListVOName="CurrencyView1"
@@ -336,6 +344,34 @@
           Name="KontragentsZamerCriteria"
           FullName="ua.divas.view.KontragentsView.KontragentsZamerCriteria"/>
     </ListBinding>
+    <ListBinding
+        Name="LOV_AgentName"
+        ListVOName="KontragentsView3"
+        ListRangeSize="-1"
+        ComboRowCountHint="10"
+        NullValueFlag="none"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="AgentName"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="DerivedAttrNames">
+            <Item Value="AgentId"/>
+        </AttrArray>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Fullname"/>
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Fullname"/>
+        </AttrArray>
+        <DisplayCriteria
+            Name="KontragentsOtherCriteria"
+            Hint="showAndExecute"/>
+        <ViewCriteriaUsage
+            Name="KontragentsOtherCriteria"
+            FullName="ua.divas.view.KontragentsView.KontragentsOtherCriteria"/>
+    </ListBinding>
     <SQLQuery><![CDATA[SELECT 
     Orders.ID, 
     Orders.DAT, 
@@ -373,6 +409,13 @@
         ID = ZAMER_ID) ZamerName, 
     Orders.DAT_COMPLETE DAT_COMPLETE, 
     Orders.DAT_ZAM DAT_ZAM, 
+    Orders.AGENT_ID,
+    (SELECT 
+        FULLNAME 
+    FROM 
+        KONTRAGENTS 
+    WHERE 
+        ID = AGENT_ID) Agent_Name,
     Orders.SUMM_PLAN SUMM_PLAN,
     'Заказ' ObjName,
     UTILITY.enable_edit(Orders.DAT) enbl
@@ -689,6 +732,50 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
       EntityAttrName="DatZam"
       EntityUsage="Orders"
       AliasName="DAT_ZAM"/>
+    <ViewAttribute
+        Name="AgentId"
+        PrecisionRule="true"
+        EntityAttrName="AgentId"
+        EntityUsage="Orders"
+        AliasName="AGENT_ID">
+        <Dependencies>
+            <Item
+                Value="AgentName"/>
+        </Dependencies>
+        <Properties>
+            <SchemaBasedProperties>
+                <DISPLAYWIDTH
+                    Value="20"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="AgentName"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="150"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="AGENT_NAME"
+        Expression="AGENT_NAME"
+        SQLType="VARCHAR"
+        LOVName="LOV_AgentName">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="150"/>
+        </DesignTime>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="ua.divas.view.OrdersView.AgentName_LABEL"/>
+                <TOOLTIP
+                    ResId="ua.divas.view.OrdersView.AgentName_TOOLTIP"/>
+                <CONTROLTYPE
+                    Value="combo_lov"/>
+                <DISPLAYWIDTH
+                    Value="20"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
     <ViewAttribute
       Name="SummPlan"
       IsNotNull="true"

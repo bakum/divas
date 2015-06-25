@@ -68,6 +68,8 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         Zamername,
         DatComplete,
         DatZam,
+        AgentId,
+        AgentName,
         SummPlan,
         Objname,
         Enbl,
@@ -95,7 +97,8 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         FirmsView1,
         KassaVO1,
         KontragentsView2,
-        KassaSettingsView1;
+        KassaSettingsView1,
+        KontragentsView3;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -144,6 +147,8 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     public static final int ZAMERNAME = AttributesEnum.Zamername.index();
     public static final int DATCOMPLETE = AttributesEnum.DatComplete.index();
     public static final int DATZAM = AttributesEnum.DatZam.index();
+    public static final int AGENTID = AttributesEnum.AgentId.index();
+    public static final int AGENTNAME = AttributesEnum.AgentName.index();
     public static final int SUMMPLAN = AttributesEnum.SummPlan.index();
     public static final int OBJNAME = AttributesEnum.Objname.index();
     public static final int ENBL = AttributesEnum.Enbl.index();
@@ -172,6 +177,7 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     public static final int KASSAVO1 = AttributesEnum.KassaVO1.index();
     public static final int KONTRAGENTSVIEW2 = AttributesEnum.KontragentsView2.index();
     public static final int KASSASETTINGSVIEW1 = AttributesEnum.KassaSettingsView1.index();
+    public static final int KONTRAGENTSVIEW3 = AttributesEnum.KontragentsView3.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -533,6 +539,38 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     }
 
     /**
+     * Gets the attribute value for AGENT_ID using the alias name AgentId.
+     * @return the AGENT_ID
+     */
+    public String getAgentId() {
+        return (String) getAttributeInternal(AGENTID);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for AGENT_ID using the alias name AgentId.
+     * @param value value to set the AGENT_ID
+     */
+    public void setAgentId(String value) {
+        setAttributeInternal(AGENTID, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute AgentName.
+     * @return the AgentName
+     */
+    public String getAgentName() {
+        return (String) getAttributeInternal(AGENTNAME);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for the calculated attribute AgentName.
+     * @param value value to set the  AgentName
+     */
+    public void setAgentName(String value) {
+        setAttributeInternal(AGENTNAME, value);
+    }
+
+    /**
      * Gets the attribute value for ZAMER_ID using the alias name ZamerId.
      * @return the ZAMER_ID
      */
@@ -768,6 +806,13 @@ public class OrdersViewRowImpl extends ViewRowImpl {
      */
     public RowSet getKassaSettingsView1() {
         return (RowSet) getAttributeInternal(KASSASETTINGSVIEW1);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> KontragentsView3.
+     */
+    public RowSet getKontragentsView3() {
+        return (RowSet) getAttributeInternal(KONTRAGENTSVIEW3);
     }
 }
 

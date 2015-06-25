@@ -15,13 +15,13 @@
     <iterator Binds="ContactDetailsView2" RangeSize="25" DataControl="AppModuleDataControl"
               id="ContactDetailsView2Iterator" ChangeEventPolicy="ppr"/>
     <iterator Binds="OrdersTpUslugiView2" RangeSize="5" DataControl="AppModuleDataControl"
-              id="OrdersTpUslugiView2Iterator"/>
+              id="OrdersTpUslugiView2Iterator" ChangeEventPolicy="ppr"/>
     <iterator Binds="OrdersTpOplatyView1" RangeSize="5" DataControl="AppModuleDataControl"
-              id="OrdersTpOplatyView1Iterator"/>
+              id="OrdersTpOplatyView1Iterator" ChangeEventPolicy="ppr"/>
     <iterator Binds="OrdersTpRashodyView4" RangeSize="5" DataControl="AppModuleDataControl"
-              id="OrdersTpRashodyView4Iterator" StateValidation="false"/>
+              id="OrdersTpRashodyView4Iterator" StateValidation="false" ChangeEventPolicy="ppr"/>
     <iterator Binds="OrdersTpNachisleniaView2" RangeSize="5" DataControl="AppModuleDataControl"
-              id="OrdersTpNachisleniaView2Iterator"/>
+              id="OrdersTpNachisleniaView2Iterator" ChangeEventPolicy="ppr"/>
     <iterator Binds="ZatratyView1" RangeSize="10" DataControl="AppModuleDataControl" id="ZatratyView1Iterator"/>
     <iterator Binds="VwOrdersMoves2" RangeSize="25" DataControl="AppModuleDataControl" id="VwOrdersMoves2Iterator"
               ChangeEventPolicy="ppr"/>
@@ -395,5 +395,11 @@
         <Item Value="Enbl"/>
       </AttrNames>
     </attributeValues>
+    <attributeValues IterBinding="OrdersView1Iterator" id="AgentId">
+      <AttrNames>
+        <Item Value="AgentId"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="OrdersView1Iterator" StaticList="false" Uses="LOV_AgentName" id="AgentName"/>
   </bindings>
 </pageDefinition>

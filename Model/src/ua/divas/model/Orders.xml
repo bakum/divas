@@ -484,6 +484,26 @@
       CompareType="GREATERTHAN"
       CompareValue="0"/>
   </Attribute>
+  <Attribute
+    Name="AgentId"
+    Precision="50"
+    ColumnName="AGENT_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="ORDERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.AgentId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.AgentId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="Currency"
     Association="ua.divas.model.OrdersCurrencyFk1Assoc"
