@@ -127,7 +127,7 @@
                                         <af:toolbar id="t3">
                                             <af:button actionListener="#{bindings.CreateInsert.execute}"
                                                        text="Добавить"
-                                                       disabled="#{bindings.OthtpEditable.inputValue == 0 ? false : !bindings.CreateInsert.enabled}"
+                                                       disabled="#{bindings.Enbl.inputValue == 0 ? true : bindings.OthtpEditable.inputValue == 0 ? false : !bindings.CreateInsert.enabled}"
                                                        id="b2" icon="/img/Symbol_Add.png"/>
                                         </af:toolbar>
                                     </f:facet>
@@ -143,13 +143,13 @@
                                         <af:column id="c7" width="60">
                                             <af:toolbar id="t2">
                                                 <af:button id="b1" icon="/img/edit-16.gif"
-                                                           disabled="#{row.OthtpEditable == 0 ? false : true}">
+                                                           disabled="#{bindings.Enbl.inputValue == 0 ? true : row.OthtpEditable == 0 ? false : true}">
                                                     <af:setPropertyListener from="#{1}"
                                                                             to="#{bindings.OthtpEditable.inputValue}"
                                                                             type="action"/>
                                                 </af:button>
                                                 <af:button actionListener="#{bindings.Delete.execute}"
-                                                           disabled="#{row.OthtpEditable == 0 ? false : true}" id="b6"
+                                                           disabled="#{bindings.Enbl.inputValue == 0 ? true : row.OthtpEditable == 0 ? false : true}" id="b6"
                                                            icon="/img/delete.png"/>
                                             </af:toolbar>
                                         </af:column>
