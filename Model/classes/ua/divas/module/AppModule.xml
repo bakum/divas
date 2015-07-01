@@ -893,6 +893,9 @@
   <ViewUsage
     Name="VwProfitMoveVO1"
     ViewObjectName="ua.divas.view.VwProfitMoveVO"/>
+  <ViewUsage
+    Name="ProgSettingsView1"
+    ViewObjectName="ua.divas.view.ProgSettingsView"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"

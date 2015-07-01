@@ -46,6 +46,7 @@ import ua.divas.view.PaySettingsViewImpl;
 import ua.divas.view.PkoViewImpl;
 import ua.divas.view.ProfitDistribTpViewImpl;
 import ua.divas.view.ProfitDistribViewImpl;
+import ua.divas.view.ProgSettingsViewImpl;
 import ua.divas.view.ProrabViewImpl;
 import ua.divas.view.RkoViewImpl;
 import ua.divas.view.StartOstTpViewImpl;
@@ -3926,6 +3927,14 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getProfitMoveFkLink1() {
         return (ViewLinkImpl) findViewLink("ProfitMoveFkLink1");
+    }
+
+    /**
+     * Container's getter for ProgSettingsView1.
+     * @return ProgSettingsView1
+     */
+    public ProgSettingsViewImpl getProgSettingsView1() {
+        return (ProgSettingsViewImpl) findViewObject("ProgSettingsView1");
     }
 }
 

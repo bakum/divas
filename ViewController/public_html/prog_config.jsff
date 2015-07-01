@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelGridLayout id="pgl1">
+        <af:gridRow height="100%" id="gr1">
+            <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
+                <!-- Content -->
+                <af:panelBox text="Настройки программы" id="pb1">
+                    <f:facet name="toolbar">
+                        <af:toolbar id="t1">
+                            <af:button text="Редактировать" id="b1" icon="/img/edit-16.gif"
+                                       shortDesc="Редактировать настройки"
+                                       disabled="#{bindings.Editable.inputValue == 1 ? true : false}"
+                                       rendered="#{bindings.Id.inputValue == null ? false : true}">
+                                <af:setPropertyListener from="#{1}" to="#{bindings.Editable.inputValue}" type="action"/>
+                            </af:button>
+                            <af:button actionListener="#{bindings.CreateInsert.execute}" text="Добавить"
+                                       disabled="#{!bindings.CreateInsert.enabled}" id="b2"
+                                       rendered="#{bindings.Id.inputValue == null ? true : false}"/>
+                            <af:button actionListener="#{bindings.Commit.execute}" text="Сохранить"
+                                       disabled="#{!bindings.Commit.enabled}" id="b3">
+                                <af:setPropertyListener from="#{0}" to="#{bindings.Editable.inputValue}" type="action"/>
+                            </af:button>
+                            <af:button actionListener="#{bindings.Rollback.execute}" text="Отменить"
+                                       disabled="#{!bindings.Rollback.enabled}" immediate="true" id="b4">
+                                <af:resetActionListener/>
+                            </af:button>
+                        </af:toolbar>
+                    </f:facet>
+                    <af:panelFormLayout id="pfl1">
+                        <af:inputText value="#{bindings.Id.inputValue}" label="#{bindings.Id.hints.label}"
+                                      required="#{bindings.Id.hints.mandatory}"
+                                      columns="#{bindings.Id.hints.displayWidth}"
+                                      maximumLength="#{bindings.Id.hints.precision}"
+                                      shortDesc="#{bindings.Id.hints.tooltip}" id="it1"
+                                      readOnly="#{bindings.Editable.inputValue == 1 ? false : true}" visible="false">
+                            <f:validator binding="#{bindings.Id.validator}"/>
+                        </af:inputText>
+                        <af:inputDate value="#{bindings.DateAfter.inputValue}" label="#{bindings.DateAfter.hints.label}"
+                                      required="#{bindings.DateAfter.hints.mandatory}"
+                                      columns="#{bindings.DateAfter.hints.displayWidth}"
+                                      shortDesc="#{bindings.DateAfter.hints.tooltip}" id="id1"
+                                      readOnly="#{bindings.Editable.inputValue == 1 ? false : true}">
+                            <f:validator binding="#{bindings.DateAfter.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.DateAfter.format}"/>
+                        </af:inputDate>
+                        <af:inputText value="#{bindings.Editable.inputValue}" label="#{bindings.Editable.hints.label}"
+                                      required="#{bindings.Editable.hints.mandatory}"
+                                      columns="#{bindings.Editable.hints.displayWidth}"
+                                      maximumLength="#{bindings.Editable.hints.precision}"
+                                      shortDesc="#{bindings.Editable.hints.tooltip}" id="it2" visible="false">
+                            <f:validator binding="#{bindings.Editable.validator}"/>
+                            <af:convertNumber groupingUsed="false" pattern="#{bindings.Editable.format}"/>
+                        </af:inputText>
+                    </af:panelFormLayout>
+                </af:panelBox>
+            </af:gridCell>
+        </af:gridRow>
+    </af:panelGridLayout>
+</ui:composition>
