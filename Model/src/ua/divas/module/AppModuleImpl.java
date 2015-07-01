@@ -3936,5 +3936,37 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ProgSettingsViewImpl getProgSettingsView1() {
         return (ProgSettingsViewImpl) findViewObject("ProgSettingsView1");
     }
+
+    /**
+     * Container's getter for ProrabReport1.
+     * @return ProrabReport1
+     */
+    public ViewObjectImpl getProrabReport1() {
+        return (ViewObjectImpl) findViewObject("ProrabReport1");
+    }
+
+    /**
+     * Container's getter for ProrabProrabRepFkLink1.
+     * @return ProrabProrabRepFkLink1
+     */
+    public ViewLinkImpl getProrabProrabRepFkLink1() {
+        return (ViewLinkImpl) findViewLink("ProrabProrabRepFkLink1");
+    }
+
+    /**
+     * Container's getter for VwSupplierMoves3.
+     * @return VwSupplierMoves3
+     */
+    public VwSupplierMovesImpl getVwSupplierMoves3() {
+        return (VwSupplierMovesImpl) findViewObject("VwSupplierMoves3");
+    }
+
+    /**
+     * Container's getter for ProrabSupplierFkLink1.
+     * @return ProrabSupplierFkLink1
+     */
+    public ViewLinkImpl getProrabSupplierFkLink1() {
+        return (ViewLinkImpl) findViewLink("ProrabSupplierFkLink1");
+    }
 }
 

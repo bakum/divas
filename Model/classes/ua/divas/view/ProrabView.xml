@@ -190,6 +190,55 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     EntityUsage="Kontragents"
     AliasName="VERSION"
     IsQueriable="false"/>
+  <ViewAttribute
+    Name="TotalSumm"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[ProrabReport.sum("Summ != null ? Summ : 0")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalOrderSumm"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[ProrabReport.sum("SummOrder != null ? SummOrder : 0")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DebtSupplier"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[VwSupplierMoves.sum("SumSumm != null ? (-1)*SumSumm : 0")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewLinkAccessor
+    Name="ProrabReport"
+    ViewLink="ua.divas.view.ProrabProrabRepFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="VwSupplierMoves"
+    ViewLink="ua.divas.view.ProrabSupplierFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

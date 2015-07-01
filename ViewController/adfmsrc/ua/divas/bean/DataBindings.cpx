@@ -60,6 +60,7 @@
     <page path="/editProfit.jsf" usageId="ua_divas_bean_editProfitPageDef"/>
     <page path="/profit.jsff" usageId="ua_divas_bean_profitPageDef"/>
     <page path="/prog_config.jsff" usageId="ua_divas_bean_prog_configPageDef"/>
+    <page path="/prorab_report.jsff" usageId="ua_divas_bean_prorab_reportPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="ua_divas_view_indexPageDef" path="ua.divas.bean.pageDefs.indexPageDef"/>
@@ -114,6 +115,7 @@
     <page id="ua_divas_bean_editProfitPageDef" path="ua.divas.bean.pageDefs.editProfitPageDef"/>
     <page id="ua_divas_bean_profitPageDef" path="ua.divas.bean.pageDefs.profitPageDef"/>
     <page id="ua_divas_bean_prog_configPageDef" path="ua.divas.bean.pageDefs.prog_configPageDef"/>
+    <page id="ua_divas_bean_prorab_reportPageDef" path="ua.divas.bean.pageDefs.prorab_reportPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <dc id="DataPackage" path="ua.divas.bean.DataPackage"/>

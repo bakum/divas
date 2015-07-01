@@ -8,6 +8,9 @@
                 <af:panelBox text="Производители работ" id="pb1" type="flow">
                     <f:facet name="toolbar">
                         <af:toolbar id="t3">
+                            <af:group id="g1">
+                                <af:link text="График выполнения работ" id="l1" action="to_report"/>
+                            </af:group>
                             <af:button actionListener="#{bindings.CreateInsert.execute}" text="Добавить"
                                        disabled="#{bindings.Commit.enabled}" id="b2"/>
                             <af:button text="Сохранить"

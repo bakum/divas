@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 import oracle.jbo.AttributeList;
+import oracle.jbo.RowIterator;
+import oracle.jbo.domain.Number;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.ViewRowImpl;
 
@@ -16,8 +18,10 @@ import ua.divas.model.KontragentsImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class ProrabViewRowImpl extends ViewRowImpl {
+
+
     public static final int ENTITY_KONTRAGENTS = 0;
-    
+
     @Override
     public boolean isAttributeUpdateable(int i) {
         BigDecimal editable = this.getEditable();
@@ -55,8 +59,14 @@ public class ProrabViewRowImpl extends ViewRowImpl {
         Editable,
         UrFiz,
         UserId,
-        Version;
-        private static AttributesEnum[] vals = null;
+        Version,
+        TotalSumm,
+        TotalOrderSumm,
+        DebtSupplier,
+        ProrabReport,
+        VwSupplierMoves;
+        static AttributesEnum[] vals = null;
+        ;
         private static final int firstIndex = 0;
 
         public int index() {
@@ -78,6 +88,8 @@ public class ProrabViewRowImpl extends ViewRowImpl {
             return vals;
         }
     }
+
+
     public static final int DELETED = AttributesEnum.Deleted.index();
     public static final int FULLNAME = AttributesEnum.Fullname.index();
     public static final int ID = AttributesEnum.Id.index();
@@ -95,6 +107,11 @@ public class ProrabViewRowImpl extends ViewRowImpl {
     public static final int URFIZ = AttributesEnum.UrFiz.index();
     public static final int USERID = AttributesEnum.UserId.index();
     public static final int VERSION = AttributesEnum.Version.index();
+    public static final int TOTALSUMM = AttributesEnum.TotalSumm.index();
+    public static final int TOTALORDERSUMM = AttributesEnum.TotalOrderSumm.index();
+    public static final int DEBTSUPPLIER = AttributesEnum.DebtSupplier.index();
+    public static final int PRORABREPORT = AttributesEnum.ProrabReport.index();
+    public static final int VWSUPPLIERMOVES = AttributesEnum.VwSupplierMoves.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -380,6 +397,44 @@ public class ProrabViewRowImpl extends ViewRowImpl {
      */
     public void setVersion(Timestamp value) {
         setAttributeInternal(VERSION, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute TotalSumm.
+     * @return the TotalSumm
+     */
+    public Number getTotalSumm() {
+        return (Number) getAttributeInternal(TOTALSUMM);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute TotalOrderSumm.
+     * @return the TotalOrderSumm
+     */
+    public Number getTotalOrderSumm() {
+        return (Number) getAttributeInternal(TOTALORDERSUMM);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute DebtSupplier.
+     * @return the DebtSupplier
+     */
+    public Number getDebtSupplier() {
+        return (Number) getAttributeInternal(DEBTSUPPLIER);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link ProrabReport.
+     */
+    public RowIterator getProrabReport() {
+        return (RowIterator) getAttributeInternal(PRORABREPORT);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link VwSupplierMoves.
+     */
+    public RowIterator getVwSupplierMoves() {
+        return (RowIterator) getAttributeInternal(VWSUPPLIERMOVES);
     }
 }
 
