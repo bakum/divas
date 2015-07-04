@@ -119,6 +119,10 @@
                                                 <af:convertNumber groupingUsed="false"
                                                                   pattern="#{bindings.OtherZatratyView1.hints.TotalZatr.format}"/>
                                             </af:inputText>
+                                            <f:facet name="footer">
+                                                <af:outputText value="#{bindings.OtherZatratyView1Iterator.viewObject.sum['TotalZatr']}" id="ot8"
+                                                               inlineStyle="font-weight: bold;"/>
+                                            </f:facet>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.OtherZatratyView1.hints.DivisionId.name}"
                                                    sortable="true"
@@ -197,7 +201,7 @@
                                                     </af:commandMenuItem>
                                                 </af:menu>
                                             </af:popup>
-                                        </f:facet>
+                                        </f:facet><f:facet name="footer"/>
                                     </af:table>
                                     <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateEdit"
                                               contentDelivery="lazyUncached" popupFetchListener="#{other.onPopupFetch}"
@@ -478,10 +482,10 @@
                                         <af:panelGroupLayout layout="vertical" id="pgl2">
                                             <af:panelHeader text="Административные затраты" id="ph1">
                                                 <af:query id="qryId1" headerText="Фильтр" disclosed="true"
-                                                          value="#{bindings.ImplicitViewCriteriaQuery.queryDescriptor}"
-                                                          model="#{bindings.ImplicitViewCriteriaQuery.queryModel}"
-                                                          queryListener="#{bindings.ImplicitViewCriteriaQuery.processQuery}"
-                                                          queryOperationListener="#{bindings.ImplicitViewCriteriaQuery.processQueryOperation}"
+                                                          value="#{bindings.OtherZatratyDateQuery.queryDescriptor}"
+                                                          model="#{bindings.OtherZatratyDateQuery.queryModel}"
+                                                          queryListener="#{bindings.OtherZatratyDateQuery.processQuery}"
+                                                          queryOperationListener="#{bindings.OtherZatratyDateQuery.processQueryOperation}"
                                                           type="flow" resultComponentId="::t1"/>
                                             </af:panelHeader>
                                         </af:panelGroupLayout>

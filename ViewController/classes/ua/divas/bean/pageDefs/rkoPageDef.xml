@@ -10,6 +10,8 @@
       </sortCriteria>
     </iterator>
     <iterator Binds="VwRkoMoves2" RangeSize="25" DataControl="AppModuleDataControl" id="VwRkoMoves2Iterator"/>
+    <searchRegion Criteria="RkoViewCriteriaDate" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="RkoView1Iterator" id="RkoViewCriteriaDateQuery"/>
   </executables>
   <bindings>
     <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>

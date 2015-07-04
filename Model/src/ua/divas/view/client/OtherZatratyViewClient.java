@@ -16,6 +16,7 @@ public class OtherZatratyViewClient extends ViewUsageImpl implements OtherZatrat
     public OtherZatratyViewClient() {
     }
 
+
     public void addEntry(String _id) {
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "addEntry", new String[] {
                                                                          "java.lang.String" }, new Object[] { _id });

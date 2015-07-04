@@ -27,7 +27,8 @@ public class ProgSettingsImpl extends DivasEntityNoDelete {
      */
     public enum AttributesEnum {
         Id,
-        DateAfter;
+        DateAfter,
+        DateAfterProfit;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -50,13 +51,22 @@ public class ProgSettingsImpl extends DivasEntityNoDelete {
             return vals;
         }
     }
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int DATEAFTER = AttributesEnum.DateAfter.index();
+    public static final int DATEAFTERPROFIT = AttributesEnum.DateAfterProfit.index();
 
     /**
      * This is the default constructor (do not remove).
      */
     public ProgSettingsImpl() {
+    }
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("ua.divas.model.ProgSettings");
     }
 
     /**
@@ -92,6 +102,22 @@ public class ProgSettingsImpl extends DivasEntityNoDelete {
     }
 
     /**
+     * Gets the attribute value for DateAfterProfit, using the alias name DateAfterProfit.
+     * @return the value of DateAfterProfit
+     */
+    public Timestamp getDateAfterProfit() {
+        return (Timestamp) getAttributeInternal(DATEAFTERPROFIT);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for DateAfterProfit.
+     * @param value value to set the DateAfterProfit
+     */
+    public void setDateAfterProfit(Timestamp value) {
+        setAttributeInternal(DATEAFTERPROFIT, value);
+    }
+
+    /**
      * @param id key constituent
 
      * @return a Key object based on given key constituents.
@@ -100,11 +126,5 @@ public class ProgSettingsImpl extends DivasEntityNoDelete {
         return new Key(new Object[] { id });
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("ua.divas.model.ProgSettings");
-    }
 }
 

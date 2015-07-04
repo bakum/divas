@@ -17,6 +17,7 @@ import ua.divas.model.ProgSettingsImpl;
 // ---------------------------------------------------------------------
 public class ProgSettingsViewRowImpl extends ViewRowImpl {
 
+
     public static final int ENTITY_PROGSETTINGS = 0;
 
     @Override
@@ -42,6 +43,7 @@ public class ProgSettingsViewRowImpl extends ViewRowImpl {
     public enum AttributesEnum {
         Id,
         DateAfter,
+        DateAfterProfit,
         Editable;
         static AttributesEnum[] vals = null;
         ;
@@ -67,8 +69,10 @@ public class ProgSettingsViewRowImpl extends ViewRowImpl {
         }
     }
 
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int DATEAFTER = AttributesEnum.DateAfter.index();
+    public static final int DATEAFTERPROFIT = AttributesEnum.DateAfterProfit.index();
     public static final int EDITABLE = AttributesEnum.Editable.index();
 
     /**
@@ -131,6 +135,22 @@ public class ProgSettingsViewRowImpl extends ViewRowImpl {
      */
     public void setEditable(BigDecimal value) {
         setAttributeInternal(EDITABLE, value);
+    }
+
+    /**
+     * Gets the attribute value for DATE_AFTER_PROFIT using the alias name DateAfterProfit.
+     * @return the DATE_AFTER_PROFIT
+     */
+    public Timestamp getDateAfterProfit() {
+        return (Timestamp) getAttributeInternal(DATEAFTERPROFIT);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for DATE_AFTER_PROFIT using the alias name DateAfterProfit.
+     * @param value value to set the DATE_AFTER_PROFIT
+     */
+    public void setDateAfterProfit(Timestamp value) {
+        setAttributeInternal(DATEAFTERPROFIT, value);
     }
 }
 

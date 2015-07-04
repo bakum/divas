@@ -31,6 +31,12 @@
             </SchemaBasedProperties>
         </Properties>
     </Variable>
+    <Variable
+        Name="s_dat"
+        Kind="viewcriteria"
+        Type="java.sql.Timestamp">
+        <TransientExpression><![CDATA[viewObject.getDateLast()]]></TransientExpression>
+    </Variable>
     <ViewAccessor
       Name="DivisionsView1"
       ViewObjectName="ua.divas.view.DivisionsView"
@@ -185,7 +191,7 @@
         dual) oth_editable,
         OtherZatraty.ACTIVITIES_ID,
         'Прочие затраты' ObjName,
-        UTILITY.enable_edit(OtherZatraty.DAT) enbl
+        UTILITY.enable_edit(OtherZatraty.ID, 'other_zatraty') enbl
 FROM  OTHER_ZATRATY OtherZatraty
 where deleted = 0 and
 upper(OtherZatraty.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))]]></SQLQuery>
@@ -205,8 +211,7 @@ upper(OtherZatraty.USER_ID) in (select upper(N) from table(cast(get_users(:u_nam
       PrecisionRule="true"
       EntityAttrName="Dat"
       EntityUsage="OtherZatraty"
-      AliasName="DAT"
-      IsQueriable="false"/>
+      AliasName="DAT"/>
     <ViewAttribute
       Name="Num"
       PrecisionRule="true"
@@ -301,7 +306,7 @@ upper(OtherZatraty.USER_ID) in (select upper(N) from table(cast(get_users(:u_nam
       EntityUsage="OtherZatraty"
       AliasName="KASSA_ID"
       LOVName="LOV_KassaId"
-      IsQueriable="false">
+        IsQueriable="false">
         <TransientExpression><![CDATA[viewObject.retrieveKassaId()]]></TransientExpression>
         <Properties>
             <SchemaBasedProperties>
@@ -366,7 +371,8 @@ upper(OtherZatraty.USER_ID) in (select upper(N) from table(cast(get_users(:u_nam
         ColumnType="NUMBER"
         AliasName="ENBL"
         Expression="ENBL"
-        SQLType="NUMERIC"/>
+        SQLType="NUMERIC"
+        IsQueriable="false"/>
     <ViewAttribute
       Name="TotalZatr"
       IsUpdateable="false"
@@ -389,6 +395,46 @@ upper(OtherZatraty.USER_ID) in (select upper(N) from table(cast(get_users(:u_nam
             </SchemaBasedProperties>
         </Properties>
     </ViewAttribute>
+    <ViewCriteria
+        Name="OtherZatratyDate"
+        ViewObjectName="ua.divas.view.OtherZatratyView"
+        Conjunction="AND">
+        <Properties>
+            <CustomProperties>
+                <Property
+                    Name="displayOperators"
+                    Value="InAdvancedMode"/>
+                <Property
+                    Name="displayName"
+                    ResId="displayName"/>
+                <Property
+                    Name="autoExecute"
+                    Value="true"/>
+                <Property
+                    Name="allowConjunctionOverride"
+                    Value="true"/>
+                <Property
+                    Name="showInList"
+                    Value="true"/>
+                <Property
+                    Name="mode"
+                    Value="Basic"/>
+            </CustomProperties>
+        </Properties>
+        <ViewCriteriaRow
+            Name="OtherZatratyViewCriteria_row_0"
+            UpperColumns="1">
+            <ViewCriteriaItem
+                Name="Dat"
+                ViewAttribute="Dat"
+                Operator="ONORAFTER"
+                Conjunction="AND"
+                Value=":s_dat"
+                GenerateIsNullClauseForBindVars="false"
+                IsBindVarValue="true"
+                Required="Optional"/>
+        </ViewCriteriaRow>
+    </ViewCriteria>
     <ViewLinkAccessor
       Name="OtherZatratyTabPartZatratyView"
       ViewLink="ua.divas.view.OtherZatratyTabPartZaFk1Link"

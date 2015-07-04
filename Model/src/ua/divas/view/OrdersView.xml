@@ -418,7 +418,7 @@
         ID = AGENT_ID) Agent_Name,
     Orders.SUMM_PLAN SUMM_PLAN,
     'Заказ' ObjName,
-    UTILITY.enable_edit(Orders.DAT) enbl
+    UTILITY.enable_edit(Orders.ID,'orders') enbl
 FROM 
     ORDERS Orders 
 WHERE 
@@ -737,7 +737,8 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
         PrecisionRule="true"
         EntityAttrName="AgentId"
         EntityUsage="Orders"
-        AliasName="AGENT_ID">
+        AliasName="AGENT_ID"
+        IsQueriable="false">
         <Dependencies>
             <Item
                 Value="AgentName"/>
@@ -794,7 +795,8 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
       ColumnType="CHAR"
       AliasName="OBJNAME"
       Expression="OBJNAME"
-      SQLType="VARCHAR">
+      SQLType="VARCHAR"
+        IsQueriable="false">
         <DesignTime>
             <Attr Name="_DisplaySize" Value="5"/>
         </DesignTime>
@@ -808,7 +810,8 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
         ColumnType="NUMBER"
         AliasName="ENBL"
         Expression="ENBL"
-        SQLType="NUMERIC"/>
+        SQLType="NUMERIC"
+        IsQueriable="false"/>
     <ViewAttribute
       Name="TotalSumUslugi"
       IsUpdateable="false"

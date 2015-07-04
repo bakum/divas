@@ -10,11 +10,11 @@
         <sort attribute="Dat" ascending="false"/>
       </sortCriteria>
     </iterator>
-    <searchRegion Criteria="__ImplicitViewCriteria__" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
-                  Binds="OtherZatratyView1Iterator" id="ImplicitViewCriteriaQuery"/>
     <iterator Binds="OtherZatratyTabPartZatratyView2" RangeSize="5" DataControl="AppModuleDataControl"
               id="OtherZatratyTabPartZatratyView2Iterator"/>
     <iterator Binds="VwOtherMoves2" RangeSize="25" DataControl="AppModuleDataControl" id="VwOtherMoves2Iterator"/>
+    <searchRegion Criteria="OtherZatratyDate" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="OtherZatratyView1Iterator" id="OtherZatratyDateQuery"/>
   </executables>
   <bindings>
     <tree IterBinding="OtherZatratyView1Iterator" id="OtherZatratyView1">

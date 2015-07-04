@@ -45,6 +45,22 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="DateAfterProfit"
+    ColumnName="DATE_AFTER_PROFIT"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="PROG_SETTINGS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.ProgSettings.DateAfterProfit_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.ProgSettings.DateAfterProfit_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Key
     Name="ProgSettingsPk"
     PrimaryKey="true">

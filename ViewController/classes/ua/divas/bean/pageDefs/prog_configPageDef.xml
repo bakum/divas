@@ -27,5 +27,10 @@
             Action="createInsertRow"/>
     <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
     <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <attributeValues IterBinding="ProgSettingsView1Iterator" id="DateAfterProfit">
+      <AttrNames>
+        <Item Value="DateAfterProfit"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

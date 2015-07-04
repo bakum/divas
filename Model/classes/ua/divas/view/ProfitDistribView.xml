@@ -19,6 +19,12 @@
     <Attr Name="_isExpertMode" Value="true"/>
     <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
+  <Variable
+    Name="s_dat"
+    Kind="viewcriteria"
+    Type="java.sql.Timestamp">
+    <TransientExpression><![CDATA[viewObject.getDateLast()]]></TransientExpression>
+  </Variable>
   <ViewAccessor
     Name="DivisionsView1"
     ViewObjectName="ua.divas.view.DivisionsView"
@@ -124,7 +130,7 @@
        ProfitDistrib.ACTIVITIES_ID, 
        ProfitDistrib.SUMM,
        (select 0 from dual) Editable,
-       UTILITY.enable_edit(ProfitDistrib.DAT) enbl
+       UTILITY.enable_edit(ProfitDistrib.ID, 'PROFIT_DISTRIB') enbl
 FROM  PROFIT_DISTRIB ProfitDistrib]]></SQLQuery>
   <EntityUsage
     Name="ProfitDistrib"
@@ -135,7 +141,8 @@ FROM  PROFIT_DISTRIB ProfitDistrib]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="ProfitDistrib"
-    AliasName="ID"/>
+    AliasName="ID"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Dat"
     IsNotNull="true"
@@ -155,14 +162,16 @@ FROM  PROFIT_DISTRIB ProfitDistrib]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Deleted"
     EntityUsage="ProfitDistrib"
-    AliasName="DELETED"/>
+    AliasName="DELETED"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Posted"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Posted"
     EntityUsage="ProfitDistrib"
-    AliasName="POSTED"/>
+    AliasName="POSTED"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="DivisionId"
     IsNotNull="true"
@@ -200,13 +209,15 @@ FROM  PROFIT_DISTRIB ProfitDistrib]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Comments"
     EntityUsage="ProfitDistrib"
-    AliasName="COMMENTS"/>
+    AliasName="COMMENTS"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Version"
     PrecisionRule="true"
     EntityAttrName="Version"
     EntityUsage="ProfitDistrib"
-    AliasName="VERSION"/>
+    AliasName="VERSION"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="CurrId"
     IsNotNull="true"
@@ -255,7 +266,8 @@ FROM  PROFIT_DISTRIB ProfitDistrib]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="EDITABLE"
     Expression="EDITABLE"
-    SQLType="NUMERIC"/>
+    SQLType="NUMERIC"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Enbl"
     IsUpdateable="false"
@@ -265,7 +277,48 @@ FROM  PROFIT_DISTRIB ProfitDistrib]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="ENBL"
     Expression="ENBL"
-    SQLType="NUMERIC"/>
+    SQLType="NUMERIC"
+    IsQueriable="false"/>
+  <ViewCriteria
+    Name="ProfitDistribViewCriteriaData"
+    ViewObjectName="ua.divas.view.ProfitDistribView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="displayName"
+          ResId="displayName"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="ProfitDistribViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Dat"
+        ViewAttribute="Dat"
+        Operator="ONORAFTER"
+        Conjunction="AND"
+        Value=":s_dat"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="ProfitDistribTpView"
     ViewLink="ua.divas.view.ProfitDistribTpFk1Link"
@@ -306,4 +359,8 @@ FROM  PROFIT_DISTRIB ProfitDistrib]]></SQLQuery>
         Type="java.math.BigDecimal"/>
     </Method>
   </ClientInterface>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>

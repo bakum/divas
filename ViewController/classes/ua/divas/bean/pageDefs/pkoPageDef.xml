@@ -10,6 +10,8 @@
       </sortCriteria>
     </iterator>
     <iterator Binds="VwPkoMoves2" RangeSize="25" DataControl="AppModuleDataControl" id="VwPkoMoves2Iterator"/>
+    <searchRegion Criteria="PkoViewCriteriaDate" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="PkoView1Iterator" id="PkoViewCriteriaDateQuery"/>
   </executables>
   <bindings>
     <tree IterBinding="PkoView1Iterator" id="PkoView1">

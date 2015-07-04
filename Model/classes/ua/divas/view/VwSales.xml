@@ -44,6 +44,12 @@
       </SchemaBasedProperties>
     </Properties>
   </Variable>
+  <Variable
+    Name="s_dat"
+    Kind="viewcriteria"
+    Type="java.sql.Timestamp">
+    <TransientExpression><![CDATA[viewObject.getDateLast1()]]></TransientExpression>
+  </Variable>
   <ViewAccessor
     Name="OrdersView1"
     ViewObjectName="ua.divas.view.OrdersView"
@@ -367,6 +373,46 @@ where
         Value="FactSebestSumma"/>
     </Dependencies>
   </ViewAttribute>
+  <ViewCriteria
+    Name="VwSalesCriteriaDate"
+    ViewObjectName="ua.divas.view.VwSales"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="displayName"
+          ResId="displayName"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="VwSalesCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Period"
+        ViewAttribute="Period"
+        Operator="ONORAFTER"
+        Conjunction="AND"
+        Value=":s_dat"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <AttrArray Name="KeyAttributes">
     <Item Value="OrderId"/>
   </AttrArray>

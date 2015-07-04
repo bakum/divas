@@ -44,6 +44,15 @@
                             <f:validator binding="#{bindings.DateAfter.validator}"/>
                             <af:convertDateTime pattern="#{bindings.DateAfter.format}"/>
                         </af:inputDate>
+                        <af:inputDate value="#{bindings.DateAfterProfit.inputValue}"
+                                      label="#{bindings.DateAfterProfit.hints.label}"
+                                      required="#{bindings.DateAfterProfit.hints.mandatory}"
+                                      columns="#{bindings.DateAfterProfit.hints.displayWidth}"
+                                      shortDesc="#{bindings.DateAfterProfit.hints.tooltip}" id="id2"
+                                      readOnly="#{bindings.Editable.inputValue == 1 ? false : true}">
+                            <f:validator binding="#{bindings.DateAfterProfit.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.DateAfterProfit.format}"/>
+                        </af:inputDate>
                         <af:inputText value="#{bindings.Editable.inputValue}" label="#{bindings.Editable.hints.label}"
                                       required="#{bindings.Editable.hints.mandatory}"
                                       columns="#{bindings.Editable.hints.displayWidth}"

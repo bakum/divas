@@ -7,7 +7,7 @@
                 <!-- Content -->
                 <af:decorativeBox id="db1" theme="medium">
                     <f:facet name="center">
-                        <af:panelStretchLayout id="psl1">
+                        <af:panelStretchLayout id="psl1" dimensionsFrom="children">
                             <f:facet name="bottom"/>
                             <f:facet name="center">
                                 <af:panelBox text="Приходные кассовые ордера" id="pb1" type="flow">
@@ -103,7 +103,12 @@
                                             </af:selectOneChoice>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.PkoView1.hints.Summa.name}" sortable="true"
-                                                   headerText="#{bindings.PkoView1.hints.Summa.label}" id="c7">
+                                                   headerText="#{bindings.PkoView1.hints.Summa.label}" id="c7"
+                                                   align="right">
+                                            <f:facet name="footer">
+                                                <af:outputText value="#{bindings.PkoView1Iterator.viewObject.sum['Summa']}" id="ot13"
+                                                               inlineStyle="font-weight: bold;"/>
+                                            </f:facet>
                                             <af:outputText value="#{row.Summa}"
                                                            shortDesc="#{bindings.PkoView1.hints.Summa.tooltip}"
                                                            id="ot5"/>
@@ -180,7 +185,7 @@
                                                 <af:outputFormatted value="#{row.bindings.Comments.inputValue}"
                                                                     id="of1"/>
                                             </af:panelLabelAndMessage>
-                                        </f:facet>
+                                        </f:facet><f:facet name="footer"/>
                                     </af:table>
                                     <af:popup childCreation="deferred" autoCancel="disabled" id="pEntry"
                                               contentDelivery="lazyUncached">
@@ -249,7 +254,22 @@
                                     </af:popup>
                                 </af:panelBox>
                             </f:facet>
-                            <f:facet name="start"/>
+                            <f:facet name="start">
+                                <af:panelDrawer id="pd1" position="left" height="60%" width="60%">
+                                    <af:showDetailItem text="ПКО" id="sdi1" icon="/img/search.png">
+                                        <af:panelGroupLayout layout="vertical" id="pgl2">
+                                            <af:panelHeader text="Приходные кассовые ордера" id="ph1">
+                                                <af:query id="qryId1" headerText="Фильтр" disclosed="true"
+                                                          value="#{bindings.PkoViewCriteriaDateQuery.queryDescriptor}"
+                                                          model="#{bindings.PkoViewCriteriaDateQuery.queryModel}"
+                                                          queryListener="#{bindings.PkoViewCriteriaDateQuery.processQuery}"
+                                                          queryOperationListener="#{bindings.PkoViewCriteriaDateQuery.processQueryOperation}"
+                                                          resultComponentId="::t1"/>
+                                            </af:panelHeader>
+                                        </af:panelGroupLayout>
+                                    </af:showDetailItem>
+                                </af:panelDrawer>
+                            </f:facet>
                             <f:facet name="end"/>
                             <f:facet name="top"/>
                         </af:panelStretchLayout>

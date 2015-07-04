@@ -487,18 +487,32 @@
                                                               visible="false">
                                                     <f:validator binding="#{bindings.AgentId.validator}"/>
                                                 </af:inputText>
-                                                <af:inputComboboxListOfValues id="agentNameId"
-                                                                              popupTitle="Search and Select: #{bindings.AgentName.hints.label}"
-                                                                              value="#{bindings.AgentName.inputValue}"
-                                                                              label="#{bindings.AgentName.hints.label}"
-                                                                              model="#{bindings.AgentName.listOfValuesModel}"
-                                                                              required="#{bindings.AgentName.hints.mandatory}"
-                                                                              columns="#{bindings.AgentName.hints.displayWidth}"
-                                                                              shortDesc="#{bindings.AgentName.hints.tooltip}"
-                                                                              labelStyle="font-weight: bold;"
-                                                                              readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
-                                                    <f:validator binding="#{bindings.AgentName.validator}"/>
-                                                </af:inputComboboxListOfValues>
+                                                <af:panelGroupLayout id="pgl17" layout="horizontal">
+                                                    <af:inputComboboxListOfValues id="agentNameId"
+                                                                                  popupTitle="Search and Select: #{bindings.AgentName.hints.label}"
+                                                                                  value="#{bindings.AgentName.inputValue}"
+                                                                                  label="#{bindings.AgentName.hints.label}"
+                                                                                  model="#{bindings.AgentName.listOfValuesModel}"
+                                                                                  required="#{bindings.AgentName.hints.mandatory}"
+                                                                                  columns="#{bindings.AgentName.hints.displayWidth}"
+                                                                                  shortDesc="#{bindings.AgentName.hints.tooltip}"
+                                                                                  labelStyle="font-weight: bold;"
+                                                                                  readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
+                                                        <f:validator binding="#{bindings.AgentName.validator}"/>
+                                                    </af:inputComboboxListOfValues>
+                                                    <af:inputComboboxListOfValues id="zamernameId"
+                                                                                  popupTitle="Search and Select: #{bindings.Zamername.hints.label}"
+                                                                                  value="#{bindings.Zamername.inputValue}"
+                                                                                  label="#{bindings.Zamername.hints.label}"
+                                                                                  model="#{bindings.Zamername.listOfValuesModel}"
+                                                                                  required="#{bindings.Zamername.hints.mandatory}"
+                                                                                  columns="#{bindings.Zamername.hints.displayWidth}"
+                                                                                  shortDesc="#{bindings.Zamername.hints.tooltip}"
+                                                                                  labelStyle="font-weight: bold;"
+                                                                                  readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
+                                                        <f:validator binding="#{bindings.Zamername.validator}"/>
+                                                    </af:inputComboboxListOfValues>
+                                                </af:panelGroupLayout>
                                                 <af:inputComboboxListOfValues id="zamerIdId"
                                                                               popupTitle="Search and Select: #{bindings.ZamerId.hints.label}"
                                                                               value="#{bindings.ZamerId.inputValue}"
@@ -509,18 +523,6 @@
                                                                               shortDesc="#{bindings.ZamerId.hints.tooltip}"
                                                                               visible="false">
                                                     <f:validator binding="#{bindings.ZamerId.validator}"/>
-                                                </af:inputComboboxListOfValues>
-                                                <af:inputComboboxListOfValues id="zamernameId"
-                                                                              popupTitle="Search and Select: #{bindings.Zamername.hints.label}"
-                                                                              value="#{bindings.Zamername.inputValue}"
-                                                                              label="#{bindings.Zamername.hints.label}"
-                                                                              model="#{bindings.Zamername.listOfValuesModel}"
-                                                                              required="#{bindings.Zamername.hints.mandatory}"
-                                                                              columns="#{bindings.Zamername.hints.displayWidth}"
-                                                                              shortDesc="#{bindings.Zamername.hints.tooltip}"
-                                                                              labelStyle="font-weight: bold;"
-                                                                              readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
-                                                    <f:validator binding="#{bindings.Zamername.validator}"/>
                                                 </af:inputComboboxListOfValues>
                                                 <af:inputDate value="#{bindings.DatZam.inputValue}"
                                                               label="#{bindings.DatZam.hints.label}"

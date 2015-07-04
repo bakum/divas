@@ -2,6 +2,9 @@ package ua.divas.view;
 
 import java.sql.Timestamp;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import oracle.jbo.NameValuePairs;
 import oracle.jbo.Row;
 import oracle.jbo.Variable;
@@ -9,6 +12,8 @@ import oracle.jbo.common.VariableImpl;
 import oracle.jbo.domain.Date;
 import oracle.jbo.server.ViewObjectImpl;
 import oracle.jbo.server.ViewRowSetImpl;
+
+import org.codehaus.groovy.runtime.InvokerHelper;
 
 import ua.divas.classes.DivasView;
 import ua.divas.view.common.OrdersView;
@@ -155,6 +160,36 @@ public class OrdersViewImpl extends DivasView implements OrdersView {
      */
     public void setu_name(String value) {
         setNamedWhereClauseParam("u_name", value);
+    }
+    
+    private class AgrFuncHelper extends HashMap {
+        private static final long serialVersionUID = 1L;
+        private String funcName;
+
+        public AgrFuncHelper(String funcName) {
+            super();
+            this.funcName = funcName;
+        }
+
+
+        public Object get(Object key) {
+            //Invoke private method
+            //of our DefaultRowSet (sum,count,avg,min,max)
+            //key is argument expression for the aggr funcion being called
+            //sum("Salary")
+
+            return InvokerHelper.invokeMethod(getDefaultRowSet(), funcName, key);
+        }
+
+
+    }
+    
+    public Map getSum() {
+        return new AgrFuncHelper("sum");
+    }
+
+    public Map getCount() {
+        return new AgrFuncHelper("count");
     }
 }
 

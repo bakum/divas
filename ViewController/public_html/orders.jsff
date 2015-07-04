@@ -69,7 +69,7 @@
                                                         <af:button id="b1" icon="/img/edit-16.gif"
                                                                    disabled="#{bindings.Commit.enabled}"
                                                                    action="viewOrder" useWindow="true"
-                                                                   windowHeight="520" windowWidth="780"
+                                                                   windowHeight="520" windowWidth="800"
                                                                    returnListener="#{orders.onReturnValue}"/>
                                                         <af:button id="b18" icon="/img/bell.png"
                                                                    disabled="#{bindings.Commit.enabled}">
@@ -199,6 +199,10 @@
                                                         <af:convertNumber groupingUsed="false"
                                                                           pattern="#{bindings.OrdersView1.hints.TotalSumOplaty.format}"/>
                                                     </af:inputText>
+                                                    <f:facet name="footer">
+                                                        <af:outputText value="#{bindings.OrdersView1Iterator.viewObject.sum['TotalSumOplaty']}" id="ot9"
+                                                                       inlineStyle="font-weight: bold;"/>
+                                                    </f:facet>
                                                 </af:column>
                                                 <af:column sortProperty="#{bindings.OrdersView1.hints.TotalSumUslugi.name}"
                                                            sortable="true"
@@ -246,6 +250,10 @@
                                                         <af:convertNumber groupingUsed="false"
                                                                           pattern="#{bindings.OrdersView1.hints.TotalSumm.format}"/>
                                                     </af:inputText>
+                                                    <f:facet name="footer">
+                                                        <af:outputText value="#{bindings.OrdersView1Iterator.viewObject.sum['TotalSumm']}" id="ot10"
+                                                                       inlineStyle="font-weight: bold;"/>
+                                                    </f:facet>
                                                 </af:column>
                                                 <af:column sortProperty="#{bindings.OrdersView1.hints.KassaId.name}"
                                                            sortable="true"
@@ -449,7 +457,7 @@
                                                             </af:commandMenuItem>
                                                         </af:menu>
                                                     </af:popup>
-                                                </f:facet>
+                                                </f:facet><f:facet name="footer"/>
                                             </af:table>
                                             <af:poll id="p1" pollListener="#{orders.onPollListener}" rendered="false"/>
                                         </af:panelBox>

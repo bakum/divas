@@ -19,6 +19,7 @@ import ua.divas.model.ProfitDistribImpl;
 // ---------------------------------------------------------------------
 public class ProfitDistribViewRowImpl extends ViewRowImpl {
 
+
     public static final int ENTITY_PROFITDISTRIB = 0;
 
     @Override
@@ -85,6 +86,7 @@ public class ProfitDistribViewRowImpl extends ViewRowImpl {
             return vals;
         }
     }
+
 
     public static final int ID = AttributesEnum.Id.index();
     public static final int DAT = AttributesEnum.Dat.index();

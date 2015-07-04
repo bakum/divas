@@ -11,6 +11,9 @@
       </sortCriteria>
     </iterator>
     <iterator Binds="VwProfitMoveVO1" RangeSize="25" DataControl="AppModuleDataControl" id="VwProfitMoveVO1Iterator"/>
+    <searchRegion Criteria="ProfitDistribViewCriteriaData"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" Binds="ProfitDistribView1Iterator"
+                  id="ProfitDistribViewCriteriaDataQuery"/>
   </executables>
   <bindings>
     <tree IterBinding="ProfitDistribView1Iterator" id="ProfitDistribView1">

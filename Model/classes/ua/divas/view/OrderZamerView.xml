@@ -395,7 +395,7 @@
        Orders.ZAMER_ID,
        (select fullname from kontragents where id = ZAMER_ID and rownum = 1) ZamerName,
        (select adress from contact_details where kontrag_id = Orders.KONTRAG_ID and rownum = 1) adress,
-       UTILITY.enable_edit(Orders.DAT) enbl
+       UTILITY.enable_edit(Orders.ID, 'orders') enbl
 FROM  ORDERS Orders
 where deleted = 0 and
 status_id in (:name1,:name2,:name3,:name4,:name5) and
@@ -610,7 +610,8 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users_for_zamer(:u
     ColumnType="VARCHAR2"
     AliasName="STATUS_NAME"
     Expression="STATUS_NAME"
-    SQLType="VARCHAR">
+    SQLType="VARCHAR"
+    IsQueriable="false">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
@@ -722,7 +723,8 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users_for_zamer(:u
     ColumnType="NUMBER"
     AliasName="ENBL"
     Expression="ENBL"
-    SQLType="NUMERIC"/>
+    SQLType="NUMERIC"
+    IsQueriable="false"/>
   <ViewCriteria
     Name="OrderZamerViewCriteria"
     ViewObjectName="ua.divas.view.OrderZamerView"
@@ -744,6 +746,9 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users_for_zamer(:u
         <Property
           Name="mode"
           Value="Basic"/>
+        <Property
+          Name="displayName"
+          ResId="displayName"/>
       </CustomProperties>
     </Properties>
     <ViewCriteriaRow

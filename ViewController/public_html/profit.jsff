@@ -7,7 +7,7 @@
                 <!-- Content -->
                 <af:decorativeBox id="db1" theme="medium">
                     <f:facet name="center">
-                        <af:panelStretchLayout id="psl1">
+                        <af:panelStretchLayout id="psl1" dimensionsFrom="children">
                             <f:facet name="bottom"/>
                             <f:facet name="center">
                                 <af:panelBox text="Распределение прибыли" id="pb1" type="flow">
@@ -66,13 +66,18 @@
                                         </af:column>
                                         <af:column sortProperty="#{bindings.ProfitDistribView1.hints.Summ.name}"
                                                    sortable="true"
-                                                   headerText="#{bindings.ProfitDistribView1.hints.Summ.label}" id="c8">
+                                                   headerText="#{bindings.ProfitDistribView1.hints.Summ.label}" id="c8"
+                                                   align="right">
                                             <af:outputText value="#{row.Summ}"
                                                            shortDesc="#{bindings.ProfitDistribView1.hints.Summ.tooltip}"
                                                            id="ot5">
                                                 <af:convertNumber groupingUsed="false"
                                                                   pattern="#{bindings.ProfitDistribView1.hints.Summ.format}"/>
                                             </af:outputText>
+                                            <f:facet name="footer">
+                                                <af:outputText value="#{bindings.ProfitDistribView1Iterator.viewObject.sum['Summ']}" id="ot14"
+                                                               inlineStyle="font-weight: bold;"/>
+                                            </f:facet>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.ProfitDistribView1.hints.CurrId.name}"
                                                    sortable="true"
@@ -179,7 +184,7 @@
                                                     </af:commandMenuItem>
                                                 </af:menu>
                                             </af:popup>
-                                        </f:facet>
+                                        </f:facet><f:facet name="footer"/>
                                     </af:table>
                                     <af:popup childCreation="deferred" autoCancel="disabled" id="pEntry"
                                               contentDelivery="lazyUncached">
@@ -242,7 +247,23 @@
                                     </af:popup>
                                 </af:panelBox>
                             </f:facet>
-                            <f:facet name="start"/>
+                            <f:facet name="start">
+                                <af:panelDrawer id="pd1" height="60%" width="60%" position="left">
+                                    <af:showDetailItem text="Фильтры" id="sdi1" icon="/img/search.png"
+                                                       stretchChildren="first">
+                                        <af:panelGroupLayout layout="vertical" id="pgl2">
+                                            <af:panelHeader text="Распределение прибыли" id="ph1">
+                                                <af:query id="qryId1" headerText="Фильтр" disclosed="true"
+                                                          value="#{bindings.ProfitDistribViewCriteriaDataQuery.queryDescriptor}"
+                                                          model="#{bindings.ProfitDistribViewCriteriaDataQuery.queryModel}"
+                                                          queryListener="#{bindings.ProfitDistribViewCriteriaDataQuery.processQuery}"
+                                                          queryOperationListener="#{bindings.ProfitDistribViewCriteriaDataQuery.processQueryOperation}"
+                                                          resultComponentId="::t1"/>
+                                            </af:panelHeader>
+                                        </af:panelGroupLayout>
+                                    </af:showDetailItem>
+                                </af:panelDrawer>
+                            </f:facet>
                             <f:facet name="end"/>
                             <f:facet name="top"/>
                         </af:panelStretchLayout>

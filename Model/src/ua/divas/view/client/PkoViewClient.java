@@ -23,16 +23,16 @@ public class PkoViewClient extends ViewUsageImpl implements PkoView {
         return;
     }
 
-    public String getOperationName(String Id) {
-        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "getOperationName", new String[] {
-                                                                         "java.lang.String" }, new Object[] { Id });
-        return (String) _ret;
-    }
-
     public void removeEntry(String _id) {
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "removeEntry", new String[] {
                                                                          "java.lang.String" }, new Object[] { _id });
         return;
+    }
+
+    public String getOperationName(String Id) {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "getOperationName", new String[] {
+                                                                         "java.lang.String" }, new Object[] { Id });
+        return (String) _ret;
     }
 }
 

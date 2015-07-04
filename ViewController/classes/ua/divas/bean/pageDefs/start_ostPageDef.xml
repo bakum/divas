@@ -11,6 +11,8 @@
     </iterator>
     <iterator Binds="VwStartOstMovesVO1" RangeSize="25" DataControl="AppModuleDataControl"
               id="VwStartOstMovesVO1Iterator"/>
+    <searchRegion Criteria="StartOstViewCriteriaData" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="StartOstView1Iterator" id="StartOstViewCriteriaDataQuery"/>
   </executables>
   <bindings>
     <tree IterBinding="StartOstView1Iterator" id="StartOstView1">

@@ -18,6 +18,7 @@
   </DesignTime>
   <SQLQuery><![CDATA[SELECT ProgSettings.ID, 
        ProgSettings.DATE_AFTER,
+       ProgSettings.DATE_AFTER_PROFIT,
        (select 0 from dual) Editable
 FROM  PROG_SETTINGS ProgSettings]]></SQLQuery>
   <EntityUsage
@@ -36,6 +37,14 @@ FROM  PROG_SETTINGS ProgSettings]]></SQLQuery>
     EntityAttrName="DateAfter"
     EntityUsage="ProgSettings"
     AliasName="DATE_AFTER">
+    <TransientExpression><![CDATA[viewObject.getDateLast()]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DateAfterProfit"
+    PrecisionRule="true"
+    EntityAttrName="DateAfterProfit"
+    EntityUsage="ProgSettings"
+    AliasName="DATE_AFTER_PROFIT">
     <TransientExpression><![CDATA[viewObject.getDateLast()]]></TransientExpression>
   </ViewAttribute>
   <ViewAttribute
