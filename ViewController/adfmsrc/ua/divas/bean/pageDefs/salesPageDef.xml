@@ -10,12 +10,8 @@
     </iterator>
     <searchRegion Binds="VwSales1Iterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   id="VwSales1Query"/>
-    <variableIterator id="variables">
-      <variableUsage DataControl="AppModuleDataControl" Binds="VwSales1.variablesMap.f_dat"
-                     Name="ExecuteWithParams_f_dat" IsQueriable="false"/>
-      <variableUsage DataControl="AppModuleDataControl" Binds="VwSales1.variablesMap.l_dat"
-                     Name="ExecuteWithParams_l_dat" IsQueriable="false"/>
-    </variableIterator>
+    <searchRegion Criteria="VwSalesCriteriaDate" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="VwSales1Iterator" id="VwSalesCriteriaDateQuery"/>
   </executables>
   <bindings>
     <tree IterBinding="VwSales1Iterator" id="VwSales1">
@@ -36,19 +32,6 @@
     </tree>
     <list StaticList="false" IterBinding="VwSales1Iterator" id="DivisionId" NullValueFlag="start"
           Uses="LOV_DivisionId"/>
-    <action IterBinding="VwSales1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true" Action="executeWithParams">
-      <NamedData NDName="f_dat" NDType="oracle.jbo.domain.Date" NDValue="${bindings.ExecuteWithParams_f_dat}"/>
-      <NamedData NDName="l_dat" NDType="oracle.jbo.domain.Date" NDValue="${bindings.ExecuteWithParams_l_dat}"/>
-    </action>
-    <attributeValues IterBinding="variables" id="f_dat">
-      <AttrNames>
-        <Item Value="ExecuteWithParams_f_dat"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="variables" id="l_dat">
-      <AttrNames>
-        <Item Value="ExecuteWithParams_l_dat"/>
-      </AttrNames>
-    </attributeValues>
+    <action IterBinding="VwSales1Iterator" id="Execute" RequiresUpdateModel="true" Action="iteratorExecute"/>
   </bindings>
 </pageDefinition>
