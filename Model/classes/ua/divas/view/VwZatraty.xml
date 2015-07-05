@@ -21,18 +21,6 @@
     </SchemaBasedProperties>
   </Properties>
   <Variable
-    Name="f_dat"
-    Kind="where"
-    Type="oracle.jbo.domain.Date">
-    <TransientExpression><![CDATA[viewObject.getDateLast()]]></TransientExpression>
-  </Variable>
-  <Variable
-    Name="l_dat"
-    Kind="where"
-    Type="oracle.jbo.domain.Date">
-    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
-  </Variable>
-  <Variable
     Name="u_name"
     Kind="where"
     Type="java.lang.String">
@@ -43,6 +31,18 @@
           Value="Hide"/>
       </SchemaBasedProperties>
     </Properties>
+  </Variable>
+  <Variable
+    Name="f_dat"
+    Kind="viewcriteria"
+    Type="java.sql.Timestamp">
+    <TransientExpression><![CDATA[viewObject.getDateLast()]]></TransientExpression>
+  </Variable>
+  <Variable
+    Name="l_dat"
+    Kind="viewcriteria"
+    Type="java.sql.Timestamp">
+    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
   </Variable>
   <ViewAccessor
     Name="OtherZatratyView1"
@@ -125,7 +125,7 @@
     VW_ZATRATY.DIVISION_ID DIVISION_ID, 
     VW_ZATRATY.PERIOD PERIOD
 FROM 
- table(cast(REPORT_PKG.GETZATRATY(:f_dat, :l_dat) as tbl_zatraty)) VW_ZATRATY
+  VW_ZATRATY
 where
  upper(VW_ZATRATY.DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))]]></SQLQuery>
   <ViewAttribute
@@ -139,7 +139,8 @@ where
     AliasName="REGISTRATOR_ID"
     Expression="REGISTRATOR_ID"
     SQLType="VARCHAR"
-    LOVName="LOV_RegistratorId">
+    LOVName="LOV_RegistratorId"
+    IsQueriable="false">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
@@ -164,7 +165,8 @@ where
     ColumnType="VARCHAR2"
     AliasName="TABLE_NAME"
     Expression="TABLE_NAME"
-    SQLType="VARCHAR">
+    SQLType="VARCHAR"
+    IsQueriable="false">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="100"/>
     </DesignTime>
@@ -187,7 +189,8 @@ where
     ColumnType="VARCHAR2"
     AliasName="CODE"
     Expression="CODE"
-    SQLType="VARCHAR">
+    SQLType="VARCHAR"
+    IsQueriable="false">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="6"/>
     </DesignTime>
@@ -254,7 +257,8 @@ where
     ColumnType="VARCHAR2"
     AliasName="ZATRATY_NAME"
     Expression="ZATRATY_NAME"
-    SQLType="VARCHAR">
+    SQLType="VARCHAR"
+    IsQueriable="false">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="150"/>
     </DesignTime>
@@ -311,6 +315,53 @@ where
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewCriteria
+    Name="VwZatratyCriteriaDate"
+    ViewObjectName="ua.divas.view.VwZatraty"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="displayName"
+          ResId="displayName"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="VwZatratyCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Period"
+        ViewAttribute="Period"
+        Operator="BETWEEN"
+        Conjunction="AND"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional">
+        <ViewCriteriaItemValue
+          Name="VwZatratyCriteriaDate_VwZatratyCriteria_row_0_Period_vcval0"
+          Value=":f_dat"
+          IsBindVarValue="true"/>
+        <ViewCriteriaItemValue
+          Name="VwZatratyCriteriaDate_VwZatratyCriteria_row_0_Period_vcval1"
+          Value=":l_dat"
+          IsBindVarValue="true"/>
+      </ViewCriteriaItem>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

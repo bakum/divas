@@ -25,8 +25,7 @@
                                               selectionListener="#{bindings.VwSales1.collectionModel.makeCurrent}"
                                               rowSelection="single" fetchSize="#{bindings.VwSales1.rangeSize}"
                                               filterModel="#{bindings.VwSales1Query.queryDescriptor}"
-                                              queryListener="#{bindings.VwSales1Query.processQuery}"
-                                              filterVisible="true" varStatus="vs" id="t1" binding="#{sales.tb}"
+                                              queryListener="#{bindings.VwSales1Query.processQuery}" varStatus="vs" id="t1" binding="#{sales.tb}"
                                               partialTriggers="::b2">
                                         <af:column id="c8" width="50" filterable="true" visible="false">
                                             <f:facet name="filter">

@@ -347,7 +347,8 @@ where
     Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
-    SQLType="NUMERIC">
+    SQLType="NUMERIC"
+    IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[((PlanSebestSumma == null ? 0 : PlanSebestSumma)-(FactSebestSumma == null ? 0 : FactSebestSumma))]]></TransientExpression>
     <Dependencies>
