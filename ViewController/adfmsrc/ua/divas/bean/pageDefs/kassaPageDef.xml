@@ -41,6 +41,7 @@
           <Item Value="TableName"/>
           <Item Value="RegString"/>
           <Item Value="PeriodName"/>
+          <Item Value="Discription"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

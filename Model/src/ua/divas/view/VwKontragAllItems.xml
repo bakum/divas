@@ -396,13 +396,13 @@ GROUP BY ID,
   <ViewAttribute
     Name="SumCalcAdd"
     IsUpdateable="false"
-    IsSelected="false"
     IsPersistent="false"
     PrecisionRule="true"
     Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
-    SQLType="NUMERIC">
+    SQLType="NUMERIC"
+    IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[VwBuyerMoves.sum("SumCalc != null ? SumCalc : 0")]]></TransientExpression>
   </ViewAttribute>

@@ -60,6 +60,7 @@ import ua.divas.view.VwKassaMovesImpl;
 import ua.divas.view.VwKontragAllItemsImpl;
 import ua.divas.view.VwKontragZamerImpl;
 import ua.divas.view.VwNotificationCalendarViewImpl;
+import ua.divas.view.VwRatingImpl;
 import ua.divas.view.VwSalesImpl;
 import ua.divas.view.VwSupplierMovesImpl;
 import ua.divas.view.VwZamerMovesImpl;
@@ -3967,6 +3968,22 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getProrabSupplierFkLink1() {
         return (ViewLinkImpl) findViewLink("ProrabSupplierFkLink1");
+    }
+
+    /**
+     * Container's getter for VwRating1.
+     * @return VwRating1
+     */
+    public VwRatingImpl getVwRating1() {
+        return (VwRatingImpl) findViewObject("VwRating1");
+    }
+
+    /**
+     * Container's getter for RatingSettingsView1.
+     * @return RatingSettingsView1
+     */
+    public ViewObjectImpl getRatingSettingsView1() {
+        return (ViewObjectImpl) findViewObject("RatingSettingsView1");
     }
 }
 

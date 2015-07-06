@@ -902,6 +902,12 @@
   <ViewUsage
     Name="VwSupplierMoves3"
     ViewObjectName="ua.divas.view.VwSupplierMoves"/>
+  <ViewUsage
+    Name="VwRating1"
+    ViewObjectName="ua.divas.view.VwRating"/>
+  <ViewUsage
+    Name="RatingSettingsView1"
+    ViewObjectName="ua.divas.view.RatingSettingsView"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"

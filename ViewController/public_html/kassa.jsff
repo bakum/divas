@@ -55,6 +55,10 @@
                                 </af:menu>
                             </af:popup>
                         </f:facet>
+                        <af:column id="c8" headerText="Примечание" width="300">
+                            <af:outputText value="#{node.bindings.Discription}" id="ot12"
+                                           inlineStyle="font-style:italic;"/>
+                        </af:column>
                     </af:treeTable>
                     <f:facet name="statusbar"/>
                 </af:panelCollection>

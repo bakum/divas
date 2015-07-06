@@ -87,6 +87,10 @@
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/zatraty-config.xml#zatraty-config']}">
                                                 <af:region value="#{bindings.zatratyconfig1.regionModel}" id="r15"/>
                                             </af:showDetailItem>
+                                            <af:showDetailItem text="Рейтинги" id="sdi28"
+                                                               rendered="#{securityContext.taskflowViewable['/WEB-INF/rating-config.xml#rating-config']}">
+                                                <af:region value="#{bindings.ratingconfig1.regionModel}" id="r25"/>
+                                            </af:showDetailItem>
                                             <af:showDetailItem text="Баланс" id="sdi16" stretchChildren="first"
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/ballans-config.xml#ballans-config']}">
                                                 <af:region value="#{bindings.ballansconfig1.regionModel}" id="r13"/>

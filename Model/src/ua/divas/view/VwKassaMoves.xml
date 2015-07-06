@@ -113,7 +113,19 @@
         WHEN upper(MOVE_KASSA.TABLE_NAME) LIKE upper('start_ost')
             THEN 'Нач. остатки №'||(select num from start_ost where id = MOVE_KASSA.REGISTRATOR_ID)||' от '||to_char(
             (select dat from start_ost where id = MOVE_KASSA.REGISTRATOR_ID),'DD-MM-YYYY')         
-    END AS REG_STRING        
+    END AS REG_STRING,
+    CASE
+        WHEN upper(MOVE_KASSA.TABLE_NAME) LIKE upper('orders')
+            THEN (select ORDERS.DISCRIPTION from orders where id = MOVE_KASSA.REGISTRATOR_ID)
+        WHEN upper(MOVE_KASSA.TABLE_NAME) LIKE upper('pko')
+            THEN (select PKO.COMMENTS from pko where id = MOVE_KASSA.REGISTRATOR_ID)
+        WHEN upper(MOVE_KASSA.TABLE_NAME) LIKE upper('rko')
+            THEN (select RKO.COMMENTS from rko where id = MOVE_KASSA.REGISTRATOR_ID)  
+        WHEN upper(MOVE_KASSA.TABLE_NAME) LIKE upper('other_zatraty')
+            THEN (select OTHER_ZATRATY.COMMENTS from other_zatraty where id = MOVE_KASSA.REGISTRATOR_ID)   
+        WHEN upper(MOVE_KASSA.TABLE_NAME) LIKE upper('start_ost')
+            THEN (select START_OST.COMMENTS from start_ost where id = MOVE_KASSA.REGISTRATOR_ID)        
+    END AS DISCRIPTION 
 FROM 
     MOVE_KASSA
 where
@@ -134,6 +146,14 @@ ORDER BY PERIOD DESC]]></SQLQuery>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.VwKassaMoves.Id_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.VwKassaMoves.Id_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="KassaId"
@@ -344,6 +364,21 @@ ORDER BY PERIOD DESC]]></SQLQuery>
     SQLType="VARCHAR">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Discription"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DISCRIPTION"
+    Expression="DISCRIPTION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2000"/>
     </DesignTime>
   </ViewAttribute>
   <AttrArray Name="KeyAttributes">

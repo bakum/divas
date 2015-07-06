@@ -54,6 +54,8 @@
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
     <taskFlow id="programconfig1" taskFlowId="/WEB-INF/program-config.xml#program-config" activation="deferred"
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="ratingconfig1" taskFlowId="/WEB-INF/rating-config.xml#rating-config" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="NotificationView1Iterator" id="CountUnread">
