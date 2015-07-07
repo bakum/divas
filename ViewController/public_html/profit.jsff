@@ -35,7 +35,8 @@
                                               selectedRowKeys="#{bindings.ProfitDistribView1.collectionModel.selectedRow}"
                                               selectionListener="#{bindings.ProfitDistribView1.collectionModel.makeCurrent}"
                                               rowSelection="single" fetchSize="#{bindings.ProfitDistribView1.rangeSize}"
-                                              id="t1" scrollPolicy="page" binding="#{profit.table}">
+                                              id="t1" scrollPolicy="page" binding="#{profit.table}"
+                                              partialTriggers="cmi4">
                                         <af:column id="c11" width="60" rowHeader="true">
                                             <af:toolbar id="t2">
                                                 <af:button id="b1" icon="/img/edit-16.gif"
@@ -46,7 +47,7 @@
                                         </af:column>
                                         <af:column id="c12" width="30">
                                             <af:image id="i1"
-                                                      source="#{row.Posted==1 ? '/img/icon_commit.png' :  '/img/document.png'}"/>
+                                                      source="#{row.Posted==1 ? '/img/icon_commit.png' :  row.Deleted == 1 ? '/img/file_delete.png' : '/img/document.png'}"/>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.ProfitDistribView1.hints.Num.name}"
                                                    sortable="true"
@@ -179,12 +180,29 @@
                                                                             icon="/img/icon_rollback.png"
                                                                             actionListener="#{profit.onRemoveEntry}"/>
                                                     </af:group>
+                                                    <af:group id="g2">
+                                                        <af:commandMenuItem
+                                                                            text="#{profit.del_label}"
+                                                                            disabled="#{!bindings.Delete.enabled}"
+                                                                            id="cmi4" icon="/img/file_delete.png">
+                                                            <af:showPopupBehavior popupId="::pDelete"/>
+                                                        </af:commandMenuItem>
+                                                    </af:group>
                                                     <af:commandMenuItem text="Проводки" id="cmi3">
                                                         <af:showPopupBehavior popupId="::pEntry"/>
                                                     </af:commandMenuItem>
                                                 </af:menu>
                                             </af:popup>
                                         </f:facet><f:facet name="footer"/>
+                                        <af:column headerText="#{bindings.ProfitDistribView1.hints.Deleted.label}"
+                                                   id="c19" visible="false">
+                                            <af:outputText value="#{row.Deleted}"
+                                                           shortDesc="#{bindings.ProfitDistribView1.hints.Deleted.tooltip}"
+                                                           id="ot15">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.ProfitDistribView1.hints.Deleted.format}"/>
+                                            </af:outputText>
+                                        </af:column>
                                     </af:table>
                                     <af:popup childCreation="deferred" autoCancel="disabled" id="pEntry"
                                               contentDelivery="lazyUncached">
@@ -243,6 +261,15 @@
                                                                    id="ot13"/>
                                                 </af:column>
                                             </af:table>
+                                        </af:dialog>
+                                    </af:popup>
+                                    <af:popup childCreation="deferred" autoCancel="disabled" id="pDelete"
+                                              contentDelivery="lazyUncached">
+                                        <af:dialog id="d2" title="Внимание!" closeIconVisible="false"
+                                                   dialogListener="#{profit.onDeleteDialog}">
+                                            <f:facet name="buttonBar"/>
+                                            <af:outputText value="#{profit.del_title}" id="ot16"
+                                                           inlineStyle="#{profit.del_style}"/>
                                         </af:dialog>
                                     </af:popup>
                                 </af:panelBox>

@@ -36,7 +36,7 @@
                                               selectedRowKeys="#{bindings.OtherZatratyView1.collectionModel.selectedRow}"
                                               selectionListener="#{bindings.OtherZatratyView1.collectionModel.makeCurrent}"
                                               rowSelection="single" fetchSize="#{bindings.OtherZatratyView1.rangeSize}"
-                                              id="t1" editingMode="clickToEdit" partialTriggers="::bCreate"
+                                              id="t1" editingMode="clickToEdit" partialTriggers="::bCreate cmi4"
                                               scrollPolicy="page" binding="#{other.otherTable}">
                                         <af:column id="c9" width="60" rowHeader="true">
                                             <af:toolbar id="t3">
@@ -47,7 +47,7 @@
                                         </af:column>
                                         <af:column id="c17" width="30">
                                             <af:image id="i1"
-                                                      source="#{row.Posted==1 ? '/img/icon_commit.png' :  '/img/document.png'}"/>
+                                                      source="#{row.Posted==1 ? '/img/icon_commit.png' :  row.Deleted == 1 ? '/img/file_delete.png' : '/img/document.png'}"/>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.OtherZatratyView1.hints.Id.name}"
                                                    sortable="true"
@@ -196,12 +196,29 @@
                                                                             icon="/img/icon_rollback.png"
                                                                             actionListener="#{other.onRemoveEntry}"/>
                                                     </af:group>
+                                                    <af:group id="g2">
+                                                        <af:commandMenuItem
+                                                                            text="#{other.del_label}"
+                                                                            disabled="#{!bindings.Delete.enabled}"
+                                                                            id="cmi4" icon="/img/file_delete.png">
+                                                            <af:showPopupBehavior popupId="::pDelete"/>
+                                                        </af:commandMenuItem>
+                                                    </af:group>
                                                     <af:commandMenuItem text="Проводки" id="cmi3">
                                                         <af:showPopupBehavior popupId="::pEntry"/>
                                                     </af:commandMenuItem>
                                                 </af:menu>
                                             </af:popup>
                                         </f:facet><f:facet name="footer"/>
+                                        <af:column headerText="#{bindings.OtherZatratyView1.hints.Deleted.label}"
+                                                   id="c26" visible="false">
+                                            <af:outputText value="#{row.Deleted}"
+                                                           shortDesc="#{bindings.OtherZatratyView1.hints.Deleted.tooltip}"
+                                                           id="ot9">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.OtherZatratyView1.hints.Deleted.format}"/>
+                                            </af:outputText>
+                                        </af:column>
                                     </af:table>
                                     <af:popup childCreation="deferred" autoCancel="disabled" id="pCreateEdit"
                                               contentDelivery="lazyUncached" popupFetchListener="#{other.onPopupFetch}"
@@ -472,6 +489,15 @@
                                                                    id="ot7"/>
                                                 </af:column>
                                             </af:table>
+                                        </af:dialog>
+                                    </af:popup>
+                                    <af:popup childCreation="deferred" autoCancel="disabled" id="pDelete"
+                                              contentDelivery="lazyUncached">
+                                        <af:dialog id="d3" closeIconVisible="false" title="Внимание!"
+                                                   dialogListener="#{other.onDeleteDialog}">
+                                            <f:facet name="buttonBar"/>
+                                            <af:outputText value="#{other.del_title}" id="ot10"
+                                                           inlineStyle="#{other.del_style}"/>
                                         </af:dialog>
                                     </af:popup>
                                 </af:panelBox>

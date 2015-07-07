@@ -161,16 +161,36 @@ FROM  START_OST StartOst]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Deleted"
     EntityUsage="StartOst"
-    AliasName="DELETED"
-    IsQueriable="false"/>
+    AliasName="DELETED">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="check_box"/>
+        <LABEL
+          ResId="ua.divas.view.StartOstView.Deleted_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.StartOstView.Deleted_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Posted"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Posted"
     EntityUsage="StartOst"
-    AliasName="POSTED"
-    IsQueriable="false"/>
+    AliasName="POSTED">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="check_box"/>
+        <LABEL
+          ResId="ua.divas.view.StartOstView.Posted_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.StartOstView.Posted_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="DivisionId"
     IsNotNull="true"

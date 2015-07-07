@@ -415,5 +415,6 @@
         <Item Value="addNotification_desc"/>
       </AttrNames>
     </attributeValues>
+    <action IterBinding="OrdersView1Iterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
   </bindings>
 </pageDefinition>

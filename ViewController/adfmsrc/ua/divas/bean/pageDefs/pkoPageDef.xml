@@ -29,6 +29,7 @@
           <Item Value="UserId"/>
           <Item Value="Posted"/>
           <Item Value="Comments"/>
+          <Item Value="Deleted"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -57,5 +58,6 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <action IterBinding="PkoView1Iterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
   </bindings>
 </pageDefinition>

@@ -30,6 +30,7 @@
           <Item Value="OthEditable"/>
           <Item Value="TotalZatr"/>
           <Item Value="Comments"/>
+          <Item Value="Deleted"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -99,5 +100,6 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <action IterBinding="OtherZatratyView1Iterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
   </bindings>
 </pageDefinition>

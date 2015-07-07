@@ -87,6 +87,9 @@ public class OrdersBean {
 
     private RichInputDate dat;
     private RichInputText desc;
+    private String del_title;
+    private String del_style;
+    private String del_label;
 
     public OrdersBean() {
     }
@@ -172,7 +175,7 @@ public class OrdersBean {
     }
 
     public void refresh() {
-         DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = binding.findIteratorBinding("OrdersView1Iterator");
         String rks;
         if (it != null) {
@@ -189,7 +192,7 @@ public class OrdersBean {
                     e.getMessage();
                 }
             }
-        } 
+        }
 
         AdfFacesContext.getCurrentInstance().addPartialTarget(getMainTable());
         refreshZamer();
@@ -745,18 +748,88 @@ public class OrdersBean {
     public void onReturnValue(ReturnEvent returnEvent) {
         refresh();
     }
-    
+
     public void handleExceptionShowMessageInPopupDialog() {
         ControllerContext cc = ControllerContext.getInstance();
         Exception ex = cc.getCurrentViewPort().getExceptionData();
         String message = ex.getMessage();
-        
-        FacesContext fc = FacesContext.getCurrentInstance();
-        FacesMessage facesMessage =
-              new FacesMessage(FacesMessage.SEVERITY_ERROR, "UTF: " + message, null);
-            fc.addMessage(null, facesMessage);
 
-            cc.getCurrentRootViewPort().clearException();
-            fc.renderResponse();
+        FacesContext fc = FacesContext.getCurrentInstance();
+        FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "UTF: " + message, null);
+        fc.addMessage(null, facesMessage);
+
+        cc.getCurrentRootViewPort().clearException();
+        fc.renderResponse();
+    }
+
+    public void setDel_title(String del_title) {
+        this.del_title = del_title;
+    }
+
+    public String getDel_title() {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("OrdersView1Iterator");
+        Row currRow = it.getCurrentRow();
+        Integer Del = (Integer) currRow.getAttribute("Deleted");
+        String RetStr = null;
+        if (Del == 0) {
+            RetStr = "Вы хотите пометить объект на удаление?";
+        } else {
+            RetStr = "Вы хотите снять пометку на удаление?";
+        }
+        return RetStr;
+    }
+
+    public void setDel_style(String del_style) {
+        this.del_style = del_style;
+    }
+
+    public String getDel_style() {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("OrdersView1Iterator");
+        Row currRow = it.getCurrentRow();
+        Integer Del = (Integer) currRow.getAttribute("Deleted");
+        String RetStr = null;
+        if (Del == 0) {
+            RetStr = "font-size:large; Color : Red;";
+        } else {
+            RetStr = "font-size:large;";
+        }
+        return RetStr;
+    }
+    
+    public void setDel_label(String del_label) {
+        this.del_label = del_label;
+    }
+
+    public String getDel_label() {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("OrdersView1Iterator");
+        Row currRow = it.getCurrentRow();
+        Integer Del = (Integer) currRow.getAttribute("Deleted");
+        String RetStr = null;
+        if (Del == 0) {
+            RetStr = "Пометить на удаление";
+        } else {
+            RetStr = "Снять пометку на удаление";
+        }
+        return RetStr;
+    }
+
+    public void onDeleteDialog(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("OrdersView1Iterator");
+            Row currRow = it.getCurrentRow();
+            Integer Del = (Integer) currRow.getAttribute("Deleted");
+            if (Del == 0) {
+                BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+                OperationBinding ob = binding.getOperationBinding("Delete");
+                ob.execute();
+            } else {
+                currRow.setAttribute("Deleted", 0);
+            }
+            commitChange();
+        }
     }
 }

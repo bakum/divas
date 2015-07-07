@@ -310,7 +310,7 @@
        (select 0 from dual) P_Editable,
        Pko.ORDER_ID,
        UTILITY.enable_edit(Pko.ID, 'pko') enbl
-FROM  PKO Pko where deleted = 0 and
+FROM  PKO Pko where
 upper(Pko.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))]]></SQLQuery>
     <EntityUsage
       Name="Pko"
@@ -350,16 +350,28 @@ upper(Pko.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as use
       PrecisionRule="true"
       EntityAttrName="Deleted"
       EntityUsage="Pko"
-      AliasName="DELETED"
-        IsQueriable="false"/>
+      AliasName="DELETED">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="check_box"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
     <ViewAttribute
       Name="Posted"
       IsNotNull="true"
       PrecisionRule="true"
       EntityAttrName="Posted"
       EntityUsage="Pko"
-      AliasName="POSTED"
-        IsQueriable="false"/>
+      AliasName="POSTED">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="check_box"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
     <ViewAttribute
       Name="DivisionId"
       IsNotNull="true"

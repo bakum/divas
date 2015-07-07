@@ -59,5 +59,6 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <action IterBinding="ProfitDistribView1Iterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
   </bindings>
 </pageDefinition>

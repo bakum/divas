@@ -495,6 +495,13 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Permission
+      target="ua.divas.model.Orders.AgentId"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
     <Properties>
       <SchemaBasedProperties>
         <LABEL

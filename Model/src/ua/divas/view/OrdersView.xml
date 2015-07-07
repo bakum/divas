@@ -422,7 +422,6 @@
 FROM 
     ORDERS Orders 
 WHERE 
-    DELETED = 0 and
 upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))]]></SQLQuery>
     <EntityUsage
       Name="Orders"
@@ -594,8 +593,14 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
       PrecisionRule="true"
       EntityAttrName="Deleted"
       EntityUsage="Orders"
-      AliasName="DELETED"
-      IsQueriable="false"/>
+      AliasName="DELETED">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="ua.divas.view.OrdersView.Deleted_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
     <ViewAttribute
       Name="Version"
       PrecisionRule="true"
@@ -609,8 +614,14 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
       PrecisionRule="true"
       EntityAttrName="Posted"
       EntityUsage="Orders"
-      AliasName="POSTED"
-      IsQueriable="false"/>
+      AliasName="POSTED">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="check_box"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
     <ViewAttribute
       Name="FirmId"
       IsNotNull="true"

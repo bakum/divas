@@ -193,7 +193,7 @@
         'Прочие затраты' ObjName,
         UTILITY.enable_edit(OtherZatraty.ID, 'other_zatraty') enbl
 FROM  OTHER_ZATRATY OtherZatraty
-where deleted = 0 and
+where 
 upper(OtherZatraty.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))]]></SQLQuery>
     <EntityUsage
       Name="OtherZatraty"
@@ -225,16 +225,28 @@ upper(OtherZatraty.USER_ID) in (select upper(N) from table(cast(get_users(:u_nam
       PrecisionRule="true"
       EntityAttrName="Deleted"
       EntityUsage="OtherZatraty"
-      AliasName="DELETED"
-      IsQueriable="false"/>
+      AliasName="DELETED">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="check_box"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
     <ViewAttribute
       Name="Posted"
       IsNotNull="true"
       PrecisionRule="true"
       EntityAttrName="Posted"
       EntityUsage="OtherZatraty"
-      AliasName="POSTED"
-      IsQueriable="false"/>
+      AliasName="POSTED">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="check_box"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
     <ViewAttribute
       Name="DivisionId"
       IsNotNull="true"

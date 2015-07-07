@@ -36,7 +36,7 @@
                                               selectionListener="#{bindings.StartOstView1.collectionModel.makeCurrent}"
                                               rowSelection="single" fetchSize="#{bindings.StartOstView1.rangeSize}"
                                               id="t1" scrollPolicy="page" editingMode="clickToEdit"
-                                              binding="#{start_ost.table}">
+                                              binding="#{start_ost.table}" partialTriggers="cmi4">
                                         <af:column id="c9" width="60" rowHeader="true">
                                             <af:toolbar id="t3">
                                                 <af:button id="b2" icon="/img/edit-16.gif" shortDesc="Редактировать"
@@ -47,7 +47,7 @@
                                         </af:column>
                                         <af:column id="c11" width="30">
                                             <af:image id="i1"
-                                                      source="#{row.Posted==1 ? '/img/icon_commit.png' :  '/img/document.png'}"
+                                                      source="#{row.Posted==1 ? '/img/icon_commit.png' :  row.Deleted == 1 ? '/img/file_delete.png' : '/img/document.png'}"
                                                       shortDesc="Проведено"/>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.StartOstView1.hints.Id.name}"
@@ -207,12 +207,31 @@
                                                                             icon="/img/icon_rollback.png"
                                                                             actionListener="#{start_ost.onRemoveEntry}"/>
                                                     </af:group>
+                                                    <af:group id="g2">
+                                                        <af:commandMenuItem
+                                                                            text="#{start_ost.del_label}"
+                                                                            disabled="#{!bindings.Delete.enabled}"
+                                                                            id="cmi4" icon="/img/file_delete.png">
+                                                            <af:showPopupBehavior popupId="::pDelete"/>
+                                                        </af:commandMenuItem>
+                                                    </af:group>
                                                     <af:commandMenuItem text="Проводки" id="cmi3">
                                                         <af:showPopupBehavior popupId="::pEntry"/>
                                                     </af:commandMenuItem>
                                                 </af:menu>
                                             </af:popup>
                                         </f:facet><f:facet name="footer"/>
+                                        <af:column headerText="#{bindings.StartOstView1.hints.Deleted.label}" id="c17"
+                                                   visible="false">
+                                            <af:selectOneChoice value="#{row.bindings.Deleted.inputValue}"
+                                                                label="#{row.bindings.Deleted.label}"
+                                                                required="#{bindings.StartOstView1.hints.Deleted.mandatory}"
+                                                                shortDesc="#{bindings.StartOstView1.hints.Deleted.tooltip}"
+                                                                readOnly="true" id="soc5">
+                                                <f:selectItems value="#{row.bindings.Deleted.items}" id="si5"/>
+                                                <f:validator binding="#{row.bindings.Deleted.validator}"/>
+                                            </af:selectOneChoice>
+                                        </af:column>
                                     </af:table>
                                     <af:popup childCreation="deferred" autoCancel="disabled" id="pEntry"
                                               contentDelivery="lazyUncached">
@@ -281,6 +300,15 @@
                                                                    id="ot9"/>
                                                 </af:column>
                                             </af:table>
+                                        </af:dialog>
+                                    </af:popup>
+                                    <af:popup childCreation="deferred" autoCancel="disabled" id="pDelete"
+                                              contentDelivery="lazyUncached">
+                                        <af:dialog id="d2" title="Внимание!" closeIconVisible="false"
+                                                   dialogListener="#{start_ost.onDeleteDialog}">
+                                            <f:facet name="buttonBar"/>
+                                            <af:outputText value="#{start_ost.del_title}" id="ot11"
+                                                           inlineStyle="#{start_ost.del_style}"/>
                                         </af:dialog>
                                     </af:popup>
                                 </af:panelBox>

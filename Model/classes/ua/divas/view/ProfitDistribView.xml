@@ -162,16 +162,28 @@ FROM  PROFIT_DISTRIB ProfitDistrib]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Deleted"
     EntityUsage="ProfitDistrib"
-    AliasName="DELETED"
-    IsQueriable="false"/>
+    AliasName="DELETED">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="check_box"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Posted"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Posted"
     EntityUsage="ProfitDistrib"
-    AliasName="POSTED"
-    IsQueriable="false"/>
+    AliasName="POSTED">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="check_box"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="DivisionId"
     IsNotNull="true"

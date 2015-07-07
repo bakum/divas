@@ -391,8 +391,8 @@
                                             </af:popup>
                                         </af:panelGroupLayout>
                                     </af:panelLabelAndMessage>
-                                    <af:separator id="s2"/>
-                                    <af:panelLabelAndMessage label="Валюта и курс" id="plam3">
+                                    <af:separator id="s2" visible="false"/>
+                                    <af:panelLabelAndMessage label="Валюта и курс" id="plam3" visible="false">
                                         <af:panelGroupLayout id="pgl4" layout="horizontal">
                                             <af:selectOneChoice value="#{bindings.CurrId.inputValue}"
                                                                 label="#{bindings.CurrId.label}"

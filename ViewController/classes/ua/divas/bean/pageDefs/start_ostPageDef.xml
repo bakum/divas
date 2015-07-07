@@ -4,7 +4,7 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="StartOstView1" RangeSize="25" DataControl="AppModuleDataControl" id="StartOstView1Iterator">
+    <iterator Binds="StartOstView1" RangeSize="12" DataControl="AppModuleDataControl" id="StartOstView1Iterator">
       <sortCriteria>
         <sort attribute="Dat" ascending="false"/>
       </sortCriteria>
@@ -29,6 +29,7 @@
           <Item Value="Comments"/>
           <Item Value="TotalSumm"/>
           <Item Value="Posted"/>
+          <Item Value="Deleted"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -59,5 +60,6 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <action IterBinding="StartOstView1Iterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
   </bindings>
 </pageDefinition>

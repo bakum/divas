@@ -419,6 +419,11 @@
                 <name>/WEB-INF/rating-config.xml#rating-config</name>
                 <actions>view</actions>
               </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
+                <name>ua.divas.model.Orders.AgentId</name>
+                <actions>update</actions>
+              </permission>
             </permissions>
           </grant>
           <grant>
@@ -894,6 +899,11 @@
                 <class>oracle.adf.controller.security.TaskFlowPermission</class>
                 <name>/WEB-INF/rating-config.xml#rating-config</name>
                 <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
+                <name>ua.divas.model.Orders.AgentId</name>
+                <actions>update</actions>
               </permission>
             </permissions>
           </grant>
