@@ -53,6 +53,34 @@ AS TABLE OF kontragtype;
 
 /
 --------------------------------------------------------
+--  DDL for Type ROW_RATING
+--------------------------------------------------------
+
+  CREATE OR REPLACE TYPE "ROW_RATING" as object 
+(   PLACE NUMBER,
+    DIVISION_ID VARCHAR2(50 CHAR),
+    CNT NUMBER,
+    TOTAL NUMBER,
+    BALL_SUM NUMBER,
+    BALL_CNT NUMBER,
+    BALL_TOTAL NUMBER
+)
+
+/
+--------------------------------------------------------
+--  DDL for Type ROW_REFERENCE
+--------------------------------------------------------
+
+  CREATE OR REPLACE TYPE "ROW_REFERENCE" as object 
+(   TABLE_ID VARCHAR2(50),
+    MAIN_ID VARCHAR2(50),
+    TABLE_NAME VARCHAR2(30),
+    COLUMN_NAME VARCHAR2(4000),
+    CONSTRAINT_TYPE VARCHAR2(1)    
+)
+
+/
+--------------------------------------------------------
 --  DDL for Type ROW_SALES
 --------------------------------------------------------
 
@@ -64,6 +92,20 @@ AS TABLE OF kontragtype;
     SALES_SUMMA NUMBER,
     FACT_SEBEST_SUMMA NUMBER,
     PLAN_SEBEST_SUMMA NUMBER
+)
+
+/
+--------------------------------------------------------
+--  DDL for Type ROW_TABLE_REFERENCE
+--------------------------------------------------------
+
+  CREATE OR REPLACE TYPE "ROW_TABLE_REFERENCE" as object 
+(   TABLE_NAME VARCHAR2(30),
+    CONSTRAINT_NAME VARCHAR2(30),
+    COLUMN_NAME VARCHAR2(4000),
+    R_TABLE_NAME VARCHAR2(30),
+    POSITION NUMBER,
+    CONSTRAINT_TYPE VARCHAR2(1)    
 )
 
 /
@@ -89,6 +131,30 @@ AS TABLE OF kontragtype;
 
   CREATE OR REPLACE TYPE "TBL_BALLANS" 
 AS TABLE OF row_ballans;
+
+/
+--------------------------------------------------------
+--  DDL for Type TBL_RATING
+--------------------------------------------------------
+
+  CREATE OR REPLACE TYPE "TBL_RATING" 
+AS TABLE OF row_rating;
+
+/
+--------------------------------------------------------
+--  DDL for Type TBL_REFERENCE
+--------------------------------------------------------
+
+  CREATE OR REPLACE TYPE "TBL_REFERENCE" 
+AS TABLE OF ROW_TABLE_REFERENCE;
+
+/
+--------------------------------------------------------
+--  DDL for Type TBL_REF_TAB
+--------------------------------------------------------
+
+  CREATE OR REPLACE TYPE "TBL_REF_TAB" 
+AS TABLE OF row_reference;
 
 /
 --------------------------------------------------------
@@ -147,7 +213,7 @@ AS TABLE OF usertype;
 --  DDL for Sequence PS_TXN_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 198801 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 218101 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence RKO_NUM_SEQ
 --------------------------------------------------------
@@ -637,7 +703,8 @@ AS TABLE OF usertype;
 	"DAT_ZAM" DATE DEFAULT sysdate, 
 	"TIME_ZAM" VARCHAR2(5 CHAR) DEFAULT '00:00', 
 	"SUMM_PLAN" NUMBER(10,2) DEFAULT 0, 
-	"DAT_COMPLETE" DATE
+	"DAT_COMPLETE" DATE, 
+	"AGENT_ID" VARCHAR2(50 CHAR)
    ) ;
 --------------------------------------------------------
 --  DDL for Table ORDERS_TP_NACHISL
@@ -855,7 +922,8 @@ AS TABLE OF usertype;
 
   CREATE TABLE "PROG_SETTINGS" 
    (	"ID" VARCHAR2(50 CHAR), 
-	"DATE_AFTER" DATE
+	"DATE_AFTER" DATE, 
+	"DATE_AFTER_PROFIT" DATE
    ) ;
 --------------------------------------------------------
 --  DDL for Table PS_TXN
@@ -1032,6 +1100,17 @@ AS TABLE OF usertype;
 	"USR" VARCHAR2(50 CHAR), 
 	"PASSWORD" VARCHAR2(50 CHAR), 
 	"MAX_CONNECTIONS" VARCHAR2(50 CHAR)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table RATING_SETTINGS
+--------------------------------------------------------
+
+  CREATE TABLE "RATING_SETTINGS" 
+   (	"ID" VARCHAR2(50 CHAR), 
+	"SUM_DIVIDER" NUMBER(10,0) DEFAULT 1, 
+	"SUM_BAL" NUMBER(10,2), 
+	"CNT_DIVIDER" NUMBER(10,0) DEFAULT 1, 
+	"CNT_BAL" NUMBER(10,2)
    ) ;
 --------------------------------------------------------
 --  DDL for Table REG_PRICES
@@ -1742,6 +1821,39 @@ ON VW_MOVES.SUBCONTO1_DEB = DIVISIONS.ID
 LEFT JOIN KONTRAGENTS
 ON VW_MOVES.SUBCONTO1_KRED = KONTRAGENTS.ID
 WHERE VW_MOVES.DEB         = '900' and
+VW_MOVES.KRED         = '5091' and
+UPPER(VW_MOVES.TABLE_NAME) = UPPER('PROFIT_DISTRIB')
+UNION
+SELECT VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.DEB,
+  VW_MOVES.SUM_DEB,
+  VW_MOVES.KRED,
+  VW_MOVES.SUM_KRED,
+  DIVISIONS.FULLNAME,
+  d.FULLNAME
+FROM VW_MOVES
+LEFT JOIN DIVISIONS
+ON VW_MOVES.SUBCONTO1_DEB = DIVISIONS.ID
+LEFT JOIN DIVISIONS d
+ON VW_MOVES.SUBCONTO1_KRED = d.ID
+WHERE VW_MOVES.DEB         = '900' and
+VW_MOVES.KRED         = '000' and
+UPPER(VW_MOVES.TABLE_NAME) = UPPER('PROFIT_DISTRIB')
+UNION
+SELECT VW_MOVES.REGISTRATOR_ID,
+  VW_MOVES.DEB,
+  VW_MOVES.SUM_DEB,
+  VW_MOVES.KRED,
+  VW_MOVES.SUM_KRED,
+  DIVISIONS.FULLNAME,
+  d.FULLNAME
+FROM VW_MOVES
+LEFT JOIN DIVISIONS
+ON VW_MOVES.SUBCONTO1_DEB = DIVISIONS.ID
+LEFT JOIN DIVISIONS d
+ON VW_MOVES.SUBCONTO1_KRED = d.ID
+WHERE VW_MOVES.DEB         = '000' and
+VW_MOVES.KRED         = '900' and
 UPPER(VW_MOVES.TABLE_NAME) = UPPER('PROFIT_DISTRIB');
 --------------------------------------------------------
 --  DDL for View VW_MOVE_RKO
@@ -1821,10 +1933,32 @@ AND QRTZ_TRIGGERS.TRIGGER_GROUP = QRTZ_CRON_TRIGGERS.TRIGGER_GROUP
 RIGHT JOIN NOTIFICATION
 ON QRTZ_TRIGGERS.TRIGGER_NAME = NOTIFICATION.TRG_NAME;
 --------------------------------------------------------
+--  DDL for View VW_RATING
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "VW_RATING" ("PLACE", "DIVISION_ID", "CNT", "TOTAL", "BALL_SUM", "BALL_CNT", "BALL_TOTAL") AS 
+  select rownum place, division_id, cnt, total, totalsum ball_sum, totalcnt ball_cnt, totalball ball_total
+from 
+(select division_id, cnt, total, 
+  total*nvl((select RATING_SETTINGS.SUM_BAL from RATING_SETTINGS where rownum = 1),0)/nvl((select RATING_SETTINGS.SUM_DIVIDER from RATING_SETTINGS where rownum = 1),1) TotalSum,
+  cnt*nvl((select RATING_SETTINGS.CNT_BAL from RATING_SETTINGS where rownum = 1),0)/nvl((select RATING_SETTINGS.CNT_DIVIDER from RATING_SETTINGS where rownum = 1),1) TotalCnt,
+  (total*nvl((select RATING_SETTINGS.SUM_BAL from RATING_SETTINGS where rownum = 1),0)/nvl((select RATING_SETTINGS.SUM_DIVIDER from RATING_SETTINGS where rownum = 1),1))
+  +(cnt*nvl((select RATING_SETTINGS.CNT_BAL from RATING_SETTINGS where rownum = 1),0)/nvl((select RATING_SETTINGS.CNT_DIVIDER from RATING_SETTINGS where rownum = 1),1)) TotalBall
+  from (SELECT COUNT(DISTINCT ORDERS.ID) cnt,
+    ORDERS.DIVISION_ID,
+    SUM((NVL(ORDERS_TP_USLUGI.SUMM, 0) + NVL(ORDERS_TP_USLUGI.PRICE_ADD, 0))) Total
+    FROM ORDERS
+    INNER JOIN ORDERS_TP_USLUGI
+    ON ORDERS.ID = ORDERS_TP_USLUGI.ORDER_ID
+    WHERE ORDERS.STATUS_ID NOT IN (select os.id from ORDER_STATUS os where os.name in ('Отказ','Аннулирован','Контроль'))
+    AND (ORDERS.DAT between ORDERS_ENTRY.get_startdatmoves() and ORDERS_ENTRY.GET_ENDDATMOVES())
+    GROUP BY ORDERS.DIVISION_ID)
+ORDER BY TOTALBALL DESC);
+--------------------------------------------------------
 --  DDL for View VW_SALES
 --------------------------------------------------------
 
-  CREATE OR REPLACE FORCE VIEW "VW_SALES" ("ORDER_ID", "KONTRAG_ID", "PERIOD", "DIVISION_ID", "SALES_SUMMA", "FACT_SEBEST_SUMMA", "PLAN_SEBEST_SUMMA") AS 
+  CREATE OR REPLACE FORCE VIEW "VW_SALES" ("ORDER_ID", "KONTRAG_ID", "PERIOD", "DIVISION_ID", "SALES_SUMMA", "FACT_SEBEST_SUMMA", "PLAN_SEBEST_SUMMA", "STATUS_ID") AS 
   with sales as
 (select registrator_id, period, summa, VW_SALES_ORDERS.SUBCONTO1_DEB kontrag_id from VW_SALES_ORDERS
 where trunc(period) >= trunc(ORDERS_ENTRY.get_startdatmoves())
@@ -1836,7 +1970,7 @@ and trunc(period) <= trunc(ORDERS_ENTRY.get_enddatmoves()))
 select o.id order_id, o.kontrag_id, o.dat period, o.division_id,
 (select sales.summa from sales where sales.registrator_id =o.id) sales_summa,
 (select sebest.summa from sebest where sebest.registrator_id =o.id) fact_sebest_summa,
-o.summ_plan plan_sebest_summa
+o.summ_plan plan_sebest_summa, o.status_id
 from orders o where o.deleted = 0
 and trunc(o.dat) >= trunc(ORDERS_ENTRY.get_startdatmoves())
 and trunc(o.dat) <= trunc(ORDERS_ENTRY.get_enddatmoves());
@@ -2003,6 +2137,12 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
 --------------------------------------------------------
 
   CREATE UNIQUE INDEX "DIR_FILE_UPLOAD_PK" ON "DIR_FILE_UPLOAD" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index DIVISIONS_INDEX1
+--------------------------------------------------------
+
+  CREATE INDEX "DIVISIONS_INDEX1" ON "DIVISIONS" ("IS_GROUP", "DELETED") 
   ;
 --------------------------------------------------------
 --  DDL for Index DIVISIONS_PK
@@ -2221,6 +2361,102 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   CREATE UNIQUE INDEX "MEASURE_UNIT_PK" ON "MEASURE_UNIT" ("ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index MOVES_INDEX1
+--------------------------------------------------------
+
+  CREATE INDEX "MOVES_INDEX1" ON "MOVES" ("PLAN_ACC_DEB_ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index MOVES_INDEX10
+--------------------------------------------------------
+
+  CREATE INDEX "MOVES_INDEX10" ON "MOVES" ("CURR_DEB") 
+  ;
+--------------------------------------------------------
+--  DDL for Index MOVES_INDEX11
+--------------------------------------------------------
+
+  CREATE INDEX "MOVES_INDEX11" ON "MOVES" ("CURR_KRED") 
+  ;
+--------------------------------------------------------
+--  DDL for Index MOVES_INDEX12
+--------------------------------------------------------
+
+  CREATE INDEX "MOVES_INDEX12" ON "MOVES" ("PERIOD") 
+  ;
+--------------------------------------------------------
+--  DDL for Index MOVES_INDEX13
+--------------------------------------------------------
+
+  CREATE INDEX "MOVES_INDEX13" ON "MOVES" ("PLAN_ACC_DEB_ID", "DIVISION_ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index MOVES_INDEX14
+--------------------------------------------------------
+
+  CREATE INDEX "MOVES_INDEX14" ON "MOVES" ("PLAN_ACC_KRED_ID", "DIVISION_ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index MOVES_INDEX15
+--------------------------------------------------------
+
+  CREATE INDEX "MOVES_INDEX15" ON "MOVES" ("REGISTRATOR_ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index MOVES_INDEX16
+--------------------------------------------------------
+
+  CREATE INDEX "MOVES_INDEX16" ON "MOVES" ("REGISTRATOR_TYPE") 
+  ;
+--------------------------------------------------------
+--  DDL for Index MOVES_INDEX2
+--------------------------------------------------------
+
+  CREATE INDEX "MOVES_INDEX2" ON "MOVES" ("PLAN_ACC_KRED_ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index MOVES_INDEX3
+--------------------------------------------------------
+
+  CREATE INDEX "MOVES_INDEX3" ON "MOVES" ("SUBCONTO1_DEB") 
+  ;
+--------------------------------------------------------
+--  DDL for Index MOVES_INDEX4
+--------------------------------------------------------
+
+  CREATE INDEX "MOVES_INDEX4" ON "MOVES" ("SUBCONTO2_DEB") 
+  ;
+--------------------------------------------------------
+--  DDL for Index MOVES_INDEX5
+--------------------------------------------------------
+
+  CREATE INDEX "MOVES_INDEX5" ON "MOVES" ("SUBCONTO3_DEB") 
+  ;
+--------------------------------------------------------
+--  DDL for Index MOVES_INDEX6
+--------------------------------------------------------
+
+  CREATE INDEX "MOVES_INDEX6" ON "MOVES" ("SUBCONTO1_KRED") 
+  ;
+--------------------------------------------------------
+--  DDL for Index MOVES_INDEX7
+--------------------------------------------------------
+
+  CREATE INDEX "MOVES_INDEX7" ON "MOVES" ("SUBCONTO2_KRED") 
+  ;
+--------------------------------------------------------
+--  DDL for Index MOVES_INDEX8
+--------------------------------------------------------
+
+  CREATE INDEX "MOVES_INDEX8" ON "MOVES" ("SUBCONTO3_KRED") 
+  ;
+--------------------------------------------------------
+--  DDL for Index MOVES_INDEX9
+--------------------------------------------------------
+
+  CREATE INDEX "MOVES_INDEX9" ON "MOVES" ("DIVISION_ID") 
+  ;
+--------------------------------------------------------
 --  DDL for Index MOVES_PK
 --------------------------------------------------------
 
@@ -2263,10 +2499,22 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   CREATE UNIQUE INDEX "OPERATION_RKO_PK" ON "OPERATION_RKO" ("ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index ORDERS_INDEX1
+--------------------------------------------------------
+
+  CREATE INDEX "ORDERS_INDEX1" ON "ORDERS" ("DAT") 
+  ;
+--------------------------------------------------------
 --  DDL for Index ORDERS_PK
 --------------------------------------------------------
 
   CREATE UNIQUE INDEX "ORDERS_PK" ON "ORDERS" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index ORDERS_TP_NACHISL_INDEX1
+--------------------------------------------------------
+
+  CREATE INDEX "ORDERS_TP_NACHISL_INDEX1" ON "ORDERS_TP_NACHISL" ("ORDER_ID") 
   ;
 --------------------------------------------------------
 --  DDL for Index ORDERS_TP_NACHISL_PK
@@ -2275,10 +2523,22 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   CREATE UNIQUE INDEX "ORDERS_TP_NACHISL_PK" ON "ORDERS_TP_NACHISL" ("ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index ORDERS_TP_OPLATY_INDEX1
+--------------------------------------------------------
+
+  CREATE INDEX "ORDERS_TP_OPLATY_INDEX1" ON "ORDERS_TP_OPLATY" ("ORDER_ID") 
+  ;
+--------------------------------------------------------
 --  DDL for Index ORDERS_TP_OPLATY_PK
 --------------------------------------------------------
 
   CREATE UNIQUE INDEX "ORDERS_TP_OPLATY_PK" ON "ORDERS_TP_OPLATY" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index ORDERS_TP_RASHODY_INDEX1
+--------------------------------------------------------
+
+  CREATE INDEX "ORDERS_TP_RASHODY_INDEX1" ON "ORDERS_TP_RASHODY" ("ORDER_ID") 
   ;
 --------------------------------------------------------
 --  DDL for Index ORDERS_TP_RASHODY_PK
@@ -2287,16 +2547,34 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   CREATE UNIQUE INDEX "ORDERS_TP_RASHODY_PK" ON "ORDERS_TP_RASHODY" ("ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index ORDERS_TP_USLUGI_INDEX1
+--------------------------------------------------------
+
+  CREATE INDEX "ORDERS_TP_USLUGI_INDEX1" ON "ORDERS_TP_USLUGI" ("ORDER_ID") 
+  ;
+--------------------------------------------------------
 --  DDL for Index ORDERS_TP_USLUGI_PK
 --------------------------------------------------------
 
   CREATE UNIQUE INDEX "ORDERS_TP_USLUGI_PK" ON "ORDERS_TP_USLUGI" ("ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index ORDER_STATUS_INDEX1
+--------------------------------------------------------
+
+  CREATE INDEX "ORDER_STATUS_INDEX1" ON "ORDER_STATUS" ("NAME") 
+  ;
+--------------------------------------------------------
 --  DDL for Index ORDER_STATUS_PK
 --------------------------------------------------------
 
   CREATE UNIQUE INDEX "ORDER_STATUS_PK" ON "ORDER_STATUS" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index OTHER_ZATRATY_INDEX1
+--------------------------------------------------------
+
+  CREATE INDEX "OTHER_ZATRATY_INDEX1" ON "OTHER_ZATRATY" ("DAT") 
   ;
 --------------------------------------------------------
 --  DDL for Index OTHER_ZATRATY_PK
@@ -2317,10 +2595,28 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   CREATE UNIQUE INDEX "PAY_SETTINGS_PK" ON "PAY_SETTINGS" ("ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index PKO_INDEX1
+--------------------------------------------------------
+
+  CREATE INDEX "PKO_INDEX1" ON "PKO" ("DAT") 
+  ;
+--------------------------------------------------------
 --  DDL for Index PKO_PK
 --------------------------------------------------------
 
   CREATE UNIQUE INDEX "PKO_PK" ON "PKO" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PLAN_ACC_INDEX1
+--------------------------------------------------------
+
+  CREATE INDEX "PLAN_ACC_INDEX1" ON "PLAN_ACC" ("ACC_TYPE") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PLAN_ACC_INDEX2
+--------------------------------------------------------
+
+  CREATE INDEX "PLAN_ACC_INDEX2" ON "PLAN_ACC" ("CODE") 
   ;
 --------------------------------------------------------
 --  DDL for Index PLAN_ACC_PK
@@ -2353,10 +2649,22 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   CREATE UNIQUE INDEX "PLAN_TYPE_SUBCONTO_UK1" ON "PLAN_TYPE_SUBCONTO" ("TYPE_OF_OBJ") 
   ;
 --------------------------------------------------------
+--  DDL for Index PROFIT_DISTRIB_INDEX1
+--------------------------------------------------------
+
+  CREATE INDEX "PROFIT_DISTRIB_INDEX1" ON "PROFIT_DISTRIB" ("DAT") 
+  ;
+--------------------------------------------------------
 --  DDL for Index PROFIT_DISTRIB_PK
 --------------------------------------------------------
 
   CREATE UNIQUE INDEX "PROFIT_DISTRIB_PK" ON "PROFIT_DISTRIB" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PROFIT_DISTRIB_TP_INDEX1
+--------------------------------------------------------
+
+  CREATE INDEX "PROFIT_DISTRIB_TP_INDEX1" ON "PROFIT_DISTRIB_TP" ("PROFIT_ID") 
   ;
 --------------------------------------------------------
 --  DDL for Index PROFIT_DISTRIB_TP_PK
@@ -2449,6 +2757,12 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   CREATE UNIQUE INDEX "QUARTZ_PROPERTY_PK" ON "QUARTZ_PROPERTY" ("ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index RATING_SETTINGS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "RATING_SETTINGS_PK" ON "RATING_SETTINGS" ("ID") 
+  ;
+--------------------------------------------------------
 --  DDL for Index REG_PRICES_PK
 --------------------------------------------------------
 
@@ -2461,16 +2775,34 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
   CREATE UNIQUE INDEX "REG_RATES_PK" ON "REG_RATES" ("ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index RKO_INDEX1
+--------------------------------------------------------
+
+  CREATE INDEX "RKO_INDEX1" ON "RKO" ("DAT") 
+  ;
+--------------------------------------------------------
 --  DDL for Index RKO_PK
 --------------------------------------------------------
 
   CREATE UNIQUE INDEX "RKO_PK" ON "RKO" ("ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index START_OST_INDEX1
+--------------------------------------------------------
+
+  CREATE INDEX "START_OST_INDEX1" ON "START_OST" ("DAT") 
+  ;
+--------------------------------------------------------
 --  DDL for Index START_OST_PK
 --------------------------------------------------------
 
   CREATE UNIQUE INDEX "START_OST_PK" ON "START_OST" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index START_OST_TP_INDEX1
+--------------------------------------------------------
+
+  CREATE INDEX "START_OST_TP_INDEX1" ON "START_OST_TP" ("START_OST_ID") 
   ;
 --------------------------------------------------------
 --  DDL for Index START_OST_TP_PK
@@ -3612,6 +3944,21 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
  
   ALTER TABLE "QUARTZ_PROPERTY" MODIFY ("ID" NOT NULL ENABLE);
 --------------------------------------------------------
+--  Constraints for Table RATING_SETTINGS
+--------------------------------------------------------
+
+  ALTER TABLE "RATING_SETTINGS" ADD CONSTRAINT "RATING_SETTINGS_PK" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "RATING_SETTINGS" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "RATING_SETTINGS" MODIFY ("SUM_DIVIDER" NOT NULL ENABLE);
+ 
+  ALTER TABLE "RATING_SETTINGS" MODIFY ("SUM_BAL" NOT NULL ENABLE);
+ 
+  ALTER TABLE "RATING_SETTINGS" MODIFY ("CNT_DIVIDER" NOT NULL ENABLE);
+ 
+  ALTER TABLE "RATING_SETTINGS" MODIFY ("CNT_BAL" NOT NULL ENABLE);
+--------------------------------------------------------
 --  Constraints for Table REG_PRICES
 --------------------------------------------------------
 
@@ -4063,6 +4410,9 @@ GROUP BY VW_MOVES.REGISTRATOR_ID,
  
   ALTER TABLE "ORDERS" ADD CONSTRAINT "ORDERS_FK2" FOREIGN KEY ("ZAMER_ID")
 	  REFERENCES "KONTRAGENTS" ("ID") ON DELETE SET NULL ENABLE;
+ 
+  ALTER TABLE "ORDERS" ADD CONSTRAINT "ORDERS_FK3" FOREIGN KEY ("AGENT_ID")
+	  REFERENCES "KONTRAGENTS" ("ID") ENABLE;
  
   ALTER TABLE "ORDERS" ADD CONSTRAINT "ORDERS_KASSA_FK1" FOREIGN KEY ("KASSA_ID")
 	  REFERENCES "KASSA" ("ID") ENABLE;
@@ -5407,6 +5757,22 @@ end;
 /
 ALTER TRIGGER "QUARTZ_PROPERTY_TRG" ENABLE;
 --------------------------------------------------------
+--  DDL for Trigger RATING_SETTINGS_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "RATING_SETTINGS_TRG" 
+  BEFORE INSERT OR UPDATE ON "RATING_SETTINGS"
+  REFERENCING FOR EACH ROW
+  begin  
+   if inserting then 
+      if :NEW."ID" is null then 
+         select utility.uuid() into :new."ID" from dual;
+      end if; 
+   end if;
+end;
+/
+ALTER TRIGGER "RATING_SETTINGS_TRG" ENABLE;
+--------------------------------------------------------
 --  DDL for Trigger REG_PRICES_TRG
 --------------------------------------------------------
 
@@ -6138,6 +6504,7 @@ end other_entry;
   function get_kontrag_by_ierarchia(p_order in varchar2) return kontragtable;
   function get_kont_by_division(p_order in varchar2) return kontragtable;
   function get_kont_by_ierarchia(p_order in varchar2) return kontragtable;
+  function get_kont_by_order(p_order in varchar2) return kontragtable;
   procedure calc_money(p_order in varchar2);
   function getSummOrder(p_order in varchar2) return number;
   function getKoeffByLevel(p_order in varchar2, p_level number) return number;
@@ -6213,7 +6580,16 @@ END p_encrypt;
       return tbl_sales;
       
   function getballans(f_data date default null, l_data date default null)
-      return tbl_ballans;    
+      return tbl_ballans;
+      
+  function getrating(f_data date default null, l_data date default null)
+      return tbl_rating;
+  
+  function getreference(p_tablename in varchar2)
+      return tbl_reference;    
+      
+  function getreftable(p_id in varchar2, p_tablename in varchar2)
+      return tbl_ref_tab;    
 
 end report_pkg;
 
@@ -6295,7 +6671,8 @@ end usr_sett;
   procedure createKontrag(p_name in varchar2, p_user_id in varchar2,
             p_isSupp in number, p_isMeasr in number , p_isByer in number);
   procedure createZatraty(p_name in varchar2); 
-  function enable_edit(p_date in date) return number;
+  function enable_edit(p_id in varchar2, p_type in varchar2) return number;
+  procedure set_disable_edit_profit(p_date in date);
 
 end utility;
 
@@ -7326,11 +7703,13 @@ END KONTRAG;
     p_move_count number;
     p_version varchar2(1000);
     in_use exception;
-  pragma exception_init(in_use, -54);
+    pragma exception_init(in_use, -54);
+    period_blocked EXCEPTION;
   begin
     select * into p_orders_rec from orders where id = p_id for update nowait;
-    if utility.enable_edit(p_orders_rec.dat) = 0 then
-      return;
+    if utility.enable_edit(p_orders_rec.id,'orders') = 0 then
+      --return;
+      raise period_blocked;
     end if ;
     
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from orders
@@ -7348,6 +7727,8 @@ END KONTRAG;
     update orders set row = p_orders_rec
       where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF');
   exception
+        when period_blocked then
+        RAISE_APPLICATION_ERROR (-20003,'Период заблокирован! Редактирование невозможно!', TRUE) ;
         WHEN IN_USE THEN
         RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
         when others then 
@@ -7861,9 +8242,9 @@ END KONTRAG;
   
   --Субконто кредита
   if i.kontr_id is not null then
-      if p_order.status_id = p_status then
+      --if p_order.status_id = p_status then
         select id into p_ret_rec.plan_acc_kred_id from plan_acc where code = '5091';
-      end if;
+      --end if;
   end if;
   select count(*) into p_sub_count from plan_acc_subconto where plan_acc_id = p_ret_rec.plan_acc_kred_id;
   if p_sub_count > 0 then
@@ -8206,6 +8587,7 @@ END KONTRAG;
   
   for i in (select * from vw_moves where registrator_id = p_order.id and deb = '701') loop
   p_ret_rec:=p_move_rec;
+  p_ret_rec.period:=p_order.dat_complete;
   
   select code into p_code_plan from plan_acc where id = p_ret_rec.plan_acc_deb_id;
   
@@ -8334,6 +8716,7 @@ END KONTRAG;
   
   --for i in (select * from vw_moves where registrator_id = p_order.id and deb = '701') loop
   p_ret_rec:=p_move_rec;
+  p_ret_rec.period:=p_order.dat_complete;
   select sum(nvl(summa,0)) into p_summ_sales from VW_SALES_ORDERS where registrator_id = p_move_rec.registrator_id;
   select sum(nvl(summa,0)) into p_summ_sebest from VW_SEBEST_ORDERS where registrator_id = p_move_rec.registrator_id;
   
@@ -8460,18 +8843,27 @@ END KONTRAG;
     in_use exception;
     p_counter number(10);
     p_status order_status.id%type;
-  pragma exception_init(in_use, -54);
+    pragma exception_init(in_use, -54);
+    period_blocked EXCEPTION;
   begin
     select * into p_orders_rec from orders where id = p_id for update nowait;
-    if utility.enable_edit(p_orders_rec.dat) = 0 then
-      return;
+    if utility.enable_edit(p_orders_rec.id,'orders') = 0 then
+      --return;
+      raise period_blocked;
     end if ;
     
-    orders_remove_plan_acc(p_id);
+    orders_remove_plan_acc(p_id, p_orders_rec.deleted);
+    if p_orders_rec.deleted = 1 then
+      return;
+    end if;
     
-    delete from ORDERS_TP_NACHISL where order_id = p_id and manual = 0;
-    paycalc.calc_money(p_id);
-    PAYCALC.CALC_MONEY_BY_KONTR(p_id);
+    select id into p_status from order_status where upper(name) = upper('Аннулирован');
+    
+    if p_status <> p_orders_rec.status_id then
+      delete from ORDERS_TP_NACHISL where order_id = p_id and manual = 0;
+      paycalc.calc_money(p_id);
+      PAYCALC.CALC_MONEY_BY_KONTR(p_id);
+    end if;
     
     
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from orders
@@ -8517,20 +8909,26 @@ END KONTRAG;
         
         --	Проводка ТЧ Расходы - Закрытие себестоимости заказа после выполнения
         if p_counter = 5 then
-            p_move_rec.description:='Проводка ТЧ Расходы - Закрытие себестоимости заказа после выполнения';
-            set_subconto_rashody_sebest(p_move_rec);
+            --if p_orders_rec.status_id = p_status then
+              p_move_rec.description:='Проводка ТЧ Расходы - Закрытие себестоимости заказа после выполнения';
+              set_subconto_rashody_sebest(p_move_rec);
+            --end if;  
         end if;
         
         --Проводка ТЧ Начисления - Начисления на себестоимость (комиссия и т.д.)
         if p_counter = 6 then
-            p_move_rec.description:='Проводка ТЧ Начисления - Начисления на себестоимость (комиссия и т.д.)';
-            set_subconto_nachisl(p_move_rec);
+            if p_orders_rec.status_id = p_status then
+              p_move_rec.description:='Проводка ТЧ Начисления - Начисления на себестоимость (комиссия и т.д.)';
+              set_subconto_nachisl(p_move_rec);
+            end if;  
         end if;
         
         --Закрытие заказа - выполнен!
         if p_counter = 7 then
-            p_move_rec.description:='Закрытие заказа - выполнен!';
-            set_subconto_close_order(p_move_rec);
+            if p_orders_rec.status_id = p_status then
+              p_move_rec.description:='Закрытие заказа - выполнен!';
+              set_subconto_close_order(p_move_rec);
+            end if;  
         end if;
         
         --Заказ выполнен - Отнесение маржи на финансовый результат
@@ -8547,6 +8945,8 @@ END KONTRAG;
     where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF'); 
     
     exception
+        when period_blocked then
+        RAISE_APPLICATION_ERROR (-20003,'Период заблокирован! Редактирование невозможно!', TRUE) ;
         WHEN IN_USE THEN
         RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
         when others then 
@@ -8810,13 +9210,18 @@ procedure other_move_plan_acc(p_id in varchar2) as
     in_use exception;
     p_counter number(10);
     pragma exception_init(in_use, -54);
+    period_blocked EXCEPTION;
   begin
     select * into p_other_rec from OTHER_ZATRATY where id = p_id for update nowait;
-    if utility.enable_edit(p_other_rec.dat) = 0 then
-      return;
+    if utility.enable_edit(p_other_rec.id, 'OTHER_ZATRATY') = 0 then
+      --return;
+      raise period_blocked;
     end if ;
     
-    other_remove_plan_acc(p_id);
+    other_remove_plan_acc(p_id, p_other_rec.deleted);
+    if p_other_rec.deleted = 1 then
+      return;
+    end if;
     
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from OTHER_ZATRATY
       where id = p_id;
@@ -8851,6 +9256,8 @@ procedure other_move_plan_acc(p_id in varchar2) as
     where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF'); 
     
     exception
+        when period_blocked then
+        RAISE_APPLICATION_ERROR (-20003,'Период заблокирован! Редактирование невозможно!', TRUE) ;
         WHEN IN_USE THEN
         RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
         when others then 
@@ -8862,11 +9269,13 @@ procedure other_remove_plan_acc(p_id in varchar2, p_del in number default 0) as
     p_move_count number;
     p_version varchar2(1000);
     in_use exception;
-  pragma exception_init(in_use, -54);
+    pragma exception_init(in_use, -54);
+    period_blocked EXCEPTION;
   begin
     select * into p_other_rec from OTHER_ZATRATY where id = p_id for update nowait;
-    if utility.enable_edit(p_other_rec.dat) = 0 then
-      return;
+    if utility.enable_edit(p_other_rec.id, 'OTHER_ZATRATY') = 0 then
+      --return;
+      raise period_blocked;
     end if ;
     
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from OTHER_ZATRATY
@@ -8884,6 +9293,8 @@ procedure other_remove_plan_acc(p_id in varchar2, p_del in number default 0) as
     update OTHER_ZATRATY set row = p_other_rec
       where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF');
   exception
+        when period_blocked then
+        RAISE_APPLICATION_ERROR (-20003,'Период заблокирован! Редактирование невозможно!', TRUE) ;
         WHEN IN_USE THEN
         RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
         when others then 
@@ -8947,6 +9358,26 @@ end other_entry;
     end loop;
     return l_data;
   END get_kontrag_by_order;
+  
+  function get_kont_by_order(p_order in varchar2) return kontragtable AS
+  l_data kontragTable := kontragTable();
+  p_counter number := 0;
+  order_rec orders%rowtype;
+  p_kontragname kontragents.fullname%type;
+  begin
+    select o.* into order_rec from orders o where upper(o.id) = upper(p_order);
+     for i in (select * from kontrag_settings
+      where base_id = (select b.id from base_of_nachisl b where b.name = 'ORDER' and rownum = 1)
+      and pay_id in (select id from pay_settings where in_profit = 0)) loop
+      p_counter:=p_counter+1;
+      if i.kontrag_id = order_rec.agent_id then
+        select fullname into p_kontragname from kontragents where id = i.kontrag_id;
+        l_data.extend;
+        l_data(p_counter) := kontragType(nvl(i.kontrag_id,'none'), nvl(p_kontragname,'none'),1);
+      end if;
+     end loop;
+     return l_data;
+  end get_kont_by_order;
 
   function get_kontrag_by_division(p_order in varchar2) return kontragtable AS
   l_data kontragTable := kontragTable();
@@ -9254,7 +9685,24 @@ end other_entry;
                   end if;
                   insert into orders_tp_nachisl values nachisl_rec;
                 end loop; 
-             end if;   
+          else if getBaseNameKontr(x.id) = 'ORDER' then
+                for g in (select * from table(cast(get_kont_by_order(p_order) as kontragTable)) where n = y.id and rownum = 1) loop
+                  nachisl_rec.order_id:= p_order;
+                  nachisl_rec.dat_nach:=sysdate;
+                  nachisl_rec.kontr_id:= g.n;
+                  nachisl_rec.pay_id:= i.id;
+                  nachisl_rec.calc_id:= i.base_id;
+                  nachisl_rec.percent:= i.stavka;
+                  nachisl_rec.manual:= 0;
+                  if x.summa is not null then
+                    nachisl_rec.summ:= x.summa;
+                  else
+                    nachisl_rec.summ:= (i.stavka/100)*sum_order;
+                  end if;
+                  insert into orders_tp_nachisl values nachisl_rec;
+                end loop; 
+               end if;   
+             end if;
         end if;   
       end loop;  
     end loop;
@@ -9282,9 +9730,9 @@ end other_entry;
           nachisl_rec.percent:= i.stavka;
           nachisl_rec.manual:= 0;
           nachisl_rec.summ:= x.summa;
-          if nachisl_rec.summ > sum_to_profit then
-            RAISE ex_custom;
-          end if;
+          --if nachisl_rec.summ > sum_to_profit then
+            --RAISE ex_custom;
+          --end if;
           sum_to_profit:=sum_to_profit-nachisl_rec.summ;
           
           insert into profit_distrib_tp values nachisl_rec;
@@ -9292,9 +9740,9 @@ end other_entry;
       end loop;  
     end loop;
     
-    if sum_to_profit <=0 then
-        RAISE ex_custom;
-    end if;
+    --if sum_to_profit <=0 then
+        --RAISE ex_custom;
+    --end if;
     
     for i in (select * from pay_settings where in_profit = 1 and base_id in (select id from BASE_OF_CALC where name like 'Процент')) loop
       for y in (select u.id
@@ -9317,6 +9765,8 @@ end other_entry;
     EXCEPTION
     WHEN ex_custom THEN
         RAISE_APPLICATION_ERROR(-20001,'Сумма начисления больше чем распределяемая!');
+    when others then 
+        raise;    
   end profit_money_by_kontr;
   
 END PAYCALC;
@@ -9465,12 +9915,18 @@ procedure pko_move_plan_acc(p_id in varchar2) as
     p_id_supplier_operation operation_pko.id%type;
     p_counter number(10);
     pragma exception_init(in_use, -54);
+    period_blocked EXCEPTION;
   begin
     select * into p_pko_rec from PKO where id = p_id for update nowait;
-    if utility.enable_edit(p_pko_rec.dat) = 0 then
-      return;
+    if utility.enable_edit(p_pko_rec.id,'PKO') = 0 then
+      --return;
+      raise period_blocked;
     end if ;
-    pko_remove_plan_acc(p_id);
+    pko_remove_plan_acc(p_id, p_pko_rec.deleted);
+    
+    if p_pko_rec.deleted = 1 then
+      return;
+    end if;
     
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from PKO
       where id = p_id;
@@ -9524,6 +9980,8 @@ procedure pko_move_plan_acc(p_id in varchar2) as
     where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF'); 
     
     exception
+        when period_blocked then
+        RAISE_APPLICATION_ERROR (-20003,'Период заблокирован! Редактирование невозможно!', TRUE) ;
         WHEN IN_USE THEN
         RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
         when others then 
@@ -9535,11 +9993,13 @@ procedure pko_remove_plan_acc(p_id in varchar2, p_del in number default 0) as
     p_move_count number;
     p_version varchar2(1000);
     in_use exception;
-  pragma exception_init(in_use, -54);
+    pragma exception_init(in_use, -54);
+    period_blocked EXCEPTION;
   begin
     select * into p_pko_rec from PKO where id = p_id for update nowait;
-    if utility.enable_edit(p_pko_rec.dat) = 0 then
-      return;
+    if utility.enable_edit(p_pko_rec.id, 'PKO') = 0 then
+      --return;
+      raise period_blocked;
     end if ;
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from PKO
       where id = p_id;
@@ -9556,6 +10016,8 @@ procedure pko_remove_plan_acc(p_id in varchar2, p_del in number default 0) as
     update PKO set row = p_pko_rec
       where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF');
   exception
+        when period_blocked then
+        RAISE_APPLICATION_ERROR (-20003,'Период заблокирован! Редактирование невозможно!', TRUE) ;
         WHEN IN_USE THEN
         RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
         when others then 
@@ -9752,6 +10214,75 @@ END PRICES;
     RAISE_APPLICATION_ERROR (-20001,'Error profit_distrib move for plan accounting! '||SQLERRM, TRUE) ;
   end set_subconto_profit;
   
+  procedure set_subconto_division(p_move_rec moves%rowtype) as
+    p_ret_rec moves%rowtype;
+    p_counter number(10);
+    p_profit profit_distrib%rowtype;
+    p_plan_acc plan_acc%rowtype;
+    p_upr_val currency.id%type;
+    p_summ number:=0;
+    p_code_service plan_acc.id%type;
+  begin
+    select * into p_profit from profit_distrib where id = p_move_rec.registrator_id;
+    select id into p_upr_val from currency where predefined=1;
+    select id into p_code_service from PLAN_ACC where code like '000';
+    
+    ORDERS_ENTRY.set_enddatmoves(p_profit.dat); 
+    p_summ:=p_profit.summ;
+    for i in (select * from vw_ballans where code like '900'
+                order by end_ost asc) loop
+     -- p_summ:=p_summ - i.end_ost;
+      if i.DIVISION_ID = p_profit.division_id then
+        continue;
+      end if;
+      p_ret_rec:=p_move_rec;
+      --p_ret_rec.id := utility.uuid();
+      
+      
+      p_ret_rec.subconto1_deb:=i.division_id;
+      p_ret_rec.plan_acc_kred_id:=p_code_service;
+      p_ret_rec.subconto1_kred:=null;
+      p_summ:=i.end_ost;
+      
+      p_ret_rec.division_id:=i.division_id;
+      
+      p_ret_rec.curr_deb := p_profit.curr_id;
+      p_ret_rec.summ_val_deb:=entry.sign_of_summ(p_ret_rec.plan_acc_deb_id, p_summ, 1);
+  
+      p_ret_rec.curr_kred := p_profit.curr_id;
+      p_ret_rec.summ_val_kredit:=entry.sign_of_summ(p_ret_rec.plan_acc_kred_id, p_summ, 0);
+      
+      p_ret_rec.summ_upr_deb:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_deb, p_upr_val, p_ret_rec.period, p_ret_rec.summ_val_deb);
+      p_ret_rec.summ_upr_kred:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_kred, p_upr_val, p_ret_rec.period,p_ret_rec.summ_val_kredit);
+  
+      p_ret_rec.version:=systimestamp;
+      insert into moves values p_ret_rec;
+      
+      --for y in (select * from moves where id = p_ret_rec.id) loop
+        p_ret_rec:=p_move_rec;
+        p_ret_rec.plan_acc_deb_id:=p_code_service;
+        p_ret_rec.subconto1_deb:=null;
+        p_ret_rec.subconto1_kred:=p_profit.division_id;
+        p_summ:=i.end_ost;
+      
+        p_ret_rec.division_id:=p_profit.division_id;
+      
+        p_ret_rec.curr_deb := p_profit.curr_id;
+        p_ret_rec.summ_val_deb:=entry.sign_of_summ(p_ret_rec.plan_acc_deb_id, p_summ, 1);
+  
+        p_ret_rec.curr_kred := p_profit.curr_id;
+        p_ret_rec.summ_val_kredit:=entry.sign_of_summ(p_ret_rec.plan_acc_kred_id, p_summ, 0);
+      
+        p_ret_rec.summ_upr_deb:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_deb, p_upr_val, p_ret_rec.period, p_ret_rec.summ_val_deb);
+        p_ret_rec.summ_upr_kred:=currency_pkg.calculate_from_curr_to_curr(p_ret_rec.curr_kred, p_upr_val, p_ret_rec.period,p_ret_rec.summ_val_kredit);
+  
+        p_ret_rec.version:=systimestamp;
+        insert into moves values p_ret_rec;
+      --end loop;
+      
+    end loop;
+  end set_subconto_division;
+  
   procedure profit_move_plan_acc(p_id in varchar2) AS
     p_profit_rec profit_distrib%rowtype;
     p_move_rec moves%rowtype;
@@ -9759,12 +10290,18 @@ END PRICES;
     in_use exception;
     p_counter number(10);
     pragma exception_init(in_use, -54);
+    period_blocked EXCEPTION;
   BEGIN
     select * into p_profit_rec from profit_distrib where id = p_id for update nowait;
-    if utility.enable_edit(p_profit_rec.dat) = 0 then
-      return;
+    if utility.enable_edit(p_profit_rec.id, 'profit_distrib') = 0 then
+      --return;
+      raise period_blocked;
     end if ;
-    profit_remove_plan_acc(p_id);
+    
+    profit_remove_plan_acc(p_id, p_profit_rec.deleted);
+    if p_profit_rec.deleted = 1 then
+      return;
+    end if;
     
     delete from profit_distrib_tp where profit_id = p_id and manual = 0;
     paycalc.profit_money_by_kontr(p_id, p_profit_rec.summ);
@@ -9787,16 +10324,33 @@ END PRICES;
         p_move_rec.description:=i.description;
         
         --Распределение прибыли
-        if p_counter = 1 then 
+        if p_counter = 1 then
+          --null;
           set_subconto_profit(p_move_rec); 
         end if;
+        
+        --Переброс прибыли на головное подразделение
+        if p_counter = 2 then
+          --null;
+          set_subconto_division(p_move_rec); 
+        end if;
+        
+        --Переброс прибыли на головное подразделение
+        --if p_counter = 3 then
+         -- null;
+          --set_subconto_division_back(p_move_rec); 
+      --  end if;
     end loop;
     
     p_profit_rec.posted:=1;
     update profit_distrib set row = p_profit_rec
     where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF'); 
     
+    utility.set_disable_edit_profit(p_profit_rec.dat);
+    
     exception
+        when period_blocked then
+        RAISE_APPLICATION_ERROR (-20003,'Период заблокирован! Редактирование невозможно!', TRUE) ;
         WHEN IN_USE THEN
         RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
         when others then 
@@ -9809,10 +10363,12 @@ END PRICES;
     p_version varchar2(1000);
     in_use exception;
     pragma exception_init(in_use, -54);
+    period_blocked EXCEPTION;
   BEGIN
     select * into p_profit_rec from profit_distrib where id = p_id for update nowait;
-    if utility.enable_edit(p_profit_rec.dat) = 0 then
-      return;
+    if utility.enable_edit(p_profit_rec.id, 'profit_distrib') = 0 then
+      --return;
+      raise period_blocked;
     end if ;
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from profit_distrib
       where id = p_id;
@@ -9830,6 +10386,8 @@ END PRICES;
       where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF');
       
     exception
+        when period_blocked then
+        RAISE_APPLICATION_ERROR (-20003,'Период заблокирован! Редактирование невозможно!', TRUE) ;
         WHEN IN_USE THEN
         RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
         when others then 
@@ -9994,6 +10552,93 @@ function getballans(f_data date default null, l_data date default null)
     end loop;
     return l_datatbl;
   end getballans;   
+  
+  function getrating(f_data date default null, l_data date default null)
+      return tbl_rating as
+  l_datatbl tbl_rating := tbl_rating();
+  p_counter number := 0;    
+  begin
+    if f_data is not null then
+      ORDERS_ENTRY.set_startdatmoves(f_data);
+    end if;
+    if l_data is not null then
+      ORDERS_ENTRY.set_enddatmoves(l_data);
+    end if;
+    
+    for i in (select * from vw_rating) loop
+      p_counter:=p_counter+1;
+      l_datatbl.extend;
+      l_datatbl(p_counter) := row_rating(i.PLACE, 
+          i.DIVISION_ID, i.CNT, i.TOTAL, i.BALL_SUM, i.BALL_CNT, i.BALL_TOTAL);
+    end loop;
+    return l_datatbl;
+  end getrating;
+  
+  function getreference(p_tablename in varchar2)
+      return tbl_reference as
+  l_datatbl tbl_reference := tbl_reference();
+  p_counter number := 0;    
+  begin
+    for i in (SELECT DISTINCT table_name, 
+                constraint_name, 
+                column_name, 
+                r_table_name, 
+                position, 
+                constraint_type 
+        FROM   (SELECT uc.table_name, 
+               uc.constraint_name, 
+               cols.column_name, 
+               (SELECT table_name 
+                FROM   user_constraints 
+                WHERE  constraint_name = uc.r_constraint_name) r_table_name, 
+               (SELECT column_name 
+                FROM   user_cons_columns 
+                WHERE  constraint_name = uc.r_constraint_name 
+                       AND position = cols.position)           r_column_name, 
+               cols.position, 
+               uc.constraint_type 
+        FROM   user_constraints uc 
+               inner join user_cons_columns cols 
+                       ON uc.constraint_name = cols.constraint_name 
+        WHERE  constraint_type != 'C')
+        START WITH table_name = upper(p_tablename )
+           AND column_name = 'ID' 
+        CONNECT BY NOCYCLE PRIOR table_name = r_table_name 
+                         AND PRIOR column_name = r_column_name) loop
+      p_counter:=p_counter+1;
+      l_datatbl.extend;
+      l_datatbl(p_counter) := row_table_reference(i.TABLE_NAME, 
+          i.CONSTRAINT_NAME, i.COLUMN_NAME, i.R_TABLE_NAME, i.POSITION, i.CONSTRAINT_TYPE);
+    end loop;
+    return l_datatbl;
+  end getreference;
+  
+  function getreftable(p_id in varchar2, p_tablename in varchar2)
+      return tbl_ref_tab as
+  l_datatbl tbl_ref_tab := tbl_ref_tab();
+  p_counter number := 0;
+  query_str VARCHAR2(2000);
+  TYPE cur_typ IS REF CURSOR;
+  cur cur_typ;
+  id_rel VARCHAR2(50);
+  begin
+    for i in (select * from table(cast(REPORT_PKG.GETREFERENCE(p_tablename) as tbl_reference))
+              where constraint_type != 'P') loop
+                         
+      query_str := 'SELECT id FROM ' || i.table_name ||' WHERE ' ||i.column_name||' = :id';
+      OPEN cur FOR query_str USING p_id;
+      LOOP
+        FETCH cur INTO id_rel;
+        EXIT WHEN cur%NOTFOUND;
+        p_counter:=p_counter+1;
+        l_datatbl.extend;
+        l_datatbl(p_counter) := ROW_REFERENCE(id_rel, p_id,
+          i.TABLE_NAME, i.COLUMN_NAME, i.CONSTRAINT_TYPE);
+      END LOOP;
+      CLOSE cur;
+    end loop;
+    return l_datatbl;
+  end getreftable;
 
 end report_pkg;
 
@@ -10216,12 +10861,18 @@ procedure set_subconto_other(p_move_rec moves%rowtype) as
     p_id_kassa_operation operation_rko.id%type;
     p_counter number(10);
     pragma exception_init(in_use, -54);
+    period_blocked EXCEPTION;
   begin
     select * into p_rko_rec from RKO where id = p_id for update nowait;
-    if utility.enable_edit(p_rko_rec.dat) = 0 then
-      return;
+    if utility.enable_edit(p_rko_rec.id, 'RKO') = 0 then
+      --return;
+      raise period_blocked;
     end if ;
-    rko_remove_plan_acc(p_id);
+    
+    rko_remove_plan_acc(p_id, p_rko_rec.deleted);
+    if p_rko_rec.deleted = 1 then
+      return;
+    end if;
     
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from RKO
       where id = p_id;
@@ -10286,6 +10937,8 @@ procedure set_subconto_other(p_move_rec moves%rowtype) as
     where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF'); 
     
     exception
+        when period_blocked then
+        RAISE_APPLICATION_ERROR (-20003,'Период заблокирован! Редактирование невозможно!', TRUE) ;
         WHEN IN_USE THEN
         RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
         when others then 
@@ -10297,11 +10950,13 @@ procedure set_subconto_other(p_move_rec moves%rowtype) as
     p_move_count number;
     p_version varchar2(1000);
     in_use exception;
-  pragma exception_init(in_use, -54);
+    pragma exception_init(in_use, -54);
+    period_blocked EXCEPTION;
   begin
     select * into p_rko_rec from RKO where id = p_id for update nowait;
-    if utility.enable_edit(p_rko_rec.dat) = 0 then
-      return;
+    if utility.enable_edit(p_rko_rec.id, 'RKO') = 0 then
+      --return;
+      raise period_blocked;
     end if ;
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from RKO
       where id = p_id;
@@ -10318,6 +10973,8 @@ procedure set_subconto_other(p_move_rec moves%rowtype) as
     update RKO set row = p_rko_rec
       where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF');
   exception
+        when period_blocked then
+        RAISE_APPLICATION_ERROR (-20003,'Период заблокирован! Редактирование невозможно!', TRUE) ;
         WHEN IN_USE THEN
         RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
         when others then 
@@ -10372,12 +11029,17 @@ END RKO_ENTRY;
     in_use exception;
     p_upr_val currency.id%type;
     pragma exception_init(in_use, -54);
+    period_blocked EXCEPTION;
   BEGIN
     select * into p_start_rec from START_OST where id = p_id for update nowait;
-    if utility.enable_edit(p_start_rec.dat) = 0 then
-      return;
+    if utility.enable_edit(p_start_rec.id, 'START_OST') = 0 then
+      --return;
+      raise period_blocked;
     end if ;
-    start_remove_plan_acc(p_id);
+    start_remove_plan_acc(p_id, p_start_rec.deleted);
+    if p_start_rec.deleted = 1 then
+      return;
+    end if;
     
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from START_OST
       where id = p_id;
@@ -10421,6 +11083,8 @@ END RKO_ENTRY;
       where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF'); 
     
     exception
+        when period_blocked then
+        RAISE_APPLICATION_ERROR (-20003,'Период заблокирован! Редактирование невозможно!', TRUE) ;
         WHEN IN_USE THEN
         RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
         when others then 
@@ -10433,10 +11097,12 @@ END RKO_ENTRY;
     p_version varchar2(1000);
     in_use exception;
     pragma exception_init(in_use, -54);
+    period_blocked EXCEPTION;
   BEGIN
     select * into p_start_rec from START_OST where id = p_id for update nowait;
-    if utility.enable_edit(p_start_rec.dat) = 0 then
-      return;
+    if utility.enable_edit(p_start_rec.id,'START_OST') = 0 then
+      --return;
+      raise period_blocked;
     end if ;
     
     select to_char(version,'YYYY-MM-DD HH24:MI:SS.FF') into p_version from START_OST
@@ -10454,6 +11120,8 @@ END RKO_ENTRY;
     update START_OST set row = p_start_rec
       where id = p_id and version = to_timestamp(p_version,'YYYY-MM-DD HH24:MI:SS.FF');
   exception
+        when period_blocked then
+        RAISE_APPLICATION_ERROR (-20003,'Период заблокирован! Редактирование невозможно!', TRUE) ;
         WHEN IN_USE THEN
         RAISE_APPLICATION_ERROR (-20002,'Resource in use! '||SQLERRM, TRUE) ;
         when others then 
@@ -11041,7 +11709,12 @@ end usr_sett;
         values((select id from type_def where upper(type_def.table_name)=upper('PROFIT_DISTRIB')),
                (select id from plan_acc where code = '900'),
                (select id from plan_acc where code = '5091'),1,
-               'PROFIT - Распределение прибыли');            
+               'PROFIT - Распределение прибыли');
+    insert into entry_settings(typedef_id,plan_acc_deb_id,plan_acc_kred_id,chain,description)
+        values((select id from type_def where upper(type_def.table_name)=upper('PROFIT_DISTRIB')),
+               (select id from plan_acc where code = '900'),
+               (select id from plan_acc where code = '900'),2,
+               'PROFIT - Переброс прибыли на головное подразделение');           
       
     
     EXCEPTION
@@ -11254,13 +11927,13 @@ end usr_sett;
    p_zrecord.predefined:=0;
    insert into zatraty values p_zrecord;
   end;
-
+  
   --'1' - разрешено редактирование; '0' - не разрешено
-  function enable_edit(p_date in date) return number as
+  function enable_edit_all(p_date in date) return number as
   p_dat_sett date;
   begin
     select DATE_AFTER into p_dat_sett from PROG_SETTINGS where rownum=1;
-    if trunc(p_dat_sett) > trunc(p_date) then
+    if trunc(p_dat_sett) >= trunc(p_date) then
       return 0;
     else
       return 1;
@@ -11269,7 +11942,81 @@ end usr_sett;
     exception
     when others then
       return 1;
+  end enable_edit_all;
+  
+  --'1' - разрешено редактирование; '0' - не разрешено
+  function enable_edit_profit(p_date in date) return number as
+  p_dat_sett date;
+  begin
+    select DATE_AFTER_PROFIT into p_dat_sett from PROG_SETTINGS where rownum=1;
+    if trunc(p_dat_sett) >= trunc(p_date) then
+      return 0;
+    else
+      return 1;
+    end if;
+    
+    exception
+    when others then
+      return 1;
+  end enable_edit_profit;
+  
+  function get_date_profit return date as
+  p_dat_sett date;
+  begin
+   select DATE_AFTER_PROFIT into p_dat_sett from PROG_SETTINGS where rownum=1;
+    return p_dat_sett;
+    
+    exception
+    when others then
+      return to_date('01-01-1970 00:00:00','DD-MM-YYYY HH24:MI:SS');
+  end;
+
+  --'1' - разрешено редактирование; '0' - не разрешено
+  function enable_edit(p_id in varchar2, p_type in varchar2) return number as
+  p_dat_sett date;
+  p_dat_after date;
+  p_flag number:=1;
+  begin
+    execute immediate ('select dat from '||p_type||' where id='''||p_id||'''') into p_dat_sett; 
+    if enable_edit_all(p_dat_sett) = 0 then
+      return 0;
+    end if;
+    
+    if upper(p_type) = 'ORDERS' or upper(p_type) = 'OTHER_ZATRATY' or upper(p_type) = 'START_OST' then
+      if enable_edit_profit(p_dat_sett) = 0 then
+        if upper(p_type) = 'ORDERS' then
+        p_dat_after:=get_date_profit();
+          for i in (select * from orders where id = p_id and status_id in (select id from order_status where name in (
+              'Аннулирован','Закрыт', 'Выполнен','Отказ')) and trunc(dat_complete) < trunc(p_dat_after)) loop
+              p_flag:=0;
+          end loop;
+          return p_flag;
+        else
+          return 0;
+        end if;
+      end if;
+    end if;
+    
+    return 1;
+    
+    exception
+    when others then
+      return 1;
   end enable_edit;
+  
+  procedure set_disable_edit_profit(p_date in date) as
+  p_prog_sett prog_settings%rowtype; 
+  begin
+    for i in (select * from prog_settings where rownum = 1) loop
+      i.date_after_profit:=p_date;
+      update prog_settings
+      set row = i where id = i.id;
+      return;
+    end loop;
+    
+    p_prog_sett.date_after_profit:=p_date;
+    insert into prog_settings values p_prog_sett;
+  end set_disable_edit_profit;
 
 end utility;
 
