@@ -17,8 +17,45 @@
       <property
          name="y">149.04688</property>
       <property
+         name="pageFragment">true</property>
+      <property
          name="x">216.0</property>
+   </View>
+   <View
+      id="View3">
+      <property
+         name="activityId">zatraty_dir</property>
+      <property
+         name="page">/zatraty_dir.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>zatraty_dir&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">147.59766</property>
+      <property
+         name="x">370.0</property>
       <property
          name="pageFragment">true</property>
    </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="View2"
+      to="View3">
+      <property
+         name="fromOutcome">to_zatraty</property>
+      <property
+         name="sdm:polyPoints">R50,257.0,148.69629,329.0,147.24707,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase5"
+      from="View3"
+      to="View2">
+      <property
+         name="fromOutcome">to_director</property>
+      <property
+         name="sdm:polyPoints">L54,329.0,150.74707,257.07043,152.19629,R54</property>
+   </ControlFlowCase>
 </SDM>

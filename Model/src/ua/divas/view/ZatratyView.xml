@@ -11,22 +11,25 @@
   PageIterMode="Full"
   ComponentClass="ua.divas.view.ZatratyViewImpl"
   ComponentInterface="ua.divas.view.common.ZatratyView"
-  ClientProxyName="ua.divas.view.client.ZatratyViewClient">
+  ClientProxyName="ua.divas.view.client.ZatratyViewClient"
+  RowClass="ua.divas.view.ZatratyViewRowImpl">
   <DesignTime>
-    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
   <Variable
     Name="Zatr"
     Kind="viewcriteria"
     Type="java.lang.String"/>
-  <SQLQuery><![CDATA[SELECT Zatraty.ID,  
-       Zatraty.IS_GROUP,  
-       Zatraty.PARENT_ID,  
-       Zatraty.DELETED,  
-       Zatraty.FULLNAME,  
-       Zatraty.VERSION,  
-       Zatraty.PREDEFINED 
+  <SQLQuery><![CDATA[SELECT Zatraty.ID,   
+       Zatraty.IS_GROUP,   
+       Zatraty.PARENT_ID,   
+       Zatraty.DELETED,   
+       Zatraty.FULLNAME,   
+       Zatraty.VERSION,   
+       Zatraty.PREDEFINED, 
+       (select 0 from dual) Editable 
 FROM  ZATRATY Zatraty]]></SQLQuery>
   <EntityUsage
     Name="Zatraty"
@@ -60,8 +63,14 @@ FROM  ZATRATY Zatraty]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Deleted"
     EntityUsage="Zatraty"
-    AliasName="DELETED"
-    IsQueriable="false"/>
+    AliasName="DELETED">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="check_box"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Fullname"
     IsNotNull="true"
@@ -85,6 +94,16 @@ FROM  ZATRATY Zatraty]]></SQLQuery>
     EntityUsage="Zatraty"
     AliasName="PREDEFINED"
     IsQueriable="false"/>
+  <ViewAttribute
+    Name="Editable"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="EDITABLE"
+    Expression="EDITABLE"
+    SQLType="NUMERIC"
+    IsQueriable="false"/>
   <ViewCriteria
     Name="ZatratyViewCriteria"
     ViewObjectName="ua.divas.view.ZatratyView"
@@ -106,11 +125,22 @@ FROM  ZATRATY Zatraty]]></SQLQuery>
         <Property
           Name="mode"
           Value="Basic"/>
+        <Property
+          Name="displayName"
+          ResId="displayName"/>
       </CustomProperties>
     </Properties>
     <ViewCriteriaRow
       Name="ZatratyViewCriteria_row_0"
       UpperColumns="1">
+      <ViewCriteriaItem
+        Name="ZatratyViewCriteria_ZatratyViewCriteria_row_0_Deleted"
+        ViewAttribute="Deleted"
+        Operator="="
+        Conjunction="AND"
+        Value="0"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
       <ViewCriteriaItem
         Name="Fullname"
         ViewAttribute="Fullname"
@@ -155,4 +185,8 @@ FROM  ZATRATY Zatraty]]></SQLQuery>
         Type="java.lang.String"/>
     </Method>
   </ClientInterface>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>
