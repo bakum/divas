@@ -57,7 +57,7 @@
                             </af:selectOneChoice>
                         </af:column>
                         <af:column sortProperty="#{bindings.VwRating1.hints.Cnt.name}" sortable="true"
-                                   headerText="#{bindings.VwRating1.hints.Cnt.label}" id="c3">
+                                   headerText="#{bindings.VwRating1.hints.Cnt.label}" id="c3" align="center">
                             <af:outputText value="#{row.Cnt}" shortDesc="#{bindings.VwRating1.hints.Cnt.tooltip}"
                                            id="ot2">
                                 <af:convertNumber groupingUsed="false"
@@ -65,7 +65,7 @@
                             </af:outputText>
                         </af:column>
                         <af:column sortProperty="#{bindings.VwRating1.hints.Total.name}" sortable="true"
-                                   headerText="#{bindings.VwRating1.hints.Total.label}" id="c4">
+                                   headerText="#{bindings.VwRating1.hints.Total.label}" id="c4" align="center">
                             <af:outputText value="#{row.Total}" shortDesc="#{bindings.VwRating1.hints.Total.tooltip}"
                                            id="ot3">
                                 <af:convertNumber groupingUsed="false"
@@ -73,7 +73,8 @@
                             </af:outputText>
                         </af:column>
                         <af:column sortProperty="#{bindings.VwRating1.hints.BallSum.name}" sortable="true"
-                                   headerText="#{bindings.VwRating1.hints.BallSum.label}" id="c5" width="100">
+                                   headerText="#{bindings.VwRating1.hints.BallSum.label}" id="c5" width="100"
+                                   align="center">
                             <af:outputText value="#{row.BallSum}"
                                            shortDesc="#{bindings.VwRating1.hints.BallSum.tooltip}" id="ot4">
                                 <af:convertNumber groupingUsed="false"
@@ -81,7 +82,7 @@
                             </af:outputText>
                         </af:column>
                         <af:column sortProperty="#{bindings.VwRating1.hints.BallCnt.name}" sortable="true"
-                                   headerText="#{bindings.VwRating1.hints.BallCnt.label}" id="c6">
+                                   headerText="#{bindings.VwRating1.hints.BallCnt.label}" id="c6" align="center">
                             <af:outputText value="#{row.BallCnt}"
                                            shortDesc="#{bindings.VwRating1.hints.BallCnt.tooltip}" id="ot5">
                                 <af:convertNumber groupingUsed="false"
