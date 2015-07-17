@@ -34,26 +34,26 @@
       </SchemaBasedProperties>
     </Properties>
   </Variable>
-  <SQLQuery><![CDATA[SELECT Kontragents.DELETED, 
-       Kontragents.FULLNAME, 
-       Kontragents.ID, 
-       Kontragents.INN, 
-       Kontragents.IS_BUYER, 
-       Kontragents.IS_GROUP, 
-       Kontragents.IS_MEASURER, 
-       Kontragents.IS_SUPPLIER, 
-       Kontragents.KPP, 
-       Kontragents.NAMEFULL, 
-       Kontragents.OKPO, 
-       Kontragents.PARENT_ID, 
-       Kontragents.PREDEFINED,
-       (select 0 from dual) editable,
-       Kontragents.UR_FIZ, 
-       Kontragents.USER_ID, 
-       Kontragents.VERSION
-FROM  KONTRAGENTS Kontragents
-where deleted = 0 and Kontragents.IS_SUPPLIER = 1 and
-upper(Kontragents.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))
+  <SQLQuery><![CDATA[SELECT Kontragents.DELETED,  
+       Kontragents.FULLNAME,  
+       Kontragents.ID,  
+       Kontragents.INN,  
+       Kontragents.IS_BUYER,  
+       Kontragents.IS_GROUP,  
+       Kontragents.IS_MEASURER,  
+       Kontragents.IS_SUPPLIER,  
+       Kontragents.KPP,  
+       Kontragents.NAMEFULL,  
+       Kontragents.OKPO,  
+       Kontragents.PARENT_ID,  
+       Kontragents.PREDEFINED, 
+       (select 0 from dual) editable, 
+       Kontragents.UR_FIZ,  
+       Kontragents.USER_ID,  
+       Kontragents.VERSION 
+FROM  KONTRAGENTS Kontragents 
+where Kontragents.IS_SUPPLIER = 1 and 
+upper(Kontragents.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable))) 
 order by Kontragents.FULLNAME]]></SQLQuery>
   <EntityUsage
     Name="Kontragents"

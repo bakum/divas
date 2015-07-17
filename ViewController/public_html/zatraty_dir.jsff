@@ -55,7 +55,7 @@
                                         <af:column id="c8" width="30"
                                                    inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
                                             <af:image id="i1"
-                                                      source="#{row.Deleted == 1 ? '/img/file_delete.png' : '/img/minus.png'}"/>
+                                                      source="#{row.Deleted == 1 ? '/img/delete-1.png' : '/img/minus.png'}"/>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.ZatratyView1.hints.Id.name}" sortable="true"
                                                    headerText="#{bindings.ZatratyView1.hints.Id.label}" id="c1"
@@ -145,7 +145,27 @@
                                                                   pattern="#{bindings.ZatratyView1.hints.Editable.format}"/>
                                             </af:outputText>
                                         </af:column>
+                                        <f:facet name="contextMenu">
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                                                      contentDelivery="lazyUncached">
+                                                <af:menu text="menu 1" id="m1">
+                                                    <af:commandMenuItem text="#{zatraty.del_label}" id="cmi1"
+                                                                        icon="/img/delete-1.png">
+                                                        <af:showPopupBehavior popupId="::pDelete"/>
+                                                    </af:commandMenuItem>
+                                                </af:menu>
+                                            </af:popup>
+                                        </f:facet>
                                     </af:table>
+                                    <af:popup childCreation="deferred" autoCancel="disabled" id="pDelete"
+                                              contentDelivery="lazyUncached">
+                                        <af:dialog id="d1" closeIconVisible="false" title="Внимание!"
+                                                   dialogListener="#{zatraty.onDeleteDialog}">
+                                            <f:facet name="buttonBar"/>
+                                            <af:outputText value="#{zatraty.del_title}" id="ot2"
+                                                           inlineStyle="#{zatraty.del_style}"/>
+                                        </af:dialog>
+                                    </af:popup>
                                 </af:panelBox>
                             </f:facet>
                             <f:facet name="start"/>

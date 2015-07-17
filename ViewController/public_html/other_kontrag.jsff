@@ -48,7 +48,8 @@
                                                       editingMode="clickToEdit" partialTriggers="::b1"
                                                       binding="#{oth_kontr.mainTable}">
                                                 <af:column id="c7" width="60"
-                                                           inlineStyle="#{row.bindings.KEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                           inlineStyle="#{row.bindings.KEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
+                                                           rowHeader="true">
                                                     <af:toolbar id="t3">
                                                         <af:button id="b4" icon="/img/edit-16.gif"
                                                                    disabled="#{bindings.Commit.enabled}">
@@ -57,6 +58,11 @@
                                                                                     type="action"/>
                                                         </af:button>
                                                     </af:toolbar>
+                                                </af:column>
+                                                <af:column id="c18" width="30"
+                                                           inlineStyle="#{row.bindings.KEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                    <af:image id="i1"
+                                                              source="#{row.Deleted == 1 ? '/img/delete-1.png' : '/img/minus.png'}"/>
                                                 </af:column>
                                                 <af:column sortProperty="#{bindings.KontragOtherView1.hints.Id.name}" sortable="true"
                                                            headerText="#{bindings.KontragOtherView1.hints.Id.label}"
@@ -175,6 +181,28 @@
                                                         </af:button>
                                                     </af:toolbar>
                                                 </af:column>
+                                                <af:column headerText="#{bindings.KontragOtherView1.hints.Deleted.label}"
+                                                           id="c19" visible="false">
+                                                    <af:selectOneChoice value="#{row.bindings.Deleted.inputValue}"
+                                                                        label="#{row.bindings.Deleted.label}"
+                                                                        required="#{bindings.KontragOtherView1.hints.Deleted.mandatory}"
+                                                                        shortDesc="#{bindings.KontragOtherView1.hints.Deleted.tooltip}"
+                                                                        readOnly="true" id="soc6">
+                                                        <f:selectItems value="#{row.bindings.Deleted.items}" id="si6"/>
+                                                        <f:validator binding="#{row.bindings.Deleted.validator}"/>
+                                                    </af:selectOneChoice>
+                                                </af:column>
+                                                <f:facet name="contextMenu">
+                                                    <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                                                              contentDelivery="lazyUncached">
+                                                        <af:menu text="menu 1" id="m1">
+                                                            <af:commandMenuItem text="#{oth_kontr.del_label}" id="cmi1"
+                                                                                icon="/img/delete-1.png">
+                                                                <af:showPopupBehavior popupId="::pDelete"/>
+                                                            </af:commandMenuItem>
+                                                        </af:menu>
+                                                    </af:popup>
+                                                </f:facet>
                                             </af:table>
                                             <af:popup childCreation="deferred" autoCancel="disabled" id="pSettings"
                                                       contentDelivery="lazyUncached"
@@ -331,6 +359,15 @@
                                                             </af:column>
                                                         </af:table>
                                                     </af:panelBox>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="pDelete"
+                                                      contentDelivery="lazyUncached">
+                                                <af:dialog id="d2" closeIconVisible="false" title="Внимание!"
+                                                           dialogListener="#{oth_kontr.onDeleteDialog}">
+                                                    <f:facet name="buttonBar"/>
+                                                    <af:outputText value="#{oth_kontr.del_title}" id="ot1"
+                                                                   inlineStyle="#{oth_kontr.del_style}"/>
                                                 </af:dialog>
                                             </af:popup>
                                         </af:panelBox>

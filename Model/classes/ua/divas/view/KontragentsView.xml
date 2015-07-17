@@ -103,26 +103,26 @@
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
-  <SQLQuery><![CDATA[SELECT Kontragents.ID, 
-       Kontragents.IS_GROUP, 
-       Kontragents.PARENT_ID,
-       Kontragents.FULLNAME, 
-       Kontragents.DELETED, 
-       Kontragents.INN, 
-       Kontragents.OKPO, 
-       Kontragents.KPP, 
-       Kontragents.NAMEFULL, 
-       Kontragents.UR_FIZ, 
-       Kontragents.VERSION, 
-       Kontragents.PREDEFINED,
-       (select 0 from dual) editable,
-        Kontragents.IS_SUPPLIER,
-        Kontragents.IS_BUYER,
-        Kontragents.IS_MEASURER,
-        Kontragents.USER_ID
-FROM  KONTRAGENTS Kontragents
-where deleted = 0 and
-upper(Kontragents.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))
+  <SQLQuery><![CDATA[SELECT Kontragents.ID,  
+       Kontragents.IS_GROUP,  
+       Kontragents.PARENT_ID, 
+       Kontragents.FULLNAME,  
+       Kontragents.DELETED,  
+       Kontragents.INN,  
+       Kontragents.OKPO,  
+       Kontragents.KPP,  
+       Kontragents.NAMEFULL,  
+       Kontragents.UR_FIZ,  
+       Kontragents.VERSION,  
+       Kontragents.PREDEFINED, 
+       (select 0 from dual) editable, 
+        Kontragents.IS_SUPPLIER, 
+        Kontragents.IS_BUYER, 
+        Kontragents.IS_MEASURER, 
+        Kontragents.USER_ID 
+FROM  KONTRAGENTS Kontragents 
+where 
+upper(Kontragents.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable))) 
 order by Kontragents.FULLNAME]]></SQLQuery>
   <EntityUsage
     Name="Kontragents"
@@ -147,7 +147,8 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     EntityAttrName="ParentId"
     EntityUsage="Kontragents"
     AliasName="PARENT_ID"
-    LOVName="LOV_ParentId">
+    LOVName="LOV_ParentId"
+    IsQueriable="false">
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
@@ -220,7 +221,8 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Namefull"
     EntityUsage="Kontragents"
-    AliasName="NAMEFULL">
+    AliasName="NAMEFULL"
+    IsQueriable="false">
     <Properties>
       <SchemaBasedProperties>
         <DISPLAYWIDTH
@@ -250,7 +252,8 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Predefined"
     EntityUsage="Kontragents"
-    AliasName="PREDEFINED"/>
+    AliasName="PREDEFINED"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Editable"
     IsPersistent="false"
@@ -307,7 +310,8 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
-    SQLType="NUMERIC">
+    SQLType="NUMERIC"
+    IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[OrdersView.sum("TotalSumUslugi != null ? TotalSumUslugi : 0")]]></TransientExpression>
   </ViewAttribute>
@@ -320,7 +324,8 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
-    SQLType="NUMERIC">
+    SQLType="NUMERIC"
+    IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[OrdersView.sum("TotalSumOplaty != null ? TotalSumOplaty : 0")]]></TransientExpression>
   </ViewAttribute>
@@ -333,7 +338,8 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
-    SQLType="NUMERIC">
+    SQLType="NUMERIC"
+    IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[VwBuyerMoves.sum("SumSumm != null ? SumSumm : 0")]]></TransientExpression>
   </ViewAttribute>
@@ -346,7 +352,8 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
-    SQLType="NUMERIC">
+    SQLType="NUMERIC"
+    IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[ContactDetailsView.count("Id != null ? Id : 0")]]></TransientExpression>
   </ViewAttribute>
@@ -566,6 +573,14 @@ order by Kontragents.FULLNAME]]></SQLQuery>
         IsBindVarValue="true"
         Required="Optional"/>
       <ViewCriteriaItem
+        Name="Deleted"
+        ViewAttribute="Deleted"
+        Operator="="
+        Conjunction="AND"
+        Value="0"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+      <ViewCriteriaItem
         Name="IsBuyer"
         ViewAttribute="IsBuyer"
         Operator="="
@@ -617,6 +632,14 @@ order by Kontragents.FULLNAME]]></SQLQuery>
         Value=":ZamerName"
         GenerateIsNullClauseForBindVars="false"
         IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Deleted"
+        ViewAttribute="Deleted"
+        Operator="="
+        Conjunction="AND"
+        Value="0"
+        GenerateIsNullClauseForBindVars="false"
         Required="Optional"/>
       <ViewCriteriaItem
         Name="IsMeasurer"
@@ -672,6 +695,14 @@ order by Kontragents.FULLNAME]]></SQLQuery>
         IsBindVarValue="true"
         Required="Optional"/>
       <ViewCriteriaItem
+        Name="Deleted"
+        ViewAttribute="Deleted"
+        Operator="="
+        Conjunction="AND"
+        Value="0"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+      <ViewCriteriaItem
         Name="IsSupplier"
         ViewAttribute="IsSupplier"
         Operator="="
@@ -724,6 +755,14 @@ order by Kontragents.FULLNAME]]></SQLQuery>
         GenerateIsNullClauseForBindVars="false"
         IsBindVarValue="true"
         Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Deleted"
+        ViewAttribute="Deleted"
+        Operator="="
+        Conjunction="AND"
+        Value="0"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
   <ViewCriteria
@@ -768,6 +807,14 @@ order by Kontragents.FULLNAME]]></SQLQuery>
         Value=":OtherName"
         GenerateIsNullClauseForBindVars="false"
         IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Deleted"
+        ViewAttribute="Deleted"
+        Operator="="
+        Conjunction="AND"
+        Value="0"
+        GenerateIsNullClauseForBindVars="false"
         Required="Optional"/>
       <ViewCriteriaItem
         Name="IsSupplier"

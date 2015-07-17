@@ -36,7 +36,7 @@
                               partialTriggers="::b2" binding="#{prorab.table}">
                         <af:column id="c5" width="60"
                                    inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
-                                   filterable="true">
+                                   filterable="true" rowHeader="true">
                             <af:toolbar id="t2">
                                 <af:button id="b1" icon="/img/edit-16.gif" disabled="#{bindings.Commit.enabled}">
                                     <af:setPropertyListener from="#{1}" to="#{bindings.Editable.inputValue}"
@@ -47,6 +47,10 @@
                                 <af:button id="b6" actionListener="#{prorab.resetTableFilter}"
                                            icon="/img/filter_(delete)_16x16.gif" shortDesc="Сбросить все фильтры"/>
                             </f:facet>
+                        </af:column>
+                        <af:column id="c7" width="30"
+                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                            <af:image id="i1" source="#{row.Deleted == 1 ? '/img/delete-1.png' : '/img/minus.png'}"/>
                         </af:column>
                         <af:column sortProperty="#{bindings.ProrabView1.hints.Fullname.name}" filterable="true"
                                    sortable="true" headerText="#{bindings.ProrabView1.hints.Fullname.label}" id="c1"
@@ -109,7 +113,34 @@
                                                       shortDesc="#{bindings.ProrabView1.hints.IsSupplier.tooltip}"
                                                       id="sbc1"/>
                         </af:column>
+                        <af:column headerText="#{bindings.ProrabView1.hints.Deleted.label}" id="c8" visible="false">
+                            <af:selectOneChoice value="#{row.bindings.Deleted.inputValue}"
+                                                label="#{row.bindings.Deleted.label}"
+                                                required="#{bindings.ProrabView1.hints.Deleted.mandatory}"
+                                                shortDesc="#{bindings.ProrabView1.hints.Deleted.tooltip}"
+                                                readOnly="true" id="soc1">
+                                <f:selectItems value="#{row.bindings.Deleted.items}" id="si1"/>
+                                <f:validator binding="#{row.bindings.Deleted.validator}"/>
+                            </af:selectOneChoice>
+                        </af:column>
+                        <f:facet name="contextMenu">
+                            <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                                      contentDelivery="lazyUncached">
+                                <af:menu text="menu 1" id="m1">
+                                    <af:commandMenuItem text="#{prorab.del_label}" id="cmi1" icon="/img/delete-1.png">
+                                        <af:showPopupBehavior popupId="::pDelete"/>
+                                    </af:commandMenuItem>
+                                </af:menu>
+                            </af:popup>
+                        </f:facet>
                     </af:table>
+                    <af:popup childCreation="deferred" autoCancel="disabled" id="pDelete" contentDelivery="lazyUncached">
+                        <af:dialog id="d1" title="Внимание!" closeIconVisible="false"
+                                   dialogListener="#{prorab.onDeleteDialog}">
+                            <f:facet name="buttonBar"/>
+                            <af:outputText value="#{prorab.del_title}" id="ot1" inlineStyle="#{prorab.del_style}"/>
+                        </af:dialog>
+                    </af:popup>
                 </af:panelBox>
             </af:gridCell>
         </af:gridRow>

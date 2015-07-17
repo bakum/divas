@@ -54,7 +54,7 @@
                                                       rowSelection="#{bindings.Editable.inputValue == 1 ? 'none' : 'single'}"
                                                       selectionListener="#{filter.selectedListener}"
                                                       scrollPolicy="page">
-                                                <af:column id="c10" width="100" shortDesc="Удалить запись"
+                                                <af:column id="c10" width="60" shortDesc="Удалить запись"
                                                            inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
                                                            rowHeader="true">
                                                     <af:toolbar id="t4">
@@ -66,7 +66,8 @@
                                                         </af:button>
                                                         <af:button actionListener="#{bindings.Delete.execute}"
                                                                    disabled="#{bindings.Commit.enabled}" id="b7"
-                                                                   icon="/img/delete.png" shortDesc="Удалить запись">
+                                                                   icon="/img/delete.png" shortDesc="Удалить запись"
+                                                                   rendered="false">
                                                             <af:showPopupBehavior popupId="::pDelete"
                                                                                   triggerType="action"/>
                                                         </af:button>
@@ -77,6 +78,11 @@
                                                                                   triggerType="action"/>
                                                         </af:button>
                                                     </af:toolbar>
+                                                </af:column>
+                                                <af:column id="c19" width="30"
+                                                           inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
+                                                    <af:image id="i1"
+                                                              source="#{row.Deleted == 1 ? '/img/delete-1.png' : '/img/minus.png'}"/>
                                                 </af:column>
                                                 <af:column sortProperty="#{bindings.KontragentsView1.hints.Id.name}"
                                                            headerText="#{bindings.KontragentsView1.hints.Id.label}"
@@ -223,6 +229,28 @@
                                                         </af:button>
                                                     </af:toolbar>
                                                 </af:column>
+                                                <f:facet name="contextMenu">
+                                                    <af:popup childCreation="deferred" autoCancel="disabled"
+                                                              id="pMenu" contentDelivery="lazyUncached">
+                                                        <af:menu text="menu 1" id="m1">
+                                                            <af:commandMenuItem text="#{filter.del_label}" id="cmi1"
+                                                                                icon="/img/delete-1.png">
+                                                                <af:showPopupBehavior popupId="::pDelete"/>
+                                                            </af:commandMenuItem>
+                                                        </af:menu>
+                                                    </af:popup>
+                                                </f:facet>
+                                                <af:column headerText="#{bindings.KontragentsView1.hints.Deleted.label}"
+                                                           id="c18" visible="false">
+                                                    <af:selectOneChoice value="#{row.bindings.Deleted.inputValue}"
+                                                                        label="#{row.bindings.Deleted.label}"
+                                                                        required="#{bindings.KontragentsView1.hints.Deleted.mandatory}"
+                                                                        shortDesc="#{bindings.KontragentsView1.hints.Deleted.tooltip}"
+                                                                        readOnly="true" id="soc19">
+                                                        <f:selectItems value="#{row.bindings.Deleted.items}" id="si19"/>
+                                                        <f:validator binding="#{row.bindings.Deleted.validator}"/>
+                                                    </af:selectOneChoice>
+                                                </af:column>
                                             </af:table>
                                             <af:popup childCreation="deferred" id="pNewContact"
                                                       contentDelivery="lazyUncached"
@@ -297,11 +325,12 @@
                                             <af:popup childCreation="deferred" autoCancel="disabled" id="pDelete"
                                                       contentDelivery="lazyUncached">
                                                 <af:dialog id="d1" title="Удаление #{bindings.KontragName.inputValue}!"
-                                                           dialogListener="#{AutoSuggestonKontragents.deleteDialogListener}">
+                                                           dialogListener="#{filter.onDeleteDialog}"
+                                                           closeIconVisible="false">
                                                     <f:facet name="buttonBar"/>
-                                                    <af:outputFormatted value="Вы действительно хотите удалить запись?"
+                                                    <af:outputFormatted value="#{filter.del_title}"
                                                                         id="of1"
-                                                                        inlineStyle="font-size:medium; color:Red;"/>
+                                                                        inlineStyle="#{filter.del_style}"/>
                                                 </af:dialog>
                                             </af:popup>
                                             <af:popup childCreation="deferred" autoCancel="disabled" id="pView"

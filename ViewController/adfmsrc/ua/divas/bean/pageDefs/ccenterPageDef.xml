@@ -42,6 +42,7 @@
           <Item Value="Kpp"/>
           <Item Value="UrFiz" Binds="UrFiz"/>
           <Item Value="Editable"/>
+          <Item Value="Deleted"/>
         </AttrNames>
         <Accessors>
           <Item Value="ContactDetailsView"/>

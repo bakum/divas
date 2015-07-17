@@ -57,27 +57,27 @@
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
-  <SQLQuery><![CDATA[SELECT Kontragents.DELETED, 
-       Kontragents.FULLNAME, 
-       Kontragents.ID, 
-       Kontragents.INN, 
-       Kontragents.IS_BUYER, 
-       Kontragents.IS_GROUP, 
-       Kontragents.IS_MEASURER, 
-       Kontragents.IS_SUPPLIER, 
-       Kontragents.KPP, 
-       Kontragents.NAMEFULL, 
-       Kontragents.OKPO, 
-       Kontragents.PARENT_ID, 
-       Kontragents.PREDEFINED, 
-       Kontragents.UR_FIZ, 
-       Kontragents.USER_ID, 
-       Kontragents.VERSION,
-       (select 0 from dual) K_Editable
-FROM  KONTRAGENTS Kontragents
-where is_group = 0 and 
-is_buyer = 0 and is_measurer = 0 and is_supplier = 0 and deleted = 0
-and upper(Kontragents.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))
+  <SQLQuery><![CDATA[SELECT Kontragents.DELETED,  
+       Kontragents.FULLNAME,  
+       Kontragents.ID,  
+       Kontragents.INN,  
+       Kontragents.IS_BUYER,  
+       Kontragents.IS_GROUP,  
+       Kontragents.IS_MEASURER,  
+       Kontragents.IS_SUPPLIER,  
+       Kontragents.KPP,  
+       Kontragents.NAMEFULL,  
+       Kontragents.OKPO,  
+       Kontragents.PARENT_ID,  
+       Kontragents.PREDEFINED,  
+       Kontragents.UR_FIZ,  
+       Kontragents.USER_ID,  
+       Kontragents.VERSION, 
+       (select 0 from dual) K_Editable 
+FROM  KONTRAGENTS Kontragents 
+where is_group = 0 and  
+is_buyer = 0 and is_measurer = 0 and is_supplier = 0 
+and upper(Kontragents.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable))) 
 order by Kontragents.FULLNAME]]></SQLQuery>
   <EntityUsage
     Name="Kontragents"
@@ -88,8 +88,7 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Deleted"
     EntityUsage="Kontragents"
-    AliasName="DELETED"
-    IsQueriable="false"/>
+    AliasName="DELETED"/>
   <ViewAttribute
     Name="Fullname"
     IsNotNull="true"

@@ -17,6 +17,7 @@
           <Item Value="Okpo"/>
           <Item Value="Editable"/>
           <Item Value="IsSupplier" Binds="IsSupplier"/>
+          <Item Value="Deleted"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -41,5 +42,7 @@
                   MethodName="retrieveSupplierFirstParentId" IsViewObjectMethod="true"
                   DataControl="AppModuleDataControl" InstanceName="data.AppModuleDataControl.KontragentsView1"
                   ReturnName="data.AppModuleDataControl.methodResults.retrieveSupplierFirstParentId_AppModuleDataControl_KontragentsView1_retrieveSupplierFirstParentId_result"/>
+    <action IterBinding="ProrabView1Iterator" id="Delete" InstanceName="AppModuleDataControl.ProrabView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
   </bindings>
 </pageDefinition>

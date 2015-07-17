@@ -29,6 +29,9 @@ import oracle.jbo.Row;
 
 public class OtherKontragBean {
     private RichTable mainTable;
+    private String del_title;
+    private String del_label;
+    private String del_style;
 
     public OtherKontragBean() {
     }
@@ -141,6 +144,77 @@ public class OtherKontragBean {
                     refresh();
                 }
             }
+        }
+    }
+    
+    public void setDel_title(String del_title) {
+        this.del_title = del_title;
+    }
+
+    public String getDel_title() {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragOtherView1Iterator");
+        Row currRow = it.getCurrentRow();
+        Integer Del = (Integer) currRow.getAttribute("Deleted");
+        String RetStr = null;
+        if (Del == 0) {
+            RetStr = "Вы хотите пометить объект на удаление?";
+        } else {
+            RetStr = "Вы хотите снять пометку на удаление?";
+        }
+        return RetStr;
+    }
+    
+    public void setDel_label(String del_label) {
+        this.del_label = del_label;
+    }
+
+    public String getDel_label() {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragOtherView1Iterator");
+        Row currRow = it.getCurrentRow();
+        Integer Del = (Integer) currRow.getAttribute("Deleted");
+        String RetStr = null;
+        if (Del == 0) {
+            RetStr = "Пометить на удаление";
+        } else {
+            RetStr = "Снять пометку на удаление";
+        }
+        return RetStr;
+    }
+
+    public void setDel_style(String del_style) {
+        this.del_style = del_style;
+    }
+
+    public String getDel_style() {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("KontragOtherView1Iterator");
+        Row currRow = it.getCurrentRow();
+        Integer Del = (Integer) currRow.getAttribute("Deleted");
+        String RetStr = null;
+        if (Del == 0) {
+            RetStr = "font-size:large; Color : Red;";
+        } else {
+            RetStr = "font-size:large;";
+        }
+        return RetStr;
+    }
+
+    public void onDeleteDialog(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("KontragOtherView1Iterator");
+            Row currRow = it.getCurrentRow();
+            Integer Del = (Integer) currRow.getAttribute("Deleted");
+            if (Del == 0) {
+                BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+                OperationBinding ob = binding.getOperationBinding("Delete1");
+                ob.execute();
+            } else {
+                currRow.setAttribute("Deleted", 0);
+            }
+            commitChange();
         }
     }
 }

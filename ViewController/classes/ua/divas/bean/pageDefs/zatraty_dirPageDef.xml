@@ -31,5 +31,7 @@
     <action IterBinding="ZatratyView1Iterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
     <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
     <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <action IterBinding="ZatratyView1Iterator" id="Delete" InstanceName="AppModuleDataControl.ZatratyView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
   </bindings>
 </pageDefinition>

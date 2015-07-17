@@ -238,6 +238,7 @@
         </AttrArray>
         <AttrArray Name="ListDisplayAttrNames">
             <Item Value="Fullname"/>
+            <Item Value="Deleted"/>
         </AttrArray>
         <DisplayCriteria
           Hint="showAndExecute"/>
@@ -262,6 +263,7 @@
         </AttrArray>
         <AttrArray Name="ListDisplayAttrNames">
             <Item Value="Fullname"/>
+            <Item Value="Deleted"/>
         </AttrArray>
         <DisplayCriteria
           Hint="showAndExecute"
@@ -336,6 +338,7 @@
         </AttrArray>
         <AttrArray Name="ListDisplayAttrNames">
             <Item Value="Fullname"/>
+            <Item Value="Deleted"/>
         </AttrArray>
         <DisplayCriteria
           Name="KontragentsZamerCriteria"
@@ -364,6 +367,7 @@
         </AttrArray>
         <AttrArray Name="ListDisplayAttrNames">
             <Item Value="Fullname"/>
+            <Item Value="Deleted"/>
         </AttrArray>
         <DisplayCriteria
             Name="KontragentsOtherCriteria"
@@ -781,10 +785,10 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
                     ResId="ua.divas.view.OrdersView.AgentName_LABEL"/>
                 <TOOLTIP
                     ResId="ua.divas.view.OrdersView.AgentName_TOOLTIP"/>
-                <CONTROLTYPE
-                    Value="combo_lov"/>
                 <DISPLAYWIDTH
                     Value="20"/>
+                <CONTROLTYPE
+                    Value="combo_lov"/>
             </SchemaBasedProperties>
         </Properties>
     </ViewAttribute>

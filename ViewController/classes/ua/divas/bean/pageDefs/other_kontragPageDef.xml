@@ -4,7 +4,7 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="KontragOtherView1" RangeSize="25" DataControl="AppModuleDataControl"
+    <iterator Binds="KontragOtherView1" RangeSize="12" DataControl="AppModuleDataControl"
               id="KontragOtherView1Iterator">
       <sortCriteria>
         <sort attribute="Fullname" ascending="true"/>
@@ -27,6 +27,7 @@
           <Item Value="UserId"/>
           <Item Value="Version"/>
           <Item Value="KEditable"/>
+          <Item Value="Deleted"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -68,5 +69,7 @@
                   ReturnName="data.AppModuleDataControl.methodResults.retrieveSumm_AppModuleDataControl_NachislSettingsView1_retrieveSumm_result">
       <NamedData NDName="pId" NDType="java.lang.String"/>
     </methodAction>
+    <action IterBinding="KontragOtherView1Iterator" id="Delete1" InstanceName="AppModuleDataControl.KontragOtherView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
   </bindings>
 </pageDefinition>
