@@ -5,7 +5,7 @@
         <af:gridRow height="100%" id="gr1">
             <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
                 <!-- Content -->
-                <af:decorativeBox id="db1" theme="dark">
+                <af:decorativeBox id="db1" theme="dark" topHeight="20px">
                     <f:facet name="center">
                         <af:panelTabbed id="pt1">
                             <af:showDetailItem text="Валюты" id="sdi1" stretchChildren="first">
@@ -787,7 +787,12 @@
                             </af:showDetailItem>
                         </af:panelTabbed>
                     </f:facet>
-                    <f:facet name="top"/>
+                    <f:facet name="top">
+                        <af:navigationPane id="np1">
+                            <af:commandNavigationItem text="Основные справочники" id="cni2" selected="true"/>
+                            <af:commandNavigationItem text="Статьи затрат" id="cni1" action="to_zatraty"/>
+                        </af:navigationPane>
+                    </f:facet>
                 </af:decorativeBox>
             </af:gridCell>
         </af:gridRow>
