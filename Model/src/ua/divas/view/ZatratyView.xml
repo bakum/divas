@@ -20,15 +20,14 @@
     Name="Zatr"
     Kind="viewcriteria"
     Type="java.lang.String"/>
-  <SQLQuery><![CDATA[SELECT Zatraty.ID, 
-       Zatraty.IS_GROUP, 
-       Zatraty.PARENT_ID, 
-       Zatraty.DELETED, 
-       Zatraty.FULLNAME, 
-       Zatraty.VERSION, 
-       Zatraty.PREDEFINED
-FROM  ZATRATY Zatraty
-where deleted = 0]]></SQLQuery>
+  <SQLQuery><![CDATA[SELECT Zatraty.ID,  
+       Zatraty.IS_GROUP,  
+       Zatraty.PARENT_ID,  
+       Zatraty.DELETED,  
+       Zatraty.FULLNAME,  
+       Zatraty.VERSION,  
+       Zatraty.PREDEFINED 
+FROM  ZATRATY Zatraty]]></SQLQuery>
   <EntityUsage
     Name="Zatraty"
     Entity="ua.divas.model.Zatraty"/>
