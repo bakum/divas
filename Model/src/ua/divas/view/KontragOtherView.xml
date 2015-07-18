@@ -34,6 +34,10 @@
       </SchemaBasedProperties>
     </Properties>
   </Variable>
+  <Variable
+    Name="KonName"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="UsersView1"
     ViewObjectName="ua.divas.view.UsersView"
@@ -109,7 +113,8 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Inn"
     EntityUsage="Kontragents"
-    AliasName="INN"/>
+    AliasName="INN"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="IsBuyer"
     IsNotNull="true"
@@ -148,19 +153,22 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Kpp"
     EntityUsage="Kontragents"
-    AliasName="KPP"/>
+    AliasName="KPP"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Namefull"
     PrecisionRule="true"
     EntityAttrName="Namefull"
     EntityUsage="Kontragents"
-    AliasName="NAMEFULL"/>
+    AliasName="NAMEFULL"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Okpo"
     PrecisionRule="true"
     EntityAttrName="Okpo"
     EntityUsage="Kontragents"
-    AliasName="OKPO"/>
+    AliasName="OKPO"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="ParentId"
     PrecisionRule="true"
@@ -218,6 +226,51 @@ order by Kontragents.FULLNAME]]></SQLQuery>
     Expression="K_EDITABLE"
     SQLType="NUMERIC"
     IsQueriable="false"/>
+  <ViewCriteria
+    Name="KontragOtherViewNoDelete"
+    ViewObjectName="ua.divas.view.KontragOtherView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="KontragOtherViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="KontragOtherViewCriteria_KontragOtherViewCriteria_row_0_Deleted"
+        ViewAttribute="Deleted"
+        Operator="="
+        Conjunction="AND"
+        Value="0"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="KontragOtherViewCriteria_KontragOtherViewCriteria_row_0_Fullname"
+        ViewAttribute="Fullname"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Value=":KonName"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="KontragSettingsView"
     ViewLink="ua.divas.view.KontrOtherSettFkLink"

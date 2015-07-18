@@ -36,6 +36,10 @@
       Name="KassaSettingsByUser"
       FullName="ua.divas.view.KassaSettingsView.KassaSettingsByUser"/>
   </ViewAccessor>
+  <ViewAccessor
+    Name="KontragentsSupplier1"
+    ViewObjectName="ua.divas.view.KontragentsSupplier"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_OrderId"
     ListVOName="OrdersView1"
@@ -85,7 +89,7 @@
   </ListBinding>
   <ListBinding
     Name="LOV_Kontname"
-    ListVOName="KontragentsView1"
+    ListVOName="KontragentsSupplier1"
     ListRangeSize="-1"
     NullValueFlag="none"
     MRUCount="0"
@@ -105,11 +109,10 @@
       <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria
-      Name="KontragentsSupplierCriteria"
       Hint="showAndExecute"/>
     <ViewCriteriaUsage
-      Name="KontragentsSupplierCriteria"
-      FullName="ua.divas.view.KontragentsView.KontragentsSupplierCriteria"/>
+      Name="KontragentsSupplierNoDelete"
+      FullName="ua.divas.view.KontragentsSupplier.KontragentsSupplierNoDelete"/>
   </ListBinding>
   <ListBinding
     Name="LOV_ZatratyId"

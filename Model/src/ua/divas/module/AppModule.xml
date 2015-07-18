@@ -847,7 +847,11 @@
     ViewObjectName="ua.divas.view.OrdersTpNachisleniaView"/>
   <ViewUsage
     Name="KontragOtherView1"
-    ViewObjectName="ua.divas.view.KontragOtherView"/>
+    ViewObjectName="ua.divas.view.KontragOtherView">
+    <ViewCriteriaUsage
+      Name="KontragOtherViewNoDelete"
+      FullName="ua.divas.view.KontragOtherView.KontragOtherViewNoDelete"/>
+  </ViewUsage>
   <ViewUsage
     Name="KontragSettingsView1"
     ViewObjectName="ua.divas.view.KontragSettingsView"/>
@@ -908,6 +912,27 @@
   <ViewUsage
     Name="RatingSettingsView1"
     ViewObjectName="ua.divas.view.RatingSettingsView"/>
+  <ViewUsage
+    Name="KontragentsBuyer1"
+    ViewObjectName="ua.divas.view.KontragentsBuyer">
+    <ViewCriteriaUsage
+      Name="KontragentsBuyerNoDeleted"
+      FullName="ua.divas.view.KontragentsBuyer.KontragentsBuyerNoDeleted"/>
+  </ViewUsage>
+  <ViewUsage
+    Name="KontragentsMeasurer1"
+    ViewObjectName="ua.divas.view.KontragentsMeasurer">
+    <ViewCriteriaUsage
+      Name="KontragentsMeasurerNoDelete"
+      FullName="ua.divas.view.KontragentsMeasurer.KontragentsMeasurerNoDelete"/>
+  </ViewUsage>
+  <ViewUsage
+    Name="KontragentsSupplier1"
+    ViewObjectName="ua.divas.view.KontragentsSupplier">
+    <ViewCriteriaUsage
+      Name="KontragentsSupplierNoDelete"
+      FullName="ua.divas.view.KontragentsSupplier.KontragentsSupplierNoDelete"/>
+  </ViewUsage>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"

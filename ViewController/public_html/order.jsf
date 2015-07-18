@@ -489,7 +489,7 @@
                                                 </af:inputText>
                                                 <af:panelGroupLayout id="pgl17" layout="horizontal">
                                                     <af:inputComboboxListOfValues id="agentNameId"
-                                                                                  popupTitle="Search and Select: #{bindings.AgentName.hints.label}"
+                                                                                  popupTitle="Найти и выбрать: #{bindings.AgentName.hints.label}"
                                                                                   value="#{bindings.AgentName.inputValue}"
                                                                                   label="#{bindings.AgentName.hints.label}"
                                                                                   model="#{bindings.AgentName.listOfValuesModel}"
@@ -501,7 +501,7 @@
                                                         <f:validator binding="#{bindings.AgentName.validator}"/>
                                                     </af:inputComboboxListOfValues>
                                                     <af:inputComboboxListOfValues id="zamernameId"
-                                                                                  popupTitle="Search and Select: #{bindings.Zamername.hints.label}"
+                                                                                  popupTitle="Найти и выбрать: #{bindings.Zamername.hints.label}"
                                                                                   value="#{bindings.Zamername.inputValue}"
                                                                                   label="#{bindings.Zamername.hints.label}"
                                                                                   model="#{bindings.Zamername.listOfValuesModel}"
@@ -1042,7 +1042,7 @@
                                                    headerText="#{bindings.OrdersTpRashodyView4.hints.Kontname.label}"
                                                    id="c25">
                                             <af:inputComboboxListOfValues id="kontnameId"
-                                                                          popupTitle="Search and Select: #{bindings.OrdersTpRashodyView4.hints.Kontname.label}"
+                                                                          popupTitle="Найти и выбрать: #{bindings.OrdersTpRashodyView4.hints.Kontname.label}"
                                                                           value="#{row.bindings.Kontname.inputValue}"
                                                                           model="#{row.bindings.Kontname.listOfValuesModel}"
                                                                           required="#{bindings.OrdersTpRashodyView4.hints.Kontname.mandatory}"
@@ -1071,7 +1071,7 @@
                                                    headerText="#{bindings.OrdersTpRashodyView4.hints.Zatrname.label}"
                                                    id="c29">
                                             <af:inputComboboxListOfValues id="zatrnameId"
-                                                                          popupTitle="Search and Select: #{bindings.OrdersTpRashodyView4.hints.Zatrname.label}"
+                                                                          popupTitle="Найти и выбрать: #{bindings.OrdersTpRashodyView4.hints.Zatrname.label}"
                                                                           value="#{row.bindings.Zatrname.inputValue}"
                                                                           model="#{row.bindings.Zatrname.listOfValuesModel}"
                                                                           columns="#{bindings.OrdersTpRashodyView4.hints.Zatrname.displayWidth}"
