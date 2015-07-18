@@ -28,7 +28,10 @@ import ua.divas.view.GroupmembersViewImpl;
 import ua.divas.view.KassaSettingsViewImpl;
 import ua.divas.view.KassaVOImpl;
 import ua.divas.view.KontragOtherViewImpl;
+import ua.divas.view.KontragentsBuyerImpl;
 import ua.divas.view.KontragentsInOrdersViewImpl;
+import ua.divas.view.KontragentsMeasurerImpl;
+import ua.divas.view.KontragentsSupplierImpl;
 import ua.divas.view.KontragentsViewImpl;
 import ua.divas.view.LastPriceVOImpl;
 import ua.divas.view.NachislSettingsViewImpl;
@@ -3984,6 +3987,30 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewObjectImpl getRatingSettingsView1() {
         return (ViewObjectImpl) findViewObject("RatingSettingsView1");
+    }
+
+    /**
+     * Container's getter for KontragentsBuyer1.
+     * @return KontragentsBuyer1
+     */
+    public KontragentsBuyerImpl getKontragentsBuyer1() {
+        return (KontragentsBuyerImpl) findViewObject("KontragentsBuyer1");
+    }
+
+    /**
+     * Container's getter for KontragentsMeasurer1.
+     * @return KontragentsMeasurer1
+     */
+    public KontragentsMeasurerImpl getKontragentsMeasurer1() {
+        return (KontragentsMeasurerImpl) findViewObject("KontragentsMeasurer1");
+    }
+
+    /**
+     * Container's getter for KontragentsSupplier1.
+     * @return KontragentsSupplier1
+     */
+    public KontragentsSupplierImpl getKontragentsSupplier1() {
+        return (KontragentsSupplierImpl) findViewObject("KontragentsSupplier1");
     }
 }
 

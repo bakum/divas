@@ -104,6 +104,18 @@
             Name="KontragentsOtherCriteria"
             FullName="ua.divas.view.KontragentsView.KontragentsOtherCriteria"/>
     </ViewAccessor>
+    <ViewAccessor
+        Name="KontragentsBuyer1"
+        ViewObjectName="ua.divas.view.KontragentsBuyer"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="KontragentsMeasurer1"
+        ViewObjectName="ua.divas.view.KontragentsMeasurer"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="KontragOtherView1"
+        ViewObjectName="ua.divas.view.KontragOtherView"
+        RowLevelBinds="true"/>
     <ListBinding
       Name="LOV_CurrId"
       ListVOName="CurrencyView1"
@@ -245,7 +257,7 @@
     </ListBinding>
     <ListBinding
       Name="LOV_Kontragname"
-      ListVOName="KontragentsView1"
+        ListVOName="KontragentsBuyer1"
       ListRangeSize="-1"
       ComboRowCountHint="10"
       NullValueFlag="none"
@@ -263,11 +275,9 @@
         </AttrArray>
         <AttrArray Name="ListDisplayAttrNames">
             <Item Value="Fullname"/>
-            <Item Value="Deleted"/>
         </AttrArray>
         <DisplayCriteria
-          Hint="showAndExecute"
-          Name="KontragentsFilterItemsByName"/>
+          Hint="showAndExecute"/>
     </ListBinding>
     <ListBinding
       Name="LOV_FirmId"
@@ -319,7 +329,7 @@
     </ListBinding>
     <ListBinding
       Name="LOV_Zamername"
-      ListVOName="KontragentsView2"
+        ListVOName="KontragentsMeasurer1"
       ListRangeSize="-1"
       ComboRowCountHint="10"
       NullValueFlag="start"
@@ -338,18 +348,16 @@
         </AttrArray>
         <AttrArray Name="ListDisplayAttrNames">
             <Item Value="Fullname"/>
-            <Item Value="Deleted"/>
         </AttrArray>
         <DisplayCriteria
-          Name="KontragentsZamerCriteria"
           Hint="showAndExecute"/>
         <ViewCriteriaUsage
-          Name="KontragentsZamerCriteria"
-          FullName="ua.divas.view.KontragentsView.KontragentsZamerCriteria"/>
+            Name="KontragentsMeasurerNoDelete"
+            FullName="ua.divas.view.KontragentsMeasurer.KontragentsMeasurerNoDelete"/>
     </ListBinding>
     <ListBinding
         Name="LOV_AgentName"
-        ListVOName="KontragentsView3"
+        ListVOName="KontragOtherView1"
         ListRangeSize="-1"
         ComboRowCountHint="10"
         NullValueFlag="none"
@@ -367,14 +375,9 @@
         </AttrArray>
         <AttrArray Name="ListDisplayAttrNames">
             <Item Value="Fullname"/>
-            <Item Value="Deleted"/>
         </AttrArray>
         <DisplayCriteria
-            Name="KontragentsOtherCriteria"
             Hint="showAndExecute"/>
-        <ViewCriteriaUsage
-            Name="KontragentsOtherCriteria"
-            FullName="ua.divas.view.KontragentsView.KontragentsOtherCriteria"/>
     </ListBinding>
     <SQLQuery><![CDATA[SELECT 
     Orders.ID, 

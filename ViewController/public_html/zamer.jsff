@@ -119,7 +119,7 @@
                                                    id="c16" width="100"
                                                    inlineStyle="#{row.bindings.OEditable.inputValue == 1 ? 'background-color:#DCF0AB;' : row.StatusName == 'Новый' ? 'background-color:#ffbc3c;' : row.StatusName == 'Контроль' ? 'background-color:Red;' : ''}">
                                             <af:inputComboboxListOfValues id="zamernameId"
-                                                                          popupTitle="Search and Select: #{bindings.OrderZamerView1.hints.Zamername.label}"
+                                                                          popupTitle="Найти и выбрать: #{bindings.OrderZamerView1.hints.Zamername.label}"
                                                                           value="#{row.bindings.Zamername.inputValue}"
                                                                           model="#{row.bindings.Zamername.listOfValuesModel}"
                                                                           required="#{bindings.OrderZamerView1.hints.Zamername.mandatory}"

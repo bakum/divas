@@ -131,6 +131,14 @@
     Name="UsersView1"
     ViewObjectName="ua.divas.view.UsersView"
     RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="KontragentsBuyer1"
+    ViewObjectName="ua.divas.view.KontragentsBuyer"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="KontragentsMeasurer1"
+    ViewObjectName="ua.divas.view.KontragentsMeasurer"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_ActivitiesId"
     ListVOName="TypeOfActivitiesView1"
@@ -253,7 +261,7 @@
   </ListBinding>
   <ListBinding
     Name="LOV_Kontragname"
-    ListVOName="KontragentsView1"
+    ListVOName="KontragentsBuyer1"
     ListRangeSize="-1"
     ComboRowCountHint="10"
     NullValueFlag="none"
@@ -273,7 +281,6 @@
       <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria
-      Name="KontragentsFilterItemsByName"
       Hint="showAndExecute"/>
   </ListBinding>
   <ListBinding
@@ -345,7 +352,7 @@
   </ListBinding>
   <ListBinding
     Name="LOV_Zamername"
-    ListVOName="KontragentsView1"
+    ListVOName="KontragentsMeasurer1"
     ListRangeSize="-1"
     ComboRowCountHint="10"
     NullValueFlag="start"
@@ -366,11 +373,10 @@
       <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria
-      Name="KontragentsZamerCriteria"
       Hint="showAndExecute"/>
     <ViewCriteriaUsage
-      Name="KontragentsZamerCriteria"
-      FullName="ua.divas.view.KontragentsView.KontragentsZamerCriteria"/>
+      Name="KontragentsMeasurerNoDelete"
+      FullName="ua.divas.view.KontragentsMeasurer.KontragentsMeasurerNoDelete"/>
   </ListBinding>
   <SQLQuery><![CDATA[SELECT Orders.ACTIVITIES_ID, 
        Orders.CURR_ID, 
@@ -548,10 +554,10 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users_for_zamer(:u
           ResId="ua.divas.view.OrderZamerView.Kontragname_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.view.OrderZamerView.Kontragname_TOOLTIP"/>
-        <CONTROLTYPE
-          Value="input_text_lov"/>
         <DISPLAYWIDTH
           Value="50"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -683,10 +689,10 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users_for_zamer(:u
           ResId="ua.divas.view.OrderZamerView.Zamername_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.view.OrderZamerView.Zamername_TOOLTIP"/>
-        <CONTROLTYPE
-          Value="combo_lov"/>
         <DISPLAYWIDTH
           Value="20"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

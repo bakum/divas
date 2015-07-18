@@ -31,5 +31,21 @@ public class KontragOtherViewImpl extends DivasView {
     public void setu_name(String value) {
         setNamedWhereClauseParam("u_name", value);
     }
+
+    /**
+     * Returns the variable value for KonName.
+     * @return variable value for KonName
+     */
+    public String getKonName() {
+        return (String) ensureVariableManager().getVariableValue("KonName");
+    }
+
+    /**
+     * Sets <code>value</code> for variable KonName.
+     * @param value value to bind as KonName
+     */
+    public void setKonName(String value) {
+        ensureVariableManager().setVariableValue("KonName", value);
+    }
 }
 
