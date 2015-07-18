@@ -847,11 +847,7 @@
     ViewObjectName="ua.divas.view.OrdersTpNachisleniaView"/>
   <ViewUsage
     Name="KontragOtherView1"
-    ViewObjectName="ua.divas.view.KontragOtherView">
-    <ViewCriteriaUsage
-      Name="KontragOtherViewNoDelete"
-      FullName="ua.divas.view.KontragOtherView.KontragOtherViewNoDelete"/>
-  </ViewUsage>
+    ViewObjectName="ua.divas.view.KontragOtherView"/>
   <ViewUsage
     Name="KontragSettingsView1"
     ViewObjectName="ua.divas.view.KontragSettingsView"/>
