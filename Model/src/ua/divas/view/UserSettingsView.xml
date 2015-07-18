@@ -64,6 +64,14 @@
       Name="KontragentsOtherCriteria"
       FullName="ua.divas.view.KontragentsView.KontragentsOtherCriteria"/>
   </ViewAccessor>
+  <ViewAccessor
+    Name="KontragentsMeasurer1"
+    ViewObjectName="ua.divas.view.KontragentsMeasurer"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="KontragOtherView1"
+    ViewObjectName="ua.divas.view.KontragOtherView"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_UserId"
     ListVOName="UsersView1"
@@ -284,7 +292,7 @@
   </ListBinding>
   <ListBinding
     Name="LOV_ZamerkontragName"
-    ListVOName="KontragentsView1"
+    ListVOName="KontragentsMeasurer1"
     ListRangeSize="-1"
     ComboRowCountHint="10"
     NullValueFlag="none"
@@ -304,7 +312,6 @@
       <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria
-      Name="KontragentsZamerCriteria"
       Hint="showAndExecute"/>
   </ListBinding>
   <ListBinding
@@ -333,7 +340,7 @@
   </ListBinding>
   <ListBinding
     Name="LOV_KontragName"
-    ListVOName="KontragentsView2"
+    ListVOName="KontragOtherView1"
     ListRangeSize="-1"
     ComboRowCountHint="10"
     NullValueFlag="none"
@@ -353,8 +360,7 @@
       <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria
-      Hint="showAndExecute"
-      Name="KontragentsOtherCriteria"/>
+      Hint="showAndExecute"/>
   </ListBinding>
   <SQLQuery><![CDATA[SELECT UserSettings.ID, 
        UserSettings.USER_ID, 

@@ -5,7 +5,7 @@
         <af:gridRow height="100%" id="gr1">
             <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
                 <!-- Content -->
-                <af:decorativeBox id="db1" theme="dark" topHeight="20px">
+                <af:decorativeBox id="db1" theme="medium" topHeight="20px">
                     <f:facet name="center">
                         <af:panelStretchLayout id="psl1">
                             <f:facet name="bottom"/>
@@ -41,8 +41,7 @@
                                               editingMode="clickToEdit" partialTriggers="::b2"
                                               binding="#{zatraty.table}">
                                         <af:column id="c7" width="60"
-                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
-                                                   rowHeader="true">
+                                                   inlineStyle="#{row.bindings.Editable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
                                             <af:toolbar id="t2">
                                                 <af:button id="b1" icon="/img/edit-16.gif"
                                                            disabled="#{bindings.Commit.enabled}">

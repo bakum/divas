@@ -423,7 +423,7 @@
                                                         <f:validator binding="#{bindings.ZamerkontragName.validator}"/>
                                                     </af:inputListOfValues>
                                                     <af:inputListOfValues id="kontragNameId"
-                                                                          popupTitle="Search and Select: #{bindings.KontragName.hints.label}"
+                                                                          popupTitle="Найти и выбрать: #{bindings.KontragName.hints.label}"
                                                                           value="#{bindings.KontragName.inputValue}"
                                                                           label="#{bindings.KontragName.hints.label}"
                                                                           model="#{bindings.KontragName.listOfValuesModel}"
