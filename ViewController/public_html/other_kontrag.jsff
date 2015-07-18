@@ -95,8 +95,7 @@
                                                         <f:validator binding="#{row.bindings.Fullname.validator}"/>
                                                     </af:inputText>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.KontragOtherView1.hints.Inn.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.KontragOtherView1.hints.Inn.name}" sortable="true"
                                                            headerText="#{bindings.KontragOtherView1.hints.Inn.label}"
                                                            id="c3"
                                                            inlineStyle="#{row.bindings.KEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
@@ -110,8 +109,7 @@
                                                         <f:validator binding="#{row.bindings.Inn.validator}"/>
                                                     </af:inputText>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.KontragOtherView1.hints.Kpp.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.KontragOtherView1.hints.Kpp.name}" sortable="true"
                                                            headerText="#{bindings.KontragOtherView1.hints.Kpp.label}"
                                                            id="c4"
                                                            inlineStyle="#{row.bindings.KEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}"
@@ -126,8 +124,7 @@
                                                         <f:validator binding="#{row.bindings.Kpp.validator}"/>
                                                     </af:inputText>
                                                 </af:column>
-                                                <af:column sortProperty="#{bindings.KontragOtherView1.hints.Okpo.name}"
-                                                           filterable="true" sortable="true"
+                                                <af:column sortProperty="#{bindings.KontragOtherView1.hints.Okpo.name}" sortable="true"
                                                            headerText="#{bindings.KontragOtherView1.hints.Okpo.label}"
                                                            id="c5"
                                                            inlineStyle="#{row.bindings.KEditable.inputValue == 1 ? 'background-color:#DCF0AB' : ''}">
