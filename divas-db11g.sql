@@ -1,7 +1,7 @@
 ﻿--
 -- Скрипт сгенерирован Devart dbForge Studio for Oracle, Версия 3.7.472.0
 -- Домашняя страница продукта: http://www.devart.com/ru/dbforge/oracle/studio
--- Дата скрипта: 18.07.2015 14:06:37
+-- Дата скрипта: 19.07.2015 23:57:31
 -- Версия сервера: Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production With the Partitioning, OLAP, Data Mining and Real Application Testing options
 -- Версия клиента: 
 --
@@ -22,7 +22,7 @@ MINVALUE 1
 CYCLE;
 
 CREATE SEQUENCE PS_TXN_SEQ
-START WITH 154651
+START WITH 155801
 INCREMENT BY 50;
 
 CREATE SEQUENCE PROFIT_DISTRIB_NUM_SEQ
@@ -6043,9 +6043,12 @@ CREATE OR REPLACE PACKAGE BODY "REPORT_PKG"
       cur       cur_typ;
       id_rel    VARCHAR2(50);
     BEGIN
-      FOR i IN (SELECT table_name
-          FROM USER_TAB_COLUMNS
-          WHERE COLUMN_NAME = 'DELETED')
+      FOR i IN (SELECT ut.table_name,
+                       UTC.COMMENTS
+          FROM USER_TAB_COLUMNS ut,
+               user_tab_comments utc
+          WHERE ut.table_name = utc.table_name
+            AND COLUMN_NAME = 'DELETED')
       LOOP
         query_str := 'SELECT id FROM ' || i.table_name || ' WHERE deleted = 1';
         OPEN cur FOR query_str;
@@ -6125,7 +6128,7 @@ CREATE OR REPLACE PACKAGE BODY "REPORT_PKG"
           p_counter := p_counter + 1;
           l_datatbl.EXTEND;
           l_datatbl(p_counter) := ROW_TABLE_DELETED(id_rel, NULL,
-          i.TABLE_NAME, NULL, NULL, p_ref_str);
+          i.TABLE_NAME, i.comments, NULL, p_ref_str);
         END LOOP;
         CLOSE cur;
       END LOOP;
@@ -6137,17 +6140,96 @@ CREATE OR REPLACE PACKAGE BODY "REPORT_PKG"
     AS
       l_datatbl tbl_deleted_ref := tbl_deleted_ref();
       p_counter NUMBER          := 0;
+      p_num     VARCHAR(50);
+      p_dat     DATE;
+      p_ref_str VARCHAR(4000)   := '';
+      query_str VARCHAR2(200)   := '';
     BEGIN
       FOR i IN (SELECT *
           FROM vw_tbl_deleted)
       LOOP
         FOR y IN (SELECT *
-            FROM TABLE (CAST(REPORT_PKG.getreftable(i.table_id, i.table_name) AS tbl_ref_tab)))
+            FROM TABLE (CAST(REPORT_PKG.getreftable(i.table_id, i.table_name) AS tbl_ref_tab))
+            WHERE table_name NOT IN (SELECT ut.table_name
+                  FROM user_tables ut,
+                       user_tab_comments utc
+                  WHERE ut.table_name = UTC.TABLE_NAME
+                    AND UTC.COMMENTS LIKE '%' || i.objname || '%'))
         LOOP
+          p_ref_str := '';
+          IF y.table_name = 'ORDERS'
+          THEN
+            SELECT dat,
+                   num
+              INTO p_dat,
+                   p_num
+              FROM orders
+              WHERE id = y.TABLE_ID;
+            p_ref_str := 'Заказ №' || p_num || ' от ' || TO_CHAR(p_dat, 'DD-MM-YYYY');
+          ELSIF y.table_name = 'OTHER_ZATRATY'
+          THEN
+            SELECT dat,
+                   num
+              INTO p_dat,
+                   p_num
+              FROM OTHER_ZATRATY
+              WHERE id = y.TABLE_ID;
+            p_ref_str := 'Админ.затраты №' || p_num || ' от ' || TO_CHAR(p_dat, 'DD-MM-YYYY');
+          ELSIF y.table_name = 'PKO'
+          THEN
+            SELECT dat,
+                   num
+              INTO p_dat,
+                   p_num
+              FROM PKO
+              WHERE id = y.TABLE_ID;
+            p_ref_str := 'ПКО №' || p_num || ' от ' || TO_CHAR(p_dat, 'DD-MM-YYYY');
+          ELSIF y.table_name = 'RKO'
+          THEN
+            SELECT dat,
+                   num
+              INTO p_dat,
+                   p_num
+              FROM RKO
+              WHERE id = y.TABLE_ID;
+            p_ref_str := 'РКО №' || p_num || ' от ' || TO_CHAR(p_dat, 'DD-MM-YYYY');
+          ELSIF y.table_name = 'PROFIT_DISTRIB'
+          THEN
+            SELECT dat,
+                   num
+              INTO p_dat,
+                   p_num
+              FROM PROFIT_DISTRIB
+              WHERE id = y.TABLE_ID;
+            p_ref_str := 'Распределение прибыли №' || p_num || ' от ' || TO_CHAR(p_dat, 'DD-MM-YYYY');
+          ELSIF y.table_name = 'START_OST'
+          THEN
+            SELECT dat,
+                   num
+              INTO p_dat,
+                   p_num
+              FROM START_OST
+              WHERE id = y.TABLE_ID;
+            p_ref_str := 'Нач. остатки №' || p_num || ' от ' || TO_CHAR(p_dat, 'DD-MM-YYYY');
+          ELSIF y.table_name = 'KONTRAGENTS'
+          THEN
+            SELECT fullname
+              INTO query_str
+              FROM KONTRAGENTS
+              WHERE id = y.TABLE_ID;
+            p_ref_str := 'Контрагенты - ' || query_str;
+          ELSIF y.table_name = 'ZATRATY'
+          THEN
+            SELECT fullname
+              INTO query_str
+              FROM ZATRATY
+              WHERE id = y.TABLE_ID;
+            p_ref_str := 'Статья затрат - ' || query_str;
+          END IF;
           p_counter := p_counter + 1;
           l_datatbl.EXTEND;
           l_datatbl(p_counter) := ROW_TABLE_DELETED(y.TABLE_ID, i.table_id,
-          y.TABLE_NAME, y.COLUMN_NAME, y.CONSTRAINT_TYPE, i.ref_str);
+          y.TABLE_NAME, y.COLUMN_NAME, y.CONSTRAINT_TYPE, p_ref_str);
         END LOOP;
       END LOOP;
       RETURN l_datatbl;
@@ -9555,14 +9637,14 @@ CREATE OR REPLACE PACKAGE BODY "CURRENCY_PKG"
         FROM currency
         WHERE id = p_code;
 
-      SELECT TO_NUMBER(EXTRACTVALUE(VALUE(dtl), 'item/size'), '9999'),
-             TO_NUMBER(EXTRACTVALUE(VALUE(dtl), 'item/rate'), '9999.999999')
+      SELECT TO_NUMBER(EXTRACTVALUE(value(dtl), 'item/size'), '9999'),
+             TO_NUMBER(EXTRACTVALUE(value(dtl), 'item/rate'), '9999.999999')
         INTO nominal,
              val
         FROM (SELECT currency_pkg.get_xmlfromurl('http://bank-ua.com/export/currrate.xml', 'CL8MSWIN1251') xml
                  FROM dual) s,
              TABLE (XMLSEQUENCE(s.xml.extract('chapter/item'))) dtl
-        WHERE EXTRACTVALUE(VALUE(dtl), 'item/code') = p_curr_rec.code;
+        WHERE EXTRACTVALUE(value(dtl), 'item/code') = p_curr_rec.code;
       --select to_char(p_dat,'dd')|| to_char(p_dat,'mm')|| to_char(p_dat,'yyyy') into p_date_str from dual;
 
       --select to_number(t.xml.extract('//ValCurs/Valute[@id='||p_curr_rec.id_xml||']/Nominal/text()'),'9999'),
@@ -10186,14 +10268,14 @@ CREATE OR REPLACE VIEW VW_TBL_DELETED (
   TABLE_ID,
   MAIN_ID,
   TABLE_NAME,
-  COLUMN_NAME,
+  OBJNAME,
   CONSTRAINT_TYPE,
   REF_STR
 ) AS
     SELECT "TABLE_ID",
            "MAIN_ID",
            "TABLE_NAME",
-           "COLUMN_NAME",
+           "COLUMN_NAME" AS ObjName,
            "CONSTRAINT_TYPE",
            "REF_STR"
       FROM TABLE (CAST(REPORT_PKG.get_deleted_tables() AS tbl_deleted));
