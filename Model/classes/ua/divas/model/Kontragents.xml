@@ -106,7 +106,7 @@
         <TOOLTIP
           ResId="ua.divas.model.Kontragents.Fullname_TOOLTIP"/>
         <DISPLAYWIDTH
-          Value="20"/>
+          Value="30"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -149,6 +149,8 @@
           ResId="ua.divas.model.Kontragents.Inn_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.model.Kontragents.Inn_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="10"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -169,6 +171,8 @@
           ResId="ua.divas.model.Kontragents.Okpo_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.model.Kontragents.Okpo_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="10"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -189,6 +193,8 @@
           ResId="ua.divas.model.Kontragents.Kpp_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.model.Kontragents.Kpp_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="10"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>

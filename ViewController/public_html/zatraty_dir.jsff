@@ -176,6 +176,7 @@
                         <af:navigationPane id="np1">
                             <af:commandNavigationItem text="Основные справочники" id="cni1" action="to_director"/>
                             <af:commandNavigationItem text="Статьи затрат" id="cni2" selected="true"/>
+                            <af:commandNavigationItem text="Контрагенты" id="cni3" action="to_kontrag"/>
                         </af:navigationPane>
                     </f:facet>
                 </af:decorativeBox>

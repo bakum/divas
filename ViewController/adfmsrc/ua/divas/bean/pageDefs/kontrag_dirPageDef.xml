@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.2.66.68" id="kontrag_dirPageDef"
+                Package="ua.divas.bean.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="KontragentsAllRoot1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="KontragentsAllRoot1Iterator"/>
+    <iterator Binds="KontragentsAll1" RangeSize="10" DataControl="AppModuleDataControl" id="KontragentsAll1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="KontragentsAllRoot1Iterator" id="KontragentsAllRoot1">
+      <nodeDefinition DefName="ua.divas.view.KontragentsAllRoot" Name="KontragentsAllRoot10">
+        <AttrNames>
+          <Item Value="Fullname"/>
+          <Item Value="IsGroup"/>
+          <Item Value="ParentId"/>
+          <Item Value="Deleted"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="KontragentsAll"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="ua.divas.view.KontragentsAll" Name="KontragentsAllRoot11">
+        <AttrNames>
+          <Item Value="Fullname"/>
+          <Item Value="UrFiz"/>
+          <Item Value="Okpo"/>
+          <Item Value="IsGroup"/>
+          <Item Value="ParentId"/>
+          <Item Value="Deleted"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="KontragentsAll"/>
+        </Accessors>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="KontragentsAll1Iterator" id="KontragentsAll1">
+      <nodeDefinition DefName="ua.divas.view.KontragentsAll" Name="KontragentsAll10">
+        <AttrNames>
+          <Item Value="Deleted"/>
+          <Item Value="Fullname"/>
+          <Item Value="Id"/>
+          <Item Value="Inn"/>
+          <Item Value="IsBuyer"/>
+          <Item Value="IsGroup"/>
+          <Item Value="IsMeasurer"/>
+          <Item Value="IsSupplier"/>
+          <Item Value="Kpp"/>
+          <Item Value="Namefull"/>
+          <Item Value="Okpo"/>
+          <Item Value="ParentId"/>
+          <Item Value="Predefined"/>
+          <Item Value="UrFiz"/>
+          <Item Value="UserId"/>
+          <Item Value="Version"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="KontragentsAll1Iterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="KontragentsAll1Iterator" id="Fullname">
+      <AttrNames>
+        <Item Value="Fullname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="KontragentsAll1Iterator" id="Inn">
+      <AttrNames>
+        <Item Value="Inn"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="KontragentsAll1Iterator" id="IsGroup" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="IsGroup"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="1"/>
+        <Item Value="0"/>
+      </ValueList>
+    </button>
+    <button IterBinding="KontragentsAll1Iterator" id="IsBuyer" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="IsBuyer"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="1"/>
+        <Item Value="0"/>
+      </ValueList>
+    </button>
+    <button IterBinding="KontragentsAll1Iterator" id="IsMeasurer" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="IsMeasurer"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="1"/>
+        <Item Value="0"/>
+      </ValueList>
+    </button>
+    <button IterBinding="KontragentsAll1Iterator" id="IsSupplier" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="IsSupplier"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="1"/>
+        <Item Value="0"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="KontragentsAll1Iterator" id="Okpo">
+      <AttrNames>
+        <Item Value="Okpo"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="KontragentsAll1Iterator" id="UrFiz" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="UrFiz"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="1"/>
+        <Item Value="0"/>
+      </ValueList>
+    </button>
+    <list IterBinding="KontragentsAll1Iterator" StaticList="false" Uses="LOV_ParentId" id="ParentId"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <action IterBinding="KontragentsAll1Iterator" id="CreateInsert" InstanceName="AppModuleDataControl.KontragentsAll1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <action IterBinding="KontragentsAll1Iterator" id="Delete" InstanceName="AppModuleDataControl.KontragentsAll1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+  </bindings>
+</pageDefinition>

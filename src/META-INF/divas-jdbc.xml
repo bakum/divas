@@ -12,7 +12,7 @@
                 <value>dba_divas</value>
             </property>
         </properties>
-        <password-encrypted>5596838BD0035708CD4B48AB6F3E0566</password-encrypted>
+        <password-encrypted>{AES}U5H2YPDdq/EKTFMZDdV3tTUNqrQNp4stCIGiXJtpiX0=</password-encrypted>
     </jdbc-driver-params>
     <jdbc-connection-pool-params>
         <test-table-name>SQL SELECT 1 FROM DUAL</test-table-name>

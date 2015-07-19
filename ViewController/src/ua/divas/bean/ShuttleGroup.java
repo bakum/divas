@@ -497,7 +497,7 @@ public class ShuttleGroup {
             zid = getZamerId().getValue().toString();
         } catch (Exception e) {
             zid = "";
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         if (zid == null || zid == "") {
             return false;

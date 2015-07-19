@@ -51,11 +51,7 @@
   <ViewAccessor
     Name="KontragentsView1"
     ViewObjectName="ua.divas.view.KontragentsView"
-    RowLevelBinds="true">
-    <ViewCriteriaUsage
-      Name="KontragentsFilterItemsByName"
-      FullName="ua.divas.view.KontragentsView.KontragentsFilterItemsByName"/>
-  </ViewAccessor>
+    RowLevelBinds="true"/>
   <ViewAccessor
     Name="DivisionsView1"
     ViewObjectName="ua.divas.view.DivisionsView"

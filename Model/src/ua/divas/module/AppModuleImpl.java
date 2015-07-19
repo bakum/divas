@@ -4012,5 +4012,61 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public KontragentsSupplierImpl getKontragentsSupplier1() {
         return (KontragentsSupplierImpl) findViewObject("KontragentsSupplier1");
     }
+
+    /**
+     * Container's getter for KontragentsAllRoot1.
+     * @return KontragentsAllRoot1
+     */
+    public ViewObjectImpl getKontragentsAllRoot1() {
+        return (ViewObjectImpl) findViewObject("KontragentsAllRoot1");
+    }
+
+    /**
+     * Container's getter for KontragentsAll1.
+     * @return KontragentsAll1
+     */
+    public ViewObjectImpl getKontragentsAll1() {
+        return (ViewObjectImpl) findViewObject("KontragentsAll1");
+    }
+
+    /**
+     * Container's getter for KontragentsAll2.
+     * @return KontragentsAll2
+     */
+    public ViewObjectImpl getKontragentsAll2() {
+        return (ViewObjectImpl) findViewObject("KontragentsAll2");
+    }
+
+    /**
+     * Container's getter for KontragentsRootAllFkLink1.
+     * @return KontragentsRootAllFkLink1
+     */
+    public ViewLinkImpl getKontragentsRootAllFkLink1() {
+        return (ViewLinkImpl) findViewLink("KontragentsRootAllFkLink1");
+    }
+
+    /**
+     * Container's getter for KontragentsAll3.
+     * @return KontragentsAll3
+     */
+    public ViewObjectImpl getKontragentsAll3() {
+        return (ViewObjectImpl) findViewObject("KontragentsAll3");
+    }
+
+    /**
+     * Container's getter for KontragAllKontragFkLink1.
+     * @return KontragAllKontragFkLink1
+     */
+    public ViewLinkImpl getKontragAllKontragFkLink1() {
+        return (ViewLinkImpl) findViewLink("KontragAllKontragFkLink1");
+    }
+
+    /**
+     * Container's getter for KontragentsAllGroup1.
+     * @return KontragentsAllGroup1
+     */
+    public ViewObjectImpl getKontragentsAllGroup1() {
+        return (ViewObjectImpl) findViewObject("KontragentsAllGroup1");
+    }
 }
 

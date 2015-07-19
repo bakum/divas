@@ -929,6 +929,21 @@
       Name="KontragentsSupplierNoDelete"
       FullName="ua.divas.view.KontragentsSupplier.KontragentsSupplierNoDelete"/>
   </ViewUsage>
+  <ViewUsage
+    Name="KontragentsAllRoot1"
+    ViewObjectName="ua.divas.view.KontragentsAllRoot"/>
+  <ViewUsage
+    Name="KontragentsAll1"
+    ViewObjectName="ua.divas.view.KontragentsAll"/>
+  <ViewUsage
+    Name="KontragentsAll2"
+    ViewObjectName="ua.divas.view.KontragentsAll"/>
+  <ViewUsage
+    Name="KontragentsAll3"
+    ViewObjectName="ua.divas.view.KontragentsAll"/>
+  <ViewUsage
+    Name="KontragentsAllGroup1"
+    ViewObjectName="ua.divas.view.ro.KontragentsAllGroup"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -1978,6 +1993,18 @@
     ViewLinkObjectName="ua.divas.view.ProrabSupplierFkLink"
     SrcViewUsageName="ua.divas.module.AppModule.ProrabView1"
     DstViewUsageName="ua.divas.module.AppModule.VwSupplierMoves3"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="KontragentsRootAllFkLink1"
+    ViewLinkObjectName="ua.divas.view.KontragentsRootAllFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.KontragentsAllRoot1"
+    DstViewUsageName="ua.divas.module.AppModule.KontragentsAll2"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="KontragAllKontragFkLink1"
+    ViewLinkObjectName="ua.divas.view.KontragAllKontragFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.KontragentsAll1"
+    DstViewUsageName="ua.divas.module.AppModule.KontragentsAll3"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">

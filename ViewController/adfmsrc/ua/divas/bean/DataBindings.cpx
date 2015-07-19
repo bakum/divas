@@ -64,6 +64,7 @@
     <page path="/rating.jsff" usageId="ua_divas_bean_ratingPageDef"/>
     <page path="/rating_sett.jsff" usageId="ua_divas_bean_rating_settPageDef"/>
     <page path="/zatraty_dir.jsff" usageId="ua_divas_bean_zatraty_dirPageDef"/>
+    <page path="/kontrag_dir.jsff" usageId="ua_divas_bean_kontrag_dirPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="ua_divas_view_indexPageDef" path="ua.divas.bean.pageDefs.indexPageDef"/>
@@ -122,6 +123,7 @@
     <page id="ua_divas_bean_ratingPageDef" path="ua.divas.bean.pageDefs.ratingPageDef"/>
     <page id="ua_divas_bean_rating_settPageDef" path="ua.divas.bean.pageDefs.rating_settPageDef"/>
     <page id="ua_divas_bean_zatraty_dirPageDef" path="ua.divas.bean.pageDefs.zatraty_dirPageDef"/>
+    <page id="ua_divas_bean_kontrag_dirPageDef" path="ua.divas.bean.pageDefs.kontrag_dirPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <dc id="DataPackage" path="ua.divas.bean.DataPackage"/>
