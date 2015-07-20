@@ -6,6 +6,11 @@ import java.util.List;
 
 import java.util.Map;
 
+import javax.el.ELContext;
+import javax.el.ExpressionFactory;
+import javax.el.MethodExpression;
+
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -17,14 +22,17 @@ import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCDataControl;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.share.ADFContext;
+import oracle.adf.view.rich.component.rich.data.RichListView;
 import oracle.adf.view.rich.component.rich.data.RichTable;
 import oracle.adf.view.rich.component.rich.data.RichTree;
+import oracle.adf.view.rich.component.rich.data.RichTreeTable;
 import oracle.adf.view.rich.component.rich.layout.RichPanelFormLayout;
 import oracle.adf.view.rich.context.AdfFacesContext;
 import oracle.adf.view.rich.datatransfer.DataFlavor;
 import oracle.adf.view.rich.dnd.DnDAction;
 import oracle.adf.view.rich.event.DialogEvent;
 import oracle.adf.view.rich.event.DropEvent;
+import oracle.adf.view.rich.event.ItemEvent;
 import oracle.adf.view.rich.event.PopupCanceledEvent;
 import oracle.adf.view.rich.event.PopupFetchEvent;
 import oracle.adf.view.rich.event.QueryEvent;
@@ -41,10 +49,13 @@ import oracle.jbo.Key;
 
 import oracle.jbo.Row;
 import oracle.jbo.RowIterator;
+import oracle.jbo.RowNotFoundException;
 import oracle.jbo.RowSetIterator;
 import oracle.jbo.uicli.binding.JUCtrlHierBinding;
 
 import oracle.jbo.uicli.binding.JUCtrlHierNodeBinding;
+
+import oracle.jbo.uicli.binding.JUIteratorBinding;
 
 import org.apache.myfaces.trinidad.event.PollEvent;
 import org.apache.myfaces.trinidad.event.ReturnEvent;
@@ -64,7 +75,7 @@ public class FilterBeans {
     private String del_title;
     private String del_style;
     private String del_label;
-
+    private RichListView list;
 
 
     public FilterBeans() {
@@ -77,6 +88,10 @@ public class FilterBeans {
 
     public RichTable getMainTable() {
         return mainTable;
+    }
+    
+    public BindingContainer getBindings() {
+        return BindingContext.getCurrent().getCurrentBindingsEntry();
     }
 
     public void resetTableFilter(ActionEvent actionEvent) {
@@ -597,6 +612,7 @@ public class FilterBeans {
 
     public void onReturnValue(ReturnEvent returnEvent) {
         refresh();
+        System.out.println("On return called ");
     }
     
     public void setDel_title(String del_title) {
@@ -668,5 +684,66 @@ public class FilterBeans {
             }
             commitChange();
         }
+    }
+
+    public void onSelectListView(SelectionEvent selectionEvent) {
+        String adfSelectionListener = "#{bindings.OrdersViewKontragent.treeModel.makeCurrent}";
+        FacesContext fctx = FacesContext.getCurrentInstance();
+        Application application = fctx.getApplication();
+        ELContext elCtx = fctx.getELContext();
+        ExpressionFactory exprFactory = application.getExpressionFactory();
+
+        MethodExpression me = null;
+        me = exprFactory.createMethodExpression(elCtx, adfSelectionListener, Object.class, new Class[] {
+                                                SelectionEvent.class });
+        me.invoke(elCtx, new Object[] { selectionEvent });
+        
+        RichListView list1 = this.getList();
+        RowKeySet rks2 = list1.getSelectedRowKeys();
+        Iterator rksIterator = rks2.iterator();
+        
+        if (rksIterator.hasNext()) {
+            List key = (List) rksIterator.next();
+            JUCtrlHierBinding treeBinding = null;
+            treeBinding = (JUCtrlHierBinding) ((CollectionModel) list1.getValue()).getWrappedData();
+            JUCtrlHierNodeBinding nodeBinding = treeBinding.findNodeByKeyPath(key);
+
+            Row rw = nodeBinding.getRow();
+            //print first row attribute. Note that in a tree you have to
+            //determine the node type if you want to select node attributes
+            //by name and not index
+            String rowType = rw.getStructureDef().getDefName();
+            System.out.println(rowType);
+
+            DCIteratorBinding _treeIteratorBinding = null;
+            _treeIteratorBinding = treeBinding.getDCIteratorBinding();
+            JUIteratorBinding iterator = nodeBinding.getIteratorBinding();
+            String keyStr = nodeBinding.getRowKey().toStringFormat(true);
+            if (keyStr != null && rowType.matches("OrdersView")) {
+                DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("OrdersView1Iterator");
+                try {
+                    iter.setCurrentRowWithKey(keyStr);
+                } catch (RowNotFoundException e) {
+                    try {
+                        iterator.setCurrentRowWithKey(keyStr);
+                    } catch (RowNotFoundException er) {
+                        System.out.println(er.getMessage());
+
+                    }
+                }
+            }
+        }
+    }
+
+    public void setList(RichListView list) {
+        this.list = list;
+    }
+
+    public RichListView getList() {
+        return list;
+    }
+
+    public void onItem(ItemEvent itemEvent) {
+        refresh();
     }
 }

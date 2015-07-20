@@ -28,6 +28,7 @@
         <sort attribute="Dat" ascending="false"/>
       </sortCriteria>
     </iterator>
+    <iterator Binds="OrdersView1" RangeSize="10" DataControl="AppModuleDataControl" id="OrdersView1Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="KontragentsView1Iterator" id="KontragentsView1">
@@ -283,5 +284,44 @@
     </attributeValues>
     <action IterBinding="CallLogView5Iterator" id="CreateInsert2" InstanceName="AppModuleDataControl.CallLogView5"
             DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <tree IterBinding="OrdersView1Iterator" id="OrdersView1">
+      <nodeDefinition DefName="ua.divas.view.OrdersView" Name="OrdersView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ActivitiesId"/>
+          <Item Value="AgentId"/>
+          <Item Value="AgentName"/>
+          <Item Value="CountUslug"/>
+          <Item Value="CurrId"/>
+          <Item Value="Dat"/>
+          <Item Value="DatComplete"/>
+          <Item Value="DatZam"/>
+          <Item Value="Deleted"/>
+          <Item Value="Discription"/>
+          <Item Value="DivisionId"/>
+          <Item Value="Enbl"/>
+          <Item Value="FirmId"/>
+          <Item Value="KassaId"/>
+          <Item Value="KontragId"/>
+          <Item Value="Kontragname"/>
+          <Item Value="Kratnost"/>
+          <Item Value="Kurs"/>
+          <Item Value="Num"/>
+          <Item Value="Objname"/>
+          <Item Value="OEditable"/>
+          <Item Value="Posted"/>
+          <Item Value="StatusId"/>
+          <Item Value="SummPlan"/>
+          <Item Value="TotalSumm"/>
+          <Item Value="TotalSummUslugiAdd"/>
+          <Item Value="TotalSumOplaty"/>
+          <Item Value="TotalSumUslugi"/>
+          <Item Value="UserId"/>
+          <Item Value="Version"/>
+          <Item Value="ZamerId"/>
+          <Item Value="Zamername"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>

@@ -813,7 +813,8 @@
                                                              emptyText="#{bindings.OrdersViewKontragent.viewable ? 'Нет данных для отображения.' : 'В доступе отказано.'}"
                                                              fetchSize="#{bindings.OrdersViewKontragent.rangeSize}"
                                                              id="lv1" selection="single"
-                                                             selectionListener="#{bindings.OrdersViewKontragent.treeModel.makeCurrent}">
+                                                             selectionListener="#{filter.onSelectListView}"
+                                                             binding="#{filter.list}">
                                                     <af:listItem id="li1">
                                                         <af:panelGridLayout id="pgl6">
                                                             <af:gridRow marginTop="5px" height="auto" id="gr2">
