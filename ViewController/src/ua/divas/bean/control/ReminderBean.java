@@ -22,7 +22,7 @@ import org.quartz.TriggerBuilder;
 import ua.divas.classes.StartSchedulerQuartz;
 import ua.divas.module.AppModuleImpl;
 import ua.divas.bean.Notice;
-import ua.divas.bean.NotificationBean;
+import ua.divas.bean.Notification;
 
 public class ReminderBean {
     

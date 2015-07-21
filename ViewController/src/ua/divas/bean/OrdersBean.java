@@ -690,6 +690,7 @@ public class OrdersBean {
                                                                                                                 cutid,
                                                                                                                 "group").build();
                 job.getJobDataMap().put("UserName", getSessionUser());
+                //job.getJobDataMap().put("FacesContext", FacesContext.getCurrentInstance());
 
                 ob.getParamsMap().put("cutid", cutid);
                 ob.getParamsMap().put("dat", runDate);

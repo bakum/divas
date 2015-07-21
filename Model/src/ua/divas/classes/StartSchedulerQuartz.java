@@ -7,6 +7,8 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.faces.context.FacesContext;
+
 import javax.servlet.GenericServlet;
 
 import javax.servlet.ServletConfig;
@@ -16,6 +18,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 
 import javax.servlet.ServletResponse;
+
+import oracle.adf.share.ADFContext;
 
 import org.quartz.Scheduler;
 
@@ -61,6 +65,9 @@ public class StartSchedulerQuartz extends GenericServlet {
             try {
                 SchedulerFactory sf = new StdSchedulerFactory(prop);
                 sched = sf.getScheduler();
+                //FacesContext context = FacesContext.getCurrentInstance();
+                //sched.getContext().put("FacesContext", FacesContext.getCurrentInstance());
+                //sched.getContext().put("adfCtx", ADFContext.getCurrent());
                 sched.start();
                 System.out.println("Scheduler was started");
 

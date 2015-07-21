@@ -2,11 +2,6 @@ package ua.divas.bean;
 
 import java.io.Serializable;
 
-import javax.faces.context.FacesContext;
-import org.apache.myfaces.trinidad.util.Service;
-
-import org.apache.myfaces.trinidad.render.ExtendedRenderKitService;
-
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
