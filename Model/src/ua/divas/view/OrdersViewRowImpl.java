@@ -67,6 +67,7 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         ZamerId,
         Zamername,
         DatComplete,
+        DatCompleteFact,
         DatZam,
         AgentId,
         AgentName,
@@ -149,6 +150,7 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     public static final int ZAMERID = AttributesEnum.ZamerId.index();
     public static final int ZAMERNAME = AttributesEnum.Zamername.index();
     public static final int DATCOMPLETE = AttributesEnum.DatComplete.index();
+    public static final int DATCOMPLETEFACT = AttributesEnum.DatCompleteFact.index();
     public static final int DATZAM = AttributesEnum.DatZam.index();
     public static final int AGENTID = AttributesEnum.AgentId.index();
     public static final int AGENTNAME = AttributesEnum.AgentName.index();
@@ -623,6 +625,22 @@ public class OrdersViewRowImpl extends ViewRowImpl {
      */
     public void setDatComplete(Timestamp value) {
         setAttributeInternal(DATCOMPLETE, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute DatCompleteFact.
+     * @return the DatCompleteFact
+     */
+    public Timestamp getDatCompleteFact() {
+        return (Timestamp) getAttributeInternal(DATCOMPLETEFACT);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for the calculated attribute DatCompleteFact.
+     * @param value value to set the  DatCompleteFact
+     */
+    public void setDatCompleteFact(Timestamp value) {
+        setAttributeInternal(DATCOMPLETEFACT, value);
     }
 
     /**

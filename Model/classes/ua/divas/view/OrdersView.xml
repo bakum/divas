@@ -415,6 +415,7 @@
     WHERE 
         ID = ZAMER_ID) ZamerName, 
     Orders.DAT_COMPLETE DAT_COMPLETE, 
+    Orders.DAT_COMPLETE_FACT DAT_COMPLETE_FACT, 
     Orders.DAT_ZAM DAT_ZAM, 
     Orders.AGENT_ID,
     (SELECT 
@@ -743,6 +744,12 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
       AliasName="DAT_COMPLETE">
         <TransientExpression><![CDATA[adf.currentDateTime]]></TransientExpression>
     </ViewAttribute>
+    <ViewAttribute
+        Name="DatCompleteFact"
+        PrecisionRule="true"
+        AliasName="DAT_COMPLETE_FACT"
+        EntityAttrName="DatCompleteFact"
+        EntityUsage="Orders"/>
     <ViewAttribute
       Name="DatZam"
       IsNotNull="true"

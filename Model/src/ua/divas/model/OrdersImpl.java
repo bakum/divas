@@ -66,6 +66,7 @@ public class OrdersImpl extends DivasEntity {
         DatZam,
         SummPlan,
         AgentId,
+        DatCompleteFact,
         Currency,
         Divisions,
         Firms,
@@ -127,6 +128,7 @@ public class OrdersImpl extends DivasEntity {
     public static final int DATZAM = AttributesEnum.DatZam.index();
     public static final int SUMMPLAN = AttributesEnum.SummPlan.index();
     public static final int AGENTID = AttributesEnum.AgentId.index();
+    public static final int DATCOMPLETEFACT = AttributesEnum.DatCompleteFact.index();
     public static final int CURRENCY = AttributesEnum.Currency.index();
     public static final int DIVISIONS = AttributesEnum.Divisions.index();
     public static final int FIRMS = AttributesEnum.Firms.index();
@@ -507,6 +509,22 @@ public class OrdersImpl extends DivasEntity {
      */
     public void setAgentId(String value) {
         setAttributeInternal(AGENTID, value);
+    }
+
+    /**
+     * Gets the attribute value for DatCompleteFact, using the alias name DatCompleteFact.
+     * @return the value of DatCompleteFact
+     */
+    public Timestamp getDatCompleteFact() {
+        return (Timestamp) getAttributeInternal(DATCOMPLETEFACT);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for DatCompleteFact.
+     * @param value value to set the DatCompleteFact
+     */
+    public void setDatCompleteFact(Timestamp value) {
+        setAttributeInternal(DATCOMPLETEFACT, value);
     }
 
     /**

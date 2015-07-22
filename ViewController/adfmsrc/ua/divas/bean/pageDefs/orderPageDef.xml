@@ -401,5 +401,10 @@
       </AttrNames>
     </attributeValues>
     <listOfValues IterBinding="OrdersView1Iterator" StaticList="false" Uses="LOV_AgentName" id="AgentName"/>
+    <attributeValues IterBinding="OrdersView1Iterator" id="DatCompleteFact">
+      <AttrNames>
+        <Item Value="DatCompleteFact"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

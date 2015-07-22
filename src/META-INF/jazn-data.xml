@@ -424,6 +424,11 @@
                 <name>ua.divas.model.Orders.AgentId</name>
                 <actions>update</actions>
               </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
+                <name>ua.divas.model.Orders.DatCompleteFact</name>
+                <actions>update</actions>
+              </permission>
             </permissions>
           </grant>
           <grant>
@@ -903,6 +908,11 @@
               <permission>
                 <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
                 <name>ua.divas.model.Orders.AgentId</name>
+                <actions>update</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
+                <name>ua.divas.model.Orders.DatCompleteFact</name>
                 <actions>update</actions>
               </permission>
             </permissions>

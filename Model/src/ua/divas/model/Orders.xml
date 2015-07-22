@@ -511,6 +511,29 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="DatCompleteFact"
+    ColumnName="DAT_COMPLETE_FACT"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="ORDERS">
+    <Permission
+      target="ua.divas.model.Orders.DatCompleteFact"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Orders.DatCompleteFact_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Orders.DatCompleteFact_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="Currency"
     Association="ua.divas.model.OrdersCurrencyFk1Assoc"

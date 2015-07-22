@@ -52,6 +52,16 @@
                                             <f:validator binding="#{bindings.DatComplete.validator}"/>
                                             <af:convertDateTime pattern="#{bindings.DatComplete.format}"/>
                                         </af:inputDate>
+                                        <af:inputDate value="#{bindings.DatCompleteFact.inputValue}"
+                                                      label="#{bindings.DatCompleteFact.hints.label}"
+                                                      required="#{bindings.DatCompleteFact.hints.mandatory}"
+                                                      columns="#{bindings.DatCompleteFact.hints.displayWidth}"
+                                                      shortDesc="#{bindings.DatCompleteFact.hints.tooltip}" id="id8"
+                                                      labelStyle="font-weight: bold;"
+                                                      readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
+                                            <f:validator binding="#{bindings.DatCompleteFact.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.DatCompleteFact.format}"/>
+                                        </af:inputDate>
                                     </af:panelLabelAndMessage>
                                     <af:separator id="s1"/>
                                     <af:panelLabelAndMessage label="Реквизиты" id="plam2">
