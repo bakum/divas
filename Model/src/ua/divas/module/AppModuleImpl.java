@@ -4068,5 +4068,37 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewObjectImpl getKontragentsAllGroup1() {
         return (ViewObjectImpl) findViewObject("KontragentsAllGroup1");
     }
+
+    /**
+     * Container's getter for ObjectDeleted1.
+     * @return ObjectDeleted1
+     */
+    public ViewObjectImpl getObjectDeleted1() {
+        return (ViewObjectImpl) findViewObject("ObjectDeleted1");
+    }
+
+    /**
+     * Container's getter for ObjectDeletedRef1.
+     * @return ObjectDeletedRef1
+     */
+    public ViewObjectImpl getObjectDeletedRef1() {
+        return (ViewObjectImpl) findViewObject("ObjectDeletedRef1");
+    }
+
+    /**
+     * Container's getter for ObjectDeletedRef2.
+     * @return ObjectDeletedRef2
+     */
+    public ViewObjectImpl getObjectDeletedRef2() {
+        return (ViewObjectImpl) findViewObject("ObjectDeletedRef2");
+    }
+
+    /**
+     * Container's getter for ObjDelRefFkLink1.
+     * @return ObjDelRefFkLink1
+     */
+    public ViewLinkImpl getObjDelRefFkLink1() {
+        return (ViewLinkImpl) findViewLink("ObjDelRefFkLink1");
+    }
 }
 

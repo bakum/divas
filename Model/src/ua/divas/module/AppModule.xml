@@ -944,6 +944,15 @@
   <ViewUsage
     Name="KontragentsAllGroup1"
     ViewObjectName="ua.divas.view.ro.KontragentsAllGroup"/>
+  <ViewUsage
+    Name="ObjectDeleted1"
+    ViewObjectName="ua.divas.view.ObjectDeleted"/>
+  <ViewUsage
+    Name="ObjectDeletedRef1"
+    ViewObjectName="ua.divas.view.ObjectDeletedRef"/>
+  <ViewUsage
+    Name="ObjectDeletedRef2"
+    ViewObjectName="ua.divas.view.ObjectDeletedRef"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -2005,6 +2014,12 @@
     ViewLinkObjectName="ua.divas.view.KontragAllKontragFkLink"
     SrcViewUsageName="ua.divas.module.AppModule.KontragentsAll1"
     DstViewUsageName="ua.divas.module.AppModule.KontragentsAll3"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="ObjDelRefFkLink1"
+    ViewLinkObjectName="ua.divas.view.ObjDelRefFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.ObjectDeleted1"
+    DstViewUsageName="ua.divas.module.AppModule.ObjectDeletedRef2"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">

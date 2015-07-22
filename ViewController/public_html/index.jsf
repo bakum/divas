@@ -260,6 +260,18 @@
                                             </af:panelBox>
                                         </af:dialog>
                                     </af:popup>
+                                    <af:popup childCreation="deferred" autoCancel="disabled" id="pLong"
+                                              contentDelivery="immediate">
+                                        <af:dialog id="d4" type="none" closeIconVisible="false"
+                                                   title="Выполняется обработка..."
+                                                   titleIconSource="#{resource['images:smpt_ico_(16x16).gif']}">
+                                            <f:facet name="buttonBar"/>
+                                            <af:panelGroupLayout id="pgl4" layout="vertical" halign="center">
+                                                <af:image id="i1" source="/img/animbar.gif"/>
+                                                <af:outputText value="подождите пожалуйста..." id="ot2"/>
+                                            </af:panelGroupLayout>
+                                        </af:dialog>
+                                    </af:popup>
                                 </af:panelGroupLayout>
                             </f:facet>
                         </af:decorativeBox>

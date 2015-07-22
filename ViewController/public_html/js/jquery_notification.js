@@ -16,3 +16,25 @@ function clientMethodCall() {
         null, true);                     
     event.cancel();                    
 }       */
+
+function enforcePreventUserInput(evt){            
+    var popup = AdfPage.PAGE.findComponentByAbsoluteId('pLong');
+    if (popup != null){
+        AdfPage.PAGE.addBusyStateListener(popup,handleBusyState);        
+        evt.preventUserInput();
+    }
+}
+
+function handleBusyState(evt){
+var popup = AdfPage.PAGE.findComponentByAbsoluteId('pLong');        
+    if(popup!=null){
+        if (evt.isBusy()){
+            popup.show();   
+        }
+    else if (popup.isPopupVisible())
+        {
+            popup.hide();
+            AdfPage.PAGE.removeBusyStateListener(popup,handleBusyState);
+        }
+    }
+}
