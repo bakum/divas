@@ -953,6 +953,9 @@
   <ViewUsage
     Name="ObjectDeletedRef2"
     ViewObjectName="ua.divas.view.ObjectDeletedRef"/>
+  <ViewUsage
+    Name="KontragentsRep1"
+    ViewObjectName="ua.divas.view.KontragentsRep"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"

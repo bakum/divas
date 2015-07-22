@@ -1,5 +1,7 @@
 package ua.divas.bean;
 
+import java.io.OutputStream;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -66,6 +68,11 @@ import org.apache.myfaces.trinidad.model.RowKeySet;
 
 import org.apache.myfaces.trinidad.model.RowKeySetImpl;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
 import ua.divas.module.AppModuleImpl;
 
 
@@ -89,7 +96,7 @@ public class FilterBeans {
     public RichTable getMainTable() {
         return mainTable;
     }
-    
+
     public BindingContainer getBindings() {
         return BindingContext.getCurrent().getCurrentBindingsEntry();
     }
@@ -614,7 +621,7 @@ public class FilterBeans {
         refresh();
         System.out.println("On return called ");
     }
-    
+
     public void setDel_title(String del_title) {
         this.del_title = del_title;
     }
@@ -650,7 +657,7 @@ public class FilterBeans {
         }
         return RetStr;
     }
-    
+
     public void setDel_label(String del_label) {
         this.del_label = del_label;
     }
@@ -697,11 +704,11 @@ public class FilterBeans {
         me = exprFactory.createMethodExpression(elCtx, adfSelectionListener, Object.class, new Class[] {
                                                 SelectionEvent.class });
         me.invoke(elCtx, new Object[] { selectionEvent });
-        
+
         RichListView list1 = this.getList();
         RowKeySet rks2 = list1.getSelectedRowKeys();
         Iterator rksIterator = rks2.iterator();
-        
+
         if (rksIterator.hasNext()) {
             List key = (List) rksIterator.next();
             JUCtrlHierBinding treeBinding = null;
@@ -745,5 +752,96 @@ public class FilterBeans {
 
     public void onItem(ItemEvent itemEvent) {
         refresh();
+    }
+
+    public void generateExcel(FacesContext facesContext, OutputStream outputStream) {
+        try {
+            HSSFWorkbook workbook = new HSSFWorkbook();
+            HSSFSheet worksheet = workbook.createSheet("Контакты");
+            DCBindingContainer bindings = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding dcIteratorBindings = bindings.findIteratorBinding("KontragentsRep1Iterator");
+            HSSFRow excelrow = null;
+
+            // Get all the rows of a iterator
+            oracle.jbo.Row[] rows = dcIteratorBindings.getAllRowsInRange();
+            int i = 0;
+            for (oracle.jbo.Row row : rows) {
+                Integer buyer = (Integer)row.getAttribute("IsBuyer");
+                if (buyer != 1 ) continue;
+                //print header on first row in excel
+                if (i == 0) {
+                    excelrow = (HSSFRow) worksheet.createRow((short) i);
+                    short j = 0;
+                    for (String colName : row.getAttributeNames()) {
+                        HSSFCell cellA1 = excelrow.createCell((short) j);
+                        if (colName.equalsIgnoreCase("Fullname")) {
+                            cellA1.setCellValue("Ф.И.О.");
+                        }
+                        if (colName.equalsIgnoreCase("Adress")) {
+                            cellA1.setCellValue("Адрес");
+                        }
+                        if (colName.equalsIgnoreCase("Phone")) {
+                            cellA1.setCellValue("Телефон");
+                        }
+                        if (colName.equalsIgnoreCase("Email")) {
+                            cellA1.setCellValue("Почта");
+                        }
+                        j++;
+                    }
+                }
+                //print data from second row in excel
+                ++i;
+                short j = 0;
+                excelrow = worksheet.createRow((short) i);
+                for (String colName : row.getAttributeNames()) {
+                    //System.out.println("hello " + row.getAttribute(colName));
+                    //System.out.println("hello " + colName);
+                    HSSFCell cell = excelrow.createCell(j);
+                    /* if (null != row.getAttribute(colName)) {
+                        cell.setCellValue(row.getAttribute(colName).toString());
+                    } */
+                    if (colName.equalsIgnoreCase("Fullname")) {
+                        cell.setCellValue(row.getAttribute(colName).toString());
+                    }
+                    if (colName.equalsIgnoreCase("Adress")) {
+                        if (null != row.getAttribute(colName)) {
+                            cell.setCellValue(row.getAttribute(colName).toString());
+                        }
+                    }
+                    if (colName.equalsIgnoreCase("Phone")) {
+                        if (null != row.getAttribute(colName)) {
+                            cell.setCellValue(row.getAttribute(colName).toString());
+                        }
+                    }
+                    if (colName.equalsIgnoreCase("Email")) {
+                        if (null != row.getAttribute(colName)) {
+                            cell.setCellValue(row.getAttribute(colName).toString());
+                        }
+                    }
+                    //cell.setCellValue("Rакая-то херня");
+                    j++;
+
+                }
+                worksheet.createFreezePane(0, 1, 0, 1);
+                worksheet.autoSizeColumn(0);
+                worksheet.autoSizeColumn(1);
+                worksheet.autoSizeColumn(2);
+                worksheet.autoSizeColumn(3);
+            }
+
+            workbook.write(outputStream);
+            outputStream.flush();
+        } catch (Exception e) {
+            // TODO: Add catch code
+            e.printStackTrace();
+        }
+
+
+    }
+    
+    public void onPdf(ActionEvent actionEvent) {
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Infirmation", "Функция ещё не реализована!");
+        ctx.addMessage(null, msg);
     }
 }

@@ -7,6 +7,7 @@
     <iterator Binds="KontragentsAllRoot1" RangeSize="25" DataControl="AppModuleDataControl"
               id="KontragentsAllRoot1Iterator"/>
     <iterator Binds="KontragentsAll1" RangeSize="10" DataControl="AppModuleDataControl" id="KontragentsAll1Iterator"/>
+    <iterator Binds="KontragentsRep1" RangeSize="10" DataControl="AppModuleDataControl" id="KontragentsRep1Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="KontragentsAllRoot1Iterator" id="KontragentsAllRoot1">
@@ -130,5 +131,16 @@
     <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
     <action IterBinding="KontragentsAll1Iterator" id="Delete" InstanceName="AppModuleDataControl.KontragentsAll1"
             DataControl="AppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="KontragentsRep1Iterator" id="KontragentsRep1">
+      <nodeDefinition DefName="ua.divas.view.KontragentsRep" Name="KontragentsRep10">
+        <AttrNames>
+          <Item Value="Fullname"/>
+          <Item Value="Adress"/>
+          <Item Value="Email"/>
+          <Item Value="Phone"/>
+          <Item Value="IsBuyer"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>

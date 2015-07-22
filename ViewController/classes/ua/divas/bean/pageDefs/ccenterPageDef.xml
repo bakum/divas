@@ -29,6 +29,7 @@
       </sortCriteria>
     </iterator>
     <iterator Binds="OrdersView1" RangeSize="10" DataControl="AppModuleDataControl" id="OrdersView1Iterator"/>
+    <iterator Binds="KontragentsRep1" RangeSize="10" DataControl="AppModuleDataControl" id="KontragentsRep1Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="KontragentsView1Iterator" id="KontragentsView1">
@@ -320,6 +321,17 @@
           <Item Value="Version"/>
           <Item Value="ZamerId"/>
           <Item Value="Zamername"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="KontragentsRep1Iterator" id="KontragentsRep1">
+      <nodeDefinition DefName="ua.divas.view.KontragentsRep" Name="KontragentsRep10">
+        <AttrNames>
+          <Item Value="Fullname"/>
+          <Item Value="Adress"/>
+          <Item Value="Email"/>
+          <Item Value="IsBuyer"/>
+          <Item Value="Phone"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

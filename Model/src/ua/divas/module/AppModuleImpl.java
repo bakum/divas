@@ -4100,5 +4100,13 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getObjDelRefFkLink1() {
         return (ViewLinkImpl) findViewLink("ObjDelRefFkLink1");
     }
+
+    /**
+     * Container's getter for KontragentsRep1.
+     * @return KontragentsRep1
+     */
+    public ViewObjectImpl getKontragentsRep1() {
+        return (ViewObjectImpl) findViewObject("KontragentsRep1");
+    }
 }
 

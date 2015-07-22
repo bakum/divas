@@ -38,6 +38,19 @@
                                                     <af:button text="Обновить" id="b15"
                                                                actionListener="#{filter.onRefresh}"
                                                                disabled="#{bindings.Commit.enabled}"/>
+                                                    <af:menuBar id="mb1">
+                                                        <af:menu text="Экспорт" id="m2">
+                                                            <af:commandMenuItem text="Оправить в Excel" id="cmi2"
+                                                                                icon="/img/excel.png">
+                                                                <af:fileDownloadActionListener contentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                                                                                               filename="ExcelFromPoi.xls"
+                                                                                               method="#{filter.generateExcel}"/>
+                                                            </af:commandMenuItem>
+                                                            <af:commandMenuItem text="Отправить в Pdf" id="cmi3"
+                                                                                icon="/img/pdf.png"
+                                                                                actionListener="#{filter.onPdf}"/>
+                                                        </af:menu>
+                                                    </af:menuBar>
                                                 </af:toolbar>
                                             </f:facet>
                                             <af:table value="#{bindings.KontragentsView1.collectionModel}" var="row"

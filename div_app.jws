@@ -157,6 +157,15 @@
                <value n="id" v="Slf4j-log4j12-1.6.6.jar"/>
                <value n="locked" v="true"/>
             </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../poi-3.12/poi-3.12-20150511.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Poi-3.12-20150511.jar"/>
+               <value n="id" v="Poi-3.12-20150511.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
          </list>
       </hash>
       <list n="libraryReferences">
@@ -182,6 +191,10 @@
          </hash>
          <hash>
             <value n="id" v="Slf4j-log4j12-1.6.6.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Poi-3.12-20150511.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>
