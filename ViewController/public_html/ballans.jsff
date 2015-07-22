@@ -10,24 +10,6 @@
                         <af:panelGroupLayout id="pgl4" layout="horizontal">
                             <af:link text="Развернутый баланс" id="l1" action="to_detail"/>
                             <af:spacer width="10" height="10" id="s1"/>
-                            <af:inputDate value="#{bindings.f_dat.inputValue}" label="От:"
-                                          required="#{bindings.f_dat.hints.mandatory}"
-                                          columns="#{bindings.f_dat.hints.displayWidth}"
-                                          shortDesc="#{bindings.f_dat.hints.tooltip}" id="id3">
-                                <f:validator binding="#{bindings.f_dat.validator}"/>
-                                <af:convertDateTime pattern="#{bindings.f_dat.format}"/>
-                            </af:inputDate>
-                            <af:spacer width="10" height="10" id="s3"/>
-                            <af:inputDate value="#{bindings.l_dat.inputValue}" label="До:"
-                                          required="#{bindings.l_dat.hints.mandatory}"
-                                          columns="#{bindings.l_dat.hints.displayWidth}"
-                                          shortDesc="#{bindings.l_dat.hints.tooltip}" id="id4">
-                                <f:validator binding="#{bindings.l_dat.validator}"/>
-                                <af:convertDateTime pattern="#{bindings.l_dat.format}"/>
-                            </af:inputDate>
-                            <af:spacer width="10" height="10" id="s2"/>
-                            <af:button actionListener="#{bindings.ExecuteWithParams1.execute}" text="Обновить"
-                                       disabled="#{!bindings.ExecuteWithParams1.enabled}" id="b3"/>
                         </af:panelGroupLayout>
                     </f:facet>
                     <af:table value="#{bindings.VwBallansAp1.collectionModel}" var="row"

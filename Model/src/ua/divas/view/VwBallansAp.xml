@@ -9,7 +9,9 @@
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
-  ComponentClass="ua.divas.view.VwBallansApImpl">
+  ComponentClass="ua.divas.view.VwBallansApImpl"
+  ComponentInterface="ua.divas.view.common.VwBallansAp"
+  ClientProxyName="ua.divas.view.client.VwBallansApClient">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
@@ -20,18 +22,6 @@
         ResId="ua.divas.view.VwBallansAp_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
-  <Variable
-    Name="f_dat"
-    Kind="where"
-    Type="oracle.jbo.domain.Date">
-    <TransientExpression><![CDATA[viewObject.getDateLast()]]></TransientExpression>
-  </Variable>
-  <Variable
-    Name="l_dat"
-    Kind="where"
-    Type="oracle.jbo.domain.Date">
-    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
-  </Variable>
   <ViewAccessor
     Name="DivisionsView1"
     ViewObjectName="ua.divas.view.DivisionsView"
@@ -40,25 +30,25 @@
       Name="DivisionsViewItems"
       FullName="ua.divas.view.DivisionsView.DivisionsViewItems"/>
   </ViewAccessor>
-  <SQLQuery><![CDATA[SELECT 
-    VW_BALLANS_AP.ID ID, 
-    VW_BALLANS_AP.CODE CODE, 
-    VW_BALLANS_AP.FULLNAME FULLNAME, 
-    SUM(VW_BALLANS_AP.ACTIVE_START) ACTIVE_START,
-    SUM(VW_BALLANS_AP.ACTIVE_DEB) ACTIVE_DEB,
-    SUM(VW_BALLANS_AP.ACTIVE_KRED) ACTIVE_KRED,
-    SUM(VW_BALLANS_AP.ACTIVE_OBOROT) ACTIVE_OBOROT, 
-    SUM(VW_BALLANS_AP.ACTIVE_END) ACTIVE_END, 
-    SUM(VW_BALLANS_AP.PASSIVE_START) PASSIVE_START,
-    SUM(VW_BALLANS_AP.PASSIVE_DEB) PASSIVE_DEB,
-    SUM(VW_BALLANS_AP.PASSIVE_KRED) PASSIVE_KRED,
-    SUM(VW_BALLANS_AP.PASSIVE_OBOROT) PASSIVE_OBOROT, 
-    SUM(VW_BALLANS_AP.PASSIVE_END) PASSIVE_END
-FROM 
-    table(cast(REPORT_PKG.GETBALLANS(:f_dat, :l_dat) as tbl_ballans)) VW_BALLANS_AP
-GROUP BY VW_BALLANS_AP.ID,
-  VW_BALLANS_AP.CODE,
-  VW_BALLANS_AP.FULLNAME
+  <SQLQuery><![CDATA[SELECT  
+    VW_BALLANS_AP.ID ID,  
+    VW_BALLANS_AP.CODE CODE,  
+    VW_BALLANS_AP.FULLNAME FULLNAME,  
+    SUM(VW_BALLANS_AP.ACTIVE_START) ACTIVE_START, 
+    SUM(VW_BALLANS_AP.ACTIVE_DEB) ACTIVE_DEB, 
+    SUM(VW_BALLANS_AP.ACTIVE_KRED) ACTIVE_KRED, 
+    SUM(VW_BALLANS_AP.ACTIVE_OBOROT) ACTIVE_OBOROT,  
+    SUM(VW_BALLANS_AP.ACTIVE_END) ACTIVE_END,  
+    SUM(VW_BALLANS_AP.PASSIVE_START) PASSIVE_START, 
+    SUM(VW_BALLANS_AP.PASSIVE_DEB) PASSIVE_DEB, 
+    SUM(VW_BALLANS_AP.PASSIVE_KRED) PASSIVE_KRED, 
+    SUM(VW_BALLANS_AP.PASSIVE_OBOROT) PASSIVE_OBOROT,  
+    SUM(VW_BALLANS_AP.PASSIVE_END) PASSIVE_END 
+FROM  
+    ballans VW_BALLANS_AP 
+GROUP BY VW_BALLANS_AP.ID, 
+  VW_BALLANS_AP.CODE, 
+  VW_BALLANS_AP.FULLNAME 
 ORDER BY CODE]]></SQLQuery>
   <ViewAttribute
     Name="Id"
@@ -355,6 +345,22 @@ ORDER BY CODE]]></SQLQuery>
     ViewLink="ua.divas.view.VwBallansDetaiFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="refreshBallans"
+      MethodName="refreshBallans">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="f_dat"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="l_dat"
+        Type="oracle.jbo.domain.Date"/>
+    </Method>
+  </ClientInterface>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

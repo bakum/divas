@@ -31,36 +31,6 @@ public class VwBallansApDetailImpl extends ViewObjectImpl {
         return dbDate;
     }
 
-    /**
-     * Returns the bind variable value for f_dat.
-     * @return bind variable value for f_dat
-     */
-    public Date getf_dat() {
-        return (Date) getNamedWhereClauseParam("f_dat");
-    }
 
-    /**
-     * Sets <code>value</code> for bind variable f_dat.
-     * @param value value to bind as f_dat
-     */
-    public void setf_dat(Date value) {
-        setNamedWhereClauseParam("f_dat", value);
-    }
-
-    /**
-     * Returns the bind variable value for l_dat.
-     * @return bind variable value for l_dat
-     */
-    public Date getl_dat() {
-        return (Date) getNamedWhereClauseParam("l_dat");
-    }
-
-    /**
-     * Sets <code>value</code> for bind variable l_dat.
-     * @param value value to bind as l_dat
-     */
-    public void setl_dat(Date value) {
-        setNamedWhereClauseParam("l_dat", value);
-    }
 }
 

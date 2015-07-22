@@ -3,12 +3,6 @@
                 Package="ua.divas.bean.pageDefs">
   <parameters/>
   <executables>
-    <variableIterator id="variables">
-      <variableUsage DataControl="AppModuleDataControl" Binds="VwBallansAp1.variablesMap.f_dat"
-                     Name="ExecuteWithParams1_f_dat" IsQueriable="false"/>
-      <variableUsage DataControl="AppModuleDataControl" Binds="VwBallansAp1.variablesMap.l_dat"
-                     Name="ExecuteWithParams1_l_dat" IsQueriable="false"/>
-    </variableIterator>
     <iterator Binds="VwBallansAp1" RangeSize="25" DataControl="AppModuleDataControl" id="VwBallansAp1Iterator"/>
     <iterator Binds="VwBallansApDetail1" RangeSize="10" DataControl="AppModuleDataControl"
               id="VwBallansApDetail1Iterator"/>
@@ -33,26 +27,5 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <action IterBinding="VwBallansAp1Iterator" id="ExecuteWithParams1" RequiresUpdateModel="true"
-            Action="executeWithParams">
-      <NamedData NDName="f_dat" NDValue="${bindings.ExecuteWithParams1_f_dat}" NDType="oracle.jbo.domain.Date"/>
-      <NamedData NDName="l_dat" NDValue="${bindings.ExecuteWithParams1_l_dat}" NDType="oracle.jbo.domain.Date"/>
-    </action>
-    <attributeValues IterBinding="variables" id="f_dat">
-      <AttrNames>
-        <Item Value="ExecuteWithParams1_f_dat"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="variables" id="l_dat">
-      <AttrNames>
-        <Item Value="ExecuteWithParams1_l_dat"/>
-      </AttrNames>
-    </attributeValues>
-    <action IterBinding="VwBallansApDetail1Iterator" id="ExecuteWithParams"
-            InstanceName="AppModuleDataControl.VwBallansApDetail1" DataControl="AppModuleDataControl"
-            RequiresUpdateModel="true" Action="executeWithParams">
-      <NamedData NDName="f_dat" NDValue="${bindings.ExecuteWithParams1_f_dat}" NDType="oracle.jbo.domain.Date"/>
-      <NamedData NDName="l_dat" NDValue="${bindings.ExecuteWithParams1_l_dat}" NDType="oracle.jbo.domain.Date"/>
-    </action>
   </bindings>
 </pageDefinition>

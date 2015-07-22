@@ -5,18 +5,14 @@
   <executables>
     <iterator Binds="VwBallansAp1" RangeSize="25" DataControl="AppModuleDataControl" id="VwBallansAp1Iterator"/>
     <variableIterator id="variables">
-      <variableUsage DataControl="AppModuleDataControl" Binds="VwBallansAp1.variablesMap.f_dat"
-                     Name="ExecuteWithParams_f_dat" IsQueriable="false"/>
-      <variableUsage DataControl="AppModuleDataControl" Binds="VwBallansAp1.variablesMap.l_dat"
-                     Name="ExecuteWithParams_l_dat" IsQueriable="false"/>
-      <variableUsage DataControl="AppModuleDataControl" Binds="VwBallansApDetail1.variablesMap.f_dat"
-                     Name="ExecuteWithParams1_f_dat" IsQueriable="false"/>
-      <variableUsage DataControl="AppModuleDataControl" Binds="VwBallansApDetail1.variablesMap.l_dat"
-                     Name="ExecuteWithParams1_l_dat" IsQueriable="false"/>
       <variable Type="java.math.BigDecimal" Name="addProfitDistrib_Summa" IsQueriable="false"/>
+      <variable Type="oracle.jbo.domain.Date" Name="refreshBallans_f_dat" IsQueriable="false"
+                DefaultValue="#{bindings.FDat.inputValue}"/>
+      <variable Type="oracle.jbo.domain.Date" Name="refreshBallans_l_dat" IsQueriable="false"
+                DefaultValue="#{bindings.LDat.inputValue}"/>
     </variableIterator>
-    <iterator Binds="VwBallansApDetail1" RangeSize="25" DataControl="AppModuleDataControl"
-              id="VwBallansApDetail1Iterator"/>
+    <iterator Binds="VwBallansApDetail2" RangeSize="10" DataControl="AppModuleDataControl"
+              id="VwBallansApDetail2Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="VwBallansAp1Iterator" id="VwBallansAp1">
@@ -57,36 +53,6 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <action IterBinding="VwBallansAp1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
-            Action="executeWithParams">
-      <NamedData NDName="f_dat" NDType="oracle.jbo.domain.Date" NDValue="${bindings.ExecuteWithParams_f_dat}"/>
-      <NamedData NDName="l_dat" NDType="oracle.jbo.domain.Date" NDValue="${bindings.ExecuteWithParams_l_dat}"/>
-    </action>
-    <attributeValues IterBinding="variables" id="f_dat">
-      <AttrNames>
-        <Item Value="ExecuteWithParams_f_dat"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="variables" id="l_dat">
-      <AttrNames>
-        <Item Value="ExecuteWithParams_l_dat"/>
-      </AttrNames>
-    </attributeValues>
-    <action IterBinding="VwBallansApDetail1Iterator" id="ExecuteWithParams1" RequiresUpdateModel="true"
-            Action="executeWithParams">
-      <NamedData NDName="f_dat" NDType="oracle.jbo.domain.Date" NDValue="${bindings.ExecuteWithParams1_f_dat}"/>
-      <NamedData NDName="l_dat" NDType="oracle.jbo.domain.Date" NDValue="${bindings.ExecuteWithParams1_l_dat}"/>
-    </action>
-    <attributeValues IterBinding="variables" id="f_dat1">
-      <AttrNames>
-        <Item Value="ExecuteWithParams1_f_dat"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="variables" id="l_dat1">
-      <AttrNames>
-        <Item Value="ExecuteWithParams1_l_dat"/>
-      </AttrNames>
-    </attributeValues>
     <methodAction id="addProfitDistrib" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addProfitDistrib"
                   IsViewObjectMethod="false" DataControl="AppModuleDataControl"
                   InstanceName="data.AppModuleDataControl.dataProvider">
@@ -101,5 +67,31 @@
                   IsViewObjectMethod="true" DataControl="AppModuleDataControl"
                   InstanceName="data.AppModuleDataControl.ProfitDistribView1"
                   ReturnName="data.AppModuleDataControl.methodResults.getProfit_AppModuleDataControl_ProfitDistribView1_getProfit_result"/>
+    <methodAction id="refreshBallans" RequiresUpdateModel="true" Action="invokeMethod" MethodName="refreshBallans"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.VwBallansAp1">
+      <NamedData NDName="f_dat" NDValue="${bindings.refreshBallans_f_dat}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="l_dat" NDValue="${bindings.refreshBallans_l_dat}" NDType="oracle.jbo.domain.Date"/>
+    </methodAction>
+    <attributeValues IterBinding="variables" id="f_dat">
+      <AttrNames>
+        <Item Value="refreshBallans_f_dat"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="l_dat">
+      <AttrNames>
+        <Item Value="refreshBallans_l_dat"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VwBallansApDetail2Iterator" id="FDat">
+      <AttrNames>
+        <Item Value="FDat"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VwBallansApDetail2Iterator" id="LDat">
+      <AttrNames>
+        <Item Value="LDat"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

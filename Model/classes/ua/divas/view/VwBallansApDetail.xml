@@ -20,18 +20,6 @@
         ResId="ua.divas.view.VwBallansApDetail_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
-  <Variable
-    Name="f_dat"
-    Kind="where"
-    Type="oracle.jbo.domain.Date">
-    <TransientExpression><![CDATA[viewObject.getDateLast()]]></TransientExpression>
-  </Variable>
-  <Variable
-    Name="l_dat"
-    Kind="where"
-    Type="oracle.jbo.domain.Date">
-    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
-  </Variable>
   <ViewAccessor
     Name="DivisionsView1"
     ViewObjectName="ua.divas.view.DivisionsView"
@@ -55,24 +43,26 @@
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
-  <SQLQuery><![CDATA[SELECT 
-    VW_BALLANS_AP.ID ID, 
-    VW_BALLANS_AP.CODE CODE, 
-    VW_BALLANS_AP.FULLNAME FULLNAME, 
-    VW_BALLANS_AP.ACTIVE_START ACTIVE_START,
-    VW_BALLANS_AP.ACTIVE_DEB ACTIVE_DEB,
-    VW_BALLANS_AP.ACTIVE_KRED ACTIVE_KRED,
-    VW_BALLANS_AP.ACTIVE_OBOROT ACTIVE_OBOROT, 
-    VW_BALLANS_AP.ACTIVE_END ACTIVE_END, 
-    VW_BALLANS_AP.PASSIVE_START PASSIVE_START,
-    VW_BALLANS_AP.PASSIVE_DEB PASSIVE_DEB,
-    VW_BALLANS_AP.PASSIVE_KRED PASSIVE_KRED,
-    VW_BALLANS_AP.PASSIVE_OBOROT PASSIVE_OBOROT, 
-    VW_BALLANS_AP.PASSIVE_END PASSIVE_END, 
-    VW_BALLANS_AP.DIVISION_ID DIVISION_ID,
-    (select fullname from divisions where id = VW_BALLANS_AP.DIVISION_ID) Div_Name
-FROM 
-table(cast(REPORT_PKG.GETBALLANS(:f_dat, :l_dat) as tbl_ballans)) VW_BALLANS_AP]]></SQLQuery>
+  <SQLQuery><![CDATA[SELECT    
+    VW_BALLANS_AP.ID ID,    
+    VW_BALLANS_AP.CODE CODE,    
+    VW_BALLANS_AP.FULLNAME FULLNAME,    
+    VW_BALLANS_AP.ACTIVE_START ACTIVE_START,   
+    VW_BALLANS_AP.ACTIVE_DEB ACTIVE_DEB,   
+    VW_BALLANS_AP.ACTIVE_KRED ACTIVE_KRED,   
+    VW_BALLANS_AP.ACTIVE_OBOROT ACTIVE_OBOROT,    
+    VW_BALLANS_AP.ACTIVE_END ACTIVE_END,    
+    VW_BALLANS_AP.PASSIVE_START PASSIVE_START,   
+    VW_BALLANS_AP.PASSIVE_DEB PASSIVE_DEB,   
+    VW_BALLANS_AP.PASSIVE_KRED PASSIVE_KRED,   
+    VW_BALLANS_AP.PASSIVE_OBOROT PASSIVE_OBOROT,    
+    VW_BALLANS_AP.PASSIVE_END PASSIVE_END,    
+    VW_BALLANS_AP.DIVISION_ID DIVISION_ID,  
+    VW_BALLANS_AP.F_DAT F_DAT,  
+    VW_BALLANS_AP.L_DAT L_DAT,  
+    (select fullname from divisions where id = VW_BALLANS_AP.DIVISION_ID) Div_Name   
+FROM    
+ballans VW_BALLANS_AP]]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"
@@ -240,6 +230,26 @@ table(cast(REPORT_PKG.GETBALLANS(:f_dat, :l_dat) as tbl_ballans)) VW_BALLANS_AP]
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="FDat"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="F_DAT"
+    Expression="F_DAT"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="LDat"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="L_DAT"
+    Expression="L_DAT"
+    SQLType="DATE"/>
   <ViewAttribute
     Name="DivName"
     IsUpdateable="false"

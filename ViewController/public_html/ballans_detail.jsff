@@ -17,7 +17,6 @@
                                 <f:validator binding="#{bindings.f_dat.validator}"/>
                                 <af:convertDateTime pattern="#{bindings.f_dat.format}"/>
                             </af:inputDate>
-                            <af:spacer width="10" height="10" id="s2"/>
                             <af:inputDate value="#{bindings.l_dat.inputValue}" label="До:"
                                           required="#{bindings.l_dat.hints.mandatory}"
                                           columns="#{bindings.l_dat.hints.displayWidth}"
@@ -25,35 +24,15 @@
                                 <f:validator binding="#{bindings.l_dat.validator}"/>
                                 <af:convertDateTime pattern="#{bindings.l_dat.format}"/>
                             </af:inputDate>
+                            <af:button actionListener="#{ballans.onExecute}" text="Рассчитать"
+                                       disabled="#{!bindings.refreshBallans.enabled}" id="b1"/>
                             <af:spacer width="10" height="10" id="s1"/>
-                            <af:button actionListener="#{ballans.onExecute}" text="Обновить"
-                                       disabled="#{!bindings.ExecuteWithParams.enabled}" id="b1"/>
-                            <af:panelFormLayout id="pfl1" rendered="false">
-                                <af:inputDate value="#{bindings.f_dat1.inputValue}"
-                                              label="#{bindings.f_dat1.hints.label}"
-                                              required="#{bindings.f_dat1.hints.mandatory}"
-                                              columns="#{bindings.f_dat1.hints.displayWidth}"
-                                              shortDesc="#{bindings.f_dat1.hints.tooltip}" id="id3">
-                                    <f:validator binding="#{bindings.f_dat1.validator}"/>
-                                    <af:convertDateTime pattern="#{bindings.f_dat1.format}"/>
-                                </af:inputDate>
-                                <af:inputDate value="#{bindings.l_dat1.inputValue}"
-                                              label="#{bindings.l_dat1.hints.label}"
-                                              required="#{bindings.l_dat1.hints.mandatory}"
-                                              columns="#{bindings.l_dat1.hints.displayWidth}"
-                                              shortDesc="#{bindings.l_dat1.hints.tooltip}" id="id4">
-                                    <f:validator binding="#{bindings.l_dat1.validator}"/>
-                                    <af:convertDateTime pattern="#{bindings.l_dat1.format}"/>
-                                </af:inputDate>
-                                <af:button actionListener="#{bindings.ExecuteWithParams1.execute}"
-                                           text="ExecuteWithParams1" disabled="#{!bindings.ExecuteWithParams1.enabled}"
-                                           id="b2"/>
-                            </af:panelFormLayout>
+                            <af:button text="Обновить" id="b2" actionListener="#{ballans.onRefresh}"/>
                         </af:panelGroupLayout>
                     </f:facet>
                     <af:treeTable value="#{bindings.VwBallansAp1.treeModel}" var="node"
                                   selectionListener="#{bindings.VwBallansAp1.treeModel.makeCurrent}"
-                                  rowSelection="single" id="tt1" partialTriggers="::b1" binding="#{ballans.treeTable}">
+                                  rowSelection="single" id="tt1" binding="#{ballans.treeTable}">
                         <f:facet name="nodeStamp">
                             <af:column id="c1" width="350" headerText="Наименование"
                                        inlineStyle="#{node.bindings.DivisionId != null ? 'border-right-width:medium; border-right-color:#151515;background-color:#DCF0AB;' : 'border-right-width:medium; border-right-color:#151515;'}">

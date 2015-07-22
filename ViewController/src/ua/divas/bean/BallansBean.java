@@ -16,6 +16,8 @@ import javax.faces.validator.ValidatorException;
 
 import oracle.adf.model.BindingContext;
 
+import oracle.adf.model.binding.DCBindingContainer;
+import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichTreeTable;
 
 import oracle.adf.view.rich.component.rich.input.RichInputNumberSpinbox;
@@ -32,6 +34,31 @@ public class BallansBean {
     private RichInputNumberSpinbox summ;
 
     public BallansBean() {
+    }
+    
+    public void refreshIterator() {
+        DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = binding.findIteratorBinding("VwBallansAp1Iterator");
+        String rks;
+        if (it != null) {
+            /* try {
+                rks = it.getCurrentRow().getKey().toStringFormat(true);
+            } catch (Exception e) {
+                rks = null;
+            } */
+            it.executeQuery();
+            /* if (rks != null) {
+                try {
+                    it.setCurrentRowWithKey(rks);
+                } catch (Exception e) {
+                    e.getMessage();
+                }
+            } */
+        }
+        
+        it = binding.findIteratorBinding("VwBallansApDetail2Iterator");
+        it.executeQuery();
+        //AdfFacesContext.getCurrentInstance().addPartialTarget(getOtherTable());
     }
 
     public void resetBindingValue(String expression, Object newValue) {
@@ -61,10 +88,9 @@ public class BallansBean {
     public void onExecute(ActionEvent actionEvent) {
         BindingContext bctx = BindingContext.getCurrent();
         BindingContainer bindings = bctx.getCurrentBindingsEntry();
-        OperationBinding executeWithParams = bindings.getOperationBinding("ExecuteWithParams1");
+        OperationBinding executeWithParams = bindings.getOperationBinding("refreshBallans");
         executeWithParams.execute();
-        executeWithParams = bindings.getOperationBinding("ExecuteWithParams");
-        executeWithParams.execute();
+        refreshIterator();
 
         AdfFacesContext.getCurrentInstance().addPartialTarget(getTreeTable());
     }
@@ -150,5 +176,10 @@ public class BallansBean {
         }
 
 
+    }
+
+    public void onRefresh(ActionEvent actionEvent) {
+        refreshIterator();
+        refresh();
     }
 }
