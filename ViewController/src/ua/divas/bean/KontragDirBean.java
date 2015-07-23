@@ -1,5 +1,12 @@
 package ua.divas.bean;
 
+import com.itextpdf.text.Document;
+
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
+import java.io.IOException;
 import java.io.OutputStream;
 
 import java.util.Iterator;
@@ -368,5 +375,25 @@ public class KontragDirBean {
         FacesContext ctx = FacesContext.getCurrentInstance();
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Infirmation", "Функция ещё не реализована!");
         ctx.addMessage(null, msg);
+    }
+
+    public void generatePdf(FacesContext facesContext, OutputStream outputStream) {
+        try {
+            Document document = new Document();
+            PdfWriter.getInstance(document, outputStream);
+            document.open();
+            DCBindingContainer bindings = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding dcIteratorBindings = bindings.findIteratorBinding("KontragentsRep1Iterator");
+            oracle.jbo.Row[] rows = dcIteratorBindings.getAllRowsInRange();
+            PdfPTable my_table = new PdfPTable(4);
+            
+            document.add(my_table);
+            document.close();
+            outputStream.flush();
+        } catch (Exception e) {
+            // TODO: Add catch code
+            e.printStackTrace();
+        }
+
     }
 }

@@ -166,6 +166,87 @@
                <value n="id" v="Poi-3.12-20150511.jar"/>
                <value n="locked" v="true"/>
             </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../itext-5.5.6/itext-pdfa-5.5.6-javadoc.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Itext-pdfa-5.5.6-javadoc.jar"/>
+               <value n="id" v="Itext-pdfa-5.5.6-javadoc.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../itext-5.5.6/itext-pdfa-5.5.6-sources.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Itext-pdfa-5.5.6-sources.jar"/>
+               <value n="id" v="Itext-pdfa-5.5.6-sources.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../itext-5.5.6/itext-pdfa-5.5.6.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Itext-pdfa-5.5.6.jar"/>
+               <value n="id" v="Itext-pdfa-5.5.6.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../itext-5.5.6/itext-xtra-5.5.6-javadoc.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Itext-xtra-5.5.6-javadoc.jar"/>
+               <value n="id" v="Itext-xtra-5.5.6-javadoc.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../itext-5.5.6/itext-xtra-5.5.6-sources.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Itext-xtra-5.5.6-sources.jar"/>
+               <value n="id" v="Itext-xtra-5.5.6-sources.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../itext-5.5.6/itext-xtra-5.5.6.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Itext-xtra-5.5.6.jar"/>
+               <value n="id" v="Itext-xtra-5.5.6.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../itext-5.5.6/itextpdf-5.5.6-javadoc.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Itextpdf-5.5.6-javadoc.jar"/>
+               <value n="id" v="Itextpdf-5.5.6-javadoc.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../itext-5.5.6/itextpdf-5.5.6-sources.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Itextpdf-5.5.6-sources.jar"/>
+               <value n="id" v="Itextpdf-5.5.6-sources.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../itext-5.5.6/itextpdf-5.5.6.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Itextpdf-5.5.6.jar"/>
+               <value n="id" v="Itextpdf-5.5.6.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
          </list>
       </hash>
       <list n="libraryReferences">
@@ -195,6 +276,42 @@
          </hash>
          <hash>
             <value n="id" v="Poi-3.12-20150511.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Itext-pdfa-5.5.6-javadoc.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Itext-pdfa-5.5.6-sources.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Itext-pdfa-5.5.6.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Itext-xtra-5.5.6-javadoc.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Itext-xtra-5.5.6-sources.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Itext-xtra-5.5.6.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Itextpdf-5.5.6-javadoc.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Itextpdf-5.5.6-sources.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Itextpdf-5.5.6.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>

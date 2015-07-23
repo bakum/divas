@@ -33,8 +33,11 @@
                                                                                filename="ExcelFromPoi.xls"
                                                                                method="#{kon_dir.generateExcel}"/>
                                             </af:commandMenuItem>
-                                            <af:commandMenuItem text="Отправить в Pdf" id="cmi3" icon="/img/pdf.png"
-                                                                actionListener="#{kon_dir.onPdf}"/>
+                                            <af:commandMenuItem text="Отправить в Pdf" id="cmi3" icon="/img/pdf.png">
+                                                <af:fileDownloadActionListener contentType="application/pdf"
+                                                                               filename="PdfExport.pdf"
+                                                                               method="#{kon_dir.generatePdf}"/>
+                                            </af:commandMenuItem>
                                         </af:menu>
                                     </af:menuBar>
                                 </af:toolbar>
