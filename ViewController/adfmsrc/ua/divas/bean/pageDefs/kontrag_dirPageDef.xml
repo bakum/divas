@@ -7,7 +7,7 @@
     <iterator Binds="KontragentsAllRoot1" RangeSize="25" DataControl="AppModuleDataControl"
               id="KontragentsAllRoot1Iterator"/>
     <iterator Binds="KontragentsAll1" RangeSize="10" DataControl="AppModuleDataControl" id="KontragentsAll1Iterator"/>
-    <iterator Binds="KontragentsRep1" RangeSize="10" DataControl="AppModuleDataControl" id="KontragentsRep1Iterator"/>
+    <iterator Binds="KontragentsRep1" RangeSize="-1" DataControl="AppModuleDataControl" id="KontragentsRep1Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="KontragentsAllRoot1Iterator" id="KontragentsAllRoot1">

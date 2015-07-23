@@ -28,12 +28,12 @@
                                     <af:button text="Обновить" id="b4" actionListener="#{kon_dir.onRefresh}"/>
                                     <af:menuBar id="mb1">
                                         <af:menu text="Экспорт" id="m2">
-                                            <af:commandMenuItem text="Отправить в Excel" id="cmi2" icon="/img/excel.png">
+                                            <af:commandMenuItem text="Печать в Excel" id="cmi2" icon="/img/excel.png">
                                                 <af:fileDownloadActionListener contentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                                                                                filename="ExcelFromPoi.xls"
                                                                                method="#{kon_dir.generateExcel}"/>
                                             </af:commandMenuItem>
-                                            <af:commandMenuItem text="Отправить в Pdf" id="cmi3" icon="/img/pdf.png">
+                                            <af:commandMenuItem text="Печать в Pdf" id="cmi3" icon="/img/pdf.png">
                                                 <af:fileDownloadActionListener contentType="application/pdf"
                                                                                filename="PdfExport.pdf"
                                                                                method="#{kon_dir.generatePdf}"/>

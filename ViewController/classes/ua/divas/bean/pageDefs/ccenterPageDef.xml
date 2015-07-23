@@ -29,7 +29,7 @@
       </sortCriteria>
     </iterator>
     <iterator Binds="OrdersView1" RangeSize="10" DataControl="AppModuleDataControl" id="OrdersView1Iterator"/>
-    <iterator Binds="KontragentsRep1" RangeSize="10" DataControl="AppModuleDataControl" id="KontragentsRep1Iterator"/>
+    <iterator Binds="KontragentsRep1" RangeSize="-1" DataControl="AppModuleDataControl" id="KontragentsRep1Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="KontragentsView1Iterator" id="KontragentsView1">

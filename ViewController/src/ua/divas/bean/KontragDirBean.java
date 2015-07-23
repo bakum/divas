@@ -1,13 +1,28 @@
 package ua.divas.bean;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chapter;
 import com.itextpdf.text.Document;
 
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Section;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import java.util.Iterator;
 import java.util.List;
@@ -21,6 +36,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import javax.faces.event.ActionEvent;
+
+import javax.servlet.http.HttpServletRequest;
 
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
@@ -344,7 +361,7 @@ public class KontragDirBean {
                         if (null != row.getAttribute(colName)) {
                             cell.setCellValue(row.getAttribute(colName).toString());
                         }
-                    }                    
+                    }
                     if (colName.equalsIgnoreCase("Email")) {
                         if (null != row.getAttribute(colName)) {
                             cell.setCellValue(row.getAttribute(colName).toString());
@@ -379,15 +396,72 @@ public class KontragDirBean {
 
     public void generatePdf(FacesContext facesContext, OutputStream outputStream) {
         try {
-            Document document = new Document();
+            String rqPath =
+                ((HttpServletRequest) facesContext.getExternalContext().getRequest()).getRealPath("/fonts/times.ttf");
+            System.out.println("URL: " + rqPath);
+            BaseFont bf = BaseFont.createFont(rqPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font font = new Font(bf, 14);
+            Font fontc = new Font(bf, 12);
+            Font fontm = new Font(bf, 10);
+            Document document = new Document(PageSize.A4);
             PdfWriter.getInstance(document, outputStream);
             document.open();
+            Paragraph preface = new Paragraph();
+            Chapter chapter1 = new Chapter(preface, 1);
+            Paragraph title1 = new Paragraph("Контакты", fontc);
+            chapter1.setNumberDepth(0);
+            Section section1 = chapter1.addSection(title1);
+            // Start a new page
+            //document.newPage();
             DCBindingContainer bindings = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
             DCIteratorBinding dcIteratorBindings = bindings.findIteratorBinding("KontragentsRep1Iterator");
             oracle.jbo.Row[] rows = dcIteratorBindings.getAllRowsInRange();
-            PdfPTable my_table = new PdfPTable(4);
-            
-            document.add(my_table);
+            PdfPTable table = new PdfPTable(rows[0].getAttributeCount() - 1);
+            table.setSpacingBefore(10);
+            int i = 0;
+            for (oracle.jbo.Row row : rows) {
+                if (i == 0) {
+                    for (String colName : row.getAttributeNames()) {
+                        //PdfPCell c = new PdfPCell(new Phrase("Билиберда",fontc));
+                        //table.addCell(c);
+                        if (colName.equalsIgnoreCase("Fullname")) {
+                            PdfPCell c1 = new PdfPCell(new Phrase("Ф.И.О.", fontc));
+                            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                            table.addCell(c1);
+                        }
+                        if (colName.equalsIgnoreCase("Adress")) {
+                            PdfPCell c2 = new PdfPCell(new Phrase("Адрес", fontc));
+                            c2.setHorizontalAlignment(Element.ALIGN_CENTER);
+                            table.addCell(c2);
+                        }
+                        if (colName.equalsIgnoreCase("Phone")) {
+                            PdfPCell c3 = new PdfPCell(new Phrase("Телефон", fontc));
+                            c3.setHorizontalAlignment(Element.ALIGN_CENTER);
+                            table.addCell(c3);
+                        }
+                        if (colName.equalsIgnoreCase("Email")) {
+                            PdfPCell c4 = new PdfPCell(new Phrase("Почта", fontc));
+                            c4.setHorizontalAlignment(Element.ALIGN_CENTER);
+                            table.addCell(c4);
+                        }
+                    }
+                    //table.setHeaderRows(1);
+                }
+                i++;
+                for (String colName : row.getAttributeNames()) {
+                    if (colName.equalsIgnoreCase("IsBuyer")) {
+                        continue;
+                    }
+                    if (row.getAttribute(colName) != null) {
+                        table.addCell(new Phrase(row.getAttribute(colName).toString(), fontm));
+                    } else {
+                        table.addCell("");
+                    }
+                }
+            }
+            section1.add(table);
+            document.add(section1);
+            //document.newPage();
             document.close();
             outputStream.flush();
         } catch (Exception e) {
