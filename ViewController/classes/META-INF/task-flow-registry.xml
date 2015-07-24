@@ -2,8 +2,8 @@
 <task-flow-registry xmlns="http://xmlns.oracle.com/adf/controller/rc">
    <task-flow-descriptor path="WEB-INF/directories.xml" id="direct" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="META-INF/adfc-config.xml" id="" type="" uses-page-fragments="false" library-internal="false" train="false" critical="false" page-type="facelets"/>
-   <task-flow-descriptor path="WEB-INF/start_ost-config.xml" id="start_ost-config" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/pay-config.xml" id="pay-config" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/start_ost-config.xml" id="start_ost-config" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/money-config.xml" id="money-config" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/kontrag_calc-config.xml" id="kontrag_calc-config" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/addKontrag.xml" id="addKontrag" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="true" critical="false" page-type="facelets">
@@ -11,8 +11,8 @@
    </task-flow-descriptor>
    <task-flow-descriptor path="WEB-INF/rating-config.xml" id="rating-config" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/call_center.xml" id="call_center" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
-   <task-flow-descriptor path="WEB-INF/plan_acc.xml" id="plan_acc" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/kassa-config.xml" id="kassa-config" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/plan_acc.xml" id="plan_acc" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/editProfit.xml" id="editProfit" type="task-flow-definition" uses-page-fragments="false" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/EditRko.xml" id="EditRko" type="task-flow-definition" uses-page-fragments="false" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/ballans-config.xml" id="ballans-config" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
