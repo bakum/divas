@@ -2,6 +2,7 @@ package ua.divas.bean;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chapter;
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 
 import com.itextpdf.text.DocumentException;
@@ -406,11 +407,18 @@ public class KontragDirBean {
             Document document = new Document(PageSize.A4);
             PdfWriter.getInstance(document, outputStream);
             document.open();
+            document.addAuthor("Divas CRM, Copyright by BMExpert");
+            document.addCreator("Divas CRM, Copyright by BMExpert");
+            document.addSubject("Exported contacts from Divas CRM");
             Paragraph preface = new Paragraph();
             Chapter chapter1 = new Chapter(preface, 1);
-            Paragraph title1 = new Paragraph("Контакты", fontc);
             chapter1.setNumberDepth(0);
-            Section section1 = chapter1.addSection(title1);
+            Paragraph title = new Paragraph("Список контактов", fontc);
+            /* Chunk ch = new Chunk("Список контактов", fontc);
+            document.add(ch);
+            document.add(Chunk.NEWLINE); */
+            Section section1 = chapter1.addSection(title);
+            section1.setNumberDepth(0);
             // Start a new page
             //document.newPage();
             DCBindingContainer bindings = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
