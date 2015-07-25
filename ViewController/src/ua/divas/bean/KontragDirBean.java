@@ -1,5 +1,7 @@
 package ua.divas.bean;
 
+import com.google.common.io.ByteStreams;
+
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chapter;
 import com.itextpdf.text.Chunk;
@@ -17,6 +19,8 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+
+import com.itextpdf.text.pdf.RandomAccessFileOrArray;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -397,10 +401,19 @@ public class KontragDirBean {
 
     public void generatePdf(FacesContext facesContext, OutputStream outputStream) {
         try {
-            String rqPath =
-                ((HttpServletRequest) facesContext.getExternalContext().getRequest()).getRealPath("/fonts/times.ttf");
-            System.out.println("URL: " + rqPath);
-            BaseFont bf = BaseFont.createFont(rqPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            HttpServletRequest request =
+                        (HttpServletRequest)facesContext.getExternalContext().getRequest();
+            String requestUrl = request.getRequestURL().toString();
+            String contextRoot = facesContext.getExternalContext().getRequestContextPath();
+            String fontUrl = requestUrl.substring(0, requestUrl.indexOf(contextRoot))+contextRoot+"/fonts/times.ttf";
+            //String rqPath =
+            //    ((HttpServletRequest) facesContext.getExternalContext().getRequest()).getRealPath("/fonts/times.ttf");
+            //System.out.println("path: " + rqPath);
+            //String urlPath = facesContext.getExternalContext().getRequestContextPath()+"/fonts/times.ttf";
+            System.out.println("URL: " + fontUrl);
+            InputStream is = (new URL(fontUrl)).openStream();
+            byte[] bytes = ByteStreams.toByteArray(is);
+            BaseFont bf = BaseFont.createFont("times.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED, false, bytes, null);
             Font font = new Font(bf, 14);
             Font fontc = new Font(bf, 12);
             Font fontm = new Font(bf, 10);
