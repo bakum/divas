@@ -871,7 +871,7 @@ public class FilterBeans {
                         (HttpServletRequest)facesContext.getExternalContext().getRequest();
             String requestUrl = request.getRequestURL().toString();
             String contextRoot = facesContext.getExternalContext().getRequestContextPath();
-            String fontUrl = requestUrl.substring(0, requestUrl.indexOf(contextRoot))+contextRoot+"/fonts/times.ttf";
+            String fontUrl = requestUrl.substring(0, requestUrl.lastIndexOf(contextRoot))+contextRoot+"/fonts/times.ttf";
             //String rqPath =
             //    ((HttpServletRequest) facesContext.getExternalContext().getRequest()).getRealPath("/fonts/times.ttf");
             //System.out.println("path: " + rqPath);

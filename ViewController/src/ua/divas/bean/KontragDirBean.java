@@ -401,11 +401,22 @@ public class KontragDirBean {
 
     public void generatePdf(FacesContext facesContext, OutputStream outputStream) {
         try {
+            //for hosting
+            /* String requestUrlDivas = "https://divas.imx.net.ua/divas/faces/index";
+            System.out.println("requestUrlDivas: " + requestUrlDivas);
+            String contextRootDivas = "/divas";
+            System.out.println("contextRootDivas: " + contextRootDivas);
+            String fontUrlDivas = requestUrlDivas.substring(0, requestUrlDivas.lastIndexOf(contextRootDivas))+contextRootDivas+"/fonts/times.ttf";
+            System.out.println("fontUrlDivas: " + fontUrlDivas); */
+            
+            
             HttpServletRequest request =
                         (HttpServletRequest)facesContext.getExternalContext().getRequest();
             String requestUrl = request.getRequestURL().toString();
+            System.out.println("requestUrl: " + requestUrl);
             String contextRoot = facesContext.getExternalContext().getRequestContextPath();
-            String fontUrl = requestUrl.substring(0, requestUrl.indexOf(contextRoot))+contextRoot+"/fonts/times.ttf";
+            System.out.println("contextRoot: " + contextRoot);
+            String fontUrl = requestUrl.substring(0, requestUrl.lastIndexOf(contextRoot))+contextRoot+"/fonts/times.ttf";
             //String rqPath =
             //    ((HttpServletRequest) facesContext.getExternalContext().getRequest()).getRealPath("/fonts/times.ttf");
             //System.out.println("path: " + rqPath);
