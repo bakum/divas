@@ -11,10 +11,12 @@
   PageIterMode="Full"
   ComponentClass="ua.divas.view.ObjectDeletedImpl"
   ComponentInterface="ua.divas.view.common.ObjectDeleted"
-  ClientProxyName="ua.divas.view.client.ObjectDeletedClient">
+  ClientProxyName="ua.divas.view.client.ObjectDeletedClient"
+  RowClass="ua.divas.view.ObjectDeletedRowImpl">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
-    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
   <Properties>
     <SchemaBasedProperties>
@@ -28,7 +30,8 @@
     VW_TBL_DELETED.TABLE_NAME TABLE_NAME, 
     VW_TBL_DELETED.OBJNAME OBJNAME, 
     VW_TBL_DELETED.CONSTRAINT_TYPE CONSTRAINT_TYPE, 
-    VW_TBL_DELETED.REF_STR REF_STR 
+    VW_TBL_DELETED.REF_STR REF_STR,
+    (select 0 from dual) Mark
 FROM 
     VW_TBL_DELETED]]></SQLQuery>
   <ViewAttribute
@@ -154,6 +157,15 @@ FROM
     </Properties>
   </ViewAttribute>
   <ViewAttribute
+    Name="Mark"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="MARK"
+    Expression="MARK"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
     Name="Enabled_del"
     IsUpdateable="false"
     IsSelected="false"
@@ -183,6 +195,16 @@ FROM
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="Cnt"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"
+    DefaultValue='0'/>
   <AttrArray Name="KeyAttributes">
     <Item Value="TableId"/>
   </AttrArray>

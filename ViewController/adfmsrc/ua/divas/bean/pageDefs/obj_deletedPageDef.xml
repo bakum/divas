@@ -17,6 +17,7 @@
           <Item Value="TableId"/>
           <Item Value="MainId"/>
           <Item Value="MarkForDelete"/>
+          <Item Value="Cnt"/>
         </AttrNames>
         <Accessors>
           <Item Value="ObjectDeletedRef"/>

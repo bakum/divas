@@ -34,7 +34,7 @@ public class ObjectDeletedImpl extends DivasView implements ObjectDeleted {
         duplicateRowSet.first();
         Row currentRow = this.getCurrentRow();
         boolean currentRowDeleted = false;
-        Row[] rowsToDelete = duplicateRowSet.getFilteredRows("MarkForDelete", true);
+        Row[] rowsToDelete = duplicateRowSet.getFilteredRows("Mark", 1);
         try {
             if (rowsToDelete.length > 0) {
                 for (Row rw : rowsToDelete) {

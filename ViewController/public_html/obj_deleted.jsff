@@ -14,9 +14,16 @@
                                     <af:button text="Обновить" id="b1" actionListener="#{del.onRefresh}">
                                         <af:clientListener method="enforcePreventUserInput" type="action"/>
                                     </af:button>
+                                    <af:button actionListener="#{bindings.Commit.execute}" text="Сохранить"
+                                               disabled="#{!bindings.Commit.enabled}" id="b3" visible="false"/>
+                                    <af:button actionListener="#{bindings.Rollback.execute}" text="Отменить"
+                                               disabled="#{!bindings.Rollback.enabled}" immediate="true" id="b4">
+                                        <af:resetActionListener/>
+                                    </af:button>
                                     <af:group id="g1">
-                                        <af:button text="Удалить все помеченные" id="b2"
-                                                   actionListener="#{del.onDelete}"/>
+                                        <af:button text="Удалить все помеченные" id="b2">
+                                            <af:showPopupBehavior popupId="pDelete"/>
+                                        </af:button>
                                     </af:group>
                                 </af:toolbar>
                             </f:facet>
@@ -48,9 +55,18 @@
                                 <af:column id="c3" headerText="Удалить">
                                     <af:selectBooleanCheckbox value="#{node.MarkForDelete}" id="ot6"
                                                               readOnly="#{node.Enabled_del == 0 ? false : node.MainId == null ? true : false}"
-                                                              rendered="#{node.MainId == null ? true : false}"/>
+                                                              rendered="#{node.MainId == null ? true : false}"
+                                                              autoSubmit="true"/>
                                 </af:column>
                             </af:treeTable>
+                            <af:popup childCreation="deferred" autoCancel="disabled" id="pDelete"
+                                      contentDelivery="lazyUncached">
+                                <af:dialog id="d1" title="Внимание!" dialogListener="#{del.onDeleteDialog}">
+                                    <f:facet name="buttonBar"/>
+                                    <af:outputText value="Выбранные объекты будут удалены безвозвратно! Хотите продолжить?" id="ot7"
+                                                   inlineStyle="font-size:large; Color : Red;"/>
+                                </af:dialog>
+                            </af:popup>
                         </af:panelCollection>
                     </f:facet>
                     <f:facet name="top">

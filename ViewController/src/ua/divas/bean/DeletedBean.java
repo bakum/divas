@@ -18,6 +18,8 @@ import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichTreeTable;
 import oracle.adf.view.rich.context.AdfFacesContext;
 
+import oracle.adf.view.rich.event.DialogEvent;
+
 import oracle.binding.BindingContainer;
 
 import oracle.binding.OperationBinding;
@@ -141,5 +143,15 @@ public class DeletedBean {
             oper.execute();
         } */
         refresh();
+    }
+    
+    public void onDeleteDialog(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding oper = (OperationBinding) binding.getOperationBinding("deleteSelectedRowsObj");
+            if (oper != null) {
+                oper.execute();
+            }
+        }
     }
 }
