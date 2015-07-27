@@ -47,11 +47,8 @@
                                                                                                method="#{filter.generateExcel}"/>
                                                             </af:commandMenuItem>
                                                             <af:commandMenuItem text="Печать в Pdf" id="cmi3"
-                                                                                icon="/img/pdf.png">
-                                                                <af:fileDownloadActionListener filename="PdfExport.pdf"
-                                                                                               contentType="application/pdf"
-                                                                                               method="#{filter.generatePdf}"/>
-                                                            </af:commandMenuItem>
+                                                                                icon="/img/pdf.png"
+                                                                                actionListener="#{filter.onPdf}"/>
                                                         </af:menu>
                                                     </af:menuBar>
                                                 </af:toolbar>

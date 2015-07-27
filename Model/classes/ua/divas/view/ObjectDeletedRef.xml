@@ -149,23 +149,6 @@ FROM
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
-  <ViewAttribute
-    Name="MarkForDelete"
-    IsSelected="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Type="java.lang.Boolean"
-    ColumnType="NUMBER"
-    AliasName="VIEW_ATTR"
-    SQLType="BIT"
-    DefaultValue="false">
-    <Properties>
-      <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="check_box"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
   <AttrArray Name="KeyAttributes">
     <Item Value="TableId"/>
   </AttrArray>

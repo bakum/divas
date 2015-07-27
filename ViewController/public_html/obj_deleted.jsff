@@ -14,6 +14,10 @@
                                     <af:button text="Обновить" id="b1" actionListener="#{del.onRefresh}">
                                         <af:clientListener method="enforcePreventUserInput" type="action"/>
                                     </af:button>
+                                    <af:group id="g1">
+                                        <af:button text="Удалить все помеченные" id="b2"
+                                                   actionListener="#{del.onDelete}"/>
+                                    </af:group>
                                 </af:toolbar>
                             </f:facet>
                             <f:facet name="statusbar">
@@ -41,7 +45,11 @@
                                     <af:outputText value="#{node.Enabled_del}" id="ot3"
                                                    inlineStyle="#{node.Enabled_del == 0 ? 'color:Green;' : 'color:Red;font-weight:bold;'}"/>
                                 </af:column>
-                                <af:column id="c3"/>
+                                <af:column id="c3" headerText="Удалить">
+                                    <af:selectBooleanCheckbox value="#{node.MarkForDelete}" id="ot6"
+                                                              readOnly="#{node.Enabled_del == 0 ? false : node.MainId == null ? true : false}"
+                                                              rendered="#{node.MainId == null ? true : false}"/>
+                                </af:column>
                             </af:treeTable>
                         </af:panelCollection>
                     </f:facet>

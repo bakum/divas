@@ -37,6 +37,7 @@ import ua.divas.view.LastPriceVOImpl;
 import ua.divas.view.NachislSettingsViewImpl;
 import ua.divas.view.NomenklaturaViewImpl;
 import ua.divas.view.NotificationViewImpl;
+import ua.divas.view.ObjectDeletedImpl;
 import ua.divas.view.OrderZamerViewImpl;
 import ua.divas.view.OrdersCalcViewImpl;
 import ua.divas.view.OrdersTpNachisleniaViewImpl;
@@ -4073,8 +4074,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for ObjectDeleted1.
      * @return ObjectDeleted1
      */
-    public ViewObjectImpl getObjectDeleted1() {
-        return (ViewObjectImpl) findViewObject("ObjectDeleted1");
+    public ObjectDeletedImpl getObjectDeleted1() {
+        return (ObjectDeletedImpl) findViewObject("ObjectDeleted1");
     }
 
     /**

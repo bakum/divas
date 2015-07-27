@@ -20,6 +20,8 @@ import oracle.adf.view.rich.context.AdfFacesContext;
 
 import oracle.binding.BindingContainer;
 
+import oracle.binding.OperationBinding;
+
 import oracle.jbo.Row;
 import oracle.jbo.RowNotFoundException;
 import oracle.jbo.uicli.binding.JUCtrlHierBinding;
@@ -49,8 +51,12 @@ public class DeletedBean {
     }
 
     public String refresh() {
-
         DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        if (binding.getDataControl().isTransactionModified()) {
+            BindingContainer bd = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding ob = bd.getOperationBinding("Rollback");
+            ob.execute();
+        }
         DCIteratorBinding it = binding.findIteratorBinding("ObjectDeleted1Iterator");
         if (it != null) {
             it.executeQuery();
@@ -72,7 +78,7 @@ public class DeletedBean {
                                                 SelectionEvent.class });
         me.invoke(elCtx, new Object[] { selectionEvent });
 
-        RichTreeTable tree1 = this.getTreeTable();
+         RichTreeTable tree1 = this.getTreeTable();
         RowKeySet rks2 = tree1.getSelectedRowKeys();
         Iterator rksIterator = rks2.iterator();
         if (rksIterator.hasNext()) {
@@ -121,6 +127,19 @@ public class DeletedBean {
     }
 
     public void onRefresh(ActionEvent actionEvent) {
+        refresh();
+    }
+
+    public void onDelete(ActionEvent actionEvent) {
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding oper = (OperationBinding) binding.getOperationBinding("deleteSelectedRowsObj");
+        if (oper != null) {
+            oper.execute();
+        }
+        /* oper = (OperationBinding) binding.getOperationBinding("deleteSelectedRowsRef");
+        if (oper != null) {
+            oper.execute();
+        } */
         refresh();
     }
 }

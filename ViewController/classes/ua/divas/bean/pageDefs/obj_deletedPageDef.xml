@@ -30,7 +30,6 @@
           <Item Value="MainId"/>
           <Item Value="RefStr"/>
           <Item Value="TableName"/>
-          <Item Value="MarkForDelete"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -41,11 +40,15 @@
           <Item Value="ColumnName"/>
           <Item Value="ConstraintType"/>
           <Item Value="MainId"/>
-          <Item Value="MarkForDelete"/>
           <Item Value="RefStr"/>
           <Item Value="TableName"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <methodAction id="deleteSelectedRowsObj" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="deleteSelectedRowsObj" IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.ObjectDeleted1"/>
+    <action id="Commit" DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" DataControl="AppModuleDataControl" RequiresUpdateModel="false" Action="rollbackTransaction"/>
   </bindings>
 </pageDefinition>
