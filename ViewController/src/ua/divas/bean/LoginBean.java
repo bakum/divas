@@ -80,10 +80,10 @@ public class LoginBean {
 
             //Store username , password in session for later use
             //when connecting to Twitter
-            ADFContext adfctx = ADFContext.getCurrent();
+            /* ADFContext adfctx = ADFContext.getCurrent();
             Map sessionScope = adfctx.getSessionScope();
             sessionScope.put(this.USERNAMETOKEN, un);
-            sessionScope.put(this.PASSWORDTOKEN, new String(pw));
+            sessionScope.put(this.PASSWORDTOKEN, new String(pw)); */
 
             String loginUrl = "/adfAuthentication?success_url=/faces/index";
             //String loginUrl = "/adfAuthentication?success_url=/faces" + ctx.getViewRoot().getViewId();
@@ -118,7 +118,7 @@ public class LoginBean {
         FacesMessage msg =
             new FacesMessage(FacesMessage.SEVERITY_ERROR, "Unexpected error during login",
                              "Unexpected error during login (" + errType + "), please consult logs for detail");
-        FacesContext.getCurrentInstance().addMessage("d2:it35", msg);
+        FacesContext.getCurrentInstance().addMessage(null, msg);
         e.printStackTrace();
     }
 
@@ -126,8 +126,8 @@ public class LoginBean {
         FacesContext ctx = FacesContext.getCurrentInstance();
         ExternalContext ectx = ctx.getExternalContext();
         //String logoutUrl = "faces" + ctx.getViewRoot().getViewId();
-        //String logoutUrl = "/adfAuthentication?logout=true&end_url=/faces/home.jsf";
-        String logoutUrl = "faces/home.jsf";
+        String logoutUrl = "adfAuthentication?logout=true&end_url=/faces/home.jsf";
+        //String logoutUrl = "faces/home.jsf";
         ((HttpServletRequest) ectx.getRequest()).getSession().invalidate();
         try {
             ectx.redirect(logoutUrl);
