@@ -258,6 +258,15 @@ public class KontragSettingsImpl extends DivasEntityNoDelete {
     }
 
     /**
+     * @param id key constituent
+
+     * @return a Key object based on given key constituents.
+     */
+    public static Key createPrimaryKey(String id) {
+        return new Key(new Object[] { id });
+    }
+
+    /**
      * Validation method for KontragSettings.
      */
     public boolean validateKontragSettings2() {
@@ -272,14 +281,6 @@ public class KontragSettingsImpl extends DivasEntityNoDelete {
         return true;
     }
 
-    /**
-     * @param id key constituent
-
-     * @return a Key object based on given key constituents.
-     */
-    public static Key createPrimaryKey(String id) {
-        return new Key(new Object[] { id });
-    }
 
     /**
      * Validation method for KontragSettings.

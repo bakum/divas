@@ -4109,5 +4109,21 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewObjectImpl getKontragentsRep1() {
         return (ViewObjectImpl) findViewObject("KontragentsRep1");
     }
+
+    /**
+     * Container's getter for KontragSettingsView2.
+     * @return KontragSettingsView2
+     */
+    public ViewObjectImpl getKontragSettingsView2() {
+        return (ViewObjectImpl) findViewObject("KontragSettingsView2");
+    }
+
+    /**
+     * Container's getter for KontragentsAllKontragSettingsFkLink1.
+     * @return KontragentsAllKontragSettingsFkLink1
+     */
+    public ViewLinkImpl getKontragentsAllKontragSettingsFkLink1() {
+        return (ViewLinkImpl) findViewLink("KontragentsAllKontragSettingsFkLink1");
+    }
 }
 

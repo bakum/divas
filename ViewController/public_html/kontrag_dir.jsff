@@ -61,10 +61,15 @@
                                            width="100">
                                     <af:outputText value="#{node.bindings.Okpo}" id="ot3"/>
                                 </af:column>
-                                <af:column id="c2" width="35" align="center">
+                                <af:column id="c2" width="70" align="center">
                                     <af:toolbar id="t1" rendered="#{node.ParentId == null ? false : true}">
-                                        <af:button id="b1" icon="/img/edit-16.gif">
+                                        <af:button id="b1" icon="/img/edit-16.gif" shortDesc="Редактировать">
                                             <af:showPopupBehavior popupId="::pCreateEdit"/>
+                                        </af:button>
+                                        <af:button id="b5" icon="/img/format-bullet-list.png"
+                                                   visible="#{node.SuppSetting == 0 ? false : true}"
+                                                   shortDesc="Настройки начислений">
+                                            <af:showPopupBehavior popupId="::pSettings"/>
                                         </af:button>
                                     </af:toolbar>
                                 </af:column>
@@ -174,6 +179,155 @@
                                     <f:facet name="buttonBar"/>
                                     <af:outputText value="#{kon_dir.del_title}" id="ot5"
                                                    inlineStyle="#{kon_dir.del_style}"/>
+                                </af:dialog>
+                            </af:popup>
+                            <af:popup childCreation="deferred" id="pSettings"
+                                      contentDelivery="lazyUncached" resetEditableValues="whenCanceled"
+                                      popupCanceledListener="#{kon_dir.onCancel}">
+                                <af:dialog id="d3" title="Настройки пользователя: #{bindings.Fullname.inputValue}"
+                                           dialogListener="#{kon_dir.onDialog}" contentWidth="650" contentHeight="300"
+                                           resize="on">
+                                    <f:facet name="buttonBar"/>
+                                    <af:panelBox text="Начисления" id="pb1" type="flow">
+                                        <f:facet name="toolbar">
+                                            <af:toolbar id="t5">
+                                                <af:button actionListener="#{bindings.CreateInsert1.execute}"
+                                                           text="Добавить"
+                                                           disabled="#{bindings.KsEditable.inputValue == '1' ? true : false}" id="b9"/>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <af:table value="#{bindings.KontragSettingsView2.collectionModel}" var="row"
+                                                  rows="#{bindings.KontragSettingsView2.rangeSize}"
+                                                  emptyText="#{bindings.KontragSettingsView2.viewable ? 'Нет данных.' : 'В доступе отказано.'}"
+                                                  rowBandingInterval="0"
+                                                  selectedRowKeys="#{bindings.KontragSettingsView2.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.KontragSettingsView2.collectionModel.makeCurrent}"
+                                                  rowSelection="single"
+                                                  fetchSize="#{bindings.KontragSettingsView2.rangeSize}" id="t3"
+                                                  scrollPolicy="page" editingMode="clickToEdit"
+                                                  partialTriggers="b8 ::b9">
+                                            <af:column id="c13">
+                                                <af:toolbar id="t4">
+                                                    <af:button id="b6" icon="/img/edit-16.gif"
+                                                               disabled="#{bindings.KsEditable.inputValue == '1' ? true : false}">
+                                                        <af:setPropertyListener from="#{1}"
+                                                                                to="#{bindings.KsEditable.inputValue}"
+                                                                                type="action"/>
+                                                    </af:button>
+                                                    <af:button actionListener="#{bindings.Commit.execute}"
+                                                               disabled="#{bindings.KsEditable.inputValue == '1' ? false : true}" id="b7"
+                                                               icon="/img/icon_save.png">
+                                                        <af:setPropertyListener from="#{0}"
+                                                                                to="#{bindings.KsEditable.inputValue}"
+                                                                                type="action"/>
+                                                    </af:button>
+                                                    <af:button actionListener="#{bindings.Delete1.execute}"
+                                                               disabled="#{bindings.KsEditable.inputValue == '1' ? true : false}"
+                                                               id="b8" icon="/img/delete.png"/>
+                                                </af:toolbar>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.KontragSettingsView2.hints.Id.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.KontragSettingsView2.hints.Id.label}"
+                                                       id="c6" visible="false">
+                                                <af:inputText value="#{row.bindings.Id.inputValue}"
+                                                              label="#{bindings.KontragSettingsView2.hints.Id.label}"
+                                                              required="#{bindings.KontragSettingsView2.hints.Id.mandatory}"
+                                                              columns="#{bindings.KontragSettingsView2.hints.Id.displayWidth}"
+                                                              maximumLength="#{bindings.KontragSettingsView2.hints.Id.precision}"
+                                                              shortDesc="#{bindings.KontragSettingsView2.hints.Id.tooltip}"
+                                                              id="it2">
+                                                    <f:validator binding="#{row.bindings.Id.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.KontragSettingsView2.hints.KontragId.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.KontragSettingsView2.hints.KontragId.label}"
+                                                       id="c7" visible="false">
+                                                <af:selectOneChoice value="#{row.bindings.KontragId.inputValue}"
+                                                                    label="#{row.bindings.KontragId.label}"
+                                                                    required="#{bindings.KontragSettingsView2.hints.KontragId.mandatory}"
+                                                                    shortDesc="#{bindings.KontragSettingsView2.hints.KontragId.tooltip}"
+                                                                    id="soc2">
+                                                    <f:selectItems value="#{row.bindings.KontragId.items}" id="si2"/>
+                                                    <f:validator binding="#{row.bindings.KontragId.validator}"/>
+                                                </af:selectOneChoice>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.KontragSettingsView2.hints.PayId.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.KontragSettingsView2.hints.PayId.label}"
+                                                       id="c8">
+                                                <af:selectOneChoice value="#{row.bindings.PayId.inputValue}"
+                                                                    label="#{row.bindings.PayId.label}"
+                                                                    required="#{bindings.KontragSettingsView2.hints.PayId.mandatory}"
+                                                                    shortDesc="#{bindings.KontragSettingsView2.hints.PayId.tooltip}"
+                                                                    id="soc3"
+                                                                    valueChangeListener="#{kon_dir.onPaySettChange}"
+                                                                    autoSubmit="true">
+                                                    <f:selectItems value="#{row.bindings.PayId.items}" id="si3"/>
+                                                    <f:validator binding="#{row.bindings.PayId.validator}"/>
+                                                </af:selectOneChoice>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.KontragSettingsView2.hints.BaseId.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.KontragSettingsView2.hints.BaseId.label}"
+                                                       id="c9">
+                                                <af:selectOneChoice value="#{row.bindings.BaseId.inputValue}"
+                                                                    label="#{row.bindings.BaseId.label}"
+                                                                    required="#{bindings.KontragSettingsView2.hints.BaseId.mandatory}"
+                                                                    shortDesc="#{bindings.KontragSettingsView2.hints.BaseId.tooltip}"
+                                                                    id="soc4">
+                                                    <f:selectItems value="#{row.bindings.BaseId.items}" id="si4"/>
+                                                    <f:validator binding="#{row.bindings.BaseId.validator}"/>
+                                                </af:selectOneChoice>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.KontragSettingsView2.hints.DivisionId.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.KontragSettingsView2.hints.DivisionId.label}"
+                                                       id="c10">
+                                                <af:selectOneChoice value="#{row.bindings.DivisionId.inputValue}"
+                                                                    label="#{row.bindings.DivisionId.label}"
+                                                                    required="#{bindings.KontragSettingsView2.hints.DivisionId.mandatory}"
+                                                                    shortDesc="#{bindings.KontragSettingsView2.hints.DivisionId.tooltip}"
+                                                                    id="soc5">
+                                                    <f:selectItems value="#{row.bindings.DivisionId.items}" id="si5"/>
+                                                    <f:validator binding="#{row.bindings.DivisionId.validator}"/>
+                                                </af:selectOneChoice>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.KontragSettingsView2.hints.Summa.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.KontragSettingsView2.hints.Summa.label}"
+                                                       id="c11">
+                                                <af:inputText value="#{row.bindings.Summa.inputValue}"
+                                                              label="#{bindings.KontragSettingsView2.hints.Summa.label}"
+                                                              required="#{bindings.KontragSettingsView2.hints.Summa.mandatory}"
+                                                              columns="#{bindings.KontragSettingsView2.hints.Summa.displayWidth}"
+                                                              maximumLength="#{bindings.KontragSettingsView2.hints.Summa.precision}"
+                                                              shortDesc="#{bindings.KontragSettingsView2.hints.Summa.tooltip}"
+                                                              id="it5">
+                                                    <f:validator binding="#{row.bindings.Summa.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.KontragSettingsView2.hints.Summa.format}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.KontragSettingsView2.hints.KsEditable.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.KontragSettingsView2.hints.KsEditable.label}"
+                                                       id="c12" visible="false">
+                                                <af:inputText value="#{row.bindings.KsEditable.inputValue}"
+                                                              label="#{bindings.KontragSettingsView2.hints.KsEditable.label}"
+                                                              required="#{bindings.KontragSettingsView2.hints.KsEditable.mandatory}"
+                                                              columns="#{bindings.KontragSettingsView2.hints.KsEditable.displayWidth}"
+                                                              maximumLength="#{bindings.KontragSettingsView2.hints.KsEditable.precision}"
+                                                              shortDesc="#{bindings.KontragSettingsView2.hints.KsEditable.tooltip}"
+                                                              id="it7">
+                                                    <f:validator binding="#{row.bindings.KsEditable.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.KontragSettingsView2.hints.KsEditable.format}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelBox>
                                 </af:dialog>
                             </af:popup>
                         </af:panelCollection>

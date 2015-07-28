@@ -8,6 +8,10 @@
               id="KontragentsAllRoot1Iterator"/>
     <iterator Binds="KontragentsAll1" RangeSize="10" DataControl="AppModuleDataControl" id="KontragentsAll1Iterator"/>
     <iterator Binds="KontragentsRep1" RangeSize="-1" DataControl="AppModuleDataControl" id="KontragentsRep1Iterator"/>
+    <iterator Binds="KontragentsAllGroup1" RangeSize="-1" DataControl="AppModuleDataControl"
+              id="KontragentsAllGroup1Iterator"/>
+    <iterator Binds="KontragSettingsView2" RangeSize="5" DataControl="AppModuleDataControl"
+              id="KontragSettingsView2Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="KontragentsAllRoot1Iterator" id="KontragentsAllRoot1">
@@ -17,6 +21,7 @@
           <Item Value="IsGroup"/>
           <Item Value="ParentId"/>
           <Item Value="Deleted"/>
+          <Item Value="SuppSetting"/>
         </AttrNames>
         <Accessors>
           <Item Value="KontragentsAll"/>
@@ -30,6 +35,7 @@
           <Item Value="IsGroup"/>
           <Item Value="ParentId"/>
           <Item Value="Deleted"/>
+          <Item Value="SuppSetting"/>
         </AttrNames>
         <Accessors>
           <Item Value="KontragentsAll"/>
@@ -142,5 +148,55 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <tree IterBinding="KontragentsAllGroup1Iterator" id="KontragentsAllGroup1">
+      <nodeDefinition DefName="ua.divas.view.ro.KontragentsAllGroup" Name="KontragentsAllGroup10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Deleted"/>
+          <Item Value="Fullname"/>
+          <Item Value="Inn"/>
+          <Item Value="IsBuyer"/>
+          <Item Value="IsGroup"/>
+          <Item Value="IsMeasurer"/>
+          <Item Value="IsSupplier"/>
+          <Item Value="Kpp"/>
+          <Item Value="Namefull"/>
+          <Item Value="Okpo"/>
+          <Item Value="ParentId"/>
+          <Item Value="Predefined"/>
+          <Item Value="UrFiz"/>
+          <Item Value="UserId"/>
+          <Item Value="Version"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="KontragSettingsView2Iterator" id="KontragSettingsView2">
+      <nodeDefinition DefName="ua.divas.view.KontragSettingsView" Name="KontragSettingsView20">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="KontragId"/>
+          <Item Value="PayId"/>
+          <Item Value="BaseId"/>
+          <Item Value="DivisionId"/>
+          <Item Value="Summa"/>
+          <Item Value="KsEditable"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="KontragSettingsView2Iterator" id="Delete1" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <attributeValues IterBinding="KontragSettingsView2Iterator" id="KsEditable">
+      <AttrNames>
+        <Item Value="KsEditable"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="KontragSettingsView2Iterator" id="CreateInsert1" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <methodAction id="retrieveSumm" RequiresUpdateModel="true" Action="invokeMethod" MethodName="retrieveSumm"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.NachislSettingsView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.retrieveSumm_AppModuleDataControl_NachislSettingsView1_retrieveSumm_result">
+      <NamedData NDName="pId" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

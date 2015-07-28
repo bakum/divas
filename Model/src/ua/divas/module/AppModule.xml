@@ -956,6 +956,9 @@
   <ViewUsage
     Name="KontragentsRep1"
     ViewObjectName="ua.divas.view.KontragentsRep"/>
+  <ViewUsage
+    Name="KontragSettingsView2"
+    ViewObjectName="ua.divas.view.KontragSettingsView"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -2023,6 +2026,12 @@
     ViewLinkObjectName="ua.divas.view.ObjDelRefFkLink"
     SrcViewUsageName="ua.divas.module.AppModule.ObjectDeleted1"
     DstViewUsageName="ua.divas.module.AppModule.ObjectDeletedRef2"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="KontragentsAllKontragSettingsFkLink1"
+    ViewLinkObjectName="ua.divas.view.KontragentsAllKontragSettingsFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.KontragentsAll1"
+    DstViewUsageName="ua.divas.module.AppModule.KontragSettingsView2"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">

@@ -65,7 +65,15 @@
        Kontragents.PREDEFINED, 
        Kontragents.UR_FIZ, 
        Kontragents.USER_ID, 
-       Kontragents.VERSION
+       Kontragents.VERSION,
+       case
+        when (is_group = 0
+            and is_buyer = 0 
+            and is_measurer = 0 
+            and is_supplier = 0)
+        then 1
+        else 0
+       end supp_setting
 FROM  KONTRAGENTS Kontragents]]></SQLQuery>
   <EntityUsage
     Name="Kontragents"
@@ -182,9 +190,24 @@ FROM  KONTRAGENTS Kontragents]]></SQLQuery>
     EntityAttrName="Version"
     EntityUsage="Kontragents"
     AliasName="VERSION"/>
+  <ViewAttribute
+    Name="SuppSetting"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SUPP_SETTING"
+    Expression="SUPP_SETTING"
+    SQLType="NUMERIC"/>
   <ViewLinkAccessor
     Name="KontragentsAll"
     ViewLink="ua.divas.view.KontragAllKontragFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="KontragSettingsView"
+    ViewLink="ua.divas.view.KontragentsAllKontragSettingsFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <ResourceBundle>

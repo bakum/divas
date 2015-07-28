@@ -34,7 +34,8 @@
        Kontragents.PREDEFINED, 
        Kontragents.UR_FIZ, 
        Kontragents.USER_ID, 
-       Kontragents.VERSION
+       Kontragents.VERSION,
+       0 as supp_setting
 FROM  KONTRAGENTS Kontragents
 where parent_id is null]]></SQLQuery>
   <EntityUsage
@@ -144,6 +145,16 @@ where parent_id is null]]></SQLQuery>
     EntityAttrName="Version"
     EntityUsage="Kontragents"
     AliasName="VERSION"/>
+  <ViewAttribute
+    Name="SuppSetting"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SUPP_SETTING"
+    Expression="SUPP_SETTING"
+    SQLType="NUMERIC"/>
   <ViewLinkAccessor
     Name="KontragentsAll"
     ViewLink="ua.divas.view.KontragentsRootAllFkLink"
