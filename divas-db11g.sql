@@ -1,7 +1,7 @@
 ﻿--
 -- Скрипт сгенерирован Devart dbForge Studio for Oracle, Версия 3.7.472.0
 -- Домашняя страница продукта: http://www.devart.com/ru/dbforge/oracle/studio
--- Дата скрипта: 19.07.2015 23:57:31
+-- Дата скрипта: 28.07.2015 18:41:49
 -- Версия сервера: Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production With the Partitioning, OLAP, Data Mining and Real Application Testing options
 -- Версия клиента: 
 --
@@ -22,7 +22,7 @@ MINVALUE 1
 CYCLE;
 
 CREATE SEQUENCE PS_TXN_SEQ
-START WITH 155801
+START WITH 1
 INCREMENT BY 50;
 
 CREATE SEQUENCE PROFIT_DISTRIB_NUM_SEQ
@@ -753,6 +753,26 @@ CREATE TABLE CALENDAR (
 LOGGING;
 
 COMMENT ON TABLE CALENDAR IS 'Календарь';
+
+CREATE TABLE BALLANS (
+  ID             VARCHAR2(50 CHAR)   NOT NULL,
+  CODE           VARCHAR2(6 CHAR)    NOT NULL,
+  FULLNAME       VARCHAR2(3000 CHAR) NOT NULL,
+  ACTIVE_START   NUMBER,
+  ACTIVE_DEB     NUMBER,
+  ACTIVE_KRED    NUMBER,
+  ACTIVE_OBOROT  NUMBER,
+  ACTIVE_END     NUMBER,
+  PASSIVE_START  NUMBER,
+  PASSIVE_DEB    NUMBER,
+  PASSIVE_KRED   NUMBER,
+  PASSIVE_OBOROT NUMBER,
+  PASSIVE_END    NUMBER,
+  DIVISION_ID    VARCHAR2(50 CHAR)   NOT NULL,
+  F_DAT          DATE,
+  L_DAT          DATE
+)
+LOGGING;
 
 CREATE TABLE KONTRAGENTS (
   ID          VARCHAR2(50 CHAR)  NOT NULL,
@@ -1590,7 +1610,7 @@ CREATE TABLE PROFIT_DISTRIB_TP (
                                                                         NEXT 1 M
                                                                         MAXEXTENTS UNLIMITED),
   CONSTRAINT PROFIT_DISTRIB_TP_FK1 FOREIGN KEY (PROFIT_ID)
-  REFERENCES PROFIT_DISTRIB (ID),
+  REFERENCES PROFIT_DISTRIB (ID) ON DELETE CASCADE,
   CONSTRAINT PROFIT_DISTRIB_TP_FK2 FOREIGN KEY (KONTR_ID)
   REFERENCES KONTRAGENTS (ID),
   CONSTRAINT PROFIT_DISTRIB_TP_FK3 FOREIGN KEY (CALC_ID)
@@ -1606,29 +1626,30 @@ LOGGING;
 COMMENT ON TABLE PROFIT_DISTRIB_TP IS 'ТЧ_РаспределениеПрибыли';
 
 CREATE TABLE ORDERS (
-  ID            VARCHAR2(50 CHAR) NOT NULL,
-  DAT           DATE              DEFAULT current_timestamp NOT NULL,
-  NUM           VARCHAR2(50 CHAR) NOT NULL,
-  KONTRAG_ID    VARCHAR2(50 CHAR) NOT NULL,
-  CURR_ID       VARCHAR2(50 CHAR) NOT NULL,
-  KASSA_ID      VARCHAR2(50 CHAR) NOT NULL,
-  DIVISION_ID   VARCHAR2(50 CHAR) NOT NULL,
-  USER_ID       VARCHAR2(50 CHAR) NOT NULL,
-  KURS          NUMBER(10, 6)     DEFAULT 1 NOT NULL,
-  KRATNOST      NUMBER(10, 0)     DEFAULT 1 NOT NULL,
-  DISCRIPTION   VARCHAR2(2000 CHAR),
-  DELETED       NUMBER(1, 0)      DEFAULT 0 NOT NULL,
-  VERSION       TIMESTAMP(6)      DEFAULT systimestamp NOT NULL,
-  POSTED        NUMBER(1, 0)      DEFAULT 0 NOT NULL,
-  FIRM_ID       VARCHAR2(50 CHAR) NOT NULL,
-  ACTIVITIES_ID VARCHAR2(50 CHAR) NOT NULL,
-  STATUS_ID     VARCHAR2(50 CHAR) NOT NULL,
-  ZAMER_ID      VARCHAR2(50 CHAR),
-  DAT_ZAM       DATE              DEFAULT sysdate NOT NULL,
-  TIME_ZAM      VARCHAR2(5 CHAR)  DEFAULT '00:00' NOT NULL,
-  SUMM_PLAN     NUMBER(10, 2)     DEFAULT 0 NOT NULL,
-  DAT_COMPLETE  DATE,
-  AGENT_ID      VARCHAR2(50 CHAR),
+  ID                VARCHAR2(50 CHAR) NOT NULL,
+  DAT               DATE              DEFAULT current_timestamp NOT NULL,
+  NUM               VARCHAR2(50 CHAR) NOT NULL,
+  KONTRAG_ID        VARCHAR2(50 CHAR) NOT NULL,
+  CURR_ID           VARCHAR2(50 CHAR) NOT NULL,
+  KASSA_ID          VARCHAR2(50 CHAR) NOT NULL,
+  DIVISION_ID       VARCHAR2(50 CHAR) NOT NULL,
+  USER_ID           VARCHAR2(50 CHAR) NOT NULL,
+  KURS              NUMBER(10, 6)     DEFAULT 1 NOT NULL,
+  KRATNOST          NUMBER(10, 0)     DEFAULT 1 NOT NULL,
+  DISCRIPTION       VARCHAR2(2000 CHAR),
+  DELETED           NUMBER(1, 0)      DEFAULT 0 NOT NULL,
+  VERSION           TIMESTAMP(6)      DEFAULT systimestamp NOT NULL,
+  POSTED            NUMBER(1, 0)      DEFAULT 0 NOT NULL,
+  FIRM_ID           VARCHAR2(50 CHAR) NOT NULL,
+  ACTIVITIES_ID     VARCHAR2(50 CHAR) NOT NULL,
+  STATUS_ID         VARCHAR2(50 CHAR) NOT NULL,
+  ZAMER_ID          VARCHAR2(50 CHAR),
+  DAT_ZAM           DATE              DEFAULT sysdate NOT NULL,
+  TIME_ZAM          VARCHAR2(5 CHAR)  DEFAULT '00:00' NOT NULL,
+  SUMM_PLAN         NUMBER(10, 2)     DEFAULT 0 NOT NULL,
+  DAT_COMPLETE      DATE,
+  AGENT_ID          VARCHAR2(50 CHAR),
+  DAT_COMPLETE_FACT DATE,
   CONSTRAINT ORDERS_CHK1 CHECK (DELETED IN (1, 0)),
   CONSTRAINT ORDERS_CHK2 CHECK (POSTED IN (1, 0)),
   CONSTRAINT ORDERS_PK PRIMARY KEY (ID) USING INDEX STORAGE (INITIAL 64 K
@@ -3318,7 +3339,7 @@ CREATE OR REPLACE PACKAGE BODY "ORDERS_ENTRY"
             AND deb = '701')
       LOOP
         p_ret_rec := p_move_rec;
-        p_ret_rec.period := p_order.dat_complete;
+        p_ret_rec.period := p_order.dat_complete_fact;
 
         SELECT code
           INTO p_code_plan
@@ -3501,7 +3522,7 @@ CREATE OR REPLACE PACKAGE BODY "ORDERS_ENTRY"
 
       --for i in (select * from vw_moves where registrator_id = p_order.id and deb = '701') loop
       p_ret_rec := p_move_rec;
-      p_ret_rec.period := p_order.dat_complete;
+      p_ret_rec.period := p_order.dat_complete_fact;
       SELECT SUM(NVL(summa, 0))
         INTO p_summ_sales
         FROM VW_SALES_ORDERS
@@ -3674,6 +3695,37 @@ CREATE OR REPLACE PACKAGE BODY "ORDERS_ENTRY"
       WHEN OTHERS THEN RAISE_APPLICATION_ERROR(-20001, 'Error order move for plan accounting! ' || SQLERRM, TRUE);
     END set_subconto_finrez_order;
 
+  PROCEDURE set_dat_complete(p_id IN VARCHAR2)
+    AS
+      p_orders_rec orders % ROWTYPE;
+      p_status     order_status.id % TYPE;
+      p_version    VARCHAR2(1000);
+    BEGIN
+      SELECT *
+        INTO p_orders_rec
+        FROM orders
+        WHERE id = p_id;
+      SELECT TO_CHAR(version, 'YYYY-MM-DD HH24:MI:SS.FF')
+        INTO p_version
+        FROM orders
+        WHERE id = p_id;
+      SELECT id
+        INTO p_status
+        FROM order_status
+        WHERE UPPER(name) = UPPER('Выполнен');
+      IF p_orders_rec.status_id = p_status
+      THEN
+        IF p_orders_rec.dat_complete_fact IS NULL
+        THEN
+          p_orders_rec.dat_complete_fact := sysdate;
+          UPDATE orders
+            SET ROW = p_orders_rec
+            WHERE id = p_id
+            AND version = TO_TIMESTAMP(p_version, 'YYYY-MM-DD HH24:MI:SS.FF');
+        END IF;
+      END IF;
+    END set_dat_complete;
+
   PROCEDURE orders_move_plan_acc(p_id IN VARCHAR2)
     AS
       p_orders_rec   orders % ROWTYPE;
@@ -3685,6 +3737,8 @@ CREATE OR REPLACE PACKAGE BODY "ORDERS_ENTRY"
       PRAGMA EXCEPTION_INIT (in_use, -54);
       period_blocked EXCEPTION;
     BEGIN
+      set_dat_complete(p_id);
+
       SELECT *
         INTO p_orders_rec
         FROM orders
@@ -4935,7 +4989,7 @@ BEGIN
                   FROM order_status
                   WHERE name IN (
                     'Аннулирован', 'Закрыт', 'Выполнен', 'Отказ'))
-              AND TRUNC(dat_complete) < TRUNC(p_dat_after))
+              AND TRUNC(dat_complete_fact) < TRUNC(p_dat_after))
         LOOP
           p_flag := 0;
         END LOOP;
@@ -5844,6 +5898,11 @@ CREATE OR REPLACE PACKAGE "REPORT_PKG"
   FUNCTION get_deletedref_tables
     RETURN tbl_deleted_ref;
 
+  PROCEDURE refresh_ballans(f_data DATE DEFAULT NULL,
+                            l_data DATE DEFAULT NULL);
+  PROCEDURE delete_table(p_id        IN VARCHAR2,
+                         p_tablename IN VARCHAR2);
+
 END report_pkg;
 /
 
@@ -5989,7 +6048,43 @@ CREATE OR REPLACE PACKAGE BODY "REPORT_PKG"
               WHERE constraint_type != 'C') START WITH table_name = UPPER(p_tablename)
         AND column_name = 'ID'
         CONNECT BY NOCYCLE PRIOR table_name = r_table_name
-        AND PRIOR column_name = r_column_name)
+        AND PRIOR column_name = r_column_name
+
+          UNION
+        SELECT 'START_OST_TP',
+               NULL,
+               'SUBCONTO1_DEB',
+               NULL,
+               NULL,
+               'R'
+          FROM dual
+
+          UNION
+        SELECT 'START_OST_TP',
+               NULL,
+               'SUBCONTO2_DEB',
+               NULL,
+               NULL,
+               'R'
+          FROM dual
+
+          UNION
+        SELECT 'START_OST_TP',
+               NULL,
+               'SUBCONTO1_KRED',
+               NULL,
+               NULL,
+               'R'
+          FROM dual
+
+          UNION
+        SELECT 'START_OST_TP',
+               NULL,
+               'SUBCONTO2_KRED',
+               NULL,
+               NULL,
+               'R'
+          FROM dual)
       LOOP
         p_counter := p_counter + 1;
         l_datatbl.EXTEND;
@@ -6166,6 +6261,54 @@ CREATE OR REPLACE PACKAGE BODY "REPORT_PKG"
               FROM orders
               WHERE id = y.TABLE_ID;
             p_ref_str := 'Заказ №' || p_num || ' от ' || TO_CHAR(p_dat, 'DD-MM-YYYY');
+          ELSIF y.table_name = 'ORDERS_TP_NACHISL'
+          THEN
+            SELECT dat,
+                   num
+              INTO p_dat,
+                   p_num
+              FROM orders
+              WHERE id = (SELECT Order_id
+                    FROM ORDERS_TP_NACHISL
+                    WHERE id = y.TABLE_ID
+                      AND ROWNUM = 1);
+            p_ref_str := 'Заказ №' || p_num || ' от ' || TO_CHAR(p_dat, 'DD-MM-YYYY');
+          ELSIF y.table_name = 'ORDERS_TP_OPLATY'
+          THEN
+            SELECT dat,
+                   num
+              INTO p_dat,
+                   p_num
+              FROM orders
+              WHERE id = (SELECT Order_id
+                    FROM ORDERS_TP_OPLATY
+                    WHERE id = y.TABLE_ID
+                      AND ROWNUM = 1);
+            p_ref_str := 'Заказ №' || p_num || ' от ' || TO_CHAR(p_dat, 'DD-MM-YYYY');
+          ELSIF y.table_name = 'ORDERS_TP_RASHODY'
+          THEN
+            SELECT dat,
+                   num
+              INTO p_dat,
+                   p_num
+              FROM orders
+              WHERE id = (SELECT Order_id
+                    FROM ORDERS_TP_RASHODY
+                    WHERE id = y.TABLE_ID
+                      AND ROWNUM = 1);
+            p_ref_str := 'Заказ №' || p_num || ' от ' || TO_CHAR(p_dat, 'DD-MM-YYYY');
+          ELSIF y.table_name = 'ORDERS_TP_USLUGI'
+          THEN
+            SELECT dat,
+                   num
+              INTO p_dat,
+                   p_num
+              FROM orders
+              WHERE id = (SELECT Order_id
+                    FROM ORDERS_TP_USLUGI
+                    WHERE id = y.TABLE_ID
+                      AND ROWNUM = 1);
+            p_ref_str := 'Заказ №' || p_num || ' от ' || TO_CHAR(p_dat, 'DD-MM-YYYY');
           ELSIF y.table_name = 'OTHER_ZATRATY'
           THEN
             SELECT dat,
@@ -6174,6 +6317,18 @@ CREATE OR REPLACE PACKAGE BODY "REPORT_PKG"
                    p_num
               FROM OTHER_ZATRATY
               WHERE id = y.TABLE_ID;
+            p_ref_str := 'Админ.затраты №' || p_num || ' от ' || TO_CHAR(p_dat, 'DD-MM-YYYY');
+          ELSIF y.table_name = 'OTHER_ZATRATY_TAB_PART_ZATRATY'
+          THEN
+            SELECT dat,
+                   num
+              INTO p_dat,
+                   p_num
+              FROM OTHER_ZATRATY
+              WHERE id = (SELECT oth_id
+                    FROM OTHER_ZATRATY_TAB_PART_ZATRATY
+                    WHERE id = y.TABLE_ID
+                      AND ROWNUM = 1);
             p_ref_str := 'Админ.затраты №' || p_num || ' от ' || TO_CHAR(p_dat, 'DD-MM-YYYY');
           ELSIF y.table_name = 'PKO'
           THEN
@@ -6202,6 +6357,18 @@ CREATE OR REPLACE PACKAGE BODY "REPORT_PKG"
               FROM PROFIT_DISTRIB
               WHERE id = y.TABLE_ID;
             p_ref_str := 'Распределение прибыли №' || p_num || ' от ' || TO_CHAR(p_dat, 'DD-MM-YYYY');
+          ELSIF y.table_name = 'PROFIT_DISTRIB_TP'
+          THEN
+            SELECT dat,
+                   num
+              INTO p_dat,
+                   p_num
+              FROM PROFIT_DISTRIB
+              WHERE id = (SELECT profit_ID
+                    FROM PROFIT_DISTRIB_TP
+                    WHERE id = y.TABLE_ID
+                      AND ROWNUM = 1);
+            p_ref_str := 'Распределение прибыли №' || p_num || ' от ' || TO_CHAR(p_dat, 'DD-MM-YYYY');
           ELSIF y.table_name = 'START_OST'
           THEN
             SELECT dat,
@@ -6210,6 +6377,18 @@ CREATE OR REPLACE PACKAGE BODY "REPORT_PKG"
                    p_num
               FROM START_OST
               WHERE id = y.TABLE_ID;
+            p_ref_str := 'Нач. остатки №' || p_num || ' от ' || TO_CHAR(p_dat, 'DD-MM-YYYY');
+          ELSIF y.table_name = 'START_OST_TP'
+          THEN
+            SELECT dat,
+                   num
+              INTO p_dat,
+                   p_num
+              FROM START_OST
+              WHERE id = (SELECT start_ost_ID
+                    FROM START_OST_TP
+                    WHERE id = y.TABLE_ID
+                      AND ROWNUM = 1);
             p_ref_str := 'Нач. остатки №' || p_num || ' от ' || TO_CHAR(p_dat, 'DD-MM-YYYY');
           ELSIF y.table_name = 'KONTRAGENTS'
           THEN
@@ -6225,6 +6404,26 @@ CREATE OR REPLACE PACKAGE BODY "REPORT_PKG"
               FROM ZATRATY
               WHERE id = y.TABLE_ID;
             p_ref_str := 'Статья затрат - ' || query_str;
+          ELSIF y.table_name = 'USER_SETTINGS'
+          THEN
+            SELECT UPPER(LOGIN)
+              INTO query_str
+              FROM users
+              WHERE id = (SELECT user_ID
+                    FROM USER_SETTINGS
+                    WHERE id = y.TABLE_ID
+                      AND ROWNUM = 1);
+            p_ref_str := 'Настройки пользователя - ' || query_str;
+          ELSIF y.table_name = 'KONTRAG_SETTINGS'
+          THEN
+            SELECT UPPER(fullname)
+              INTO query_str
+              FROM KONTRAGENTS
+              WHERE id = (SELECT KONTRAG_ID
+                    FROM KONTRAG_SETTINGS
+                    WHERE id = y.TABLE_ID
+                      AND ROWNUM = 1);
+            p_ref_str := 'Настройки контрагента - ' || query_str;
           END IF;
           p_counter := p_counter + 1;
           l_datatbl.EXTEND;
@@ -6234,6 +6433,69 @@ CREATE OR REPLACE PACKAGE BODY "REPORT_PKG"
       END LOOP;
       RETURN l_datatbl;
     END get_deletedref_tables;
+
+  PROCEDURE refresh_ballans(f_data DATE DEFAULT NULL,
+                            l_data DATE DEFAULT NULL)
+    AS
+      p_f_dat DATE;
+      p_l_dat DATE;
+    BEGIN
+      IF f_data IS NOT NULL
+      THEN
+        p_f_dat := f_data;
+      ELSE
+        p_f_dat := ORDERS_ENTRY.get_startdatmoves;
+      END IF;
+
+      IF l_data IS NOT NULL
+      THEN
+        p_l_dat := l_data;
+      ELSE
+        p_l_dat := ORDERS_ENTRY.get_enddatmoves;
+      END IF;
+      DELETE FROM BALLANS;
+      INSERT INTO BALLANS (
+        ID, CODE, FULLNAME, ACTIVE_START, ACTIVE_DEB, ACTIVE_KRED, ACTIVE_OBOROT, ACTIVE_END, PASSIVE_START, PASSIVE_DEB, PASSIVE_KRED, PASSIVE_OBOROT, PASSIVE_END, DIVISION_ID, F_DAT, l_DAT
+      )
+        SELECT ID,
+               CODE,
+               FULLNAME,
+               ACTIVE_START,
+               ACTIVE_DEB,
+               ACTIVE_KRED,
+               ACTIVE_OBOROT,
+               ACTIVE_END,
+               PASSIVE_START,
+               PASSIVE_DEB,
+               PASSIVE_KRED,
+               PASSIVE_OBOROT,
+               PASSIVE_END,
+               DIVISION_ID,
+               (SELECT p_f_dat
+                   FROM dual),
+               (SELECT p_l_dat
+                   FROM dual)
+          FROM TABLE (CAST(REPORT_PKG.GETBALLANS(f_data, l_data) AS tbl_ballans));
+    END refresh_ballans;
+
+  PROCEDURE delete_table(p_id        IN VARCHAR2,
+                         p_tablename IN VARCHAR2)
+    AS
+      in_use    EXCEPTION;
+      PRAGMA EXCEPTION_INIT (in_use, -54);
+      query_str VARCHAR2(2000) := '';
+    BEGIN
+      query_str := 'select * from ' || p_tablename || ' where id = :1 for update nowait';
+      EXECUTE IMMEDIATE query_str
+      USING '' || p_id || '';
+      query_str := 'delete from ' || p_tablename || ' where id = :1';
+      EXECUTE IMMEDIATE query_str
+      USING '' || p_id || '';
+
+    EXCEPTION
+      WHEN IN_USE THEN RAISE_APPLICATION_ERROR(-20002, 'Запись с Ид=' || p_id || ' таблицы ' || p_tablename || ' заблокирована!', TRUE);
+      WHEN OTHERS THEN RAISE_APPLICATION_ERROR(-20001, 'Ошибка удаления записи Ид=' || p_id || ' таблицы ' || p_tablename, TRUE);
+    END delete_table;
 
 END report_pkg;
 
