@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import oracle.jbo.AttributeList;
 import oracle.jbo.Row;
 import oracle.jbo.RowIterator;
+import oracle.jbo.domain.Date;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.ViewRowImpl;
 
@@ -54,6 +55,9 @@ public class UsersViewRowImpl extends ViewRowImpl {
         UEditable,
         UDescription,
         IsZamer,
+        IsActive,
+        DateBefore,
+        DateBeforeAccept,
         OrdersView,
         UsersGroupsView,
         UserSettingsView,
@@ -105,6 +109,9 @@ public class UsersViewRowImpl extends ViewRowImpl {
     public static final int UEDITABLE = AttributesEnum.UEditable.index();
     public static final int UDESCRIPTION = AttributesEnum.UDescription.index();
     public static final int ISZAMER = AttributesEnum.IsZamer.index();
+    public static final int ISACTIVE = AttributesEnum.IsActive.index();
+    public static final int DATEBEFORE = AttributesEnum.DateBefore.index();
+    public static final int DATEBEFOREACCEPT = AttributesEnum.DateBeforeAccept.index();
     public static final int ORDERSVIEW = AttributesEnum.OrdersView.index();
     public static final int USERSGROUPSVIEW = AttributesEnum.UsersGroupsView.index();
     public static final int USERSETTINGSVIEW = AttributesEnum.UserSettingsView.index();
@@ -324,6 +331,54 @@ public class UsersViewRowImpl extends ViewRowImpl {
      */
     public void setIsZamer(Integer value) {
         setAttributeInternal(ISZAMER, value);
+    }
+
+    /**
+     * Gets the attribute value for IS_ACTIVE using the alias name IsActive.
+     * @return the IS_ACTIVE
+     */
+    public Integer getIsActive() {
+        return (Integer) getAttributeInternal(ISACTIVE);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for IS_ACTIVE using the alias name IsActive.
+     * @param value value to set the IS_ACTIVE
+     */
+    public void setIsActive(Integer value) {
+        setAttributeInternal(ISACTIVE, value);
+    }
+
+    /**
+     * Gets the attribute value for DATE_BEFORE using the alias name DateBefore.
+     * @return the DATE_BEFORE
+     */
+    public Date getDateBefore() {
+        return (Date) getAttributeInternal(DATEBEFORE);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for DATE_BEFORE using the alias name DateBefore.
+     * @param value value to set the DATE_BEFORE
+     */
+    public void setDateBefore(Date value) {
+        setAttributeInternal(DATEBEFORE, value);
+    }
+
+    /**
+     * Gets the attribute value for DATE_BEFIRE_ACCEPT using the alias name DateBefireAccept.
+     * @return the DATE_BEFIRE_ACCEPT
+     */
+    public Integer getDateBeforeAccept() {
+        return (Integer) getAttributeInternal(DATEBEFOREACCEPT);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for DATE_BEFIRE_ACCEPT using the alias name DateBefireAccept.
+     * @param value value to set the DATE_BEFIRE_ACCEPT
+     */
+    public void setDateBeforeAccept(Integer value) {
+        setAttributeInternal(DATEBEFOREACCEPT, value);
     }
 
     /**

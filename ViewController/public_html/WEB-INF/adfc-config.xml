@@ -6,6 +6,9 @@
   <view id="home">
     <page>/home.jsf</page>
   </view>
+  <view id="reg_code">
+    <page>/reg_code.jsf</page>
+  </view>
   <control-flow-rule id="__1">
     <from-activity-id>index</from-activity-id>
     <control-flow-case id="__2">

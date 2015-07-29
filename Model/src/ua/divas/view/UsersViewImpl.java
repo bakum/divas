@@ -2,7 +2,16 @@ package ua.divas.view;
 
 import java.io.IOException;
 
+import java.math.BigDecimal;
+
+import java.util.Date;
+
+import oracle.jbo.Row;
+import oracle.jbo.Variable;
+import oracle.jbo.common.VariableImpl;
 import oracle.jbo.server.ViewObjectImpl;
+
+import oracle.jbo.server.ViewRowSetImpl;
 
 import ua.divas.classes.DivasView;
 import ua.divas.classes.WLS_Utility;
@@ -18,6 +27,28 @@ public class UsersViewImpl extends DivasView implements UsersView {
      * This is the default constructor (do not remove).
      */
     public UsersViewImpl() {
+    }
+
+
+    public Boolean userExistsAndActive(String u_login) {
+        String ret = (String) callStoredFunction(VARCHAR2, "UTILITY.user_exists(?)", new Object[] { u_login });
+        if (ret.contains("1")) {
+            return new Boolean(true);
+        }
+        return new Boolean(false);
+    }
+    
+    public Boolean accessEnabled(String u_login) {
+        String ret = (String) callStoredFunction(VARCHAR2, "UTILITY.access_enabled(?)", new Object[] { u_login });
+        if (ret.contains("1")) {
+            return new Boolean(true);
+        }
+        return new Boolean(false);
+    }
+    
+    public String generateCode(String u_login, Date p_date) {
+        String ret = (String) callStoredFunction(VARCHAR2, "UTILITY.access_enabled(?,?)", new Object[] { u_login, p_date });
+        return ret;
     }
 
     public void addUserToWls(String username, String psw, String desc) {
@@ -54,6 +85,22 @@ public class UsersViewImpl extends DivasView implements UsersView {
      */
     public void setu_name(String value) {
         setNamedWhereClauseParam("u_name", value);
+    }
+
+    /**
+     * Returns the variable value for u_login.
+     * @return variable value for u_login
+     */
+    public String getu_login() {
+        return (String) ensureVariableManager().getVariableValue("u_login");
+    }
+
+    /**
+     * Sets <code>value</code> for variable u_login.
+     * @param value value to bind as u_login
+     */
+    public void setu_login(String value) {
+        ensureVariableManager().setVariableValue("u_login", value);
     }
 }
 

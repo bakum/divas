@@ -2,6 +2,8 @@ package ua.divas.bean;
 
 import java.io.IOException;
 
+import java.math.BigDecimal;
+
 import java.util.Map;
 
 import javax.faces.application.FacesMessage;
@@ -20,14 +22,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import oracle.adf.model.BindingContext;
 import oracle.adf.share.ADFContext;
 import oracle.adf.share.security.SecurityContext;
 import oracle.adf.view.rich.event.DialogEvent;
 
+import oracle.binding.BindingContainer;
+import oracle.binding.OperationBinding;
+
+import ua.divas.classes.IllegalUserException;
+
 import weblogic.security.URLCallbackHandler;
 
 import weblogic.servlet.security.ServletAuthentication;
-
 
 
 public class LoginBean {
@@ -36,6 +43,7 @@ public class LoginBean {
 
     public static String USERNAMETOKEN = "_____demoOnlyUsernameAttrString___________";
     public static String PASSWORDTOKEN = "_____demoOnlyPasswordAttrString___________";
+    public static String ENABLEDTOKEN = "UserEnabled";
 
     public LoginBean() {
     }
@@ -56,7 +64,7 @@ public class LoginBean {
         return _password;
     }
 
-    public void OnLoginAction(DialogEvent dialogEvent) {
+    public void OnLoginAction(DialogEvent dialogEvent) throws IllegalUserException {
         if (dialogEvent.getOutcome() == DialogEvent.Outcome.ok) {
             doLogin();
         } else {
@@ -64,28 +72,52 @@ public class LoginBean {
         }
     }
 
-    private String doLogin() {
+    private String doLogin() throws IllegalUserException {
         String un = _username;
         byte[] pw = _password.getBytes();
+
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("userExistsAndActive");
+        ob.getParamsMap().put("u_login", un);
+        Boolean exists = (Boolean) ob.execute();
+        System.out.println("Exists: " + exists.toString());
+        Boolean enabled = null;
+
+        if (exists.booleanValue()) {
+            ob = binding.getOperationBinding("accessEnabled");
+            ob.getParamsMap().put("u_login", un);
+            enabled = (Boolean) ob.execute();
+        }
+
         FacesContext ctx = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) ctx.getExternalContext().getRequest();
         try {
+            if (!exists.booleanValue()) {
+                throw new IllegalUserException("");
+            }
             CallbackHandler handler = new URLCallbackHandler(un, pw);
             Subject mySubject = weblogic.security.services.Authentication.login(handler);
             weblogic.servlet.security.ServletAuthentication.runAs(mySubject, request);
             ServletAuthentication.generateNewSessionID(request);
+            String loginUrl = null;
 
             //save username and password. Note that in a real application this is
             //*NOT* what you should do unencrypted. Note that this is a demo
 
             //Store username , password in session for later use
             //when connecting to Twitter
-            /* ADFContext adfctx = ADFContext.getCurrent();
+            ADFContext adfctx = ADFContext.getCurrent();
             Map sessionScope = adfctx.getSessionScope();
-            sessionScope.put(this.USERNAMETOKEN, un);
-            sessionScope.put(this.PASSWORDTOKEN, new String(pw)); */
+            sessionScope.put(this.ENABLEDTOKEN, enabled.toString());
+            //sessionScope.put(this.USERNAMETOKEN, un);
+            //sessionScope.put(this.PASSWORDTOKEN, new String(pw));
+             if (!enabled.booleanValue()) {
+                loginUrl = "/adfAuthentication?success_url=/faces/reg_code";
+            } else {
+                loginUrl = "/adfAuthentication?success_url=/faces/index";
+            } 
 
-            String loginUrl = "/adfAuthentication?success_url=/faces/index";
+            //String loginUrl = "/adfAuthentication?success_url=/faces/index";
             //String loginUrl = "/adfAuthentication?success_url=/faces" + ctx.getViewRoot().getViewId();
             //String loginUrl = "faces" + ctx.getViewRoot().getViewId();
             HttpServletResponse response = (HttpServletResponse) ctx.getExternalContext().getResponse();
@@ -97,6 +129,8 @@ public class LoginBean {
             ctx.addMessage(null, msg);
         } catch (LoginException le) {
             reportUnexpectedLoginError("LoginException", le);
+        } catch (IllegalUserException iue) {
+            reportUnexpectedLoginError("IllegalUser", iue);
         }
         return null;
     }
@@ -117,9 +151,9 @@ public class LoginBean {
     private void reportUnexpectedLoginError(String errType, Exception e) {
         FacesMessage msg =
             new FacesMessage(FacesMessage.SEVERITY_ERROR, "Unexpected error during login",
-                             "Unexpected error during login (" + errType + "), please consult logs for detail");
+                             "Ошибка валидации пользователя (" + errType + "), обратитесь к администратору");
         FacesContext.getCurrentInstance().addMessage(null, msg);
-        e.printStackTrace();
+        //e.printStackTrace();
     }
 
     public String logout() {
@@ -153,7 +187,7 @@ public class LoginBean {
         return roles[0];
     }
 
-    public void onLogin(ActionEvent actionEvent) {
+    public void onLogin(ActionEvent actionEvent) throws IllegalUserException {
         doLogin();
     }
 }

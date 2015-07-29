@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" locale="ru">
     <af:document title="Divas CRM - Авторизация" id="d1" inlineStyle="background-color:Scrollbar;">
+        <af:messages id="m1"/>
         <af:form id="f1" defaultCommand="b1">
             <af:panelGridLayout id="pgl1">
                 <af:gridRow height="100%" id="gr1">

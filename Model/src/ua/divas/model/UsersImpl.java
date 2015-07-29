@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import oracle.jbo.Key;
 import oracle.jbo.RowIterator;
+import oracle.jbo.domain.DBSequence;
+import oracle.jbo.domain.Date;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.EntityDefImpl;
 import oracle.jbo.server.EntityImpl;
@@ -38,6 +40,9 @@ public class UsersImpl extends DivasEntityNoDelete {
         Predefined,
         UDescription,
         IsZamer,
+        IsActive,
+        DateBefore,
+        DateBefireAccept,
         Orders,
         UsersGroups,
         UserSettings,
@@ -86,6 +91,9 @@ public class UsersImpl extends DivasEntityNoDelete {
     public static final int PREDEFINED = AttributesEnum.Predefined.index();
     public static final int UDESCRIPTION = AttributesEnum.UDescription.index();
     public static final int ISZAMER = AttributesEnum.IsZamer.index();
+    public static final int ISACTIVE = AttributesEnum.IsActive.index();
+    public static final int DATEBEFORE = AttributesEnum.DateBefore.index();
+    public static final int DATEBEFIREACCEPT = AttributesEnum.DateBefireAccept.index();
     public static final int ORDERS = AttributesEnum.Orders.index();
     public static final int USERSGROUPS = AttributesEnum.UsersGroups.index();
     public static final int USERSETTINGS = AttributesEnum.UserSettings.index();
@@ -288,6 +296,54 @@ public class UsersImpl extends DivasEntityNoDelete {
      */
     public void setIsZamer(Integer value) {
         setAttributeInternal(ISZAMER, value);
+    }
+
+    /**
+     * Gets the attribute value for IsActive, using the alias name IsActive.
+     * @return the value of IsActive
+     */
+    public Integer getIsActive() {
+        return (Integer) getAttributeInternal(ISACTIVE);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for IsActive.
+     * @param value value to set the IsActive
+     */
+    public void setIsActive(Integer value) {
+        setAttributeInternal(ISACTIVE, value);
+    }
+
+    /**
+     * Gets the attribute value for DateBefore, using the alias name DateBefore.
+     * @return the value of DateBefore
+     */
+    public Date getDateBefore() {
+        return (Date) getAttributeInternal(DATEBEFORE);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for DateBefore.
+     * @param value value to set the DateBefore
+     */
+    public void setDateBefore(Date value) {
+        setAttributeInternal(DATEBEFORE, value);
+    }
+
+    /**
+     * Gets the attribute value for DateBefireAccept, using the alias name DateBefireAccept.
+     * @return the value of DateBefireAccept
+     */
+    public Integer getDateBefireAccept() {
+        return (Integer) getAttributeInternal(DATEBEFIREACCEPT);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for DateBefireAccept.
+     * @param value value to set the DateBefireAccept
+     */
+    public void setDateBefireAccept(Integer value) {
+        setAttributeInternal(DATEBEFIREACCEPT, value);
     }
 
     /**

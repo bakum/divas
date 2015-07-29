@@ -1063,6 +1063,23 @@
               </permission>
             </permissions>
           </grant>
+          <grant>
+            <grantee>
+              <principals>
+                <principal>
+                  <class>oracle.security.jps.internal.core.principals.JpsAnonymousRoleImpl</class>
+                  <name>anonymous-role</name>
+                </principal>
+              </principals>
+            </grantee>
+            <permissions>
+              <permission>
+                <class>oracle.adf.share.security.authorization.RegionPermission</class>
+                <name>ua.divas.bean.pageDefs.homePageDef</name>
+                <actions>view</actions>
+              </permission>
+            </permissions>
+          </grant>
         </jazn-policy>
       </application>
     </applications>

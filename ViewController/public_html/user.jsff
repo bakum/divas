@@ -176,6 +176,12 @@
                                                                     id="of1"/>
                                             </af:panelLabelAndMessage>
                                         </f:facet>
+                                        <af:column headerText="#{bindings.UsersView1.hints.IsActive.label}" id="c19">
+                                            <af:selectBooleanCheckbox value="#{row.bindings.IsActive.inputValue}"
+                                                                      label="#{row.bindings.IsActive.label}"
+                                                                      shortDesc="#{bindings.UsersView1.hints.IsActive.tooltip}"
+                                                                      id="sbc6"/>
+                                        </af:column>
                                     </af:table>
                                 </af:panelBox>
                                 <af:popup childCreation="deferred" id="pCreateInsert"
@@ -227,11 +233,19 @@
                                                                   readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}">
                                                         <f:validator binding="#{bindings.Email.validator}"/>
                                                     </af:inputText>
-                                                    <af:selectBooleanCheckbox value="#{bindings.IsAdmin.inputValue}"
-                                                                              label="#{bindings.IsAdmin.label}"
-                                                                              shortDesc="#{bindings.IsAdmin.hints.tooltip}"
-                                                                              id="sbc1"
-                                                                              readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}"/>
+                                                    <af:panelLabelAndMessage label="#{bindings.IsAdmin.label}" id="plam3">
+                                                        <af:panelGroupLayout id="pgl5" layout="horizontal">
+                                                            <af:selectBooleanCheckbox value="#{bindings.IsAdmin.inputValue}"
+                                                                                      shortDesc="#{bindings.IsAdmin.hints.tooltip}"
+                                                                                      id="sbc1"
+                                                                                      readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}"/>
+                                                            <af:selectBooleanCheckbox value="#{bindings.IsActive.inputValue}"
+                                                                                      label="#{bindings.IsActive.label}"
+                                                                                      shortDesc="#{bindings.IsActive.hints.tooltip}"
+                                                                                      id="sbc7"
+                                                                                      readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}"/>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelLabelAndMessage>
                                                     <af:inputText value="#{bindings.UDescription.inputValue}"
                                                                   label="#{bindings.UDescription.hints.label}"
                                                                   required="#{bindings.UDescription.hints.mandatory}"

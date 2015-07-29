@@ -1,5 +1,7 @@
 package ua.divas.view.client;
 
+import java.util.Date;
+
 import oracle.jbo.client.remote.ViewUsageImpl;
 
 import ua.divas.view.common.UsersView;
@@ -17,6 +19,13 @@ public class UsersViewClient extends ViewUsageImpl implements UsersView {
     }
 
 
+    public Boolean accessEnabled(String u_login) {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "accessEnabled", new String[] {
+                                                                         "java.lang.String" }, new Object[] {
+                                                                         u_login });
+        return (Boolean) _ret;
+    }
+
     public void addUserToWls(String username, String psw, String desc) {
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "addUserToWls", new String[] {
                                                                          "java.lang.String", "java.lang.String",
@@ -33,11 +42,25 @@ public class UsersViewClient extends ViewUsageImpl implements UsersView {
         return;
     }
 
+    public String generateCode(String u_login, Date p_date) {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "generateCode", new String[] {
+                                                                         "java.lang.String", "java.util.Date"
+        }, new Object[] { u_login, p_date });
+        return (String) _ret;
+    }
+
     public void resetUserPwdToWls(String username, String newPassword) {
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "resetUserPwdToWls", new String[] {
                                                                          "java.lang.String", "java.lang.String"
         }, new Object[] { username, newPassword });
         return;
+    }
+
+    public Boolean userExistsAndActive(String u_login) {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "userExistsAndActive", new String[] {
+                                                                         "java.lang.String" }, new Object[] {
+                                                                         u_login });
+        return (Boolean) _ret;
     }
 }
 
