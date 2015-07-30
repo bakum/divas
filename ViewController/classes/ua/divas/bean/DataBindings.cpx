@@ -67,6 +67,7 @@
     <page path="/kontrag_dir.jsff" usageId="ua_divas_bean_kontrag_dirPageDef"/>
     <page path="/obj_deleted.jsff" usageId="ua_divas_bean_obj_deletedPageDef"/>
     <page path="/home.jsf" usageId="ua_divas_bean_homePageDef"/>
+    <page path="/reg_code.jsf" usageId="ua_divas_bean_reg_codePageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="ua_divas_view_indexPageDef" path="ua.divas.bean.pageDefs.indexPageDef"/>
@@ -128,6 +129,7 @@
     <page id="ua_divas_bean_kontrag_dirPageDef" path="ua.divas.bean.pageDefs.kontrag_dirPageDef"/>
     <page id="ua_divas_bean_obj_deletedPageDef" path="ua.divas.bean.pageDefs.obj_deletedPageDef"/>
     <page id="ua_divas_bean_homePageDef" path="ua.divas.bean.pageDefs.homePageDef"/>
+    <page id="ua_divas_bean_reg_codePageDef" path="ua.divas.bean.pageDefs.reg_codePageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <dc id="DataPackage" path="ua.divas.bean.DataPackage"/>

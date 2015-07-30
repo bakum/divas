@@ -180,7 +180,43 @@
                                             <af:selectBooleanCheckbox value="#{row.bindings.IsActive.inputValue}"
                                                                       label="#{row.bindings.IsActive.label}"
                                                                       shortDesc="#{bindings.UsersView1.hints.IsActive.tooltip}"
-                                                                      id="sbc6"/>
+                                                                      id="sbc6" readOnly="true"/>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UsersView1.hints.DateBefore.label}" id="c20"
+                                                   sortProperty="#{bindings.UsersView1.hints.DateBefore.name}"
+                                                   sortable="true" align="center" width="200"
+                                                   inlineStyle="#{row.IsAdmin == 1 ? 'background-color:#b5ffb5' : row.DateBeforeAccept == 0 ? 'background-color:#ffded6;' : row.UsrEnbl == 0 ? 'background-color:#ffded6;' : 'background-color:#b5ffb5'}"
+                                                   shortDesc="#{row.DateBeforeAccept == 1 ? 'Доступ подтвержден пользователем' : 'Доступ не подтвержден'}">
+                                            <af:inputDate value="#{row.bindings.DateBefore.inputValue}"
+                                                          label="#{bindings.UsersView1.hints.DateBefore.label}"
+                                                          required="#{bindings.UsersView1.hints.DateBefore.mandatory}"
+                                                          columns="#{bindings.UsersView1.hints.DateBefore.displayWidth}"
+                                                          shortDesc="#{bindings.UsersView1.hints.DateBefore.tooltip}"
+                                                          id="id1" inlineStyle="color:Red;" readOnly="true">
+                                                <f:validator binding="#{row.bindings.DateBefore.validator}"/>
+                                                <af:convertDateTime pattern="#{bindings.UsersView1.hints.DateBefore.format}"/>
+                                            </af:inputDate>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UsersView1.hints.DateBeforeAccept.label}"
+                                                   id="c21" visible="false" sortable="true">
+                                            <af:selectBooleanCheckbox value="#{row.bindings.DateBeforeAccept.inputValue}"
+                                                                      label="#{row.bindings.DateBeforeAccept.label}"
+                                                                      shortDesc="#{bindings.UsersView1.hints.DateBeforeAccept.tooltip}"
+                                                                      id="sbc8" readOnly="true"/>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UsersView1.hints.UsrEnbl.label}" id="c22"
+                                                   visible="false">
+                                            <af:inputText value="#{row.bindings.UsrEnbl.inputValue}"
+                                                          label="#{bindings.UsersView1.hints.UsrEnbl.label}"
+                                                          required="#{bindings.UsersView1.hints.UsrEnbl.mandatory}"
+                                                          columns="#{bindings.UsersView1.hints.UsrEnbl.displayWidth}"
+                                                          maximumLength="#{bindings.UsersView1.hints.UsrEnbl.precision}"
+                                                          shortDesc="#{bindings.UsersView1.hints.UsrEnbl.tooltip}"
+                                                          id="it29" readOnly="true">
+                                                <f:validator binding="#{row.bindings.UsrEnbl.validator}"/>
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.UsersView1.hints.UsrEnbl.format}"/>
+                                            </af:inputText>
                                         </af:column>
                                     </af:table>
                                 </af:panelBox>
@@ -263,6 +299,34 @@
                                                                               readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}"/>
                                                     <f:facet name="footer"/>
                                                     <af:spacer width="10" height="10" id="s1"/>
+                                                    <af:group id="g2" title="Настройки доступа">
+                                                        <af:panelLabelAndMessage label="#{bindings.DateBefore.hints.label}" id="plam4">
+                                                            <af:panelGroupLayout id="pgl6" layout="horizontal">
+                                                                <af:inputDate value="#{bindings.DateBefore.inputValue}"
+                                                                              required="#{bindings.DateBefore.hints.mandatory}"
+                                                                              columns="#{bindings.DateBefore.hints.displayWidth}"
+                                                                              shortDesc="#{bindings.DateBefore.hints.tooltip}"
+                                                                              id="id2"
+                                                                              readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}"
+                                                                              autoSubmit="true"
+                                                                              valueChangeListener="#{users.onDateChange}">
+                                                                    <f:validator binding="#{bindings.DateBefore.validator}"/>
+                                                                    <af:convertDateTime pattern="#{bindings.DateBefore.format}"/>
+                                                                </af:inputDate>
+                                                                <af:spacer width="10" height="10" id="s3"/>
+                                                                <af:outputFormatted value="#{users.codeLabel}" id="of2"
+                                                                                    shortDesc="Код доступа"
+                                                                                    inlineStyle="font-size:large;"
+                                                                                    binding="#{users.code}"
+                                                                                    partialTriggers="id2"/>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelLabelAndMessage>
+                                                        <af:selectBooleanCheckbox value="#{bindings.DateBeforeAccept.inputValue}"
+                                                                                  label="#{bindings.DateBeforeAccept.label}"
+                                                                                  shortDesc="#{bindings.DateBeforeAccept.hints.tooltip}"
+                                                                                  id="sbc9"
+                                                                                  readOnly="#{bindings.UEditable.inputValue == 1 ? false : true}"/>
+                                                    </af:group>
                                                 </af:panelFormLayout>
                                                 <f:facet name="toolbar">
                                                     <af:button text="Редактировать" id="b2" icon="/img/edit-16.gif"
@@ -489,7 +553,8 @@
                                                     </af:toolbar>
                                                 </f:facet>
                                             </af:showDetailItem>
-                                            <af:showDetailItem text="Начисления" id="sdi6" stretchChildren="first">
+                                            <af:showDetailItem text="Начисления" id="sdi6" stretchChildren="first"
+                                                               rendered="false">
                                                 <af:panelBox text="Настройки начислений" id="pb4" type="flow">
                                                     <f:facet name="toolbar">
                                                         <af:toolbar id="t6">

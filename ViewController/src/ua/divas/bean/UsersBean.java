@@ -1,18 +1,24 @@
 package ua.divas.bean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
 import oracle.adf.controller.ControllerContext;
 import oracle.adf.model.BindingContext;
 
+import oracle.adf.model.binding.DCBindingContainer;
+import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichTable;
 
+import oracle.adf.view.rich.component.rich.output.RichOutputFormatted;
+import oracle.adf.view.rich.context.AdfFacesContext;
 import oracle.adf.view.rich.event.QueryEvent;
 import oracle.adf.view.rich.model.AttributeCriterion;
 import oracle.adf.view.rich.model.ConjunctionCriterion;
@@ -28,10 +34,12 @@ import oracle.jbo.uicli.binding.JUCtrlValueBindingRef;
 
 public class UsersBean {
     private RichTable userTable;
+    private String codeLabel;
+    private RichOutputFormatted code;
 
     public UsersBean() {
     }
-    
+
     public void setUserTable(RichTable userTable) {
         this.userTable = userTable;
     }
@@ -39,7 +47,7 @@ public class UsersBean {
     public RichTable getUserTable() {
         return userTable;
     }
-    
+
     public void resetTableFilter(ActionEvent actionEvent) {
         FilterableQueryDescriptor queryDescriptor = (FilterableQueryDescriptor) getUserTable().getFilterModel();
         if (queryDescriptor != null && queryDescriptor.getFilterConjunctionCriterion() != null) {
@@ -54,7 +62,7 @@ public class UsersBean {
             getUserTable().queueEvent(new QueryEvent(getUserTable(), queryDescriptor));
         }
     }
-    
+
     public BindingContainer getBindings() {
         return BindingContext.getCurrent().getCurrentBindingsEntry();
     }
@@ -84,21 +92,60 @@ public class UsersBean {
             selectItems.add(new SelectItem((String) rw.getAttribute("Login"), (String) rw.getAttribute("Login")));
         }
         return selectItems;
-        }
-    
+    }
+
     public void handleExceptionShowMessageInPopupDialog() {
         ControllerContext cc = ControllerContext.getInstance();
         Exception ex = cc.getCurrentViewPort().getExceptionData();
         String message = ex.getMessage();
-        
-        FacesContext fc = FacesContext.getCurrentInstance();
-        FacesMessage facesMessage =
-              new FacesMessage(FacesMessage.SEVERITY_ERROR, "UTF: " + message, null);
-            fc.addMessage(null, facesMessage);
 
-            cc.getCurrentRootViewPort().clearException();
-            fc.renderResponse();
+        FacesContext fc = FacesContext.getCurrentInstance();
+        FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "UTF: " + message, null);
+        fc.addMessage(null, facesMessage);
+
+        cc.getCurrentRootViewPort().clearException();
+        fc.renderResponse();
     }
 
-    
+
+    public void setCodeLabel(String codeLabel) {
+        this.codeLabel = codeLabel;
+    }
+
+    public String getCodeLabel() {
+        String rez = null;
+        DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = binding.findIteratorBinding("UsersView1Iterator");
+        if (it != null) {
+            Row curRow = it.getCurrentRow();
+            oracle.jbo.domain.Date dt = (oracle.jbo.domain.Date) curRow.getAttribute("DateBefore");
+            if (null == dt) {
+                return "Код не может быть рассчитан";
+            }
+
+        }
+
+        BindingContainer bd = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding oper = (OperationBinding) bd.getOperationBinding("generateCode");
+        rez = (String) oper.execute();
+        return rez;
+    }
+
+    public void setCode(RichOutputFormatted code) {
+        this.code = code;
+    }
+
+    public RichOutputFormatted getCode() {
+        return code;
+    }
+
+    public void onDateChange(ValueChangeEvent valueChangeEvent) {
+        AdfFacesContext.getCurrentInstance().addPartialTarget(getCode());
+        /* DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = binding.findIteratorBinding("UsersView1Iterator");
+        if (it != null) {
+            Row curRow = it.getCurrentRow();
+            curRow.setAttribute("DateBeforeAccept", 0);
+        } */
+    }
 }

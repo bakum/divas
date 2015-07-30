@@ -226,10 +226,6 @@
     Name="KontragSettingsRule1"
     ResId="ua.divas.model.KontragSettings_Rule_1"
     MethodName="validateKontragSettings1"/>
-  <validation:MethodValidationBean
-    Name="KontragSettingsRule2"
-    ResId="ua.divas.model.KontragSettings_Rule_2"
-    MethodName="validateKontragSettings2"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

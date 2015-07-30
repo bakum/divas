@@ -2,6 +2,10 @@ package ua.divas.bean.listener;
 
 import java.io.IOException;
 
+import java.security.MessageDigest;
+
+import java.security.NoSuchAlgorithmException;
+
 import java.util.List;
 
 import java.util.Map;
@@ -35,21 +39,58 @@ public class DivasListener implements PagePhaseListener {
         }
     }
 
+    private String getSessionUserEnabledToken() throws NoSuchAlgorithmException {
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
+        messageDigest.update("UserEnabled".getBytes());
+        return new String(messageDigest.digest());
+    }
+
+    private String getSessionUserEnabled(String enbl) throws NoSuchAlgorithmException {
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
+        messageDigest.update("true".getBytes());
+        String retTrue = new String(messageDigest.digest());
+
+        messageDigest.update("false".getBytes());
+        String retFalse = new String(messageDigest.digest());
+        if (enbl != null) {
+            if (enbl.equalsIgnoreCase(retTrue)) {
+                return "true";
+            } else if (enbl.equalsIgnoreCase(retFalse)) {
+                return "false";
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
     @Override
     public void beforePhase(PagePhaseEvent pagePhaseEvent) {
-        FacesContext ctx = FacesContext.getCurrentInstance();
-        HttpServletRequest request = (HttpServletRequest) ctx.getExternalContext().getRequest();
-        String requestUrl = request.getRequestURL().toString();
-        int ind = requestUrl.lastIndexOf("index");
-
-        ADFContext adfctx = ADFContext.getCurrent();
-        Map sessionScope = adfctx.getSessionScope();
-        String enbl = (String) sessionScope.get("UserEnabled");
-        System.out.println("PhaseListener Enbl user = " + enbl);
-        System.out.println("PhaseListener ind = " + ind);
-
         if (pagePhaseEvent.getPhaseId() == Lifecycle.PREPARE_RENDER_ID) {
             processErrors(pagePhaseEvent.getLifecycleContext());
+
+            FacesContext ctx = FacesContext.getCurrentInstance();
+            HttpServletRequest request = (HttpServletRequest) ctx.getExternalContext().getRequest();
+            String requestUrl = request.getRequestURL().toString();
+            int ind = requestUrl.lastIndexOf("index");
+
+            ADFContext adfctx = ADFContext.getCurrent();
+            Map sessionScope = adfctx.getSessionScope();
+            String enblEncrypt;
+            try {
+                enblEncrypt = (String) sessionScope.get(getSessionUserEnabledToken());
+            } catch (NoSuchAlgorithmException e) {
+                enblEncrypt = "null";
+            }
+            String enbl;
+            try {
+                enbl = getSessionUserEnabled(enblEncrypt);
+            } catch (NoSuchAlgorithmException e) {
+                enbl = null;
+            }
+            System.out.println("PhaseListener Enbl user = " + enbl);
+            System.out.println("PhaseListener ind = " + ind);
             if (enbl != null) {
                 if (enbl.contains("false")) {
                     if (ind > 0) {

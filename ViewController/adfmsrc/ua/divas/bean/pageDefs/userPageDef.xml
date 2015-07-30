@@ -96,6 +96,9 @@
           <Item Value="IsZamer"/>
           <Item Value="UDescription"/>
           <Item Value="IsActive"/>
+          <Item Value="DateBefore"/>
+          <Item Value="DateBeforeAccept"/>
+          <Item Value="UsrEnbl"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -333,5 +336,26 @@
         <Item Value="0"/>
       </ValueList>
     </button>
+    <attributeValues IterBinding="UsersView1Iterator" id="DateBefore">
+      <AttrNames>
+        <Item Value="DateBefore"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="UsersView1Iterator" id="DateBeforeAccept" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="DateBeforeAccept"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="1"/>
+        <Item Value="0"/>
+      </ValueList>
+    </button>
+    <methodAction id="generateCode" RequiresUpdateModel="true" Action="invokeMethod" MethodName="generateCode"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.UsersView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.generateCode_AppModuleDataControl_UsersView1_generateCode_result">
+      <NamedData NDName="u_login" NDValue="#{bindings.Login.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="p_date" NDValue="#{bindings.DateBefore.inputValue}" NDType="oracle.jbo.domain.Date"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

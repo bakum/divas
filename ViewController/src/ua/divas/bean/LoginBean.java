@@ -4,6 +4,10 @@ import java.io.IOException;
 
 import java.math.BigDecimal;
 
+import java.security.MessageDigest;
+
+import java.security.NoSuchAlgorithmException;
+
 import java.util.Map;
 
 import javax.faces.application.FacesMessage;
@@ -25,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 import oracle.adf.model.BindingContext;
 import oracle.adf.share.ADFContext;
 import oracle.adf.share.security.SecurityContext;
+import oracle.adf.view.rich.component.rich.RichPopup;
 import oracle.adf.view.rich.event.DialogEvent;
 
 import oracle.binding.BindingContainer;
@@ -44,8 +49,20 @@ public class LoginBean {
     public static String USERNAMETOKEN = "_____demoOnlyUsernameAttrString___________";
     public static String PASSWORDTOKEN = "_____demoOnlyPasswordAttrString___________";
     public static String ENABLEDTOKEN = "UserEnabled";
+    public static String VERSION = "Copyright by BMExpert 2015 v0.1.3";
+
+    private String versionStr;
+    private RichPopup popup;
 
     public LoginBean() {
+    }
+
+    public void setPopup(RichPopup popup) {
+        this.popup = popup;
+    }
+
+    public RichPopup getPopup() {
+        return popup;
     }
 
     public void setUsername(String _username) {
@@ -64,7 +81,7 @@ public class LoginBean {
         return _password;
     }
 
-    public void OnLoginAction(DialogEvent dialogEvent) throws IllegalUserException {
+    public void OnLoginAction(DialogEvent dialogEvent) throws IllegalUserException, NoSuchAlgorithmException {
         if (dialogEvent.getOutcome() == DialogEvent.Outcome.ok) {
             doLogin();
         } else {
@@ -72,7 +89,7 @@ public class LoginBean {
         }
     }
 
-    private String doLogin() throws IllegalUserException {
+    private String doLogin() throws IllegalUserException, NoSuchAlgorithmException {
         String un = _username;
         byte[] pw = _password.getBytes();
 
@@ -103,19 +120,24 @@ public class LoginBean {
 
             //save username and password. Note that in a real application this is
             //*NOT* what you should do unencrypted. Note that this is a demo
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
+            messageDigest.update(this.ENABLEDTOKEN.getBytes());
+            String encryptedEnabledToken = new String(messageDigest.digest());
 
+            messageDigest.update(enabled.toString().getBytes());
+            String encryptedEnabled = new String(messageDigest.digest());
             //Store username , password in session for later use
             //when connecting to Twitter
             ADFContext adfctx = ADFContext.getCurrent();
             Map sessionScope = adfctx.getSessionScope();
-            sessionScope.put(this.ENABLEDTOKEN, enabled.toString());
+            sessionScope.put(encryptedEnabledToken, encryptedEnabled);
             //sessionScope.put(this.USERNAMETOKEN, un);
             //sessionScope.put(this.PASSWORDTOKEN, new String(pw));
-             if (!enabled.booleanValue()) {
+            if (!enabled.booleanValue()) {
                 loginUrl = "/adfAuthentication?success_url=/faces/reg_code";
             } else {
                 loginUrl = "/adfAuthentication?success_url=/faces/index";
-            } 
+            }
 
             //String loginUrl = "/adfAuthentication?success_url=/faces/index";
             //String loginUrl = "/adfAuthentication?success_url=/faces" + ctx.getViewRoot().getViewId();
@@ -187,7 +209,39 @@ public class LoginBean {
         return roles[0];
     }
 
-    public void onLogin(ActionEvent actionEvent) throws IllegalUserException {
+    public void onLogin(ActionEvent actionEvent) throws IllegalUserException, NoSuchAlgorithmException {
         doLogin();
+    }
+
+    public void setVersionStr(String versionStr) {
+        this.versionStr = versionStr;
+    }
+
+    public String getVersionStr() {
+        return this.VERSION;
+    }
+
+    public void onCodeComplete(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            logout();
+        }
+    }
+
+    public void onComplete(ActionEvent actionEvent) {
+        BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = binding.getOperationBinding("acceptCode");
+        try {
+            ob.execute();
+            if (ob.getErrors().isEmpty()) {
+                getPopup().show(new RichPopup.PopupHints());
+            }
+        } catch (Exception e) {
+            FacesMessage msg =
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Unexpected error",
+                                 "Ошибка валидации кода (" + e.getLocalizedMessage() +
+                                 "), обратитесь к администратору");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            //e.printStackTrace();
+        }
     }
 }

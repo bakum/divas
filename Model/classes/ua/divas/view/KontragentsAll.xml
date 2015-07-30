@@ -69,7 +69,6 @@
        case
         when (is_group = 0
             and is_buyer = 0 
-            and is_measurer = 0 
             and is_supplier = 0)
         then 1
         else 0
@@ -199,7 +198,7 @@ FROM  KONTRAGENTS Kontragents]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="SUPP_SETTING"
     Expression="SUPP_SETTING"
-    SQLType="NUMERIC"/>
+    SQLType="INTEGER"/>
   <ViewLinkAccessor
     Name="KontragentsAll"
     ViewLink="ua.divas.view.KontragAllKontragFkLink"

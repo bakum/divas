@@ -19,6 +19,13 @@ public class UsersViewClient extends ViewUsageImpl implements UsersView {
     }
 
 
+    public void acceptCode(String u_login, String p_code) {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "acceptCode", new String[] {
+                                                                         "java.lang.String", "java.lang.String"
+        }, new Object[] { u_login, p_code });
+        return;
+    }
+
     public Boolean accessEnabled(String u_login) {
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "accessEnabled", new String[] {
                                                                          "java.lang.String" }, new Object[] {
@@ -42,9 +49,9 @@ public class UsersViewClient extends ViewUsageImpl implements UsersView {
         return;
     }
 
-    public String generateCode(String u_login, Date p_date) {
+    public String generateCode(String u_login, oracle.jbo.domain.Date p_date) {
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "generateCode", new String[] {
-                                                                         "java.lang.String", "java.util.Date"
+                                                                         "java.lang.String", "oracle.jbo.domain.Date"
         }, new Object[] { u_login, p_date });
         return (String) _ret;
     }

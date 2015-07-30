@@ -58,6 +58,7 @@ public class UsersViewRowImpl extends ViewRowImpl {
         IsActive,
         DateBefore,
         DateBeforeAccept,
+        UsrEnbl,
         OrdersView,
         UsersGroupsView,
         UserSettingsView,
@@ -112,6 +113,7 @@ public class UsersViewRowImpl extends ViewRowImpl {
     public static final int ISACTIVE = AttributesEnum.IsActive.index();
     public static final int DATEBEFORE = AttributesEnum.DateBefore.index();
     public static final int DATEBEFOREACCEPT = AttributesEnum.DateBeforeAccept.index();
+    public static final int USRENBL = AttributesEnum.UsrEnbl.index();
     public static final int ORDERSVIEW = AttributesEnum.OrdersView.index();
     public static final int USERSGROUPSVIEW = AttributesEnum.UsersGroupsView.index();
     public static final int USERSETTINGSVIEW = AttributesEnum.UserSettingsView.index();
@@ -379,6 +381,14 @@ public class UsersViewRowImpl extends ViewRowImpl {
      */
     public void setDateBeforeAccept(Integer value) {
         setAttributeInternal(DATEBEFOREACCEPT, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute UsrEnbl.
+     * @return the UsrEnbl
+     */
+    public Integer getUsrEnbl() {
+        return (Integer) getAttributeInternal(USRENBL);
     }
 
     /**

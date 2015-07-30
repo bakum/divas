@@ -46,9 +46,13 @@ public class UsersViewImpl extends DivasView implements UsersView {
         return new Boolean(false);
     }
     
-    public String generateCode(String u_login, Date p_date) {
-        String ret = (String) callStoredFunction(VARCHAR2, "UTILITY.access_enabled(?,?)", new Object[] { u_login, p_date });
+    public String generateCode(String u_login, oracle.jbo.domain.Date p_date) {
+        String ret = (String) callStoredFunction(VARCHAR2, "UTILITY.generate_code(?,?)", new Object[] { u_login, p_date });
         return ret;
+    }
+    
+    public void acceptCode(String u_login, String p_code) {
+        callStoredProcedure("UTILITY.accept_code(?,?)", new Object[] { u_login, p_code });
     }
 
     public void addUserToWls(String username, String psw, String desc) {
@@ -102,5 +106,7 @@ public class UsersViewImpl extends DivasView implements UsersView {
     public void setu_login(String value) {
         ensureVariableManager().setVariableValue("u_login", value);
     }
+
+
 }
 

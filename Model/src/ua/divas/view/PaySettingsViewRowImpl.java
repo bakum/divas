@@ -54,6 +54,7 @@ public class PaySettingsViewRowImpl extends ViewRowImpl {
         Summa,
         Editable,
         InProfit,
+        Comments,
         NachislSettingsView,
         KontragSettingsView,
         ProfitDistribTpView,
@@ -93,6 +94,7 @@ public class PaySettingsViewRowImpl extends ViewRowImpl {
     public static final int SUMMA = AttributesEnum.Summa.index();
     public static final int EDITABLE = AttributesEnum.Editable.index();
     public static final int INPROFIT = AttributesEnum.InProfit.index();
+    public static final int COMMENTS = AttributesEnum.Comments.index();
     public static final int NACHISLSETTINGSVIEW = AttributesEnum.NachislSettingsView.index();
     public static final int KONTRAGSETTINGSVIEW = AttributesEnum.KontragSettingsView.index();
     public static final int PROFITDISTRIBTPVIEW = AttributesEnum.ProfitDistribTpView.index();
@@ -270,6 +272,15 @@ public class PaySettingsViewRowImpl extends ViewRowImpl {
      */
     public void setInProfit(Integer value) {
         setAttributeInternal(INPROFIT, value);
+    }
+
+
+    /**
+     * Gets the attribute value for the calculated attribute Comments.
+     * @return the Comments
+     */
+    public String getComments() {
+        return (String) getAttributeInternal(COMMENTS);
     }
 
     /**

@@ -18,6 +18,8 @@ public interface UsersView extends ViewObject {
 
     Boolean accessEnabled(String u_login);
 
-    String generateCode(String u_login, Date p_date);
+    String generateCode(String u_login, oracle.jbo.domain.Date p_date);
+
+    void acceptCode(String u_login, String p_code);
 }
 

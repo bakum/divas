@@ -296,6 +296,13 @@
     Type="java.lang.Integer"
     ColumnType="NUMBER"
     TableName="USERS">
+    <Permission
+      target="ua.divas.model.Users.DateBefireAccept"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
     <Properties>
       <SchemaBasedProperties>
         <LABEL

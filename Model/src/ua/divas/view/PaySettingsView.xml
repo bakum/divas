@@ -67,7 +67,12 @@
         0 
     FROM 
         dual) editable,
-        PaySettings.IN_PROFIT
+        PaySettings.IN_PROFIT,
+        case
+        when in_profit = 1
+        then '(по прибыли)'
+        else ''
+        end as Comments
 FROM  PAY_SETTINGS PaySettings]]></SQLQuery>
   <EntityUsage
     Name="PaySettings"
@@ -150,6 +155,21 @@ FROM  PAY_SETTINGS PaySettings]]></SQLQuery>
     EntityAttrName="InProfit"
     EntityUsage="PaySettings"
     AliasName="IN_PROFIT"/>
+  <ViewAttribute
+    Name="Comments"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="12"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COMMENTS"
+    Expression="COMMENTS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewCriteria
     Name="FindByIdFix"
     ViewObjectName="ua.divas.view.PaySettingsView"

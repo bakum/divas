@@ -48,7 +48,12 @@
        Users.IS_ZAMER,
        Users.IS_ACTIVE,
        Users.DATE_BEFORE,
-       Users.DATE_BEFIRE_ACCEPT
+       Users.DATE_BEFIRE_ACCEPT,
+       case
+       when trunc(date_before) < trunc(sysdate)
+       then 0
+       else 1
+       end as Usr_Enbl
 FROM  USERS Users
 where
 upper(Users.ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))]]></SQLQuery>
@@ -164,6 +169,16 @@ upper(Users.ID) in (select upper(N) from table(cast(get_users(:u_name) as userTa
     EntityAttrName="DateBefireAccept"
     EntityUsage="Users"
     AliasName="DATE_BEFIRE_ACCEPT"/>
+  <ViewAttribute
+    Name="UsrEnbl"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="USR_ENBL"
+    Expression="USR_ENBL"
+    SQLType="NUMERIC"/>
   <ViewCriteria
     Name="UsersViewExists"
     ViewObjectName="ua.divas.view.UsersView"
@@ -357,7 +372,20 @@ upper(Users.ID) in (select upper(N) from table(cast(get_users(:u_name) as userTa
         Type="java.lang.String"/>
       <Parameter
         Name="p_date"
-        Type="java.util.Date"/>
+        Type="oracle.jbo.domain.Date"/>
+    </Method>
+    <Method
+      Name="acceptCode"
+      MethodName="acceptCode">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="u_login"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="p_code"
+        Type="java.lang.String"/>
     </Method>
   </ClientInterface>
 </ViewObject>

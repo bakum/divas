@@ -172,7 +172,7 @@
                                     </af:link>
                                     <af:spacer width="10" height="10" id="s7"/>
                                     <af:link id="l4" targetFrame="_blank"
-                                             destination="http://bmexp.com" text="Copyright by BMExpert 2015 v0.1.3"/>
+                                             destination="http://bmexp.com" text="#{login.versionStr}"/>
                                     <af:popup childCreation="deferred" autoCancel="disabled" id="pLogin">
                                         <af:dialog id="d2" title="Авторизация" dialogListener="#{login.OnLoginAction}">
                                             <f:facet name="buttonBar"/>
