@@ -119,7 +119,8 @@
         Kontragents.IS_SUPPLIER, 
         Kontragents.IS_BUYER, 
         Kontragents.IS_MEASURER, 
-        Kontragents.USER_ID 
+        Kontragents.USER_ID,
+        Kontragents.PHOTO
 FROM  KONTRAGENTS Kontragents 
 where 
 upper(Kontragents.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable))) 
@@ -301,6 +302,13 @@ order by Kontragents.FULLNAME]]></SQLQuery>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="Photo"
+    IsQueriable="false"
+    PrecisionRule="true"
+    EntityAttrName="Photo"
+    EntityUsage="Kontragents"
+    AliasName="PHOTO"/>
   <ViewAttribute
     Name="TotalSumm"
     IsUpdateable="false"

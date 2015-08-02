@@ -36,10 +36,10 @@ public class KontragSettingsImpl extends DivasEntityNoDelete {
         DivisionId,
         Summa,
         PaySettings,
-        Divisions,
         BaseOfNachisl,
         Kontragents;
-        private static AttributesEnum[] vals = null;
+        static AttributesEnum[] vals = null;
+        ;
         private static final int firstIndex = 0;
 
         public int index() {
@@ -71,7 +71,6 @@ public class KontragSettingsImpl extends DivasEntityNoDelete {
     public static final int DIVISIONID = AttributesEnum.DivisionId.index();
     public static final int SUMMA = AttributesEnum.Summa.index();
     public static final int PAYSETTINGS = AttributesEnum.PaySettings.index();
-    public static final int DIVISIONS = AttributesEnum.Divisions.index();
     public static final int BASEOFNACHISL = AttributesEnum.BaseOfNachisl.index();
     public static final int KONTRAGENTS = AttributesEnum.Kontragents.index();
 
@@ -215,19 +214,6 @@ public class KontragSettingsImpl extends DivasEntityNoDelete {
         setAttributeInternal(PAYSETTINGS, value);
     }
 
-    /**
-     * @return the associated entity DivisionsImpl.
-     */
-    public DivisionsImpl getDivisions() {
-        return (DivisionsImpl) getAttributeInternal(DIVISIONS);
-    }
-
-    /**
-     * Sets <code>value</code> as the associated entity DivisionsImpl.
-     */
-    public void setDivisions(DivisionsImpl value) {
-        setAttributeInternal(DIVISIONS, value);
-    }
 
     /**
      * @return the associated entity oracle.jbo.server.EntityImpl.
@@ -256,6 +242,7 @@ public class KontragSettingsImpl extends DivasEntityNoDelete {
     public void setKontragents(KontragentsImpl value) {
         setAttributeInternal(KONTRAGENTS, value);
     }
+
 
     /**
      * @param id key constituent
@@ -289,7 +276,10 @@ public class KontragSettingsImpl extends DivasEntityNoDelete {
         String bId = getBaseId();
         String bName = getBaseNachislName(bId);
         String div = getDivisionId();
-        if (!bName.equals("ORDER") && div == null) {
+        if (bName.equals("ORDER")) {
+            return true;
+        }
+        if (bName.equals("DIV") && div == null) {
             return false;
         }
         return true;

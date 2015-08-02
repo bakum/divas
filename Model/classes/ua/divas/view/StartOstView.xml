@@ -204,6 +204,10 @@ FROM  START_OST StartOst]]></SQLQuery>
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="choice"/>
+        <LABEL
+          ResId="ua.divas.view.StartOstView.DivisionId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.StartOstView.DivisionId_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -220,6 +224,10 @@ FROM  START_OST StartOst]]></SQLQuery>
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="choice"/>
+        <LABEL
+          ResId="ua.divas.view.StartOstView.UserId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.StartOstView.UserId_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

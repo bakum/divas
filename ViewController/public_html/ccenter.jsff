@@ -13,7 +13,7 @@
                             <af:showDetailItem text="Клиенты" id="sdi1" stretchChildren="first">
                                 <af:panelStretchLayout id="psl1" bottomHeight="51px" dimensionsFrom="children">
                                     <f:facet name="center">
-                                        <af:panelBox id="pb1" type="flow" text="Абоненты">
+                                        <af:panelBox id="pb1" type="flow" text="Клиенты">
                                             <f:facet name="toolbar">
                                                 <af:toolbar id="t2">
                                                     <af:link text="Контрагенты" id="l2" action="toother"

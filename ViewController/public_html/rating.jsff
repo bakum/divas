@@ -38,15 +38,15 @@
                               rowSelection="single" fetchSize="#{bindings.VwRating1.rangeSize}" id="t1"
                               scrollPolicy="page" partialTriggers="::b1">
                         <af:column sortProperty="#{bindings.VwRating1.hints.Place.name}" sortable="true"
-                                   headerText="#{bindings.VwRating1.hints.Place.label}" id="c1">
+                                   headerText="#{bindings.VwRating1.hints.Place.label}" id="c1" align="center">
                             <af:outputText value="#{row.Place}" shortDesc="#{bindings.VwRating1.hints.Place.tooltip}"
-                                           id="ot1" inlineStyle="font-weight:bold;">
+                                           id="ot1" inlineStyle="font-weight:bold; font-size:larger;">
                                 <af:convertNumber groupingUsed="false"
                                                   pattern="#{bindings.VwRating1.hints.Place.format}"/>
                             </af:outputText>
                         </af:column>
                         <af:column sortProperty="#{bindings.VwRating1.hints.DivisionId.name}" sortable="true"
-                                   headerText="#{bindings.VwRating1.hints.DivisionId.label}" id="c2">
+                                   headerText="#{bindings.VwRating1.hints.DivisionId.label}" id="c2" align="center">
                             <af:selectOneChoice value="#{row.bindings.DivisionId.inputValue}"
                                                 label="#{row.bindings.DivisionId.label}"
                                                 required="#{bindings.VwRating1.hints.DivisionId.mandatory}"

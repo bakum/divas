@@ -22,8 +22,10 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import com.itextpdf.text.pdf.RandomAccessFileOrArray;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 
 import java.math.BigDecimal;
@@ -31,8 +33,12 @@ import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import java.sql.SQLException;
+
 import java.util.Iterator;
 import java.util.List;
+
+import java.util.StringTokenizer;
 
 import javax.el.ELContext;
 import javax.el.ExpressionFactory;
@@ -52,6 +58,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
+import oracle.adf.model.binding.DCDataControl;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichTreeTable;
 
@@ -66,6 +73,9 @@ import oracle.binding.OperationBinding;
 
 import oracle.jbo.Row;
 import oracle.jbo.RowNotFoundException;
+import oracle.jbo.ViewObject;
+import oracle.jbo.domain.BlobDomain;
+import oracle.jbo.server.ViewObjectImpl;
 import oracle.jbo.uicli.binding.JUCtrlHierBinding;
 import oracle.jbo.uicli.binding.JUCtrlHierNodeBinding;
 import oracle.jbo.uicli.binding.JUIteratorBinding;
@@ -73,10 +83,13 @@ import oracle.jbo.uicli.binding.JUIteratorBinding;
 import org.apache.myfaces.trinidad.event.SelectionEvent;
 import org.apache.myfaces.trinidad.model.CollectionModel;
 import org.apache.myfaces.trinidad.model.RowKeySet;
+import org.apache.myfaces.trinidad.model.UploadedFile;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
+import ua.divas.module.AppModuleImpl;
 
 public class KontragDirBean {
     private RichTreeTable treeTable;
@@ -418,15 +431,15 @@ public class KontragDirBean {
             System.out.println("contextRootDivas: " + contextRootDivas);
             String fontUrlDivas = requestUrlDivas.substring(0, requestUrlDivas.lastIndexOf(contextRootDivas))+contextRootDivas+"/fonts/times.ttf";
             System.out.println("fontUrlDivas: " + fontUrlDivas); */
-            
-            
-            HttpServletRequest request =
-                        (HttpServletRequest)facesContext.getExternalContext().getRequest();
+
+
+            HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
             String requestUrl = request.getRequestURL().toString();
             System.out.println("requestUrl: " + requestUrl);
             String contextRoot = facesContext.getExternalContext().getRequestContextPath();
             System.out.println("contextRoot: " + contextRoot);
-            String fontUrl = requestUrl.substring(0, requestUrl.lastIndexOf(contextRoot))+contextRoot+"/fonts/times.ttf";
+            String fontUrl =
+                requestUrl.substring(0, requestUrl.lastIndexOf(contextRoot)) + contextRoot + "/fonts/times.ttf";
             //String rqPath =
             //    ((HttpServletRequest) facesContext.getExternalContext().getRequest()).getRealPath("/fonts/times.ttf");
             //System.out.println("path: " + rqPath);
@@ -512,7 +525,7 @@ public class KontragDirBean {
         }
 
     }
-    
+
     public String getValueFrmExpression(String data) {
         FacesContext fc = FacesContext.getCurrentInstance();
         Application app = fc.getApplication();
@@ -526,7 +539,7 @@ public class KontragDirBean {
         }
         return Message;
     }
-    
+
     public void onPaySettChange(ValueChangeEvent valueChangeEvent) {
         valueChangeEvent.getComponent().processUpdates(FacesContext.getCurrentInstance());
         //System.out.println(vce.getNewValue());
@@ -577,6 +590,60 @@ public class KontragDirBean {
                     ob.execute();
                     refresh();
                 }
+            }
+        }
+    }
+
+    private BlobDomain createBlobDomain(UploadedFile file) {
+
+        InputStream in = null;
+        BlobDomain blobDomain = null;
+        OutputStream out = null;
+
+        try {
+            in = file.getInputStream();
+
+            blobDomain = new BlobDomain();
+            out = blobDomain.getBinaryOutputStream();
+            byte[] buffer = new byte[8192];
+            int bytesRead = 0;
+
+            while ((bytesRead = in.read(buffer, 0, 8192)) != -1) {
+                out.write(buffer, 0, bytesRead);
+            }
+
+            in.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.fillInStackTrace();
+        }
+
+        return blobDomain;
+    }
+
+    public void parseFile(UploadedFile file) {
+       
+        DCBindingContainer bindings = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding dcIteratorBindings = bindings.findIteratorBinding("KontragentsRep1Iterator");
+        Row rw = dcIteratorBindings.getCurrentRow();
+        rw.setAttribute("Photo", createBlobDomain(file));
+
+    }
+
+    public void onFileDownload(ValueChangeEvent valueChangeEvent) {
+        UploadedFile file = (UploadedFile) valueChangeEvent.getNewValue();
+        if (file.getContentType().equalsIgnoreCase("image/jpeg") ||
+            file.getContentType().equalsIgnoreCase("image/png") ||
+            file.getContentType().equalsIgnoreCase("image/gif")) {
+            try {
+
+                parseFile(file);
+                //AdfFacesContext.getCurrentInstance().addPartialTarget(staffTable);
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage().toString());
             }
         }
     }

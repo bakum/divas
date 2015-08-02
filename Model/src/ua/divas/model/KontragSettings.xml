@@ -144,13 +144,6 @@
     Type="ua.divas.model.PaySettingsImpl"
     IsUpdateable="true"/>
   <AccessorAttribute
-    Name="Divisions"
-    Association="ua.divas.model.KontragSettingsFk4Assoc"
-    AssociationEnd="ua.divas.model.KontragSettingsFk4Assoc.Divisions"
-    AssociationOtherEnd="ua.divas.model.KontragSettingsFk4Assoc.KontragSettings"
-    Type="ua.divas.model.DivisionsImpl"
-    IsUpdateable="true"/>
-  <AccessorAttribute
     Name="BaseOfNachisl"
     Association="ua.divas.model.KontragSettingsFk3Assoc"
     AssociationEnd="ua.divas.model.KontragSettingsFk3Assoc.BaseOfNachisl"

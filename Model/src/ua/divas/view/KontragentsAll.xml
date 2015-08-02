@@ -9,9 +9,11 @@
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
-  OrderBy="FULLNAME">
+  OrderBy="FULLNAME"
+  ComponentClass="ua.divas.view.KontragentsAllImpl">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
   <Properties>
     <SchemaBasedProperties>
@@ -65,6 +67,7 @@
        Kontragents.PREDEFINED, 
        Kontragents.UR_FIZ, 
        Kontragents.USER_ID, 
+       Kontragents.PHOTO,
        Kontragents.VERSION,
        case
         when (is_group = 0
@@ -182,7 +185,16 @@ FROM  KONTRAGENTS Kontragents]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="UserId"
     EntityUsage="Kontragents"
-    AliasName="USER_ID"/>
+    AliasName="USER_ID">
+    <TransientExpression><![CDATA[viewObject.getSessionUserId()]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Photo"
+    IsQueriable="false"
+    PrecisionRule="true"
+    EntityAttrName="Photo"
+    EntityUsage="Kontragents"
+    AliasName="PHOTO"/>
   <ViewAttribute
     Name="Version"
     PrecisionRule="true"

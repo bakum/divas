@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import oracle.jbo.AttributeList;
 import oracle.jbo.RowIterator;
 import oracle.jbo.RowSet;
+import oracle.jbo.domain.BlobDomain;
 import oracle.jbo.domain.Number;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.ViewRowImpl;
@@ -61,6 +62,7 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
         IsBuyer,
         IsMeasurer,
         UserId,
+        Photo,
         TotalSumm,
         TotalOplat,
         DebtBuyer,
@@ -128,6 +130,7 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
     public static final int ISBUYER = AttributesEnum.IsBuyer.index();
     public static final int ISMEASURER = AttributesEnum.IsMeasurer.index();
     public static final int USERID = AttributesEnum.UserId.index();
+    public static final int PHOTO = AttributesEnum.Photo.index();
     public static final int TOTALSUMM = AttributesEnum.TotalSumm.index();
     public static final int TOTALOPLAT = AttributesEnum.TotalOplat.index();
     public static final int DEBTBUYER = AttributesEnum.DebtBuyer.index();
@@ -458,6 +461,22 @@ public class KontragentsViewRowImpl extends ViewRowImpl {
      */
     public Number getCountContacts() {
         return (Number) getAttributeInternal(COUNTCONTACTS);
+    }
+
+    /**
+     * Gets the attribute value for PHOTO using the alias name Photo.
+     * @return the PHOTO
+     */
+    public BlobDomain getPhoto() {
+        return (BlobDomain) getAttributeInternal(PHOTO);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for PHOTO using the alias name Photo.
+     * @param value value to set the PHOTO
+     */
+    public void setPhoto(BlobDomain value) {
+        setAttributeInternal(PHOTO, value);
     }
 
     /**

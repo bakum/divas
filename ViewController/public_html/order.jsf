@@ -42,26 +42,68 @@
                                                 <f:validator binding="#{bindings.StatusId.validator}"/>
                                             </af:selectOneChoice>
                                         </af:panelGroupLayout>
-                                        <af:inputDate value="#{bindings.DatComplete.inputValue}"
-                                                      label="#{bindings.DatComplete.hints.label}"
-                                                      required="#{bindings.DatComplete.hints.mandatory}"
-                                                      columns="#{bindings.DatComplete.hints.displayWidth}"
-                                                      shortDesc="#{bindings.DatComplete.hints.tooltip}" id="id2"
-                                                      labelStyle="font-weight: bold;"
-                                                      readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
-                                            <f:validator binding="#{bindings.DatComplete.validator}"/>
-                                            <af:convertDateTime pattern="#{bindings.DatComplete.format}"/>
-                                        </af:inputDate>
-                                        <af:inputDate value="#{bindings.DatCompleteFact.inputValue}"
-                                                      label="#{bindings.DatCompleteFact.hints.label}"
-                                                      required="#{bindings.DatCompleteFact.hints.mandatory}"
-                                                      columns="#{bindings.DatCompleteFact.hints.displayWidth}"
-                                                      shortDesc="#{bindings.DatCompleteFact.hints.tooltip}" id="id8"
-                                                      labelStyle="font-weight: bold;"
-                                                      readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
-                                            <f:validator binding="#{bindings.DatCompleteFact.validator}"/>
-                                            <af:convertDateTime pattern="#{bindings.DatCompleteFact.format}"/>
-                                        </af:inputDate>
+                                        <af:panelGroupLayout id="pgl19" layout="horizontal">
+                                            <af:panelGroupLayout id="pgl18">
+                                                <af:inputDate value="#{bindings.DatComplete.inputValue}"
+                                                              label="#{bindings.DatComplete.hints.label}"
+                                                              required="#{bindings.DatComplete.hints.mandatory}"
+                                                              columns="#{bindings.DatComplete.hints.displayWidth}"
+                                                              shortDesc="#{bindings.DatComplete.hints.tooltip}" id="id2"
+                                                              labelStyle="font-weight: bold;"
+                                                              readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
+                                                    <f:validator binding="#{bindings.DatComplete.validator}"/>
+                                                    <af:convertDateTime pattern="#{bindings.DatComplete.format}"/>
+                                                </af:inputDate>
+                                                <af:inputDate value="#{bindings.DatCompleteFact.inputValue}"
+                                                              label="#{bindings.DatCompleteFact.hints.label}"
+                                                              required="#{bindings.DatCompleteFact.hints.mandatory}"
+                                                              columns="#{bindings.DatCompleteFact.hints.displayWidth}"
+                                                              shortDesc="#{bindings.DatCompleteFact.hints.tooltip}"
+                                                              id="id8" labelStyle="font-weight: bold;"
+                                                              readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
+                                                    <f:validator binding="#{bindings.DatCompleteFact.validator}"/>
+                                                    <af:convertDateTime pattern="#{bindings.DatCompleteFact.format}"/>
+                                                </af:inputDate>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="50" height="10" id="s6"/>
+                                            <af:panelGroupLayout id="pgl20">
+                                                <af:group id="g1" title="Детали заказа">
+                                                    <af:panelLabelAndMessage label="#{bindings.TotalSumOplaty.hints.label}"
+                                                                             id="plam15"
+                                                                             labelStyle="color:Blue;font-weight: bold;">
+                                                        <af:outputText value="#{bindings.TotalSumOplaty.inputValue}"
+                                                                       shortDesc="#{bindings.TotalSumOplaty.hints.tooltip}"
+                                                                       id="ot9"
+                                                                       inlineStyle="color:Blue;font-size:larger;">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.TotalSumOplaty.format}"/>
+                                                        </af:outputText>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.TotalSumm.hints.label}"
+                                                                             id="plam16"
+                                                                             labelStyle="color:Blue;font-weight: bold;">
+                                                        <af:outputText value="#{bindings.TotalSumm.inputValue}"
+                                                                       shortDesc="#{bindings.TotalSumm.hints.tooltip}"
+                                                                       id="ot10"
+                                                                       inlineStyle="color:Blue;font-size:larger;">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.TotalSumm.format}"/>
+                                                        </af:outputText>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.KoefOpl.hints.label}"
+                                                                             id="plam17"
+                                                                             labelStyle="color:Blue;font-weight: bold;">
+                                                        <af:outputText value="#{bindings.KoefOpl.inputValue}%"
+                                                                       shortDesc="#{bindings.KoefOpl.hints.tooltip}"
+                                                                       id="ot11"
+                                                                       inlineStyle="color:Blue;font-size:larger;">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.KoefOpl.format}"/>
+                                                        </af:outputText>
+                                                    </af:panelLabelAndMessage>
+                                                </af:group>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
                                     </af:panelLabelAndMessage>
                                     <af:separator id="s1"/>
                                     <af:panelLabelAndMessage label="Реквизиты" id="plam2">
@@ -425,7 +467,7 @@
                                             </af:selectOneChoice>
                                         </af:panelGroupLayout>
                                     </af:panelLabelAndMessage>
-                                    <af:panelLabelAndMessage label="Подразделение" id="plam4">
+                                    <af:panelLabelAndMessage id="plam4">
                                         <af:panelGroupLayout id="pgl5" layout="horizontal">
                                             <af:selectOneChoice value="#{bindings.DivisionId.inputValue}"
                                                                 label="#{bindings.DivisionId.label}"
@@ -472,11 +514,13 @@
                                                   columns="#{bindings.Discription.hints.displayWidth}"
                                                   maximumLength="#{bindings.Discription.hints.precision}"
                                                   shortDesc="#{bindings.Discription.hints.tooltip}" id="it4" rows="4"
-                                                  readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
+                                                  readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
+                                                  labelStyle="font-weight: bold;">
                                         <f:validator binding="#{bindings.Discription.validator}"/>
                                     </af:inputText>
                                     <af:separator id="s3"/>
-                                    <af:panelLabelAndMessage id="plam5" label="#{bindings.ActivitiesId.label}">
+                                    <af:panelLabelAndMessage id="plam5" label="#{bindings.ActivitiesId.label}"
+                                                             labelStyle="font-weight: bold;">
                                         <af:panelGroupLayout id="pgl7" layout="horizontal">
                                             <af:selectOneChoice value="#{bindings.ActivitiesId.inputValue}"
                                                                 required="#{bindings.ActivitiesId.hints.mandatory}"

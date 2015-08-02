@@ -198,5 +198,10 @@
                   ReturnName="data.AppModuleDataControl.methodResults.retrieveSumm_AppModuleDataControl_NachislSettingsView1_retrieveSumm_result">
       <NamedData NDName="pId" NDType="java.lang.String"/>
     </methodAction>
+    <attributeValues IterBinding="KontragentsAll1Iterator" id="Photo">
+      <AttrNames>
+        <Item Value="Photo"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

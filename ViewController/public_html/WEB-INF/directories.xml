@@ -27,6 +27,11 @@
       <managed-bean-class>ua.divas.bean.KontragDirBean</managed-bean-class>
       <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean id="__15">
+      <managed-bean-name>net</managed-bean-name>
+      <managed-bean-class>ua.divas.bean.NetBeans</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
     <view id="director">
       <page>/director.jsff</page>
     </view>

@@ -79,6 +79,7 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         TotalSumOplaty,
         TotalSummUslugiAdd,
         TotalSumm,
+        KoefOpl,
         OrdersTpUslugiView,
         OrdersTpOplatyView,
         OrdersTpRashodyView,
@@ -162,6 +163,7 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     public static final int TOTALSUMOPLATY = AttributesEnum.TotalSumOplaty.index();
     public static final int TOTALSUMMUSLUGIADD = AttributesEnum.TotalSummUslugiAdd.index();
     public static final int TOTALSUMM = AttributesEnum.TotalSumm.index();
+    public static final int KOEFOPL = AttributesEnum.KoefOpl.index();
     public static final int ORDERSTPUSLUGIVIEW = AttributesEnum.OrdersTpUslugiView.index();
     public static final int ORDERSTPOPLATYVIEW = AttributesEnum.OrdersTpOplatyView.index();
     public static final int ORDERSTPRASHODYVIEW = AttributesEnum.OrdersTpRashodyView.index();
@@ -544,6 +546,14 @@ public class OrdersViewRowImpl extends ViewRowImpl {
      */
     public Number getTotalSumm() {
         return (Number) getAttributeInternal(TOTALSUMM);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute KoefOpl.
+     * @return the KoefOpl
+     */
+    public Number getKoefOpl() {
+        return (Number) getAttributeInternal(KOEFOPL);
     }
 
     /**

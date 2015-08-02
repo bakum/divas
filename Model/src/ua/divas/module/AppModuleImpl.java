@@ -28,6 +28,8 @@ import ua.divas.view.GroupmembersViewImpl;
 import ua.divas.view.KassaSettingsViewImpl;
 import ua.divas.view.KassaVOImpl;
 import ua.divas.view.KontragOtherViewImpl;
+import ua.divas.view.KontragSettingsViewImpl;
+import ua.divas.view.KontragentsAllImpl;
 import ua.divas.view.KontragentsBuyerImpl;
 import ua.divas.view.KontragentsInOrdersViewImpl;
 import ua.divas.view.KontragentsMeasurerImpl;
@@ -3738,8 +3740,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for KontragSettingsView1.
      * @return KontragSettingsView1
      */
-    public ViewObjectImpl getKontragSettingsView1() {
-        return (ViewObjectImpl) findViewObject("KontragSettingsView1");
+    public KontragSettingsViewImpl getKontragSettingsView1() {
+        return (KontragSettingsViewImpl) findViewObject("KontragSettingsView1");
     }
 
     /**
@@ -4026,16 +4028,16 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for KontragentsAll1.
      * @return KontragentsAll1
      */
-    public ViewObjectImpl getKontragentsAll1() {
-        return (ViewObjectImpl) findViewObject("KontragentsAll1");
+    public KontragentsAllImpl getKontragentsAll1() {
+        return (KontragentsAllImpl) findViewObject("KontragentsAll1");
     }
 
     /**
      * Container's getter for KontragentsAll2.
      * @return KontragentsAll2
      */
-    public ViewObjectImpl getKontragentsAll2() {
-        return (ViewObjectImpl) findViewObject("KontragentsAll2");
+    public KontragentsAllImpl getKontragentsAll2() {
+        return (KontragentsAllImpl) findViewObject("KontragentsAll2");
     }
 
     /**
@@ -4050,8 +4052,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for KontragentsAll3.
      * @return KontragentsAll3
      */
-    public ViewObjectImpl getKontragentsAll3() {
-        return (ViewObjectImpl) findViewObject("KontragentsAll3");
+    public KontragentsAllImpl getKontragentsAll3() {
+        return (KontragentsAllImpl) findViewObject("KontragentsAll3");
     }
 
     /**
@@ -4114,8 +4116,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for KontragSettingsView2.
      * @return KontragSettingsView2
      */
-    public ViewObjectImpl getKontragSettingsView2() {
-        return (ViewObjectImpl) findViewObject("KontragSettingsView2");
+    public KontragSettingsViewImpl getKontragSettingsView2() {
+        return (KontragSettingsViewImpl) findViewObject("KontragSettingsView2");
     }
 
     /**
@@ -4124,6 +4126,54 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getKontragentsAllKontragSettingsFkLink1() {
         return (ViewLinkImpl) findViewLink("KontragentsAllKontragSettingsFkLink1");
+    }
+
+    /**
+     * Container's getter for NetGroupView1.
+     * @return NetGroupView1
+     */
+    public ViewObjectImpl getNetGroupView1() {
+        return (ViewObjectImpl) findViewObject("NetGroupView1");
+    }
+
+    /**
+     * Container's getter for NetDetailView1.
+     * @return NetDetailView1
+     */
+    public ViewObjectImpl getNetDetailView1() {
+        return (ViewObjectImpl) findViewObject("NetDetailView1");
+    }
+
+    /**
+     * Container's getter for NetDetailView2.
+     * @return NetDetailView2
+     */
+    public ViewObjectImpl getNetDetailView2() {
+        return (ViewObjectImpl) findViewObject("NetDetailView2");
+    }
+
+    /**
+     * Container's getter for NetDetaiDetailFkLink1.
+     * @return NetDetaiDetailFkLink1
+     */
+    public ViewLinkImpl getNetDetaiDetailFkLink1() {
+        return (ViewLinkImpl) findViewLink("NetDetaiDetailFkLink1");
+    }
+
+    /**
+     * Container's getter for NetDetailView3.
+     * @return NetDetailView3
+     */
+    public ViewObjectImpl getNetDetailView3() {
+        return (ViewObjectImpl) findViewObject("NetDetailView3");
+    }
+
+    /**
+     * Container's getter for NetGroupDetailFkLink1.
+     * @return NetGroupDetailFkLink1
+     */
+    public ViewLinkImpl getNetGroupDetailFkLink1() {
+        return (ViewLinkImpl) findViewLink("NetGroupDetailFkLink1");
     }
 }
 

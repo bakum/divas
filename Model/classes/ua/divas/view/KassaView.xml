@@ -136,6 +136,10 @@ where deleted = 0]]></SQLQuery>
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="choice"/>
+        <LABEL
+          ResId="ua.divas.view.KassaView.DivisionId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.KassaView.DivisionId_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -299,4 +303,8 @@ where deleted = 0]]></SQLQuery>
     ViewLink="ua.divas.view.OrderTpOplatyKassaFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="ua.divas.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>

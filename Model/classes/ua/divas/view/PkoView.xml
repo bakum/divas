@@ -385,6 +385,10 @@ upper(Pko.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as use
             <SchemaBasedProperties>
                 <CONTROLTYPE
                   Value="choice"/>
+                <LABEL
+                    ResId="ua.divas.view.PkoView.DivisionId_LABEL"/>
+                <TOOLTIP
+                    ResId="ua.divas.view.PkoView.DivisionId_TOOLTIP"/>
             </SchemaBasedProperties>
         </Properties>
     </ViewAttribute>
@@ -401,6 +405,10 @@ upper(Pko.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as use
             <SchemaBasedProperties>
                 <CONTROLTYPE
                   Value="choice"/>
+                <LABEL
+                    ResId="ua.divas.view.PkoView.UserId_LABEL"/>
+                <TOOLTIP
+                    ResId="ua.divas.view.PkoView.UserId_TOOLTIP"/>
             </SchemaBasedProperties>
         </Properties>
     </ViewAttribute>

@@ -197,6 +197,10 @@ FROM  PROFIT_DISTRIB ProfitDistrib]]></SQLQuery>
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="choice"/>
+        <LABEL
+          ResId="ua.divas.view.ProfitDistribView.DivisionId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.ProfitDistribView.DivisionId_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -213,6 +217,10 @@ FROM  PROFIT_DISTRIB ProfitDistrib]]></SQLQuery>
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="choice"/>
+        <LABEL
+          ResId="ua.divas.view.ProfitDistribView.UserId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.ProfitDistribView.UserId_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

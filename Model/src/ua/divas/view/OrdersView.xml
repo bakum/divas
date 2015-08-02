@@ -469,6 +469,8 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
             <SchemaBasedProperties>
                 <CONTROLTYPE
                   Value="input_text_lov"/>
+                <LABEL
+                    ResId="ua.divas.view.OrdersView.KontragId_LABEL"/>
             </SchemaBasedProperties>
         </Properties>
         <Dependencies>
@@ -494,12 +496,12 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
             <SchemaBasedProperties>
                 <DISPLAYWIDTH
                   Value="30"/>
+                <CONTROLTYPE
+                    Value="input_text_lov"/>
                 <LABEL
                   ResId="ua.divas.view.OrdersView.Kontragname_LABEL"/>
                 <TOOLTIP
                   ResId="ua.divas.view.OrdersView.Kontragname_TOOLTIP"/>
-                <CONTROLTYPE
-                  Value="input_text_lov"/>
             </SchemaBasedProperties>
         </Properties>
     </ViewAttribute>
@@ -552,6 +554,10 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
             <SchemaBasedProperties>
                 <CONTROLTYPE
                   Value="choice"/>
+                <LABEL
+                    ResId="ua.divas.view.OrdersView.DivisionId_LABEL"/>
+                <TOOLTIP
+                    ResId="ua.divas.view.OrdersView.DivisionId_TOOLTIP"/>
             </SchemaBasedProperties>
         </Properties>
     </ViewAttribute>
@@ -568,6 +574,10 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
             <SchemaBasedProperties>
                 <CONTROLTYPE
                   Value="choice"/>
+                <LABEL
+                    ResId="ua.divas.view.OrdersView.UserId_LABEL"/>
+                <TOOLTIP
+                    ResId="ua.divas.view.OrdersView.UserId_TOOLTIP"/>
             </SchemaBasedProperties>
         </Properties>
     </ViewAttribute>
@@ -940,10 +950,10 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
         <TransientExpression><![CDATA[(TotalSumUslugi != null ? TotalSumUslugi : 0)+(TotalSummUslugiAdd != null ? TotalSummUslugiAdd : 0)]]></TransientExpression>
         <Properties>
             <SchemaBasedProperties>
+                <TOOLTIP
+                    ResId="ua.divas.view.OrdersView.TotalSumm_TOOLTIP"/>
                 <LABEL
                   ResId="ua.divas.view.OrdersView.TotalSumm_LABEL"/>
-                <TOOLTIP
-                  ResId="ua.divas.view.OrdersView.TotalSumm_TOOLTIP"/>
             </SchemaBasedProperties>
         </Properties>
         <Dependencies>
@@ -952,6 +962,28 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
             <Item
                 Value="TotalSummUslugiAdd"/>
         </Dependencies>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="KoefOpl"
+        IsUpdateable="false"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="oracle.jbo.domain.Number"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        IsQueriable="false">
+        <RecalcCondition><![CDATA[true]]></RecalcCondition>
+        <TransientExpression><![CDATA[(TotalSumm == null ? 0 : TotalSumOplaty == null ? 0 : TotalSumOplaty*100/TotalSumm)]]></TransientExpression>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="ua.divas.view.OrdersView.KoefOpl_LABEL"/>
+                <TOOLTIP
+                    ResId="ua.divas.view.OrdersView.KoefOpl_TOOLTIP"/>
+            </SchemaBasedProperties>
+        </Properties>
     </ViewAttribute>
     <ViewCriteria
       Name="OrdersViewCriteria"

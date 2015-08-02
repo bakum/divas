@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
-                xmlns:f="http://java.sun.com/jsf/core">
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
     <af:panelGridLayout id="pgl1">
         <af:gridRow height="100%" id="gr1">
             <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
@@ -502,11 +502,11 @@
                                             </af:table>
                                         </af:panelBox>
                                     </af:showDetailItem>
-                                    <af:showDetailItem text="Подразделения" id="sdi4" stretchChildren="first">
+                                    <af:showDetailItem text="Филиалы" id="sdi4" stretchChildren="first">
                                         <af:panelSplitter id="ps1" splitterPosition="713" positionedFromEnd="true"
                                                           collapsed="#{bindings.IsGroup.inputValue == 1 ? true : false}">
                                             <f:facet name="first">
-                                                <af:panelBox text="Подразделения" id="pb5"
+                                                <af:panelBox text="Филиалы" id="pb5"
                                                              icon="/img/chart_organisation.png">
                                                     <f:facet name="toolbar">
                                                         <af:toolbar id="t8">
@@ -525,7 +525,8 @@
                                                                   selectionListener="#{division.onTreeSelect}" id="tt1"
                                                                   binding="#{division.treeTable}"
                                                                   editingMode="clickToEdit" contextMenuSelect="false"
-                                                                  rowSelection="#{bindings.DEditable.inputValue == '1' ? 'none' : 'single'}">
+                                                                  rowSelection="#{bindings.DEditable.inputValue == '1' ? 'none' : 'single'}"
+                                                                  disclosedRowKeys="#{pageFlowScope.rks.rks}">
                                                         <f:facet name="nodeStamp">
                                                             <af:column id="c29" width="300" headerText="Наименование">
                                                                 <af:outputText value="#{node.Fullname}" id="ot4"
@@ -580,7 +581,7 @@
                                             <f:facet name="second">
                                                 <af:decorativeBox id="db2" theme="medium">
                                                     <f:facet name="center">
-                                                        <af:panelBox text="Редактировать подразделение: #{bindings.Fullname1.inputValue}" id="pb4">
+                                                        <af:panelBox text="Редактировать филиал: #{bindings.Fullname1.inputValue}" id="pb4">
                                                             <f:facet name="toolbar">
                                                                 <af:toolbar id="t10">
                                                                     <af:button text="Сохранить" id="b16"
@@ -646,7 +647,7 @@
                                                                 </f:facet>
                                                             </af:panelFormLayout>
                                                             <af:spacer width="10" height="10" id="s1"/>
-                                                            <af:panelHeader text="Кассы подразделения" id="ph1" type="flow">
+                                                            <af:panelHeader text="Кассы филиала" id="ph1" type="flow">
                                                                 <f:facet name="context"/>
                                                                 <f:facet name="menuBar"/>
                                                                 <f:facet name="toolbar">
@@ -782,6 +783,135 @@
                                                 </af:decorativeBox>
                                             </f:facet>
                                         </af:panelSplitter>
+                                    </af:showDetailItem>
+                                    <af:showDetailItem text="Сеть" id="sdi5" stretchChildren="first">
+                                        <af:panelBox text="Структура сетевых начислений" id="pb6"
+                                                     icon="/img/chart_organisation.png">
+                                            <f:facet name="toolbar"/>
+                                            <dvt:hierarchyViewer id="hv1" var="node"
+                                                                 value="#{bindings.NetGroupView1.treeModel}"
+                                                                 selectionListener="#{net.onSelect}"
+                                                                 detailWindow="none" layout="hier_horz_left"
+                                                                 levelFetchSize="#{bindings.NetGroupView1.rangeSize}"
+                                                                 styleClass="AFStretchWidth"
+                                                                 controlPanelBehavior="initExpanded"
+                                                                 displayLevelsAncestor="1" displayLevelsChildren="6"
+                                                                 nodeSelection="single" binding="#{net.tree}">
+                                                <dvt:link linkType="orthogonalRounded" id="l1"/>
+                                                <dvt:node type="ua.divas.view.NetGroupView" width="233" height="233"
+                                                          id="n1" shape="ellipse">
+                                                    <f:facet name="zoom100">
+                                                        <af:panelGroupLayout styleClass="AFStretchWidth AFHVNodeStretchHeight AFHVNodePadding"
+                                                                             layout="vertical" id="pgl3">
+                                                            <af:panelGroupLayout layout="horizontal" id="pgl4">
+                                                                <af:panelGroupLayout layout="vertical" id="pgl5">
+                                                                    <af:outputText value="#{node.Fullname}"
+                                                                                   shortDesc="#{node.hints.Fullname.tooltip}"
+                                                                                   styleClass="AFHVNodeTitleTextStyle"
+                                                                                   id="ot6"/>
+                                                                </af:panelGroupLayout>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                    <f:facet name="zoom75">
+                                                        <af:panelGroupLayout styleClass="AFStretchWidth AFHVNodeStretchHeight AFHVNodePadding"
+                                                                             layout="vertical" id="pgl6">
+                                                            <af:panelGroupLayout layout="horizontal" id="pgl7">
+                                                                <af:panelGroupLayout layout="vertical" id="pgl8">
+                                                                    <af:outputText value="#{node.Fullname}"
+                                                                                   shortDesc="#{node.hints.Fullname.tooltip}"
+                                                                                   styleClass="AFHVNodeTitleTextStyle75"
+                                                                                   id="ot7"/>
+                                                                </af:panelGroupLayout>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                    <f:facet name="zoom50">
+                                                        <af:panelGroupLayout styleClass="AFStretchWidth AFHVNodeStretchHeight AFHVNodePadding"
+                                                                             layout="vertical" id="pgl9">
+                                                            <af:panelGroupLayout layout="horizontal" id="pgl10">
+                                                                <af:panelGroupLayout layout="vertical" id="pgl11">
+                                                                    <af:outputText value="#{node.Fullname}"
+                                                                                   shortDesc="#{node.hints.Fullname.tooltip}"
+                                                                                   styleClass="AFHVNodeTitleTextStyle50"
+                                                                                   id="ot8"/>
+                                                                </af:panelGroupLayout>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                    <f:facet name="zoom25">
+                                                        <af:panelGroupLayout styleClass="AFStretchWidth AFHVNodeStretchHeight AFHVNodePaddingSmall"
+                                                                             layout="vertical" id="pgl12">
+                                                            <af:panelGroupLayout layout="horizontal" id="pgl13">
+                                                                <af:panelGroupLayout layout="vertical" id="pgl14">
+                                                                    <af:outputText value="#{node.Fullname}"
+                                                                                   shortDesc="#{node.hints.Fullname.tooltip}"
+                                                                                   styleClass="AFHVNodeTitleTextStyle25"
+                                                                                   id="ot9"/>
+                                                                </af:panelGroupLayout>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                </dvt:node>
+                                                <dvt:node type="ua.divas.view.NetDetailView" width="233" height="233"
+                                                          id="n2">
+                                                    <f:facet name="zoom100">
+                                                        <af:panelGroupLayout styleClass="AFStretchWidth AFHVNodeStretchHeight AFHVNodePadding"
+                                                                             layout="vertical" id="pgl15">
+                                                            <af:panelGroupLayout layout="horizontal" id="pgl16">
+                                                                <af:panelGroupLayout layout="vertical" id="pgl17"
+                                                                                     halign="center">
+                                                                    <af:image source="/img/money.png" id="i1"/>
+                                                                    <af:outputText value="#{node.Fullname}"
+                                                                                   shortDesc="#{node.hints.Fullname.tooltip}"
+                                                                                   styleClass="AFHVNodeTitleTextStyle"
+                                                                                   id="ot10"/>
+                                                                </af:panelGroupLayout>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                    <f:facet name="zoom75">
+                                                        <af:panelGroupLayout styleClass="AFStretchWidth AFHVNodeStretchHeight AFHVNodePadding"
+                                                                             layout="vertical" id="pgl18">
+                                                            <af:panelGroupLayout layout="horizontal" id="pgl19">
+                                                                <af:panelGroupLayout layout="vertical" id="pgl20">
+                                                                    <af:outputText value="#{node.Fullname}"
+                                                                                   shortDesc="#{node.hints.Fullname.tooltip}"
+                                                                                   styleClass="AFHVNodeTitleTextStyle75"
+                                                                                   id="ot11"/>
+                                                                </af:panelGroupLayout>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                    <f:facet name="zoom50">
+                                                        <af:panelGroupLayout styleClass="AFStretchWidth AFHVNodeStretchHeight AFHVNodePadding"
+                                                                             layout="vertical" id="pgl21">
+                                                            <af:panelGroupLayout layout="horizontal" id="pgl22">
+                                                                <af:panelGroupLayout layout="vertical" id="pgl23">
+                                                                    <af:outputText value="#{node.Fullname}"
+                                                                                   shortDesc="#{node.hints.Fullname.tooltip}"
+                                                                                   styleClass="AFHVNodeTitleTextStyle50"
+                                                                                   id="ot12"/>
+                                                                </af:panelGroupLayout>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                    <f:facet name="zoom25">
+                                                        <af:panelGroupLayout styleClass="AFStretchWidth AFHVNodeStretchHeight AFHVNodePaddingSmall"
+                                                                             layout="vertical" id="pgl24">
+                                                            <af:panelGroupLayout layout="horizontal" id="pgl25">
+                                                                <af:panelGroupLayout layout="vertical" id="pgl26">
+                                                                    <af:outputText value="#{node.Fullname}"
+                                                                                   shortDesc="#{node.hints.Fullname.tooltip}"
+                                                                                   styleClass="AFHVNodeTitleTextStyle25"
+                                                                                   id="ot13"/>
+                                                                </af:panelGroupLayout>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                </dvt:node>
+                                            </dvt:hierarchyViewer>
+                                        </af:panelBox>
                                     </af:showDetailItem>
                                 </af:panelTabbed>
                             </af:showDetailItem>

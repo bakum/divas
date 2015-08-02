@@ -959,6 +959,18 @@
   <ViewUsage
     Name="KontragSettingsView2"
     ViewObjectName="ua.divas.view.KontragSettingsView"/>
+  <ViewUsage
+    Name="NetGroupView1"
+    ViewObjectName="ua.divas.view.NetGroupView"/>
+  <ViewUsage
+    Name="NetDetailView1"
+    ViewObjectName="ua.divas.view.NetDetailView"/>
+  <ViewUsage
+    Name="NetDetailView2"
+    ViewObjectName="ua.divas.view.NetDetailView"/>
+  <ViewUsage
+    Name="NetDetailView3"
+    ViewObjectName="ua.divas.view.NetDetailView"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -2032,6 +2044,18 @@
     ViewLinkObjectName="ua.divas.view.KontragentsAllKontragSettingsFkLink"
     SrcViewUsageName="ua.divas.module.AppModule.KontragentsAll1"
     DstViewUsageName="ua.divas.module.AppModule.KontragSettingsView2"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="NetDetaiDetailFkLink1"
+    ViewLinkObjectName="ua.divas.view.NetDetaiDetailFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.NetDetailView1"
+    DstViewUsageName="ua.divas.module.AppModule.NetDetailView2"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="NetGroupDetailFkLink1"
+    ViewLinkObjectName="ua.divas.view.NetGroupDetailFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.NetGroupView1"
+    DstViewUsageName="ua.divas.module.AppModule.NetDetailView3"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">

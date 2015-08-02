@@ -180,6 +180,10 @@ FROM  ORDERS_TP_OPLATY OrdersTpOplaty]]></SQLQuery>
             <SchemaBasedProperties>
                 <CONTROLTYPE
                   Value="choice"/>
+                <LABEL
+                    ResId="ua.divas.view.OrdersTpOplatyView.UserId_LABEL"/>
+                <TOOLTIP
+                    ResId="ua.divas.view.OrdersTpOplatyView.UserId_TOOLTIP"/>
             </SchemaBasedProperties>
         </Properties>
     </ViewAttribute>
@@ -227,4 +231,8 @@ FROM  ORDERS_TP_OPLATY OrdersTpOplaty]]></SQLQuery>
             </SchemaBasedProperties>
         </Properties>
     </ViewAttribute>
+    <ResourceBundle>
+        <PropertiesBundle
+            PropertiesFile="ua.divas.model.ModelBundle"/>
+    </ResourceBundle>
 </ViewObject>

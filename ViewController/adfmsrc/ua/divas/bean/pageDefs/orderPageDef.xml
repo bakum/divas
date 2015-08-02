@@ -406,5 +406,15 @@
         <Item Value="DatCompleteFact"/>
       </AttrNames>
     </attributeValues>
+    <attributeValues IterBinding="OrdersView1Iterator" id="TotalSumOplaty">
+      <AttrNames>
+        <Item Value="TotalSumOplaty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OrdersView1Iterator" id="KoefOpl">
+      <AttrNames>
+        <Item Value="KoefOpl"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

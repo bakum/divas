@@ -13,6 +13,8 @@
     <iterator Binds="KassaView4" RangeSize="5" DataControl="AppModuleDataControl" id="KassaView4Iterator"/>
     <iterator Binds="DivisionsRootView2" RangeSize="25" DataControl="AppModuleDataControl"
               id="DivisionsRootView2Iterator"/>
+    <iterator Binds="NetGroupView1" RangeSize="25" DataControl="AppModuleDataControl" id="NetGroupView1Iterator"/>
+    <iterator id="KontragentsView1Iterator" Binds="KontragentsView1" DataControl="AppModuleDataControl" RangeSize="25"/>
   </executables>
   <bindings>
     <tree IterBinding="CurrencyView1Iterator" id="CurrencyView1">
@@ -198,5 +200,35 @@
         <Item Value="IsGroup"/>
       </AttrNames>
     </attributeValues>
+    <tree IterBinding="NetGroupView1Iterator" id="NetGroupView1">
+      <nodeDefinition DefName="ua.divas.view.NetGroupView" Name="NetGroupView10">
+        <AttrNames>
+          <Item Value="Fullname"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="NetDetailView">
+            <Properties>
+              <CustomProperties>
+                <Property Name="hierarchyType" Value="children"/>
+              </CustomProperties>
+            </Properties>
+          </Item>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="ua.divas.view.NetDetailView" Name="NetGroupView11">
+        <AttrNames>
+          <Item Value="Fullname"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="IdNetDetailView">
+            <Properties>
+              <CustomProperties>
+                <Property Name="hierarchyType" Value="children"/>
+              </CustomProperties>
+            </Properties>
+          </Item>
+        </Accessors>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>

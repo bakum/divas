@@ -414,6 +414,10 @@ FROM  USER_SETTINGS UserSettings]]></SQLQuery>
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="choice"/>
+        <LABEL
+          ResId="ua.divas.view.UserSettingsView.DivisionId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.UserSettingsView.DivisionId_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

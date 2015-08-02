@@ -365,6 +365,25 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="Photo"
+    IsQueriable="false"
+    ColumnName="PHOTO"
+    SQLType="BLOB"
+    Type="oracle.jbo.domain.BlobDomain"
+    ColumnType="BLOB"
+    TableName="KONTRAGENTS">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="image"/>
+        <LABEL
+          ResId="ua.divas.model.Kontragents.Photo_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Kontragents.Photo_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="Kontragents"
     Association="ua.divas.model.KontragentsKontragentsFk1Assoc"

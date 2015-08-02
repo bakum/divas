@@ -260,6 +260,10 @@ upper(OtherZatraty.USER_ID) in (select upper(N) from table(cast(get_users(:u_nam
             <SchemaBasedProperties>
                 <CONTROLTYPE
                   Value="choice"/>
+                <LABEL
+                    ResId="ua.divas.view.OtherZatratyView.DivisionId_LABEL"/>
+                <TOOLTIP
+                    ResId="ua.divas.view.OtherZatratyView.DivisionId_TOOLTIP"/>
             </SchemaBasedProperties>
         </Properties>
     </ViewAttribute>
@@ -276,6 +280,10 @@ upper(OtherZatraty.USER_ID) in (select upper(N) from table(cast(get_users(:u_nam
             <SchemaBasedProperties>
                 <CONTROLTYPE
                   Value="choice"/>
+                <LABEL
+                    ResId="ua.divas.view.OtherZatratyView.UserId_LABEL"/>
+                <TOOLTIP
+                    ResId="ua.divas.view.OtherZatratyView.UserId_TOOLTIP"/>
             </SchemaBasedProperties>
         </Properties>
     </ViewAttribute>

@@ -47,13 +47,16 @@ public class KontragSettingsViewRowImpl extends ViewRowImpl {
         PayId,
         Version,
         BaseId,
+        BaseName,
         DivisionId,
         Summa,
         KsEditable,
-        KontragOtherView1,
+        SwitherDivisionId,
         PaySettingsView1,
         BaseOfNachislView1,
-        DivisionsView1;
+        KontragentsView1,
+        DivisionsView1,
+        KontragOtherView1;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -84,13 +87,16 @@ public class KontragSettingsViewRowImpl extends ViewRowImpl {
     public static final int PAYID = AttributesEnum.PayId.index();
     public static final int VERSION = AttributesEnum.Version.index();
     public static final int BASEID = AttributesEnum.BaseId.index();
+    public static final int BASENAME = AttributesEnum.BaseName.index();
     public static final int DIVISIONID = AttributesEnum.DivisionId.index();
     public static final int SUMMA = AttributesEnum.Summa.index();
     public static final int KSEDITABLE = AttributesEnum.KsEditable.index();
-    public static final int KONTRAGOTHERVIEW1 = AttributesEnum.KontragOtherView1.index();
+    public static final int SWITHERDIVISIONID = AttributesEnum.SwitherDivisionId.index();
     public static final int PAYSETTINGSVIEW1 = AttributesEnum.PaySettingsView1.index();
     public static final int BASEOFNACHISLVIEW1 = AttributesEnum.BaseOfNachislView1.index();
+    public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
+    public static final int KONTRAGOTHERVIEW1 = AttributesEnum.KontragOtherView1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -187,6 +193,22 @@ public class KontragSettingsViewRowImpl extends ViewRowImpl {
     }
 
     /**
+     * Gets the attribute value for the calculated attribute BaseName.
+     * @return the BaseName
+     */
+    public String getBaseName() {
+        return (String) getAttributeInternal(BASENAME);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for the calculated attribute BaseName.
+     * @param value value to set the  BaseName
+     */
+    public void setBaseName(String value) {
+        setAttributeInternal(BASENAME, value);
+    }
+
+    /**
      * Gets the attribute value for DIVISION_ID using the alias name DivisionId.
      * @return the DIVISION_ID
      */
@@ -234,11 +256,13 @@ public class KontragSettingsViewRowImpl extends ViewRowImpl {
         setAttributeInternal(KSEDITABLE, value);
     }
 
+
     /**
-     * Gets the view accessor <code>RowSet</code> KontragOtherView1.
+     * Gets the attribute value for the calculated attribute SwitherDivisionId.
+     * @return the SwitherDivisionId
      */
-    public RowSet getKontragOtherView1() {
-        return (RowSet) getAttributeInternal(KONTRAGOTHERVIEW1);
+    public String getSwitherDivisionId() {
+        return (String) getAttributeInternal(SWITHERDIVISIONID);
     }
 
     /**
@@ -255,11 +279,27 @@ public class KontragSettingsViewRowImpl extends ViewRowImpl {
         return (RowSet) getAttributeInternal(BASEOFNACHISLVIEW1);
     }
 
+
+    /**
+     * Gets the view accessor <code>RowSet</code> KontragentsView1.
+     */
+    public RowSet getKontragentsView1() {
+        return (RowSet) getAttributeInternal(KONTRAGENTSVIEW1);
+    }
+
     /**
      * Gets the view accessor <code>RowSet</code> DivisionsView1.
      */
     public RowSet getDivisionsView1() {
         return (RowSet) getAttributeInternal(DIVISIONSVIEW1);
     }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> KontragOtherView1.
+     */
+    public RowSet getKontragOtherView1() {
+        return (RowSet) getAttributeInternal(KONTRAGOTHERVIEW1);
+    }
+
 }
 

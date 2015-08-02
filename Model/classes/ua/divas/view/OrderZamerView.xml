@@ -476,6 +476,10 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users_for_zamer(:u
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="choice"/>
+        <LABEL
+          ResId="ua.divas.view.OrderZamerView.DivisionId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.OrderZamerView.DivisionId_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -531,6 +535,8 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users_for_zamer(:u
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="input_text_lov"/>
+        <LABEL
+          ResId="ua.divas.view.OrderZamerView.KontragId_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -644,6 +650,10 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users_for_zamer(:u
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="choice"/>
+        <LABEL
+          ResId="ua.divas.view.OrderZamerView.UserId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.OrderZamerView.UserId_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

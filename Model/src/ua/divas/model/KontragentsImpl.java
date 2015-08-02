@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import oracle.jbo.Key;
 import oracle.jbo.RowIterator;
+import oracle.jbo.domain.BlobDomain;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.EntityDefImpl;
 import oracle.jbo.server.EntityImpl;
@@ -48,6 +49,7 @@ public class KontragentsImpl extends DivasEntity {
         IsMeasurer,
         IsSupplier,
         UserId,
+        Photo,
         Kontragents,
         ParentIdKontragents,
         CompaignsDetails,
@@ -103,6 +105,7 @@ public class KontragentsImpl extends DivasEntity {
     public static final int ISMEASURER = AttributesEnum.IsMeasurer.index();
     public static final int ISSUPPLIER = AttributesEnum.IsSupplier.index();
     public static final int USERID = AttributesEnum.UserId.index();
+    public static final int PHOTO = AttributesEnum.Photo.index();
     public static final int KONTRAGENTS = AttributesEnum.Kontragents.index();
     public static final int PARENTIDKONTRAGENTS = AttributesEnum.ParentIdKontragents.index();
     public static final int COMPAIGNSDETAILS = AttributesEnum.CompaignsDetails.index();
@@ -388,6 +391,22 @@ public class KontragentsImpl extends DivasEntity {
      */
     public void setUserId(String value) {
         setAttributeInternal(USERID, value);
+    }
+
+    /**
+     * Gets the attribute value for Photo, using the alias name Photo.
+     * @return the value of Photo
+     */
+    public BlobDomain getPhoto() {
+        return (BlobDomain) getAttributeInternal(PHOTO);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for Photo.
+     * @param value value to set the Photo
+     */
+    public void setPhoto(BlobDomain value) {
+        setAttributeInternal(PHOTO, value);
     }
 
     /**

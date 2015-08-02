@@ -349,13 +349,13 @@
                                                     </af:selectManyShuttle>
                                                 </af:panelBox>
                                             </af:showDetailItem>
-                                            <af:showDetailItem text="Подразделения" id="sdi2">
+                                            <af:showDetailItem text="Филиалы" id="sdi2">
                                                 <af:panelBox id="pb3">
                                                     <f:facet name="toolbar"/>
                                                     <af:selectManyShuttle id="sms2"
                                                                           value="#{shuttle_departament.selectedValues}"
-                                                                          leadingHeader="Подразделения:"
-                                                                          trailingHeader="В подразделении:"
+                                                                          leadingHeader="Филиалы:"
+                                                                          trailingHeader="В филиале:"
                                                                           valueChangeListener="#{shuttle_departament.onDepartamentChange}">
                                                         <f:selectItems value="#{shuttle_departament.allValues}"
                                                                        id="si2"/>

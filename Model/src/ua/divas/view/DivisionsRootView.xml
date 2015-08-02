@@ -137,4 +137,7 @@ where parent_id is null]]></SQLQuery>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>
   </ResourceBundle>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
 </ViewObject>

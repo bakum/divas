@@ -161,6 +161,13 @@
                                                                           label="#{bindings.IsSupplier.label}"
                                                                           shortDesc="#{bindings.IsSupplier.hints.tooltip}"
                                                                           id="sbc4"/>
+                                                <af:spacer width="10" height="10" id="s1"/>
+                                                <af:image shortDesc="#{bindings.Photo.hints.tooltip}" id="it8"
+                                                          source="#{bindings.Photo.inputValue}"
+                                                          rendered="#{bindings.IsGroup.inputValue == '0' ? true : false}"
+                                                          visible="false"/>
+                                                <af:inputFile id="if1" valueChangeListener="#{kon_dir.onFileDownload}"
+                                                              autoSubmit="true" visible="false"/>
                                             </af:panelGroupLayout>
                                         </af:panelLabelAndMessage>
                                         <af:selectBooleanCheckbox value="#{bindings.UrFiz.inputValue}"
@@ -206,7 +213,7 @@
                                                   fetchSize="#{bindings.KontragSettingsView2.rangeSize}" id="t3"
                                                   scrollPolicy="page" editingMode="clickToEdit"
                                                   partialTriggers="b8 ::b9">
-                                            <af:column id="c13">
+                                            <af:column id="c13" sortable="true">
                                                 <af:toolbar id="t4">
                                                     <af:button id="b6" icon="/img/edit-16.gif"
                                                                disabled="#{bindings.KsEditable.inputValue == '1' ? true : false}">
@@ -215,8 +222,8 @@
                                                                                 type="action"/>
                                                     </af:button>
                                                     <af:button actionListener="#{bindings.Commit.execute}"
-                                                               disabled="#{bindings.KsEditable.inputValue == '1' ? false : true}" id="b7"
-                                                               icon="/img/icon_save.png">
+                                                               disabled="#{bindings.KsEditable.inputValue == '1' ? false : true}"
+                                                               id="b7" icon="/img/icon_save.png">
                                                         <af:setPropertyListener from="#{0}"
                                                                                 to="#{bindings.KsEditable.inputValue}"
                                                                                 type="action"/>
@@ -276,7 +283,7 @@
                                                                     label="#{row.bindings.BaseId.label}"
                                                                     required="#{bindings.KontragSettingsView2.hints.BaseId.mandatory}"
                                                                     shortDesc="#{bindings.KontragSettingsView2.hints.BaseId.tooltip}"
-                                                                    id="soc4">
+                                                                    id="soc4" autoSubmit="true">
                                                     <f:selectItems value="#{row.bindings.BaseId.items}" id="si4"/>
                                                     <f:validator binding="#{row.bindings.BaseId.validator}"/>
                                                 </af:selectOneChoice>

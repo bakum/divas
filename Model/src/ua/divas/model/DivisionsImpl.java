@@ -49,10 +49,10 @@ public class DivisionsImpl extends DivasEntity {
         Users,
         OtherZatraty,
         NachislSettings,
-        KontragSettings,
         StartOst,
         ProfitDistrib;
-        private static AttributesEnum[] vals = null;
+        static AttributesEnum[] vals = null;
+        ;
         private static final int firstIndex = 0;
 
         public int index() {
@@ -93,7 +93,6 @@ public class DivisionsImpl extends DivasEntity {
     public static final int USERS = AttributesEnum.Users.index();
     public static final int OTHERZATRATY = AttributesEnum.OtherZatraty.index();
     public static final int NACHISLSETTINGS = AttributesEnum.NachislSettings.index();
-    public static final int KONTRAGSETTINGS = AttributesEnum.KontragSettings.index();
     public static final int STARTOST = AttributesEnum.StartOst.index();
     public static final int PROFITDISTRIB = AttributesEnum.ProfitDistrib.index();
 
@@ -316,12 +315,6 @@ public class DivisionsImpl extends DivasEntity {
         return (RowIterator) getAttributeInternal(NACHISLSETTINGS);
     }
 
-    /**
-     * @return the associated entity oracle.jbo.RowIterator.
-     */
-    public RowIterator getKontragSettings() {
-        return (RowIterator) getAttributeInternal(KONTRAGSETTINGS);
-    }
 
     /**
      * @return the associated entity oracle.jbo.RowIterator.

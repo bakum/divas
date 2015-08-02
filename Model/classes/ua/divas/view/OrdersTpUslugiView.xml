@@ -300,6 +300,10 @@ FROM  ORDERS_TP_USLUGI OrdersTpUslugi]]></SQLQuery>
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="combo_lov"/>
+        <LABEL
+          ResId="ua.divas.view.OrdersTpUslugiView.SotrId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.OrdersTpUslugiView.SotrId_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

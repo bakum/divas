@@ -49,16 +49,12 @@
     </Properties>
   </Variable>
   <ViewAccessor
-    Name="DivisionsView1"
-    ViewObjectName="ua.divas.view.DivisionsView"
-    RowLevelBinds="true">
-    <ViewCriteriaUsage
-      Name="DivisionsViewItems"
-      FullName="ua.divas.view.DivisionsView.DivisionsViewItems"/>
-  </ViewAccessor>
+    Name="UsersView1"
+    ViewObjectName="ua.divas.view.UsersView"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_DivisionId"
-    ListVOName="DivisionsView1"
+    ListVOName="UsersView1"
     ListRangeSize="-1"
     NullValueFlag="start"
     NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
@@ -71,7 +67,7 @@
       <Item Value="Id"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="Fullname"/>
+      <Item Value="Login"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
