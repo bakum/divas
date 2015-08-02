@@ -113,7 +113,11 @@ public class KontragDirBean {
     }
 
     public String refresh() {
-
+        BindingContainer bd = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = bd.getOperationBinding("Commit");
+        if (ob.isOperationEnabled()) {
+            ob.execute();
+        }
         DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = binding.findIteratorBinding("KontragentsAllRoot1Iterator");
         if (it != null) {
@@ -624,7 +628,7 @@ public class KontragDirBean {
     }
 
     public void parseFile(UploadedFile file) {
-       
+
         DCBindingContainer bindings = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding dcIteratorBindings = bindings.findIteratorBinding("KontragentsRep1Iterator");
         Row rw = dcIteratorBindings.getCurrentRow();

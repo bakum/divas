@@ -154,6 +154,7 @@
           <Item Value="Id"/>
           <Item Value="Fullname"/>
           <Item Value="IsGroup"/>
+          <Item Value="Deleted"/>
         </AttrNames>
         <Accessors>
           <Item Value="DivisionsView"/>
@@ -165,6 +166,7 @@
           <Item Value="Fullname"/>
           <Item Value="IsGroup"/>
           <Item Value="MainUser"/>
+          <Item Value="Deleted"/>
         </AttrNames>
         <Accessors>
           <Item Value="DivisionsView"/>
@@ -230,5 +232,7 @@
         </Accessors>
       </nodeDefinition>
     </tree>
+    <action IterBinding="DivisionsView1Iterator" id="Delete1" InstanceName="AppModuleDataControl.DivisionsView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
   </bindings>
 </pageDefinition>

@@ -86,7 +86,7 @@
        (select 0 from dual) D_Editable,
        Divisions.MAIN_USER
 FROM  DIVISIONS Divisions
-where deleted = 0 and
+where 
 upper(Divisions.ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))
 order by Divisions.IS_GROUP DESC]]></SQLQuery>
   <EntityUsage
@@ -268,14 +268,6 @@ order by Divisions.IS_GROUP DESC]]></SQLQuery>
     <ViewCriteriaRow
       Name="DivisionsViewCriteria_row_0"
       UpperColumns="1">
-      <ViewCriteriaItem
-        Name="DivisionsViewCriteria_DivisionsViewCriteria_row_0_Deleted"
-        ViewAttribute="Deleted"
-        Operator="="
-        Conjunction="AND"
-        Value="0"
-        GenerateIsNullClauseForBindVars="false"
-        Required="Optional"/>
       <ViewCriteriaItem
         Name="IsGroup"
         ViewAttribute="IsGroup"

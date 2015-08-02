@@ -59,6 +59,7 @@ public class DeletedBean {
             OperationBinding ob = bd.getOperationBinding("Rollback");
             ob.execute();
         }
+        
         DCIteratorBinding it = binding.findIteratorBinding("ObjectDeleted1Iterator");
         if (it != null) {
             it.executeQuery();

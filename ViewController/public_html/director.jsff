@@ -536,6 +536,25 @@
                                                         <f:facet name="pathStamp">
                                                             <af:outputText value="#{node}" id="ot5"/>
                                                         </f:facet>
+                                                        <f:facet name="contextMenu">
+                                                            <af:popup childCreation="deferred" autoCancel="disabled"
+                                                                      id="pMenu">
+                                                                <af:menu text="menu 1" id="m1">
+                                                                    <af:commandMenuItem text="#{division.del_label}"
+                                                                                        id="cmi1"
+                                                                                        icon="/img/delete-1.png">
+                                                                        <af:showPopupBehavior popupId="::pDelete"/>
+                                                                    </af:commandMenuItem>
+                                                                </af:menu>
+                                                            </af:popup>
+                                                        </f:facet>
+                                                        <af:column id="c37" width="30">
+                                                            <af:image id="i2"
+                                                                      source="#{node.Deleted == 1 ? '/img/delete-1.png' : node.IsGroup == 1 ? '/img/folder.png' : '/img/minus.png'}"/>
+                                                        </af:column>
+                                                        <af:column id="c36" visible="false">
+                                                            <af:outputText value="#{node.Deleted}" id="ot15"/>
+                                                        </af:column>
                                                     </af:treeTable>
                                                     <af:popup childCreation="deferred" autoCancel="disabled"
                                                               id="pCreateEditDivision" contentDelivery="lazyUncached"
@@ -575,6 +594,16 @@
                                                             </af:panelFormLayout>
                                                         </af:dialog>
                                                         <af:resetListener type="popupCanceled"/>
+                                                    </af:popup>
+                                                    <af:popup childCreation="deferred"
+                                                              id="pDelete" contentDelivery="lazyUncached"
+                                                              resetEditableValues="whenCanceled">
+                                                        <af:dialog id="d3" closeIconVisible="false" title="Внимание!"
+                                                                   dialogListener="#{division.onDeleteDialog}">
+                                                            <f:facet name="buttonBar"/>
+                                                            <af:outputText value="#{division.del_title}" id="ot14"
+                                                                           inlineStyle="#{division.del_style}"/>
+                                                        </af:dialog>
                                                     </af:popup>
                                                 </af:panelBox>
                                             </f:facet>
