@@ -9,7 +9,7 @@
                     <f:facet name="center">
                         <af:panelTabbed id="pt1">
                             <af:showDetailItem text="Пользователи" id="sdi1" stretchChildren="first">
-                                <af:panelBox id="pb1" type="flow">
+                                <af:panelBox id="pb1" type="flow" text="Пользователи">
                                     <f:facet name="toolbar">
                                         <af:toolbar id="t7">
                                             <af:button actionListener="#{bindings.CreateInsert.execute}"
@@ -907,6 +907,59 @@
                                                       binding="#{shuttle_group.kontragName}" autoSubmit="true"/>
                                     </af:dialog>
                                 </af:popup>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="Активные пользователи" id="sdi7" stretchChildren="first">
+                                <af:panelCollection id="pc1">
+                                    <f:facet name="menus"/>
+                                    <f:facet name="toolbar">
+                                        <af:toolbar id="t11">
+                                            <af:button actionListener="#{bindings.Execute.execute}" text="Обновить"
+                                                       disabled="#{!bindings.Execute.enabled}" id="b17"/>
+                                        </af:toolbar>
+                                    </f:facet>
+                                    <af:table value="#{bindings.onlineUserList.collectionModel}" var="row"
+                                              rows="#{bindings.onlineUserList.rangeSize}"
+                                              emptyText="#{bindings.onlineUserList.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              rowBandingInterval="0"
+                                              selectedRowKeys="#{bindings.onlineUserList.collectionModel.selectedRow}"
+                                              selectionListener="#{bindings.onlineUserList.collectionModel.makeCurrent}"
+                                              rowSelection="single" fetchSize="#{bindings.onlineUserList.rangeSize}"
+                                              id="t10" partialTriggers="::b17">
+                                        <af:column sortProperty="#{bindings.onlineUserList.hints.id.name}"
+                                                   sortable="true"
+                                                   headerText="GUID" id="c23"
+                                                   width="270">
+                                            <af:outputText value="#{row.id}"
+                                                           shortDesc="#{bindings.onlineUserList.hints.id.tooltip}"
+                                                           id="ot1"
+                                                           inlineStyle="#{securityContext.userName == row.login ? 'font-weight:bold;' : ''}"/>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.onlineUserList.hints.login.name}"
+                                                   sortable="true" headerText="Логин" id="c24" width="150">
+                                            <af:outputText value="#{row.login}"
+                                                           shortDesc="#{bindings.onlineUserList.hints.login.tooltip}"
+                                                           id="ot2"
+                                                           inlineStyle="#{securityContext.userName == row.login ? 'font-weight:bold;' : ''}"/>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.onlineUserList.hints.logDate.name}"
+                                                   sortable="true" headerText="Дата входа" id="c25" width="150">
+                                            <af:outputText value="#{row.logDate}"
+                                                           shortDesc="#{bindings.onlineUserList.hints.logDate.tooltip}"
+                                                           id="ot3"
+                                                           inlineStyle="#{securityContext.userName == row.login ? 'font-weight:bold;' : ''}">
+                                                <af:convertDateTime pattern="dd-MMM-yyy HH:mm:ss"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column headerText="IP"
+                                                   id="c26" width="200">
+                                            <af:outputText value="#{row.ipAdress}"
+                                                           shortDesc="#{bindings.onlineUserList.hints.ipAdress.tooltip}"
+                                                           id="ot4"
+                                                           inlineStyle="#{securityContext.userName == row.login ? 'font-weight:bold;' : ''}"/>
+                                        </af:column>
+                                    </af:table>
+                                    <f:facet name="statusbar"/>
+                                </af:panelCollection>
                             </af:showDetailItem>
                         </af:panelTabbed>
                     </f:facet>

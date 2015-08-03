@@ -1,3 +1,12 @@
+// $(window).on('beforeunload', domystuff);
+
+function domystuff(event){
+    //event.cancel();
+    //var component = AdfPage.PAGE.findComponentByAbsoluteId("pgl2");
+    //AdfCustomEvent.queue(component,"customEvent",{payload:'logoff'}, true);
+    //$get("/faces/home.jsf");
+}
+
 function Growl(ttl,mess, stl){
   $.growl(
         { title: ttl, 

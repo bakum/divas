@@ -1,8 +1,17 @@
 package ua.divas.bean;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
+import java.io.InputStreamReader;
+
 import java.math.BigDecimal;
+
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.UnknownHostException;
 
 import java.security.MessageDigest;
 
@@ -35,6 +44,7 @@ import oracle.adf.view.rich.event.DialogEvent;
 import oracle.binding.BindingContainer;
 import oracle.binding.OperationBinding;
 
+import ua.divas.bean.control.OnlineUserData;
 import ua.divas.classes.IllegalUserException;
 
 import weblogic.security.URLCallbackHandler;
@@ -137,6 +147,7 @@ public class LoginBean {
                 loginUrl = "/adfAuthentication?success_url=/faces/reg_code";
             } else {
                 loginUrl = "/adfAuthentication?success_url=/faces/index";
+                OnlineUserData.addOnlineUser(un);
             }
 
             //String loginUrl = "/adfAuthentication?success_url=/faces/index";

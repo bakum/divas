@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,17 +18,9 @@ import ua.divas.module.AppModuleImpl;
 
 public class OnlineUserData {
 
-    private OnlineUser onlineUser;
-    private List<OnlineUser> onlineUserList;
+    private static List<OnlineUser> onlineUserList = new ArrayList<OnlineUser>();
     protected static int VARCHAR2 = Types.VARCHAR;
 
-    public void setOnlineUserObject(OnlineUser onlineUserObject) {
-        this.onlineUser = onlineUserObject;
-    }
-
-    public OnlineUser getOnlineUserObject() {
-        return onlineUser;
-    }
 
     public void setOnlineUserList(List<OnlineUser> onlineUserList) {
         this.onlineUserList = onlineUserList;
@@ -37,32 +30,37 @@ public class OnlineUserData {
         return onlineUserList;
     }
 
-    private int searchUser(String Id) {
-        Iterator<OnlineUser> i = onlineUserList.iterator();
-        int c = 0;
-        while (i.hasNext()) {
-            OnlineUser o = i.next();
-            if (o.getId().matches(Id)) {
-                return c;
+    private static int searchUser(String Id) {
+        if (onlineUserList.isEmpty()) {
+            return -1;
+        } else {
+            Iterator<OnlineUser> i = onlineUserList.iterator();
+            int c = 0;
+            while (i.hasNext()) {
+                OnlineUser o = i.next();
+                if (o.getId().matches(Id)) {
+                    return c;
+                }
+                c++;
             }
-            c++;
         }
         return -1;
     }
-    
-    private String getUserId(String login) {
-        String _id = (String)callStoredFunction(VARCHAR2, "USR_SETT.GET_USERID(?)", new Object[] { login });
+
+    public final static String getUserId(String login) {
+        String _id = (String) callStoredFunction(VARCHAR2, "USR_SETT.GET_USERID(?)", new Object[] { login });
         if (_id.equals("00000000-0000-0000-0000-000000000000"))
             return null;
         else
             return _id;
     }
-    
-    private Object callStoredFunction(int sqlReturnType, String stmt, Object[] bindVars) {
+
+    public final static Object callStoredFunction(int sqlReturnType, String stmt, Object[] bindVars) {
         CallableStatement st = null;
         BindingContext bindingContext = BindingContext.getCurrent();
-        DCDataControl dc  = bindingContext.findDataControl("AppModuleDataControl"); // Name of application module in datacontrolBinding.cpx
-        AppModuleImpl am = (AppModuleImpl)dc.getDataProvider();
+        DCDataControl dc =
+            bindingContext.findDataControl("AppModuleDataControl"); // Name of application module in datacontrolBinding.cpx
+        AppModuleImpl am = (AppModuleImpl) dc.getDataProvider();
         try {
             // 1. Create a JDBC CallabledStatement
             st = am.getDBTransaction().createCallableStatement("begin ? := " + stmt + ";end;", 0);
@@ -92,24 +90,27 @@ public class OnlineUserData {
         }
     }
 
-    public void addOnlineUser(String login) {
+    public final static void addOnlineUser(String login) {
         String userId = getUserId(login);
         int i = searchUser(userId);
         OnlineUser usr = new OnlineUser(userId, login);
-        if (i >= 0) {            
+        if (i == -1) {
             onlineUserList.add(usr);
         } else {
             onlineUserList.set(i, usr);
         }
+        System.out.println("User list: " + onlineUserList.toString());
     }
 
-    public void removeOnlineUser(String userId) {
+    public final static void removeOnlineUser(String login) {
+        //String userId = getUserId(login);
         Iterator<OnlineUser> i = onlineUserList.iterator();
         while (i.hasNext()) {
             OnlineUser o = i.next();
-            if (o.getId().matches(userId)) {
+            if (o.getLogin().matches(login)) {
                 i.remove();
             }
         }
+        System.out.println("User list: " + onlineUserList.toString());
     }
 }

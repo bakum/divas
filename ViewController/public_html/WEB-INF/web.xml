@@ -203,6 +203,9 @@
     <listener>
         <listener-class>oracle.bc4j.mbean.BC4JConfigLifeCycleCallBack</listener-class>
     </listener>
+    <listener>
+        <listener-class>ua.divas.bean.listener.DivasHttpSessionListener</listener-class>
+    </listener>
     <welcome-file-list>
         <welcome-file>/faces/index.jsf</welcome-file>
     </welcome-file-list>

@@ -1,7 +1,12 @@
 package ua.divas.bean.control;
 
+import java.io.IOException;
+
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+
+import javax.servlet.http.HttpServletRequest;
 
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
@@ -27,13 +32,13 @@ public class NotificationBean {
         String user = secCntx.getUserPrincipal().getName();
         return user;
     }
-    
+
     public void refresh() {
         DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = binding.findIteratorBinding("NotificationView1Iterator");
         it.executeQuery();
     }
-    
+
     public String commitChange() {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("Commit");
@@ -42,7 +47,7 @@ public class NotificationBean {
         //ADFContext.getCurrent().getRequestScope().put("refreshNeeded", Boolean.TRUE);
         return null;
     }
-    
+
     public String rollbackChange() {
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
         OperationBinding ob = binding.getOperationBinding("Rollback");
@@ -53,13 +58,17 @@ public class NotificationBean {
 
     public void onCustomEvent(ClientEvent clientEvent) {
         //System.out.println("---"+clientEvent.getParameters().get("payload"));
-        if (getSessionUser().matches((String)clientEvent.getParameters().get("payload"))) {
+        if (clientEvent.getParameters().get("payload").equals("logoff")) {
+            logout();
+            return;
+        }
+        if (getSessionUser().matches((String) clientEvent.getParameters().get("payload"))) {
             refresh();
             FacesContext context = FacesContext.getCurrentInstance();
             ExtendedRenderKitService erks = Service.getService(context.getRenderKit(), ExtendedRenderKitService.class);
             erks.addScript(context,
                            "Growl('Напоминаю!'," +
-                "'У Вас новое уведомление! Перейдите в панель уведомлений.','notice')");
+                           "'У Вас новое уведомление! Перейдите в панель уведомлений.','notice')");
         }
     }
 
@@ -73,5 +82,20 @@ public class NotificationBean {
 
     public void onRefresh(ActionEvent actionEvent) {
         refresh();
+    }
+    
+    public String logout() {
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        ExternalContext ectx = ctx.getExternalContext();
+        //String logoutUrl = "faces" + ctx.getViewRoot().getViewId();
+        String logoutUrl = "adfAuthentication?logout=true&end_url=/faces/home.jsf";
+        //String logoutUrl = "faces/home.jsf";
+        ((HttpServletRequest) ectx.getRequest()).getSession().invalidate();
+        try {
+            ectx.redirect(logoutUrl);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
