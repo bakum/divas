@@ -110,6 +110,15 @@
                                                        readOnly="#{bindings.PEditable.inputValue == 1 ? false : true}">
                                     <f:validator binding="#{bindings.Summa.validator}"/>
                                 </af:inputNumberSpinbox>
+                                <af:selectOneChoice value="#{bindings.OrderId.inputValue}"
+                                                    label="#{bindings.OrderId.label}"
+                                                    required="#{bindings.OrderId.hints.mandatory}"
+                                                    shortDesc="#{bindings.OrderId.hints.tooltip}" id="soc7"
+                                                    visible="#{edit_pko.visibleKontrag}"
+                                                    readOnly="#{bindings.PEditable.inputValue == 1 ? false : true}">
+                                    <f:selectItems value="#{bindings.OrderId.items}" id="si7"/>
+                                    <f:validator binding="#{bindings.OrderId.validator}"/>
+                                </af:selectOneChoice>
                                 <af:inputText value="#{bindings.Comments.inputValue}"
                                               label="#{bindings.Comments.hints.label}"
                                               required="#{bindings.Comments.hints.mandatory}"

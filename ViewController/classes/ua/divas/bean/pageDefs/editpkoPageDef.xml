@@ -62,5 +62,7 @@
         <Item Value="Enbl"/>
       </AttrNames>
     </attributeValues>
+    <list IterBinding="PkoView1Iterator" StaticList="false" Uses="LOV_OrderId" id="OrderId" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
   </bindings>
 </pageDefinition>

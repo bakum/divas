@@ -281,6 +281,7 @@
             <Item Value="Id"/>
         </AttrArray>
         <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Kontragname"/>
             <Item Value="Num"/>
             <Item Value="Dat"/>
         </AttrArray>

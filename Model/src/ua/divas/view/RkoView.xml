@@ -295,6 +295,7 @@
       <Item Value="Id"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Kontragname"/>
       <Item Value="Num"/>
       <Item Value="Dat"/>
     </AttrArray>
@@ -324,6 +325,8 @@
        Rko.SUMMA,
        (select 0 from dual) R_Editable,
        Rko.ORDER_ID,
+       'РКО №'||Rko.NUM|| ' от '|| TO_CHAR(
+        rko.DAT, 'DD-MM-YYYY') Reg_String,
        UTILITY.enable_edit(Rko.ID, 'rko') enbl
 FROM  RKO Rko
 where
@@ -615,6 +618,21 @@ upper(Rko.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as use
           Value="choice"/>
       </SchemaBasedProperties>
     </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RegString"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="69"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REG_STRING"
+    Expression="REG_STRING"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="69"/>
+    </DesignTime>
   </ViewAttribute>
   <ViewAttribute
     Name="Enbl"

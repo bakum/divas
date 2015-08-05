@@ -9,10 +9,14 @@
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
-  ComponentClass="ua.divas.view.VwSupplierMovesImpl">
+  ComponentClass="ua.divas.view.VwSupplierMovesImpl"
+  RowClass="ua.divas.view.VwSupplierMovesRowImpl"
+  ComponentInterface="ua.divas.view.common.VwSupplierMoves"
+  ClientProxyName="ua.divas.view.client.VwSupplierMovesClient">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
-    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
   <Properties>
     <SchemaBasedProperties>
@@ -42,7 +46,8 @@
   SUM(summ_rashod),
   REGISTRATOR_ID,
   PERIOD,
-  REG_STRING
+  REG_STRING,
+  (select 0 from dual) Mark
 FROM
   (SELECT MOVE_KONTRAG.ID,
     MOVE_KONTRAG.KONTRAG_ID,
@@ -121,7 +126,8 @@ FROM
   WHERE MOVE_KONTRAG.CODE    = '5091'
   AND KONTRAGENTS.IS_MEASURER   = 0
   )
-where
+where registrator_id not in (select id from rko where order_id is not null and posted = 1) and
+registrator_id not in (select id from pko where order_id is not null and posted = 1) and
 upper(DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))  
 GROUP BY KONTRAG_ID,
   KONTRAG,
@@ -277,7 +283,87 @@ ORDER BY PERIOD DESC]]></SQLQuery>
       <Attr Name="_DisplaySize" Value="80"/>
     </DesignTime>
   </ViewAttribute>
+  <ViewAttribute
+    Name="Mark"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="MARK"
+    Expression="MARK"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="SumRko"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[RkoVOSuppl.sum("Summa != null ? Summa : 0")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MarkForPay"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Boolean"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="BIT"
+    IsQueriable="false"
+    DefaultValue="false">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="check_box"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BallForOrder"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[-(SumSummRashod == null ? 0 : SumSummRashod)+(SumRko == null ? 0 : SumRko)-(SumPko == null ? 0 : SumPko)]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SumPko"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[RkoVOSuppl.sum("SummaRash != null ? SummaRash : 0")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SumRashod"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[(SumSummRashod == null ? 0 : SumSummRashod)+(SumPko == null ? 0 : SumPko)]]></TransientExpression>
+  </ViewAttribute>
   <AttrArray Name="KeyAttributes">
+    <Item Value="KontragId"/>
     <Item Value="RegistratorId"/>
   </AttrArray>
   <ViewLinkAccessor
@@ -285,6 +371,24 @@ ORDER BY PERIOD DESC]]></SQLQuery>
     ViewLink="ua.divas.view.VwSuppMoveNachislKontragFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="RkoVOSuppl"
+    ViewLink="ua.divas.view.VwSupplRkoVOFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="addSelectedRowsObj"
+      MethodName="addSelectedRowsObj">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="kassaId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

@@ -98,4 +98,10 @@ public class NotificationBean {
         }
         return null;
     }
+
+    public void onHandleUnload(ClientEvent clientEvent) {
+        if (clientEvent.getParameters().get("args").equals("logoff")) {
+            logout();
+        }
+    }
 }

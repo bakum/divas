@@ -15,6 +15,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
 import javax.faces.event.ActionEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.validator.ValidatorException;
 
 import oracle.adf.model.BindingContext;
@@ -31,6 +32,7 @@ import oracle.binding.BindingContainer;
 import oracle.binding.OperationBinding;
 
 import oracle.jbo.Row;
+import oracle.jbo.RowIterator;
 import oracle.jbo.RowNotFoundException;
 import oracle.jbo.uicli.binding.JUCtrlHierBinding;
 import oracle.jbo.uicli.binding.JUCtrlHierNodeBinding;
@@ -42,7 +44,7 @@ import org.apache.myfaces.trinidad.model.RowKeySet;
 
 public class SupplierBean {
     private RichTreeTable treeTable;
-    
+
     public void setTreeTable(RichTreeTable treeTable) {
         this.treeTable = treeTable;
     }
@@ -53,7 +55,7 @@ public class SupplierBean {
 
     public SupplierBean() {
     }
-    
+
     public BindingContainer getBindings() {
         return BindingContext.getCurrent().getCurrentBindingsEntry();
     }
@@ -106,11 +108,52 @@ public class SupplierBean {
             }
         }
     }
-    
+
+    private Boolean isKontragentDeleted(String konId) {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("VwKontragAllItems1Iterator");
+        Boolean result = null;
+        if (it != null) {
+            RowIterator rIter = it.findRowsByAttributeValue("Id", true, konId);
+            if (rIter != null) {
+                Integer del = (Integer) rIter.first().getAttribute("Deleted");
+                if (del.intValue() == 1) {
+                    return new Boolean(true);
+                } else {
+                    return new Boolean(false);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private String getAttrValueFromSelected(String attrName) {
+        RichTreeTable tree1 = this.getTreeTable();
+        RowKeySet rks2 = tree1.getSelectedRowKeys();
+        Iterator rksIterator = rks2.iterator();
+        String result = null;
+        if (rksIterator.hasNext()) {
+            List key = (List) rksIterator.next();
+            JUCtrlHierBinding treeBinding = null;
+            treeBinding = (JUCtrlHierBinding) ((CollectionModel) tree1.getValue()).getWrappedData();
+            JUCtrlHierNodeBinding nodeBinding = treeBinding.findNodeByKeyPath(key);
+
+            Row rw = nodeBinding.getRow();
+            //print first row attribute. Note that in a tree you have to
+            //determine the node type if you want to select node attributes
+            //by name and not index
+            String rowType = rw.getStructureDef().getDefName();
+            System.out.println(rowType);
+            result = (String) rw.getAttribute(attrName);
+        }
+        return result;
+    }
+
     public void refresh() {
         AdfFacesContext.getCurrentInstance().addPartialTarget(getTreeTable());
     }
-    
+
     public void resetBindingValue(String expression, Object newValue) {
         FacesContext ctx = FacesContext.getCurrentInstance();
         Application app = ctx.getApplication();
@@ -125,7 +168,7 @@ public class SupplierBean {
         resetBindingValue("#{bindings.addPkoFromZamer_kassaId1.inputValue}", null);
         resetBindingValue("#{bindings.Summa.inputValue}", null);
     }
-    
+
     public void onDialogPko(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().name().equals("ok")) {
             DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
@@ -164,7 +207,59 @@ public class SupplierBean {
             }
         }
     }
-    
+
+    public void onDialogRkoOrder(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            if (this.isKontragentDeleted(getAttrValueFromSelected("KontragId")).booleanValue() == true) {
+                FacesContext ctx = FacesContext.getCurrentInstance();
+                FacesMessage msg =
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Kontragent is deleted",
+                                     "Контрагент помечен на удаление" + " операция невозможна!");
+                ctx.addMessage(null, msg);
+                return;
+            }
+            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("VwSupplierMoves1Iterator");
+            Row currRow = it.getCurrentRow(); */
+
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding oper = (OperationBinding) binding.getOperationBinding("addRkoOrder");
+            if (oper != null) {
+                oper.getParamsMap().put("kontragId", getAttrValueFromSelected("KontragId"));
+                oper.getParamsMap().put("OrderId", getAttrValueFromSelected("RegistratorId"));
+                oper.execute();
+
+                refresh();
+            }
+        }
+    }
+
+    public void onDialogPkoOrder(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            if (this.isKontragentDeleted(getAttrValueFromSelected("KontragId")).booleanValue() == true) {
+                FacesContext ctx = FacesContext.getCurrentInstance();
+                FacesMessage msg =
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Kontragent is deleted",
+                                     "Контрагент помечен на удаление" + " операция невозможна!");
+                ctx.addMessage(null, msg);
+                return;
+            }
+            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("VwSupplierMoves1Iterator");
+            Row currRow = it.getCurrentRow(); */
+
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding oper = (OperationBinding) binding.getOperationBinding("addPkoOrder");
+            if (oper != null) {
+                oper.getParamsMap().put("kontragId", getAttrValueFromSelected("KontragId"));
+                oper.getParamsMap().put("OrderId", getAttrValueFromSelected("RegistratorId"));
+                oper.execute();
+
+                refresh();
+            }
+        }
+    }
+
     private boolean isDigit(String st) {
         char[] utu = st.toCharArray();
         boolean isDigit = true;
@@ -176,13 +271,13 @@ public class SupplierBean {
         }
         return isDigit;
     }
-    
+
     public void onValidateSumm(FacesContext facesContext, UIComponent uIComponent, Object object) {
         boolean fatal = false;
 
         if ((object == null) || (object.toString().isEmpty())) {
             fatal = true;
-        /* } else if (!isDigit(object.toString())) {
+            /* } else if (!isDigit(object.toString())) {
             fatal = true; */
         } else if (Float.parseFloat(object.toString()) <= 0) {
             fatal = true;
@@ -197,8 +292,32 @@ public class SupplierBean {
         }
 
     }
+    
+    private void setMarkToSelected() {
+        RichTreeTable tree1 = this.getTreeTable();
+        RowKeySet rks2 = tree1.getSelectedRowKeys();
+        Iterator rksIterator = rks2.iterator();
+        if (rksIterator.hasNext()) {
+            List key = (List) rksIterator.next();
+            JUCtrlHierBinding treeBinding = null;
+            treeBinding = (JUCtrlHierBinding) ((CollectionModel) tree1.getValue()).getWrappedData();
+            JUCtrlHierNodeBinding nodeBinding = treeBinding.findNodeByKeyPath(key);
+
+            Row rw = nodeBinding.getRow();
+            //print first row attribute. Note that in a tree you have to
+            //determine the node type if you want to select node attributes
+            //by name and not index
+            String rowType = rw.getStructureDef().getDefName();
+            System.out.println(rowType);
+            rw.setAttribute("Mark", 1);
+        }
+    }
 
     public void onRefresh(ActionEvent actionEvent) {
         refresh();
+    }
+
+    public void onCheckMark(ValueChangeEvent valueChangeEvent) {
+        //setMarkToSelected();
     }
 }

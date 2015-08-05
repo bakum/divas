@@ -12,6 +12,24 @@
                             <f:facet name="toolbar">
                                 <af:toolbar id="t3">
                                     <af:button text="Обновить" id="b5" actionListener="#{supplier.onRefresh}"/>
+                                    <af:button actionListener="#{bindings.Rollback.execute}" text="Отменить"
+                                               disabled="#{!bindings.Rollback.enabled}" immediate="true" id="b10">
+                                        <af:resetActionListener/>
+                                    </af:button>
+                                    <af:panelFormLayout id="pfl5">
+                                        <af:panelGroupLayout id="pgl4" layout="horizontal">
+                                            <af:selectOneChoice label="Касса для оплаты" id="soc5"
+                                                                value="#{bindings.addSelectedRowsObj_kassaId1.inputValue}"
+                                                                required="true" autoSubmit="true">
+                                                <f:selectItems value="#{bindings.addSelectedRowsObj_kassaId1.items}"
+                                                               id="si5"/>
+                                            </af:selectOneChoice>
+                                            <af:spacer width="10" height="10" id="s2"/>
+                                            <af:button actionListener="#{bindings.addSelectedRowsObj.execute}"
+                                                       text="Сформировать ордера"
+                                                       disabled="#{!bindings.addSelectedRowsObj.enabled}" id="b11"/>
+                                        </af:panelGroupLayout>
+                                    </af:panelFormLayout>
                                 </af:toolbar>
                             </f:facet>
                             <f:facet name="statusbar"/>
@@ -28,19 +46,42 @@
                                     <af:outputText value="#{node}" id="ot2"/>
                                 </f:facet>
                                 <af:column id="c2" width="200" headerText="Регистратор"
-                                           align="#{node.bindings.PayName == null ? 'left' : 'right'}">
-                                    <af:outputText value="#{node.bindings.RegString}" id="ot3"/>
-                                    <af:outputText value="#{node.bindings.PayName}" id="ot8"
-                                                   inlineStyle="font-style:italic;"/>
+                                           align="#{node.bindings.TableName != null ? 'left' : 'right'}">
+                                    <af:outputText value="#{node.bindings.RegString}" id="ot3"
+                                                   inlineStyle="#{node.bindings.TableName == null ? 'font-style:italic;' : ''}"/>
                                 </af:column>
-                                <af:column id="c3" headerText="Приход">
+                                <af:column id="c3" headerText="Приход" align="right">
                                     <af:outputText value="#{node.bindings.SumSummPrihod}" id="ot4"/>
-                                </af:column>
-                                <af:column id="c4" headerText="Расход"
-                                           align="#{node.bindings.PayName == null ? 'left' : 'right'}">
-                                    <af:outputText value="#{node.bindings.SumSummRashod}" id="ot5"/>
-                                    <af:outputText value="#{node.bindings.Summ}" id="ot7"
+                                    <af:outputText value="#{node.bindings.Summa}" id="ot9"
                                                    inlineStyle="font-style:italic;"/>
+                                    <af:outputText value="#{node.bindings.SumRko}" id="ot7"/>
+                                </af:column>
+                                <af:column id="c4" headerText="Расход" align="right">
+                                    <af:outputText value="#{node.bindings.SumRashod}" id="ot5"/>
+                                    <af:outputText value="#{node.bindings.SummaRash}" id="ot10"/>
+                                </af:column>
+                                <af:column id="c6" align="right" headerText="Оплатить" width="130">
+                                    <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                        <af:selectBooleanCheckbox value="#{node.MarkForPay}" id="ot8"
+                                                                  visible="#{node.bindings.TableName == 'ORDERS' ? node.bindings.BallForOrder != '0' ? true:false : false}"
+                                                                  rendered="#{node.MarkForPay == null ? false : true}"
+                                                                  autoSubmit="true"
+                                                                  valueChangeListener="#{supplier.onCheckMark}"/>
+                                        <af:spacer width="10" height="10" id="s1"/>
+                                        <af:button text="#{node.bindings.BallForOrder}" id="b6"
+                                                   visible="#{node.bindings.TableName == 'ORDERS' ? node.bindings.BallForOrder != '0' ? true:false : false}"
+                                                   icon="/img/coins.png"
+                                                   inlineStyle="#{node.bindings.BallForOrder &lt; '0' ? 'Color:Red;':''}"
+                                                   rendered="#{node.bindings.BallForOrder == null ? false : node.bindings.BallForOrder == '0' ? false : node.bindings.BallForOrder > '0' ? false : true}"
+                                                   shortDesc="Оформить РКО">
+                                            <af:showPopupBehavior popupId="::p3"/>
+                                        </af:button>
+                                        <af:button text="#{node.bindings.BallForOrder}" id="b7" icon="/img/coins.png"
+                                                   rendered="#{node.bindings.BallForOrder == null ? false : node.bindings.BallForOrder == '0' ? false : node.bindings.BallForOrder &lt; '0' ? false : true}"
+                                                   shortDesc="Оформить ПКО">
+                                            <af:showPopupBehavior popupId="::p4"/>
+                                        </af:button>
+                                    </af:panelGroupLayout>
                                 </af:column>
                                 <af:column id="c5" headerText="Задолженность" align="right">
                                     <af:outputText value="#{node.DebtSupplier}" id="ot6"
@@ -111,6 +152,56 @@
                                                    disabled="#{!bindings.addRko.enabled}" id="b4" rendered="false"/>
                                     </af:panelFormLayout>
                                     <f:facet name="buttonBar"/>
+                                </af:dialog>
+                            </af:popup>
+                            <af:popup childCreation="deferred" id="p3" resetEditableValues="whenCanceled"
+                                      contentDelivery="lazyUncached" popupFetchListener="#{supplier.onPopuoRko}">
+                                <af:dialog id="d3" title="Расход из кассы"
+                                           dialogListener="#{supplier.onDialogRkoOrder}">
+                                    <f:facet name="buttonBar"/>
+                                    <af:panelFormLayout id="pfl3">
+                                        <af:selectOneChoice label="Касса для оплаты" id="soc3"
+                                                            value="#{bindings.addRko_kassaId1.inputValue}"
+                                                            required="true">
+                                            <f:selectItems value="#{bindings.addRko_kassaId1.items}" id="si3"/>
+                                        </af:selectOneChoice>
+                                        <af:inputNumberSpinbox value="#{bindings.Summa1.inputValue}"
+                                                               label="Сумма для оплаты"
+                                                               columns="#{bindings.Summa1.hints.displayWidth}"
+                                                               shortDesc="#{bindings.Summa1.hints.tooltip}" id="ins1"
+                                                               required="true" validator="#{supplier.onValidateSumm}">
+                                            <f:validator binding="#{bindings.Summa1.validator}"/>
+                                            <af:convertNumber groupingUsed="false" pattern="#{bindings.Summa1.format}"/>
+                                        </af:inputNumberSpinbox>
+                                        <af:button actionListener="#{bindings.addRko.execute}" text="addRko"
+                                                   disabled="#{!bindings.addRko.enabled}" id="b8" rendered="false"/>
+                                    </af:panelFormLayout>
+                                </af:dialog>
+                            </af:popup>
+                            <af:popup childCreation="deferred" id="p4"
+                                      contentDelivery="lazyUncached" resetEditableValues="whenCanceled"
+                                      popupFetchListener="#{supplier.onPopupPko}">
+                                <af:dialog id="d4" title="Приход в кассу" dialogListener="#{supplier.onDialogPkoOrder}">
+                                    <f:facet name="buttonBar"/>
+                                    <af:panelFormLayout id="pfl4">
+                                        <af:selectOneChoice label="Касса для оплаты" id="soc4"
+                                                            value="#{bindings.addPkoFromZamer_kassaId1.inputValue}"
+                                                            required="true">
+                                            <f:selectItems value="#{bindings.addPkoFromZamer_kassaId1.items}" id="si4"/>
+                                        </af:selectOneChoice>
+                                        <af:inputNumberSpinbox value="#{bindings.Summa.inputValue}"
+                                                               label="Cумма для оплаты"
+                                                               columns="#{bindings.Summa.hints.displayWidth}"
+                                                               shortDesc="#{bindings.Summa.hints.tooltip}" id="ins2"
+                                                               required="true" validator="#{supplier.onValidateSumm}">
+                                            <f:validator binding="#{bindings.Summa.validator}"/>
+                                            <af:convertNumber groupingUsed="false" pattern="#{bindings.Summa.format}"/>
+                                        </af:inputNumberSpinbox>
+                                        <af:button actionListener="#{bindings.addPkoFromZamer.execute}"
+                                                   text="addPkoFromZamer"
+                                                   disabled="#{!bindings.addPkoFromZamer.enabled}" id="b9"
+                                                   rendered="false"/>
+                                    </af:panelFormLayout>
                                 </af:dialog>
                             </af:popup>
                         </af:panelCollection>

@@ -62,6 +62,7 @@ public class RkoViewRowImpl extends ViewRowImpl {
         Summa,
         REditable,
         OrderId,
+        RegString,
         Enbl,
         VwRkoMoves,
         DivisionsView1,
@@ -117,6 +118,7 @@ public class RkoViewRowImpl extends ViewRowImpl {
     public static final int SUMMA = AttributesEnum.Summa.index();
     public static final int REDITABLE = AttributesEnum.REditable.index();
     public static final int ORDERID = AttributesEnum.OrderId.index();
+    public static final int REGSTRING = AttributesEnum.RegString.index();
     public static final int ENBL = AttributesEnum.Enbl.index();
     public static final int VWRKOMOVES = AttributesEnum.VwRkoMoves.index();
     public static final int DIVISIONSVIEW1 = AttributesEnum.DivisionsView1.index();
@@ -429,6 +431,15 @@ public class RkoViewRowImpl extends ViewRowImpl {
      */
     public void setOrderId(String value) {
         setAttributeInternal(ORDERID, value);
+    }
+
+
+    /**
+     * Gets the attribute value for the calculated attribute RegString.
+     * @return the RegString
+     */
+    public String getRegString() {
+        return (String) getAttributeInternal(REGSTRING);
     }
 
     /**

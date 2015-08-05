@@ -72,7 +72,6 @@ FROM
   INNER JOIN VW_MOVES
   ON KONTRAGENTS.ID           = VW_MOVES.SUBCONTO1_DEB
   WHERE KONTRAGENTS.IS_GROUP  = 0
-  AND KONTRAGENTS.DELETED     = 0
   AND KONTRAGENTS.IS_MEASURER = 0
   GROUP BY KONTRAGENTS.ID,
     KONTRAGENTS.IS_GROUP,
@@ -114,7 +113,6 @@ FROM
   INNER JOIN VW_MOVES
   ON KONTRAGENTS.ID           = VW_MOVES.SUBCONTO1_KRED
   WHERE KONTRAGENTS.IS_GROUP  = 0
-  AND KONTRAGENTS.DELETED     = 0
   AND KONTRAGENTS.IS_MEASURER = 0
   GROUP BY KONTRAGENTS.ID,
     KONTRAGENTS.IS_GROUP,
@@ -391,7 +389,7 @@ GROUP BY ID,
     AliasName="VIEW_ATTR"
     SQLType="NUMERIC">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[VwSupplierMoves.sum("SumSumm != null ? (-1)*SumSumm : 0")]]></TransientExpression>
+    <TransientExpression><![CDATA[(SumDebRko == null ? 0 : SumDebRko)+(SumDebSumm == null ? 0 : SumDebSumm)-(SumDebPko == null ? 0 : SumDebPko)]]></TransientExpression>
   </ViewAttribute>
   <ViewAttribute
     Name="SumCalcAdd"
@@ -405,6 +403,45 @@ GROUP BY ID,
     IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[VwBuyerMoves.sum("SumCalc != null ? SumCalc : 0")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SumDebRko"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[VwSupplierMoves.sum("SumRko != null ? SumRko : 0")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SumDebSumm"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[VwSupplierMoves.sum("SumSumm != null ? (-1)*SumSumm : 0")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SumDebPko"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[VwSupplierMoves.sum("SumPko != null ? SumPko : 0")]]></TransientExpression>
   </ViewAttribute>
   <ViewLinkAccessor
     Name="VwSupplierMoves"

@@ -3350,6 +3350,40 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         
     }
     
+    public void addRkoOrder(String kassaId, String kontragId, 
+                            String OrderId, BigDecimal Summa){
+        
+        ViewObjectImpl rko = getRkoView1();
+        Row r2 = rko.createRow();
+        
+        r2.setAttribute("KassaId", kassaId);
+        r2.setAttribute("KontragId", kontragId);
+        r2.setAttribute("OrderId", OrderId);
+        r2.setAttribute("Summa", Summa);
+        
+        ViewObjectImpl opVO = getOperationRkoView1();
+        ViewRowSetImpl rs =
+            (ViewRowSetImpl) opVO.findByViewCriteria(opVO.getViewCriteria("OperationRkoToSupplier"), -1,
+                                                   opVO.QUERY_MODE_SCAN_DATABASE_TABLES);
+        Row row = rs.first();
+        String op = null;
+        if (row != null) {
+            op = (String) row.getAttribute("Id");
+        }
+        
+        r2.setAttribute("OperationId", op);
+        
+        try {
+            rko.insertRow(r2); //Insert that row in ViewObject
+            getDBTransaction().commit(); //Commit the changes
+            rko.executeQuery();
+        } catch (Exception e) {
+            getDBTransaction().rollback(); //Commit the changes
+            e.printStackTrace();
+        }
+        
+    }
+    
     public void addPkoFromZamer(String kassaId, String kontragId, BigDecimal Summa) {
         
         ViewObjectImpl pko = getPkoView1();
@@ -3357,6 +3391,41 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         
         r2.setAttribute("KassaId", kassaId);
         r2.setAttribute("KontragId", kontragId);
+        r2.setAttribute("Summa", Summa);
+        
+        ViewObjectImpl opVO = getOperationPkoView1();
+        ViewRowSetImpl rs =
+            (ViewRowSetImpl) opVO.findByViewCriteria(opVO.getViewCriteria("OperationPkoFromSupplier"), -1,
+                                                   opVO.QUERY_MODE_SCAN_DATABASE_TABLES);
+        Row row = rs.first();
+        String op = null;
+        if (row != null) {
+            op = (String) row.getAttribute("Id");
+        }
+        
+        r2.setAttribute("OperationId", op);
+       
+        
+        try {
+            pko.insertRow(r2); //Insert that row in ViewObject
+            getDBTransaction().commit(); //Commit the changes
+            pko.executeQuery();
+        } catch (Exception e) {
+            getDBTransaction().rollback(); //Commit the changes
+            e.printStackTrace();
+        }
+
+    }
+    
+    public void addPkoOrder(String kassaId, String kontragId, 
+                            String OrderId, BigDecimal Summa) {
+        
+        ViewObjectImpl pko = getPkoView1();
+        Row r2 = pko.createRow();
+        
+        r2.setAttribute("KassaId", kassaId);
+        r2.setAttribute("KontragId", kontragId);
+        r2.setAttribute("OrderId", OrderId);
         r2.setAttribute("Summa", Summa);
         
         ViewObjectImpl opVO = getOperationPkoView1();
@@ -4174,6 +4243,31 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getNetGroupDetailFkLink1() {
         return (ViewLinkImpl) findViewLink("NetGroupDetailFkLink1");
+    }
+
+
+    /**
+     * Container's getter for RkoVOSuppl1.
+     * @return RkoVOSuppl1
+     */
+    public ViewObjectImpl getRkoVOSuppl1() {
+        return (ViewObjectImpl) findViewObject("RkoVOSuppl1");
+    }
+
+    /**
+     * Container's getter for VwSupplRkoVOFkLink1.
+     * @return VwSupplRkoVOFkLink1
+     */
+    public ViewLinkImpl getVwSupplRkoVOFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwSupplRkoVOFkLink1");
+    }
+
+    /**
+     * Container's getter for RkoVOSuppl2.
+     * @return RkoVOSuppl2
+     */
+    public ViewObjectImpl getRkoVOSuppl2() {
+        return (ViewObjectImpl) findViewObject("RkoVOSuppl2");
     }
 }
 

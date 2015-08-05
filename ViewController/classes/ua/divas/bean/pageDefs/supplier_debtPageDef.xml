@@ -4,14 +4,17 @@
   <parameters/>
   <executables>
     <variableIterator id="variables">
-      <variable Type="java.lang.String" Name="addPkoFromZamer_kassaId" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="addPkoFromZamer_kassaId" IsQueriable="false"
+                DefaultValue="#{bindings.addSelectedRowsObj_kassaId1.inputValue}"/>
       <variable Type="java.math.BigDecimal" Name="addPkoFromZamer_Summa" IsQueriable="false"/>
-      <variable Type="java.lang.String" Name="addRko_kassaId" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="addRko_kassaId" IsQueriable="false"
+                DefaultValue="#{bindings.addSelectedRowsObj_kassaId1.inputValue}"/>
       <variable Type="java.math.BigDecimal" Name="addRko_Summa" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="addSelectedRowsObj_kassaId" IsQueriable="false"/>
     </variableIterator>
     <iterator Binds="VwKontragAllItems1" RangeSize="-1" DataControl="AppModuleDataControl"
               id="VwKontragAllItems1Iterator"/>
-    <iterator Binds="VwSupplierMoves1" RangeSize="10" DataControl="AppModuleDataControl" id="VwSupplierMoves1Iterator"/>
+    <iterator Binds="VwSupplierMoves1" RangeSize="-1" DataControl="AppModuleDataControl" id="VwSupplierMoves1Iterator"/>
     <iterator Binds="KassaSettingsView1" RangeSize="-1" DataControl="AppModuleDataControl"
               id="KassaSettingsView1Iterator"/>
   </executables>
@@ -37,17 +40,20 @@
           <Item Value="SumSummPrihod"/>
           <Item Value="SumSummRashod"/>
           <Item Value="TableName"/>
+          <Item Value="SumRko"/>
+          <Item Value="BallForOrder"/>
+          <Item Value="MarkForPay"/>
+          <Item Value="SumRashod"/>
         </AttrNames>
         <Accessors>
-          <Item Value="OrdersTpNachisleniaView"/>
+          <Item Value="RkoVOSuppl"/>
         </Accessors>
       </nodeDefinition>
-      <nodeDefinition DefName="ua.divas.view.OrdersTpNachisleniaView" Name="VwKontragAllItems12">
+      <nodeDefinition DefName="ua.divas.view.RkoVOSuppl" Name="VwKontragAllItems12">
         <AttrNames>
-          <Item Value="CalcId"/>
-          <Item Value="Summ"/>
-          <Item Value="Percent"/>
-          <Item Value="PayName"/>
+          <Item Value="RegString"/>
+          <Item Value="Summa"/>
+          <Item Value="SummaRash"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -107,6 +113,40 @@
     <list StaticList="false" IterBinding="variables" ListIter="KassaSettingsView1Iterator" id="addRko_kassaId1">
       <AttrNames>
         <Item Value="addRko_kassaId"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="KassaId"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="KassaName"/>
+      </ListDisplayAttrNames>
+    </list>
+    <methodAction id="addRkoOrder" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addRkoOrder"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="kassaId" NDValue="${bindings.addRko_kassaId}" NDType="java.lang.String"/>
+      <NamedData NDName="kontragId" NDType="java.lang.String"/>
+      <NamedData NDName="OrderId" NDType="java.lang.String"/>
+      <NamedData NDName="Summa" NDType="java.math.BigDecimal" NDValue="${bindings.addRko_Summa}"/>
+    </methodAction>
+    <methodAction id="addPkoOrder" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addPkoOrder"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="kassaId" NDType="java.lang.String" NDValue="${bindings.addPkoFromZamer_kassaId}"/>
+      <NamedData NDName="kontragId" NDType="java.lang.String"/>
+      <NamedData NDName="OrderId" NDType="java.lang.String"/>
+      <NamedData NDName="Summa" NDType="java.math.BigDecimal" NDValue="${bindings.addPkoFromZamer_Summa}"/>
+    </methodAction>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <methodAction id="addSelectedRowsObj" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="addSelectedRowsObj" IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.VwSupplierMoves2">
+      <NamedData NDName="kassaId" NDValue="${bindings.addSelectedRowsObj_kassaId}" NDType="java.lang.String"/>
+    </methodAction>
+    <list StaticList="false" IterBinding="variables" ListIter="KassaSettingsView1Iterator"
+          id="addSelectedRowsObj_kassaId1">
+      <AttrNames>
+        <Item Value="addSelectedRowsObj_kassaId"/>
       </AttrNames>
       <ListAttrNames>
         <Item Value="KassaId"/>

@@ -121,6 +121,15 @@
                                     <f:validator binding="#{bindings.Summa.validator}"/>
                                     <af:convertNumber groupingUsed="false" pattern="#{bindings.Summa.format}"/>
                                 </af:inputNumberSpinbox>
+                                <af:selectOneChoice value="#{bindings.OrderId.inputValue}"
+                                                    label="#{bindings.OrderId.label}"
+                                                    required="#{bindings.OrderId.hints.mandatory}"
+                                                    shortDesc="#{bindings.OrderId.hints.tooltip}" id="soc8"
+                                                    visible="#{edit_rko.visibleKontrag}"
+                                                    readOnly="#{bindings.REditable.inputValue == 1 ? false : true}">
+                                    <f:selectItems value="#{bindings.OrderId.items}" id="si8"/>
+                                    <f:validator binding="#{bindings.OrderId.validator}"/>
+                                </af:selectOneChoice>
                                 <af:inputText value="#{bindings.Comments.inputValue}"
                                               label="#{bindings.Comments.hints.label}"
                                               required="#{bindings.Comments.hints.mandatory}"

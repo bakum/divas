@@ -38,6 +38,14 @@ public class AppModuleClient extends ApplicationModuleImpl implements AppModule 
         return;
     }
 
+    public void addPkoOrder(String kassaId, String kontragId, String OrderId, BigDecimal Summa) {
+        Object _ret = this.riInvokeExportedMethod(this, "addPkoOrder", new String[] {
+                                                  "java.lang.String", "java.lang.String", "java.lang.String",
+                                                  "java.math.BigDecimal"
+        }, new Object[] { kassaId, kontragId, OrderId, Summa });
+        return;
+    }
+
     public void addProfitDistrib(BigDecimal Summa) {
         Object _ret = this.riInvokeExportedMethod(this, "addProfitDistrib", new String[] { "java.math.BigDecimal" }, new Object[] {
                                                   Summa });
@@ -49,6 +57,14 @@ public class AppModuleClient extends ApplicationModuleImpl implements AppModule 
                                                   "java.lang.String", "java.lang.String", "java.math.BigDecimal" }, new Object[] {
                                                   kassaId, kontragId, Summa
         });
+        return;
+    }
+
+    public void addRkoOrder(String kassaId, String kontragId, String OrderId, BigDecimal Summa) {
+        Object _ret = this.riInvokeExportedMethod(this, "addRkoOrder", new String[] {
+                                                  "java.lang.String", "java.lang.String", "java.lang.String",
+                                                  "java.math.BigDecimal"
+        }, new Object[] { kassaId, kontragId, OrderId, Summa });
         return;
     }
 
