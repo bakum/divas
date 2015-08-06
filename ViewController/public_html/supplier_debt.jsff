@@ -16,20 +16,6 @@
                                                disabled="#{!bindings.Rollback.enabled}" immediate="true" id="b10">
                                         <af:resetActionListener/>
                                     </af:button>
-                                    <af:panelFormLayout id="pfl5">
-                                        <af:panelGroupLayout id="pgl4" layout="horizontal">
-                                            <af:selectOneChoice label="Касса для оплаты" id="soc5"
-                                                                value="#{bindings.addSelectedRowsObj_kassaId1.inputValue}"
-                                                                required="true" autoSubmit="true">
-                                                <f:selectItems value="#{bindings.addSelectedRowsObj_kassaId1.items}"
-                                                               id="si5"/>
-                                            </af:selectOneChoice>
-                                            <af:spacer width="10" height="10" id="s2"/>
-                                            <af:button actionListener="#{bindings.addSelectedRowsObj.execute}"
-                                                       text="Сформировать ордера"
-                                                       disabled="#{!bindings.addSelectedRowsObj.enabled}" id="b11"/>
-                                        </af:panelGroupLayout>
-                                    </af:panelFormLayout>
                                 </af:toolbar>
                             </f:facet>
                             <f:facet name="statusbar"/>
@@ -37,7 +23,8 @@
                                           rowSelection="single" id="tt1" selectionListener="#{supplier.onTreeSelect}"
                                           binding="#{supplier.treeTable}">
                                 <f:facet name="nodeStamp">
-                                    <af:column id="c1" inlineStyle="font-weight:bold;" headerText="Наименование"
+                                    <af:column id="c1"
+                                               inlineStyle="#{node.bindings.Fullname.inputValue != null ? 'font-weight:bold;background-color:#DCF0AB' : ''}" headerText="Наименование"
                                                width="250">
                                         <af:outputText value="#{node.Fullname}" id="ot1"/>
                                     </af:column>
@@ -46,28 +33,34 @@
                                     <af:outputText value="#{node}" id="ot2"/>
                                 </f:facet>
                                 <af:column id="c2" width="200" headerText="Регистратор"
-                                           align="#{node.bindings.TableName != null ? 'left' : 'right'}">
+                                           align="#{node.bindings.TableName != null ? 'left' : 'right'}"
+                                           inlineStyle="#{node.bindings.Fullname.inputValue != null ? 'font-weight:bold;background-color:#DCF0AB' : ''}">
                                     <af:outputText value="#{node.bindings.RegString}" id="ot3"
                                                    inlineStyle="#{node.bindings.TableName == null ? 'font-style:italic;' : ''}"/>
                                 </af:column>
-                                <af:column id="c3" headerText="Приход" align="right">
-                                    <af:outputText value="#{node.bindings.SumSummPrihod}" id="ot4"/>
+                                <af:column id="c7" headerText="Опл, %" width="60" align="right"
+                                           inlineStyle="#{node.bindings.Fullname.inputValue != null ? 'font-weight:bold;background-color:#DCF0AB' : ''}">
+                                    <af:outputText value="#{node.Payed}" id="ot8"/>
+                                </af:column>
+                                <af:column id="c3" headerText="Оплаты" align="right"
+                                           inlineStyle="#{node.bindings.Fullname.inputValue != null ? 'font-weight:bold;background-color:#DCF0AB' : ''}"
+                                           width="80">
+                                    <af:outputText value="#{node.SumSummPrihod}" id="ot4"/>
                                     <af:outputText value="#{node.bindings.Summa}" id="ot9"
                                                    inlineStyle="font-style:italic;"/>
                                     <af:outputText value="#{node.bindings.SumRko}" id="ot7"/>
                                 </af:column>
-                                <af:column id="c4" headerText="Расход" align="right">
-                                    <af:outputText value="#{node.bindings.SumRashod}" id="ot5"/>
-                                    <af:outputText value="#{node.bindings.SummaRash}" id="ot10"/>
+                                <af:column id="c4" headerText="Начисления" align="right"
+                                           inlineStyle="#{node.bindings.Fullname.inputValue != null ? 'font-weight:bold;background-color:#DCF0AB' : ''}"
+                                           width="80">
+                                    <af:outputText value="#{node.SumSummRashod}" id="ot5"/>
+                                    <af:outputText value="#{node.SummaRash}" id="ot10"
+                                                   inlineStyle="font-style:italic;"/>
+                                    <af:outputText value="#{node.SumPko}" id="ot11"/>
                                 </af:column>
-                                <af:column id="c6" align="right" headerText="Оплатить" width="130">
+                                <af:column id="c6" align="right" width="120"
+                                           inlineStyle="#{node.bindings.Fullname.inputValue != null ? 'font-weight:bold;background-color:#DCF0AB' : ''}">
                                     <af:panelGroupLayout id="pgl3" layout="horizontal">
-                                        <af:selectBooleanCheckbox value="#{node.MarkForPay}" id="ot8"
-                                                                  visible="#{node.bindings.TableName == 'ORDERS' ? node.bindings.BallForOrder != '0' ? true:false : false}"
-                                                                  rendered="#{node.MarkForPay == null ? false : true}"
-                                                                  autoSubmit="true"
-                                                                  valueChangeListener="#{supplier.onCheckMark}"/>
-                                        <af:spacer width="10" height="10" id="s1"/>
                                         <af:button text="#{node.bindings.BallForOrder}" id="b6"
                                                    visible="#{node.bindings.TableName == 'ORDERS' ? node.bindings.BallForOrder != '0' ? true:false : false}"
                                                    icon="/img/coins.png"
@@ -81,9 +74,14 @@
                                                    shortDesc="Оформить ПКО">
                                             <af:showPopupBehavior popupId="::p4"/>
                                         </af:button>
+                                        <af:selectBooleanCheckbox id="sbc1" value="#{node.MarkForPay}"
+                                                                  rendered="#{node.MarkForPay == null ? false : true}"
+                                                                  autoSubmit="true" visible="false"/>
                                     </af:panelGroupLayout>
                                 </af:column>
-                                <af:column id="c5" headerText="Задолженность" align="right">
+                                <af:column id="c5" headerText="Задолженность" align="right" width="120"
+                                           inlineStyle="#{node.bindings.Fullname.inputValue != null ? 'font-weight:bold;background-color:#DCF0AB' : ''}">
+                                    <af:outputText value="#{node.SumDebRko}" id="ot12" rendered="false"/>
                                     <af:outputText value="#{node.DebtSupplier}" id="ot6"
                                                    inlineStyle="#{node.DebtSupplier &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}"
                                                    rendered="#{node.DebtSupplier == '0' ? true : false}"/>

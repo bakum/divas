@@ -389,7 +389,7 @@ GROUP BY ID,
     AliasName="VIEW_ATTR"
     SQLType="NUMERIC">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[(SumDebRko == null ? 0 : SumDebRko)+(SumDebSumm == null ? 0 : SumDebSumm)-(SumDebPko == null ? 0 : SumDebPko)]]></TransientExpression>
+    <TransientExpression><![CDATA[(SumSummPrihod == null ? 0 : SumSummPrihod)-(SumSummRashod == null ? 0 : SumSummRashod)+(SumDebRko == null ? 0 : SumDebRko)]]></TransientExpression>
   </ViewAttribute>
   <ViewAttribute
     Name="SumCalcAdd"
@@ -442,6 +442,32 @@ GROUP BY ID,
     SQLType="NUMERIC">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[VwSupplierMoves.sum("SumPko != null ? SumPko : 0")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SumSummRashod"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[VwSupplierMoves.sum("SumSummRashod != null ? SumSummRashod : 0")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SumSummPrihod"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[VwSupplierMoves.sum("SumSummPrihod != null ? SumSummPrihod : 0")]]></TransientExpression>
   </ViewAttribute>
   <ViewLinkAccessor
     Name="VwSupplierMoves"

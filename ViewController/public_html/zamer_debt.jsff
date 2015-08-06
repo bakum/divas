@@ -26,14 +26,22 @@
                         <af:column id="c2" width="200" headerText="Счет" visible="false">
                             <af:outputText value="#{node.bindings.Code}" id="ot3"/>
                         </af:column>
-                        <af:column id="c6" headerText="Регистратор" width="200">
-                            <af:outputText value="#{node.bindings.RegString}" id="ot4"/>
+                        <af:column id="c6" headerText="Регистратор" width="200"
+                                   align="#{node.bindings.TableName != null ? 'left' : 'right'}">
+                            <af:outputText value="#{node.bindings.RegString}" id="ot4"
+                                           inlineStyle="#{node.bindings.TableName == null ? 'font-style:italic;' : ''}"/>
                         </af:column>
-                        <af:column id="c4" headerText="Приход">
+                        <af:column id="c7" headerText="Опл, %" width="60" align="right">
+                            <af:outputText value="#{node.Payed}" id="ot10"/>
+                        </af:column>
+                        <af:column id="c4" headerText="Оплаты" align="right">
                             <af:outputText value="#{node.bindings.SummPrihod}" id="ot6"/>
+                            <af:outputText value="#{node.bindings.Summa}" id="ot9" inlineStyle="font-style:italic;"/>
                         </af:column>
-                        <af:column id="c5" headerText="Расход">
+                        <af:column id="c5" headerText="Начисления" align="right">
                             <af:outputText value="#{node.bindings.SummRashod}" id="ot7"/>
+                            <af:outputText value="#{node.bindings.SummaRash}" id="ot8"
+                                           inlineStyle="font-style:italic;"/>
                         </af:column>
                         <af:column id="c3" headerText="Задолженность (нам должен)" align="right">
                             <af:panelGroupLayout id="pgl2" layout="horizontal" halign="right">

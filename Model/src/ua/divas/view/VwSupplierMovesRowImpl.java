@@ -19,6 +19,7 @@ public class VwSupplierMovesRowImpl extends ViewRowImpl {
      * AttributesEnum: generated enum for identifying attributes and accessors. DO NOT MODIFY.
      */
     public enum AttributesEnum {
+        Id,
         KontragId,
         Kontrag,
         DivisionId,
@@ -30,6 +31,7 @@ public class VwSupplierMovesRowImpl extends ViewRowImpl {
         RegistratorId,
         Period,
         RegString,
+        Payed,
         Mark,
         SumRko,
         MarkForPay,
@@ -62,6 +64,7 @@ public class VwSupplierMovesRowImpl extends ViewRowImpl {
     }
 
 
+    public static final int ID = AttributesEnum.Id.index();
     public static final int KONTRAGID = AttributesEnum.KontragId.index();
     public static final int KONTRAG = AttributesEnum.Kontrag.index();
     public static final int DIVISIONID = AttributesEnum.DivisionId.index();
@@ -73,6 +76,7 @@ public class VwSupplierMovesRowImpl extends ViewRowImpl {
     public static final int REGISTRATORID = AttributesEnum.RegistratorId.index();
     public static final int PERIOD = AttributesEnum.Period.index();
     public static final int REGSTRING = AttributesEnum.RegString.index();
+    public static final int PAYED = AttributesEnum.Payed.index();
     public static final int MARK = AttributesEnum.Mark.index();
     public static final int SUMRKO = AttributesEnum.SumRko.index();
     public static final int MARKFORPAY = AttributesEnum.MarkForPay.index();
@@ -86,6 +90,14 @@ public class VwSupplierMovesRowImpl extends ViewRowImpl {
      * This is the default constructor (do not remove).
      */
     public VwSupplierMovesRowImpl() {
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute Id.
+     * @return the Id
+     */
+    public String getId() {
+        return (String) getAttributeInternal(ID);
     }
 
     /**
@@ -174,6 +186,14 @@ public class VwSupplierMovesRowImpl extends ViewRowImpl {
      */
     public String getRegString() {
         return (String) getAttributeInternal(REGSTRING);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute Payed.
+     * @return the Payed
+     */
+    public String getPayed() {
+        return (String) getAttributeInternal(PAYED);
     }
 
     /**

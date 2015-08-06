@@ -4269,5 +4269,21 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewObjectImpl getRkoVOSuppl2() {
         return (ViewObjectImpl) findViewObject("RkoVOSuppl2");
     }
+
+    /**
+     * Container's getter for RkoVOSuppl3.
+     * @return RkoVOSuppl3
+     */
+    public ViewObjectImpl getRkoVOSuppl3() {
+        return (ViewObjectImpl) findViewObject("RkoVOSuppl3");
+    }
+
+    /**
+     * Container's getter for VwZamerRkoVOFkLink1.
+     * @return VwZamerRkoVOFkLink1
+     */
+    public ViewLinkImpl getVwZamerRkoVOFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwZamerRkoVOFkLink1");
+    }
 }
 

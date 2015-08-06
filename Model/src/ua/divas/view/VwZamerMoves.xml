@@ -32,50 +32,117 @@
       </SchemaBasedProperties>
     </Properties>
   </Variable>
-  <SQLQuery><![CDATA[SELECT MOVE_KONTRAG.ID,
-  MOVE_KONTRAG.KONTRAG_ID,
-  MOVE_KONTRAG.KONTRAG,
-  MOVE_KONTRAG.DIVISION_ID DIVISION_ID,
-  MOVE_KONTRAG.TABLE_NAME TABLE_NAME,  
-  MOVE_KONTRAG.CODE,
-  MOVE_KONTRAG.SUMM,
-  case 
-        when MOVE_KONTRAG.SUMM >=0
-        then MOVE_KONTRAG.SUMM
-    end as summ_rashod,
-    case 
-        when MOVE_KONTRAG.SUMM < 0
-        then (-1)*MOVE_KONTRAG.SUMM
-    end as summ_prihod,
-  MOVE_KONTRAG.REGISTRATOR_ID,
-  MOVE_KONTRAG.PERIOD,
-  KONTRAGENTS.IS_MEASURER,
-  CASE
-        WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('orders')
-            THEN 'Заказ №'||(select num from orders where id = MOVE_KONTRAG.REGISTRATOR_ID)||' от '||to_char(
-            (select dat from orders where id = MOVE_KONTRAG.REGISTRATOR_ID),'DD-MM-YYYY')
-        WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('pko')
-            THEN 'ПКО №'||(select num from pko where id = MOVE_KONTRAG.REGISTRATOR_ID)||' от '||to_char(
-            (select dat from pko where id = MOVE_KONTRAG.REGISTRATOR_ID),'DD-MM-YYYY')  
-        WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('rko')
-            THEN 'РКО №'||(select num from rko where id = MOVE_KONTRAG.REGISTRATOR_ID)||' от '||to_char(
-            (select dat from rko where id = MOVE_KONTRAG.REGISTRATOR_ID),'DD-MM-YYYY')  
-        WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('other_zatraty')
-            THEN 'Админ. затраты №'||(select num from other_zatraty where id = MOVE_KONTRAG.REGISTRATOR_ID)||' от '||to_char(
-            (select dat from other_zatraty where id = MOVE_KONTRAG.REGISTRATOR_ID),'DD-MM-YYYY')     
-        WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('start_ost')
+  <SQLQuery><![CDATA[SELECT max(ID) ID,
+  KONTRAG_ID,
+  KONTRAG,
+  DIVISION_ID,
+  TABLE_NAME,
+  CODE,
+  SUM(SUMM) as Summ,
+  SUM(summ_prihod),
+  SUM(summ_rashod),
+  REGISTRATOR_ID,
+  PERIOD,
+  REG_STRING,
+  PAYED,
+  (select 0 from dual) Mark
+FROM
+  (SELECT MOVE_KONTRAG.ID,
+    MOVE_KONTRAG.KONTRAG_ID,
+    MOVE_KONTRAG.KONTRAG,
+    MOVE_KONTRAG.DIVISION_ID DIVISION_ID,
+    MOVE_KONTRAG.TABLE_NAME TABLE_NAME,
+    MOVE_KONTRAG.CODE,
+    MOVE_KONTRAG.SUMM,
+    CASE
+      WHEN MOVE_KONTRAG.SUMM >= 0
+      THEN MOVE_KONTRAG.SUMM
+      else 0
+    END AS summ_rashod,
+    CASE
+      WHEN MOVE_KONTRAG.SUMM < 0
+      THEN ( -1) * MOVE_KONTRAG.SUMM
+      else 0
+    END AS summ_prihod,
+    MOVE_KONTRAG.REGISTRATOR_ID,
+    MOVE_KONTRAG.PERIOD,
+    case
+      when upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('orders')
+      then (select utility.order_payed_percent(MOVE_KONTRAG.REGISTRATOR_ID) from dual)
+    end as payed,
+    CASE
+      WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('orders')
+      THEN 'Заказ №'
+        ||
+        (SELECT orders.NUM
+        FROM orders
+        WHERE orders.ID = MOVE_KONTRAG.REGISTRATOR_ID
+        )
+        || ' от '
+        || TO_CHAR(
+        (SELECT orders.DAT FROM orders WHERE orders.ID = MOVE_KONTRAG.REGISTRATOR_ID
+        ), 'DD-MM-YYYY')
+      WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('pko')
+      THEN 'ПКО №'
+        ||
+        (SELECT pko.NUM
+        FROM pko
+        WHERE pko.ID = MOVE_KONTRAG.REGISTRATOR_ID
+        )
+        || ' от '
+        || TO_CHAR(
+        (SELECT pko.DAT FROM pko WHERE pko.ID = MOVE_KONTRAG.REGISTRATOR_ID
+        ), 'DD-MM-YYYY')
+      WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('rko')
+      THEN 'РКО №'
+        ||
+        (SELECT rko.NUM
+        FROM rko
+        WHERE rko.ID = MOVE_KONTRAG.REGISTRATOR_ID
+        )
+        || ' от '
+        || TO_CHAR(
+        (SELECT rko.DAT FROM rko WHERE rko.ID = MOVE_KONTRAG.REGISTRATOR_ID
+        ), 'DD-MM-YYYY')
+      WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('other_zatraty')
+      THEN 'Админ. затраты №'
+        ||
+        (SELECT other_zatraty.NUM
+        FROM other_zatraty
+        WHERE other_zatraty.ID = MOVE_KONTRAG.REGISTRATOR_ID
+        )
+        || ' от '
+        || TO_CHAR(
+        (SELECT other_zatraty.DAT
+        FROM other_zatraty
+        WHERE other_zatraty.ID = MOVE_KONTRAG.REGISTRATOR_ID
+        ), 'DD-MM-YYYY')
+       WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('start_ost')
             THEN 'Нач. остатки №'||(select num from start_ost where id = MOVE_KONTRAG.REGISTRATOR_ID)||' от '||to_char(
-            (select dat from start_ost where id = MOVE_KONTRAG.REGISTRATOR_ID),'DD-MM-YYYY')              
-        WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('PROFIT_DISTRIB')
+            (select dat from start_ost where id = MOVE_KONTRAG.REGISTRATOR_ID),'DD-MM-YYYY')          
+       WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('PROFIT_DISTRIB')
             THEN 'Распред. прибыли №'||(select num from profit_distrib where id = MOVE_KONTRAG.REGISTRATOR_ID)||' от '||to_char(
-            (select dat from profit_distrib where id = MOVE_KONTRAG.REGISTRATOR_ID),'DD-MM-YYYY')                  
-    END AS REG_STRING  
-FROM MOVE_KONTRAG
-INNER JOIN KONTRAGENTS
-ON MOVE_KONTRAG.KONTRAG_ID    = KONTRAGENTS.ID
-WHERE KONTRAGENTS.IS_MEASURER = 1
+            (select dat from profit_distrib where id = MOVE_KONTRAG.REGISTRATOR_ID),'DD-MM-YYYY')                       
+    END AS REG_STRING
+  FROM MOVE_KONTRAG
+  INNER JOIN KONTRAGENTS
+  ON MOVE_KONTRAG.KONTRAG_ID = KONTRAGENTS.ID
+  WHERE MOVE_KONTRAG.CODE    = '5091'
+  AND KONTRAGENTS.IS_MEASURER   = 1
+  )
+where registrator_id not in (select id from rko where order_id is not null and posted = 1) and
+registrator_id not in (select id from pko where order_id is not null and posted = 1)
 and
-upper(MOVE_KONTRAG.DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))
+upper(DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))
+GROUP BY KONTRAG_ID,
+  KONTRAG,
+  DIVISION_ID,
+  TABLE_NAME,
+  CODE,
+  REGISTRATOR_ID,
+  PERIOD,
+  REG_STRING,
+  PAYED
 ORDER BY PERIOD DESC]]></SQLQuery>
   <ViewAttribute
     Name="Id"
@@ -208,25 +275,6 @@ ORDER BY PERIOD DESC]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="SUMM"
     Expression="SUMM"
-    SQLType="NUMERIC">
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.VwZamerMoves.Summ_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.VwZamerMoves.Summ_TOOLTIP"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="SummRashod"
-    IsUpdateable="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Type="java.math.BigDecimal"
-    ColumnType="NUMBER"
-    AliasName="SUMM_RASHOD"
-    Expression="SUMM_RASHOD"
     SQLType="NUMERIC"/>
   <ViewAttribute
     Name="SummPrihod"
@@ -235,8 +283,18 @@ ORDER BY PERIOD DESC]]></SQLQuery>
     PrecisionRule="true"
     Type="java.math.BigDecimal"
     ColumnType="NUMBER"
-    AliasName="SUMM_PRIHOD"
-    Expression="SUMM_PRIHOD"
+    AliasName='"SUM(SUMM_PRIHOD)"'
+    Expression='"SUM(SUMM_PRIHOD)"'
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SummRashod"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName='"SUM(SUMM_RASHOD)"'
+    Expression='"SUM(SUMM_RASHOD)"'
     SQLType="NUMERIC"/>
   <ViewAttribute
     Name="RegistratorId"
@@ -281,25 +339,6 @@ ORDER BY PERIOD DESC]]></SQLQuery>
     </Properties>
   </ViewAttribute>
   <ViewAttribute
-    Name="IsMeasurer"
-    IsUpdateable="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Type="java.math.BigDecimal"
-    ColumnType="NUMBER"
-    AliasName="IS_MEASURER"
-    Expression="IS_MEASURER"
-    SQLType="NUMERIC">
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.VwZamerMoves.IsMeasurer_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.VwZamerMoves.IsMeasurer_TOOLTIP"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
-  <ViewAttribute
     Name="RegString"
     IsUpdateable="false"
     IsPersistent="false"
@@ -314,9 +353,39 @@ ORDER BY PERIOD DESC]]></SQLQuery>
       <Attr Name="_DisplaySize" Value="80"/>
     </DesignTime>
   </ViewAttribute>
+  <ViewAttribute
+    Name="Payed"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PAYED"
+    Expression="PAYED"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Mark"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="MARK"
+    Expression="MARK"
+    SQLType="NUMERIC"/>
   <AttrArray Name="KeyAttributes">
     <Item Value="Id"/>
   </AttrArray>
+  <ViewLinkAccessor
+    Name="RkoVOSuppl"
+    ViewLink="ua.divas.view.VwZamerRkoVOFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

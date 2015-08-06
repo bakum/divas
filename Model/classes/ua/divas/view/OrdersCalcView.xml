@@ -47,7 +47,7 @@
     ORDERS_CALC.DEBT DEBT 
 FROM 
     ORDERS_CALC
-where
+where 
 upper(ORDERS_CALC.DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))]]></SQLQuery>
   <ViewAttribute
     Name="Id"

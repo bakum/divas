@@ -165,7 +165,7 @@ public class SupplierBean {
     }
 
     public void onPopupPko(PopupFetchEvent popupFetchEvent) {
-        resetBindingValue("#{bindings.addPkoFromZamer_kassaId1.inputValue}", null);
+       // resetBindingValue("#{bindings.addPkoFromZamer_kassaId1.inputValue}", null);
         resetBindingValue("#{bindings.Summa.inputValue}", null);
     }
 
@@ -187,7 +187,7 @@ public class SupplierBean {
     }
 
     public void onPopuoRko(PopupFetchEvent popupFetchEvent) {
-        resetBindingValue("#{bindings.addRko_kassaId1.inputValue}", null);
+       // resetBindingValue("#{bindings.addRko_kassaId1.inputValue}", null);
         resetBindingValue("#{bindings.Summa1.inputValue}", null);
     }
 

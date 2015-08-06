@@ -38,6 +38,18 @@
           <Item Value="SummPrihod"/>
           <Item Value="SummRashod"/>
           <Item Value="RegString"/>
+          <Item Value="TableName"/>
+          <Item Value="Payed"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="RkoVOSuppl"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="ua.divas.view.RkoVOSuppl" Name="VwKontragZamer12">
+        <AttrNames>
+          <Item Value="RegString"/>
+          <Item Value="Summa"/>
+          <Item Value="SummaRash"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

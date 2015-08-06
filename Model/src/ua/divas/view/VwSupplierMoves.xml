@@ -36,7 +36,8 @@
       </SchemaBasedProperties>
     </Properties>
   </Variable>
-  <SQLQuery><![CDATA[SELECT KONTRAG_ID,
+  <SQLQuery><![CDATA[SELECT max(ID) ID,
+  KONTRAG_ID,
   KONTRAG,
   DIVISION_ID,
   TABLE_NAME,
@@ -47,6 +48,7 @@
   REGISTRATOR_ID,
   PERIOD,
   REG_STRING,
+  PAYED,
   (select 0 from dual) Mark
 FROM
   (SELECT MOVE_KONTRAG.ID,
@@ -59,13 +61,19 @@ FROM
     CASE
       WHEN MOVE_KONTRAG.SUMM >= 0
       THEN MOVE_KONTRAG.SUMM
+      else 0
     END AS summ_rashod,
     CASE
       WHEN MOVE_KONTRAG.SUMM < 0
       THEN ( -1) * MOVE_KONTRAG.SUMM
+      else 0
     END AS summ_prihod,
     MOVE_KONTRAG.REGISTRATOR_ID,
     MOVE_KONTRAG.PERIOD,
+    case
+      when upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('orders')
+      then (select utility.order_payed_percent(MOVE_KONTRAG.REGISTRATOR_ID) from dual)
+    end as payed,
     CASE
       WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('orders')
       THEN 'Заказ №'
@@ -136,8 +144,25 @@ GROUP BY KONTRAG_ID,
   CODE,
   REGISTRATOR_ID,
   PERIOD,
-  REG_STRING
+  REG_STRING,
+  PAYED
 ORDER BY PERIOD DESC]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="VARCHAR"
+    IsQueriable="false">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewAttribute
     Name="KontragId"
     IsUpdateable="false"
@@ -284,6 +309,21 @@ ORDER BY PERIOD DESC]]></SQLQuery>
     </DesignTime>
   </ViewAttribute>
   <ViewAttribute
+    Name="Payed"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PAYED"
+    Expression="PAYED"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
     Name="Mark"
     IsPersistent="false"
     PrecisionRule="true"
@@ -334,7 +374,7 @@ ORDER BY PERIOD DESC]]></SQLQuery>
     AliasName="VIEW_ATTR"
     SQLType="NUMERIC">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[-(SumSummRashod == null ? 0 : SumSummRashod)+(SumRko == null ? 0 : SumRko)-(SumPko == null ? 0 : SumPko)]]></TransientExpression>
+    <TransientExpression><![CDATA[(SumRko == null ? 0 : SumRko)-(SumPko == null ? 0 : SumPko)]]></TransientExpression>
   </ViewAttribute>
   <ViewAttribute
     Name="SumPko"
@@ -360,11 +400,10 @@ ORDER BY PERIOD DESC]]></SQLQuery>
     AliasName="VIEW_ATTR"
     SQLType="NUMERIC">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[(SumSummRashod == null ? 0 : SumSummRashod)+(SumPko == null ? 0 : SumPko)]]></TransientExpression>
+    <TransientExpression><![CDATA[(SumPko == null ? 0 : SumPko)]]></TransientExpression>
   </ViewAttribute>
   <AttrArray Name="KeyAttributes">
-    <Item Value="KontragId"/>
-    <Item Value="RegistratorId"/>
+    <Item Value="Id"/>
   </AttrArray>
   <ViewLinkAccessor
     Name="OrdersTpNachisleniaView"
