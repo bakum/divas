@@ -40,23 +40,29 @@
                                 </af:column>
                                 <af:column id="c7" headerText="Опл, %" width="60" align="right"
                                            inlineStyle="#{node.bindings.Fullname.inputValue != null ? 'font-weight:bold;background-color:#DCF0AB' : ''}">
-                                    <af:outputText value="#{node.Payed}" id="ot8"/>
+                                    <af:outputText value="#{node.Payed}" id="ot8"
+                                                   inlineStyle="font-weight:bold;color:Blue;"/>
                                 </af:column>
                                 <af:column id="c3" headerText="Оплаты" align="right"
                                            inlineStyle="#{node.bindings.Fullname.inputValue != null ? 'font-weight:bold;background-color:#DCF0AB' : ''}"
                                            width="80">
-                                    <af:outputText value="#{node.SumSummPrihod}" id="ot4"/>
+                                    <af:outputText value="#{node.SumSummPrihod}" id="ot4"
+                                                   rendered="#{node.SumRko == null ? true : false}"
+                                                   inlineStyle="font-weight:bold;"/>
                                     <af:outputText value="#{node.bindings.Summa}" id="ot9"
                                                    inlineStyle="font-style:italic;"/>
-                                    <af:outputText value="#{node.bindings.SumRko}" id="ot7"/>
+                                    <af:outputText value="#{node.bindings.SumRko}" id="ot7"
+                                                   inlineStyle="font-weight:bold;"/>
                                 </af:column>
                                 <af:column id="c4" headerText="Начисления" align="right"
                                            inlineStyle="#{node.bindings.Fullname.inputValue != null ? 'font-weight:bold;background-color:#DCF0AB' : ''}"
                                            width="80">
-                                    <af:outputText value="#{node.SumSummRashod}" id="ot5"/>
+                                    <af:outputText value="#{node.SumSummRashod}" id="ot5"
+                                                   rendered="#{node.SumPko == null ? true : false}"
+                                                   inlineStyle="font-weight:bold;"/>
                                     <af:outputText value="#{node.SummaRash}" id="ot10"
                                                    inlineStyle="font-style:italic;"/>
-                                    <af:outputText value="#{node.SumPko}" id="ot11"/>
+                                    <af:outputText value="#{node.SumPko}" id="ot11" inlineStyle="font-weight:bold;"/>
                                 </af:column>
                                 <af:column id="c6" align="right" width="120"
                                            inlineStyle="#{node.bindings.Fullname.inputValue != null ? 'font-weight:bold;background-color:#DCF0AB' : ''}">
