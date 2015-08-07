@@ -378,6 +378,45 @@ ORDER BY PERIOD DESC]]></SQLQuery>
     AliasName="MARK"
     Expression="MARK"
     SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SumRko"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[RkoVOSuppl.sum("Summa != null ? Summa : 0")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SumPko"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[RkoVOSuppl.sum("SummaRash != null ? SummaRash : 0")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BallForOrder"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[(SumRko == null ? 0 : SumRko)-(SumPko == null ? 0 : SumPko)]]></TransientExpression>
+  </ViewAttribute>
   <AttrArray Name="KeyAttributes">
     <Item Value="Id"/>
   </AttrArray>

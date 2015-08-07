@@ -20,6 +20,10 @@ import ua.divas.view.common.VwKontragZamer;
 // ---------------------------------------------------------------------
 public class VwKontragZamerImpl extends DivasView implements VwKontragZamer {
 
+    public String getBallans(String id, String code) {
+        return (String)callStoredFunction(VARCHAR2,"UTILITY.ballans_by_kontr(?,?)", new Object[] {id, code});
+    }
+    
     public void paySelectedRows(String kassaId, BigDecimal Summ) {
         RowSet duplicateRowSet = this.createRowSet("duplicateRowSet");
         duplicateRowSet.first();
@@ -82,6 +86,22 @@ public class VwKontragZamerImpl extends DivasView implements VwKontragZamer {
      */
     public void setu_name(String value) {
         setNamedWhereClauseParam("u_name", value);
+    }
+
+    /**
+     * Returns the variable value for KonName.
+     * @return variable value for KonName
+     */
+    public String getKonName() {
+        return (String) ensureVariableManager().getVariableValue("KonName");
+    }
+
+    /**
+     * Sets <code>value</code> for variable KonName.
+     * @param value value to bind as KonName
+     */
+    public void setKonName(String value) {
+        ensureVariableManager().setVariableValue("KonName", value);
     }
 }
 

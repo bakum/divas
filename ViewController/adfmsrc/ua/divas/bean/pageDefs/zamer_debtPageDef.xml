@@ -11,9 +11,12 @@
       <variable Type="java.lang.String" Name="addRko_kassaId" IsQueriable="false"/>
       <variable Type="java.math.BigDecimal" Name="addRko_Summa" IsQueriable="false"/>
     </variableIterator>
-    <iterator Binds="VwKontragZamer1" RangeSize="25" DataControl="AppModuleDataControl" id="VwKontragZamer1Iterator"/>
+    <iterator Binds="VwKontragZamer1" RangeSize="-1" DataControl="AppModuleDataControl" id="VwKontragZamer1Iterator"/>
     <iterator Binds="KassaSettingsView1" RangeSize="-1" DataControl="AppModuleDataControl"
               id="KassaSettingsView1Iterator"/>
+    <searchRegion Criteria="VwKontragActive" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="VwKontragZamer1Iterator" id="VwKontragActiveQuery"/>
+    <iterator id="VwZamerMoves1Iterator" Binds="VwZamerMoves1" DataControl="AppModuleDataControl" RangeSize="-1"/>
   </executables>
   <bindings>
     <tree IterBinding="VwKontragZamer1Iterator" id="VwKontragZamer1">
@@ -40,6 +43,9 @@
           <Item Value="RegString"/>
           <Item Value="TableName"/>
           <Item Value="Payed"/>
+          <Item Value="SumPko"/>
+          <Item Value="SumRko"/>
+          <Item Value="BallForOrder"/>
         </AttrNames>
         <Accessors>
           <Item Value="RkoVOSuppl"/>
@@ -109,5 +115,24 @@
         <Item Value="KassaName"/>
       </ListDisplayAttrNames>
     </list>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <methodAction id="addRkoOrder" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addRkoOrder"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults.addRkoOrder_AppModuleDataControl_dataProvider_addRkoOrder_result">
+      <NamedData NDName="kassaId" NDValue="${bindings.addRko_kassaId}" NDType="java.lang.String"/>
+      <NamedData NDName="kontragId" NDType="java.lang.String"/>
+      <NamedData NDName="OrderId" NDType="java.lang.String"/>
+      <NamedData NDName="Summa" NDValue="${bindings.addRko_Summa}" NDType="java.math.BigDecimal"/>
+    </methodAction>
+    <methodAction id="addPkoOrder" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addPkoOrder"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults.addPkoOrder_AppModuleDataControl_dataProvider_addPkoOrder_result">
+      <NamedData NDName="kassaId" NDType="java.lang.String" NDValue="#{bindings.paySelectedRows_kassaId}"/>
+      <NamedData NDName="kontragId" NDType="java.lang.String"/>
+      <NamedData NDName="OrderId" NDType="java.lang.String"/>
+      <NamedData NDName="Summa" NDType="java.math.BigDecimal" NDValue="#{bindings.paySelectedRows_Summ}"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

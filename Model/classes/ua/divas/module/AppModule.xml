@@ -687,7 +687,11 @@
     ViewObjectName="ua.divas.view.VwBuyerMoves"/>
   <ViewUsage
     Name="VwKontragZamer1"
-    ViewObjectName="ua.divas.view.VwKontragZamer"/>
+    ViewObjectName="ua.divas.view.VwKontragZamer">
+    <ViewCriteriaUsage
+      Name="VwKontragActive"
+      FullName="ua.divas.view.VwKontragZamer.VwKontragActive"/>
+  </ViewUsage>
   <ViewUsage
     Name="VwZamerMoves2"
     ViewObjectName="ua.divas.view.VwZamerMoves"/>
@@ -789,7 +793,11 @@
     ViewObjectName="ua.divas.view.VwSupplierMoves"/>
   <ViewUsage
     Name="VwKontragAllItems1"
-    ViewObjectName="ua.divas.view.VwKontragAllItems"/>
+    ViewObjectName="ua.divas.view.VwKontragAllItems">
+    <ViewCriteriaUsage
+      Name="VwKontragActive"
+      FullName="ua.divas.view.VwKontragAllItems.VwKontragActive"/>
+  </ViewUsage>
   <ViewUsage
     Name="VwBuyerMoves3"
     ViewObjectName="ua.divas.view.VwBuyerMoves"/>

@@ -14,6 +14,9 @@
     <iterator Binds="VwSupplierMoves1" RangeSize="-1" DataControl="AppModuleDataControl" id="VwSupplierMoves1Iterator"/>
     <iterator Binds="KassaSettingsView1" RangeSize="-1" DataControl="AppModuleDataControl"
               id="KassaSettingsView1Iterator"/>
+    <iterator id="VwSupplierMoves2Iterator" Binds="VwSupplierMoves2" DataControl="AppModuleDataControl" RangeSize="-1"/>
+    <searchRegion Criteria="VwKontragActive" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="VwKontragAllItems1Iterator" id="VwKontragActiveQuery"/>
   </executables>
   <bindings>
     <tree IterBinding="VwKontragAllItems1Iterator" id="VwKontragAllItems1">
@@ -25,6 +28,7 @@
           <Item Value="SumDebPko"/>
           <Item Value="SumDebRko"/>
           <Item Value="SumDebSumm"/>
+          <Item Value="Mark"/>
         </AttrNames>
         <Accessors>
           <Item Value="VwSupplierMoves"/>
@@ -46,6 +50,7 @@
           <Item Value="SumPko"/>
           <Item Value="SumSummPrihod"/>
           <Item Value="SumSummRashod"/>
+          <Item Value="Mark"/>
         </AttrNames>
         <Accessors>
           <Item Value="RkoVOSuppl"/>
@@ -73,6 +78,8 @@
           <Item Value="SumSummPrihod"/>
           <Item Value="SumSummRashod"/>
           <Item Value="TableName"/>
+          <Item Value="Mark"/>
+          <Item Value="MarkForPay"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

@@ -43,7 +43,7 @@ public class VwSupplierMovesImpl extends DivasView implements VwSupplierMoves {
         duplicateRowSet.first();
         Row currentRow = this.getCurrentRow();
         boolean currentRowDeleted = false;
-        Row[] rowsToDelete = duplicateRowSet.getFilteredRows("MarkForPay", true);
+        Row[] rowsToDelete = duplicateRowSet.getFilteredRows("Mark", 1);
         try {
             if (rowsToDelete.length > 0) {
                 for (Row rw : rowsToDelete) {

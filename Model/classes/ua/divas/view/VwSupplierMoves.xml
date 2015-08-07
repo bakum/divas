@@ -331,7 +331,8 @@ ORDER BY PERIOD DESC]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="MARK"
     Expression="MARK"
-    SQLType="INTEGER"/>
+    SQLType="INTEGER"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="SumRko"
     IsUpdateable="false"

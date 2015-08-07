@@ -35,6 +35,10 @@
       </SchemaBasedProperties>
     </Properties>
   </Variable>
+  <Variable
+    Name="KonName"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <SQLQuery><![CDATA[SELECT DISTINCT ID,
   IS_GROUP,
   PARENT_ID,
@@ -49,7 +53,11 @@
   PREDEFINED,
   IS_SUPPLIER,
   IS_BUYER,
-  IS_MEASURER
+  IS_MEASURER,
+  case
+    when (ID not in (select id from ballans_by_Kontrag where ballans !=0)) then 1
+    else 0
+  end Nullable
 FROM
   (SELECT KONTRAGENTS.ID ID,
     KONTRAGENTS.IS_GROUP IS_GROUP,
@@ -159,7 +167,8 @@ GROUP BY ID,
     ColumnType="VARCHAR2"
     AliasName="ID"
     Expression="ID"
-    SQLType="VARCHAR">
+    SQLType="VARCHAR"
+    IsQueriable="false">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
@@ -175,7 +184,8 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="IS_GROUP"
     Expression="IS_GROUP"
-    SQLType="INTEGER"/>
+    SQLType="INTEGER"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="ParentId"
     IsUpdateable="false"
@@ -186,7 +196,8 @@ GROUP BY ID,
     ColumnType="VARCHAR2"
     AliasName="PARENT_ID"
     Expression="PARENT_ID"
-    SQLType="VARCHAR">
+    SQLType="VARCHAR"
+    IsQueriable="false">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
@@ -205,6 +216,16 @@ GROUP BY ID,
     <DesignTime>
       <Attr Name="_DisplaySize" Value="150"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.VwKontragZamer.Fullname_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.VwKontragZamer.Fullname_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="Deleted"
@@ -217,7 +238,18 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="DELETED"
     Expression="DELETED"
-    SQLType="INTEGER"/>
+    SQLType="INTEGER">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="check_box"/>
+        <LABEL
+          ResId="ua.divas.view.VwKontragZamer.Deleted_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.VwKontragZamer.Deleted_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Inn"
     IsUpdateable="false"
@@ -228,7 +260,8 @@ GROUP BY ID,
     ColumnType="VARCHAR2"
     AliasName="INN"
     Expression="INN"
-    SQLType="VARCHAR">
+    SQLType="VARCHAR"
+    IsQueriable="false">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
@@ -243,7 +276,8 @@ GROUP BY ID,
     ColumnType="VARCHAR2"
     AliasName="OKPO"
     Expression="OKPO"
-    SQLType="VARCHAR">
+    SQLType="VARCHAR"
+    IsQueriable="false">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
@@ -258,7 +292,8 @@ GROUP BY ID,
     ColumnType="VARCHAR2"
     AliasName="KPP"
     Expression="KPP"
-    SQLType="VARCHAR">
+    SQLType="VARCHAR"
+    IsQueriable="false">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
@@ -273,7 +308,8 @@ GROUP BY ID,
     ColumnType="VARCHAR2"
     AliasName="NAMEFULL"
     Expression="NAMEFULL"
-    SQLType="VARCHAR">
+    SQLType="VARCHAR"
+    IsQueriable="false">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="150"/>
     </DesignTime>
@@ -289,7 +325,8 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="UR_FIZ"
     Expression="UR_FIZ"
-    SQLType="INTEGER"/>
+    SQLType="INTEGER"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Version"
     IsUpdateable="false"
@@ -299,7 +336,8 @@ GROUP BY ID,
     ColumnType="TIMESTAMP"
     AliasName="VERSION"
     Expression="VERSION"
-    SQLType="DATE"/>
+    SQLType="DATE"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Predefined"
     IsUpdateable="false"
@@ -311,7 +349,8 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="PREDEFINED"
     Expression="PREDEFINED"
-    SQLType="INTEGER"/>
+    SQLType="INTEGER"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="IsSupplier"
     IsUpdateable="false"
@@ -321,7 +360,8 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="IS_SUPPLIER"
     Expression="IS_SUPPLIER"
-    SQLType="NUMERIC"/>
+    SQLType="NUMERIC"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="IsBuyer"
     IsUpdateable="false"
@@ -331,7 +371,8 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="IS_BUYER"
     Expression="IS_BUYER"
-    SQLType="NUMERIC"/>
+    SQLType="NUMERIC"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="IsMeasurer"
     IsUpdateable="false"
@@ -341,7 +382,25 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="IS_MEASURER"
     Expression="IS_MEASURER"
-    SQLType="NUMERIC"/>
+    SQLType="NUMERIC"
+    IsQueriable="false"/>
+  <ViewAttribute
+    Name="Nullable"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="NULLABLE"
+    Expression="NULLABLE"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="DebtZamer"
     IsUpdateable="false"
@@ -353,7 +412,15 @@ GROUP BY ID,
     AliasName="VIEW_ATTR"
     SQLType="NUMERIC">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[VwZamerMoves.sum("Summ != null ? (-1)*Summ : 0")]]></TransientExpression>
+    <TransientExpression><![CDATA[viewObject.getBallans(Id,'5091')]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.VwKontragZamer.DebtZamer_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.VwKontragZamer.DebtZamer_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="MarkedForPaymant"
@@ -363,7 +430,8 @@ GROUP BY ID,
     Type="java.lang.Boolean"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
-    SQLType="BIT">
+    SQLType="BIT"
+    IsQueriable="false">
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
@@ -371,6 +439,94 @@ GROUP BY ID,
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewCriteria
+    Name="VwKontragActive"
+    ViewObjectName="ua.divas.view.VwKontragZamer"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="displayName"
+          ResId="displayName"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="VwKontragZamerCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Fullname"
+        ViewAttribute="Fullname"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Value=":KonName"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Nullable"
+        ViewAttribute="Nullable"
+        Operator="="
+        Conjunction="AND"
+        Value="0"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="VwKontragAll"
+    ViewObjectName="ua.divas.view.VwKontragZamer"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="displayName"
+          ResId="displayName"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="VwKontragZamerCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Fullname"
+        ViewAttribute="Fullname"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Value=":KonName"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <AttrArray Name="KeyAttributes">
     <Item Value="Id"/>
   </AttrArray>

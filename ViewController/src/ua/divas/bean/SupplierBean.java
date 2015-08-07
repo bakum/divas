@@ -1,5 +1,9 @@
 package ua.divas.bean;
 
+import com.sun.faces.component.visit.FullVisitContext;
+
+import java.math.BigDecimal;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,6 +16,10 @@ import javax.el.ValueExpression;
 import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIViewRoot;
+import javax.faces.component.visit.VisitCallback;
+import javax.faces.component.visit.VisitContext;
+import javax.faces.component.visit.VisitResult;
 import javax.faces.context.FacesContext;
 
 import javax.faces.event.ActionEvent;
@@ -23,6 +31,7 @@ import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichTreeTable;
 
+import oracle.adf.view.rich.component.rich.nav.RichButton;
 import oracle.adf.view.rich.context.AdfFacesContext;
 import oracle.adf.view.rich.event.DialogEvent;
 import oracle.adf.view.rich.event.PopupFetchEvent;
@@ -95,8 +104,10 @@ public class SupplierBean {
             String keyStr = nodeBinding.getRowKey().toStringFormat(true);
             if (keyStr != null && rowType.matches("VwSupplierMoves")) {
                 DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("VwSupplierMoves1Iterator");
+                DCIteratorBinding itr = (DCIteratorBinding) getBindings().get("VwSupplierMoves2Iterator");
                 try {
                     iter.setCurrentRowWithKey(keyStr);
+                    itr.setCurrentRowWithKey(keyStr);
                 } catch (RowNotFoundException e) {
                     try {
                         iterator.setCurrentRowWithKey(keyStr);
@@ -151,6 +162,12 @@ public class SupplierBean {
     }
 
     public void refresh() {
+        DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = binding.findIteratorBinding("VwKontragAllItems1Iterator");
+        //String rks;
+        if (it != null) {
+            it.executeQuery();
+        }
         AdfFacesContext.getCurrentInstance().addPartialTarget(getTreeTable());
     }
 
@@ -165,8 +182,19 @@ public class SupplierBean {
     }
 
     public void onPopupPko(PopupFetchEvent popupFetchEvent) {
-       // resetBindingValue("#{bindings.addPkoFromZamer_kassaId1.inputValue}", null);
-        resetBindingValue("#{bindings.Summa.inputValue}", null);
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        oracle.jbo.domain.Number lbn = null;
+        if (popupFetchEvent.getLaunchSourceClientId().contains("b7")) {
+            DCIteratorBinding it = bd.findIteratorBinding("VwSupplierMoves1Iterator");
+            Row currRow = it.getCurrentRow();
+            lbn = (oracle.jbo.domain.Number) currRow.getAttribute("BallForOrder");
+        } else {
+            DCIteratorBinding it = bd.findIteratorBinding("VwKontragAllItems1Iterator");
+            Row currRow = it.getCurrentRow();
+            lbn = (oracle.jbo.domain.Number) currRow.getAttribute("DebtSupplier");
+        }
+        // resetBindingValue("#{bindings.addPkoFromZamer_kassaId1.inputValue}", null);
+        resetBindingValue("#{bindings.Summa.inputValue}", lbn.bigDecimalValue().abs());
     }
 
     public void onDialogPko(DialogEvent dialogEvent) {
@@ -186,9 +214,46 @@ public class SupplierBean {
         }
     }
 
+    public UIComponent findComponent(final String id) {
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        UIViewRoot root = context.getViewRoot();
+        final UIComponent[] found = new UIComponent[1];
+
+        root.visitTree(new FullVisitContext(context), new VisitCallback() {
+            @Override
+            public VisitResult visit(VisitContext context, UIComponent component) {
+                if (component.getId().equals(id)) {
+                    found[0] = component;
+                    return VisitResult.COMPLETE;
+                }
+                return VisitResult.ACCEPT;
+            }
+        });
+
+        return found[0];
+
+    }
+
+    private UIComponent getUIComponent(String name) {
+        FacesContext facesCtx = FacesContext.getCurrentInstance();
+        return facesCtx.getViewRoot().findComponent(name);
+    }
+
     public void onPopuoRko(PopupFetchEvent popupFetchEvent) {
-       // resetBindingValue("#{bindings.addRko_kassaId1.inputValue}", null);
-        resetBindingValue("#{bindings.Summa1.inputValue}", null);
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        oracle.jbo.domain.Number lbn = null;
+        if (popupFetchEvent.getLaunchSourceClientId().contains("b6")) {
+            DCIteratorBinding it = bd.findIteratorBinding("VwSupplierMoves1Iterator");
+            Row currRow = it.getCurrentRow();
+            lbn = (oracle.jbo.domain.Number) currRow.getAttribute("BallForOrder");
+        } else {
+            DCIteratorBinding it = bd.findIteratorBinding("VwKontragAllItems1Iterator");
+            Row currRow = it.getCurrentRow();
+            lbn = (oracle.jbo.domain.Number) currRow.getAttribute("DebtSupplier");
+        }
+        // resetBindingValue("#{bindings.addRko_kassaId1.inputValue}", null);
+        resetBindingValue("#{bindings.Summa1.inputValue}", lbn.bigDecimalValue().abs());
     }
 
     public void onDialogRko(DialogEvent dialogEvent) {
@@ -292,7 +357,7 @@ public class SupplierBean {
         }
 
     }
-    
+
     private void setMarkToSelected() {
         RichTreeTable tree1 = this.getTreeTable();
         RowKeySet rks2 = tree1.getSelectedRowKeys();
@@ -319,5 +384,16 @@ public class SupplierBean {
 
     public void onCheckMark(ValueChangeEvent valueChangeEvent) {
         //setMarkToSelected();
+    }
+
+    public void onPayOrder(ActionEvent actionEvent) {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("VwSupplierMoves2Iterator");
+        for (int i = 0; i < it.getViewObject().getEstimatedRowCount(); i++) {
+            Row rw = it.getRowAtRangeIndex(i);
+            if (true == rw.getAttribute("MarkForPay")) {
+                System.out.println("MarkForPay: " + rw.getAttribute("MarkForPay").toString());
+            }
+        }
     }
 }

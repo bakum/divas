@@ -15,7 +15,11 @@ public class VwKontragAllItemsImpl extends DivasView {
      */
     public VwKontragAllItemsImpl() {
     }
-
+    
+    public String getBallans(String id, String code) {
+        return (String)callStoredFunction(VARCHAR2,"UTILITY.ballans_by_kontr(?,?)", new Object[] {id, code});
+    }
+    
     /**
      * Returns the bind variable value for u_name.
      * @return bind variable value for u_name
@@ -30,6 +34,22 @@ public class VwKontragAllItemsImpl extends DivasView {
      */
     public void setu_name(String value) {
         setNamedWhereClauseParam("u_name", value);
+    }
+
+    /**
+     * Returns the variable value for KonName.
+     * @return variable value for KonName
+     */
+    public String getKonName() {
+        return (String) ensureVariableManager().getVariableValue("KonName");
+    }
+
+    /**
+     * Sets <code>value</code> for variable KonName.
+     * @param value value to bind as KonName
+     */
+    public void setKonName(String value) {
+        ensureVariableManager().setVariableValue("KonName", value);
     }
 }
 
