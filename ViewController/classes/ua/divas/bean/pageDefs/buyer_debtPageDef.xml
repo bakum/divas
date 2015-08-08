@@ -11,6 +11,8 @@
       </sortCriteria>
     </iterator>
     <iterator id="VwBuyerMoves1Iterator" Binds="VwBuyerMoves1" DataControl="AppModuleDataControl" RangeSize="25"/>
+    <searchRegion Criteria="VwKontragActive" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="VwKontragAllItems1Iterator" id="VwKontragActiveQuery"/>
   </executables>
   <bindings>
     <tree IterBinding="VwKontragAllItems1Iterator" id="VwKontragAllItems1">
@@ -36,6 +38,9 @@
           <Item Value="SumSummRashod"/>
           <Item Value="TableName"/>
           <Item Value="SumCalc"/>
+          <Item Value="Payed"/>
+          <Item Value="SumPko"/>
+          <Item Value="SumRko"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

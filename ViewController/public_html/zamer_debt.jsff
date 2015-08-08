@@ -124,21 +124,25 @@
                                         <af:dialog id="d1" title="Приход в кассу" closeIconVisible="false"
                                                    dialogListener="#{zamer_debt.onDialogPay}">
                                             <f:facet name="buttonBar"/>
-                                            <af:panelFormLayout id="pfl1">
-                                                <af:button actionListener="#{bindings.paySelectedRows.execute}"
-                                                           text="paySelectedRows"
-                                                           disabled="#{!bindings.paySelectedRows.enabled}" id="b1"
-                                                           visible="false"/>
-                                                <af:selectOneChoice label="Касса для оплаты" id="soc1"
-                                                                    value="#{bindings.paySelectedRows_kassaId1.inputValue}"
-                                                                    required="true" binding="#{zamer_debt.kassaId}">
-                                                    <f:selectItems id="si1"
-                                                                   value="#{bindings.paySelectedRows_kassaId1.items}"/>
+                                            <af:panelFormLayout id="pfl3">
+                                                <af:selectOneChoice label="Касса для оплаты" id="soc3"
+                                                                    value="#{bindings.addRko_kassaId1.inputValue}"
+                                                                    required="true">
+                                                    <f:selectItems value="#{bindings.addRko_kassaId1.items}" id="si3"/>
                                                 </af:selectOneChoice>
-                                                <af:inputNumberSpinbox label="Сумма оплаты" id="it1" required="true"
-                                                                       value="#{bindings.paySelectedRows_Summ1.inputValue}"
-                                                                       autoSubmit="true" binding="#{zamer_debt.summa}"
-                                                                       validator="#{zamer_debt.onValidateSumm}"/>
+                                                <af:inputNumberSpinbox value="#{bindings.Summa.inputValue}"
+                                                                       label="Сумма для оплаты"
+                                                                       columns="#{bindings.Summa.hints.displayWidth}"
+                                                                       shortDesc="#{bindings.Summa.hints.tooltip}"
+                                                                       id="ins3" required="true"
+                                                                       validator="#{zamer_debt.onValidateSumm}">
+                                                    <f:validator binding="#{bindings.Summa.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.Summa.format}"/>
+                                                </af:inputNumberSpinbox>
+                                                <af:button actionListener="#{bindings.addRko.execute}" text="addRko"
+                                                           disabled="#{!bindings.addRko.enabled}" id="b9"
+                                                           rendered="false"/>
                                             </af:panelFormLayout>
                                         </af:dialog>
                                     </af:popup>
@@ -172,25 +176,35 @@
                                     </af:popup>
                                     <af:popup childCreation="deferred" id="p3" resetEditableValues="whenCanceled"
                                               popupFetchListener="#{zamer_debt.onPopupPay}">
-                                        <af:dialog id="d3" title="Приход в кассу">
+                                        <af:dialog id="d3" title="Приход в кассу"
+                                                   dialogListener="#{zamer_debt.onDialogPkoOrder}">
                                             <f:facet name="buttonBar"/>
-                                            <af:panelFormLayout id="pfl3">
-                                                <af:selectOneChoice label="Касса для оплаты" id="soc3"
-                                                                    value="#{bindings.paySelectedRows_kassaId1.inputValue}"
-                                                                    required="true" binding="#{zamer_debt.kassaId}">
-                                                    <f:selectItems id="si3"
-                                                                   value="#{bindings.paySelectedRows_kassaId1.items}"/>
+                                            <af:panelFormLayout id="pfl1">
+                                                <af:selectOneChoice label="Касса для оплаты" id="soc1"
+                                                                    value="#{bindings.addRko_kassaId1.inputValue}"
+                                                                    required="true">
+                                                    <f:selectItems value="#{bindings.addRko_kassaId1.items}" id="si1"/>
                                                 </af:selectOneChoice>
-                                                <af:inputNumberSpinbox label="Сумма оплаты" id="ins1" required="true"
-                                                                       value="#{bindings.paySelectedRows_Summ1.inputValue}"
-                                                                       autoSubmit="true" binding="#{zamer_debt.summa}"
-                                                                       validator="#{zamer_debt.onValidateSumm}"/>
+                                                <af:inputNumberSpinbox value="#{bindings.Summa.inputValue}"
+                                                                       label="Сумма для оплаты"
+                                                                       columns="#{bindings.Summa.hints.displayWidth}"
+                                                                       shortDesc="#{bindings.Summa.hints.tooltip}"
+                                                                       id="ins1" required="true"
+                                                                       validator="#{zamer_debt.onValidateSumm}">
+                                                    <f:validator binding="#{bindings.Summa.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.Summa.format}"/>
+                                                </af:inputNumberSpinbox>
+                                                <af:button actionListener="#{bindings.addRko.execute}" text="addRko"
+                                                           disabled="#{!bindings.addRko.enabled}" id="b1"
+                                                           rendered="false"/>
                                             </af:panelFormLayout>
                                         </af:dialog>
                                     </af:popup>
                                     <af:popup childCreation="deferred" id="p4" resetEditableValues="whenCanceled"
                                               popupFetchListener="#{zamer_debt.onPopupRko}">
-                                        <af:dialog id="d4" title="Расход из кассы">
+                                        <af:dialog id="d4" title="Расход из кассы"
+                                                   dialogListener="#{zamer_debt.onDialogRkoOrder}">
                                             <f:facet name="buttonBar"/>
                                             <af:panelFormLayout id="pfl4">
                                                 <af:selectOneChoice label="Касса для оплаты" id="soc4"
@@ -218,13 +232,13 @@
                                     <af:showDetailItem text="Поиск" id="sdi1" stretchChildren="first"
                                                        icon="/img/search.png">
                                         <af:panelGroupLayout layout="vertical" id="pgl3">
-                                            <af:panelHeader text="Поиск" id="ph1">
+                                            <af:panelHeader text="Замерщики" id="ph1">
                                                 <af:query id="qryId1" headerText="Поиск" disclosed="true"
                                                           value="#{bindings.VwKontragActiveQuery.queryDescriptor}"
                                                           model="#{bindings.VwKontragActiveQuery.queryModel}"
                                                           queryListener="#{bindings.VwKontragActiveQuery.processQuery}"
                                                           queryOperationListener="#{bindings.VwKontragActiveQuery.processQueryOperation}"
-                                                          resultComponentId="::tt1"/>
+                                                          resultComponentId="::tt1" saveResultsLayout="never"/>
                                             </af:panelHeader>
                                         </af:panelGroupLayout>
                                     </af:showDetailItem>

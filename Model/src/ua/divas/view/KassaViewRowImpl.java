@@ -53,6 +53,7 @@ public class KassaViewRowImpl extends ViewRowImpl {
         Deleted,
         Version,
         Predefined,
+        Nullable,
         KEditable,
         TotalSumm,
         TotalPrihod,
@@ -102,6 +103,7 @@ public class KassaViewRowImpl extends ViewRowImpl {
     public static final int DELETED = AttributesEnum.Deleted.index();
     public static final int VERSION = AttributesEnum.Version.index();
     public static final int PREDEFINED = AttributesEnum.Predefined.index();
+    public static final int NULLABLE = AttributesEnum.Nullable.index();
     public static final int KEDITABLE = AttributesEnum.KEditable.index();
     public static final int TOTALSUMM = AttributesEnum.TotalSumm.index();
     public static final int TOTALPRIHOD = AttributesEnum.TotalPrihod.index();
@@ -289,6 +291,14 @@ public class KassaViewRowImpl extends ViewRowImpl {
      */
     public void setPredefined(Integer value) {
         setAttributeInternal(PREDEFINED, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute Nullable.
+     * @return the Nullable
+     */
+    public Integer getNullable() {
+        return (Integer) getAttributeInternal(NULLABLE);
     }
 
     /**

@@ -12,6 +12,8 @@
     <iterator id="PkoView1Iterator" Binds="PkoView1" DataControl="AppModuleDataControl" RangeSize="25"/>
     <iterator id="RkoView1Iterator" Binds="RkoView1" DataControl="AppModuleDataControl" RangeSize="25"/>
     <iterator id="StartOstView1Iterator" Binds="StartOstView1" DataControl="AppModuleDataControl" RangeSize="25"/>
+    <searchRegion Criteria="KassaViewActive" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="KassaView1Iterator" id="KassaViewActiveQuery"/>
   </executables>
   <bindings>
     <tree IterBinding="KassaView1Iterator" id="KassaView1">

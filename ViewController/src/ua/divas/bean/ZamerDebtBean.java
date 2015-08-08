@@ -31,6 +31,7 @@ import oracle.binding.BindingContainer;
 import oracle.binding.OperationBinding;
 
 import oracle.jbo.Row;
+import oracle.jbo.RowIterator;
 import oracle.jbo.RowNotFoundException;
 import oracle.jbo.uicli.binding.JUCtrlHierBinding;
 import oracle.jbo.uicli.binding.JUCtrlHierNodeBinding;
@@ -150,13 +151,20 @@ public class ZamerDebtBean {
     }
 
     public void onDialogPay(DialogEvent dialogEvent) {
-        if (dialogEvent.getOutcome().name().equals("ok")) {
-            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-            OperationBinding oper = (OperationBinding) binding.getOperationBinding("paySelRow");
-            oper.execute();
+            if (dialogEvent.getOutcome().name().equals("ok")) {
+                DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+                DCIteratorBinding it = bd.findIteratorBinding("VwKontragZamer1Iterator");
+                Row currRow = it.getCurrentRow();
 
-            refresh();
-        }
+                BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+                OperationBinding oper = (OperationBinding) binding.getOperationBinding("addPkoFromZamer");
+                if (oper != null) {
+                    oper.getParamsMap().put("kontragId", currRow.getAttribute("Id").toString());
+                    oper.execute();
+
+                    refresh();
+                }
+            }
     }
 
     public void onDialogRko(DialogEvent dialogEvent) {
@@ -179,7 +187,7 @@ public class ZamerDebtBean {
     public void onPopupPay(PopupFetchEvent popupFetchEvent) {
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         oracle.jbo.domain.Number lbn = null;
-        if (!popupFetchEvent.getLaunchSourceClientId().contains("b2")) {
+        if (popupFetchEvent.getLaunchSourceClientId().contains("b8")) {
             DCIteratorBinding it = bd.findIteratorBinding("VwZamerMoves1Iterator");
             Row currRow = it.getCurrentRow();
             lbn = (oracle.jbo.domain.Number) currRow.getAttribute("BallForOrder");
@@ -188,14 +196,14 @@ public class ZamerDebtBean {
             Row currRow = it.getCurrentRow();
             lbn = (oracle.jbo.domain.Number) currRow.getAttribute("DebtZamer");
         }
-        //resetBindingValue("#{bindings.paySelectedRows_kassaId1.inputValue}", null);
-        resetBindingValue("#{bindings.paySelectedRows_Summ1.inputValue}", lbn.bigDecimalValue().abs());
+        //resetBindingValue("#{bindings.addRko_kassaId1.inputValue}", null);
+        resetBindingValue("#{bindings.Summa.inputValue}", lbn.bigDecimalValue().abs());
     }
 
     public void onPopupRko(PopupFetchEvent popupFetchEvent) {
         DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         oracle.jbo.domain.Number lbn = null;
-        if (!popupFetchEvent.getLaunchSourceClientId().contains("b4")) {
+        if (popupFetchEvent.getLaunchSourceClientId().contains("b7")) {
             DCIteratorBinding it = bd.findIteratorBinding("VwZamerMoves1Iterator");
             Row currRow = it.getCurrentRow();
             lbn = (oracle.jbo.domain.Number) currRow.getAttribute("BallForOrder");
@@ -207,6 +215,99 @@ public class ZamerDebtBean {
         //resetBindingValue("#{bindings.addRko_kassaId1.inputValue}", null);
         resetBindingValue("#{bindings.Summa.inputValue}", lbn.bigDecimalValue().abs());
 
+    }
+    
+    private Boolean isKontragentDeleted(String konId) {
+        DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = bd.findIteratorBinding("VwKontragZamer1Iterator");
+        Boolean result = null;
+        if (it != null) {
+            RowIterator rIter = it.findRowsByAttributeValue("Id", true, konId);
+            if (rIter != null) {
+                Integer del = (Integer) rIter.first().getAttribute("Deleted");
+                if (del.intValue() == 1) {
+                    return new Boolean(true);
+                } else {
+                    return new Boolean(false);
+                }
+            }
+        }
+
+        return result;
+    }
+    
+    private String getAttrValueFromSelected(String attrName) {
+        RichTreeTable tree1 = this.getTreeTable();
+        RowKeySet rks2 = tree1.getSelectedRowKeys();
+        Iterator rksIterator = rks2.iterator();
+        String result = null;
+        if (rksIterator.hasNext()) {
+            List key = (List) rksIterator.next();
+            JUCtrlHierBinding treeBinding = null;
+            treeBinding = (JUCtrlHierBinding) ((CollectionModel) tree1.getValue()).getWrappedData();
+            JUCtrlHierNodeBinding nodeBinding = treeBinding.findNodeByKeyPath(key);
+
+            Row rw = nodeBinding.getRow();
+            //print first row attribute. Note that in a tree you have to
+            //determine the node type if you want to select node attributes
+            //by name and not index
+            String rowType = rw.getStructureDef().getDefName();
+            System.out.println(rowType);
+            result = (String) rw.getAttribute(attrName);
+        }
+        return result;
+    }
+    
+    public void onDialogRkoOrder(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            if (this.isKontragentDeleted(getAttrValueFromSelected("KontragId")).booleanValue() == true) {
+                FacesContext ctx = FacesContext.getCurrentInstance();
+                FacesMessage msg =
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Kontragent is deleted",
+                                     "Контрагент помечен на удаление" + " операция невозможна!");
+                ctx.addMessage(null, msg);
+                return;
+            } 
+            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("VwZamerMoves1Iterator");
+            Row currRow = it.getCurrentRow();  */
+
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding oper = (OperationBinding) binding.getOperationBinding("addRkoOrder");
+            if (oper != null) {
+                oper.getParamsMap().put("kontragId", getAttrValueFromSelected("KontragId"));
+                oper.getParamsMap().put("OrderId", getAttrValueFromSelected("RegistratorId"));
+                oper.execute();
+
+                refresh();
+            }
+        }
+    }
+
+    public void onDialogPkoOrder(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            if (this.isKontragentDeleted(getAttrValueFromSelected("KontragId")).booleanValue() == true) {
+                FacesContext ctx = FacesContext.getCurrentInstance();
+                FacesMessage msg =
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Kontragent is deleted",
+                                     "Контрагент помечен на удаление" + " операция невозможна!");
+                ctx.addMessage(null, msg);
+                return;
+            } 
+            /* DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("VwZamerMoves1Iterator");
+            Row currRow = it.getCurrentRow();  */
+
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding oper = (OperationBinding) binding.getOperationBinding("addPkoOrder");
+            if (oper != null) {
+                oper.getParamsMap().put("kontragId", getAttrValueFromSelected("KontragId"));
+                oper.getParamsMap().put("OrderId", getAttrValueFromSelected("RegistratorId"));
+                oper.execute();
+
+                refresh();
+            }
+        }
     }
 
     private boolean isDigit(String st) {

@@ -23,6 +23,10 @@
     Name="DId"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <Variable
+    Name="KassaName"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="CurrencyView1"
     ViewObjectName="ua.divas.view.CurrencyView"
@@ -78,6 +82,10 @@
        Kassa.DELETED, 
        Kassa.VERSION, 
        Kassa.PREDEFINED,
+       case
+        when (ID not in (select kassa_id from ballans_by_kassa where ballans !=0)) then 1
+        else 0
+       end Nullable,
        (select 0 from dual) k_editable
 FROM  KASSA Kassa
 where deleted = 0]]></SQLQuery>
@@ -89,7 +97,8 @@ where deleted = 0]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="Kassa"
-    AliasName="ID"/>
+    AliasName="ID"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Fullname"
     IsNotNull="true"
@@ -103,13 +112,15 @@ where deleted = 0]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="IsGroup"
     EntityUsage="Kassa"
-    AliasName="IS_GROUP"/>
+    AliasName="IS_GROUP"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="ParentId"
     PrecisionRule="true"
     EntityAttrName="ParentId"
     EntityUsage="Kassa"
-    AliasName="PARENT_ID"/>
+    AliasName="PARENT_ID"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="CurrId"
     IsNotNull="true"
@@ -148,27 +159,48 @@ where deleted = 0]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="FirmaId"
     EntityUsage="Kassa"
-    AliasName="FIRMA_ID"/>
+    AliasName="FIRMA_ID"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Deleted"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Deleted"
     EntityUsage="Kassa"
-    AliasName="DELETED"/>
+    AliasName="DELETED"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Version"
     PrecisionRule="true"
     EntityAttrName="Version"
     EntityUsage="Kassa"
-    AliasName="VERSION"/>
+    AliasName="VERSION"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Predefined"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Predefined"
     EntityUsage="Kassa"
-    AliasName="PREDEFINED"/>
+    AliasName="PREDEFINED"
+    IsQueriable="false"/>
+  <ViewAttribute
+    Name="Nullable"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="NULLABLE"
+    Expression="NULLABLE"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="KEditable"
     IsPersistent="false"
@@ -177,7 +209,8 @@ where deleted = 0]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="K_EDITABLE"
     Expression="K_EDITABLE"
-    SQLType="NUMERIC"/>
+    SQLType="NUMERIC"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="TotalSumm"
     IsUpdateable="false"
@@ -187,7 +220,8 @@ where deleted = 0]]></SQLQuery>
     Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
-    SQLType="NUMERIC">
+    SQLType="NUMERIC"
+    IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[VwKassaMoves.sum("Summ != null ? Summ : 0")]]></TransientExpression>
   </ViewAttribute>
@@ -200,7 +234,8 @@ where deleted = 0]]></SQLQuery>
     Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
-    SQLType="NUMERIC">
+    SQLType="NUMERIC"
+    IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[VwKassaMoves.sum("SummPrihod != null ? SummPrihod : 0")]]></TransientExpression>
   </ViewAttribute>
@@ -213,7 +248,8 @@ where deleted = 0]]></SQLQuery>
     Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
-    SQLType="NUMERIC">
+    SQLType="NUMERIC"
+    IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[VwKassaMoves.sum("SummRashod != null ? SummRashod : 0")]]></TransientExpression>
   </ViewAttribute>
@@ -234,7 +270,7 @@ where deleted = 0]]></SQLQuery>
           Value="true"/>
         <Property
           Name="showInList"
-          Value="true"/>
+          Value="false"/>
         <Property
           Name="mode"
           Value="Basic"/>
@@ -258,6 +294,94 @@ where deleted = 0]]></SQLQuery>
         Operator="="
         Conjunction="AND"
         Value=":DId"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="KassaViewActive"
+    ViewObjectName="ua.divas.view.KassaView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="displayName"
+          ResId="displayName"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="KassaViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Fullname"
+        ViewAttribute="Fullname"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Value=":KassaName"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Nullable"
+        ViewAttribute="Nullable"
+        Operator="="
+        Conjunction="AND"
+        Value="0"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="KassaViewAll"
+    ViewObjectName="ua.divas.view.KassaView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="displayName"
+          ResId="displayName"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="KassaViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Fullname"
+        ViewAttribute="Fullname"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Value=":KassaName"
         GenerateIsNullClauseForBindVars="false"
         IsBindVarValue="true"
         Required="Optional"/>

@@ -243,7 +243,7 @@
                                     <af:showDetailItem text="Поиск" id="sdi1" stretchChildren="first"
                                                        icon="/img/search.png">
                                         <af:panelGroupLayout layout="vertical" id="pgl4">
-                                            <af:panelHeader text="Поиск" id="ph1">
+                                            <af:panelHeader text="Кредиторы" id="ph1">
                                                 <af:query id="qryId1" headerText="Поиск" disclosed="true"
                                                           value="#{bindings.VwKontragActiveQuery.queryDescriptor}"
                                                           model="#{bindings.VwKontragActiveQuery.queryModel}"

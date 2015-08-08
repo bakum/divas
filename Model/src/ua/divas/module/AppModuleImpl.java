@@ -13,7 +13,6 @@ import oracle.jbo.server.ViewLinkImpl;
 
 
 import oracle.jbo.server.ViewObjectImpl;
-
 import oracle.jbo.server.ViewRowSetImpl;
 
 import ua.divas.module.common.AppModule;
@@ -4285,5 +4284,7 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewLinkImpl getVwZamerRkoVOFkLink1() {
         return (ViewLinkImpl) findViewLink("VwZamerRkoVOFkLink1");
     }
+
+
 }
 

@@ -115,7 +115,7 @@ SELECT max(ORDERS_TP_NACHISL.ID),
   SUM( -ORDERS_TP_NACHISL.SUMM),
   NULL,
   ORDERS_TP_NACHISL.ORDER_ID,
-  'Начисления по заказу' Reg_String
+  TO_CHAR(ORDERS_TP_NACHISL.DAT_NACH, 'DD-MM-YYYY')||' Начисления по заказу' Reg_String
 FROM ORDERS_TP_NACHISL
 INNER JOIN ORDERS
 ON ORDERS.ID        = ORDERS_TP_NACHISL.ORDER_ID
@@ -136,7 +136,7 @@ GROUP BY
   ORDERS_TP_NACHISL.KONTR_ID,
   NULL,
   ORDERS_TP_NACHISL.ORDER_ID,
-  'Начисления по заказу'
+  TO_CHAR(ORDERS_TP_NACHISL.DAT_NACH, 'DD-MM-YYYY')||' Начисления по заказу'
 union
 SELECT max(ORDERS_TP_OPLATY.ID),
   ORDERS.DAT,
@@ -155,7 +155,7 @@ SELECT max(ORDERS_TP_OPLATY.ID),
   SUM(ORDERS_TP_OPLATY.SUM),
   NULL,
   ORDERS_TP_OPLATY.ORDER_ID,
-  'Оплаты по заказу' Reg_String
+  TO_CHAR(ORDERS_TP_OPLATY.DAT, 'DD-MM-YYYY')||' Оплата по заказу' Reg_String
 FROM ORDERS_TP_OPLATY
 INNER JOIN ORDERS
 ON ORDERS.ID                   = ORDERS_TP_OPLATY.ORDER_ID
@@ -177,7 +177,7 @@ GROUP BY
   ORDERS_TP_OPLATY.ZAMER_ID,
   NULL,
   ORDERS_TP_OPLATY.ORDER_ID,
-  'Оплаты по заказу'
+  TO_CHAR(ORDERS_TP_OPLATY.DAT, 'DD-MM-YYYY')||' Оплата по заказу'
   union
   SELECT max(ORDERS_TP_RASHODY.ID),
   ORDERS.DAT,
@@ -196,7 +196,7 @@ GROUP BY
   SUM(-ORDERS_TP_RASHODY.SUMM),
   NULL,
   ORDERS_TP_RASHODY.ORDER_ID,
-  'Начисления по заказу' Reg_String
+  TO_CHAR(ORDERS_TP_RASHODY.DAT_RASH, 'DD-MM-YYYY')||' Начисления по заказу' Reg_String
 FROM ORDERS_TP_RASHODY
 INNER JOIN ORDERS
 ON ORDERS.ID                   = ORDERS_TP_RASHODY.ORDER_ID
@@ -218,7 +218,7 @@ GROUP BY
   ORDERS_TP_RASHODY.KONTR_ID,
   NULL,
   ORDERS_TP_RASHODY.ORDER_ID,
-  'Начисления по заказу') RKO]]></SQLQuery>
+  TO_CHAR(ORDERS_TP_RASHODY.DAT_RASH, 'DD-MM-YYYY')||' Начисления по заказу') RKO]]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"

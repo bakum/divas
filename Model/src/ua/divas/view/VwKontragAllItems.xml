@@ -419,8 +419,7 @@ GROUP BY ID,
     ColumnType="VARCHAR2"
     AliasName="CODE"
     Expression="CODE"
-    SQLType="VARCHAR"
-    IsQueriable="false">
+    SQLType="VARCHAR">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="6"/>
     </DesignTime>
@@ -444,7 +443,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="NULLABLE"
     Expression="NULLABLE"
-    SQLType="NUMERIC">
+    SQLType="INTEGER">
     <Properties>
       <SchemaBasedProperties>
         <DISPLAYHINT
@@ -721,7 +720,8 @@ GROUP BY ID,
         Conjunction="AND"
         Value="5091"
         GenerateIsNullClauseForBindVars="false"
-        Required="Optional"/>
+        Required="Optional"
+        UpperColumns="0"/>
     </ViewCriteriaRow>
   </ViewCriteria>
   <ViewCriteria
@@ -769,13 +769,120 @@ GROUP BY ID,
         Conjunction="AND"
         Value="5091"
         GenerateIsNullClauseForBindVars="false"
-        Required="Optional"/>
+        Required="Optional"
+        UpperColumns="0"/>
       <ViewCriteriaItem
         Name="Nullable"
         ViewAttribute="Nullable"
         Operator="="
         Conjunction="AND"
         Value="0"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="VwKontragDebActive"
+    ViewObjectName="ua.divas.view.VwKontragAllItems"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="displayName"
+          ResId="displayName"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="VwKontragAllItemsCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Fullname"
+        ViewAttribute="Fullname"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Value=":KonName"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="VwKontragAllItemsCriteria_VwKontragAllItemsCriteria_row_0_Code"
+        ViewAttribute="Code"
+        Operator="="
+        Conjunction="AND"
+        Value="20711"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"
+        UpperColumns="0"/>
+      <ViewCriteriaItem
+        Name="Nullable"
+        ViewAttribute="Nullable"
+        Operator="="
+        Conjunction="AND"
+        Value="0"
+        GenerateIsNullClauseForBindVars="false"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="VwKontragAllDeb"
+    ViewObjectName="ua.divas.view.VwKontragAllItems"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="displayName"
+          ResId="displayName"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="VwKontragAllItemsCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Fullname"
+        ViewAttribute="Fullname"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Value=":KonName"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="VwKontragAllDeb_VwKontragAllItemsCriteria_row_0_Code"
+        ViewAttribute="Code"
+        Operator="="
+        Conjunction="AND"
+        Value="20711"
+        UpperColumns="0"
         GenerateIsNullClauseForBindVars="false"
         Required="Optional"/>
     </ViewCriteriaRow>

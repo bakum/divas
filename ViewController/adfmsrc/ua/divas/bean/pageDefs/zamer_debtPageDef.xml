@@ -4,10 +4,6 @@
   <parameters/>
   <executables>
     <variableIterator id="variables">
-      <variable Type="void" Name="paySelectedRows_return" IsQueriable="false" IsUpdateable="0"
-                DefaultValue="${bindings.paySelectedRows.result}"/>
-      <variable Type="java.lang.String" Name="paySelectedRows_kassaId" IsQueriable="false"/>
-      <variable Name="paySelectedRows_Summ" Type="java.math.BigDecimal"/>
       <variable Type="java.lang.String" Name="addRko_kassaId" IsQueriable="false"/>
       <variable Type="java.math.BigDecimal" Name="addRko_Summa" IsQueriable="false"/>
     </variableIterator>
@@ -59,39 +55,6 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <methodAction id="paySelectedRows" RequiresUpdateModel="true" Action="invokeMethod" MethodName="paySelectedRows"
-                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
-                  InstanceName="data.AppModuleDataControl.VwKontragZamer1"
-                  ReturnName="data.AppModuleDataControl.methodResults.paySelectedRows_AppModuleDataControl_VwKontragZamer1_paySelectedRows_result">
-      <NamedData NDName="kassaId" NDValue="#{bindings.paySelectedRows_kassaId}" NDType="java.lang.String"/>
-      <NamedData NDName="Summ" NDValue="#{bindings.paySelectedRows_Summ}" NDType="java.math.BigDecimal"/>
-    </methodAction>
-    <list StaticList="false" IterBinding="variables" ListIter="KassaSettingsView1Iterator"
-          id="paySelectedRows_kassaId1"
-          NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
-          NullValueFlag="start">
-      <AttrNames>
-        <Item Value="paySelectedRows_kassaId"/>
-      </AttrNames>
-      <ListAttrNames>
-        <Item Value="KassaId"/>
-      </ListAttrNames>
-      <ListDisplayAttrNames>
-        <Item Value="KassaName"/>
-      </ListDisplayAttrNames>
-    </list>
-    <attributeValues IterBinding="variables" id="paySelectedRows_Summ1">
-      <AttrNames>
-        <Item Value="paySelectedRows_Summ"/>
-      </AttrNames>
-    </attributeValues>
-    <methodAction id="paySelRow" RequiresUpdateModel="true" Action="invokeMethod" MethodName="paySelRow"
-                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
-                  InstanceName="data.AppModuleDataControl.VwKontragZamer1">
-      <NamedData NDName="rw" NDType="oracle.jbo.Row" NDValue="#{bindings.VwKontragZamer1Iterator.currentRow}"/>
-      <NamedData NDName="kassaId" NDType="java.lang.String" NDValue="#{bindings.paySelectedRows_kassaId}"/>
-      <NamedData NDName="Summ" NDType="java.math.BigDecimal" NDValue="#{bindings.paySelectedRows_Summ}"/>
-    </methodAction>
     <methodAction id="addRko" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addRko"
                   IsViewObjectMethod="false" DataControl="AppModuleDataControl"
                   InstanceName="data.AppModuleDataControl.dataProvider">
@@ -129,10 +92,18 @@
                   IsViewObjectMethod="false" DataControl="AppModuleDataControl"
                   InstanceName="data.AppModuleDataControl.dataProvider"
                   ReturnName="data.AppModuleDataControl.methodResults.addPkoOrder_AppModuleDataControl_dataProvider_addPkoOrder_result">
-      <NamedData NDName="kassaId" NDType="java.lang.String" NDValue="#{bindings.paySelectedRows_kassaId}"/>
+      <NamedData NDName="kassaId" NDType="java.lang.String" NDValue="${bindings.addRko_kassaId}"/>
       <NamedData NDName="kontragId" NDType="java.lang.String"/>
       <NamedData NDName="OrderId" NDType="java.lang.String"/>
-      <NamedData NDName="Summa" NDType="java.math.BigDecimal" NDValue="#{bindings.paySelectedRows_Summ}"/>
+      <NamedData NDName="Summa" NDType="java.math.BigDecimal" NDValue="${bindings.addRko_Summa}"/>
+    </methodAction>
+    <methodAction id="addPkoFromZamer" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addPkoFromZamer"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults.addPkoFromZamer_AppModuleDataControl_dataProvider_addPkoFromZamer_result">
+      <NamedData NDName="kassaId" NDValue="${bindings.addRko_kassaId}" NDType="java.lang.String"/>
+      <NamedData NDName="kontragId" NDType="java.lang.String"/>
+      <NamedData NDName="Summa" NDType="java.math.BigDecimal" NDValue="${bindings.addRko_Summa}"/>
     </methodAction>
   </bindings>
 </pageDefinition>

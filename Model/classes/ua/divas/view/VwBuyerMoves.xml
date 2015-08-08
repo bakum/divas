@@ -32,7 +32,8 @@
       </SchemaBasedProperties>
     </Properties>
   </Variable>
-  <SQLQuery><![CDATA[SELECT KONTRAG_ID,
+  <SQLQuery><![CDATA[SELECT max(ID) ID,
+  KONTRAG_ID,
   KONTRAG,
   DIVISION_ID,
   TABLE_NAME,
@@ -41,8 +42,9 @@
   SUM(summ_prihod),
   SUM(summ_rashod),
   REGISTRATOR_ID,
-  PERIOD,
+  max(PERIOD) PERIOD,
   REG_STRING,
+  PAYED,
   (select sum(debt) from orders_calc where id = REGISTRATOR_ID) Sum_Calc
 FROM
   (SELECT MOVE_KONTRAG.ID,
@@ -55,13 +57,19 @@ FROM
     CASE
       WHEN MOVE_KONTRAG.SUMM >= 0
       THEN MOVE_KONTRAG.SUMM
+      else 0
     END AS summ_prihod,
     CASE
       WHEN MOVE_KONTRAG.SUMM < 0
       THEN ( -1) * MOVE_KONTRAG.SUMM
+      else 0
     END AS summ_rashod,
     MOVE_KONTRAG.REGISTRATOR_ID,
     MOVE_KONTRAG.PERIOD,
+    case
+      when upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('orders')
+      then (select utility.order_payed_percent(MOVE_KONTRAG.REGISTRATOR_ID) from dual)
+    end as payed,
     CASE
       WHEN upper(MOVE_KONTRAG.TABLE_NAME) LIKE upper('orders')
       THEN 'Заказ №'
@@ -122,7 +130,9 @@ FROM
   WHERE MOVE_KONTRAG.CODE    = '20711'
   AND KONTRAGENTS.IS_MEASURER   = 0
   )
-where  
+where 
+registrator_id not in (select id from rko where order_id is not null and posted = 1) and
+registrator_id not in (select id from pko where order_id is not null and posted = 1) and   
 upper(DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))  
 GROUP BY KONTRAG_ID,
   KONTRAG,
@@ -130,9 +140,24 @@ GROUP BY KONTRAG_ID,
   TABLE_NAME,
   CODE,
   REGISTRATOR_ID,
-  PERIOD,
-  REG_STRING
+  REG_STRING,
+  PAYED
 ORDER BY PERIOD DESC]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewAttribute
     Name="KontragId"
     IsUpdateable="false"
@@ -320,6 +345,21 @@ ORDER BY PERIOD DESC]]></SQLQuery>
     </DesignTime>
   </ViewAttribute>
   <ViewAttribute
+    Name="Payed"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PAYED"
+    Expression="PAYED"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
     Name="SumCalc"
     IsUpdateable="false"
     IsPersistent="false"
@@ -329,9 +369,43 @@ ORDER BY PERIOD DESC]]></SQLQuery>
     AliasName="SUM_CALC"
     Expression="SUM_CALC"
     SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SumRko"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[RkoVOSuppl.sum("Summa != null ? Summa : 0")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SumPko"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[RkoVOSuppl.sum("SummaRash != null ? SummaRash : 0")]]></TransientExpression>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
   <ViewLinkAccessor
     Name="OrdersCalcView"
     ViewLink="ua.divas.view.VwBuyerMovesOrdersCalcFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="RkoVOSuppl"
+    ViewLink="ua.divas.view.VwBuyerMovesRkoVOFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <ResourceBundle>
