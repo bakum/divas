@@ -523,6 +523,26 @@
                                                                           visible="false">
                                                         <f:validator binding="#{bindings.KontragId.validator}"/>
                                                     </af:inputListOfValues>
+                                                    <af:inputText value="#{bindings.NetId.inputValue}"
+                                                                  label="#{bindings.NetId.hints.label}"
+                                                                  required="#{bindings.NetId.hints.mandatory}"
+                                                                  columns="#{bindings.NetId.hints.displayWidth}"
+                                                                  maximumLength="#{bindings.NetId.hints.precision}"
+                                                                  shortDesc="#{bindings.NetId.hints.tooltip}" id="it30"
+                                                                  visible="false">
+                                                        <f:validator binding="#{bindings.NetId.validator}"/>
+                                                    </af:inputText>
+                                                    <af:inputListOfValues id="netNameId"
+                                                                          popupTitle="Найти и выбрать: #{bindings.NetName.hints.label}"
+                                                                          value="#{bindings.NetName.inputValue}"
+                                                                          label="#{bindings.NetName.hints.label}"
+                                                                          model="#{bindings.NetName.listOfValuesModel}"
+                                                                          required="#{bindings.NetName.hints.mandatory}"
+                                                                          columns="#{bindings.NetName.hints.displayWidth}"
+                                                                          shortDesc="#{bindings.NetName.hints.tooltip}"
+                                                                          autoSubmit="true" createPopupId="pKontrag">
+                                                        <f:validator binding="#{bindings.NetName.validator}"/>
+                                                    </af:inputListOfValues>
                                                     <af:group id="g1"
                                                               title="Предоставлен доступ к использованию следующих касс">
                                                         <af:selectManyShuttle value="#{shuttle_kassa.selectedValues}"

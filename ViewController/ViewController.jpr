@@ -56,7 +56,7 @@
       <string v="oracle.adfdtinternal.model.ide.settings.ADFMSettings/adfmContentSet"/>
       <string v="oracle.toplink.workbench.addin/toplinkContentSet"/>
    </list>
-   <value n="defaultPackage" v="ua.divas.view"/>
+   <value n="defaultPackage" v="ua.divas.bean"/>
    <value n="jbo.JpxName" v="ua.divas.bean.ViewController"/>
    <value n="JboProject" v="true"/>
    <hash n="oracle.adfdtinternal.model.ide.security.SecurityPolicies">
@@ -212,6 +212,14 @@
       <hash n="javaContentSet">
          <list n="constituent-sets">
             <hash>
+               <list n="pattern-filters">
+                  <string v="+**"/>
+               </list>
+               <list n="url-path">
+                  <url path="src/"/>
+               </list>
+            </hash>
+            <hash>
                <url n="content-folder-url" path="adfmsrc/ua/divas/view/"/>
                <list n="pattern-filters">
                   <string v="+ua/divas/view/ActiveBean.java"/>
@@ -221,12 +229,7 @@
                </list>
             </hash>
          </list>
-         <list n="pattern-filters">
-            <string v="+**"/>
-         </list>
-         <list n="url-path">
-            <url path="src/"/>
-         </list>
+         <list n="url-path"/>
       </hash>
    </hash>
    <hash n="oracle.jdeveloper.runner.RunConfigurations">

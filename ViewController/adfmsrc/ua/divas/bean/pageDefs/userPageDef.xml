@@ -372,5 +372,11 @@
       </nodeDefinition>
     </tree>
     <action IterBinding="onlineUserListIterator" id="Execute" RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues IterBinding="UserSettingsView8Iterator" id="NetId">
+      <AttrNames>
+        <Item Value="NetId"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="UserSettingsView8Iterator" StaticList="false" Uses="LOV_NetName" id="NetName"/>
   </bindings>
 </pageDefinition>

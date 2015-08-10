@@ -226,6 +226,26 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="NetId"
+    Precision="50"
+    ColumnName="NET_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="USER_SETTINGS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.UserSettings.NetId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.UserSettings.NetId_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="Currency"
     Association="ua.divas.model.UserSettingsCurrencyFk1Assoc"

@@ -44,6 +44,7 @@
           <Item Value="RegString"/>
           <Item Value="PeriodName"/>
           <Item Value="Discription"/>
+          <Item Value="Payed"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

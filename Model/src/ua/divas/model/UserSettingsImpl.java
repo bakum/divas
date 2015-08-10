@@ -36,6 +36,7 @@ public class UserSettingsImpl extends DivasEntityNoDelete {
         ActivitiesId,
         ZamerkontragId,
         KontragId,
+        NetId,
         Currency,
         Divisions,
         Firms,
@@ -77,6 +78,7 @@ public class UserSettingsImpl extends DivasEntityNoDelete {
     public static final int ACTIVITIESID = AttributesEnum.ActivitiesId.index();
     public static final int ZAMERKONTRAGID = AttributesEnum.ZamerkontragId.index();
     public static final int KONTRAGID = AttributesEnum.KontragId.index();
+    public static final int NETID = AttributesEnum.NetId.index();
     public static final int CURRENCY = AttributesEnum.Currency.index();
     public static final int DIVISIONS = AttributesEnum.Divisions.index();
     public static final int FIRMS = AttributesEnum.Firms.index();
@@ -260,6 +262,22 @@ public class UserSettingsImpl extends DivasEntityNoDelete {
     }
 
     /**
+     * Gets the attribute value for NetId, using the alias name NetId.
+     * @return the value of NetId
+     */
+    public String getNetId() {
+        return (String) getAttributeInternal(NETID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for NetId.
+     * @param value value to set the NetId
+     */
+    public void setNetId(String value) {
+        setAttributeInternal(NETID, value);
+    }
+
+    /**
      * @return the associated entity CurrencyImpl.
      */
     public CurrencyImpl getCurrency() {
@@ -359,6 +377,15 @@ public class UserSettingsImpl extends DivasEntityNoDelete {
 
 
     /**
+     * @param id key constituent
+
+     * @return a Key object based on given key constituents.
+     */
+    public static Key createPrimaryKey(String id) {
+        return new Key(new Object[] { id });
+    }
+
+    /**
      * Validation method for UserSettings.
      */
     public boolean validateUserSettings2() {
@@ -373,14 +400,6 @@ public class UserSettingsImpl extends DivasEntityNoDelete {
         return true;
     }
 
-    /**
-     * @param id key constituent
-
-     * @return a Key object based on given key constituents.
-     */
-    public static Key createPrimaryKey(String id) {
-        return new Key(new Object[] { id });
-    }
 
     /**
      * Validation method for UserSettings.

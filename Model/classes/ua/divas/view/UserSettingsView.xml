@@ -362,6 +362,30 @@
     <DisplayCriteria
       Hint="showAndExecute"/>
   </ListBinding>
+  <ListBinding
+    Name="LOV_NetName"
+    ListVOName="KontragOtherView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0"
+    ComboRowCountHint="10">
+    <AttrArray Name="AttrNames">
+      <Item Value="NetName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="NetId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Fullname"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
   <SQLQuery><![CDATA[SELECT UserSettings.ID, 
        UserSettings.USER_ID, 
        UserSettings.DIVISION_ID, 
@@ -375,7 +399,9 @@
        UserSettings.ZAMERKONTRAG_ID,
        (select fullname from kontragents where id = UserSettings.ZAMERKONTRAG_ID) ZamerKontrag_Name,
        UserSettings.KONTRAG_ID,
-       (select fullname from kontragents where id = UserSettings.KONTRAG_ID) Kontrag_Name
+       (select fullname from kontragents where id = UserSettings.KONTRAG_ID) Kontrag_Name,
+       UserSettings.NET_ID,
+       (select fullname from kontragents where id = UserSettings.NET_ID) Net_Name
 FROM  USER_SETTINGS UserSettings]]></SQLQuery>
   <EntityUsage
     Name="UserSettings"
@@ -615,6 +641,10 @@ FROM  USER_SETTINGS UserSettings]]></SQLQuery>
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="input_text_lov"/>
+        <LABEL
+          ResId="ua.divas.view.UserSettingsView.KontragId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.UserSettingsView.KontragId_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -634,16 +664,59 @@ FROM  USER_SETTINGS UserSettings]]></SQLQuery>
     </DesignTime>
     <Properties>
       <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
         <LABEL
           ResId="ua.divas.view.UserSettingsView.KontragName_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.view.UserSettingsView.KontragName_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="NetId"
+    PrecisionRule="true"
+    EntityAttrName="NetId"
+    EntityUsage="UserSettings"
+    AliasName="NET_ID">
+    <TransientExpression><![CDATA[KontragId]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="NetName"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="NetName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="150"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NET_NAME"
+    Expression="NET_NAME"
+    SQLType="VARCHAR"
+    LOVName="LOV_NetName">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="150"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.UserSettingsView.NetName_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.UserSettingsView.NetName_TOOLTIP"/>
         <DISPLAYWIDTH
           Value="30"/>
         <CONTROLTYPE
           Value="input_text_lov"/>
       </SchemaBasedProperties>
     </Properties>
+    <Dependencies>
+      <Item
+        Value="KontragName"/>
+    </Dependencies>
   </ViewAttribute>
   <ViewCriteria
     Name="FilterSettingsByUser"
