@@ -41,7 +41,7 @@
                                               queryListener="#{bindings.UsersView1Query.processQuery}"
                                               filterVisible="true" varStatus="vs" id="t1" scrollPolicy="page"
                                               editingMode="clickToEdit" partialTriggers="::b3"
-                                              binding="#{users.userTable}">
+                                              binding="#{shuttle_group.userTable}">
                                         <af:column id="c7" filterable="true" width="60">
                                             <af:toolbar id="t2">
                                                 <af:button id="b1" icon="/img/edit-16.gif"
@@ -58,7 +58,7 @@
                                             <f:facet name="filter">
                                                 <af:button id="b8"
                                                            icon="/img/filter_(delete)_16x16.gif"
-                                                           actionListener="#{users.resetTableFilter}"/>
+                                                           actionListener="#{shuttle_group.resetTableFilter}"/>
                                             </f:facet>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.UsersView1.hints.Id.name}"

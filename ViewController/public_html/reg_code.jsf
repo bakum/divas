@@ -74,7 +74,7 @@
                                 <af:panelGroupLayout id="pgl2" layout="horizontal">
                                     <af:spacer width="10" height="10" id="s2"/>
                                     <af:link text="Выйти" id="l2" icon="/img/glbl_logout.gif" action="#{login.logout}"
-                                             rendered="#{securityContext.authenticated}"/>
+                                             rendered="#{securityContext.authenticated}" immediate="true"/>
                                     <af:spacer width="20" height="10" id="s4"/>
                                     <af:outputFormatted value="Пользователь: #{securityContext.userName}" id="of1"
                                                         styleClass="Linkclass"/>

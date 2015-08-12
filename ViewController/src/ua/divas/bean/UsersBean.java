@@ -33,35 +33,12 @@ import oracle.jbo.uicli.binding.JUCtrlHierBinding;
 import oracle.jbo.uicli.binding.JUCtrlValueBindingRef;
 
 public class UsersBean {
-    private RichTable userTable;
     private String codeLabel;
     private RichOutputFormatted code;
 
     public UsersBean() {
     }
 
-    public void setUserTable(RichTable userTable) {
-        this.userTable = userTable;
-    }
-
-    public RichTable getUserTable() {
-        return userTable;
-    }
-
-    public void resetTableFilter(ActionEvent actionEvent) {
-        FilterableQueryDescriptor queryDescriptor = (FilterableQueryDescriptor) getUserTable().getFilterModel();
-        if (queryDescriptor != null && queryDescriptor.getFilterConjunctionCriterion() != null) {
-            ConjunctionCriterion cc = queryDescriptor.getFilterConjunctionCriterion();
-            List<Criterion> lc = cc.getCriterionList();
-            for (Criterion c : lc) {
-                if (c instanceof AttributeCriterion) {
-                    AttributeCriterion ac = (AttributeCriterion) c;
-                    ac.setValue(null);
-                }
-            }
-            getUserTable().queueEvent(new QueryEvent(getUserTable(), queryDescriptor));
-        }
-    }
 
     public BindingContainer getBindings() {
         return BindingContext.getCurrent().getCurrentBindingsEntry();

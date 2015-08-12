@@ -24,13 +24,21 @@ import oracle.adf.model.binding.DCDataControl;
 import oracle.adf.model.binding.DCIteratorBinding;
 
 import oracle.adf.view.rich.component.rich.RichPopup;
+import oracle.adf.view.rich.component.rich.data.RichTable;
 import oracle.adf.view.rich.component.rich.input.RichInputListOfValues;
 import oracle.adf.view.rich.component.rich.input.RichInputText;
 import oracle.adf.view.rich.component.rich.input.RichSelectOneChoice;
+import oracle.adf.view.rich.context.AdfFacesContext;
 import oracle.adf.view.rich.event.DialogEvent;
 
 import oracle.adf.view.rich.event.PopupCanceledEvent;
 import oracle.adf.view.rich.event.PopupFetchEvent;
+
+import oracle.adf.view.rich.event.QueryEvent;
+import oracle.adf.view.rich.model.AttributeCriterion;
+import oracle.adf.view.rich.model.ConjunctionCriterion;
+import oracle.adf.view.rich.model.Criterion;
+import oracle.adf.view.rich.model.FilterableQueryDescriptor;
 
 import oracle.adfinternal.view.faces.taglib.listener.ResetActionListener;
 
@@ -51,6 +59,7 @@ import ua.divas.module.AppModuleImpl;
 public class ShuttleGroup {
     List selectedValues = new ArrayList();
     List allValues = new ArrayList();
+    private RichTable userTable;
     private RichSelectOneChoice division;
     private RichSelectOneChoice currency;
     private RichInputText konName;
@@ -65,6 +74,29 @@ public class ShuttleGroup {
     private RichPopup newZamerPopup;
 
     public ShuttleGroup() {
+    }
+    
+    public void setUserTable(RichTable userTable) {
+        this.userTable = userTable;
+    }
+
+    public RichTable getUserTable() {
+        return userTable;
+    }
+    
+    public void resetTableFilter(ActionEvent actionEvent) {
+        FilterableQueryDescriptor queryDescriptor = (FilterableQueryDescriptor) getUserTable().getFilterModel();
+        if (queryDescriptor != null && queryDescriptor.getFilterConjunctionCriterion() != null) {
+            ConjunctionCriterion cc = queryDescriptor.getFilterConjunctionCriterion();
+            List<Criterion> lc = cc.getCriterionList();
+            for (Criterion c : lc) {
+                if (c instanceof AttributeCriterion) {
+                    AttributeCriterion ac = (AttributeCriterion) c;
+                    ac.setValue(null);
+                }
+            }
+            getUserTable().queueEvent(new QueryEvent(getUserTable(), queryDescriptor));
+        }
     }
 
     public void resetBindingValue(String expression, Object newValue) {
@@ -212,14 +244,15 @@ public class ShuttleGroup {
         DCIteratorBinding it = binding.findIteratorBinding("UsersView1Iterator");
         if (it != null) {
             String rks = it.getCurrentRow().getKey().toStringFormat(true);
-            BindingContainer bindings = BindingContext.getCurrent().getCurrentBindingsEntry(); 
-            bindings.refresh();
+            //BindingContainer bindings = BindingContext.getCurrent().getCurrentBindingsEntry(); 
+            //bindings.refresh();
             it.executeQuery();
-            it.refresh(DCIteratorBinding.RANGESIZE_UNLIMITED);
+            //it.refresh(DCIteratorBinding.RANGESIZE_UNLIMITED);
             if (rks != null) {
                 it.setCurrentRowWithKey(rks);
             }
         }
+        AdfFacesContext.getCurrentInstance().addPartialTarget(getUserTable());
     }
 
     public String commitChange() {
