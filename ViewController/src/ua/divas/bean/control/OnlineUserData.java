@@ -47,7 +47,7 @@ public class OnlineUserData {
         return -1;
     }
 
-    public final static String getUserId(String login) {
+    private final static String getUserId(String login) {
         String _id = (String) callStoredFunction(VARCHAR2, "USR_SETT.GET_USERID(?)", new Object[] { login });
         if (_id.equals("00000000-0000-0000-0000-000000000000"))
             return null;
@@ -55,7 +55,7 @@ public class OnlineUserData {
             return _id;
     }
 
-    public final static Object callStoredFunction(int sqlReturnType, String stmt, Object[] bindVars) {
+    private final static Object callStoredFunction(int sqlReturnType, String stmt, Object[] bindVars) {
         CallableStatement st = null;
         BindingContext bindingContext = BindingContext.getCurrent();
         DCDataControl dc =

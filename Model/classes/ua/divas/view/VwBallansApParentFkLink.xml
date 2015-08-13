@@ -3,40 +3,38 @@
 <!---->
 <ViewLink
   xmlns="http://xmlns.oracle.com/bc4j"
-  Name="VwBallansDetaiFkLink"
+  Name="VwBallansApParentFkLink"
   Version="12.1.2.66.68"
   InheritPersonalization="merge">
   <Properties>
     <SchemaBasedProperties>
       <LABEL
-        ResId="ua.divas.view.VwBallansDetaiFkLink_LABEL"/>
+        ResId="ua.divas.view.VwBallansApParentFkLink_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
   <ViewLinkDefEnd
-    Name="VwBallansApParent"
+    Name="VwBallansAp"
     Cardinality="1"
     Source="true"
+    Owner="ua.divas.view.VwBallansAp">
+    <DesignTime>
+      <Attr Name="_finderName" Value="VwBallansAp"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="ua.divas.view.VwBallansAp.Id"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="VwBallansApParent"
+    Cardinality="-1"
     Owner="ua.divas.view.VwBallansApParent">
     <DesignTime>
       <Attr Name="_finderName" Value="VwBallansApParent"/>
       <Attr Name="_isUpdateable" Value="true"/>
     </DesignTime>
     <AttrArray Name="Attributes">
-      <Item Value="ua.divas.view.VwBallansApParent.ParentId"/>
-      <Item Value="ua.divas.view.VwBallansApParent.Code"/>
-    </AttrArray>
-  </ViewLinkDefEnd>
-  <ViewLinkDefEnd
-    Name="VwBallansApDetail"
-    Cardinality="-1"
-    Owner="ua.divas.view.VwBallansApDetail">
-    <DesignTime>
-      <Attr Name="_finderName" Value="VwBallansApDetail"/>
-      <Attr Name="_isUpdateable" Value="true"/>
-    </DesignTime>
-    <AttrArray Name="Attributes">
-      <Item Value="ua.divas.view.VwBallansApDetail.ParentId"/>
-      <Item Value="ua.divas.view.VwBallansApDetail.Code"/>
+      <Item Value="ua.divas.view.VwBallansApParent.Id"/>
     </AttrArray>
   </ViewLinkDefEnd>
   <ResourceBundle>

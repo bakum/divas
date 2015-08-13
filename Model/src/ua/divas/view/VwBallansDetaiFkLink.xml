@@ -13,16 +13,17 @@
     </SchemaBasedProperties>
   </Properties>
   <ViewLinkDefEnd
-    Name="VwBallansAp"
+    Name="VwBallansApParent"
     Cardinality="1"
     Source="true"
-    Owner="ua.divas.view.VwBallansAp">
+    Owner="ua.divas.view.VwBallansApParent">
     <DesignTime>
-      <Attr Name="_finderName" Value="VwBallansAp"/>
+      <Attr Name="_finderName" Value="VwBallansApParent"/>
       <Attr Name="_isUpdateable" Value="true"/>
     </DesignTime>
     <AttrArray Name="Attributes">
-      <Item Value="ua.divas.view.VwBallansAp.Id"/>
+      <Item Value="ua.divas.view.VwBallansApParent.ParentId"/>
+      <Item Value="ua.divas.view.VwBallansApParent.Code"/>
     </AttrArray>
   </ViewLinkDefEnd>
   <ViewLinkDefEnd
@@ -34,7 +35,8 @@
       <Attr Name="_isUpdateable" Value="true"/>
     </DesignTime>
     <AttrArray Name="Attributes">
-      <Item Value="ua.divas.view.VwBallansApDetail.Id"/>
+      <Item Value="ua.divas.view.VwBallansApDetail.ParentId"/>
+      <Item Value="ua.divas.view.VwBallansApDetail.Code"/>
     </AttrArray>
   </ViewLinkDefEnd>
   <ResourceBundle>

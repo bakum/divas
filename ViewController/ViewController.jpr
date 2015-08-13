@@ -56,6 +56,7 @@
       <string v="oracle.adfdtinternal.model.ide.settings.ADFMSettings/adfmContentSet"/>
       <string v="oracle.toplink.workbench.addin/toplinkContentSet"/>
    </list>
+   <value n="DCProject" v="true"/>
    <value n="defaultPackage" v="ua.divas.bean"/>
    <value n="jbo.JpxName" v="ua.divas.bean.ViewController"/>
    <value n="JboProject" v="true"/>

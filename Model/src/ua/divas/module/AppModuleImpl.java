@@ -3868,21 +3868,6 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         return (ViewLinkImpl) findViewLink("StartOstVwMovesFkLink1");
     }
 
-    /**
-     * Container's getter for VwBallansApDetail1.
-     * @return VwBallansApDetail1
-     */
-    public VwBallansApDetailImpl getVwBallansApDetail1() {
-        return (VwBallansApDetailImpl) findViewObject("VwBallansApDetail1");
-    }
-
-    /**
-     * Container's getter for VwBallansDetaiFkLink1.
-     * @return VwBallansDetaiFkLink1
-     */
-    public ViewLinkImpl getVwBallansDetaiFkLink1() {
-        return (ViewLinkImpl) findViewLink("VwBallansDetaiFkLink1");
-    }
 
     /**
      * Container's getter for VwBallansApDetail2.
@@ -4286,5 +4271,44 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     }
 
 
+    /**
+     * Container's getter for VwBallansApParent1.
+     * @return VwBallansApParent1
+     */
+    public ViewObjectImpl getVwBallansApParent1() {
+        return (ViewObjectImpl) findViewObject("VwBallansApParent1");
+    }
+
+    /**
+     * Container's getter for VwBallansApParentFkLink1.
+     * @return VwBallansApParentFkLink1
+     */
+    public ViewLinkImpl getVwBallansApParentFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwBallansApParentFkLink1");
+    }
+
+    /**
+     * Container's getter for VwBallansApParent2.
+     * @return VwBallansApParent2
+     */
+    public ViewObjectImpl getVwBallansApParent2() {
+        return (ViewObjectImpl) findViewObject("VwBallansApParent2");
+    }
+
+    /**
+     * Container's getter for VwBallansApDetail1.
+     * @return VwBallansApDetail1
+     */
+    public VwBallansApDetailImpl getVwBallansApDetail1() {
+        return (VwBallansApDetailImpl) findViewObject("VwBallansApDetail1");
+    }
+
+    /**
+     * Container's getter for VwBallansDetaiFkLink1.
+     * @return VwBallansDetaiFkLink1
+     */
+    public ViewLinkImpl getVwBallansDetaiFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwBallansDetaiFkLink1");
+    }
 }
 

@@ -341,8 +341,8 @@ ORDER BY CODE]]></SQLQuery>
     <Item Value="Id"/>
   </AttrArray>
   <ViewLinkAccessor
-    Name="VwBallansApDetail"
-    ViewLink="ua.divas.view.VwBallansDetaiFkLink"
+    Name="VwBallansApParent"
+    ViewLink="ua.divas.view.VwBallansApParentFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <ClientInterface

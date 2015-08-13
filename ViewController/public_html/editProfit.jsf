@@ -78,8 +78,7 @@
                                                                required="#{bindings.Summ.hints.mandatory}"
                                                                columns="#{bindings.Summ.hints.displayWidth}"
                                                                shortDesc="#{bindings.Summ.hints.tooltip}" id="it4"
-                                                               readOnly="#{bindings.Editable.inputValue == 1 ? false : true}"
-                                                               validator="#{profit_jsf.onSummValidate}">
+                                                               readOnly="#{bindings.Editable.inputValue == 1 ? false : true}">
                                             <f:validator binding="#{bindings.Summ.validator}"/>
                                             <af:convertNumber groupingUsed="false" pattern="#{bindings.Summ.format}"/>
                                         </af:inputNumberSpinbox>

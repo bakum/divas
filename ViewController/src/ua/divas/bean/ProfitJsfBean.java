@@ -136,8 +136,8 @@ public class ProfitJsfBean {
 
         if ((object == null) || (object.toString().isEmpty())) {
             fatal = true;
-        } else if (!isDigit(object.toString())) {
-            fatal = true;
+       // } else if (!isDigit(object.toString())) {
+       //     fatal = true;
         } else if (Integer.parseInt(object.toString()) <= 0) {
             fatal = true;
         }

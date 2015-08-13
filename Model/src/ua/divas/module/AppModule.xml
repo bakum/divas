@@ -872,9 +872,6 @@
     Name="VwStartOstMovesVO1"
     ViewObjectName="ua.divas.view.VwStartOstMovesVO"/>
   <ViewUsage
-    Name="VwBallansApDetail1"
-    ViewObjectName="ua.divas.view.VwBallansApDetail"/>
-  <ViewUsage
     Name="VwBallansApDetail2"
     ViewObjectName="ua.divas.view.VwBallansApDetail"/>
   <ViewUsage
@@ -988,6 +985,15 @@
   <ViewUsage
     Name="RkoVOSuppl3"
     ViewObjectName="ua.divas.view.RkoVOSuppl"/>
+  <ViewUsage
+    Name="VwBallansApParent1"
+    ViewObjectName="ua.divas.view.VwBallansApParent"/>
+  <ViewUsage
+    Name="VwBallansApParent2"
+    ViewObjectName="ua.divas.view.VwBallansApParent"/>
+  <ViewUsage
+    Name="VwBallansApDetail1"
+    ViewObjectName="ua.divas.view.VwBallansApDetail"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -1985,12 +1991,6 @@
     DstViewUsageName="ua.divas.module.AppModule.VwStartOstMovesVO1"
     Reversed="false"/>
   <ViewLinkUsage
-    Name="VwBallansDetaiFkLink1"
-    ViewLinkObjectName="ua.divas.view.VwBallansDetaiFkLink"
-    SrcViewUsageName="ua.divas.module.AppModule.VwBallansAp1"
-    DstViewUsageName="ua.divas.module.AppModule.VwBallansApDetail1"
-    Reversed="false"/>
-  <ViewLinkUsage
     Name="ProfitDistribFk1Link1"
     ViewLinkObjectName="ua.divas.view.ProfitDistribFk1Link"
     SrcViewUsageName="ua.divas.module.AppModule.DivisionsView1"
@@ -2085,6 +2085,18 @@
     ViewLinkObjectName="ua.divas.view.VwZamerRkoVOFkLink"
     SrcViewUsageName="ua.divas.module.AppModule.VwZamerMoves1"
     DstViewUsageName="ua.divas.module.AppModule.RkoVOSuppl3"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="VwBallansApParentFkLink1"
+    ViewLinkObjectName="ua.divas.view.VwBallansApParentFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.VwBallansAp1"
+    DstViewUsageName="ua.divas.module.AppModule.VwBallansApParent1"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="VwBallansDetaiFkLink1"
+    ViewLinkObjectName="ua.divas.view.VwBallansDetaiFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.VwBallansApParent2"
+    DstViewUsageName="ua.divas.module.AppModule.VwBallansApDetail1"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">

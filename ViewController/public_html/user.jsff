@@ -970,11 +970,25 @@
                                                 <af:convertDateTime pattern="dd-MMM-yyy HH:mm:ss"/>
                                             </af:outputText>
                                         </af:column>
-                                        <af:column headerText="IP"
+                                        <af:column headerText="IP сервера"
                                                    id="c26" width="200">
                                             <af:outputText value="#{row.ipAdress}"
                                                            shortDesc="#{bindings.onlineUserList.hints.ipAdress.tooltip}"
                                                            id="ot4"
+                                                           inlineStyle="#{securityContext.userName == row.login ? 'font-weight:bold;' : ''}"/>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.onlineUserList.hints.ipAdressLocal.label}"
+                                                   id="c27" width="200">
+                                            <af:outputText value="#{row.ipAdressLocal}"
+                                                           shortDesc="#{bindings.onlineUserList.hints.ipAdressLocal.tooltip}"
+                                                           id="ot5"
+                                                           inlineStyle="#{securityContext.userName == row.login ? 'font-weight:bold;' : ''}"/>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.onlineUserList.hints.ipAdressNAT.label}"
+                                                   id="c28" width="200">
+                                            <af:outputText value="#{row.ipAdressNAT}"
+                                                           shortDesc="#{bindings.onlineUserList.hints.ipAdressNAT.tooltip}"
+                                                           id="ot6"
                                                            inlineStyle="#{securityContext.userName == row.login ? 'font-weight:bold;' : ''}"/>
                                         </af:column>
                                     </af:table>

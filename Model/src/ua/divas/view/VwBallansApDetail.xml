@@ -57,7 +57,8 @@
     VW_BALLANS_AP.PASSIVE_KRED PASSIVE_KRED,   
     VW_BALLANS_AP.PASSIVE_OBOROT PASSIVE_OBOROT,    
     VW_BALLANS_AP.PASSIVE_END PASSIVE_END,    
-    VW_BALLANS_AP.DIVISION_ID DIVISION_ID,  
+    VW_BALLANS_AP.DIVISION_ID DIVISION_ID,
+    (select parent_id from divisions where id = VW_BALLANS_AP.DIVISION_ID) PARENT_ID, 
     VW_BALLANS_AP.F_DAT F_DAT,  
     VW_BALLANS_AP.L_DAT L_DAT,  
     (select fullname from divisions where id = VW_BALLANS_AP.DIVISION_ID) Div_Name   
@@ -229,6 +230,21 @@ ballans VW_BALLANS_AP]]></SQLQuery>
           Value="choice"/>
       </SchemaBasedProperties>
     </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ParentId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARENT_ID"
+    Expression="PARENT_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
   </ViewAttribute>
   <ViewAttribute
     Name="FDat"

@@ -191,7 +191,7 @@
                             <af:popup childCreation="deferred" id="pSettings"
                                       contentDelivery="lazyUncached" resetEditableValues="whenCanceled"
                                       popupCanceledListener="#{kon_dir.onCancel}">
-                                <af:dialog id="d3" title="Настройки пользователя: #{bindings.Fullname.inputValue}"
+                                <af:dialog id="d3" title="Настройки контрагента: #{bindings.Fullname.inputValue}"
                                            dialogListener="#{kon_dir.onDialog}" contentWidth="650" contentHeight="300"
                                            resize="on">
                                     <f:facet name="buttonBar"/>

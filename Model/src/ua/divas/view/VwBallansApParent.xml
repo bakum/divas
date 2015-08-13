@@ -3,47 +3,38 @@
 <!---->
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
-  Name="VwBallansApDetail"
+  Name="VwBallansApParent"
   Version="12.1.2.66.68"
   InheritPersonalization="merge"
+  OrderBy='"CODE"'
   BindingStyle="OracleName"
   CustomQuery="true"
-  PageIterMode="Full"
-  ComponentClass="ua.divas.view.VwBallansApDetailImpl">
+  PageIterMode="Full">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
-    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
   <Properties>
     <SchemaBasedProperties>
       <LABEL
-        ResId="ua.divas.view.VwBallansApDetail_LABEL"/>
+        ResId="ua.divas.view.VwBallansApParent_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
-  <ViewAccessor
-    Name="DivisionsView1"
-    ViewObjectName="ua.divas.view.DivisionsView"
-    RowLevelBinds="true"/>
-  <ListBinding
-    Name="LOV_DivisionId"
-    ListVOName="DivisionsView1"
-    ListRangeSize="-1"
-    NullValueFlag="start"
-    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
-    MRUCount="0">
-    <AttrArray Name="AttrNames">
-      <Item Value="DivisionId"/>
-    </AttrArray>
-    <AttrArray Name="AttrExpressions"/>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="Fullname"/>
-    </AttrArray>
-    <DisplayCriteria/>
-  </ListBinding>
-  <SQLQuery><![CDATA[SELECT    
+  <SQLQuery><![CDATA[SELECT MAX(VW_BALLANS_AP.ID) ID,
+  VW_BALLANS_AP.CODE CODE,
+  VW_BALLANS_AP.FULLNAME FULLNAME,
+  VW_BALLANS_AP.PARENT_ID PARENT_ID,
+  VW_BALLANS_AP.PARENT_NAME DIV_NAME,
+  SUM(VW_BALLANS_AP.ACTIVE_START) ACTIVE_START,
+  SUM(VW_BALLANS_AP.ACTIVE_DEB) ACTIVE_DEB,
+  SUM(VW_BALLANS_AP.ACTIVE_KRED) ACTIVE_KRED,
+  SUM(VW_BALLANS_AP.ACTIVE_OBOROT) ACTIVE_OBOROT,
+  SUM(VW_BALLANS_AP.ACTIVE_END) ACTIVE_END,
+  SUM(VW_BALLANS_AP.PASSIVE_START) PASSIVE_START,
+  SUM(VW_BALLANS_AP.PASSIVE_DEB) PASSIVE_DEB,
+  SUM(VW_BALLANS_AP.PASSIVE_KRED) PASSIVE_KRED,
+  SUM(VW_BALLANS_AP.PASSIVE_OBOROT) PASSIVE_OBOROT,
+  SUM(VW_BALLANS_AP.PASSIVE_END) PASSIVE_END
+FROM (SELECT    
     VW_BALLANS_AP.ID ID,    
     VW_BALLANS_AP.CODE CODE,    
     VW_BALLANS_AP.FULLNAME FULLNAME,    
@@ -58,12 +49,32 @@
     VW_BALLANS_AP.PASSIVE_OBOROT PASSIVE_OBOROT,    
     VW_BALLANS_AP.PASSIVE_END PASSIVE_END,    
     VW_BALLANS_AP.DIVISION_ID DIVISION_ID,
-    (select parent_id from divisions where id = VW_BALLANS_AP.DIVISION_ID) PARENT_ID, 
+    case when
+    (select parent_id 
+      from divisions where id = VW_BALLANS_AP.DIVISION_ID 
+        and 
+        (select id from divisions where id = (select parent_id from divisions where id = VW_BALLANS_AP.DIVISION_ID)
+          and is_group = 0) is not null) is null then VW_BALLANS_AP.DIVISION_ID
+     else  (select parent_id from divisions where id = VW_BALLANS_AP.DIVISION_ID)
+     end PARENT_ID,   
+    case when
+    (select parent_id 
+      from divisions where id = VW_BALLANS_AP.DIVISION_ID 
+        and 
+        (select id from divisions where id = (select parent_id from divisions where id = VW_BALLANS_AP.DIVISION_ID)
+          and is_group = 0) is not null) is null then (select fullname from divisions where id = VW_BALLANS_AP.DIVISION_ID)
+     else  (select fullname from divisions where id = (select parent_id from divisions where id = VW_BALLANS_AP.DIVISION_ID))
+     end PARENT_NAME, 
     VW_BALLANS_AP.F_DAT F_DAT,  
     VW_BALLANS_AP.L_DAT L_DAT,  
     (select fullname from divisions where id = VW_BALLANS_AP.DIVISION_ID) Div_Name   
-FROM    
-ballans VW_BALLANS_AP]]></SQLQuery>
+  FROM    
+    ballans VW_BALLANS_AP) VW_BALLANS_AP
+GROUP BY 
+  VW_BALLANS_AP.CODE,
+  VW_BALLANS_AP.FULLNAME,
+  VW_BALLANS_AP.PARENT_ID,
+  VW_BALLANS_AP.PARENT_NAME]]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"
@@ -107,6 +118,36 @@ ballans VW_BALLANS_AP]]></SQLQuery>
     SQLType="VARCHAR">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="3000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ParentId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARENT_ID"
+    Expression="PARENT_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DivName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="150"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DIV_NAME"
+    Expression="DIV_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="150"/>
     </DesignTime>
   </ViewAttribute>
   <ViewAttribute
@@ -209,77 +250,15 @@ ballans VW_BALLANS_AP]]></SQLQuery>
     AliasName="PASSIVE_END"
     Expression="PASSIVE_END"
     SQLType="NUMERIC"/>
-  <ViewAttribute
-    Name="DivisionId"
-    IsUpdateable="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Precision="50"
-    Type="java.lang.String"
-    ColumnType="VARCHAR2"
-    AliasName="DIVISION_ID"
-    Expression="DIVISION_ID"
-    SQLType="VARCHAR"
-    LOVName="LOV_DivisionId">
-    <DesignTime>
-      <Attr Name="_DisplaySize" Value="50"/>
-    </DesignTime>
-    <Properties>
-      <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="choice"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="ParentId"
-    IsUpdateable="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Precision="50"
-    Type="java.lang.String"
-    ColumnType="VARCHAR2"
-    AliasName="PARENT_ID"
-    Expression="PARENT_ID"
-    SQLType="VARCHAR">
-    <DesignTime>
-      <Attr Name="_DisplaySize" Value="50"/>
-    </DesignTime>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="FDat"
-    IsUpdateable="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Type="oracle.jbo.domain.Date"
-    ColumnType="DATE"
-    AliasName="F_DAT"
-    Expression="F_DAT"
-    SQLType="DATE"/>
-  <ViewAttribute
-    Name="LDat"
-    IsUpdateable="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Type="oracle.jbo.domain.Date"
-    ColumnType="DATE"
-    AliasName="L_DAT"
-    Expression="L_DAT"
-    SQLType="DATE"/>
-  <ViewAttribute
-    Name="DivName"
-    IsUpdateable="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Precision="255"
-    Type="java.lang.String"
-    ColumnType="VARCHAR2"
-    AliasName="Div_Name"
-    SQLType="VARCHAR"
-    Expression="Div_Name"/>
   <AttrArray Name="KeyAttributes">
-    <Item Value="DivisionId"/>
+    <Item Value="Id"/>
+    <Item Value="ParentId"/>
   </AttrArray>
+  <ViewLinkAccessor
+    Name="VwBallansApDetail"
+    ViewLink="ua.divas.view.VwBallansDetaiFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="ua.divas.model.ModelBundle"/>

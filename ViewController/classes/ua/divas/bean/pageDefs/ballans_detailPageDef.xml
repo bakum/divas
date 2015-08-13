@@ -15,44 +15,6 @@
               id="VwBallansApDetail2Iterator"/>
   </executables>
   <bindings>
-    <tree IterBinding="VwBallansAp1Iterator" id="VwBallansAp1">
-      <nodeDefinition DefName="ua.divas.view.VwBallansAp" Name="VwBallansAp10">
-        <AttrNames>
-          <Item Value="Id"/>
-          <Item Value="ActiveDeb"/>
-          <Item Value="ActiveEnd"/>
-          <Item Value="ActiveKred"/>
-          <Item Value="ActiveOborot"/>
-          <Item Value="ActiveStart"/>
-          <Item Value="Code"/>
-          <Item Value="Fullname"/>
-          <Item Value="PassiveDeb"/>
-          <Item Value="PassiveEnd"/>
-          <Item Value="PassiveKred"/>
-          <Item Value="PassiveOborot"/>
-          <Item Value="PassiveStart"/>
-        </AttrNames>
-        <Accessors>
-          <Item Value="VwBallansApDetail"/>
-        </Accessors>
-      </nodeDefinition>
-      <nodeDefinition DefName="ua.divas.view.VwBallansApDetail" Name="VwBallansAp11">
-        <AttrNames>
-          <Item Value="ActiveDeb"/>
-          <Item Value="ActiveEnd"/>
-          <Item Value="ActiveKred"/>
-          <Item Value="ActiveOborot"/>
-          <Item Value="ActiveStart"/>
-          <Item Value="DivisionId"/>
-          <Item Value="PassiveDeb"/>
-          <Item Value="PassiveEnd"/>
-          <Item Value="PassiveKred"/>
-          <Item Value="PassiveOborot"/>
-          <Item Value="PassiveStart"/>
-          <Item Value="DivName"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
     <methodAction id="addProfitDistrib" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addProfitDistrib"
                   IsViewObjectMethod="false" DataControl="AppModuleDataControl"
                   InstanceName="data.AppModuleDataControl.dataProvider">
@@ -93,5 +55,67 @@
         <Item Value="LDat"/>
       </AttrNames>
     </attributeValues>
+    <tree IterBinding="VwBallansAp1Iterator" id="VwBallansAp1">
+      <nodeDefinition DefName="ua.divas.view.VwBallansAp" Name="VwBallansAp110">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ActiveDeb"/>
+          <Item Value="ActiveEnd"/>
+          <Item Value="ActiveKred"/>
+          <Item Value="ActiveOborot"/>
+          <Item Value="ActiveStart"/>
+          <Item Value="Code"/>
+          <Item Value="Fullname"/>
+          <Item Value="PassiveDeb"/>
+          <Item Value="PassiveEnd"/>
+          <Item Value="PassiveKred"/>
+          <Item Value="PassiveOborot"/>
+          <Item Value="PassiveStart"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="VwBallansApParent"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="ua.divas.view.VwBallansApParent" Name="VwBallansAp111">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ActiveDeb"/>
+          <Item Value="ActiveEnd"/>
+          <Item Value="ActiveKred"/>
+          <Item Value="ActiveOborot"/>
+          <Item Value="ActiveStart"/>
+          <Item Value="Code"/>
+          <Item Value="ParentId"/>
+          <Item Value="PassiveDeb"/>
+          <Item Value="PassiveEnd"/>
+          <Item Value="PassiveKred"/>
+          <Item Value="PassiveOborot"/>
+          <Item Value="PassiveStart"/>
+          <Item Value="DivName"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="VwBallansApDetail"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="ua.divas.view.VwBallansApDetail" Name="VwBallansAp112">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ActiveDeb"/>
+          <Item Value="ActiveEnd"/>
+          <Item Value="ActiveKred"/>
+          <Item Value="ActiveOborot"/>
+          <Item Value="ActiveStart"/>
+          <Item Value="Code"/>
+          <Item Value="DivisionId"/>
+          <Item Value="DivName"/>
+          <Item Value="ParentId"/>
+          <Item Value="PassiveDeb"/>
+          <Item Value="PassiveEnd"/>
+          <Item Value="PassiveKred"/>
+          <Item Value="PassiveOborot"/>
+          <Item Value="PassiveStart"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>

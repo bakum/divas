@@ -386,7 +386,7 @@ public class ProfitDistribImpl extends DivasEntity {
      */
     public boolean validateProfitDistrib() {
         BigDecimal summa = this.getSumm();
-        if (summa.intValue() <= 0) {
+        if (summa.intValue() < 0) {
             return false;
         }
         return true;

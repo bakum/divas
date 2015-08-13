@@ -369,6 +369,8 @@
           <Item Value="login"/>
           <Item Value="logDate"/>
           <Item Value="ipAdress"/>
+          <Item Value="ipAdressLocal"/>
+          <Item Value="ipAdressNAT"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
