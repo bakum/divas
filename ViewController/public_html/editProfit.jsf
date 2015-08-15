@@ -58,7 +58,8 @@
                                         <af:selectOneChoice value="#{bindings.DivisionId.inputValue}"
                                                             required="#{bindings.DivisionId.hints.mandatory}"
                                                             shortDesc="#{bindings.DivisionId.hints.tooltip}" id="soc1"
-                                                            readOnly="#{bindings.Editable.inputValue == 1 ? false : true}">
+                                                            readOnly="#{bindings.Editable.inputValue == 1 ? false : true}"
+                                                            autoSubmit="true">
                                             <f:selectItems value="#{bindings.DivisionId.items}" id="si1"/>
                                             <f:validator binding="#{bindings.DivisionId.validator}"/>
                                         </af:selectOneChoice>
@@ -85,7 +86,7 @@
                                         <af:spacer width="10" height="10" id="s2"/>
                                         <af:link id="l1" actionListener="#{profit_jsf.onGetProfit}"
                                                  icon="/img/coins.png"
-                                                 disabled="#{bindings.Num.inputValue != null ? true : bindings.Posted.inputValue == 1 ? true : bindings.Editable.inputValue == 1 ? false : true}"
+                                                 disabled="#{bindings.Posted.inputValue == 1 ? true : bindings.Editable.inputValue == 1 ? false : true}"
                                                  shortDesc="Получить сумму по балансу на текущий момент"/>
                                         <af:selectOneChoice value="#{bindings.CurrId.inputValue}"
                                                             label="#{bindings.CurrId.label}"

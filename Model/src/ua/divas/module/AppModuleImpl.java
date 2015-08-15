@@ -3302,9 +3302,11 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
 
     }
     
-    public void addProfitDistrib(BigDecimal Summa) {
+    public void addProfitDistrib(Date dat, BigDecimal Summa, String p_div) {
         ViewObjectImpl profit = getProfitDistribView1();
         Row r2 = profit.createRow();
+        r2.setAttribute("Dat", dat);
+        r2.setAttribute("DivisionId", p_div);
         r2.setAttribute("Summ", Summa);
         
         try {

@@ -276,8 +276,14 @@ FROM  PROFIT_DISTRIB ProfitDistrib]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="Summ"
     EntityUsage="ProfitDistrib"
-    AliasName="SUMM"
-    DefaultValue="0"/>
+    AliasName="SUMM">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[viewObject.getProfitByDivision(DivisionId)]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="DivisionId"/>
+    </Dependencies>
+  </ViewAttribute>
   <ViewAttribute
     Name="Editable"
     IsPersistent="false"
@@ -377,6 +383,16 @@ FROM  PROFIT_DISTRIB ProfitDistrib]]></SQLQuery>
       <Return
         Name="_return_type_"
         Type="java.math.BigDecimal"/>
+    </Method>
+    <Method
+      Name="getProfitByDivision"
+      MethodName="getProfitByDivision">
+      <Return
+        Name="_return_type_"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="p_div"
+        Type="java.lang.String"/>
     </Method>
   </ClientInterface>
   <ResourceBundle>

@@ -13,13 +13,11 @@
     </variableIterator>
     <iterator Binds="VwBallansApDetail2" RangeSize="10" DataControl="AppModuleDataControl"
               id="VwBallansApDetail2Iterator"/>
+    <iterator Binds="VwBallansApParent2" RangeSize="10" DataControl="AppModuleDataControl"
+              id="VwBallansApParent2Iterator"/>
+    <iterator Binds="DivisionsView1" RangeSize="10" DataControl="AppModuleDataControl" id="DivisionsView1Iterator"/>
   </executables>
   <bindings>
-    <methodAction id="addProfitDistrib" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addProfitDistrib"
-                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
-                  InstanceName="data.AppModuleDataControl.dataProvider">
-      <NamedData NDName="Summa" NDType="java.math.BigDecimal" NDValue="${bindings.addProfitDistrib_Summa}"/>
-    </methodAction>
     <attributeValues IterBinding="variables" id="Summa">
       <AttrNames>
         <Item Value="addProfitDistrib_Summa"/>
@@ -117,5 +115,23 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <methodAction id="getProfitByDivision" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getProfitByDivision" IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.ProfitDistribView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.getProfitByDivision_AppModuleDataControl_ProfitDistribView1_getProfitByDivision_result">
+      <NamedData NDName="p_div" NDType="java.lang.String" NDValue="${bindings.Id.inputValue}"/>
+    </methodAction>
+    <methodAction id="addProfitDistrib" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addProfitDistrib"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="dat" NDType="java.util.Date" NDValue="${bindings.l_dat.inputValue}"/>
+      <NamedData NDName="Summa" NDType="java.math.BigDecimal" NDValue="${bindings.addProfitDistrib_Summa}"/>
+      <NamedData NDName="p_div" NDType="java.lang.String" NDValue="${bindings.Id.inputValue}"/>
+    </methodAction>
+    <attributeValues IterBinding="DivisionsView1Iterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

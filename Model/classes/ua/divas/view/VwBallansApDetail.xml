@@ -278,6 +278,7 @@ ballans VW_BALLANS_AP]]></SQLQuery>
     SQLType="VARCHAR"
     Expression="Div_Name"/>
   <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
     <Item Value="DivisionId"/>
   </AttrArray>
   <ResourceBundle>

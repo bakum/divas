@@ -46,8 +46,11 @@ import oracle.binding.BindingContainer;
 
 import oracle.binding.OperationBinding;
 
+import oracle.jbo.Key;
 import oracle.jbo.NameValuePairs;
 import oracle.jbo.Row;
+
+import oracle.jbo.RowIterator;
 
 import org.apache.myfaces.trinidad.render.ExtendedRenderKitService;
 
@@ -238,8 +241,41 @@ public class ShuttleGroup {
         }
 
     }
-
+    
     public void refresh() {
+        DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = binding.findIteratorBinding("UsersView1Iterator");
+        String rks;
+        DCIteratorBinding it_detail = binding.findIteratorBinding("KassaSettingsView2Iterator");
+        if (it != null) {
+            try {
+                rks = it.getCurrentRow().getKey().toStringFormat(true);
+            } catch (Exception e) {
+                rks = null;
+            }
+            it.executeQuery();
+            if (rks != null) {
+                it.setCurrentRowWithKey(rks);
+                Row masterRow = it.getCurrentRow();
+                String masterId = (String) masterRow.getAttribute("Id");
+                it_detail.executeQuery();
+                RowIterator rIter = it_detail.findRowsByAttributeValue("UserId", true, masterId);
+                if (rIter != null && rIter.first() != null) {
+                    try {
+                        String contId = rIter.first().getAttribute("Id").toString();
+                        Key k = new Key(new Object[] { contId });
+                        it_detail.setCurrentRowWithKey(k.toStringFormat(true));
+                    } catch (Exception e) {
+                        // TODO: Add catch code
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        AdfFacesContext.getCurrentInstance().addPartialTarget(getUserTable());
+    }
+
+    public void refresh1() {
         DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding it = binding.findIteratorBinding("UsersView1Iterator");
         if (it != null) {

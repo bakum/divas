@@ -107,5 +107,11 @@
         <Item Value="Posted"/>
       </AttrNames>
     </attributeValues>
+    <methodAction id="getProfitByDivision" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getProfitByDivision" IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.ProfitDistribView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.getProfitByDivision_AppModuleDataControl_ProfitDistribView1_getProfitByDivision_result">
+      <NamedData NDName="p_div" NDValue="#{bindings.DivisionId.inputValue}" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

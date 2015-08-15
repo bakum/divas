@@ -13,5 +13,7 @@ public interface ProfitDistribView extends ViewObject {
     void removeEntry(String _id);
 
     BigDecimal getProfit();
+
+    BigDecimal getProfitByDivision(String p_div);
 }
 

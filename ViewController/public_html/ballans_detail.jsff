@@ -39,7 +39,7 @@
                                         </af:panelGroupLayout>
                                     </f:facet>
                                     <af:treeTable value="#{bindings.VwBallansAp1.treeModel}" var="node"
-                                                  selectionListener="#{bindings.VwBallansAp1.treeModel.makeCurrent}"
+                                                  selectionListener="#{ballans.onTreeSelect}"
                                                   rowSelection="single" id="tt1" binding="#{ballans.treeTable}"
                                                   scrollPolicy="page">
                                         <f:facet name="nodeStamp">
@@ -133,14 +133,14 @@
                                                        align="right" width="120">
                                                 <af:outputText value="#{node.PassiveEnd}" id="ot11"
                                                                inlineStyle="#{node.PassiveEnd &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}"
-                                                               rendered="#{node.PassiveEnd &lt;=0 ? true : node.Code == '900' ? false : true}"/>
+                                                               rendered="#{node.Code != '900' ? true : node.Fullname != null ? true : node.PassiveEnd &lt;= 0 ? true :false}"/>
                                                 <f:facet name="footer">
                                                     <af:outputText value="#{bindings.VwBallansAp1Iterator.viewObject.sum['PassiveEnd']}"
                                                                    id="ot14" inlineStyle="font-weight:bold;"/>
                                                 </f:facet>
                                                 <af:panelGroupLayout id="pgl3" layout="horizontal" halign="right">
                                                     <af:toolbar id="t1"
-                                                                rendered="#{node.PassiveEnd &lt;= 0 ? false : node.Code == '900' ? true : false}">
+                                                                rendered="#{node.PassiveEnd &lt;= 0 ? false : node.Fullname != null ? false : node.Code == '900' ? true : false}">
                                                         <af:button text="#{node.PassiveEnd}" id="b3"
                                                                    icon="/img/coins.png" shortDesc="Распределить сумму"
                                                                    inlineStyle="font-weight:bold;">

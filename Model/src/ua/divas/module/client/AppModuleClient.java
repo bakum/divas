@@ -23,6 +23,21 @@ public class AppModuleClient extends ApplicationModuleImpl implements AppModule 
     }
 
 
+    public void addProfitDistrib(BigDecimal Summa) {
+        Object _ret = this.riInvokeExportedMethod(this, "addProfitDistrib", new String[] { "java.math.BigDecimal" }, new Object[] {
+                                                  Summa });
+        return;
+    }
+
+
+    public void addProfitDistrib(BigDecimal Summa, String p_div) {
+        Object _ret = this.riInvokeExportedMethod(this, "addProfitDistrib", new String[] {
+                                                  "java.math.BigDecimal", "java.lang.String" }, new Object[] {
+                                                  Summa, p_div });
+        return;
+    }
+
+
     public void addNotification(String cutid, String desc, Date dat, String ObjId, String ContId) {
         Object _ret = this.riInvokeExportedMethod(this, "addNotification", new String[] {
                                                   "java.lang.String", "java.lang.String", "java.util.Date",
@@ -46,9 +61,10 @@ public class AppModuleClient extends ApplicationModuleImpl implements AppModule 
         return;
     }
 
-    public void addProfitDistrib(BigDecimal Summa) {
-        Object _ret = this.riInvokeExportedMethod(this, "addProfitDistrib", new String[] { "java.math.BigDecimal" }, new Object[] {
-                                                  Summa });
+    public void addProfitDistrib(Date dat, BigDecimal Summa, String p_div) {
+        Object _ret = this.riInvokeExportedMethod(this, "addProfitDistrib", new String[] {
+                                                  "java.util.Date", "java.math.BigDecimal", "java.lang.String"
+        }, new Object[] { dat, Summa, p_div });
         return;
     }
 

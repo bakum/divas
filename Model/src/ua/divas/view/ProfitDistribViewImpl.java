@@ -32,7 +32,12 @@ public class ProfitDistribViewImpl extends DivasView implements ProfitDistribVie
      */
     public ProfitDistribViewImpl() {
     }
-    
+
+    public BigDecimal getProfitByDivision(String p_div) {
+        BigDecimal res = (BigDecimal) callStoredFunction(NUMBER, "PROFIT_ENTRY.GETPROFITBYDIVISION(?)", new Object[] { p_div });
+        return (null == res) ? BigDecimal.ZERO : res;
+    }
+
     public java.sql.Timestamp getDateLast() throws SQLException {
         Calendar calendar = Calendar.getInstance();
         //calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH)); // это будет начало месяца
@@ -41,7 +46,7 @@ public class ProfitDistribViewImpl extends DivasView implements ProfitDistribVie
         //calendar.set(Calendar.DAY_OF_YEAR, calendar.getActualMinimum(Calendar.DAY_OF_YEAR)); // это будет начало года
         calendar.set(1970, Calendar.JANUARY, 01);
         java.util.Date pDate = calendar.getTime();
-        java.sql.Timestamp dbDate= new java.sql.Timestamp(pDate.getTime());
+        java.sql.Timestamp dbDate = new java.sql.Timestamp(pDate.getTime());
         //oracle.jbo.domain.Date time = new oracle.jbo.domain.Date(pDate);
         return dbDate;
     }
@@ -128,7 +133,7 @@ public class ProfitDistribViewImpl extends DivasView implements ProfitDistribVie
     public void sets_dat(Timestamp value) {
         ensureVariableManager().setVariableValue("s_dat", value);
     }
-    
+
     private class AgrFuncHelper extends HashMap {
         private static final long serialVersionUID = 1L;
         private String funcName;
@@ -150,7 +155,7 @@ public class ProfitDistribViewImpl extends DivasView implements ProfitDistribVie
 
 
     }
-    
+
     public Map getSum() {
         return new AgrFuncHelper("sum");
     }

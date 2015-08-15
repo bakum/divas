@@ -110,7 +110,7 @@ public class ProfitJsfBean {
         currRow.setAttribute("Summ", null);
 
         BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
-        OperationBinding ob = binding.getOperationBinding("getProfit");
+        OperationBinding ob = binding.getOperationBinding("getProfitByDivision");
         if (ob != null) {
             BigDecimal summa = (BigDecimal) ob.execute();
             System.out.println(summa);

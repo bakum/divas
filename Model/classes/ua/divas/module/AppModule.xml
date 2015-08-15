@@ -2178,11 +2178,68 @@
         Type="java.math.BigDecimal"/>
     </Method>
     <Method
-      Name="addProfitDistrib"
-      MethodName="addProfitDistrib">
+      Name="addRko"
+      MethodName="addRko">
       <Return
         Name="_return_type_"
         Type="void"/>
+      <Parameter
+        Name="kassaId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="kontragId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="Summa"
+        Type="java.math.BigDecimal"/>
+    </Method>
+    <Method
+      Name="deleteChildren"
+      MethodName="deleteChildren">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="ri"
+        Type="oracle.jbo.RowIterator"/>
+      <Parameter
+        Name="selectedNodeKey"
+        Type="oracle.jbo.Key"/>
+    </Method>
+    <Method
+      Name="addNotification"
+      MethodName="addNotification">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="cutid"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="desc"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="dat"
+        Type="java.util.Date"/>
+      <Parameter
+        Name="ObjId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="ContId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="addPkoFromZamer"
+      MethodName="addPkoFromZamer">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="kassaId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="kontragId"
+        Type="java.lang.String"/>
       <Parameter
         Name="Summa"
         Type="java.math.BigDecimal"/>
@@ -2255,16 +2312,6 @@
         Type="java.math.BigDecimal"/>
     </Method>
     <Method
-      Name="addProfitDistrib"
-      MethodName="addProfitDistrib">
-      <Return
-        Name="_return_type_"
-        Type="void"/>
-      <Parameter
-        Name="Summa"
-        Type="java.math.BigDecimal"/>
-    </Method>
-    <Method
       Name="addRko"
       MethodName="addRko">
       <Return
@@ -2327,93 +2374,6 @@
       <Parameter
         Name="kontragId"
         Type="java.lang.String"/>
-      <Parameter
-        Name="Summa"
-        Type="java.math.BigDecimal"/>
-    </Method>
-    <Method
-      Name="addProfitDistrib"
-      MethodName="addProfitDistrib">
-      <Return
-        Name="_return_type_"
-        Type="void"/>
-      <Parameter
-        Name="Summa"
-        Type="java.math.BigDecimal"/>
-    </Method>
-    <Method
-      Name="addRko"
-      MethodName="addRko">
-      <Return
-        Name="_return_type_"
-        Type="void"/>
-      <Parameter
-        Name="kassaId"
-        Type="java.lang.String"/>
-      <Parameter
-        Name="kontragId"
-        Type="java.lang.String"/>
-      <Parameter
-        Name="Summa"
-        Type="java.math.BigDecimal"/>
-    </Method>
-    <Method
-      Name="deleteChildren"
-      MethodName="deleteChildren">
-      <Return
-        Name="_return_type_"
-        Type="void"/>
-      <Parameter
-        Name="ri"
-        Type="oracle.jbo.RowIterator"/>
-      <Parameter
-        Name="selectedNodeKey"
-        Type="oracle.jbo.Key"/>
-    </Method>
-    <Method
-      Name="addNotification"
-      MethodName="addNotification">
-      <Return
-        Name="_return_type_"
-        Type="void"/>
-      <Parameter
-        Name="cutid"
-        Type="java.lang.String"/>
-      <Parameter
-        Name="desc"
-        Type="java.lang.String"/>
-      <Parameter
-        Name="dat"
-        Type="java.util.Date"/>
-      <Parameter
-        Name="ObjId"
-        Type="java.lang.String"/>
-      <Parameter
-        Name="ContId"
-        Type="java.lang.String"/>
-    </Method>
-    <Method
-      Name="addPkoFromZamer"
-      MethodName="addPkoFromZamer">
-      <Return
-        Name="_return_type_"
-        Type="void"/>
-      <Parameter
-        Name="kassaId"
-        Type="java.lang.String"/>
-      <Parameter
-        Name="kontragId"
-        Type="java.lang.String"/>
-      <Parameter
-        Name="Summa"
-        Type="java.math.BigDecimal"/>
-    </Method>
-    <Method
-      Name="addProfitDistrib"
-      MethodName="addProfitDistrib">
-      <Return
-        Name="_return_type_"
-        Type="void"/>
       <Parameter
         Name="Summa"
         Type="java.math.BigDecimal"/>
@@ -2471,6 +2431,22 @@
       <Parameter
         Name="Summa"
         Type="java.math.BigDecimal"/>
+    </Method>
+    <Method
+      Name="addProfitDistrib"
+      MethodName="addProfitDistrib">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="dat"
+        Type="java.util.Date"/>
+      <Parameter
+        Name="Summa"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="p_div"
+        Type="java.lang.String"/>
     </Method>
   </ClientInterface>
 </AppModule>

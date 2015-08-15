@@ -25,15 +25,21 @@ public class ProfitDistribViewClient extends ViewUsageImpl implements ProfitDist
         return;
     }
 
+    public BigDecimal getProfit() {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "getProfit", null, null);
+        return (BigDecimal) _ret;
+    }
+
+    public BigDecimal getProfitByDivision(String p_div) {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "getProfitByDivision", new String[] {
+                                                                         "java.lang.String" }, new Object[] { p_div });
+        return (BigDecimal) _ret;
+    }
+
     public void removeEntry(String _id) {
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "removeEntry", new String[] {
                                                                          "java.lang.String" }, new Object[] { _id });
         return;
-    }
-
-    public BigDecimal getProfit() {
-        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "getProfit", null, null);
-        return (BigDecimal) _ret;
     }
 }
 

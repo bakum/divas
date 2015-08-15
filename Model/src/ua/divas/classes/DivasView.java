@@ -37,6 +37,8 @@ public class DivasView extends ViewObjectImpl {
     }
 
     protected static int VARCHAR2 = Types.VARCHAR;
+    protected static int NUMBER = Types.NUMERIC;
+    protected static int DATE = Types.DATE;
 
     public String getSessionUserId() {
         String _id = (String)callStoredFunction(VARCHAR2, "USR_SETT.GET_USERID(?)", new Object[] { getSessionUser() });
