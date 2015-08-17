@@ -13,7 +13,7 @@
                                 <af:panelSpringboard id="ps1" displayMode="grid">
                                     <af:showDetailItem text="Реестр заказов" id="sdi1" icon="/img/fork-1-icon.png"
                                                        stretchChildren="first"
-                                                       rendered="#{securityContext.taskflowViewable['/WEB-INF/orders-config.xml#orders']}">
+                                                       rendered="#{securityContext.taskflowViewable['/WEB-INF/orders.xml#orders']}">
                                         <af:region value="#{bindings.ordersconfig1.regionModel}" id="r3"/>
                                     </af:showDetailItem>
                                     <af:showDetailItem text="Клиенты" id="sdi2" stretchChildren="first"

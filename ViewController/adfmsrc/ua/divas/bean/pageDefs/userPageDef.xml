@@ -56,6 +56,7 @@
                       id="onlineUserListIterator"/>
     <iterator id="KassaSettingsView2Iterator" Binds="KassaSettingsView2" DataControl="AppModuleDataControl"
               RangeSize="25" Refresh="ifNeeded"/>
+    <iterator id="KassaView1_1Iterator" Binds="KassaView1_1" DataControl="AppModuleDataControl" RangeSize="25"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="UsersView1Iterator" id="Login">

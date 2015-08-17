@@ -23,6 +23,9 @@
         <role>
           <name>tester</name>
         </role>
+        <role>
+          <name>cc_manager</name>
+        </role>
       </roles>
     </realm>
   </jazn-realm>
@@ -89,6 +92,16 @@
               <member>
                 <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
                 <name>tester</name>
+              </member>
+            </members>
+          </app-role>
+          <app-role>
+            <name>cc_manager</name>
+            <class>oracle.security.jps.service.policystore.ApplicationRole</class>
+            <members>
+              <member>
+                <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
+                <name>cc_manager</name>
               </member>
             </members>
           </app-role>
@@ -1087,6 +1100,58 @@
                 <class>oracle.adf.share.security.authorization.RegionPermission</class>
                 <name>ua.divas.bean.pageDefs.homePageDef</name>
                 <actions>view</actions>
+              </permission>
+            </permissions>
+          </grant>
+          <grant>
+            <grantee>
+              <principals>
+                <principal>
+                  <class>oracle.security.jps.internal.core.principals.JpsXmlEnterpriseRoleImpl</class>
+                  <name>cc_manager</name>
+                </principal>
+              </principals>
+            </grantee>
+            <permissions>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/addKontrag.xml#addKontrag</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/addOrder.xml#addOrder</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/calendar-config.xml#calendar-config</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/call_center.xml#call_center</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/order-dialog-flow.xml#order-dialog-flow</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/orders.xml#orders</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.controller.security.TaskFlowPermission</class>
+                <name>/WEB-INF/other-dialod-flow.xml#other-dialod-flow</name>
+                <actions>view</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityAttributePermission</class>
+                <name>ua.divas.model.Orders.AgentId</name>
+                <actions>update</actions>
               </permission>
             </permissions>
           </grant>

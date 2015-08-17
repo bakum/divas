@@ -623,7 +623,7 @@
                                 </f:facet>
                             </af:showDetailItem>
                             <af:showDetailItem text="Услуги" id="sdi2" stretchChildren="first"
-                                               rendered="#{!securityContext.userInRole['manager']}">
+                                               rendered="#{!(securityContext.userInRole['manager'] or securityContext.userInRole['cc_manager'])}">
                                 <af:panelBox text="Перечень работ" id="pb1" type="flow">
                                     <f:facet name="toolbar"/>
                                     <af:table value="#{bindings.OrdersTpUslugiView2.collectionModel}" var="row"
@@ -847,7 +847,7 @@
                                 </f:facet>
                             </af:showDetailItem>
                             <af:showDetailItem text="Оплаты" id="sdi5"
-                                               rendered="#{!securityContext.userInRole['manager']}">
+                                               rendered="#{!(securityContext.userInRole['manager'] or securityContext.userInRole['cc_manager'])}">
                                 <af:panelBox text="Перечень оплат" id="pb2" type="flow">
                                     <f:facet name="toolbar"/>
                                     <af:table value="#{bindings.OrdersTpOplatyView1.collectionModel}" var="row"
@@ -1006,7 +1006,7 @@
                                 </f:facet>
                             </af:showDetailItem>
                             <af:showDetailItem text="Расходы" id="sdi6" stretchChildren="first"
-                                               rendered="#{!securityContext.userInRole['manager']}">
+                                               rendered="#{!(securityContext.userInRole['manager'] or securityContext.userInRole['cc_manager'])}">
                                 <af:panelBox text="Затраты" id="pb3" type="flow">
                                     <f:facet name="toolbar">
                                         <af:toolbar id="t11">
@@ -1241,7 +1241,7 @@
                                 </af:panelBox>
                             </af:showDetailItem>
                             <af:showDetailItem text="Начисления" id="sdi7" stretchChildren="first"
-                                               rendered="#{!securityContext.userInRole['manager']}">
+                                               rendered="#{!(securityContext.userInRole['manager'] or securityContext.userInRole['cc_manager'])}">
                                 <af:panelBox text="Начисления" id="pb4" type="flow">
                                     <f:facet name="toolbar">
                                         <af:toolbar id="t15">

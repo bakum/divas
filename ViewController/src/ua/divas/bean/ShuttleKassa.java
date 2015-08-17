@@ -50,7 +50,7 @@ public class ShuttleKassa {
 
     public List getAllValues() {
         DCBindingContainer bindings = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
-        DCIteratorBinding dcIteratorBindings = bindings.findIteratorBinding("KassaView1Iterator");
+        DCIteratorBinding dcIteratorBindings = bindings.findIteratorBinding("KassaView1_1Iterator");
 
         if (null != dcIteratorBindings) {
             // Get all the rows of a iterator
@@ -83,7 +83,7 @@ public class ShuttleKassa {
         }
         DCBindingContainer bindings = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
         DCIteratorBinding dcIteratorBindings = bindings.findIteratorBinding("KassaSettingsView2Iterator");
-        DCIteratorBinding divi = bindings.findIteratorBinding("KassaView1Iterator");
+        DCIteratorBinding divi = bindings.findIteratorBinding("KassaView1_1Iterator");
         if (null != dcIteratorBindings) {
             Row[] rows = dcIteratorBindings.getAllRowsInRange();
             for (Row rw : rows) {
