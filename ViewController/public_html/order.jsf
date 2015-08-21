@@ -480,6 +480,16 @@
                                                 <f:selectItems value="#{bindings.DivisionId.items}" id="si4"/>
                                                 <f:validator binding="#{bindings.DivisionId.validator}"/>
                                             </af:selectOneChoice>
+                                            <af:selectOneChoice value="#{bindings.DivisionDest.inputValue}"
+                                                                label="#{bindings.DivisionDest.label}"
+                                                                required="#{bindings.DivisionDest.hints.mandatory}"
+                                                                shortDesc="#{bindings.DivisionDest.hints.tooltip}"
+                                                                id="soc19" labelStyle="font-weight: bold;"
+                                                                readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
+                                                                rendered="#{(securityContext.userInRole['administrator'] or securityContext.userInRole['cc_manager'])}">
+                                                <f:selectItems value="#{bindings.DivisionDest.items}" id="si19"/>
+                                                <f:validator binding="#{bindings.DivisionDest.validator}"/>
+                                            </af:selectOneChoice>
                                             <af:selectOneChoice value="#{bindings.UserId.inputValue}"
                                                                 label="#{bindings.UserId.label}"
                                                                 required="#{bindings.UserId.hints.mandatory}"

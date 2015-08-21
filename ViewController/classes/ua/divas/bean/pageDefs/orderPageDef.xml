@@ -416,5 +416,7 @@
         <Item Value="KoefOpl"/>
       </AttrNames>
     </attributeValues>
+    <list IterBinding="OrdersView1Iterator" StaticList="false" Uses="LOV_DivisionDest" id="DivisionDest"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
   </bindings>
 </pageDefinition>

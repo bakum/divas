@@ -379,6 +379,25 @@
         <DisplayCriteria
             Hint="showAndExecute"/>
     </ListBinding>
+    <ListBinding
+        Name="LOV_DivisionDest"
+        ListVOName="DivisionsView1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="DivisionDest"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Fullname"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
     <SQLQuery><![CDATA[SELECT 
     Orders.ID, 
     Orders.DAT, 
@@ -393,6 +412,7 @@
     Orders.CURR_ID, 
     Orders.KASSA_ID, 
     Orders.DIVISION_ID, 
+    Orders.DIVISION_DEST,
     Orders.USER_ID, 
     Orders.KURS, 
     Orders.KRATNOST, 
@@ -558,6 +578,21 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
                     ResId="ua.divas.view.OrdersView.DivisionId_LABEL"/>
                 <TOOLTIP
                     ResId="ua.divas.view.OrdersView.DivisionId_TOOLTIP"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="DivisionDest"
+        PrecisionRule="true"
+        EntityAttrName="DivisionDest"
+        EntityUsage="Orders"
+        AliasName="DIVISION_DEST"
+        LOVName="LOV_DivisionDest">
+        <TransientExpression><![CDATA[viewObject.retrieveDivisionId()]]></TransientExpression>
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
             </SchemaBasedProperties>
         </Properties>
     </ViewAttribute>

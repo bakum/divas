@@ -53,6 +53,7 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         CurrId,
         KassaId,
         DivisionId,
+        DivisionDest,
         UserId,
         Kurs,
         Kratnost,
@@ -137,6 +138,7 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     public static final int CURRID = AttributesEnum.CurrId.index();
     public static final int KASSAID = AttributesEnum.KassaId.index();
     public static final int DIVISIONID = AttributesEnum.DivisionId.index();
+    public static final int DIVISIONDEST = AttributesEnum.DivisionDest.index();
     public static final int USERID = AttributesEnum.UserId.index();
     public static final int KURS = AttributesEnum.Kurs.index();
     public static final int KRATNOST = AttributesEnum.Kratnost.index();
@@ -554,6 +556,22 @@ public class OrdersViewRowImpl extends ViewRowImpl {
      */
     public Number getKoefOpl() {
         return (Number) getAttributeInternal(KOEFOPL);
+    }
+
+    /**
+     * Gets the attribute value for DIVISION_DEST using the alias name DivisionDest.
+     * @return the DIVISION_DEST
+     */
+    public String getDivisionDest() {
+        return (String) getAttributeInternal(DIVISIONDEST);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for DIVISION_DEST using the alias name DivisionDest.
+     * @param value value to set the DIVISION_DEST
+     */
+    public void setDivisionDest(String value) {
+        setAttributeInternal(DIVISIONDEST, value);
     }
 
     /**
