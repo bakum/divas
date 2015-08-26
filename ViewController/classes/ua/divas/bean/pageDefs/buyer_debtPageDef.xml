@@ -4,19 +4,19 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="VwKontragAllItems1" RangeSize="25" DataControl="AppModuleDataControl"
-              id="VwKontragAllItems1Iterator">
+    <iterator Binds="VwKontragDeb1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="VwKontragDeb1Iterator">
       <sortCriteria>
         <sort attribute="Fullname" ascending="true"/>
       </sortCriteria>
     </iterator>
     <iterator id="VwBuyerMoves1Iterator" Binds="VwBuyerMoves1" DataControl="AppModuleDataControl" RangeSize="25"/>
     <searchRegion Criteria="VwKontragActive" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
-                  Binds="VwKontragAllItems1Iterator" id="VwKontragActiveQuery"/>
+                  Binds="VwKontragDeb1Iterator" id="VwKontragActiveQuery"/>
   </executables>
   <bindings>
-    <tree IterBinding="VwKontragAllItems1Iterator" id="VwKontragAllItems1">
-      <nodeDefinition DefName="ua.divas.view.VwKontragAllItems" Name="VwKontragAllItems10">
+    <tree IterBinding="VwKontragDeb1Iterator" id="VwKontragDeb1">
+      <nodeDefinition DefName="ua.divas.view.VwKontragDeb" Name="VwKontragDeb10">
         <AttrNames>
           <Item Value="Id"/>
           <Item Value="Fullname"/>
@@ -27,7 +27,7 @@
           <Item Value="VwBuyerMoves"/>
         </Accessors>
       </nodeDefinition>
-      <nodeDefinition DefName="ua.divas.view.VwBuyerMoves" Name="VwKontragAllItems11">
+      <nodeDefinition DefName="ua.divas.view.VwBuyerMoves" Name="VwKontragDeb11">
         <AttrNames>
           <Item Value="Code"/>
           <Item Value="Period"/>

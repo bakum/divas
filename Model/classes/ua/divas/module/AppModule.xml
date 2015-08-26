@@ -54,7 +54,11 @@
     ViewObjectName="ua.divas.view.GroupsView"/>
   <ViewUsage
     Name="KassaView1"
-    ViewObjectName="ua.divas.view.KassaView"/>
+    ViewObjectName="ua.divas.view.KassaView">
+    <ViewCriteriaUsage
+      Name="KassaViewActive"
+      FullName="ua.divas.view.KassaView.KassaViewActive"/>
+  </ViewUsage>
   <ViewUsage
     Name="KontragentsView1"
     ViewObjectName="ua.divas.view.KontragentsView">
@@ -994,6 +998,16 @@
   <ViewUsage
     Name="VwBallansApDetail1"
     ViewObjectName="ua.divas.view.VwBallansApDetail"/>
+  <ViewUsage
+    Name="VwKontragDeb1"
+    ViewObjectName="ua.divas.view.VwKontragDeb">
+    <ViewCriteriaUsage
+      Name="VwKontragActive"
+      FullName="ua.divas.view.VwKontragDeb.VwKontragActive"/>
+  </ViewUsage>
+  <ViewUsage
+    Name="VwBuyerMoves4"
+    ViewObjectName="ua.divas.view.VwBuyerMoves"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -2097,6 +2111,12 @@
     ViewLinkObjectName="ua.divas.view.VwBallansDetaiFkLink"
     SrcViewUsageName="ua.divas.module.AppModule.VwBallansApParent2"
     DstViewUsageName="ua.divas.module.AppModule.VwBallansApDetail1"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="VwBuyerMovesKontragAllDebFkLink1"
+    ViewLinkObjectName="ua.divas.view.VwBuyerMovesKontragAllDebFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.VwKontragDeb1"
+    DstViewUsageName="ua.divas.module.AppModule.VwBuyerMoves4"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">

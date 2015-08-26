@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import oracle.adf.model.BindingContext;
+import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichTreeTable;
 
@@ -55,7 +56,7 @@ public class BuyerDebtBean {
     public void onTreeSelect(SelectionEvent selectionEvent) {
         //original selection listener set by ADF
         //#{bindings.KassaView1.treeModel.makeCurrent}
-        String adfSelectionListener = "#{bindings.VwKontragAllItems1.treeModel.makeCurrent}";
+        String adfSelectionListener = "#{bindings.VwKontragDeb1.treeModel.makeCurrent}";
 
         FacesContext fctx = FacesContext.getCurrentInstance();
         Application application = fctx.getApplication();
@@ -105,6 +106,12 @@ public class BuyerDebtBean {
     }
     
     public void refresh() {
+        DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = binding.findIteratorBinding("VwKontragDeb1Iterator");
+        //String rks;
+        if (it != null) {
+            it.executeQuery();
+        }
         AdfFacesContext.getCurrentInstance().addPartialTarget(getTreeTable());
     }
 

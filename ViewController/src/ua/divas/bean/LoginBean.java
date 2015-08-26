@@ -110,7 +110,7 @@ public class LoginBean {
         System.out.println("Exists: " + exists.toString());
         Boolean enabled = null;
 
-        if (exists.booleanValue()) {
+        if (exists) {
             ob = binding.getOperationBinding("accessEnabled");
             ob.getParamsMap().put("u_login", un);
             enabled = (Boolean) ob.execute();
@@ -119,7 +119,7 @@ public class LoginBean {
         FacesContext ctx = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) ctx.getExternalContext().getRequest();
         try {
-            if (!exists.booleanValue()) {
+            if (!exists) {
                 throw new IllegalUserException("");
             }
             CallbackHandler handler = new URLCallbackHandler(un, pw);
@@ -143,7 +143,7 @@ public class LoginBean {
             sessionScope.put(encryptedEnabledToken, encryptedEnabled);
             //sessionScope.put(this.USERNAMETOKEN, un);
             //sessionScope.put(this.PASSWORDTOKEN, new String(pw));
-            if (!enabled.booleanValue()) {
+            if (!enabled) {
                 loginUrl = "/adfAuthentication?success_url=/faces/reg_code";
             } else {
                 loginUrl = "/adfAuthentication?success_url=/faces/index";

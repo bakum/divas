@@ -3,14 +3,14 @@
 <!---->
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
-  Name="VwKontragAllItems"
+  Name="VwKontragDeb"
   Version="12.1.2.66.68"
   InheritPersonalization="merge"
+  OrderBy='"FULLNAME"'
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
-  ComponentClass="ua.divas.view.VwKontragAllItemsImpl"
-  OrderBy='"FULLNAME"'>
+  ComponentClass="ua.divas.view.VwKontragDebImpl">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
@@ -18,7 +18,7 @@
   <Properties>
     <SchemaBasedProperties>
       <LABEL
-        ResId="ua.divas.view.VwKontragAllItems_LABEL"/>
+        ResId="ua.divas.view.VwKontragDeb_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
   <Variable
@@ -37,7 +37,7 @@
     Name="KonName"
     Kind="viewcriteria"
     Type="java.lang.String"/>
-  <SQLQuery><![CDATA[SELECT DISTINCT ID,
+  <SQLQuery><![CDATA[SELECT DISTINCT ID ID,
   IS_GROUP,
   PARENT_ID,
   FULLNAME,
@@ -82,6 +82,7 @@ FROM
   ON KONTRAGENTS.ID           = VW_MOVES.SUBCONTO1_DEB
   WHERE KONTRAGENTS.IS_GROUP  = 0
   AND KONTRAGENTS.IS_MEASURER = 0
+  AND VW_MOVES.DEB like '20711'
   GROUP BY KONTRAGENTS.ID,
     KONTRAGENTS.IS_GROUP,
     KONTRAGENTS.PARENT_ID,
@@ -99,51 +100,9 @@ FROM
     KONTRAGENTS.IS_MEASURER,
     KONTRAGENTS.USER_ID,
     VW_MOVES.DEB
-  UNION
-  SELECT KONTRAGENTS.ID ID,
-    KONTRAGENTS.IS_GROUP IS_GROUP,
-    KONTRAGENTS.PARENT_ID PARENT_ID,
-    KONTRAGENTS.FULLNAME FULLNAME,
-    KONTRAGENTS.DELETED DELETED,
-    KONTRAGENTS.INN INN,
-    KONTRAGENTS.OKPO OKPO,
-    KONTRAGENTS.KPP KPP,
-    KONTRAGENTS.NAMEFULL NAMEFULL,
-    KONTRAGENTS.UR_FIZ UR_FIZ,
-    KONTRAGENTS.VERSION VERSION,
-    KONTRAGENTS.PREDEFINED PREDEFINED,
-    KONTRAGENTS.IS_SUPPLIER IS_SUPPLIER,
-    KONTRAGENTS.IS_BUYER IS_BUYER,
-    KONTRAGENTS.IS_MEASURER IS_MEASURER,
-    KONTRAGENTS.USER_ID USER_ID,
-    SUM(VW_MOVES.SUM_KRED),
-    VW_MOVES.KRED
-  FROM KONTRAGENTS
-  INNER JOIN VW_MOVES
-  ON KONTRAGENTS.ID           = VW_MOVES.SUBCONTO1_KRED
-  WHERE KONTRAGENTS.IS_GROUP  = 0
-  AND KONTRAGENTS.IS_MEASURER = 0
-  GROUP BY KONTRAGENTS.ID,
-    KONTRAGENTS.IS_GROUP,
-    KONTRAGENTS.PARENT_ID,
-    KONTRAGENTS.FULLNAME,
-    KONTRAGENTS.DELETED,
-    KONTRAGENTS.INN,
-    KONTRAGENTS.OKPO,
-    KONTRAGENTS.KPP,
-    KONTRAGENTS.NAMEFULL,
-    KONTRAGENTS.UR_FIZ,
-    KONTRAGENTS.VERSION,
-    KONTRAGENTS.PREDEFINED,
-    KONTRAGENTS.IS_SUPPLIER,
-    KONTRAGENTS.IS_BUYER,
-    KONTRAGENTS.IS_MEASURER,
-    KONTRAGENTS.USER_ID,
-    VW_MOVES.KRED
-  )
-where
+  ) 
+WHERE
 upper(USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as userTable)))  
-and DEB like '5091'
 GROUP BY ID,
   IS_GROUP,
   PARENT_ID,
@@ -166,7 +125,7 @@ GROUP BY ID,
     IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
-    Precision="255"
+    Precision="50"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
     AliasName="ID"
@@ -182,24 +141,11 @@ GROUP BY ID,
     IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
-    Precision="1"
-    Scale="0"
-    Type="java.lang.Integer"
-    ColumnType="NUMBER"
-    AliasName="IS_GROUP"
-    Expression="IS_GROUP"
-    SQLType="NUMERIC"
-    IsQueriable="false"/>
-  <ViewAttribute
-    Name="ParentId"
-    IsUpdateable="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Precision="50"
+    Precision="255"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    AliasName="PARENT_ID"
-    Expression="PARENT_ID"
+    AliasName="IS_GROUP"
+    Expression="IS_GROUP"
     SQLType="VARCHAR"
     IsQueriable="false">
     <DesignTime>
@@ -207,27 +153,38 @@ GROUP BY ID,
     </DesignTime>
   </ViewAttribute>
   <ViewAttribute
+    Name="ParentId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Scale="0"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="PARENT_ID"
+    Expression="PARENT_ID"
+    SQLType="NUMERIC"
+    IsQueriable="false"/>
+  <ViewAttribute
     Name="Fullname"
     IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
-    Precision="150"
+    Precision="50"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
     AliasName="FULLNAME"
     Expression="FULLNAME"
     SQLType="VARCHAR">
     <DesignTime>
-      <Attr Name="_DisplaySize" Value="150"/>
+      <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
     <Properties>
       <SchemaBasedProperties>
         <LABEL
-          ResId="ua.divas.view.VwKontragAllItems.Fullname_LABEL"/>
+          ResId="ua.divas.view.VwKontragDeb.Fullname_LABEL"/>
         <TOOLTIP
-          ResId="ua.divas.view.VwKontragAllItems.Fullname_TOOLTIP"/>
-        <DISPLAYWIDTH
-          Value="30"/>
+          ResId="ua.divas.view.VwKontragDeb.Fullname_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -236,21 +193,21 @@ GROUP BY ID,
     IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
-    Precision="1"
-    Scale="0"
-    Type="java.lang.Integer"
-    ColumnType="NUMBER"
+    Precision="150"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
     AliasName="DELETED"
     Expression="DELETED"
-    SQLType="NUMERIC">
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="150"/>
+    </DesignTime>
     <Properties>
       <SchemaBasedProperties>
         <LABEL
-          ResId="ua.divas.view.VwKontragAllItems.Deleted_LABEL"/>
+          ResId="ua.divas.view.VwKontragDeb.Deleted_LABEL"/>
         <TOOLTIP
-          ResId="ua.divas.view.VwKontragAllItems.Deleted_TOOLTIP"/>
-        <CONTROLTYPE
-          Value="check_box"/>
+          ResId="ua.divas.view.VwKontragDeb.Deleted_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -259,17 +216,14 @@ GROUP BY ID,
     IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
-    Precision="50"
-    Type="java.lang.String"
-    ColumnType="VARCHAR2"
+    Precision="1"
+    Scale="0"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
     AliasName="INN"
     Expression="INN"
-    SQLType="VARCHAR"
-    IsQueriable="false">
-    <DesignTime>
-      <Attr Name="_DisplaySize" Value="50"/>
-    </DesignTime>
-  </ViewAttribute>
+    SQLType="NUMERIC"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Okpo"
     IsUpdateable="false"
@@ -307,7 +261,7 @@ GROUP BY ID,
     IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
-    Precision="150"
+    Precision="50"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
     AliasName="NAMEFULL"
@@ -315,7 +269,7 @@ GROUP BY ID,
     SQLType="VARCHAR"
     IsQueriable="false">
     <DesignTime>
-      <Attr Name="_DisplaySize" Value="150"/>
+      <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
   </ViewAttribute>
   <ViewAttribute
@@ -323,37 +277,40 @@ GROUP BY ID,
     IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
-    Precision="1"
-    Scale="0"
-    Type="java.lang.Integer"
-    ColumnType="NUMBER"
+    Precision="150"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
     AliasName="UR_FIZ"
     Expression="UR_FIZ"
-    SQLType="NUMERIC"
-    IsQueriable="false"/>
+    SQLType="VARCHAR"
+    IsQueriable="false">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="150"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewAttribute
     Name="Version"
     IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
-    Type="java.sql.Timestamp"
-    ColumnType="TIMESTAMP"
+    Precision="1"
+    Scale="0"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
     AliasName="VERSION"
     Expression="VERSION"
-    SQLType="TIMESTAMP"
+    SQLType="NUMERIC"
     IsQueriable="false"/>
   <ViewAttribute
     Name="Predefined"
     IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
-    Precision="1"
-    Scale="0"
-    Type="java.lang.Integer"
-    ColumnType="NUMBER"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="TIMESTAMP"
     AliasName="PREDEFINED"
     Expression="PREDEFINED"
-    SQLType="NUMERIC"
+    SQLType="TIMESTAMP"
     IsQueriable="false"/>
   <ViewAttribute
     Name="IsSupplier"
@@ -362,7 +319,7 @@ GROUP BY ID,
     PrecisionRule="true"
     Precision="1"
     Scale="0"
-    Type="java.lang.Integer"
+    Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     AliasName="IS_SUPPLIER"
     Expression="IS_SUPPLIER"
@@ -375,7 +332,7 @@ GROUP BY ID,
     PrecisionRule="true"
     Precision="1"
     Scale="0"
-    Type="java.lang.Integer"
+    Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     AliasName="IS_BUYER"
     Expression="IS_BUYER"
@@ -388,7 +345,7 @@ GROUP BY ID,
     PrecisionRule="true"
     Precision="1"
     Scale="0"
-    Type="java.lang.Integer"
+    Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     AliasName="IS_MEASURER"
     Expression="IS_MEASURER"
@@ -399,23 +356,20 @@ GROUP BY ID,
     IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
-    Precision="50"
-    Type="java.lang.String"
-    ColumnType="VARCHAR2"
+    Precision="1"
+    Scale="0"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
     AliasName="USER_ID"
     Expression="USER_ID"
-    SQLType="VARCHAR"
-    IsQueriable="false">
-    <DesignTime>
-      <Attr Name="_DisplaySize" Value="50"/>
-    </DesignTime>
-  </ViewAttribute>
+    SQLType="NUMERIC"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Code"
     IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
-    Precision="6"
+    Precision="50"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
     AliasName="CODE"
@@ -423,29 +377,23 @@ GROUP BY ID,
     SQLType="VARCHAR"
     IsQueriable="false">
     <DesignTime>
-      <Attr Name="_DisplaySize" Value="6"/>
+      <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
-    <Properties>
-      <SchemaBasedProperties>
-        <DISPLAYHINT
-          Value="Hide"/>
-        <LABEL
-          ResId="ua.divas.view.VwKontragAllItems.Code_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.VwKontragAllItems.Code_TOOLTIP"/>
-      </SchemaBasedProperties>
-    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="Nullable"
     IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
-    Type="java.lang.Integer"
-    ColumnType="NUMBER"
+    Precision="6"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
     AliasName="NULLABLE"
     Expression="NULLABLE"
-    SQLType="NUMERIC">
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
     <Properties>
       <SchemaBasedProperties>
         <DISPLAYHINT
@@ -462,43 +410,22 @@ GROUP BY ID,
     Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
-    SQLType="NUMERIC"
-    IsQueriable="false">
+    SQLType="NUMERIC">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[viewObject.getBallans(Id,'20711')]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <LABEL
-          ResId="ua.divas.view.VwKontragAllItems.DebtBuyer_LABEL"/>
+          ResId="ua.divas.view.VwKontragDeb.DebtBuyer_LABEL"/>
         <TOOLTIP
-          ResId="ua.divas.view.VwKontragAllItems.DebtBuyer_TOOLTIP"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="DebtSupplier"
-    IsUpdateable="false"
-    IsSelected="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Type="oracle.jbo.domain.Number"
-    ColumnType="NUMBER"
-    AliasName="VIEW_ATTR"
-    SQLType="NUMERIC">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[viewObject.getBallans(Id,'5091')]]></TransientExpression>
-    <Properties>
-      <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.view.VwKontragAllItems.DebtSupplier_LABEL"/>
-        <TOOLTIP
-          ResId="ua.divas.view.VwKontragAllItems.DebtSupplier_TOOLTIP"/>
+          ResId="ua.divas.view.VwKontragDeb.DebtBuyer_TOOLTIP"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="SumCalcAdd"
     IsUpdateable="false"
+    IsSelected="false"
     IsPersistent="false"
     PrecisionRule="true"
     Type="oracle.jbo.domain.Number"
@@ -509,90 +436,9 @@ GROUP BY ID,
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[VwBuyerMoves.sum("SumCalc != null ? SumCalc : 0")]]></TransientExpression>
   </ViewAttribute>
-  <ViewAttribute
-    Name="SumDebRko"
-    IsUpdateable="false"
-    IsSelected="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Type="oracle.jbo.domain.Number"
-    ColumnType="NUMBER"
-    AliasName="VIEW_ATTR"
-    SQLType="NUMERIC"
-    IsQueriable="false">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[VwSupplierMoves.sum("SumRko != null ? SumRko : 0")]]></TransientExpression>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="SumDebSumm"
-    IsUpdateable="false"
-    IsSelected="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Type="oracle.jbo.domain.Number"
-    ColumnType="NUMBER"
-    AliasName="VIEW_ATTR"
-    SQLType="NUMERIC"
-    IsQueriable="false">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[VwSupplierMoves.sum("SumSumm != null ? (-1)*SumSumm : 0")]]></TransientExpression>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="SumDebPko"
-    IsUpdateable="false"
-    IsSelected="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Type="oracle.jbo.domain.Number"
-    ColumnType="NUMBER"
-    AliasName="VIEW_ATTR"
-    SQLType="NUMERIC"
-    IsQueriable="false">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[VwSupplierMoves.sum("SumPko != null ? SumPko : 0")]]></TransientExpression>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="SumSummRashod"
-    IsUpdateable="false"
-    IsSelected="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Type="oracle.jbo.domain.Number"
-    ColumnType="NUMBER"
-    AliasName="VIEW_ATTR"
-    SQLType="NUMERIC"
-    IsQueriable="false">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[VwSupplierMoves.sum("SumSummRashod != null ? SumSummRashod : 0")]]></TransientExpression>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="SumSummPrihod"
-    IsUpdateable="false"
-    IsSelected="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Type="oracle.jbo.domain.Number"
-    ColumnType="NUMBER"
-    AliasName="VIEW_ATTR"
-    SQLType="NUMERIC"
-    IsQueriable="false">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[VwSupplierMoves.sum("SumSummPrihod != null ? SumSummPrihod : 0")]]></TransientExpression>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="Mark"
-    IsSelected="false"
-    IsPersistent="false"
-    PrecisionRule="true"
-    Type="java.lang.Integer"
-    ColumnType="INTEGER"
-    AliasName="VIEW_ATTR"
-    SQLType="NUMERIC"
-    DefaultValue="0"
-    IsQueriable="false"/>
   <ViewCriteria
     Name="VwKontragActive"
-    ViewObjectName="ua.divas.view.VwKontragAllItems"
+    ViewObjectName="ua.divas.view.VwKontragDeb"
     Conjunction="AND">
     <Properties>
       <CustomProperties>
@@ -617,7 +463,7 @@ GROUP BY ID,
       </CustomProperties>
     </Properties>
     <ViewCriteriaRow
-      Name="VwKontragAllItemsCriteria_row_0"
+      Name="VwKontragDebCriteria_row_0"
       UpperColumns="1">
       <ViewCriteriaItem
         Name="Fullname"
@@ -640,16 +486,13 @@ GROUP BY ID,
   </ViewCriteria>
   <ViewCriteria
     Name="VwKontragAll"
-    ViewObjectName="ua.divas.view.VwKontragAllItems"
+    ViewObjectName="ua.divas.view.VwKontragDeb"
     Conjunction="AND">
     <Properties>
       <CustomProperties>
         <Property
           Name="displayOperators"
           Value="InAdvancedMode"/>
-        <Property
-          Name="displayName"
-          ResId="displayName"/>
         <Property
           Name="autoExecute"
           Value="true"/>
@@ -662,10 +505,13 @@ GROUP BY ID,
         <Property
           Name="mode"
           Value="Basic"/>
+        <Property
+          Name="displayName"
+          ResId="displayName"/>
       </CustomProperties>
     </Properties>
     <ViewCriteriaRow
-      Name="VwKontragAllItemsCriteria_row_0"
+      Name="VwKontragDebCriteria_row_0"
       UpperColumns="1">
       <ViewCriteriaItem
         Name="Fullname"
@@ -682,13 +528,8 @@ GROUP BY ID,
     <Item Value="Id"/>
   </AttrArray>
   <ViewLinkAccessor
-    Name="VwSupplierMoves"
-    ViewLink="ua.divas.view.VwSupplierMovesVwKontragAllFkLink"
-    Type="oracle.jbo.RowIterator"
-    IsUpdateable="false"/>
-  <ViewLinkAccessor
     Name="VwBuyerMoves"
-    ViewLink="ua.divas.view.VwBuyerMovesVwKontragAllFkLink"
+    ViewLink="ua.divas.view.VwBuyerMovesKontragAllDebFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <ResourceBundle>

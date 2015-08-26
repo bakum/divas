@@ -31,26 +31,27 @@ public class UsersViewImpl extends DivasView implements UsersView {
 
 
     public Boolean userExistsAndActive(String u_login) {
-        String ret = (String) callStoredFunction(VARCHAR2, "UTILITY.user_exists(?)", new Object[] { u_login });
-        if (ret.contains("1")) {
-            return new Boolean(true);
+        BigDecimal ret = (BigDecimal) callStoredFunction(NUMBER, "UTILITY.user_exists(?)", new Object[] { u_login });
+        if (ret.intValue() == 1) {
+            return true;
         }
-        return new Boolean(false);
+        return false;
     }
-    
+
     public Boolean accessEnabled(String u_login) {
-        String ret = (String) callStoredFunction(VARCHAR2, "UTILITY.access_enabled(?)", new Object[] { u_login });
-        if (ret.contains("1")) {
-            return new Boolean(true);
+        BigDecimal ret = (BigDecimal) callStoredFunction(NUMBER, "UTILITY.access_enabled(?)", new Object[] { u_login });
+        if (ret.intValue() == 1) {
+            return true;
         }
-        return new Boolean(false);
+        return false;
     }
-    
+
     public String generateCode(String u_login, oracle.jbo.domain.Date p_date) {
-        String ret = (String) callStoredFunction(VARCHAR2, "UTILITY.generate_code(?,?)", new Object[] { u_login, p_date });
+        String ret = (String) callStoredFunction(VARCHAR2, "UTILITY.generate_code(?,?)", new Object[] {
+                                                 u_login, p_date });
         return ret;
     }
-    
+
     public void acceptCode(String u_login, String p_code) {
         callStoredProcedure("UTILITY.accept_code(?,?)", new Object[] { u_login, p_code });
     }

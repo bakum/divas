@@ -18,7 +18,7 @@
                                                        actionListener="#{buyer_debt.onRefresh}"/>
                                         </af:toolbar>
                                     </f:facet>
-                                    <af:treeTable value="#{bindings.VwKontragAllItems1.treeModel}" var="node"
+                                    <af:treeTable value="#{bindings.VwKontragDeb1.treeModel}" var="node"
                                                   rowSelection="single" id="tt1" binding="#{buyer_debt.treeTable}">
                                         <f:facet name="nodeStamp">
                                             <af:column id="c1" headerText="Наименование" width="250"

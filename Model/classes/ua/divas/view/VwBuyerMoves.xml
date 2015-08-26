@@ -319,7 +319,7 @@ ORDER BY PERIOD DESC]]></SQLQuery>
     ColumnType="TIMESTAMP"
     AliasName="PERIOD"
     Expression="PERIOD"
-    SQLType="DATE">
+    SQLType="TIMESTAMP">
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -378,10 +378,7 @@ ORDER BY PERIOD DESC]]></SQLQuery>
     Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
-    SQLType="NUMERIC">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[RkoVOSuppl.sum("Summa != null ? Summa : 0")]]></TransientExpression>
-  </ViewAttribute>
+    SQLType="NUMERIC"/>
   <ViewAttribute
     Name="SumPko"
     IsUpdateable="false"
@@ -391,21 +388,13 @@ ORDER BY PERIOD DESC]]></SQLQuery>
     Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
-    SQLType="NUMERIC">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[RkoVOSuppl.sum("SummaRash != null ? SummaRash : 0")]]></TransientExpression>
-  </ViewAttribute>
+    SQLType="NUMERIC"/>
   <AttrArray Name="KeyAttributes">
     <Item Value="Id"/>
   </AttrArray>
   <ViewLinkAccessor
     Name="OrdersCalcView"
     ViewLink="ua.divas.view.VwBuyerMovesOrdersCalcFkLink"
-    Type="oracle.jbo.RowIterator"
-    IsUpdateable="false"/>
-  <ViewLinkAccessor
-    Name="RkoVOSuppl"
-    ViewLink="ua.divas.view.VwBuyerMovesRkoVOFkLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <ResourceBundle>

@@ -63,6 +63,7 @@ import ua.divas.view.VwBallansApImpl;
 import ua.divas.view.VwBuyerMovesImpl;
 import ua.divas.view.VwKassaMovesImpl;
 import ua.divas.view.VwKontragAllItemsImpl;
+import ua.divas.view.VwKontragDebImpl;
 import ua.divas.view.VwKontragZamerImpl;
 import ua.divas.view.VwNotificationCalendarViewImpl;
 import ua.divas.view.VwRatingImpl;
@@ -4311,6 +4312,30 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getVwBallansDetaiFkLink1() {
         return (ViewLinkImpl) findViewLink("VwBallansDetaiFkLink1");
+    }
+
+    /**
+     * Container's getter for VwKontragDeb1.
+     * @return VwKontragDeb1
+     */
+    public VwKontragDebImpl getVwKontragDeb1() {
+        return (VwKontragDebImpl) findViewObject("VwKontragDeb1");
+    }
+
+    /**
+     * Container's getter for VwBuyerMoves4.
+     * @return VwBuyerMoves4
+     */
+    public VwBuyerMovesImpl getVwBuyerMoves4() {
+        return (VwBuyerMovesImpl) findViewObject("VwBuyerMoves4");
+    }
+
+    /**
+     * Container's getter for VwBuyerMovesKontragAllDebFkLink1.
+     * @return VwBuyerMovesKontragAllDebFkLink1
+     */
+    public ViewLinkImpl getVwBuyerMovesKontragAllDebFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwBuyerMovesKontragAllDebFkLink1");
     }
 }
 
