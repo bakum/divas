@@ -61,6 +61,7 @@ import ua.divas.view.UsersViewImpl;
 import ua.divas.view.VwBallansApDetailImpl;
 import ua.divas.view.VwBallansApImpl;
 import ua.divas.view.VwBuyerMovesImpl;
+import ua.divas.view.VwInsideMasterImpl;
 import ua.divas.view.VwKassaMovesImpl;
 import ua.divas.view.VwKontragAllItemsImpl;
 import ua.divas.view.VwKontragDebImpl;
@@ -4336,6 +4337,62 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewLinkImpl getVwBuyerMovesKontragAllDebFkLink1() {
         return (ViewLinkImpl) findViewLink("VwBuyerMovesKontragAllDebFkLink1");
+    }
+
+    /**
+     * Container's getter for VwInsideMaster1.
+     * @return VwInsideMaster1
+     */
+    public VwInsideMasterImpl getVwInsideMaster1() {
+        return (VwInsideMasterImpl) findViewObject("VwInsideMaster1");
+    }
+
+    /**
+     * Container's getter for VwInsideDetail1.
+     * @return VwInsideDetail1
+     */
+    public ViewObjectImpl getVwInsideDetail1() {
+        return (ViewObjectImpl) findViewObject("VwInsideDetail1");
+    }
+
+    /**
+     * Container's getter for VwInsideMasterDetailFkLink1.
+     * @return VwInsideMasterDetailFkLink1
+     */
+    public ViewLinkImpl getVwInsideMasterDetailFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwInsideMasterDetailFkLink1");
+    }
+
+    /**
+     * Container's getter for VwInsideDetail2.
+     * @return VwInsideDetail2
+     */
+    public ViewObjectImpl getVwInsideDetail2() {
+        return (ViewObjectImpl) findViewObject("VwInsideDetail2");
+    }
+
+    /**
+     * Container's getter for VwMovesInside1.
+     * @return VwMovesInside1
+     */
+    public ViewObjectImpl getVwMovesInside1() {
+        return (ViewObjectImpl) findViewObject("VwMovesInside1");
+    }
+
+    /**
+     * Container's getter for VwInsideDetailMoviesFkLink1.
+     * @return VwInsideDetailMoviesFkLink1
+     */
+    public ViewLinkImpl getVwInsideDetailMoviesFkLink1() {
+        return (ViewLinkImpl) findViewLink("VwInsideDetailMoviesFkLink1");
+    }
+
+    /**
+     * Container's getter for VwMovesInside2.
+     * @return VwMovesInside2
+     */
+    public ViewObjectImpl getVwMovesInside2() {
+        return (ViewObjectImpl) findViewObject("VwMovesInside2");
     }
 }
 

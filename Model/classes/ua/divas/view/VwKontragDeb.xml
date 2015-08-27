@@ -185,6 +185,8 @@ GROUP BY ID,
           ResId="ua.divas.view.VwKontragDeb.Fullname_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.view.VwKontragDeb.Fullname_TOOLTIP"/>
+        <DISPLAYWIDTH
+          Value="30"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -208,6 +210,8 @@ GROUP BY ID,
           ResId="ua.divas.view.VwKontragDeb.Deleted_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.view.VwKontragDeb.Deleted_TOOLTIP"/>
+        <CONTROLTYPE
+          Value="check_box"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

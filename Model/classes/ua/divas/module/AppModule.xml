@@ -1008,6 +1008,25 @@
   <ViewUsage
     Name="VwBuyerMoves4"
     ViewObjectName="ua.divas.view.VwBuyerMoves"/>
+  <ViewUsage
+    Name="VwInsideMaster1"
+    ViewObjectName="ua.divas.view.VwInsideMaster">
+    <ViewCriteriaUsage
+      Name="VwInsideActive"
+      FullName="ua.divas.view.VwInsideMaster.VwInsideActive"/>
+  </ViewUsage>
+  <ViewUsage
+    Name="VwInsideDetail1"
+    ViewObjectName="ua.divas.view.VwInsideDetail"/>
+  <ViewUsage
+    Name="VwInsideDetail2"
+    ViewObjectName="ua.divas.view.VwInsideDetail"/>
+  <ViewUsage
+    Name="VwMovesInside1"
+    ViewObjectName="ua.divas.view.VwMovesInside"/>
+  <ViewUsage
+    Name="VwMovesInside2"
+    ViewObjectName="ua.divas.view.VwMovesInside"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"
@@ -2117,6 +2136,18 @@
     ViewLinkObjectName="ua.divas.view.VwBuyerMovesKontragAllDebFkLink"
     SrcViewUsageName="ua.divas.module.AppModule.VwKontragDeb1"
     DstViewUsageName="ua.divas.module.AppModule.VwBuyerMoves4"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="VwInsideMasterDetailFkLink1"
+    ViewLinkObjectName="ua.divas.view.VwInsideMasterDetailFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.VwInsideMaster1"
+    DstViewUsageName="ua.divas.module.AppModule.VwInsideDetail1"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="VwInsideDetailMoviesFkLink1"
+    ViewLinkObjectName="ua.divas.view.VwInsideDetailMoviesFkLink"
+    SrcViewUsageName="ua.divas.module.AppModule.VwInsideDetail2"
+    DstViewUsageName="ua.divas.module.AppModule.VwMovesInside1"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">

@@ -77,6 +77,12 @@
                                                         <af:region value="#{bindings.kontrag_calcconfig1.regionModel}"
                                                                    id="r20"/>
                                                     </af:showDetailItem>
+                                                    <af:showDetailItem text="Расчеты между филиалами" id="sdi29"
+                                                                       stretchChildren="first"
+                                                                       rendered="#{securityContext.taskflowViewable['/WEB-INF/inside_debt.xml#inside_debt']}">
+                                                        <af:region value="#{bindings.inside_debt1.regionModel}"
+                                                                   id="r26"/>
+                                                    </af:showDetailItem>
                                                 </af:panelTabbed>
                                             </af:showDetailItem>
                                             <af:showDetailItem text="Продажи" id="sdi17" stretchChildren="first"
