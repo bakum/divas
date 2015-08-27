@@ -252,7 +252,7 @@
     ColumnType="TIMESTAMP"
     AliasName="PERIOD"
     Expression="PERIOD"
-    SQLType="TIMESTAMP"/>
+    SQLType="DATE"/>
   <ViewAttribute
     Name="DivisionId"
     IsUpdateable="false"

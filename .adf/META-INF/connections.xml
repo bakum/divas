@@ -12,7 +12,7 @@
         <Contents>1521</Contents>
       </StringRefAddr>
       <StringRefAddr addrType="hostname">
-        <Contents>127.0.0.1</Contents>
+        <Contents>192.168.0.200</Contents>
       </StringRefAddr>
       <StringRefAddr addrType="user">
         <Contents>dba_divas</Contents>
@@ -24,6 +24,12 @@
     </RefAddresses>
   </Reference>
 </References>
+
+
+
+
+
+
 
 
 

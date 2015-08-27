@@ -5,7 +5,9 @@
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="VwInsideDetailMoviesFkLink"
   Version="12.1.2.66.68"
-  InheritPersonalization="merge">
+  InheritPersonalization="merge"
+  Where="((:Bind_DivId = DIV_ID) AND (:Bind_DivIdDest = DIV_ID_DEST)) AND (:Bind_DivDestName like DIV_DEST_NAME)"
+  WhereReverse="((:Bind_DivId = DIV_ID) AND (:Bind_DivIdDest = DIV_ID_DEST)) AND (:Bind_DivDestName like DIV_DEST_NAME)">
   <Properties>
     <SchemaBasedProperties>
       <LABEL
@@ -24,6 +26,7 @@
     <AttrArray Name="Attributes">
       <Item Value="ua.divas.view.VwInsideDetail.DivId"/>
       <Item Value="ua.divas.view.VwInsideDetail.DivIdDest"/>
+      <Item Value="ua.divas.view.VwInsideDetail.DivDestName"/>
     </AttrArray>
   </ViewLinkDefEnd>
   <ViewLinkDefEnd
@@ -37,6 +40,7 @@
     <AttrArray Name="Attributes">
       <Item Value="ua.divas.view.VwMovesInside.DivId"/>
       <Item Value="ua.divas.view.VwMovesInside.DivIdDest"/>
+      <Item Value="ua.divas.view.VwMovesInside.DivDestName"/>
     </AttrArray>
   </ViewLinkDefEnd>
   <ResourceBundle>
