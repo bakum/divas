@@ -160,7 +160,8 @@ GROUP BY ID,
   IS_BUYER,
   IS_MEASURER,
   USER_ID,
-  DEB]]></SQLQuery>
+  DEB
+  HAVING ALL_DEBTS_KONTRAG_VISIBLE(:u_name, id) = 1]]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"
@@ -188,7 +189,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="IS_GROUP"
     Expression="IS_GROUP"
-    SQLType="NUMERIC"
+    SQLType="INTEGER"
     IsQueriable="false"/>
   <ViewAttribute
     Name="ParentId"
@@ -242,7 +243,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="DELETED"
     Expression="DELETED"
-    SQLType="NUMERIC">
+    SQLType="INTEGER">
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -329,7 +330,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="UR_FIZ"
     Expression="UR_FIZ"
-    SQLType="NUMERIC"
+    SQLType="INTEGER"
     IsQueriable="false"/>
   <ViewAttribute
     Name="Version"
@@ -340,7 +341,7 @@ GROUP BY ID,
     ColumnType="TIMESTAMP"
     AliasName="VERSION"
     Expression="VERSION"
-    SQLType="TIMESTAMP"
+    SQLType="DATE"
     IsQueriable="false"/>
   <ViewAttribute
     Name="Predefined"
@@ -353,7 +354,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="PREDEFINED"
     Expression="PREDEFINED"
-    SQLType="NUMERIC"
+    SQLType="INTEGER"
     IsQueriable="false"/>
   <ViewAttribute
     Name="IsSupplier"
@@ -366,7 +367,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="IS_SUPPLIER"
     Expression="IS_SUPPLIER"
-    SQLType="NUMERIC"
+    SQLType="INTEGER"
     IsQueriable="false"/>
   <ViewAttribute
     Name="IsBuyer"
@@ -379,7 +380,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="IS_BUYER"
     Expression="IS_BUYER"
-    SQLType="NUMERIC"
+    SQLType="INTEGER"
     IsQueriable="false"/>
   <ViewAttribute
     Name="IsMeasurer"
@@ -392,7 +393,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="IS_MEASURER"
     Expression="IS_MEASURER"
-    SQLType="NUMERIC"
+    SQLType="INTEGER"
     IsQueriable="false"/>
   <ViewAttribute
     Name="UserId"
@@ -445,7 +446,7 @@ GROUP BY ID,
     ColumnType="NUMBER"
     AliasName="NULLABLE"
     Expression="NULLABLE"
-    SQLType="NUMERIC">
+    SQLType="INTEGER">
     <Properties>
       <SchemaBasedProperties>
         <DISPLAYHINT
@@ -587,7 +588,7 @@ GROUP BY ID,
     Type="java.lang.Integer"
     ColumnType="INTEGER"
     AliasName="VIEW_ATTR"
-    SQLType="NUMERIC"
+    SQLType="INTEGER"
     DefaultValue="0"
     IsQueriable="false"/>
   <ViewCriteria

@@ -50,13 +50,13 @@
     <iterator Binds="KassaView1" RangeSize="25" DataControl="AppModuleDataControl" id="KassaView1Iterator"/>
     <iterator Binds="NachislSettingsView2" RangeSize="8" DataControl="AppModuleDataControl"
               id="NachislSettingsView2Iterator"/>
-    <iterator Binds="root" RangeSize="25" DataControl="OnlineUserData" id="OnlineUserDataIterator"/>
-    <accessorIterator MasterBinding="OnlineUserDataIterator" Binds="onlineUserList" RangeSize="25"
+    <iterator Binds="root" RangeSize="-1" DataControl="OnlineUserData" id="OnlineUserDataIterator"/>
+    <accessorIterator MasterBinding="OnlineUserDataIterator" Binds="onlineUserList" RangeSize="-1"
                       DataControl="OnlineUserData" BeanClass="ua.divas.bean.control.OnlineUser"
                       id="onlineUserListIterator"/>
     <iterator id="KassaSettingsView2Iterator" Binds="KassaSettingsView2" DataControl="AppModuleDataControl"
-              RangeSize="25" Refresh="ifNeeded"/>
-    <iterator id="KassaView1_1Iterator" Binds="KassaView1_1" DataControl="AppModuleDataControl" RangeSize="25"/>
+              RangeSize="-1" Refresh="ifNeeded"/>
+    <iterator id="KassaView1_1Iterator" Binds="KassaView1_1" DataControl="AppModuleDataControl" RangeSize="-1"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="UsersView1Iterator" id="Login">

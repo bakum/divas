@@ -6,6 +6,9 @@
     <variableIterator id="variables"/>
     <iterator Binds="ProgSettingsView1" RangeSize="25" DataControl="AppModuleDataControl"
               id="ProgSettingsView1Iterator"/>
+    <iterator Binds="InsideSettingsView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="InsideSettingsView1Iterator"/>
+    <iterator id="PaySettingsView1Iterator" Binds="PaySettingsView1" DataControl="AppModuleDataControl" RangeSize="-1"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="ProgSettingsView1Iterator" id="Id">
@@ -32,5 +35,16 @@
         <Item Value="DateAfterProfit"/>
       </AttrNames>
     </attributeValues>
+    <list IterBinding="InsideSettingsView1Iterator" ListOperMode="multiSelect" ListIter="InsideSettingsView1Iterator"
+          id="InsideSettingsView1" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Id"/>
+        <Item Value="PayId"/>
+        <Item Value="Description"/>
+      </ListDisplayAttrNames>
+    </list>
   </bindings>
 </pageDefinition>

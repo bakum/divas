@@ -69,6 +69,25 @@
                                     <af:convertNumber groupingUsed="false" pattern="#{bindings.Editable.format}"/>
                                 </af:inputText>
                             </af:panelFormLayout>
+                            <af:spacer width="10" height="10" id="s1"/>
+                            <af:panelHeader text="Настройки внутренних задолженностей" id="ph1" type="flow">
+                                <f:facet name="context"/>
+                                <f:facet name="menuBar"/>
+                                <f:facet name="toolbar"/>
+                                <f:facet name="legend">
+                                    <af:outputText value="*Эти начисления попадут в задолженность" id="ot1"
+                                                   inlineStyle="color:Red;"
+                                                   visible="#{bindings.Editable.inputValue == 1 ? false : true}"/>
+                                </f:facet>
+                                <f:facet name="info"/>
+                                <af:selectManyShuttle value="#{prog_settings.selectedValues}" id="sms1"
+                                                      leadingHeader="Все начисления" trailingHeader="В задолженности"
+                                                      valueChangeListener="#{prog_settings.onInsChange}"
+                                                      readOnly="#{bindings.Editable.inputValue == 1 ? false : true}">
+                                    <f:selectItems value="#{prog_settings.allValues}" id="si1"/>
+                                    <f:validator binding="#{bindings.InsideSettingsView1.validator}"/>
+                                </af:selectManyShuttle>
+                            </af:panelHeader>
                         </af:panelBox>
                     </f:facet>
                     <f:facet name="top">

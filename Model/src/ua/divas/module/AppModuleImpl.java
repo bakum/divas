@@ -26,6 +26,7 @@ import ua.divas.view.FirmsViewImpl;
 import ua.divas.view.GroupmembersViewImpl;
 import ua.divas.view.KassaSettingsViewImpl;
 import ua.divas.view.KassaVOImpl;
+import ua.divas.view.KassaViewImpl;
 import ua.divas.view.KontragOtherViewImpl;
 import ua.divas.view.KontragSettingsViewImpl;
 import ua.divas.view.KontragentsAllImpl;
@@ -197,8 +198,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for KassaView1.
      * @return KassaView1
      */
-    public ViewObjectImpl getKassaView1() {
-        return (ViewObjectImpl) findViewObject("KassaView1");
+    public KassaViewImpl getKassaView1() {
+        return (KassaViewImpl) findViewObject("KassaView1");
     }
 
     /**
@@ -661,32 +662,32 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for KassaView2.
      * @return KassaView2
      */
-    public ViewObjectImpl getKassaView2() {
-        return (ViewObjectImpl) findViewObject("KassaView2");
+    public KassaViewImpl getKassaView2() {
+        return (KassaViewImpl) findViewObject("KassaView2");
     }
 
     /**
      * Container's getter for KassaView3.
      * @return KassaView3
      */
-    public ViewObjectImpl getKassaView3() {
-        return (ViewObjectImpl) findViewObject("KassaView3");
+    public KassaViewImpl getKassaView3() {
+        return (KassaViewImpl) findViewObject("KassaView3");
     }
 
     /**
      * Container's getter for KassaView4.
      * @return KassaView4
      */
-    public ViewObjectImpl getKassaView4() {
-        return (ViewObjectImpl) findViewObject("KassaView4");
+    public KassaViewImpl getKassaView4() {
+        return (KassaViewImpl) findViewObject("KassaView4");
     }
 
     /**
      * Container's getter for KassaView5.
      * @return KassaView5
      */
-    public ViewObjectImpl getKassaView5() {
-        return (ViewObjectImpl) findViewObject("KassaView5");
+    public KassaViewImpl getKassaView5() {
+        return (KassaViewImpl) findViewObject("KassaView5");
     }
 
     /**
@@ -2911,8 +2912,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for VwKassaMoves2.
      * @return VwKassaMoves2
      */
-    public ViewObjectImpl getVwKassaMoves2() {
-        return (ViewObjectImpl) findViewObject("VwKassaMoves2");
+    public VwKassaMovesImpl getVwKassaMoves2() {
+        return (VwKassaMovesImpl) findViewObject("VwKassaMoves2");
     }
 
     /**
@@ -2927,8 +2928,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      * Container's getter for VwKassaMoves3.
      * @return VwKassaMoves3
      */
-    public ViewObjectImpl getVwKassaMoves3() {
-        return (ViewObjectImpl) findViewObject("VwKassaMoves3");
+    public VwKassaMovesImpl getVwKassaMoves3() {
+        return (VwKassaMovesImpl) findViewObject("VwKassaMoves3");
     }
 
     /**
@@ -4393,6 +4394,14 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewObjectImpl getVwMovesInside2() {
         return (ViewObjectImpl) findViewObject("VwMovesInside2");
+    }
+
+    /**
+     * Container's getter for InsideSettingsView1.
+     * @return InsideSettingsView1
+     */
+    public ViewObjectImpl getInsideSettingsView1() {
+        return (ViewObjectImpl) findViewObject("InsideSettingsView1");
     }
 }
 

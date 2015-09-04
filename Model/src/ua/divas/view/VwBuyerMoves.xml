@@ -132,8 +132,8 @@ FROM
   )
 where 
 registrator_id not in (select id from rko where order_id is not null and posted = 1) and
-registrator_id not in (select id from pko where order_id is not null and posted = 1) and   
-upper(DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))  
+registrator_id not in (select id from pko where order_id is not null and posted = 1)
+and upper(DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))  
 GROUP BY KONTRAG_ID,
   KONTRAG,
   DIVISION_ID,
@@ -319,7 +319,7 @@ ORDER BY PERIOD DESC]]></SQLQuery>
     ColumnType="TIMESTAMP"
     AliasName="PERIOD"
     Expression="PERIOD"
-    SQLType="TIMESTAMP">
+    SQLType="DATE">
     <Properties>
       <SchemaBasedProperties>
         <LABEL

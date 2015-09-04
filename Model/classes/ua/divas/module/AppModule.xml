@@ -1027,6 +1027,9 @@
   <ViewUsage
     Name="VwMovesInside2"
     ViewObjectName="ua.divas.view.VwMovesInside"/>
+  <ViewUsage
+    Name="InsideSettingsView1"
+    ViewObjectName="ua.divas.view.InsideSettingsView"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"

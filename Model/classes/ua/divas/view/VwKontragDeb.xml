@@ -119,7 +119,8 @@ GROUP BY ID,
   IS_BUYER,
   IS_MEASURER,
   USER_ID,
-  DEB]]></SQLQuery>
+  DEB
+  HAVING ALL_DEBTS_KONTRAG_VISIBLE(:u_name, id) = 1]]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"
@@ -314,7 +315,7 @@ GROUP BY ID,
     ColumnType="TIMESTAMP"
     AliasName="PREDEFINED"
     Expression="PREDEFINED"
-    SQLType="TIMESTAMP"
+    SQLType="DATE"
     IsQueriable="false"/>
   <ViewAttribute
     Name="IsSupplier"
