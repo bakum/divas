@@ -37,6 +37,7 @@
           <Item Value="Zamername"/>
           <Item Value="Adress"/>
           <Item Value="StatusName"/>
+          <Item Value="DatZam"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

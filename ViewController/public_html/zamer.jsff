@@ -81,6 +81,19 @@
                                                 <af:convertDateTime pattern="#{bindings.OrderZamerView1.hints.Dat.format}"/>
                                             </af:inputDate>
                                         </af:column>
+                                        <af:column headerText="#{bindings.OrderZamerView1.hints.DatZam.label}" id="c19"
+                                                   inlineStyle="#{row.bindings.OEditable.inputValue == 1 ? 'background-color:#DCF0AB;' : row.StatusName == 'Новый' ? 'background-color:#ffbc3c;' : row.StatusName == 'Контроль' ? 'background-color:Red;' : ''}"
+                                                   width="120">
+                                            <af:inputDate value="#{row.bindings.DatZam.inputValue}"
+                                                          label="#{bindings.OrderZamerView1.hints.DatZam.label}"
+                                                          required="#{bindings.OrderZamerView1.hints.DatZam.mandatory}"
+                                                          columns="#{bindings.OrderZamerView1.hints.DatZam.displayWidth}"
+                                                          shortDesc="#{bindings.OrderZamerView1.hints.DatZam.tooltip}"
+                                                          id="id1">
+                                                <f:validator binding="#{row.bindings.DatZam.validator}"/>
+                                                <af:convertDateTime pattern="#{bindings.OrderZamerView1.hints.DatZam.format}"/>
+                                            </af:inputDate>
+                                        </af:column>
                                         <af:column sortProperty="#{bindings.OrderZamerView1.hints.Num.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.OrderZamerView1.hints.Num.label}" id="c3"

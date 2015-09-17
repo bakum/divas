@@ -55,5 +55,11 @@
         <Item Value="BallCnt"/>
       </AttrNames>
     </attributeValues>
+    <methodAction id="retrieveKontragName" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="retrieveKontragName" IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.VwRating1"
+                  ReturnName="data.AppModuleDataControl.methodResults.retrieveKontragName_AppModuleDataControl_VwRating1_retrieveKontragName_result">
+      <NamedData NDName="Id" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

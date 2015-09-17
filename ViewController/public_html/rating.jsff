@@ -28,6 +28,16 @@
                             <af:spacer width="10" height="10" id="s3"/>
                             <af:button actionListener="#{bindings.ExecuteWithParams.execute}" text="Обновить"
                                        disabled="#{!bindings.ExecuteWithParams.enabled}" id="b1"/>
+                            <af:spacer width="10" height="10" id="s4"/>
+                            <af:menuBar id="mb1">
+                                <af:menu text="Экспорт" id="m1">
+                                    <af:commandMenuItem text="Печать в Excel" id="cmi1" icon="/img/excel.png">
+                                        <af:fileDownloadActionListener contentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                                                                       filename="Raitings.xls"
+                                                                       method="#{raitings.generateExcel}"/>
+                                    </af:commandMenuItem>
+                                </af:menu>
+                            </af:menuBar>
                         </af:panelGroupLayout>
                     </f:facet>
                     <af:table value="#{bindings.VwRating1.collectionModel}" var="row"

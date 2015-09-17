@@ -21,6 +21,10 @@
         ResId="ua.divas.view.KontragentsAll_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
+  <Variable
+    Name="KonId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="KontragentsView1"
     ViewObjectName="ua.divas.view.KontragentsView"
@@ -211,6 +215,43 @@ FROM  KONTRAGENTS Kontragents]]></SQLQuery>
     AliasName="SUPP_SETTING"
     Expression="SUPP_SETTING"
     SQLType="INTEGER"/>
+  <ViewCriteria
+    Name="KontragentsAllById"
+    ViewObjectName="ua.divas.view.KontragentsAll"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="KontragentsAllCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Id"
+        ViewAttribute="Id"
+        Operator="="
+        Conjunction="AND"
+        Value=":KonId"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="KontragentsAll"
     ViewLink="ua.divas.view.KontragAllKontragFkLink"

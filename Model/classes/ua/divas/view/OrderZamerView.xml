@@ -381,6 +381,7 @@
   <SQLQuery><![CDATA[SELECT Orders.ACTIVITIES_ID, 
        Orders.CURR_ID, 
        Orders.DAT, 
+       Orders.DAT_ZAM,
        Orders.DELETED, 
        Orders.DISCRIPTION, 
        Orders.DIVISION_ID, 
@@ -448,6 +449,12 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users_for_zamer(:u
     EntityAttrName="Dat"
     EntityUsage="Orders"
     AliasName="DAT"/>
+  <ViewAttribute
+    Name="DatZam"
+    PrecisionRule="true"
+    AliasName="DAT_ZAM"
+    EntityAttrName="DatZam"
+    EntityUsage="Orders"/>
   <ViewAttribute
     Name="Deleted"
     IsNotNull="true"

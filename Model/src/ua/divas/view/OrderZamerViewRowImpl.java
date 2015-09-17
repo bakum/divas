@@ -46,6 +46,7 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
         ActivitiesId,
         CurrId,
         Dat,
+        DatZam,
         Deleted,
         Discription,
         DivisionId,
@@ -107,6 +108,7 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
     public static final int ACTIVITIESID = AttributesEnum.ActivitiesId.index();
     public static final int CURRID = AttributesEnum.CurrId.index();
     public static final int DAT = AttributesEnum.Dat.index();
+    public static final int DATZAM = AttributesEnum.DatZam.index();
     public static final int DELETED = AttributesEnum.Deleted.index();
     public static final int DISCRIPTION = AttributesEnum.Discription.index();
     public static final int DIVISIONID = AttributesEnum.DivisionId.index();
@@ -201,6 +203,22 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
      */
     public void setDat(Timestamp value) {
         setAttributeInternal(DAT, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute DatZam.
+     * @return the DatZam
+     */
+    public Timestamp getDatZam() {
+        return (Timestamp) getAttributeInternal(DATZAM);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for DAT_ZAM using the alias name DatZam.
+     * @param value value to set the DAT_ZAM
+     */
+    public void setDatZam(Timestamp value) {
+        setAttributeInternal(DATZAM, value);
     }
 
     /**
