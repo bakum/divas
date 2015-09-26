@@ -89,6 +89,10 @@
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/sales-config.xml#sales-config']}">
                                                 <af:region value="#{bindings.salesconfig1.regionModel}" id="r14"/>
                                             </af:showDetailItem>
+                                            <af:showDetailItem text="Прорабы" id="sdi22" stretchChildren="first"
+                                                               rendered="#{securityContext.taskflowViewable['/WEB-INF/prorab-config.xml#prorab-config']}">
+                                                <af:region value="#{bindings.prorabconfig1.regionModel}" id="r19"/>
+                                            </af:showDetailItem>
                                             <af:showDetailItem text="Затраты" id="sdi18" stretchChildren="first"
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/zatraty-config.xml#zatraty-config']}">
                                                 <af:region value="#{bindings.zatratyconfig1.regionModel}" id="r15"/>
@@ -130,10 +134,6 @@
                                                                stretchChildren="first"
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/profit-config.xml#profit-config']}">
                                                 <af:region value="#{bindings.profitconfig1.regionModel}" id="r23"/>
-                                            </af:showDetailItem>
-                                            <af:showDetailItem text="Прорабы" id="sdi22" stretchChildren="first"
-                                                               rendered="#{securityContext.taskflowViewable['/WEB-INF/prorab-config.xml#prorab-config']}">
-                                                <af:region value="#{bindings.prorabconfig1.regionModel}" id="r19"/>
                                             </af:showDetailItem>
                                             <af:showDetailItem text="Прайс-лист" id="sdi8" stretchChildren="first"
                                                                rendered="#{securityContext.taskflowViewable['/WEB-INF/import-price-config.xml#import-price-config']}">

@@ -124,6 +124,19 @@
                                                         <af:convertDateTime pattern="#{bindings.OrdersView1.hints.Dat.format}"/>
                                                     </af:inputDate>
                                                 </af:column>
+                                                <af:column headerText="#{bindings.OrdersView1.hints.DatZam.label}"
+                                                           id="c77" width="120" sortable="true"
+                                                           sortProperty="#{bindings.OrdersView1.hints.DatZam.name}">
+                                                    <af:inputDate value="#{row.bindings.DatZam.inputValue}"
+                                                                  label="#{bindings.OrdersView1.hints.DatZam.label}"
+                                                                  required="#{bindings.OrdersView1.hints.DatZam.mandatory}"
+                                                                  columns="#{bindings.OrdersView1.hints.DatZam.displayWidth}"
+                                                                  shortDesc="#{bindings.OrdersView1.hints.DatZam.tooltip}"
+                                                                  id="id13">
+                                                        <f:validator binding="#{row.bindings.DatZam.validator}"/>
+                                                        <af:convertDateTime pattern="#{bindings.OrdersView1.hints.DatZam.format}"/>
+                                                    </af:inputDate>
+                                                </af:column>
                                                 <af:column sortProperty="#{bindings.OrdersView1.hints.Num.name}"
                                                            sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.Num.label}" id="c3">
@@ -175,7 +188,7 @@
                                                 <af:column sortProperty="#{bindings.OrdersView1.hints.CurrId.name}"
                                                            sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.CurrId.label}"
-                                                           id="c6">
+                                                           id="c6" visible="false">
                                                     <af:selectOneChoice value="#{row.bindings.CurrId.inputValue}"
                                                                         label="#{row.bindings.CurrId.label}"
                                                                         required="#{bindings.OrdersView1.hints.CurrId.mandatory}"

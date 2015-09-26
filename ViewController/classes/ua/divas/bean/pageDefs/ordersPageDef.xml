@@ -61,6 +61,7 @@
           <Item Value="TotalSumOplaty"/>
           <Item Value="TotalSummUslugiAdd"/>
           <Item Value="TotalSumm"/>
+          <Item Value="DatZam"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

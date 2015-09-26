@@ -1,5 +1,10 @@
 package ua.divas.view;
 
+import java.sql.SQLException;
+
+import java.util.Calendar;
+
+import oracle.jbo.domain.Date;
 import oracle.jbo.server.ViewObjectImpl;
 
 import ua.divas.classes.DivasView;
@@ -14,6 +19,30 @@ public class VwKassaMovesImpl extends DivasView {
      * This is the default constructor (do not remove).
      */
     public VwKassaMovesImpl() {
+    }
+    
+    public Date getDateFirst() throws SQLException {
+        Calendar calendar = Calendar.getInstance();
+        //calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH)); // это будет начало месяца
+        //calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH)); // это будет конец месяца
+        //calendar.set(Calendar.DAY_OF_YEAR, calendar.getActualMaximum(Calendar.DAY_OF_YEAR)); // это будет конец года
+        calendar.set(Calendar.DAY_OF_YEAR, calendar.getActualMinimum(Calendar.DAY_OF_YEAR)); // это будет начало года
+        java.util.Date pDate = calendar.getTime();
+        oracle.jbo.domain.Date dbDate= new oracle.jbo.domain.Date(new java.sql.Date(pDate.getTime()));
+        //oracle.jbo.domain.Date time = new oracle.jbo.domain.Date(pDate);
+        return dbDate;
+    }
+    
+    public Date getDateLast() throws SQLException {
+        Calendar calendar = Calendar.getInstance();
+        //calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH)); // это будет начало месяца
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH)); // это будет конец месяца
+        //calendar.set(Calendar.DAY_OF_YEAR, calendar.getActualMaximum(Calendar.DAY_OF_YEAR)); // это будет конец года
+        //calendar.set(Calendar.DAY_OF_YEAR, calendar.getActualMinimum(Calendar.DAY_OF_YEAR)); // это будет начало года
+        java.util.Date pDate = calendar.getTime();
+        oracle.jbo.domain.Date dbDate= new oracle.jbo.domain.Date(new java.sql.Date(pDate.getTime()));
+        //oracle.jbo.domain.Date time = new oracle.jbo.domain.Date(pDate);
+        return dbDate;
     }
 
     /**
