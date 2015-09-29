@@ -84,7 +84,8 @@
        Divisions.VERSION, 
        Divisions.PREDEFINED,
        (select 0 from dual) D_Editable,
-       Divisions.MAIN_USER
+       Divisions.MAIN_USER,
+       Divisions.PREFIX
 FROM  DIVISIONS Divisions
 where 
 upper(Divisions.ID) in (select upper(N) from table(cast(get_divisions(:u_name) as divisionTable)))
@@ -173,6 +174,12 @@ order by Divisions.IS_GROUP DESC]]></SQLQuery>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="Prefix"
+    PrecisionRule="true"
+    EntityAttrName="Prefix"
+    EntityUsage="Divisions"
+    AliasName="PREFIX"/>
   <ViewAttribute
     Name="TotalActiveStart"
     IsUpdateable="false"

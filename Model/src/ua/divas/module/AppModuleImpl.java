@@ -8,6 +8,8 @@ import oracle.jbo.Key;
 import oracle.jbo.Row;
 import oracle.jbo.RowIterator;
 import oracle.jbo.Session;
+import oracle.jbo.Variable;
+import oracle.jbo.common.VariableImpl;
 import oracle.jbo.server.ApplicationModuleImpl;
 import oracle.jbo.server.ViewLinkImpl;
 
@@ -3278,8 +3280,7 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         return (NotificationViewImpl) findViewObject("NotificationView1");
     }
 
-    public void addNotification(String cutid, String desc, Date dat, 
-                                String ObjId, String ContId) {
+    public void addNotification(String cutid, String desc, Date dat, String ObjId, String ContId) {
         long t = dat.getTime();
         Date afterAddingTenMins = new Date(t + (10 * 60000));
         ViewObjectImpl not = getNotificationView1();
@@ -3293,7 +3294,7 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         r2.setAttribute("EndDate", afterAddingTenMins);
         r2.setAttribute("ObjectId", ObjId);
         r2.setAttribute("Contact", ContId);
-        
+
         try {
             not.insertRow(r2); //Insert that row in ViewObject
             getDBTransaction().commit(); //Commit the changes
@@ -3304,14 +3305,14 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         }
 
     }
-    
+
     public void addProfitDistrib(Date dat, BigDecimal Summa, String p_div) {
         ViewObjectImpl profit = getProfitDistribView1();
         Row r2 = profit.createRow();
         r2.setAttribute("Dat", dat);
         r2.setAttribute("DivisionId", p_div);
         r2.setAttribute("Summ", Summa);
-        
+
         try {
             profit.insertRow(r2); //Insert that row in ViewObject
             getDBTransaction().commit(); //Commit the changes
@@ -3321,28 +3322,28 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
             e.printStackTrace();
         }
     }
-    
-    public void addRko(String kassaId, String kontragId, BigDecimal Summa){
-        
+
+    public void addRko(String kassaId, String kontragId, BigDecimal Summa) {
+
         ViewObjectImpl rko = getRkoView1();
         Row r2 = rko.createRow();
-        
+
         r2.setAttribute("KassaId", kassaId);
         r2.setAttribute("KontragId", kontragId);
         r2.setAttribute("Summa", Summa);
-        
+
         ViewObjectImpl opVO = getOperationRkoView1();
         ViewRowSetImpl rs =
             (ViewRowSetImpl) opVO.findByViewCriteria(opVO.getViewCriteria("OperationRkoToSupplier"), -1,
-                                                   opVO.QUERY_MODE_SCAN_DATABASE_TABLES);
+                                                     opVO.QUERY_MODE_SCAN_DATABASE_TABLES);
         Row row = rs.first();
         String op = null;
         if (row != null) {
             op = (String) row.getAttribute("Id");
         }
-        
+
         r2.setAttribute("OperationId", op);
-        
+
         try {
             rko.insertRow(r2); //Insert that row in ViewObject
             getDBTransaction().commit(); //Commit the changes
@@ -3351,32 +3352,31 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
             getDBTransaction().rollback(); //Commit the changes
             e.printStackTrace();
         }
-        
+
     }
-    
-    public void addRkoOrder(String kassaId, String kontragId, 
-                            String OrderId, BigDecimal Summa){
-        
+
+    public void addRkoOrder(String kassaId, String kontragId, String OrderId, BigDecimal Summa) {
+
         ViewObjectImpl rko = getRkoView1();
         Row r2 = rko.createRow();
-        
+
         r2.setAttribute("KassaId", kassaId);
         r2.setAttribute("KontragId", kontragId);
         r2.setAttribute("OrderId", OrderId);
         r2.setAttribute("Summa", Summa);
-        
+
         ViewObjectImpl opVO = getOperationRkoView1();
         ViewRowSetImpl rs =
             (ViewRowSetImpl) opVO.findByViewCriteria(opVO.getViewCriteria("OperationRkoToSupplier"), -1,
-                                                   opVO.QUERY_MODE_SCAN_DATABASE_TABLES);
+                                                     opVO.QUERY_MODE_SCAN_DATABASE_TABLES);
         Row row = rs.first();
         String op = null;
         if (row != null) {
             op = (String) row.getAttribute("Id");
         }
-        
+
         r2.setAttribute("OperationId", op);
-        
+
         try {
             rko.insertRow(r2); //Insert that row in ViewObject
             getDBTransaction().commit(); //Commit the changes
@@ -3385,31 +3385,31 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
             getDBTransaction().rollback(); //Commit the changes
             e.printStackTrace();
         }
-        
+
     }
-    
+
     public void addPkoFromZamer(String kassaId, String kontragId, BigDecimal Summa) {
-        
+
         ViewObjectImpl pko = getPkoView1();
         Row r2 = pko.createRow();
-        
+
         r2.setAttribute("KassaId", kassaId);
         r2.setAttribute("KontragId", kontragId);
         r2.setAttribute("Summa", Summa);
-        
+
         ViewObjectImpl opVO = getOperationPkoView1();
         ViewRowSetImpl rs =
             (ViewRowSetImpl) opVO.findByViewCriteria(opVO.getViewCriteria("OperationPkoFromSupplier"), -1,
-                                                   opVO.QUERY_MODE_SCAN_DATABASE_TABLES);
+                                                     opVO.QUERY_MODE_SCAN_DATABASE_TABLES);
         Row row = rs.first();
         String op = null;
         if (row != null) {
             op = (String) row.getAttribute("Id");
         }
-        
+
         r2.setAttribute("OperationId", op);
-       
-        
+
+
         try {
             pko.insertRow(r2); //Insert that row in ViewObject
             getDBTransaction().commit(); //Commit the changes
@@ -3420,31 +3420,30 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         }
 
     }
-    
-    public void addPkoOrder(String kassaId, String kontragId, 
-                            String OrderId, BigDecimal Summa) {
-        
+
+    public void addPkoOrder(String kassaId, String kontragId, String OrderId, BigDecimal Summa) {
+
         ViewObjectImpl pko = getPkoView1();
         Row r2 = pko.createRow();
-        
+
         r2.setAttribute("KassaId", kassaId);
         r2.setAttribute("KontragId", kontragId);
         r2.setAttribute("OrderId", OrderId);
         r2.setAttribute("Summa", Summa);
-        
+
         ViewObjectImpl opVO = getOperationPkoView1();
         ViewRowSetImpl rs =
             (ViewRowSetImpl) opVO.findByViewCriteria(opVO.getViewCriteria("OperationPkoFromSupplier"), -1,
-                                                   opVO.QUERY_MODE_SCAN_DATABASE_TABLES);
+                                                     opVO.QUERY_MODE_SCAN_DATABASE_TABLES);
         Row row = rs.first();
         String op = null;
         if (row != null) {
             op = (String) row.getAttribute("Id");
         }
-        
+
         r2.setAttribute("OperationId", op);
-       
-        
+
+
         try {
             pko.insertRow(r2); //Insert that row in ViewObject
             getDBTransaction().commit(); //Commit the changes
@@ -3454,6 +3453,45 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
             e.printStackTrace();
         }
 
+    }
+
+    public void transferOfDebt(String source, String dest, BigDecimal Summa) {
+        ViewObjectImpl so = getStartOstView1();
+        Row r2 = so.createRow();
+        r2.setAttribute("Comments", "Transfer of debt");
+        r2.setAttribute("Dat", new Date());
+        ViewObjectImpl sotp = getStartOstTpView2();
+        Row r3 = sotp.createRow();
+        
+        ViewObjectImpl plVO = getPlanAccView1();
+        VariableImpl z = new VariableImpl();
+        z.setName("p_code");
+        String code = "5091";
+        ViewRowSetImpl rs =
+            (ViewRowSetImpl) plVO.findByViewCriteriaWithBindVars(plVO.getViewCriteria("PlanAccViewByCode"), -1,
+                                                     plVO.QUERY_MODE_SCAN_DATABASE_TABLES, new Variable[] { z }, new Object[] {
+                                                               code });
+        Row row = rs.first();
+        String pl = null;
+        if (row != null) {
+            pl = (String) row.getAttribute("Id");
+        }
+        
+        r3.setAttribute("PlanAccDebId", pl);
+        r3.setAttribute("Subconto1Deb", source);
+        r3.setAttribute("PlanAccKredId", pl);
+        r3.setAttribute("Subconto1Kred", dest);
+        r3.setAttribute("Summ", Summa);
+        
+        try {
+            so.insertRow(r2); //Insert that row in ViewObject
+            sotp.insertRow(r3); //Insert that row in ViewObject
+            getDBTransaction().commit(); //Commit the changes
+            so.executeQuery();
+        } catch (Exception e) {
+            getDBTransaction().rollback(); //Commit the changes
+            e.printStackTrace();
+        }
     }
 
     /**

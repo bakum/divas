@@ -62,6 +62,7 @@
           <Item Value="TotalSummUslugiAdd"/>
           <Item Value="TotalSumm"/>
           <Item Value="DatZam"/>
+          <Item Value="ManagerId"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

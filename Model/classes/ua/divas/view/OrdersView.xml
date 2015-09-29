@@ -398,6 +398,25 @@
         </AttrArray>
         <DisplayCriteria/>
     </ListBinding>
+    <ListBinding
+        Name="LOV_ManagerId"
+        ListVOName="KontragOtherView1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="ManagerId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Fullname"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
     <SQLQuery><![CDATA[SELECT 
     Orders.ID, 
     Orders.DAT, 
@@ -446,7 +465,8 @@
         ID = AGENT_ID) Agent_Name,
     Orders.SUMM_PLAN SUMM_PLAN,
     'Заказ' ObjName,
-    UTILITY.enable_edit(Orders.ID,'orders') enbl
+    UTILITY.enable_edit(Orders.ID,'orders') enbl,
+    (select kontrag_id from user_settings where user_id = Orders.USER_ID) Manager_ID
 FROM 
     ORDERS Orders 
 WHERE 
@@ -882,6 +902,32 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
         Expression="ENBL"
         SQLType="NUMERIC"
         IsQueriable="false"/>
+    <ViewAttribute
+        Name="ManagerId"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="50"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="MANAGER_ID"
+        Expression="MANAGER_ID"
+        SQLType="VARCHAR"
+        LOVName="LOV_ManagerId">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="50"/>
+        </DesignTime>
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+                <LABEL
+                    ResId="ua.divas.view.OrdersView.ManagerId_LABEL"/>
+                <TOOLTIP
+                    ResId="ua.divas.view.OrdersView.ManagerId_TOOLTIP"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
     <ViewAttribute
       Name="TotalSumUslugi"
       IsUpdateable="false"

@@ -189,6 +189,26 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="Prefix"
+    Precision="20"
+    ColumnName="PREFIX"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="DIVISIONS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.model.Divisions.Prefix_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.model.Divisions.Prefix_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="Divisions"
     Association="ua.divas.model.DivisionsDivisionsFk1Assoc"

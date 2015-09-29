@@ -298,7 +298,7 @@
                                                 <af:column sortProperty="#{bindings.OrdersView1.hints.UserId.name}"
                                                            sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.UserId.label}"
-                                                           id="c9">
+                                                           id="c9" rendered="false">
                                                     <af:selectOneChoice value="#{row.bindings.UserId.inputValue}"
                                                                         label="#{row.bindings.UserId.label}"
                                                                         required="#{bindings.OrdersView1.hints.UserId.mandatory}"
@@ -306,6 +306,18 @@
                                                                         id="soc4" readOnly="true">
                                                         <f:selectItems value="#{row.bindings.UserId.items}" id="si4"/>
                                                         <f:validator binding="#{row.bindings.UserId.validator}"/>
+                                                    </af:selectOneChoice>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.OrdersView1.hints.ManagerId.label}"
+                                                           id="c78" width="120">
+                                                    <af:selectOneChoice value="#{row.bindings.ManagerId.inputValue}"
+                                                                        label="#{row.bindings.ManagerId.label}"
+                                                                        required="#{bindings.OrdersView1.hints.ManagerId.mandatory}"
+                                                                        shortDesc="#{bindings.OrdersView1.hints.ManagerId.tooltip}"
+                                                                        id="soc25" readOnly="true">
+                                                        <f:selectItems value="#{row.bindings.ManagerId.items}"
+                                                                       id="si25"/>
+                                                        <f:validator binding="#{row.bindings.ManagerId.validator}"/>
                                                     </af:selectOneChoice>
                                                 </af:column>
                                                 <af:column sortProperty="#{bindings.OrdersView1.hints.Kurs.name}"

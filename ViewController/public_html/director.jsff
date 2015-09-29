@@ -670,6 +670,16 @@
                                                                                    id="si4"/>
                                                                     <f:validator binding="#{bindings.MainUser.validator}"/>
                                                                 </af:selectOneChoice>
+                                                                <af:inputText value="#{bindings.Prefix.inputValue}"
+                                                                              label="#{bindings.Prefix.hints.label}"
+                                                                              required="#{bindings.Prefix.hints.mandatory}"
+                                                                              columns="#{bindings.Prefix.hints.displayWidth}"
+                                                                              maximumLength="#{bindings.Prefix.hints.precision}"
+                                                                              shortDesc="#{bindings.Prefix.hints.tooltip}"
+                                                                              id="it25"
+                                                                              readOnly="#{bindings.DEditable.inputValue == '1' ? false : true}">
+                                                                    <f:validator binding="#{bindings.Prefix.validator}"/>
+                                                                </af:inputText>
                                                                 <f:facet name="footer">
                                                                     <af:panelGroupLayout id="pgl2" layout="horizontal"
                                                                                          halign="right"/>

@@ -12,6 +12,10 @@
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
   </DesignTime>
+  <Variable
+    Name="p_code"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="EnumAccountTypeView1"
     ViewObjectName="ua.divas.view.EnumAccountTypeView"
@@ -168,6 +172,43 @@ order by PlanAcc.PARENT_ID DESC]]></SQLQuery>
     EntityAttrName="Code"
     EntityUsage="PlanAcc"
     AliasName="CODE"/>
+  <ViewCriteria
+    Name="PlanAccViewByCode"
+    ViewObjectName="ua.divas.view.PlanAccView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PlanAccViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Code"
+        ViewAttribute="Code"
+        Operator="="
+        Conjunction="AND"
+        Value=":p_code"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="PlanAccView"
     ViewLink="ua.divas.view.PlanAccFk1Link"

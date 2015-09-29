@@ -139,6 +139,10 @@
     Name="KontragentsMeasurer1"
     ViewObjectName="ua.divas.view.KontragentsMeasurer"
     RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="KontragOtherView1"
+    ViewObjectName="ua.divas.view.KontragOtherView"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_ActivitiesId"
     ListVOName="TypeOfActivitiesView1"
@@ -378,6 +382,25 @@
       Name="KontragentsMeasurerNoDelete"
       FullName="ua.divas.view.KontragentsMeasurer.KontragentsMeasurerNoDelete"/>
   </ListBinding>
+  <ListBinding
+    Name="LOV_ManagerId"
+    ListVOName="KontragOtherView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ManagerId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <SQLQuery><![CDATA[SELECT Orders.ACTIVITIES_ID, 
        Orders.CURR_ID, 
        Orders.DAT, 
@@ -402,7 +425,8 @@
        Orders.ZAMER_ID,
        (select fullname from kontragents where id = ZAMER_ID and rownum = 1) ZamerName,
        (select adress from contact_details where kontrag_id = Orders.KONTRAG_ID and rownum = 1) adress,
-       UTILITY.enable_edit(Orders.ID, 'orders') enbl
+       UTILITY.enable_edit(Orders.ID, 'orders') enbl,
+       (select kontrag_id from user_settings where user_id = Orders.USER_ID) Manager_ID
 FROM  ORDERS Orders
 where deleted = 0 and
 status_id in (:name1,:name2,:name3,:name4,:name5) and
@@ -748,6 +772,32 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users_for_zamer(:u
     Expression="ENBL"
     SQLType="NUMERIC"
     IsQueriable="false"/>
+  <ViewAttribute
+    Name="ManagerId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="MANAGER_ID"
+    Expression="MANAGER_ID"
+    SQLType="VARCHAR"
+    LOVName="LOV_ManagerId">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.OrderZamerView.ManagerId_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.OrderZamerView.ManagerId_TOOLTIP"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewCriteria
     Name="OrderZamerViewCriteria"
     ViewObjectName="ua.divas.view.OrderZamerView"

@@ -68,6 +68,7 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
         Zamername,
         Adress,
         Enbl,
+        ManagerId,
         OrdersTpOplatyView,
         OrdersTpRashodyView,
         TypeOfActivitiesView1,
@@ -79,7 +80,8 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
         OrderStatusView1,
         UsersView1,
         KontragentsBuyer1,
-        KontragentsMeasurer1;
+        KontragentsMeasurer1,
+        KontragOtherView1;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -130,6 +132,7 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
     public static final int ZAMERNAME = AttributesEnum.Zamername.index();
     public static final int ADRESS = AttributesEnum.Adress.index();
     public static final int ENBL = AttributesEnum.Enbl.index();
+    public static final int MANAGERID = AttributesEnum.ManagerId.index();
     public static final int ORDERSTPOPLATYVIEW = AttributesEnum.OrdersTpOplatyView.index();
     public static final int ORDERSTPRASHODYVIEW = AttributesEnum.OrdersTpRashodyView.index();
     public static final int TYPEOFACTIVITIESVIEW1 = AttributesEnum.TypeOfActivitiesView1.index();
@@ -142,6 +145,7 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
     public static final int USERSVIEW1 = AttributesEnum.UsersView1.index();
     public static final int KONTRAGENTSBUYER1 = AttributesEnum.KontragentsBuyer1.index();
     public static final int KONTRAGENTSMEASURER1 = AttributesEnum.KontragentsMeasurer1.index();
+    public static final int KONTRAGOTHERVIEW1 = AttributesEnum.KontragOtherView1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -534,6 +538,14 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
     }
 
     /**
+     * Gets the attribute value for the calculated attribute ManagerId.
+     * @return the ManagerId
+     */
+    public String getManagerId() {
+        return (String) getAttributeInternal(MANAGERID);
+    }
+
+    /**
      * Gets the associated <code>RowIterator</code> using master-detail link OrdersTpOplatyView.
      */
     public RowIterator getOrdersTpOplatyView() {
@@ -616,6 +628,13 @@ public class OrderZamerViewRowImpl extends ViewRowImpl {
      */
     public RowSet getKontragentsMeasurer1() {
         return (RowSet) getAttributeInternal(KONTRAGENTSMEASURER1);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> KontragOtherView1.
+     */
+    public RowSet getKontragOtherView1() {
+        return (RowSet) getAttributeInternal(KONTRAGOTHERVIEW1);
     }
 }
 

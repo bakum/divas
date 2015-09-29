@@ -38,6 +38,7 @@
           <Item Value="Adress"/>
           <Item Value="StatusName"/>
           <Item Value="DatZam"/>
+          <Item Value="ManagerId"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

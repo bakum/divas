@@ -102,8 +102,18 @@
                                                            inlineStyle="#{node.DebtSupplier &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}"
                                                            rendered="#{node.DebtSupplier == '0' ? true : false}"/>
                                             <af:panelGroupLayout id="pgl2" layout="horizontal" halign="right">
-                                                <af:toolbar id="t1"
-                                                            rendered="#{node.DebtSupplier == null ? false : node.DebtSupplier == '0' ? false : node.DebtSupplier > '0' ? false : true}">
+                                                <af:menuBar id="mb1"
+                                                            rendered="#{node.DebtSupplier == null ? false : node.DebtSupplier == '0' ? false : node.DebtSupplier > '0' ? false : true}"
+                                                            styleClass="RedClass">
+                                                    <af:menu text="#{node.DebtSupplier}" id="m1" icon="/img/coins.png"
+                                                             styleClass="RedClass">
+                                                        <af:commandMenuItem text="Перенос задолженности" id="cmi2"/>
+                                                        <af:commandMenuItem text="Оформить РКО" id="cmi1">
+                                                            <af:showPopupBehavior popupId="::p2"/>
+                                                        </af:commandMenuItem>
+                                                    </af:menu>
+                                                </af:menuBar>
+                                                <af:toolbar id="t1" rendered="false">
                                                     <af:button text="#{node.DebtSupplier}" id="b1" icon="/img/coins.png"
                                                                inlineStyle="#{node.DebtSupplier &lt; '0' ? 'font-weight:bold; color:Red' : 'font-weight:bold;'}"
                                                                shortDesc="Оформить РКО">
@@ -249,7 +259,7 @@
                                                           model="#{bindings.VwKontragActiveQuery.queryModel}"
                                                           queryListener="#{bindings.VwKontragActiveQuery.processQuery}"
                                                           queryOperationListener="#{bindings.VwKontragActiveQuery.processQueryOperation}"
-                                                          resultComponentId="::pc1:tt1"/>
+                                                          resultComponentId="::tt1"/>
                                             </af:panelHeader>
                                         </af:panelGroupLayout>
                                     </af:showDetailItem>

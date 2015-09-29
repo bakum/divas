@@ -52,6 +52,7 @@ public class DivisionsViewRowImpl extends ViewRowImpl {
         Predefined,
         DEditable,
         MainUser,
+        Prefix,
         TotalActiveStart,
         TotalActiveOborot,
         DivisionsView,
@@ -102,6 +103,7 @@ public class DivisionsViewRowImpl extends ViewRowImpl {
     public static final int PREDEFINED = AttributesEnum.Predefined.index();
     public static final int DEDITABLE = AttributesEnum.DEditable.index();
     public static final int MAINUSER = AttributesEnum.MainUser.index();
+    public static final int PREFIX = AttributesEnum.Prefix.index();
     public static final int TOTALACTIVESTART = AttributesEnum.TotalActiveStart.index();
     public static final int TOTALACTIVEOBOROT = AttributesEnum.TotalActiveOborot.index();
     public static final int DIVISIONSVIEW = AttributesEnum.DivisionsView.index();
@@ -291,6 +293,22 @@ public class DivisionsViewRowImpl extends ViewRowImpl {
      */
     public Number getTotalActiveOborot() {
         return (Number) getAttributeInternal(TOTALACTIVEOBOROT);
+    }
+
+    /**
+     * Gets the attribute value for PREFIX using the alias name Prefix.
+     * @return the PREFIX
+     */
+    public String getPrefix() {
+        return (String) getAttributeInternal(PREFIX);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for PREFIX using the alias name Prefix.
+     * @param value value to set the PREFIX
+     */
+    public void setPrefix(String value) {
+        setAttributeInternal(PREFIX, value);
     }
 
     /**

@@ -75,6 +75,7 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         SummPlan,
         Objname,
         Enbl,
+        ManagerId,
         TotalSumUslugi,
         CountUslug,
         TotalSumOplaty,
@@ -160,6 +161,7 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     public static final int SUMMPLAN = AttributesEnum.SummPlan.index();
     public static final int OBJNAME = AttributesEnum.Objname.index();
     public static final int ENBL = AttributesEnum.Enbl.index();
+    public static final int MANAGERID = AttributesEnum.ManagerId.index();
     public static final int TOTALSUMUSLUGI = AttributesEnum.TotalSumUslugi.index();
     public static final int COUNTUSLUG = AttributesEnum.CountUslug.index();
     public static final int TOTALSUMOPLATY = AttributesEnum.TotalSumOplaty.index();
@@ -717,6 +719,14 @@ public class OrdersViewRowImpl extends ViewRowImpl {
      */
     public BigDecimal getEnbl() {
         return (BigDecimal) getAttributeInternal(ENBL);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute ManagerId.
+     * @return the ManagerId
+     */
+    public String getManagerId() {
+        return (String) getAttributeInternal(MANAGERID);
     }
 
     /**

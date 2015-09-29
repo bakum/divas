@@ -293,10 +293,24 @@
                                                                   pattern="#{bindings.OrderZamerView1.hints.OEditable.format}"/>
                                             </af:inputText>
                                         </af:column>
+                                        <af:column headerText="#{bindings.OrderZamerView1.hints.ManagerId.label}"
+                                                   id="c20"
+                                                   inlineStyle="#{row.bindings.OEditable.inputValue == 1 ? 'background-color:#DCF0AB;' : row.StatusName == 'Новый' ? 'background-color:#ffbc3c;' : row.StatusName == 'Контроль' ? 'background-color:Red;' : ''}"
+                                                   width="120">
+                                            <af:selectOneChoice value="#{row.bindings.ManagerId.inputValue}"
+                                                                label="#{row.bindings.ManagerId.label}"
+                                                                required="#{bindings.OrderZamerView1.hints.ManagerId.mandatory}"
+                                                                shortDesc="#{bindings.OrderZamerView1.hints.ManagerId.tooltip}"
+                                                                id="soc8">
+                                                <f:selectItems value="#{row.bindings.ManagerId.items}" id="si8"/>
+                                                <f:validator binding="#{row.bindings.ManagerId.validator}"/>
+                                            </af:selectOneChoice>
+                                        </af:column>
                                         <af:column sortProperty="#{bindings.OrderZamerView1.hints.UserId.name}"
                                                    sortable="true"
                                                    headerText="#{bindings.OrderZamerView1.hints.UserId.label}" id="c14"
-                                                   inlineStyle="#{row.bindings.OEditable.inputValue == 1 ? 'background-color:#DCF0AB;' : row.StatusName == 'Новый' ? 'background-color:#ffbc3c;' : row.StatusName == 'Контроль' ? 'background-color:Red;' : ''}">
+                                                   inlineStyle="#{row.bindings.OEditable.inputValue == 1 ? 'background-color:#DCF0AB;' : row.StatusName == 'Новый' ? 'background-color:#ffbc3c;' : row.StatusName == 'Контроль' ? 'background-color:Red;' : ''}"
+                                                   rendered="false">
                                             <af:selectOneChoice value="#{row.bindings.UserId.inputValue}"
                                                                 label="#{row.bindings.UserId.label}"
                                                                 required="#{bindings.OrderZamerView1.hints.UserId.mandatory}"

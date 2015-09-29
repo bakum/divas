@@ -234,5 +234,10 @@
     </tree>
     <action IterBinding="DivisionsView1Iterator" id="Delete1" InstanceName="AppModuleDataControl.DivisionsView1"
             DataControl="AppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="DivisionsView1Iterator" id="Prefix">
+      <AttrNames>
+        <Item Value="Prefix"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>
