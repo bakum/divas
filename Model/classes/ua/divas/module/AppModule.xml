@@ -2502,5 +2502,21 @@
         Name="p_div"
         Type="java.lang.String"/>
     </Method>
+    <Method
+      Name="transferOfDebt"
+      MethodName="transferOfDebt">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="source"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="dest"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="Summa"
+        Type="java.math.BigDecimal"/>
+    </Method>
   </ClientInterface>
 </AppModule>

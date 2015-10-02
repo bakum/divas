@@ -3477,6 +3477,7 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
             pl = (String) row.getAttribute("Id");
         }
         
+        r3.setAttribute("StartOstId", r2.getAttribute("Id").toString());
         r3.setAttribute("PlanAccDebId", pl);
         r3.setAttribute("Subconto1Deb", source);
         r3.setAttribute("PlanAccKredId", pl);

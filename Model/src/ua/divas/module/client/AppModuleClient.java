@@ -90,5 +90,12 @@ public class AppModuleClient extends ApplicationModuleImpl implements AppModule 
                                                   ri, selectedNodeKey });
         return;
     }
+
+    public void transferOfDebt(String source, String dest, BigDecimal Summa) {
+        Object _ret = this.riInvokeExportedMethod(this, "transferOfDebt", new String[] {
+                                                  "java.lang.String", "java.lang.String", "java.math.BigDecimal"
+        }, new Object[] { source, dest, Summa });
+        return;
+    }
 }
 

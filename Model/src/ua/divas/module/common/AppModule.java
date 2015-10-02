@@ -26,5 +26,7 @@ public interface AppModule extends ApplicationModule {
     void addRkoOrder(String kassaId, String kontragId, String OrderId, BigDecimal Summa);
 
     void addProfitDistrib(Date dat, BigDecimal Summa, String p_div);
+
+    void transferOfDebt(String source, String dest, BigDecimal Summa);
 }
 

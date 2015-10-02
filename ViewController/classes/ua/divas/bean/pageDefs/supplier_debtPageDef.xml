@@ -8,6 +8,9 @@
       <variable Type="java.math.BigDecimal" Name="addPkoFromZamer_Summa" IsQueriable="false"/>
       <variable Type="java.lang.String" Name="addRko_kassaId" IsQueriable="false"/>
       <variable Type="java.math.BigDecimal" Name="addRko_Summa" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="transferOfDebt_source" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="transferOfDebt_dest" IsQueriable="false"/>
+      <variable Type="java.math.BigDecimal" Name="transferOfDebt_Summa" IsQueriable="false"/>
     </variableIterator>
     <iterator Binds="VwKontragAllItems1" RangeSize="-1" DataControl="AppModuleDataControl"
               id="VwKontragAllItems1Iterator"/>
@@ -147,5 +150,44 @@
       <NamedData NDName="Summa" NDType="java.math.BigDecimal" NDValue="${bindings.addPkoFromZamer_Summa}"/>
     </methodAction>
     <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <methodAction id="transferOfDebt" RequiresUpdateModel="true" Action="invokeMethod" MethodName="transferOfDebt"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider">
+      <NamedData NDName="source" NDType="java.lang.String" NDValue="${bindings.transferOfDebt_source}"/>
+      <NamedData NDName="dest" NDType="java.lang.String" NDValue="${bindings.transferOfDebt_dest}"/>
+      <NamedData NDName="Summa" NDType="java.math.BigDecimal" NDValue="${bindings.transferOfDebt_Summa}"/>
+    </methodAction>
+    <attributeValues IterBinding="variables" id="Summa2">
+      <AttrNames>
+        <Item Value="transferOfDebt_Summa"/>
+      </AttrNames>
+    </attributeValues>
+    <list StaticList="false" IterBinding="variables" ListIter="VwKontragAllItems1Iterator" id="transferOfDebt_source1">
+      <AttrNames>
+        <Item Value="transferOfDebt_source"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="Id"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Fullname"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list StaticList="false" IterBinding="variables" ListIter="VwKontragAllItems1Iterator" id="transferOfDebt_dest1">
+      <AttrNames>
+        <Item Value="transferOfDebt_dest"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="Id"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Fullname"/>
+      </ListDisplayAttrNames>
+    </list>
+    <attributeValues IterBinding="VwKontragAllItems1Iterator" id="Fullname">
+      <AttrNames>
+        <Item Value="Fullname"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

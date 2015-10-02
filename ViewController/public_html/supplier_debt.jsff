@@ -107,7 +107,9 @@
                                                             styleClass="RedClass">
                                                     <af:menu text="#{node.DebtSupplier}" id="m1" icon="/img/coins.png"
                                                              styleClass="RedClass">
-                                                        <af:commandMenuItem text="Перенос задолженности" id="cmi2"/>
+                                                        <af:commandMenuItem text="Перенос задолженности" id="cmi2">
+                                                            <af:showPopupBehavior popupId="::p5"/>
+                                                        </af:commandMenuItem>
                                                         <af:commandMenuItem text="Оформить РКО" id="cmi1">
                                                             <af:showPopupBehavior popupId="::p2"/>
                                                         </af:commandMenuItem>
@@ -243,6 +245,44 @@
                                                            disabled="#{!bindings.addPkoFromZamer.enabled}" id="b9"
                                                            rendered="false"/>
                                             </af:panelFormLayout>
+                                        </af:dialog>
+                                    </af:popup>
+                                    <af:popup childCreation="deferred" autoCancel="disabled" id="p5"
+                                              contentDelivery="lazyUncached" resetEditableValues="whenCanceled"
+                                              popupFetchListener="#{supplier.onPopupTransfer}">
+                                        <af:dialog id="d5"
+                                                   title="Перенос задолженности от #{bindings.Fullname.inputValue}"
+                                                   dialogListener="#{supplier.onDialogTransfer}">
+                                            <af:panelFormLayout id="pfl5">
+                                                <af:inputText value="#{bindings.Fullname.inputValue}"
+                                                              id="ot13" label="От кого:" readOnly="true"
+                                                              required="true"/>
+                                                <af:selectOneChoice label="От кого:" id="soc6"
+                                                                    value="#{bindings.transferOfDebt_source1.inputValue}"
+                                                                    rendered="false">
+                                                    <f:selectItems value="#{bindings.transferOfDebt_source1.items}" id="si6"/>
+                                                </af:selectOneChoice>
+                                                <af:selectOneChoice label="Кому:" id="soc5"
+                                                                    value="#{bindings.transferOfDebt_dest1.inputValue}"
+                                                                    required="true">
+                                                    <f:selectItems value="#{bindings.transferOfDebt_dest1.items}" id="si5"/>
+                                                </af:selectOneChoice>
+                                                <af:inputNumberSpinbox value="#{bindings.Summa2.inputValue}"
+                                                                       label="Cумма для оплаты"
+                                                                       columns="#{bindings.Summa2.hints.displayWidth}"
+                                                                       shortDesc="#{bindings.Summa2.hints.tooltip}"
+                                                                       id="it5" required="true"
+                                                                       validator="#{supplier.onValidateSumm}">
+                                                    <f:validator binding="#{bindings.Summa2.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.Summa2.format}"/>
+                                                </af:inputNumberSpinbox>
+                                                <af:button actionListener="#{bindings.transferOfDebt.execute}"
+                                                           text="transferOfDebt"
+                                                           disabled="#{!bindings.transferOfDebt.enabled}" id="b11"
+                                                           visible="false"/>
+                                            </af:panelFormLayout>
+                                            <f:facet name="buttonBar"/>
                                         </af:dialog>
                                     </af:popup>
                                 </af:panelBox>

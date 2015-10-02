@@ -31,11 +31,13 @@ import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichTreeTable;
 
+import oracle.adf.view.rich.component.rich.input.RichSelectOneChoice;
 import oracle.adf.view.rich.component.rich.nav.RichButton;
 import oracle.adf.view.rich.context.AdfFacesContext;
 import oracle.adf.view.rich.event.DialogEvent;
 import oracle.adf.view.rich.event.PopupFetchEvent;
 
+import oracle.binding.AttributeBinding;
 import oracle.binding.BindingContainer;
 
 import oracle.binding.OperationBinding;
@@ -177,8 +179,10 @@ public class SupplierBean {
         ExpressionFactory elFactory = app.getExpressionFactory();
         ELContext elContext = ctx.getELContext();
         ValueExpression valueExp = elFactory.createValueExpression(elContext, expression, Object.class);
-        Class bindClass = valueExp.getType(elContext);
-        valueExp.setValue(elContext, newValue);
+        //Class bindClass = valueExp.getType(elContext);
+        //if (bindClass.isPrimitive() || bindClass.isInstance(newValue)) {
+            valueExp.setValue(elContext, newValue);
+        //}
     }
 
     public void onPopupPko(PopupFetchEvent popupFetchEvent) {
@@ -207,6 +211,23 @@ public class SupplierBean {
             OperationBinding oper = (OperationBinding) binding.getOperationBinding("addPkoFromZamer");
             if (oper != null) {
                 oper.getParamsMap().put("kontragId", currRow.getAttribute("Id").toString());
+                oper.execute();
+
+                refresh();
+            }
+        }
+    }
+
+    public void onDialogTransfer(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().name().equals("ok")) {
+            DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+            DCIteratorBinding it = bd.findIteratorBinding("VwKontragAllItems1Iterator");
+            Row currRow = it.getCurrentRow();
+
+            BindingContainer binding = BindingContext.getCurrent().getCurrentBindingsEntry();
+            OperationBinding oper = (OperationBinding) binding.getOperationBinding("transferOfDebt");
+            if (oper != null) {
+                oper.getParamsMap().put("source", currRow.getAttribute("Id").toString());
                 oper.execute();
 
                 refresh();
@@ -254,6 +275,34 @@ public class SupplierBean {
         }
         // resetBindingValue("#{bindings.addRko_kassaId1.inputValue}", null);
         resetBindingValue("#{bindings.Summa1.inputValue}", lbn.bigDecimalValue().abs());
+    }
+
+    public void onPopupTransfer(PopupFetchEvent popupFetchEvent) {
+        //DCBindingContainer bd = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        /* if (popupFetchEvent.getLaunchSourceClientId().contains("b6")) {
+            DCIteratorBinding it = bd.findIteratorBinding("VwSupplierMoves1Iterator");
+            Row currRow = it.getCurrentRow();
+            lbn = (oracle.jbo.domain.Number) currRow.getAttribute("BallForOrder");
+        } else { */
+        //DCIteratorBinding it = bd.findIteratorBinding("VwKontragAllItems1Iterator");
+        //Row currRow = it.getCurrentRow();
+        //String lbn = currRow.getAttribute("Id").toString();
+        //}
+        // resetBindingValue("#{bindings.addRko_kassaId1.inputValue}", null);
+        resetBindingValue("#{bindings.Summa2.inputValue}", null);
+        //RichSelectOneChoice soc = getSource();
+        resetBindingValue("#{bindings.transferOfDebt_dest1.inputValue}", null);
+        //AttributeBinding attr = (AttributeBinding)getBindings().getControlBinding("transferOfDebt_source1");
+        //if (soc != null && soc.getValue() == null) {
+        /* try {
+            soc.setValue(lbn);
+        } catch (Exception e) {
+            // TODO: Add catch code
+            //e.printStackTrace();
+        } */
+        //resetBindingValue("#{bindings.transferOfDebt_source1.inputValue}", lbn);
+        //}
+
     }
 
     public void onDialogRko(DialogEvent dialogEvent) {
