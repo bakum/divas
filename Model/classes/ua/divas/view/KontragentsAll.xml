@@ -37,6 +37,10 @@
     Name="KontragentsAllGroup1"
     ViewObjectName="ua.divas.view.ro.KontragentsAllGroup"
     RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="UsersView1"
+    ViewObjectName="ua.divas.view.UsersView"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_ParentId"
     ListVOName="KontragentsAllGroup1"
@@ -53,6 +57,25 @@
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="Fullname"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_UserId"
+    ListVOName="UsersView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="UserId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Login"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -189,8 +212,15 @@ FROM  KONTRAGENTS Kontragents]]></SQLQuery>
     PrecisionRule="true"
     EntityAttrName="UserId"
     EntityUsage="Kontragents"
-    AliasName="USER_ID">
+    AliasName="USER_ID"
+    LOVName="LOV_UserId">
     <TransientExpression><![CDATA[viewObject.getSessionUserId()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="Photo"

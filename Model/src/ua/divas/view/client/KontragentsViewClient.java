@@ -20,6 +20,13 @@ public class KontragentsViewClient extends ViewUsageImpl implements KontragentsV
     public KontragentsViewClient() {
     }
 
+    public String createByer(String p_name, String contact, String phone, String mail) {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "createByer", new String[] {
+                                                                         "java.lang.String", "java.lang.String",
+                                                                         "java.lang.String", "java.lang.String"
+        }, new Object[] { p_name, contact, phone, mail });
+        return (String) _ret;
+    }
 
     public void createKontrag(String p_name, int isSupp, int isMeasr, int isByer) {
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this, "createKontrag", new String[] {

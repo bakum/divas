@@ -84,7 +84,7 @@
       <property
          name="fromOutcome">ok</property>
       <property
-         name="sdm:polyPoints">R46,279.0,106.671875,433.0,52.0625,L50</property>
+         name="sdm:polyPoints">R42,279.0,103.171875,433.0,52.0625,L50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -94,8 +94,29 @@
       <property
          name="fromOutcome">cancel</property>
       <property
-         name="sdm:polyPoints">R54,279.0,113.671875,434.0,195.0625,L50</property>
+         name="sdm:polyPoints">R50,281.7339,110.171875,434.0,195.0625,L50</property>
    </ControlFlowCase>
+   <TaskFlowCall
+      id="TaskFlowCall15">
+      <property
+         name="taskFlowId">newKontrag</property>
+      <property
+         name="activityId">newKontrag</property>
+      <property
+         name="documentReference">/WEB-INF/newKontrag.xml</property>
+      <property
+         name="runAsDialog">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>newKontrag&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="trainStop">false</property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">327.14062</property>
+      <property
+         name="x">136.0</property>
+   </TaskFlowCall>
    <TaskFlowCall
       id="TaskFlowCall12">
       <property
@@ -111,18 +132,28 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">277.57812</property>
+         name="y">333.625</property>
       <property
-         name="x">246.00684</property>
+         name="x">391.00684</property>
    </TaskFlowCall>
    <ControlFlowCase
       islink="true"
-      id="ControlFlowCase14"
+      id="ControlFlowCase1416"
       from="View3"
       to="TaskFlowCall12">
       <property
          name="fromOutcome">addKontrag</property>
       <property
-         name="sdm:polyPoints">B50,238.0,164.17188,246.00684,223.59375,T50</property>
+         name="sdm:polyPoints">B56,241.5,164.17188,391.00684,279.64062,T50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase22"
+      from="View3"
+      to="TaskFlowCall15">
+      <property
+         name="fromOutcome">newKontrag</property>
+      <property
+         name="sdm:polyPoints">B44,234.5,164.17188,136.0,273.15625,T50</property>
    </ControlFlowCase>
 </SDM>

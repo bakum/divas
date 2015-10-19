@@ -352,16 +352,24 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="KONTRAGENTS">
+    TableName="KONTRAGENTS"
+    IsNotNull="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Permission
+      target="ua.divas.model.Kontragents.UserId"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
     <Properties>
       <SchemaBasedProperties>
-        <LABEL
-          ResId="ua.divas.model.Kontragents.UserId_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.model.Kontragents.UserId_TOOLTIP"/>
+        <LABEL
+          ResId="ua.divas.model.Kontragents.UserId_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -521,6 +529,18 @@
     </DesignTime>
     <AttrArray Name="Attributes">
       <Item Value="ua.divas.model.Kontragents.UrFiz"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="KontragentsUserIdCheck">
+    <DesignTime>
+      <Attr Name="_isNotNull" Value="true"/>
+      <Attr Name="_DBObjectName" Value="KONTRAGENTS_USER_ID_CHECK"/>
+      <Attr Name="_checkCondition" Value='"USER_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="ua.divas.model.Kontragents.UserId"/>
     </AttrArray>
   </Key>
   <Key

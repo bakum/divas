@@ -88,5 +88,7 @@
     </attributeValues>
     <action IterBinding="OtherZatratyTabPartZatratyView2Iterator" id="Delete" RequiresUpdateModel="false"
             Action="removeCurrentRow"/>
+    <listOfValues Uses="LOV_Zatrname" StaticList="false" IterBinding="OtherZatratyTabPartZatratyView2Iterator"
+                  id="Zatrname"/>
   </bindings>
 </pageDefinition>

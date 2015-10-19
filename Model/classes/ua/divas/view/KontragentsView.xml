@@ -1314,6 +1314,25 @@ order by Kontragents.FULLNAME]]></SQLQuery>
         Name="isByer"
         Type="int"/>
     </Method>
+    <Method
+      Name="createByer"
+      MethodName="createByer">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="p_name"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="contact"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="phone"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="mail"
+        Type="java.lang.String"/>
+    </Method>
   </ClientInterface>
   <ResourceBundle>
     <PropertiesBundle

@@ -5,8 +5,8 @@
    <task-flow-descriptor path="WEB-INF/addOrder.xml" id="addOrder" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="true" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/EditRko.xml" id="EditRko" type="task-flow-definition" uses-page-fragments="false" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/plan_acc.xml" id="plan_acc" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
-   <task-flow-descriptor path="WEB-INF/orders.xml" id="orders" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/kassa-config.xml" id="kassa-config" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/orders.xml" id="orders" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/users.xml" id="users" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/calendar-config.xml" id="calendar-config" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/addKontrag.xml" id="addKontrag" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="true" critical="false" page-type="facelets">
@@ -19,8 +19,8 @@
    <task-flow-descriptor path="WEB-INF/directories.xml" id="direct" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/newProfit.xml" id="newProfit" type="task-flow-definition" uses-page-fragments="false" library-internal="false" train="true" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/TaskFlowTemplate.xml" id="TaskFlowTemplate" type="task-flow-template" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="unspecified"/>
-   <task-flow-descriptor path="WEB-INF/editProfit.xml" id="editProfit" type="task-flow-definition" uses-page-fragments="false" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/EditPko.xml" id="EditPko" type="task-flow-definition" uses-page-fragments="false" library-internal="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/editProfit.xml" id="editProfit" type="task-flow-definition" uses-page-fragments="false" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/ballans-config.xml" id="ballans-config" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/newStart.xml" id="newStart" type="task-flow-definition" uses-page-fragments="false" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/sales-config.xml" id="sales-config" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
@@ -42,5 +42,6 @@
    <task-flow-descriptor path="WEB-INF/program-config.xml" id="program-config" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/prorab-config.xml" id="prorab-config" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/newPko.xml" id="newPko" type="task-flow-definition" uses-page-fragments="false" library-internal="false" train="true" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/newKontrag.xml" id="newKontrag" type="task-flow-definition" uses-page-fragments="false" library-internal="false" train="false" critical="false" page-type="facelets"/>
    <task-flow-descriptor path="WEB-INF/call_center.xml" id="call_center" type="task-flow-definition" uses-page-fragments="true" library-internal="false" train="false" critical="false" page-type="facelets"/>
 </task-flow-registry>

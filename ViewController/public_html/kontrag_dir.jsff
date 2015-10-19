@@ -175,6 +175,14 @@
                                                                   shortDesc="#{bindings.UrFiz.hints.tooltip}"
                                                                   id="sbc5"
                                                                   rendered="#{bindings.IsGroup.inputValue == '0' ? true : false}"/>
+                                        <af:selectOneChoice value="#{bindings.UserId.inputValue}"
+                                                            label="#{bindings.UserId.label}"
+                                                            required="#{bindings.UserId.hints.mandatory}"
+                                                            shortDesc="#{bindings.UserId.hints.tooltip}" id="soc6"
+                                                            rendered="#{securityContext.userInRole['administrator']}">
+                                            <f:selectItems value="#{bindings.UserId.items}" id="si6"/>
+                                            <f:validator binding="#{bindings.UserId.validator}"/>
+                                        </af:selectOneChoice>
                                     </af:panelFormLayout>
                                     <f:facet name="buttonBar"/>
                                 </af:dialog>

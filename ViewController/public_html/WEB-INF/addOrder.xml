@@ -43,6 +43,22 @@
       </return-value>
       <after-listener>#{new_order.afterKontrListener}</after-listener>
     </task-flow-call>
+    <task-flow-call id="newKontrag">
+      <task-flow-reference>
+        <document>/WEB-INF/newKontrag.xml</document>
+        <id>newKontrag</id>
+      </task-flow-reference>
+      <return-value id="__10">
+        <name>KontragId</name>
+        <value>#{pageFlowScope.KontragId}</value>
+      </return-value>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+        <dialog-return-value>#{pageFlowScope.KontragId}</dialog-return-value>
+      </run-as-dialog>
+    </task-flow-call>
     <train/>
     <control-flow-rule id="__1">
       <from-activity-id>CreateInsert</from-activity-id>
@@ -64,6 +80,10 @@
       <control-flow-case id="__7">
         <from-outcome>addKontrag</from-outcome>
         <to-activity-id>addKontrag</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__9">
+        <from-outcome>newKontrag</from-outcome>
+        <to-activity-id>newKontrag</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>

@@ -28,5 +28,7 @@ public interface KontragentsView extends ViewObject {
     String retrieveOtherParentId();
 
     void createKontrag(String p_name, int isSupp, int isMeasr, int isByer);
+
+    String createByer(String p_name, String contact, String phone, String mail);
 }
 

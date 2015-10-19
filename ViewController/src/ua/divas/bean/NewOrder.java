@@ -2,9 +2,15 @@ package ua.divas.bean;
 
 import java.util.Map;
 
+import javax.el.ELContext;
+import javax.el.ExpressionFactory;
+import javax.el.ValueExpression;
+
+import javax.faces.application.Application;
 import javax.faces.context.FacesContext;
 
 import oracle.adf.model.BindingContext;
+import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCDataControl;
 import oracle.adf.share.ADFContext;
 import oracle.adf.view.rich.component.rich.input.RichInputListOfValues;
@@ -47,6 +53,16 @@ public class NewOrder {
 
     public NewOrder() {
         super();
+    }
+    
+    public void resetBindingValue(String expression, Object newValue) {
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        Application app = ctx.getApplication();
+        ExpressionFactory elFactory = app.getExpressionFactory();
+        ELContext elContext = ctx.getELContext();
+        ValueExpression valueExp = elFactory.createValueExpression(elContext, expression, Object.class);
+        Class bindClass = valueExp.getType(elContext);
+        valueExp.setValue(elContext, newValue);
     }
     
     public void onLaunchLov(LaunchPopupEvent launchPopupEvent) {
@@ -94,7 +110,7 @@ public class NewOrder {
         } */
     }
 
-    /* public void onStKontragId(ClientEvent clientEvent) {
+     public void onStKontragId(ClientEvent clientEvent) {
         ADFContext adfCtx = ADFContext.getCurrent();
         Map pageFlowScope = adfCtx.getPageFlowScope();
         Object val = pageFlowScope.get("KontragId"); //Name = PageFlowScope value name
@@ -104,8 +120,25 @@ public class NewOrder {
             //getKontragId().setValue(val.toString());
             //AdfFacesContext.getCurrentInstance().addPartialTarget(getKontragName());
         }
-    } 
+    }
     public void onReturn(ReturnEvent re) {
-        System.out.println("From return listener: "+re.getReturnValue());
-    }*/
+        //System.out.println("From return listener: "+re.getReturnValue());
+        ADFContext adfCtx = ADFContext.getCurrent();
+        Map pageFlowScope = adfCtx.getPageFlowScope();
+        Object val = pageFlowScope.get("KontragId"); //Name = PageFlowScope value name
+
+        if (val != null) { //Avoid null pointer exception
+            System.out.println("KontragId from server: "+val.toString());
+            
+            DCBindingContainer bindings = 
+            ((DCBindingContainer)BindingContext.getCurrent().getCurrentBindingsEntry());
+                AttributeBinding attrBinding = 
+                    (AttributeBinding) bindings.getControlBinding("KontragId1");
+            attrBinding.setInputValue(val);
+            //resetBindingValue("#{bindings.KontragId.inputValue}",val.toString());
+            //getKontragId().setValue(val.toString());
+            AdfFacesContext.getCurrentInstance().addPartialTarget(getKontragId());
+            AdfFacesContext.getCurrentInstance().addPartialTarget(getKontragName());
+        }
+    }
 }

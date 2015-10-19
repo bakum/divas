@@ -34,6 +34,11 @@ public class KontragentsViewImpl extends DivasView implements KontragentsView {
         String u_id = getSessionUserId();
         callStoredProcedure("UTILITY.createKontrag(?,?,?,?,?)", new Object[] {p_name,u_id,isSupp,isMeasr,isByer});
     }
+    
+    public String createByer(String p_name, String contact, String phone, String mail) {
+        String u_id = getSessionUserId();
+        return (String)callStoredFunction(VARCHAR2,"UTILITY.createByer(?,?,?,?,?)", new Object[] {p_name,u_id,contact,phone,mail});
+    }
 
     public String retrieveCustomersFirstParentId() {
         String rv = getCustomerParentId();

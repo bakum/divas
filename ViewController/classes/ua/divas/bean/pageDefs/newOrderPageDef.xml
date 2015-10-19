@@ -41,5 +41,10 @@
         <Item Value="SummPlan"/>
       </AttrNames>
     </attributeValues>
+    <attributeValues IterBinding="OrdersView1Iterator" id="KontragId1">
+      <AttrNames>
+        <Item Value="KontragId"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

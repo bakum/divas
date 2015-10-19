@@ -63,6 +63,7 @@
           <Item Value="TotalSumm"/>
           <Item Value="DatZam"/>
           <Item Value="ManagerId"/>
+          <Item Value="DivisionDest"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

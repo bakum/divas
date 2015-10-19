@@ -60,14 +60,16 @@
                                     </af:selectOneChoice>
                                 </af:panelGroupLayout>
                             </af:panelLabelAndMessage>
+                            <af:inputText label="#{bindings.KontragId1.hints.label}" id="it5"
+                                          value="#{bindings.KontragId1.inputValue}" visible="false"/>
                             <af:inputListOfValues id="kontragIdId"
                                                   popupTitle="Search and Select: #{bindings.KontragId.hints.label}"
                                                   value="#{bindings.KontragId.inputValue}"
                                                   label="#{bindings.KontragId.hints.label}"
                                                   model="#{bindings.KontragId.listOfValuesModel}"
                                                   columns="#{bindings.KontragId.hints.displayWidth}"
-                                                  shortDesc="#{bindings.KontragId.hints.tooltip}" visible="false"
-                                                  binding="#{new_order.kontragId}">
+                                                  shortDesc="#{bindings.KontragId.hints.tooltip}"
+                                                  binding="#{new_order.kontragId}" visible="false">
                                 <f:validator binding="#{bindings.KontragId.validator}"/>
                             </af:inputListOfValues>
                             <af:panelLabelAndMessage label="#{bindings.Kontragname.hints.label}" id="plam2">
@@ -86,7 +88,8 @@
                                     </af:inputListOfValues>
                                     <af:spacer width="10" height="10" id="s3"/>
                                     <af:button text="Новый клиент" id="b3" icon="/img/Symbol_Add.png"
-                                               action="addKontrag"/>
+                                               action="newKontrag" useWindow="true" windowHeight="300"
+                                               windowWidth="300" returnListener="#{new_order.onReturn}"/>
                                 </af:panelGroupLayout>
                                 <af:outputFormatted value="1. Выберите существующего клиента или создайте нового" id="of2"
                                                     inlineStyle="color:Red;"/>

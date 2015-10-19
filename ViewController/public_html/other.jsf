@@ -206,8 +206,10 @@
                                                                   required="#{bindings.OtherZatratyTabPartZatratyView2.hints.Zatrname.mandatory}"
                                                                   columns="#{bindings.OtherZatratyTabPartZatratyView2.hints.Zatrname.displayWidth}"
                                                                   shortDesc="#{bindings.OtherZatratyTabPartZatratyView2.hints.Zatrname.tooltip}"
-                                                                  autoSubmit="true" createPopupId="::pCreateZatraty">
+                                                                  autoSubmit="true" createPopupId="::pCreateZatraty"
+                                                                  launchPopupListener="#{other_jsf.onLaunchLov}">
                                                 <f:validator binding="#{row.bindings.Zatrname.validator}"/>
+                                                <af:autoSuggestBehavior suggestedItems="#{bindings.Zatrname.suggestedItems}"/>
                                             </af:inputListOfValues>
                                         </af:column>
                                         <af:column sortProperty="#{bindings.OtherZatratyTabPartZatratyView2.hints.Summa.name}"

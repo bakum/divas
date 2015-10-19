@@ -203,5 +203,7 @@
         <Item Value="Photo"/>
       </AttrNames>
     </attributeValues>
+    <list IterBinding="KontragentsAll1Iterator" StaticList="false" Uses="LOV_UserId" id="UserId" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
   </bindings>
 </pageDefinition>

@@ -8,8 +8,10 @@ import java.sql.Types;
 import oracle.adf.share.ADFContext;
 import oracle.adf.share.security.SecurityContext;
 
+import oracle.jbo.CriteriaClauses;
 import oracle.jbo.JboException;
 import oracle.jbo.Row;
+import oracle.jbo.ViewCriteria;
 import oracle.jbo.server.ViewObjectImpl;
 
 public class DivasView extends ViewObjectImpl {
@@ -18,6 +20,13 @@ public class DivasView extends ViewObjectImpl {
     }
 
      @Override
+    public CriteriaClauses buildViewCriteriaClauses(ViewCriteria viewCriteria) {
+        // TODO Implement this method
+        viewCriteria.setUpperColumns(true);
+        return super.buildViewCriteriaClauses(viewCriteria);
+    } 
+
+    @Override
     public void insertRow(Row row) {
         super.insertRow(row);
         row.removeAndRetain();

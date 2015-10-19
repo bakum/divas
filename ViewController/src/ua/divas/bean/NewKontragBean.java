@@ -2,6 +2,7 @@ package ua.divas.bean;
 
 import java.util.Map;
 
+import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
 import oracle.adf.model.BindingContext;
@@ -62,4 +63,5 @@ public class NewKontragBean {
     public RichInputText getKontragId() {
         return kontragId;
     }
+
 }

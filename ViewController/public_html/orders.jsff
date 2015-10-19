@@ -199,7 +199,7 @@
                                                     </af:selectOneChoice>
                                                 </af:column>
                                                 <af:column headerText="#{bindings.OrdersView1.hints.TotalSumOplaty.label}"
-                                                           id="c25" align="right">
+                                                           id="c25" align="right" width="70">
                                                     <af:inputText value="#{row.bindings.TotalSumOplaty.inputValue}"
                                                                   label="#{bindings.OrdersView1.hints.TotalSumOplaty.label}"
                                                                   required="#{bindings.OrdersView1.hints.TotalSumOplaty.mandatory}"
@@ -220,7 +220,7 @@
                                                 <af:column sortProperty="#{bindings.OrdersView1.hints.TotalSumUslugi.name}"
                                                            sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.TotalSumUslugi.label}"
-                                                           id="c18" visible="false" align="right">
+                                                           id="c18" visible="false" align="right" width="70">
                                                     <af:inputText value="#{row.bindings.TotalSumUslugi.inputValue}"
                                                                   label="#{bindings.OrdersView1.hints.TotalSumUslugi.label}"
                                                                   required="#{bindings.OrdersView1.hints.TotalSumUslugi.mandatory}"
@@ -235,7 +235,7 @@
                                                     </af:inputText>
                                                 </af:column>
                                                 <af:column headerText="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.label}"
-                                                           id="c65" visible="false" align="right">
+                                                           id="c65" visible="false" align="right" width="70">
                                                     <af:inputText value="#{row.bindings.TotalSummUslugiAdd.inputValue}"
                                                                   label="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.label}"
                                                                   required="#{bindings.OrdersView1.hints.TotalSummUslugiAdd.mandatory}"
@@ -250,7 +250,7 @@
                                                     </af:inputText>
                                                 </af:column>
                                                 <af:column headerText="#{bindings.OrdersView1.hints.TotalSumm.label}"
-                                                           id="c73" align="right">
+                                                           id="c73" align="right" width="80">
                                                     <af:inputText value="#{row.bindings.TotalSumm.inputValue}"
                                                                   label="#{bindings.OrdersView1.hints.TotalSumm.label}"
                                                                   required="#{bindings.OrdersView1.hints.TotalSumm.mandatory}"
@@ -281,10 +281,24 @@
                                                         <f:validator binding="#{row.bindings.KassaId.validator}"/>
                                                     </af:selectOneChoice>
                                                 </af:column>
+                                                <af:column headerText="#{bindings.OrdersView1.hints.DivisionDest.label}"
+                                                           id="c79"
+                                                           sortProperty="#{bindings.OrdersView1.hints.DivisionDest.name}"
+                                                           sortable="true">
+                                                    <af:selectOneChoice value="#{row.bindings.DivisionDest.inputValue}"
+                                                                        label="#{row.bindings.DivisionDest.label}"
+                                                                        required="#{bindings.OrdersView1.hints.DivisionDest.mandatory}"
+                                                                        shortDesc="#{bindings.OrdersView1.hints.DivisionDest.tooltip}"
+                                                                        id="soc26" readOnly="true">
+                                                        <f:selectItems value="#{row.bindings.DivisionDest.items}"
+                                                                       id="si26"/>
+                                                        <f:validator binding="#{row.bindings.DivisionDest.validator}"/>
+                                                    </af:selectOneChoice>
+                                                </af:column>
                                                 <af:column sortProperty="#{bindings.OrdersView1.hints.DivisionId.name}"
                                                            sortable="true"
                                                            headerText="#{bindings.OrdersView1.hints.DivisionId.label}"
-                                                           id="c8">
+                                                           id="c8" visible="false">
                                                     <af:selectOneChoice value="#{row.bindings.DivisionId.inputValue}"
                                                                         label="#{row.bindings.DivisionId.label}"
                                                                         required="#{bindings.OrdersView1.hints.DivisionId.mandatory}"
