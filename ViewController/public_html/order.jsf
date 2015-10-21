@@ -110,15 +110,39 @@
                                     <af:separator id="s1"/>
                                     <af:panelLabelAndMessage label="Реквизиты" id="plam2">
                                         <af:panelGroupLayout id="pgl3">
-                                            <af:selectOneChoice value="#{bindings.FirmId.inputValue}"
-                                                                label="#{bindings.FirmId.label}"
-                                                                required="#{bindings.FirmId.hints.mandatory}"
-                                                                shortDesc="#{bindings.FirmId.hints.tooltip}" id="soc1"
-                                                                labelStyle="font-weight: bold;"
-                                                                readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
-                                                <f:selectItems value="#{bindings.FirmId.items}" id="si1"/>
-                                                <f:validator binding="#{bindings.FirmId.validator}"/>
-                                            </af:selectOneChoice>
+                                            <af:panelGroupLayout id="pgl22" layout="horizontal">
+                                                <af:selectOneChoice value="#{bindings.FirmId.inputValue}"
+                                                                    label="#{bindings.FirmId.label}"
+                                                                    required="#{bindings.FirmId.hints.mandatory}"
+                                                                    shortDesc="#{bindings.FirmId.hints.tooltip}"
+                                                                    id="soc1" labelStyle="font-weight: bold;"
+                                                                    readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
+                                                    <f:selectItems value="#{bindings.FirmId.items}" id="si1"/>
+                                                    <f:validator binding="#{bindings.FirmId.validator}"/>
+                                                </af:selectOneChoice>
+                                                <af:inputListOfValues id="kontragnameId"
+                                                                      popupTitle="Найти и выбрать: #{bindings.Kontragname.hints.label}"
+                                                                      value="#{bindings.Kontragname.inputValue}"
+                                                                      label="#{bindings.Kontragname.hints.label}"
+                                                                      model="#{bindings.Kontragname.listOfValuesModel}"
+                                                                      required="#{bindings.Kontragname.hints.mandatory}"
+                                                                      columns="#{bindings.Kontragname.hints.displayWidth}"
+                                                                      shortDesc="#{bindings.Kontragname.hints.tooltip}"
+                                                                      labelStyle="font-weight: bold;"
+                                                                      readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
+                                                                      launchPopupListener="#{order_jsf.onLaunchLov}"
+                                                                      createPopupId="pCreateKon">
+                                                    <f:validator binding="#{bindings.Kontragname.validator}"/>
+                                                    <af:autoSuggestBehavior suggestedItems="#{bindings.Kontragname.suggestedItems}"/>
+                                                    <f:facet name="context">
+                                                        <af:contextInfo id="ci1">
+                                                            <af:showPopupBehavior align="beforeStart"
+                                                                                  triggerType="contextInfo"
+                                                                                  popupId="pKontInfo"/>
+                                                        </af:contextInfo>
+                                                    </f:facet>
+                                                </af:inputListOfValues>
+                                            </af:panelGroupLayout>
                                             <af:inputListOfValues id="kontragIdId"
                                                                   popupTitle="Search and Select: #{bindings.KontragId.hints.label}"
                                                                   value="#{bindings.KontragId.inputValue}"
@@ -129,28 +153,6 @@
                                                                   shortDesc="#{bindings.KontragId.hints.tooltip}"
                                                                   visible="false">
                                                 <f:validator binding="#{bindings.KontragId.validator}"/>
-                                            </af:inputListOfValues>
-                                            <af:inputListOfValues id="kontragnameId"
-                                                                  popupTitle="Найти и выбрать: #{bindings.Kontragname.hints.label}"
-                                                                  value="#{bindings.Kontragname.inputValue}"
-                                                                  label="#{bindings.Kontragname.hints.label}"
-                                                                  model="#{bindings.Kontragname.listOfValuesModel}"
-                                                                  required="#{bindings.Kontragname.hints.mandatory}"
-                                                                  columns="#{bindings.Kontragname.hints.displayWidth}"
-                                                                  shortDesc="#{bindings.Kontragname.hints.tooltip}"
-                                                                  labelStyle="font-weight: bold;"
-                                                                  readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
-                                                                  launchPopupListener="#{order_jsf.onLaunchLov}"
-                                                                  createPopupId="pCreateKon">
-                                                <f:validator binding="#{bindings.Kontragname.validator}"/>
-                                                <af:autoSuggestBehavior suggestedItems="#{bindings.Kontragname.suggestedItems}"/>
-                                                <f:facet name="context">
-                                                    <af:contextInfo id="ci1">
-                                                        <af:showPopupBehavior align="beforeStart"
-                                                                              triggerType="contextInfo"
-                                                                              popupId="pKontInfo"/>
-                                                    </af:contextInfo>
-                                                </f:facet>
                                             </af:inputListOfValues>
                                             <af:inputText value="#{bindings.SummPlan.inputValue}"
                                                           label="#{bindings.SummPlan.hints.label}"
@@ -471,25 +473,27 @@
                                     </af:panelLabelAndMessage>
                                     <af:panelLabelAndMessage id="plam4">
                                         <af:panelGroupLayout id="pgl5" layout="horizontal">
-                                            <af:selectOneChoice value="#{bindings.DivisionId.inputValue}"
-                                                                label="#{bindings.DivisionId.label}"
-                                                                required="#{bindings.DivisionId.hints.mandatory}"
-                                                                shortDesc="#{bindings.DivisionId.hints.tooltip}"
-                                                                id="soc4" labelStyle="font-weight: bold;"
-                                                                readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
-                                                <f:selectItems value="#{bindings.DivisionId.items}" id="si4"/>
-                                                <f:validator binding="#{bindings.DivisionId.validator}"/>
-                                            </af:selectOneChoice>
-                                            <af:selectOneChoice value="#{bindings.DivisionDest.inputValue}"
-                                                                label="#{bindings.DivisionDest.label}"
-                                                                required="#{bindings.DivisionDest.hints.mandatory}"
-                                                                shortDesc="#{bindings.DivisionDest.hints.tooltip}"
-                                                                id="soc19" labelStyle="font-weight: bold;"
-                                                                readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
-                                                                rendered="#{(securityContext.userInRole['administrator'] or securityContext.userInRole['cc_manager'])}">
-                                                <f:selectItems value="#{bindings.DivisionDest.items}" id="si19"/>
-                                                <f:validator binding="#{bindings.DivisionDest.validator}"/>
-                                            </af:selectOneChoice>
+                                            <af:panelGroupLayout id="pgl21" layout="vertical">
+                                                <af:selectOneChoice value="#{bindings.DivisionId.inputValue}"
+                                                                    label="#{bindings.DivisionId.label}"
+                                                                    required="#{bindings.DivisionId.hints.mandatory}"
+                                                                    shortDesc="#{bindings.DivisionId.hints.tooltip}"
+                                                                    id="soc4" labelStyle="font-weight: bold;"
+                                                                    readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}">
+                                                    <f:selectItems value="#{bindings.DivisionId.items}" id="si4"/>
+                                                    <f:validator binding="#{bindings.DivisionId.validator}"/>
+                                                </af:selectOneChoice>
+                                                <af:selectOneChoice value="#{bindings.DivisionDest.inputValue}"
+                                                                    label="#{bindings.DivisionDest.label}"
+                                                                    required="#{bindings.DivisionDest.hints.mandatory}"
+                                                                    shortDesc="#{bindings.DivisionDest.hints.tooltip}"
+                                                                    id="soc19" labelStyle="font-weight: bold;"
+                                                                    readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
+                                                                    rendered="#{(securityContext.userInRole['administrator'] or securityContext.userInRole['cc_manager'])}">
+                                                    <f:selectItems value="#{bindings.DivisionDest.items}" id="si19"/>
+                                                    <f:validator binding="#{bindings.DivisionDest.validator}"/>
+                                                </af:selectOneChoice>
+                                            </af:panelGroupLayout>
                                             <af:selectOneChoice value="#{bindings.UserId.inputValue}"
                                                                 label="#{bindings.UserId.label}"
                                                                 required="#{bindings.UserId.hints.mandatory}"
@@ -525,7 +529,7 @@
                                                   required="#{bindings.Discription.hints.mandatory}"
                                                   columns="#{bindings.Discription.hints.displayWidth}"
                                                   maximumLength="#{bindings.Discription.hints.precision}"
-                                                  shortDesc="#{bindings.Discription.hints.tooltip}" id="it4" rows="4"
+                                                  shortDesc="#{bindings.Discription.hints.tooltip}" id="it4" rows="3"
                                                   readOnly="#{bindings.OEditable.inputValue == 1 ? false : true}"
                                                   labelStyle="font-weight: bold;">
                                         <f:validator binding="#{bindings.Discription.validator}"/>

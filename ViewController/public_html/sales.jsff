@@ -19,7 +19,7 @@
                                     </f:facet>
                                     <af:table value="#{bindings.VwSales1.collectionModel}" var="row"
                                               rows="#{bindings.VwSales1.rangeSize}"
-                                              emptyText="#{bindings.VwSales1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              emptyText="#{bindings.VwSales1.viewable ? 'Нет данных.' : 'В доступе отказано.'}"
                                               rowBandingInterval="0"
                                               selectedRowKeys="#{bindings.VwSales1.collectionModel.selectedRow}"
                                               selectionListener="#{bindings.VwSales1.collectionModel.makeCurrent}"
