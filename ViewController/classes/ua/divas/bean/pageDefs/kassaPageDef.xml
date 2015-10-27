@@ -24,6 +24,7 @@
           <Item Value="TotalSumm"/>
           <Item Value="TotalPrihod"/>
           <Item Value="TotalRashod"/>
+          <Item Value="TotalSummFirst"/>
         </AttrNames>
         <Accessors>
           <Item Value="VwKassaMoves"/>

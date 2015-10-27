@@ -1,5 +1,12 @@
 package ua.divas.view;
 
+import java.math.BigDecimal;
+
+import java.sql.SQLException;
+
+import java.util.Calendar;
+
+import oracle.jbo.domain.Date;
 import oracle.jbo.server.ViewObjectImpl;
 
 import ua.divas.classes.DivasView;
@@ -14,6 +21,44 @@ public class KassaViewImpl extends DivasView {
      * This is the default constructor (do not remove).
      */
     public KassaViewImpl() {
+    }
+    
+    public BigDecimal getBallans(String id, String code) {
+        return (BigDecimal)callStoredFunction(NUMBER,"UTILITY.ballans_by_kassa(?,?,?)", new Object[] {id, code, getp_ld()});
+    }
+    
+    public BigDecimal getprihod_by_kassa(String id) {
+        return (BigDecimal)callStoredFunction(NUMBER,"UTILITY.prihod_by_kassa(?,?,?)", new Object[] {id, getp_fd(), getp_ld()});
+    }
+    
+    public BigDecimal getrashod_by_kassa(String id) {
+        return (BigDecimal)callStoredFunction(NUMBER,"UTILITY.rashod_by_kassa(?,?,?)", new Object[] {id, getp_fd(), getp_ld()});
+    }
+    
+    public BigDecimal getFirstBallans(String id, String code) {
+        return (BigDecimal)callStoredFunction(NUMBER,"UTILITY.ballans_by_kassa(?,?,?)", new Object[] {id, code, getp_fd()});
+    }
+    
+    public Date getDateFirst() throws SQLException {
+        /* Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH)); // это будет начало месяца
+        //calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH)); // это будет конец месяца
+        java.util.Date pDate = calendar.getTime();
+        oracle.jbo.domain.Date dbDate= new oracle.jbo.domain.Date(new java.sql.Date(pDate.getTime()));
+        //oracle.jbo.domain.Date time = new oracle.jbo.domain.Date(pDate); */
+        return new oracle.jbo.domain.Date();
+    }
+    
+    public Date getDateLast() throws SQLException {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH)); // это будет начало месяца
+        //calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH)); // это будет конец месяца
+        //calendar.set(Calendar.DAY_OF_YEAR, calendar.getActualMaximum(Calendar.DAY_OF_YEAR)); // это будет конец года
+        //calendar.set(Calendar.DAY_OF_YEAR, calendar.getActualMinimum(Calendar.DAY_OF_YEAR)); // это будет начало года
+        java.util.Date pDate = calendar.getTime();
+        oracle.jbo.domain.Date dbDate= new oracle.jbo.domain.Date(new java.sql.Date(pDate.getTime()));
+        //oracle.jbo.domain.Date time = new oracle.jbo.domain.Date(pDate);
+        return dbDate;
     }
 
     /**
@@ -78,6 +123,38 @@ public class KassaViewImpl extends DivasView {
      */
     public void setu_name(String value) {
         setNamedWhereClauseParam("u_name", value);
+    }
+
+    /**
+     * Returns the bind variable value for p_fd.
+     * @return bind variable value for p_fd
+     */
+    public Date getp_fd() {
+        return (Date) getNamedWhereClauseParam("p_fd");
+    }
+
+    /**
+     * Sets <code>value</code> for bind variable p_fd.
+     * @param value value to bind as p_fd
+     */
+    public void setp_fd(Date value) {
+        setNamedWhereClauseParam("p_fd", value);
+    }
+
+    /**
+     * Returns the bind variable value for p_ld.
+     * @return bind variable value for p_ld
+     */
+    public Date getp_ld() {
+        return (Date) getNamedWhereClauseParam("p_ld");
+    }
+
+    /**
+     * Sets <code>value</code> for bind variable p_ld.
+     * @param value value to bind as p_ld
+     */
+    public void setp_ld(Date value) {
+        setNamedWhereClauseParam("p_ld", value);
     }
 }
 

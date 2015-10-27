@@ -17,6 +17,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import oracle.adf.model.BindingContext;
+import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCDataControl;
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichTreeTable;
@@ -179,6 +180,11 @@ public class KassaBean {
     }
     
     public void refresh() {
+        DCBindingContainer binding = (DCBindingContainer) BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCIteratorBinding it = binding.findIteratorBinding("KassaView1Iterator");
+        if (it != null) {
+            it.executeQuery();
+        }
         AdfFacesContext.getCurrentInstance().addPartialTarget(getTreeTable());
     }
 

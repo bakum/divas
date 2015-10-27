@@ -3,7 +3,7 @@
                 Package="ua.divas.bean.pageDefs">
   <parameters/>
   <executables>
-    <iterator Binds="VwSales1" RangeSize="11" DataControl="AppModuleDataControl" id="VwSales1Iterator">
+    <iterator Binds="VwSales1" RangeSize="15" DataControl="AppModuleDataControl" id="VwSales1Iterator">
       <sortCriteria>
         <sort attribute="Period" ascending="false"/>
       </sortCriteria>

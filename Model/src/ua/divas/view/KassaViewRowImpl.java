@@ -44,6 +44,7 @@ public class KassaViewRowImpl extends ViewRowImpl {
      */
     public enum AttributesEnum {
         Id,
+        DateDiapason,
         Fullname,
         IsGroup,
         ParentId,
@@ -58,6 +59,7 @@ public class KassaViewRowImpl extends ViewRowImpl {
         TotalSumm,
         TotalPrihod,
         TotalRashod,
+        TotalSummFirst,
         KassaView,
         OrdersView,
         UserSettingsView,
@@ -94,6 +96,7 @@ public class KassaViewRowImpl extends ViewRowImpl {
 
 
     public static final int ID = AttributesEnum.Id.index();
+    public static final int DATEDIAPASON = AttributesEnum.DateDiapason.index();
     public static final int FULLNAME = AttributesEnum.Fullname.index();
     public static final int ISGROUP = AttributesEnum.IsGroup.index();
     public static final int PARENTID = AttributesEnum.ParentId.index();
@@ -108,6 +111,7 @@ public class KassaViewRowImpl extends ViewRowImpl {
     public static final int TOTALSUMM = AttributesEnum.TotalSumm.index();
     public static final int TOTALPRIHOD = AttributesEnum.TotalPrihod.index();
     public static final int TOTALRASHOD = AttributesEnum.TotalRashod.index();
+    public static final int TOTALSUMMFIRST = AttributesEnum.TotalSummFirst.index();
     public static final int KASSAVIEW = AttributesEnum.KassaView.index();
     public static final int ORDERSVIEW = AttributesEnum.OrdersView.index();
     public static final int USERSETTINGSVIEW = AttributesEnum.UserSettingsView.index();
@@ -148,6 +152,15 @@ public class KassaViewRowImpl extends ViewRowImpl {
     public void setId(String value) {
         setAttributeInternal(ID, value);
     }
+
+    /**
+     * Gets the attribute value for the calculated attribute DateDiapason.
+     * @return the DateDiapason
+     */
+    public BigDecimal getDateDiapason() {
+        return (BigDecimal) getAttributeInternal(DATEDIAPASON);
+    }
+
 
     /**
      * Gets the attribute value for FULLNAME using the alias name Fullname.
@@ -321,24 +334,33 @@ public class KassaViewRowImpl extends ViewRowImpl {
      * Gets the attribute value for the calculated attribute TotalSumm.
      * @return the TotalSumm
      */
-    public Number getTotalSumm() {
-        return (Number) getAttributeInternal(TOTALSUMM);
+    public BigDecimal getTotalSumm() {
+        return (BigDecimal) getAttributeInternal(TOTALSUMM);
     }
 
     /**
      * Gets the attribute value for the calculated attribute TotalPrihod.
      * @return the TotalPrihod
      */
-    public Number getTotalPrihod() {
-        return (Number) getAttributeInternal(TOTALPRIHOD);
+    public BigDecimal getTotalPrihod() {
+        return (BigDecimal) getAttributeInternal(TOTALPRIHOD);
     }
 
     /**
      * Gets the attribute value for the calculated attribute TotalRashod.
      * @return the TotalRashod
      */
-    public Number getTotalRashod() {
-        return (Number) getAttributeInternal(TOTALRASHOD);
+    public BigDecimal getTotalRashod() {
+        return (BigDecimal) getAttributeInternal(TOTALRASHOD);
+    }
+
+
+    /**
+     * Gets the attribute value for the calculated attribute TotalSummFirst.
+     * @return the TotalSummFirst
+     */
+    public BigDecimal getTotalSummFirst() {
+        return (BigDecimal) getAttributeInternal(TOTALSUMMFIRST);
     }
 
     /**

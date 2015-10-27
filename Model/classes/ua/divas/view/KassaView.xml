@@ -40,6 +40,34 @@
       </SchemaBasedProperties>
     </Properties>
   </Variable>
+  <Variable
+    Name="p_fd"
+    Kind="where"
+    Type="oracle.jbo.domain.Date">
+    <TransientExpression><![CDATA[viewObject.getDateLast()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.KassaView.p_fd_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.KassaView.p_fd_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="p_ld"
+    Kind="where"
+    Type="oracle.jbo.domain.Date">
+    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="ua.divas.view.KassaView.p_ld_LABEL"/>
+        <TOOLTIP
+          ResId="ua.divas.view.KassaView.p_ld_TOOLTIP"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
   <ViewAccessor
     Name="CurrencyView1"
     ViewObjectName="ua.divas.view.CurrencyView"
@@ -85,7 +113,8 @@
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
-  <SQLQuery><![CDATA[SELECT Kassa.ID, 
+  <SQLQuery><![CDATA[SELECT Kassa.ID,
+       (select utility.setDateDiapason(:p_fd, :p_ld) from dual) Date_Diapason,
        Kassa.FULLNAME, 
        Kassa.IS_GROUP, 
        Kassa.PARENT_ID, 
@@ -112,6 +141,17 @@ upper(Kassa.DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_na
     EntityAttrName="Id"
     EntityUsage="Kassa"
     AliasName="ID"
+    IsQueriable="false"/>
+  <ViewAttribute
+    Name="DateDiapason"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DATE_DIAPASON"
+    Expression="DATE_DIAPASON"
+    SQLType="NUMERIC"
     IsQueriable="false"/>
   <ViewAttribute
     Name="Fullname"
@@ -231,13 +271,13 @@ upper(Kassa.DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_na
     IsSelected="false"
     IsPersistent="false"
     PrecisionRule="true"
-    Type="oracle.jbo.domain.Number"
+    Type="java.math.BigDecimal"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
     SQLType="NUMERIC"
     IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[VwKassaMoves.sum("Summ != null ? Summ : 0")]]></TransientExpression>
+    <TransientExpression><![CDATA[viewObject.getBallans(Id,'2081')]]></TransientExpression>
   </ViewAttribute>
   <ViewAttribute
     Name="TotalPrihod"
@@ -245,13 +285,19 @@ upper(Kassa.DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_na
     IsSelected="false"
     IsPersistent="false"
     PrecisionRule="true"
-    Type="oracle.jbo.domain.Number"
+    Type="java.math.BigDecimal"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
     SQLType="NUMERIC"
     IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[VwKassaMoves.sum("SummPrihod != null ? SummPrihod : 0")]]></TransientExpression>
+    <TransientExpression><![CDATA[viewObject.getprihod_by_kassa(Id)]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="TotalSumm"/>
+      <Item
+        Value="TotalSummFirst"/>
+    </Dependencies>
   </ViewAttribute>
   <ViewAttribute
     Name="TotalRashod"
@@ -259,13 +305,33 @@ upper(Kassa.DIVISION_ID) in (select upper(N) from table(cast(get_divisions(:u_na
     IsSelected="false"
     IsPersistent="false"
     PrecisionRule="true"
-    Type="oracle.jbo.domain.Number"
+    Type="java.math.BigDecimal"
     ColumnType="NUMBER"
     AliasName="VIEW_ATTR"
     SQLType="NUMERIC"
     IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <TransientExpression><![CDATA[VwKassaMoves.sum("SummRashod != null ? SummRashod : 0")]]></TransientExpression>
+    <TransientExpression><![CDATA[viewObject.getrashod_by_kassa(Id)]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="TotalSumm"/>
+      <Item
+        Value="TotalSummFirst"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalSummFirst"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    IsQueriable="false">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[viewObject.getFirstBallans(Id,'2081')]]></TransientExpression>
   </ViewAttribute>
   <ViewCriteria
     Name="KassaViewByCurrAndDivisions"
