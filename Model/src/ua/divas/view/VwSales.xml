@@ -44,6 +44,18 @@
     Type="java.sql.Timestamp">
     <TransientExpression><![CDATA[viewObject.getDateLast()]]></TransientExpression>
   </Variable>
+  <Variable
+    Name="u_status_complete"
+    Kind="viewcriteria"
+    Type="java.lang.String">
+    <TransientExpression><![CDATA[viewObject.getCompleteStatus()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
   <ViewAccessor
     Name="OrdersView1"
     ViewObjectName="ua.divas.view.OrdersView"
@@ -517,10 +529,12 @@ where
       <ViewCriteriaItem
         Name="StatusId"
         ViewAttribute="StatusId"
-        Operator="ISNOTBLANK"
+        Operator="="
         Conjunction="AND"
         GenerateIsNullClauseForBindVars="false"
-        Required="Optional"/>
+        Required="Optional"
+        Value=":u_status_complete"
+        IsBindVarValue="true"/>
     </ViewCriteriaRow>
   </ViewCriteria>
   <AttrArray Name="KeyAttributes">

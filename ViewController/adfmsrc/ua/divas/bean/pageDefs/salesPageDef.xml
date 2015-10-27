@@ -3,14 +3,14 @@
                 Package="ua.divas.bean.pageDefs">
   <parameters/>
   <executables>
-    <iterator Binds="VwSales1" RangeSize="25" DataControl="AppModuleDataControl" id="VwSales1Iterator">
+    <iterator Binds="VwSales1" RangeSize="11" DataControl="AppModuleDataControl" id="VwSales1Iterator">
       <sortCriteria>
         <sort attribute="Period" ascending="false"/>
       </sortCriteria>
     </iterator>
     <searchRegion Binds="VwSales1Iterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   id="VwSales1Query"/>
-    <searchRegion Criteria="VwSalesCriteriaDate" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+    <searchRegion Criteria="VwSalesCriteriaComplete" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   Binds="VwSales1Iterator" id="VwSalesCriteriaDateQuery"/>
   </executables>
   <bindings>

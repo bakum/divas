@@ -3,7 +3,7 @@
                 Package="ua.divas.bean.pageDefs" SkipValidation="true" EnableTokenValidation="false">
   <parameters/>
   <executables>
-    <iterator Binds="OrdersView1" RangeSize="12" DataControl="AppModuleDataControl" id="OrdersView1Iterator"
+    <iterator Binds="OrdersView1" RangeSize="11" DataControl="AppModuleDataControl" id="OrdersView1Iterator"
               StateValidation="false">
       <sortCriteria>
         <sort attribute="Dat" ascending="false"/>

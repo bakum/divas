@@ -737,7 +737,11 @@
     ViewObjectName="ua.divas.view.VwBallansAp"/>
   <ViewUsage
     Name="VwSales1"
-    ViewObjectName="ua.divas.view.VwSales"/>
+    ViewObjectName="ua.divas.view.VwSales">
+    <ViewCriteriaUsage
+      Name="VwSalesCriteriaComplete"
+      FullName="ua.divas.view.VwSales.VwSalesCriteriaComplete"/>
+  </ViewUsage>
   <ViewUsage
     Name="VwSales2"
     ViewObjectName="ua.divas.view.VwSales"/>
@@ -749,7 +753,11 @@
     ViewObjectName="ua.divas.view.VwSales"/>
   <ViewUsage
     Name="VwZatraty1"
-    ViewObjectName="ua.divas.view.VwZatraty"/>
+    ViewObjectName="ua.divas.view.VwZatraty">
+    <ViewCriteriaUsage
+      Name="VwZatratyCriteriaDate"
+      FullName="ua.divas.view.VwZatraty.VwZatratyCriteriaDate"/>
+  </ViewUsage>
   <ViewUsage
     Name="VwZatraty2"
     ViewObjectName="ua.divas.view.VwZatraty"/>

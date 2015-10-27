@@ -26,7 +26,7 @@
                                               rowSelection="single" fetchSize="#{bindings.VwSales1.rangeSize}"
                                               filterModel="#{bindings.VwSales1Query.queryDescriptor}"
                                               queryListener="#{bindings.VwSales1Query.processQuery}" varStatus="vs" id="t1" binding="#{sales.tb}"
-                                              partialTriggers="::b2">
+                                              partialTriggers="::b2" scrollPolicy="page">
                                         <af:column id="c8" width="50" filterable="true" visible="false">
                                             <f:facet name="filter">
                                                 <af:button id="b1" icon="/img/filter_(delete)_16x16.gif"
