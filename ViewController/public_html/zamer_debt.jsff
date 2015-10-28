@@ -11,7 +11,7 @@
                             <f:facet name="bottom"/>
                             <f:facet name="center">
                                 <af:panelBox text="Взаиморасчеты по замерщикам" id="pb1" showDisclosure="false"
-                                             icon="/img/cash.png">
+                                             icon="/img/cash.png" type="flow">
                                     <f:facet name="toolbar">
                                         <af:toolbar id="t2">
                                             <af:button text="Обновить" id="b3"
@@ -25,7 +25,8 @@
                                     </f:facet>
                                     <af:treeTable value="#{bindings.VwKontragZamer1.treeModel}" var="node"
                                                   selectionListener="#{zamer_debt.onTreeSelect}"
-                                                  rowSelection="single" id="tt1" binding="#{zamer_debt.treeTable}">
+                                                  rowSelection="single" id="tt1" binding="#{zamer_debt.treeTable}"
+                                                  scrollPolicy="page" fetchSize="11">
                                         <f:facet name="nodeStamp">
                                             <af:column id="c1" headerText="Наименование" width="250"
                                                        inlineStyle="#{node.bindings.Fullname.inputValue != null ? 'font-weight:bold;background-color:#DCF0AB' : ''}">

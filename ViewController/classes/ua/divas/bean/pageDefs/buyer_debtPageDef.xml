@@ -4,7 +4,7 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="VwKontragDeb1" RangeSize="25" DataControl="AppModuleDataControl"
+    <iterator Binds="VwKontragDeb1" RangeSize="-1" DataControl="AppModuleDataControl"
               id="VwKontragDeb1Iterator">
       <sortCriteria>
         <sort attribute="Fullname" ascending="true"/>

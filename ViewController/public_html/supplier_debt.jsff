@@ -26,7 +26,7 @@
                                                   rowSelection="single" id="tt1"
                                                   selectionListener="#{supplier.onTreeSelect}"
                                                   binding="#{supplier.treeTable}" partialTriggers="sbc1"
-                                                  scrollPolicy="page">
+                                                  scrollPolicy="page" fetchSize="11">
                                         <f:facet name="nodeStamp">
                                             <af:column id="c1"
                                                        inlineStyle="#{node.bindings.Fullname.inputValue != null ? 'font-weight:bold;background-color:#DCF0AB' : ''}"

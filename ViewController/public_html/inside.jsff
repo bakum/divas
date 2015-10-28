@@ -10,7 +10,8 @@
                         <af:panelStretchLayout id="psl1" dimensionsFrom="children">
                             <f:facet name="bottom"/>
                             <f:facet name="center">
-                                <af:panelBox text="Филиалы" id="pb1" showDisclosure="false" icon="/img/cash.png">
+                                <af:panelBox text="Филиалы" id="pb1" showDisclosure="false" icon="/img/cash.png"
+                                             type="flow">
                                     <f:facet name="toolbar">
                                         <af:toolbar id="t1">
                                             <af:button text="Обновить" id="b1" actionListener="#{inside.onRefresh}"/>
@@ -18,7 +19,8 @@
                                     </f:facet>
                                     <af:treeTable value="#{bindings.VwInsideMaster1.treeModel}" var="node"
                                                   selectionListener="#{inside.onTreeSelect}"
-                                                  rowSelection="single" id="tt1" binding="#{inside.treeTable}">
+                                                  rowSelection="single" id="tt1" binding="#{inside.treeTable}"
+                                                  scrollPolicy="page" fetchSize="11">
                                         <f:facet name="nodeStamp">
                                             <af:column id="c1" width="250" headerText="Филиал">
                                                 <af:outputText value="#{node.DivName}" id="ot1"

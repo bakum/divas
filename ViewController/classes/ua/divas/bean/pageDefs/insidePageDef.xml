@@ -4,7 +4,7 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="VwInsideMaster1" RangeSize="25" DataControl="AppModuleDataControl" id="VwInsideMaster1Iterator"/>
+    <iterator Binds="VwInsideMaster1" RangeSize="-1" DataControl="AppModuleDataControl" id="VwInsideMaster1Iterator"/>
     <searchRegion Criteria="VwInsideActive" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   Binds="VwInsideMaster1Iterator" id="VwInsideActiveQuery"/>
   </executables>
