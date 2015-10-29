@@ -20,7 +20,7 @@
                                     </f:facet>
                                     <af:treeTable value="#{bindings.VwKontragDeb1.treeModel}" var="node"
                                                   rowSelection="single" id="tt1" binding="#{buyer_debt.treeTable}"
-                                                  scrollPolicy="page" fetchSize="11">
+                                                  scrollPolicy="page" fetchSize="19">
                                         <f:facet name="nodeStamp">
                                             <af:column id="c1" headerText="Наименование" width="250"
                                                        inlineStyle="font-weight:bold;">

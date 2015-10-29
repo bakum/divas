@@ -98,7 +98,8 @@
                                                 <af:region value="#{bindings.zatratyconfig1.regionModel}" id="r15"/>
                                             </af:showDetailItem>
                                             <af:showDetailItem text="Рейтинги" id="sdi28"
-                                                               rendered="#{securityContext.taskflowViewable['/WEB-INF/rating-config.xml#rating-config']}">
+                                                               rendered="#{securityContext.taskflowViewable['/WEB-INF/rating-config.xml#rating-config']}"
+                                                               stretchChildren="first">
                                                 <af:region value="#{bindings.ratingconfig1.regionModel}" id="r25"/>
                                             </af:showDetailItem>
                                             <af:showDetailItem text="Баланс" id="sdi16" stretchChildren="first"

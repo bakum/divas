@@ -20,7 +20,7 @@
                                     <af:treeTable value="#{bindings.VwInsideMaster1.treeModel}" var="node"
                                                   selectionListener="#{inside.onTreeSelect}"
                                                   rowSelection="single" id="tt1" binding="#{inside.treeTable}"
-                                                  scrollPolicy="page" fetchSize="11">
+                                                  fetchSize="19" scrollPolicy="page">
                                         <f:facet name="nodeStamp">
                                             <af:column id="c1" width="250" headerText="Филиал">
                                                 <af:outputText value="#{node.DivName}" id="ot1"

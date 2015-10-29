@@ -19,7 +19,7 @@
                                     <af:treeTable value="#{bindings.KassaView1.treeModel}" var="node"
                                                   selectionListener="#{kassa.onTreeSelect}" rowSelection="single"
                                                   id="tt1" scrollPolicy="page" binding="#{kassa.treeTable}"
-                                                  fetchSize="11">
+                                                  fetchSize="19">
                                         <f:facet name="nodeStamp">
                                             <af:column id="c1" width="180" inlineStyle="font-weight:bold;">
                                                 <af:outputText value="#{node.Fullname}" id="ot1"/>

@@ -9,7 +9,7 @@
       <variableUsage DataControl="AppModuleDataControl" Binds="VwRating1.variablesMap.l_dat"
                      Name="ExecuteWithParams_l_dat" IsQueriable="false"/>
     </variableIterator>
-    <iterator Binds="VwRating1" RangeSize="5" DataControl="AppModuleDataControl" id="VwRating1Iterator"/>
+    <iterator Binds="VwRating1" RangeSize="25" DataControl="AppModuleDataControl" id="VwRating1Iterator"/>
   </executables>
   <bindings>
     <tree IterBinding="VwRating1Iterator" id="VwRating1">
