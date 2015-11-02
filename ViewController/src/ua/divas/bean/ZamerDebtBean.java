@@ -116,8 +116,10 @@ public class ZamerDebtBean {
             String keyStr = nodeBinding.getRowKey().toStringFormat(true);
             if (keyStr != null && rowType.matches("VwZamerMoves")) {
                 DCIteratorBinding iter = (DCIteratorBinding) getBindings().get("VwZamerMoves1Iterator");
+                DCIteratorBinding itr = (DCIteratorBinding) getBindings().get("VwZamerMoves2Iterator");
                 try {
                     iter.setCurrentRowWithKey(keyStr);
+                    itr.setCurrentRowWithKey(keyStr);
                 } catch (RowNotFoundException e) {
                     try {
                         iterator.setCurrentRowWithKey(keyStr);

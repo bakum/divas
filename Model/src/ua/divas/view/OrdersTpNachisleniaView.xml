@@ -36,6 +36,10 @@
     Name="PaySettingsView1"
     ViewObjectName="ua.divas.view.PaySettingsView"
     RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="KontragentsLookupVO1"
+    ViewObjectName="ua.divas.view.KontragentsLookupVO"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_CalcId"
     ListVOName="BaseOfCalcView1"
@@ -86,7 +90,7 @@
   </ListBinding>
   <ListBinding
     Name="LOV_Kontname"
-    ListVOName="KontragentsView1"
+    ListVOName="KontragentsLookupVO1"
     ListRangeSize="-1"
     ComboRowCountHint="10"
     NullValueFlag="start"
@@ -107,11 +111,7 @@
       <Item Value="Fullname"/>
     </AttrArray>
     <DisplayCriteria
-      Name="KontragentsFilterItemsByName"
       Hint="showAndExecute"/>
-    <ViewCriteriaUsage
-      Name="KontragentsFilterItemsByName"
-      FullName="ua.divas.view.KontragentsView.KontragentsFilterItemsByName"/>
   </ListBinding>
   <ListBinding
     Name="LOV_PayId"
@@ -227,12 +227,12 @@ FROM  ORDERS_TP_NACHISL OrdersTpNachislenia]]></SQLQuery>
     </DesignTime>
     <Properties>
       <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="combo_lov"/>
         <LABEL
           ResId="ua.divas.view.OrdersTpNachisleniaView.Kontname_LABEL"/>
         <TOOLTIP
           ResId="ua.divas.view.OrdersTpNachisleniaView.Kontname_TOOLTIP"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

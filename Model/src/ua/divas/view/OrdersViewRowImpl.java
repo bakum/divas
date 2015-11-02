@@ -105,7 +105,8 @@ public class OrdersViewRowImpl extends ViewRowImpl {
         KontragentsView3,
         KontragentsBuyer1,
         KontragentsMeasurer1,
-        KontragOtherView1;
+        KontragOtherView1,
+        KontragentsAll1;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -192,6 +193,7 @@ public class OrdersViewRowImpl extends ViewRowImpl {
     public static final int KONTRAGENTSBUYER1 = AttributesEnum.KontragentsBuyer1.index();
     public static final int KONTRAGENTSMEASURER1 = AttributesEnum.KontragentsMeasurer1.index();
     public static final int KONTRAGOTHERVIEW1 = AttributesEnum.KontragOtherView1.index();
+    public static final int KONTRAGENTSALL1 = AttributesEnum.KontragentsAll1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -896,6 +898,13 @@ public class OrdersViewRowImpl extends ViewRowImpl {
      */
     public RowSet getKontragOtherView1() {
         return (RowSet) getAttributeInternal(KONTRAGOTHERVIEW1);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> KontragentsAll1.
+     */
+    public RowSet getKontragentsAll1() {
+        return (RowSet) getAttributeInternal(KONTRAGENTSALL1);
     }
 }
 

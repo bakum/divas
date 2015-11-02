@@ -1340,7 +1340,7 @@
                                                    headerText="#{bindings.OrdersTpNachisleniaView2.hints.Kontname.label}"
                                                    id="c33" width="150">
                                             <af:inputComboboxListOfValues id="iclov2"
-                                                                          popupTitle="Search and Select: #{bindings.OrdersTpNachisleniaView2.hints.Kontname.label}"
+                                                                          popupTitle="Найти и выбрать: #{bindings.OrdersTpNachisleniaView2.hints.Kontname.label}"
                                                                           value="#{row.bindings.Kontname.inputValue}"
                                                                           model="#{row.bindings.Kontname.listOfValuesModel}"
                                                                           required="#{bindings.OrdersTpNachisleniaView2.hints.Kontname.mandatory}"

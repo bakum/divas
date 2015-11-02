@@ -116,6 +116,10 @@
         Name="KontragOtherView1"
         ViewObjectName="ua.divas.view.KontragOtherView"
         RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="KontragentsAll1"
+        ViewObjectName="ua.divas.view.KontragentsAll"
+        RowLevelBinds="true"/>
     <ListBinding
       Name="LOV_CurrId"
       ListVOName="CurrencyView1"
@@ -400,7 +404,7 @@
     </ListBinding>
     <ListBinding
         Name="LOV_ManagerId"
-        ListVOName="KontragOtherView1"
+        ListVOName="KontragentsAll1"
         ListRangeSize="-1"
         NullValueFlag="start"
         NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
@@ -919,12 +923,12 @@ upper(Orders.USER_ID) in (select upper(N) from table(cast(get_users(:u_name) as 
         </DesignTime>
         <Properties>
             <SchemaBasedProperties>
-                <CONTROLTYPE
-                    Value="choice"/>
                 <LABEL
                     ResId="ua.divas.view.OrdersView.ManagerId_LABEL"/>
                 <TOOLTIP
                     ResId="ua.divas.view.OrdersView.ManagerId_TOOLTIP"/>
+                <CONTROLTYPE
+                    Value="choice"/>
             </SchemaBasedProperties>
         </Properties>
     </ViewAttribute>

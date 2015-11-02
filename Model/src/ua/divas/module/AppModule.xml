@@ -1038,6 +1038,9 @@
   <ViewUsage
     Name="InsideSettingsView1"
     ViewObjectName="ua.divas.view.InsideSettingsView"/>
+  <ViewUsage
+    Name="KontragentsLookupVO1"
+    ViewObjectName="ua.divas.view.KontragentsLookupVO"/>
   <ViewLinkUsage
     Name="CallLogFk1Link1"
     ViewLinkObjectName="ua.divas.view.CallLogFk1Link"

@@ -13,6 +13,7 @@
     <searchRegion Criteria="VwKontragActive" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   Binds="VwKontragZamer1Iterator" id="VwKontragActiveQuery"/>
     <iterator id="VwZamerMoves1Iterator" Binds="VwZamerMoves1" DataControl="AppModuleDataControl" RangeSize="-1"/>
+    <iterator id="VwZamerMoves2Iterator" Binds="VwZamerMoves2" DataControl="AppModuleDataControl" RangeSize="-1"/>
   </executables>
   <bindings>
     <tree IterBinding="VwKontragZamer1Iterator" id="VwKontragZamer1">

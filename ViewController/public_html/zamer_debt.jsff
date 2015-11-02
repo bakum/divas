@@ -147,9 +147,10 @@
                                             </af:panelFormLayout>
                                         </af:dialog>
                                     </af:popup>
-                                    <af:popup childCreation="deferred" id="p2" contentDelivery="lazyUncached"
+                                    <af:popup childCreation="deferred" id="p2"
                                               resetEditableValues="whenCanceled"
-                                              popupFetchListener="#{zamer_debt.onPopupRko}">
+                                              popupFetchListener="#{zamer_debt.onPopupRko}"
+                                              contentDelivery="lazyUncached">
                                         <af:dialog id="d2" title="Расход из кассы"
                                                    dialogListener="#{zamer_debt.onDialogRko}">
                                             <af:panelFormLayout id="pfl2">
@@ -176,7 +177,8 @@
                                         </af:dialog>
                                     </af:popup>
                                     <af:popup childCreation="deferred" id="p3" resetEditableValues="whenCanceled"
-                                              popupFetchListener="#{zamer_debt.onPopupPay}">
+                                              popupFetchListener="#{zamer_debt.onPopupPay}"
+                                              contentDelivery="lazyUncached">
                                         <af:dialog id="d3" title="Приход в кассу"
                                                    dialogListener="#{zamer_debt.onDialogPkoOrder}">
                                             <f:facet name="buttonBar"/>
@@ -203,7 +205,8 @@
                                         </af:dialog>
                                     </af:popup>
                                     <af:popup childCreation="deferred" id="p4" resetEditableValues="whenCanceled"
-                                              popupFetchListener="#{zamer_debt.onPopupRko}">
+                                              popupFetchListener="#{zamer_debt.onPopupRko}"
+                                              contentDelivery="lazyUncached">
                                         <af:dialog id="d4" title="Расход из кассы"
                                                    dialogListener="#{zamer_debt.onDialogRkoOrder}">
                                             <f:facet name="buttonBar"/>

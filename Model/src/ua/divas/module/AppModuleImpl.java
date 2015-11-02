@@ -34,6 +34,7 @@ import ua.divas.view.KontragSettingsViewImpl;
 import ua.divas.view.KontragentsAllImpl;
 import ua.divas.view.KontragentsBuyerImpl;
 import ua.divas.view.KontragentsInOrdersViewImpl;
+import ua.divas.view.KontragentsLookupVOImpl;
 import ua.divas.view.KontragentsMeasurerImpl;
 import ua.divas.view.KontragentsSupplierImpl;
 import ua.divas.view.KontragentsViewImpl;
@@ -4441,6 +4442,14 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
      */
     public ViewObjectImpl getInsideSettingsView1() {
         return (ViewObjectImpl) findViewObject("InsideSettingsView1");
+    }
+
+    /**
+     * Container's getter for KontragentsLookupVO1.
+     * @return KontragentsLookupVO1
+     */
+    public KontragentsLookupVOImpl getKontragentsLookupVO1() {
+        return (KontragentsLookupVOImpl) findViewObject("KontragentsLookupVO1");
     }
 }
 

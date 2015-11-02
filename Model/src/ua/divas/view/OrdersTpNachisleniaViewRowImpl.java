@@ -58,7 +58,8 @@ public class OrdersTpNachisleniaViewRowImpl extends ViewRowImpl {
         TableName,
         BaseOfCalcView1,
         KontragentsView1,
-        PaySettingsView1;
+        PaySettingsView1,
+        KontragentsLookupVO1;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -101,6 +102,7 @@ public class OrdersTpNachisleniaViewRowImpl extends ViewRowImpl {
     public static final int BASEOFCALCVIEW1 = AttributesEnum.BaseOfCalcView1.index();
     public static final int KONTRAGENTSVIEW1 = AttributesEnum.KontragentsView1.index();
     public static final int PAYSETTINGSVIEW1 = AttributesEnum.PaySettingsView1.index();
+    public static final int KONTRAGENTSLOOKUPVO1 = AttributesEnum.KontragentsLookupVO1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -344,6 +346,13 @@ public class OrdersTpNachisleniaViewRowImpl extends ViewRowImpl {
      */
     public RowSet getPaySettingsView1() {
         return (RowSet) getAttributeInternal(PAYSETTINGSVIEW1);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> KontragentsLookupVO1.
+     */
+    public RowSet getKontragentsLookupVO1() {
+        return (RowSet) getAttributeInternal(KONTRAGENTSLOOKUPVO1);
     }
 }
 

@@ -133,7 +133,8 @@
                                         </af:column>
                                     </af:treeTable>
                                     <af:popup childCreation="deferred" id="p1" resetEditableValues="whenCanceled"
-                                              popupFetchListener="#{supplier.onPopupPko}">
+                                              popupFetchListener="#{supplier.onPopupPko}"
+                                              contentDelivery="lazyUncached">
                                         <af:dialog id="d1" title="Приход в кассу"
                                                    dialogListener="#{supplier.onDialogPko}">
                                             <af:panelFormLayout id="pfl1">

@@ -1060,6 +1060,16 @@
                 <name>/WEB-INF/newKontrag.xml#newKontrag</name>
                 <actions>view</actions>
               </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpOplaty</name>
+                <actions>read</actions>
+              </permission>
+              <permission>
+                <class>oracle.adf.share.security.authorization.EntityPermission</class>
+                <name>ua.divas.model.OrdersTpUslugi</name>
+                <actions>read</actions>
+              </permission>
             </permissions>
           </grant>
           <grant>
